@@ -124,6 +124,53 @@
     }
 
     /* =========================================================
+       THREE IMAGE STRIP
+       ========================================================= */
+
+    .home-photo-strip {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      width: 100%;
+      height: 390px;
+      overflow: hidden;
+      margin: 0 0 0;
+    }
+
+    .home-photo-strip-item {
+      position: relative;
+      overflow: hidden;
+      background: #111;
+    }
+
+    .home-photo-strip-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      display: block;
+      transition: transform .5s ease;
+    }
+
+    .home-photo-strip-item:hover img {
+      transform: scale(1.03);
+    }
+
+    /*
+     * Das dritte Bild zeigt dich ursprünglich relativ klein
+     * auf der Rennstrecke. Deshalb wird es stärker herangezoomt.
+     */
+
+    .home-photo-strip-item.zoomed img {
+      transform: scale(2.15);
+      object-position: center 52%;
+    }
+
+    .home-photo-strip-item.zoomed:hover img {
+      transform: scale(2.22);
+    }
+
+    /* =========================================================
        BIG PHOTO
        ========================================================= */
 
@@ -838,6 +885,11 @@
         letter-spacing: -2.5px;
       }
 
+      .home-photo-strip {
+        height: 300px;
+        gap: 7px;
+      }
+
       .about-project-grid {
         grid-template-columns: 1fr;
         gap: 30px;
@@ -882,6 +934,15 @@
 
       .intro-copy {
         font-size: 16px;
+      }
+
+      .home-photo-strip {
+        height: 220px;
+        gap: 5px;
+      }
+
+      .home-photo-strip-item.zoomed img {
+        transform: scale(2.25);
       }
 
       .story-photo {
@@ -1108,6 +1169,47 @@
           </div>
 
         </div>
+
+      </div>
+
+    </div>
+
+    <!-- =====================================================
+         THREE IMAGE STRIP
+         ===================================================== -->
+
+    <div class="home-photo-strip">
+
+      <!-- OBEN LINKS -->
+
+      <div class="home-photo-strip-item">
+
+        <img
+          src="IMG_3005(3).jpeg"
+          alt="Tano Loew bei einem Laufwettkampf"
+        >
+
+      </div>
+
+      <!-- OBEN RECHTS -->
+
+      <div class="home-photo-strip-item">
+
+        <img
+          src="IMG_5573(1).jpeg"
+          alt="Tano Loew in New York"
+        >
+
+      </div>
+
+      <!-- UNTEN RECHTS / STÄRKER HERANGEZOOMT -->
+
+      <div class="home-photo-strip-item zoomed">
+
+        <img
+          src="IMG_6130.jpeg"
+          alt="Tano Loew auf der Rennstrecke"
+        >
 
       </div>
 
@@ -2972,12 +3074,6 @@
 
       registerForm.reset();
 
-      /*
-       * Wenn E-Mail-Bestätigung aktiviert ist,
-       * gibt Supabase zunächst keinen aktiven
-       * Session-Login zurück.
-       */
-
       if (
         data &&
         data.session
@@ -3354,11 +3450,6 @@
 
         currentUser =
           session.user;
-
-        /*
-         * Das Profil wird nach dem Auth-Event
-         * geladen.
-         */
 
         await loadProfile(
           currentUser
