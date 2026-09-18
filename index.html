@@ -113,44 +113,28 @@
         );
     }
 
-    .home-hero-content {
-      position: absolute;
-      left: 50px;
-      right: 50px;
-      bottom: 48px;
-      z-index: 2;
-      color: #fff;
+    /* =========================================================
+       HOME INTRO
+       ========================================================= */
+
+    .home-intro {
+      padding: 58px 0 35px;
     }
 
-    .home-hero-eyebrow {
-      color: var(--miles-blue);
-      font-size: 11px;
-      font-weight: 900;
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      margin-bottom: 18px;
+    .intro-copy {
+      max-width: 680px;
+      margin-top: 0;
+      font-size: 18px;
+      line-height: 1.65;
+      color: #777;
+      font-family: inherit;
     }
 
-    .home-hero-content h1 {
-      max-width: 1000px;
-      margin: 0;
-      font-size: clamp(46px, 7vw, 94px);
-      line-height: .91;
-      letter-spacing: -4px;
-    }
-
-    .home-hero-content h1 span {
-      color: var(--miles-blue);
-    }
-
-    .home-hero-content p {
-      margin: 25px 0 0;
-      font-size: 12px;
-      line-height: 1.5;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,.72);
+    .intro-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 28px;
     }
 
     /* =========================================================
@@ -865,16 +849,6 @@
         min-height: 620px;
       }
 
-      .home-hero-content {
-        left: 30px;
-        right: 30px;
-        bottom: 35px;
-      }
-
-      .home-hero-content h1 {
-        letter-spacing: -2.5px;
-      }
-
       .about-project-grid {
         grid-template-columns: 1fr;
         gap: 30px;
@@ -920,22 +894,6 @@
 
       .home-hero img {
         object-position: center center;
-      }
-
-      .home-hero-content {
-        left: 20px;
-        right: 20px;
-        bottom: 25px;
-      }
-
-      .home-hero-content h1 {
-        font-size: 45px;
-        letter-spacing: -2px;
-      }
-
-      .home-hero-eyebrow {
-        font-size: 10px;
-        letter-spacing: 2px;
       }
 
       .story-photo {
@@ -1180,26 +1138,6 @@
 
       <div class="home-hero-overlay"></div>
 
-      <div class="home-hero-content">
-
-        <div class="home-hero-eyebrow">
-          MILES APART RUNNING CLUB
-        </div>
-
-        <h1>
-          Laufen verbindet.<br>
-          <span>
-            Auch wenn wir miles apart sind.
-          </span>
-        </h1>
-
-        <p>
-          One community.<br>
-          Countless miles.
-        </p>
-
-      </div>
-
     </div>
 
     <!-- =====================================================
@@ -1207,20 +1145,6 @@
          ===================================================== -->
 
     <section class="home-intro">
-
-      <div class="intro-eyebrow">
-        MILES APART RUNNING CLUB
-      </div>
-
-      <h1 class="intro-title">
-
-        Laufen verbindet.<br>
-
-        <span>
-          Auch wenn wir miles apart sind.
-        </span>
-
-      </h1>
 
       <p class="intro-copy">
 
