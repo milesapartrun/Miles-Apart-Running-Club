@@ -20,6 +20,26 @@
   >
 
   <!-- =======================================================
+       INTER — TYPOGRAFIE WIE AUF EVENTS / CHALLENGES
+       ======================================================= -->
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+    rel="stylesheet"
+  >
+
+  <!-- =======================================================
        SUPABASE
        ======================================================= -->
 
@@ -33,11 +53,19 @@
 
     :root {
       --miles-blue: #18b8c7;
+
+      --site-font:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
     }
 
     /* =========================================================
-       TYPOGRAFIE
-       EXAKT WIE AUF CHALLENGES / EVENTS
+       GLOBALE TYPOGRAFIE
        ========================================================= */
 
     html,
@@ -46,31 +74,71 @@
     input,
     textarea,
     select {
-      font-family:
-        Inter,
-        ui-sans-serif,
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
+      font-family: var(--site-font);
     }
+
+    body,
+    body * {
+      font-family: inherit;
+    }
+
+    /* =========================================================
+       TYPOGRAFIE — EVENTS / CHALLENGES LOOK
+       ========================================================= */
 
     body {
-      font-family:
-        Inter,
-        ui-sans-serif,
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
     }
 
-    *,
-    *::before,
-    *::after {
-      font-family: inherit;
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    p,
+    span,
+    strong,
+    b,
+    a,
+    button,
+    input,
+    textarea,
+    select,
+    label {
+      font-family: var(--site-font);
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      font-weight: 800;
+      letter-spacing: -1.5px;
+    }
+
+    /* =========================================================
+       NAVIGATION
+       ========================================================= */
+
+    .nav a {
+      font-family: var(--site-font);
+      font-size: 16px;
+      font-weight: 750;
+      letter-spacing: 0;
+    }
+
+    .nav a.active {
+      font-weight: 800;
+    }
+
+    .crumb {
+      font-family: var(--site-font);
+      font-weight: 800;
+      letter-spacing: .11em;
     }
 
     /* =========================================================
@@ -123,35 +191,6 @@
     }
 
     /* =========================================================
-       NAVIGATION TYPOGRAFIE
-       GLEICH WIE CHALLENGES / EVENTS
-       ========================================================= */
-
-    .nav a {
-      font-family:
-        Inter,
-        ui-sans-serif,
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
-      font-weight: 750;
-      letter-spacing: 0;
-    }
-
-    .crumb {
-      font-family:
-        Inter,
-        ui-sans-serif,
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
-    }
-
-    /* =========================================================
        HOME HERO
        ========================================================= */
 
@@ -196,7 +235,7 @@
     .home-hero-eyebrow {
       color: var(--miles-blue);
       font-size: 11px;
-      font-weight: 900;
+      font-weight: 800;
       letter-spacing: 2.5px;
       text-transform: uppercase;
       margin-bottom: 18px;
@@ -205,10 +244,11 @@
     .home-hero-content h1 {
       max-width: 1000px;
       margin: 0;
+      font-family: var(--site-font);
       font-size: clamp(46px, 7vw, 94px);
-      line-height: .91;
-      letter-spacing: -4px;
-      font-weight: 850;
+      line-height: .94;
+      letter-spacing: -3px;
+      font-weight: 900;
     }
 
     .home-hero-content h1 span {
@@ -217,6 +257,7 @@
 
     .home-hero-content p {
       margin: 25px 0 0;
+      font-family: var(--site-font);
       font-size: 12px;
       line-height: 1.5;
       font-weight: 700;
@@ -236,10 +277,11 @@
     .intro-copy {
       max-width: 900px;
       margin: 0;
+      font-family: var(--site-font);
       font-size: 22px;
       line-height: 1.5;
-      font-weight: 650;
-      letter-spacing: -0.35px;
+      font-weight: 500;
+      letter-spacing: -.4px;
       color: #222;
     }
 
@@ -292,6 +334,7 @@
     }
 
     .photo-caption strong {
+      font-family: var(--site-font);
       font-size: clamp(25px, 3vw, 42px);
       line-height: 1;
       letter-spacing: -1.5px;
@@ -299,6 +342,7 @@
     }
 
     .photo-caption span {
+      font-family: var(--site-font);
       font-size: 11px;
       letter-spacing: 1.5px;
       text-transform: uppercase;
@@ -322,16 +366,19 @@
     }
 
     .about-project h2 {
+      font-family: var(--site-font);
       font-size: clamp(34px, 4vw, 56px);
-      line-height: .98;
+      line-height: 1;
       letter-spacing: -2px;
       margin: 0;
       font-weight: 850;
     }
 
     .about-project-text {
+      font-family: var(--site-font);
       font-size: 18px;
       line-height: 1.75;
+      font-weight: 400;
       color: #777;
       max-width: 760px;
     }
@@ -342,6 +389,7 @@
 
     .about-project-text strong {
       color: #222;
+      font-weight: 700;
     }
 
     /* =========================================================
@@ -363,13 +411,16 @@
     }
 
     .principle-number {
+      font-family: var(--site-font);
       font-size: 11px;
       font-weight: 800;
       letter-spacing: 2px;
     }
 
     .principle h3 {
+      font-family: var(--site-font);
       font-size: 22px;
+      line-height: 1.1;
       margin: 38px 0 9px;
       font-weight: 800;
       letter-spacing: -.5px;
@@ -380,6 +431,7 @@
       color: #777;
       line-height: 1.55;
       font-size: 14px;
+      font-weight: 400;
     }
 
     /* =========================================================
@@ -399,6 +451,7 @@
     }
 
     .founder-kicker {
+      font-family: var(--site-font);
       font-size: 11px;
       font-weight: 800;
       letter-spacing: 2px;
@@ -407,9 +460,10 @@
     }
 
     .founder-head h2 {
+      font-family: var(--site-font);
       font-size: clamp(40px, 5vw, 68px);
-      line-height: .95;
-      letter-spacing: -3px;
+      line-height: .98;
+      letter-spacing: -2.5px;
       margin: 0;
       font-weight: 850;
     }
@@ -443,7 +497,9 @@
     }
 
     .founder-content h3 {
+      font-family: var(--site-font);
       font-size: 40px;
+      line-height: 1;
       letter-spacing: -1.5px;
       margin: 0 0 20px;
       font-weight: 850;
@@ -454,10 +510,12 @@
       font-size: 16px;
       line-height: 1.7;
       margin: 0 0 20px;
+      font-weight: 400;
     }
 
     .founder-content p strong {
       color: #222;
+      font-weight: 700;
     }
 
     .founder-tags {
@@ -501,6 +559,7 @@
 
     .visual-story-head h2 {
       margin: 0;
+      font-family: var(--site-font);
       font-size: clamp(32px, 4vw, 52px);
       letter-spacing: -2px;
       line-height: 1;
@@ -513,6 +572,7 @@
       line-height: 1.5;
       margin: 0;
       font-size: 14px;
+      font-weight: 400;
     }
 
     .photo-grid {
@@ -555,6 +615,7 @@
     }
 
     .statement-label {
+      font-family: var(--site-font);
       font-size: 11px;
       font-weight: 900;
       letter-spacing: 2px;
@@ -565,9 +626,10 @@
     .statement h2 {
       max-width: 950px;
       margin: 0;
+      font-family: var(--site-font);
       font-size: clamp(38px, 5.5vw, 75px);
-      line-height: .95;
-      letter-spacing: -3px;
+      line-height: .98;
+      letter-spacing: -2.5px;
       font-weight: 850;
     }
 
@@ -576,6 +638,7 @@
       margin: 28px 0 0;
       font-size: 17px;
       line-height: 1.6;
+      font-weight: 400;
     }
 
     .statement .btn {
@@ -626,6 +689,27 @@
       background: var(--miles-blue);
     }
 
+    .kpi {
+      font-family: var(--site-font);
+      font-weight: 850;
+      letter-spacing: -1px;
+    }
+
+    .label {
+      font-family: var(--site-font);
+      font-weight: 800;
+    }
+
+    .badge {
+      font-family: var(--site-font);
+      font-weight: 800;
+    }
+
+    .btn {
+      font-family: var(--site-font);
+      font-weight: 800;
+    }
+
     /* =========================================================
        TOP USER AREA
        ========================================================= */
@@ -643,6 +727,7 @@
     }
 
     .user-greeting {
+      font-family: var(--site-font);
       font-size: 13px;
       color: #666;
       white-space: nowrap;
@@ -657,6 +742,7 @@
       border: 1px solid #d7d7d3;
       background: #fff;
       color: #222;
+      font-family: var(--site-font);
       font-size: 12px;
       font-weight: 700;
       cursor: pointer;
@@ -678,6 +764,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      font-family: var(--site-font);
       font-weight: 800;
       font-size: 13px;
       cursor: pointer;
@@ -711,6 +798,7 @@
 
     .account-menu-name {
       padding: 11px;
+      font-family: var(--site-font);
       font-weight: 800;
       border-bottom: 1px solid #eee;
       margin-bottom: 5px;
@@ -719,6 +807,7 @@
     .account-menu-email {
       padding: 4px 11px 10px;
       color: #888;
+      font-family: var(--site-font);
       font-size: 11px;
       border-bottom: 1px solid #eee;
       margin-bottom: 5px;
@@ -735,6 +824,7 @@
       background: transparent;
       text-align: left;
       cursor: pointer;
+      font-family: var(--site-font);
       font-size: 12px;
       color: #222;
       text-decoration: none;
@@ -784,6 +874,7 @@
       height: 32px;
       border: 0;
       background: transparent;
+      font-family: var(--site-font);
       font-size: 25px;
       line-height: 1;
       cursor: pointer;
@@ -796,6 +887,7 @@
 
     .auth-eyebrow {
       color: var(--miles-blue);
+      font-family: var(--site-font);
       font-size: 10px;
       font-weight: 800;
       letter-spacing: 2px;
@@ -804,6 +896,7 @@
     }
 
     .auth-modal h2 {
+      font-family: var(--site-font);
       font-size: 32px;
       line-height: 1;
       letter-spacing: -1px;
@@ -813,9 +906,11 @@
 
     .auth-description {
       color: #777;
+      font-family: var(--site-font);
       font-size: 14px;
       line-height: 1.5;
       margin: 0 0 25px;
+      font-weight: 400;
     }
 
     .auth-tabs {
@@ -830,6 +925,7 @@
       border: 0;
       background: transparent;
       color: #888;
+      font-family: var(--site-font);
       font-size: 12px;
       font-weight: 700;
       cursor: pointer;
@@ -855,6 +951,7 @@
 
     .form-group label {
       display: block;
+      font-family: var(--site-font);
       font-size: 11px;
       font-weight: 700;
       margin-bottom: 7px;
@@ -868,7 +965,7 @@
       border: 1px solid #d7d7d3;
       background: #fafaf8;
       color: #222;
-      font-family: inherit;
+      font-family: var(--site-font);
       font-size: 14px;
       outline: none;
     }
@@ -884,6 +981,7 @@
       background: var(--miles-blue);
       color: #fff;
       padding: 14px;
+      font-family: var(--site-font);
       font-size: 12px;
       font-weight: 800;
       cursor: pointer;
@@ -903,6 +1001,7 @@
     .auth-message {
       min-height: 18px;
       margin-top: 12px;
+      font-family: var(--site-font);
       font-size: 12px;
       line-height: 1.5;
       color: #d34b4b;
@@ -919,6 +1018,7 @@
       background: transparent;
       padding: 0;
       color: #777;
+      font-family: var(--site-font);
       font-size: 11px;
       text-decoration: underline;
       cursor: pointer;
@@ -935,6 +1035,7 @@
       background: transparent;
       padding: 0;
       color: #777;
+      font-family: var(--site-font);
       font-size: 11px;
       cursor: pointer;
     }
@@ -949,12 +1050,13 @@
       background: #f5f5f3;
       border: 1px solid #e3e3df;
       color: #666;
+      font-family: var(--site-font);
       font-size: 11px;
       line-height: 1.5;
     }
 
     /* =========================================================
-       RESPONSIVE
+       MOBILE
        ========================================================= */
 
     @media (max-width: 900px) {
@@ -971,7 +1073,7 @@
       }
 
       .home-hero-content h1 {
-        letter-spacing: -2.5px;
+        letter-spacing: -2px;
       }
 
       .about-project-grid {
@@ -1029,7 +1131,7 @@
 
       .home-hero-content h1 {
         font-size: 45px;
-        letter-spacing: -2px;
+        letter-spacing: -1.5px;
       }
 
       .home-hero-eyebrow {
@@ -1186,8 +1288,6 @@
 
   <main class="main">
 
-    <!-- TOP BAR -->
-
     <div class="top">
 
       <div class="crumb">
@@ -1195,8 +1295,6 @@
       </div>
 
       <div class="top-right">
-
-        <!-- GUEST -->
 
         <div
           id="guestArea"
@@ -1212,8 +1310,6 @@
           </button>
 
         </div>
-
-        <!-- LOGGED IN -->
 
         <div
           id="loggedInArea"
@@ -1276,7 +1372,7 @@
     </div>
 
     <!-- =====================================================
-         HOME HERO IMAGE
+         HOME HERO
          ===================================================== -->
 
     <div class="home-hero">
@@ -1317,17 +1413,15 @@
     <section class="home-intro">
 
       <p class="intro-copy">
-
         Miles Apart ist die virtuelle Running-Community für alle,
         die laufen, trainieren und gemeinsam besser werden wollen.
         Egal, wo du gerade bist.
-
       </p>
 
     </section>
 
     <!-- =====================================================
-         HERO IMAGE
+         STORY PHOTO
          ===================================================== -->
 
     <div class="story-photo">
@@ -1372,10 +1466,8 @@
           </div>
 
           <h2>
-
             Ein Run Club.<br>
             Nur ohne Grenzen.
-
           </h2>
 
         </div>
