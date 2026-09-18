@@ -11,7 +11,7 @@
   >
 
   <title>
-    Home — Miles Apart Running Club
+    Miles Apart — Miles Apart Running Club
   </title>
 
   <link
@@ -155,11 +155,6 @@
     .home-photo-strip-item:hover img {
       transform: scale(1.03);
     }
-
-    /*
-     * Das dritte Bild zeigt dich ursprünglich relativ klein
-     * auf der Rennstrecke. Deshalb wird es stärker herangezoomt.
-     */
 
     .home-photo-strip-item.zoomed img {
       transform: scale(2.15);
@@ -1029,7 +1024,7 @@
         class="active"
         href="index.html"
       >
-        Home
+        Miles Apart
       </a>
 
       <a href="challenges.html">
@@ -1090,7 +1085,7 @@
     <div class="top">
 
       <div class="crumb">
-        MILES APART / HOME
+        MILES APART / MILES APART
       </div>
 
       <div class="top-right">
@@ -1180,8 +1175,6 @@
 
     <div class="home-photo-strip">
 
-      <!-- OBEN LINKS -->
-
       <div class="home-photo-strip-item">
 
         <img
@@ -1191,8 +1184,6 @@
 
       </div>
 
-      <!-- OBEN RECHTS -->
-
       <div class="home-photo-strip-item">
 
         <img
@@ -1201,8 +1192,6 @@
         >
 
       </div>
-
-      <!-- UNTEN RECHTS / STÄRKER HERANGEZOOMT -->
 
       <div class="home-photo-strip-item zoomed">
 
@@ -1331,8 +1320,6 @@
         </div>
 
       </div>
-
-      <!-- PRINCIPLES -->
 
       <div class="principles">
 
@@ -2128,10 +2115,6 @@
       Melde dich an und werde Teil der Community.
     </p>
 
-    <!-- =====================================================
-         NORMAL AUTH TABS
-         ===================================================== -->
-
     <div
       class="auth-tabs"
       id="authTabs"
@@ -2154,10 +2137,6 @@
       </button>
 
     </div>
-
-    <!-- =====================================================
-         LOGIN
-         ===================================================== -->
 
     <form
       class="auth-form active"
@@ -2218,10 +2197,6 @@
       ></div>
 
     </form>
-
-    <!-- =====================================================
-         REGISTRATION
-         ===================================================== -->
 
     <form
       class="auth-form"
@@ -2292,10 +2267,6 @@
 
     </form>
 
-    <!-- =====================================================
-         FORGOT PASSWORD
-         ===================================================== -->
-
     <form
       class="auth-form"
       id="forgotForm"
@@ -2346,10 +2317,6 @@
       </div>
 
     </form>
-
-    <!-- =====================================================
-         PASSWORD RECOVERY
-         ===================================================== -->
 
     <form
       class="auth-form"
@@ -2415,10 +2382,6 @@
 
 <script>
 
-  /* =========================================================
-     SUPABASE CONFIGURATION
-     ========================================================= */
-
   const SUPABASE_URL =
     "https://orbrkdrsihsacsnprewf.supabase.co";
 
@@ -2434,10 +2397,6 @@
       SUPABASE_URL,
       SUPABASE_PUBLISHABLE_KEY
     );
-
-  /* =========================================================
-     DOM ELEMENTS
-     ========================================================= */
 
   const guestArea =
     document.getElementById("guestArea");
@@ -2529,17 +2488,9 @@
   const recoverySubmit =
     document.getElementById("recoverySubmit");
 
-  /* =========================================================
-     AUTH STATE
-     ========================================================= */
-
   let currentUser = null;
 
   let currentProfile = null;
-
-  /* =========================================================
-     HELPERS
-     ========================================================= */
 
   function getInitials(name) {
 
@@ -2656,10 +2607,6 @@
 
   }
 
-  /* =========================================================
-     PROFILE
-     ========================================================= */
-
   async function loadProfile(user) {
 
     if (!user) {
@@ -2696,10 +2643,6 @@
     return currentProfile;
 
   }
-
-  /* =========================================================
-     USER INTERFACE
-     ========================================================= */
 
   function updateUserInterface() {
 
@@ -2768,10 +2711,6 @@
       currentUser.email || "";
 
   }
-
-  /* =========================================================
-     MODAL
-     ========================================================= */
 
   function openAuth() {
 
@@ -2843,10 +2782,6 @@
 
     }
   );
-
-  /* =========================================================
-     FORM VISIBILITY
-     ========================================================= */
 
   function hideAllForms() {
 
@@ -2963,10 +2898,6 @@
     "click",
     showLogin
   );
-
-  /* =========================================================
-     REGISTER
-     ========================================================= */
 
   registerForm.addEventListener(
     "submit",
@@ -3103,10 +3034,6 @@
     }
   );
 
-  /* =========================================================
-     LOGIN
-     ========================================================= */
-
   loginForm.addEventListener(
     "submit",
     async function(event) {
@@ -3182,10 +3109,6 @@
     }
   );
 
-  /* =========================================================
-     PASSWORD RESET REQUEST
-     ========================================================= */
-
   forgotForm.addEventListener(
     "submit",
     async function(event) {
@@ -3250,10 +3173,6 @@
 
     }
   );
-
-  /* =========================================================
-     PASSWORD RECOVERY
-     ========================================================= */
 
   recoveryForm.addEventListener(
     "submit",
@@ -3351,10 +3270,6 @@
     }
   );
 
-  /* =========================================================
-     ACCOUNT MENU
-     ========================================================= */
-
   avatarButton.addEventListener(
     "click",
     function(event) {
@@ -3387,10 +3302,6 @@
     }
   );
 
-  /* =========================================================
-     LOGOUT
-     ========================================================= */
-
   logoutButton.addEventListener(
     "click",
     async function() {
@@ -3416,10 +3327,6 @@
 
     }
   );
-
-  /* =========================================================
-     SUPABASE AUTH STATE
-     ========================================================= */
 
   supabaseClient.auth.onAuthStateChange(
     async function(event, session) {
@@ -3467,10 +3374,6 @@
 
     }
   );
-
-  /* =========================================================
-     INITIAL SESSION
-     ========================================================= */
 
   async function initializeAuth() {
 
@@ -3520,10 +3423,6 @@
     updateUserInterface();
 
   }
-
-  /* =========================================================
-     ERROR TRANSLATION
-     ========================================================= */
 
   function translateAuthError(error) {
 
@@ -3592,10 +3491,6 @@
     );
 
   }
-
-  /* =========================================================
-     START
-     ========================================================= */
 
   initializeAuth();
 
