@@ -1,14 +1,24 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
+
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
 
   <title>Mein Profil – Miles Apart Running Club</title>
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  />
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
+
     :root {
       --miles-blue: #18b8c7;
       --miles-blue-dark: #1199a6;
@@ -30,16 +40,10 @@
 
     body {
       margin: 0;
-      font-family:
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Roboto,
-        Helvetica,
-        Arial,
-        sans-serif;
+      font-family: var(--font-main, "Inter", sans-serif);
       background: #ffffff;
       color: var(--text);
+      font-weight: var(--font-light, 300);
     }
 
     button,
@@ -87,7 +91,7 @@
       align-items: center;
       gap: 14px;
 
-      font-weight: 800;
+      font-weight: var(--font-heading, 800);
       letter-spacing: -0.03em;
     }
 
@@ -104,16 +108,17 @@
 
       color: var(--miles-blue);
       font-size: 17px;
-      font-weight: 800;
+      font-weight: var(--font-heading, 800);
     }
 
     .brand-text {
       font-size: 18px;
+      font-weight: var(--font-heading, 800);
     }
 
     .back-link {
       color: var(--muted);
-      font-weight: 700;
+      font-weight: var(--font-light, 300);
     }
 
     .back-link:hover {
@@ -135,7 +140,7 @@
 
       color: var(--miles-blue);
       font-size: 13px;
-      font-weight: 800;
+      font-weight: var(--font-heading, 800);
       letter-spacing: 0.16em;
       text-transform: uppercase;
     }
@@ -146,6 +151,7 @@
       font-size: clamp(42px, 7vw, 76px);
       line-height: 0.95;
       letter-spacing: -0.055em;
+      font-weight: var(--font-heading, 800);
     }
 
     .intro {
@@ -155,6 +161,7 @@
       color: var(--muted);
       font-size: 19px;
       line-height: 1.6;
+      font-weight: var(--font-light, 300);
     }
 
     /* --------------------------------------------------
@@ -196,7 +203,7 @@
       color: var(--miles-blue);
 
       font-size: 48px;
-      font-weight: 800;
+      font-weight: var(--font-heading, 800);
     }
 
     .avatar img {
@@ -209,7 +216,7 @@
       margin-top: 20px;
 
       font-size: 23px;
-      font-weight: 800;
+      font-weight: var(--font-heading, 800);
     }
 
     .profile-side-username {
@@ -217,6 +224,7 @@
 
       color: var(--muted);
       font-size: 15px;
+      font-weight: var(--font-light, 300);
     }
 
     /* --------------------------------------------------
@@ -243,7 +251,7 @@
 
       color: var(--text);
       font-size: 14px;
-      font-weight: 800;
+      font-weight: var(--font-heading, 800);
 
       text-align: center;
     }
@@ -259,6 +267,7 @@
       color: var(--muted);
       font-size: 11px;
       line-height: 1.45;
+      font-weight: var(--font-light, 300);
     }
 
     /* --------------------------------------------------
@@ -283,7 +292,7 @@
 
     label {
       font-size: 14px;
-      font-weight: 800;
+      font-weight: var(--font-heading, 800);
     }
 
     input,
@@ -303,6 +312,9 @@
       transition:
         border-color 0.2s ease,
         box-shadow 0.2s ease;
+
+      font-family: var(--font-main, "Inter", sans-serif);
+      font-weight: var(--font-light, 300);
     }
 
     input:focus,
@@ -321,6 +333,7 @@
       color: var(--muted);
       font-size: 12px;
       line-height: 1.4;
+      font-weight: var(--font-light, 300);
     }
 
     .email-box {
@@ -330,6 +343,7 @@
       background: var(--soft);
 
       color: var(--muted);
+      font-weight: var(--font-light, 300);
     }
 
     /* --------------------------------------------------
@@ -353,7 +367,7 @@
       background: var(--text);
       color: #ffffff;
 
-      font-weight: 800;
+      font-weight: var(--font-heading, 800);
     }
 
     .button:hover {
@@ -397,7 +411,7 @@
       margin-top: 16px;
 
       font-size: 14px;
-      font-weight: 700;
+      font-weight: var(--font-heading, 800);
     }
 
     .status.success {
@@ -413,6 +427,7 @@
 
       color: var(--muted);
       text-align: center;
+      font-weight: var(--font-light, 300);
     }
 
     /* --------------------------------------------------
@@ -432,6 +447,7 @@
 
       font-size: 32px;
       letter-spacing: -0.04em;
+      font-weight: var(--font-heading, 800);
     }
 
     .section-header p {
@@ -439,6 +455,7 @@
 
       color: var(--muted);
       line-height: 1.5;
+      font-weight: var(--font-light, 300);
     }
 
     .password-card {
@@ -510,8 +527,11 @@
       .avatar-upload {
         max-width: 230px;
       }
+
     }
+
   </style>
+
 </head>
 
 <body>
@@ -520,14 +540,26 @@
 
     <header class="topbar">
 
-      <a href="index.html" class="brand">
-        <div class="brand-mark">M</div>
+      <a
+        href="index.html"
+        class="brand"
+      >
+
+        <div class="brand-mark">
+          M
+        </div>
+
         <div class="brand-text">
           Miles Apart Running Club
         </div>
+
       </a>
 
-      <a href="index.html" class="back-link">
+
+      <a
+        href="home.html"
+        class="back-link"
+      >
         ← Home
       </a>
 
@@ -536,7 +568,10 @@
 
     <main>
 
-      <div id="loadingState" class="loading">
+      <div
+        id="loadingState"
+        class="loading"
+      >
         Profil wird geladen …
       </div>
 
@@ -578,7 +613,10 @@
             </div>
 
 
-            <div class="profile-side-name" id="sideName">
+            <div
+              class="profile-side-name"
+              id="sideName"
+            >
               —
             </div>
 
@@ -590,8 +628,6 @@
               —
             </div>
 
-
-            <!-- PHOTO UPLOAD -->
 
             <div class="avatar-upload">
 
@@ -624,8 +660,6 @@
 
               <div class="form-grid">
 
-                <!-- NAME -->
-
                 <div class="field">
 
                   <label for="displayName">
@@ -642,8 +676,6 @@
 
                 </div>
 
-
-                <!-- USERNAME -->
 
                 <div class="field">
 
@@ -666,8 +698,6 @@
                 </div>
 
 
-                <!-- EMAIL -->
-
                 <div class="field full">
 
                   <label>
@@ -689,8 +719,6 @@
                 </div>
 
 
-                <!-- LOCATION -->
-
                 <div class="field">
 
                   <label for="location">
@@ -706,8 +734,6 @@
 
                 </div>
 
-
-                <!-- BIO -->
 
                 <div class="field full">
 
@@ -1007,6 +1033,7 @@
     ================================================== */
 
     let currentUser = null;
+
     let currentAvatarUrl = null;
 
 
@@ -1027,15 +1054,18 @@
           .filter(Boolean);
 
       if (parts.length === 1) {
+
         return parts[0]
           .slice(0, 2)
           .toUpperCase();
+
       }
 
       return (
         parts[0][0] +
         parts[parts.length - 1][0]
       ).toUpperCase();
+
     }
 
 
@@ -1049,6 +1079,7 @@
 
       profileStatus.className =
         "status " + type;
+
     }
 
 
@@ -1062,6 +1093,7 @@
 
       passwordStatus.className =
         "status " + type;
+
     }
 
 
@@ -1101,6 +1133,7 @@
           getInitials(name);
 
       }
+
     }
 
 
@@ -1109,7 +1142,11 @@
     ) {
 
       if (!error) {
-        return "Es ist ein unbekannter Fehler aufgetreten.";
+
+        return (
+          "Es ist ein unbekannter Fehler aufgetreten."
+        );
+
       }
 
       const message =
@@ -1122,7 +1159,9 @@
         )
       ) {
 
-        return "Dieser Username ist bereits vergeben.";
+        return (
+          "Dieser Username ist bereits vergeben."
+        );
 
       }
 
@@ -1132,17 +1171,18 @@
         )
       ) {
 
-        return "Der Username muss zwischen 3 und 30 Zeichen lang sein.";
+        return (
+          "Der Username muss zwischen 3 und 30 Zeichen lang sein."
+        );
 
       }
 
       return message;
+
     }
 
 
-    function getFileExtension(
-      file
-    ) {
+    function getFileExtension(file) {
 
       const name =
         file.name || "";
@@ -1151,13 +1191,19 @@
         name.split(".");
 
       if (parts.length < 2) {
+
         return "jpg";
+
       }
 
       return parts
         .pop()
         .toLowerCase()
-        .replace(/[^a-z0-9]/g, "");
+        .replace(
+          /[^a-z0-9]/g,
+          ""
+        );
+
     }
 
 
@@ -1184,6 +1230,7 @@
           "Deine Sitzung konnte nicht geladen werden.";
 
         return;
+
       }
 
 
@@ -1194,9 +1241,10 @@
       if (!session) {
 
         window.location.href =
-          "index.html";
+          "home.html";
 
         return;
+
       }
 
 
@@ -1234,6 +1282,7 @@
           "Das Profil konnte nicht geladen werden.";
 
         return;
+
       }
 
 
@@ -1299,6 +1348,7 @@
 
       profileContent.style.display =
         "block";
+
     }
 
 
@@ -1341,6 +1391,7 @@
             "";
 
           return;
+
         }
 
 
@@ -1359,6 +1410,7 @@
             "";
 
           return;
+
         }
 
 
@@ -1376,6 +1428,7 @@
           "Bild ausgewählt. Klicke auf „Änderungen speichern“, um es hochzuladen.",
           "success"
         );
+
       }
     );
 
@@ -1384,14 +1437,14 @@
        UPLOAD AVATAR
     ================================================== */
 
-    async function uploadAvatar(
-      file
-    ) {
+    async function uploadAvatar(file) {
 
       if (!currentUser) {
+
         throw new Error(
           "Keine aktive Sitzung."
         );
+
       }
 
 
@@ -1425,7 +1478,9 @@
 
 
       if (uploadError) {
+
         throw uploadError;
+
       }
 
 
@@ -1469,6 +1524,7 @@
           ]);
 
         throw profileError;
+
       }
 
 
@@ -1477,6 +1533,7 @@
 
 
       return publicUrl;
+
     }
 
 
@@ -1492,7 +1549,9 @@
         !oldAvatarUrl ||
         !currentUser
       ) {
+
         return;
+
       }
 
 
@@ -1509,15 +1568,16 @@
 
 
         if (index === -1) {
+
           return;
+
         }
 
 
         const filePath =
-          oldAvatarUrl
-            .substring(
-              index + marker.length
-            );
+          oldAvatarUrl.substring(
+            index + marker.length
+          );
 
 
         if (
@@ -1525,7 +1585,9 @@
             currentUser.id + "/"
           )
         ) {
+
           return;
+
         }
 
 
@@ -1544,6 +1606,7 @@
         );
 
       }
+
     }
 
 
@@ -1573,9 +1636,10 @@
         if (!session) {
 
           window.location.href =
-            "index.html";
+            "home.html";
 
           return;
+
         }
 
 
@@ -1613,6 +1677,7 @@
           );
 
           return;
+
         }
 
 
@@ -1630,6 +1695,7 @@
           );
 
           return;
+
         }
 
 
@@ -1643,11 +1709,6 @@
 
 
         try {
-
-          /*
-            1. Neues Profilbild hochladen,
-            falls eines ausgewählt wurde.
-          */
 
           if (selectedFile) {
 
@@ -1667,10 +1728,6 @@
             );
 
 
-            /*
-              Altes Bild anschließend löschen.
-            */
-
             if (
               oldAvatarUrl &&
               oldAvatarUrl !==
@@ -1685,10 +1742,6 @@
 
           }
 
-
-          /*
-            2. Profilinformationen speichern.
-          */
 
           const {
             error
@@ -1715,7 +1768,9 @@
 
 
           if (error) {
+
             throw error;
+
           }
 
 
@@ -1766,7 +1821,9 @@
 
           saveProfileButton.textContent =
             "Änderungen speichern";
+
         }
+
       }
     );
 
@@ -1802,6 +1859,7 @@
           );
 
           return;
+
         }
 
 
@@ -1816,6 +1874,7 @@
           );
 
           return;
+
         }
 
 
@@ -1848,6 +1907,7 @@
             error
           );
 
+
           setPasswordStatus(
             error.message ||
             "Das Passwort konnte nicht geändert werden.",
@@ -1855,6 +1915,7 @@
           );
 
           return;
+
         }
 
 
@@ -1869,6 +1930,7 @@
           "Dein Passwort wurde erfolgreich geändert.",
           "success"
         );
+
       }
     );
 
@@ -1908,11 +1970,13 @@
             "Abmelden";
 
           return;
+
         }
 
 
         window.location.href =
-          "index.html";
+          "home.html";
+
       }
     );
 
@@ -1931,14 +1995,17 @@
 
           if (
             !window.location.pathname.endsWith(
-              "index.html"
+              "home.html"
             )
           ) {
 
             window.location.href =
-              "index.html";
+              "home.html";
+
           }
+
         }
+
       }
     );
 
