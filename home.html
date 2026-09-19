@@ -90,7 +90,18 @@
 
     /* =========================================================
        NAVIGATION
-       ========================================================= */
+    ========================================================= */
+
+    /*
+      Auf Home und auf allen Unterseiten:
+
+      Miles Apart       Home
+      Challenges        Community
+      Events            Training
+
+      My Run ist kein eigener Navigationspunkt mehr.
+      My Run befindet sich direkt innerhalb von Home.
+    */
 
     .sidebar .nav {
       display: grid !important;
@@ -139,8 +150,14 @@
     }
 
 
+    /*
+      Nur der aktive Navigationspunkt bekommt
+      den blauen Punkt.
+    */
+
     .sidebar .nav a.active::before {
       content: "";
+
       width: 13px;
       height: 13px;
 
@@ -154,18 +171,14 @@
     }
 
 
+    /*
+      Bei nicht aktiven Punkten gibt es keinen Punkt.
+      Dadurch entspricht die Navigation optisch
+      dem gewünschten Design.
+    */
+
     .sidebar .nav a:not(.active)::before {
-      content: "";
-      width: 13px;
-      height: 13px;
-
-      flex: 0 0 13px;
-
-      margin-right: 25px;
-
-      border-radius: 50%;
-
-      background: transparent;
+      content: none !important;
     }
 
 
@@ -887,21 +900,14 @@
     .my-run-avatar {
       width: 130px;
       height: 130px;
-
       border-radius: 50%;
-
       border: 3px solid var(--miles-blue);
-
       background: #eefafa;
-
       display: flex;
       align-items: center;
       justify-content: center;
-
       overflow: hidden;
-
       color: var(--miles-blue);
-
       font-size: 34px;
       font-weight: 900;
     }
@@ -919,15 +925,11 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-
       padding: 10px 13px;
-
       background: #050909;
       color: #fff;
-
       font-size: 11px;
       font-weight: 800;
-
       cursor: pointer;
     }
 
@@ -987,17 +989,12 @@
     .my-run-form-group textarea {
       width: 100%;
       box-sizing: border-box;
-
       padding: 13px 14px;
-
       border: 1px solid #d7d7d3;
-
       background: #fafaf8;
       color: #222;
-
       font: inherit;
       font-size: 14px;
-
       outline: none;
     }
 
@@ -1025,16 +1022,12 @@
 
     .my-run-actions {
       grid-column: 1 / -1;
-
       display: flex;
       align-items: center;
       justify-content: space-between;
-
       gap: 15px;
-
       margin-top: 2px;
       padding-top: 18px;
-
       border-top: 1px solid var(--home-line);
     }
 
@@ -1555,21 +1548,30 @@
 
     @media (max-width: 700px) {
 
+      /*
+        Auf kleinen Bildschirmen wird die Navigation
+        bewusst weiterhin zweispaltig dargestellt,
+        damit sie dem gewünschten Grundlayout entspricht.
+      */
+
       .sidebar .nav {
-        grid-template-columns: 1fr !important;
-        gap: 4px !important;
+        grid-template-columns: 1fr 1fr !important;
+        gap: 6px 12px !important;
       }
 
 
       .sidebar .nav a {
         min-height: 54px !important;
         font-size: 18px !important;
+        padding: 0 12px !important;
       }
 
 
-      .sidebar .nav a.active::before,
-      .sidebar .nav a:not(.active)::before {
-        margin-right: 18px;
+      .sidebar .nav a.active::before {
+        width: 9px;
+        height: 9px;
+        flex-basis: 9px;
+        margin-right: 12px;
       }
 
 
@@ -1699,7 +1701,16 @@
     </div>
 
 
+    <!-- =====================================================
+         EINHEITLICHE NAVIGATION
+    ===================================================== -->
+
     <nav class="nav">
+
+
+      <a href="index.html">
+        Miles Apart
+      </a>
 
 
       <a
@@ -1707,11 +1718,6 @@
         href="home.html"
       >
         Home
-      </a>
-
-
-      <a href="index.html">
-        Miles Apart
       </a>
 
 
@@ -2637,6 +2643,7 @@
 
       <!-- ===================================================
            MY RUN
+           Direkt in Home integriert
       =================================================== -->
 
       <section
@@ -3279,7 +3286,6 @@
 ========================================================= -->
 
 <script>
-
 
   /* =========================================================
      SUPABASE
@@ -4039,6 +4045,7 @@
 
       profileCompletionPercent.textContent =
         "0%";
+
 
       profileCompletionText.textContent =
         "Melde dich an, um dein Profil zu bearbeiten.";
