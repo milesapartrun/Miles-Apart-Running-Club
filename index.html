@@ -19,29 +19,13 @@
     href="style.css"
   >
 
-  <!-- =======================================================
-       SUPABASE
-       ======================================================= -->
-
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
 
-    /* =========================================================
-       MILES APART — ACCENT COLOR
-       ========================================================= */
-
     :root {
       --miles-blue: #18b8c7;
     }
-
-    /* =========================================================
-       TYPOGRAFIE
-       
-       Dieselbe Typografie wie Challenges:
-       Inter Light 300
-       Inter Extra Bold 800
-       ========================================================= */
 
     body,
     body * {
@@ -55,10 +39,6 @@
       font-family: var(--font-main);
     }
 
-    /*
-      Normale Texte
-    */
-
     p,
     li,
     span,
@@ -69,10 +49,6 @@
     select {
       font-weight: var(--font-light);
     }
-
-    /*
-      Headlines / starke Typografie
-    */
 
     h1,
     h2,
@@ -92,12 +68,6 @@
       font-weight: var(--font-heading);
     }
 
-    /*
-      Intro-Text
-      Gleiche Schriftfamilie und gleicher Light-Schnitt
-      wie auf der Challenges-Seite.
-    */
-
     .home-intro .intro-copy {
       font-family: var(--font-main);
       font-size: 18px;
@@ -108,10 +78,6 @@
       max-width: 760px;
       margin: 0;
     }
-
-    /* =========================================================
-       ACCENT
-       ========================================================= */
 
     .lime {
       background-color: var(--miles-blue) !important;
@@ -158,10 +124,6 @@
     .principle-number {
       color: var(--miles-blue);
     }
-
-    /* =========================================================
-       HOME HERO
-       ========================================================= */
 
     .home-hero {
       position: relative;
@@ -234,10 +196,6 @@
       color: rgba(255,255,255,.72);
     }
 
-    /* =========================================================
-       BIG PHOTO
-       ========================================================= */
-
     .story-photo {
       position: relative;
       height: min(62vw, 620px);
@@ -298,10 +256,6 @@
       font-weight: var(--font-light);
     }
 
-    /* =========================================================
-       ABOUT PROJECT
-       ========================================================= */
-
     .about-project {
       margin-top: 85px;
     }
@@ -339,10 +293,6 @@
       font-weight: var(--font-heading);
     }
 
-    /* =========================================================
-       THREE PRINCIPLES
-       ========================================================= */
-
     .principles {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -376,10 +326,6 @@
       font-size: 14px;
       font-weight: var(--font-light);
     }
-
-    /* =========================================================
-       FOUNDER
-       ========================================================= */
 
     .founder {
       margin-top: 100px;
@@ -480,10 +426,6 @@
       color: var(--miles-blue);
     }
 
-    /* =========================================================
-       PHOTO STRIP
-       ========================================================= */
-
     .visual-story {
       margin-top: 100px;
     }
@@ -541,10 +483,6 @@
       transform: scale(1.03);
     }
 
-    /* =========================================================
-       COMMUNITY STATEMENT
-       ========================================================= */
-
     .statement {
       margin-top: 100px;
       padding: 70px 50px;
@@ -590,10 +528,6 @@
       border-color: #fff !important;
     }
 
-    /* =========================================================
-       CARDS
-       ========================================================= */
-
     .card.lime {
       background: var(--miles-blue) !important;
       color: #fff !important;
@@ -624,10 +558,6 @@
     .mini-progress i {
       background: var(--miles-blue);
     }
-
-    /* =========================================================
-       TOP USER AREA
-       ========================================================= */
 
     .top-right {
       display: flex;
@@ -747,10 +677,6 @@
       background: #f5f5f3;
       color: var(--miles-blue);
     }
-
-    /* =========================================================
-       LOGIN MODAL
-       ========================================================= */
 
     .auth-overlay {
       position: fixed;
@@ -963,10 +889,6 @@
       font-weight: var(--font-light);
     }
 
-    /* =========================================================
-       RESPONSIVE
-       ========================================================= */
-
     @media (max-width: 900px) {
 
       .home-hero {
@@ -1111,10 +1033,6 @@
 
 <div class="shell">
 
-  <!-- =======================================================
-       SIDEBAR
-       ======================================================= -->
-
   <aside class="sidebar">
 
     <div class="brand">
@@ -1137,6 +1055,10 @@
         href="index.html"
       >
         Miles Apart
+      </a>
+
+      <a href="home.html">
+        Home
       </a>
 
       <a href="challenges.html">
@@ -1185,10 +1107,6 @@
     </div>
 
   </aside>
-
-  <!-- =======================================================
-       MAIN CONTENT
-       ======================================================= -->
 
   <main class="main">
 
@@ -1275,10 +1193,6 @@
 
     </div>
 
-    <!-- =====================================================
-         HOME HERO
-         ===================================================== -->
-
     <div class="home-hero">
 
       <img
@@ -1310,10 +1224,6 @@
 
     </div>
 
-    <!-- =====================================================
-         INTRO
-         ===================================================== -->
-
     <section class="home-intro">
 
       <p class="intro-copy">
@@ -1323,10 +1233,6 @@
       </p>
 
     </section>
-
-    <!-- =====================================================
-         HERO IMAGE
-         ===================================================== -->
 
     <div class="story-photo">
 
@@ -1354,10 +1260,6 @@
       </div>
 
     </div>
-
-    <!-- =====================================================
-         WHAT IS MILES APART
-         ===================================================== -->
 
     <section class="about-project">
 
@@ -1466,10 +1368,6 @@
 
     </section>
 
-    <!-- =====================================================
-         FOUNDER
-         ===================================================== -->
-
     <section class="founder">
 
       <div class="founder-head">
@@ -1575,10 +1473,6 @@
 
     </section>
 
-    <!-- =====================================================
-         VISUAL STORY
-         ===================================================== -->
-
     <section class="visual-story">
 
       <div class="visual-story-head">
@@ -1637,10 +1531,6 @@
 
     </section>
 
-    <!-- =====================================================
-         COMMUNITY STATEMENT
-         ===================================================== -->
-
     <section class="statement">
 
       <div class="statement-label">
@@ -1668,10 +1558,6 @@
       </a>
 
     </section>
-
-    <!-- =====================================================
-         COMMUNITY STATS
-         ===================================================== -->
 
     <div class="section grid g4">
 
@@ -1740,10 +1626,6 @@
       </div>
 
     </div>
-
-    <!-- =====================================================
-         COMMUNITY RUN + WEEKLY GOAL
-         ===================================================== -->
 
     <div class="section grid g2">
 
@@ -1877,10 +1759,6 @@
       </div>
 
     </div>
-
-    <!-- =====================================================
-         LOWER GRID
-         ===================================================== -->
 
     <div class="section grid g3">
 
@@ -2162,10 +2040,6 @@
   </main>
 
 </div>
-
-<!-- =========================================================
-     AUTH MODAL
-     ========================================================= -->
 
 <div
   class="auth-overlay"
@@ -2464,10 +2338,6 @@
 
 </div>
 
-<!-- =========================================================
-     MILES APART / SUPABASE AUTH
-     ========================================================= -->
-
 <script>
 
   const SUPABASE_URL =
@@ -2658,25 +2528,10 @@
 
   function clearMessages() {
 
-    setMessage(
-      loginMessage,
-      ""
-    );
-
-    setMessage(
-      registerMessage,
-      ""
-    );
-
-    setMessage(
-      forgotMessage,
-      ""
-    );
-
-    setMessage(
-      recoveryMessage,
-      ""
-    );
+    setMessage(loginMessage, "");
+    setMessage(registerMessage, "");
+    setMessage(forgotMessage, "");
+    setMessage(recoveryMessage, "");
 
   }
 
@@ -2874,11 +2729,8 @@
   function hideAllForms() {
 
     loginForm.classList.remove("active");
-
     registerForm.classList.remove("active");
-
     forgotForm.classList.remove("active");
-
     recoveryForm.classList.remove("active");
 
   }
@@ -2886,7 +2738,6 @@
   function showLogin() {
 
     hideAllForms();
-
     clearMessages();
 
     loginForm.classList.add("active");
@@ -2895,7 +2746,6 @@
       "grid";
 
     loginTab.classList.add("active");
-
     registerTab.classList.remove("active");
 
     authTitle.textContent =
@@ -2909,7 +2759,6 @@
   function showRegister() {
 
     hideAllForms();
-
     clearMessages();
 
     registerForm.classList.add("active");
@@ -2918,7 +2767,6 @@
       "grid";
 
     registerTab.classList.add("active");
-
     loginTab.classList.remove("active");
 
     authTitle.textContent =
@@ -2932,7 +2780,6 @@
   function showForgotPassword() {
 
     hideAllForms();
-
     clearMessages();
 
     forgotForm.classList.add("active");
@@ -2951,7 +2798,6 @@
   function showRecovery() {
 
     hideAllForms();
-
     clearMessages();
 
     recoveryForm.classList.add("active");
@@ -3057,9 +2903,7 @@
         options: {
 
           data: {
-
             display_name: name
-
           },
 
           emailRedirectTo:
@@ -3453,7 +3297,6 @@
       } else {
 
         currentUser = null;
-
         currentProfile = null;
 
       }
@@ -3478,7 +3321,6 @@
       );
 
       currentUser = null;
-
       currentProfile = null;
 
       updateUserInterface();
@@ -3503,7 +3345,6 @@
     } else {
 
       currentUser = null;
-
       currentProfile = null;
 
     }
