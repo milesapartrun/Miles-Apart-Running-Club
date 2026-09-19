@@ -37,30 +37,72 @@
 
     /* =========================================================
        TYPOGRAFIE
+       
+       Dieselbe Typografie wie Challenges:
+       Inter Light 300
+       Inter Extra Bold 800
        ========================================================= */
 
     body,
     body * {
-      font-family: inherit;
+      font-family: var(--font-main);
     }
 
     button,
     input,
     textarea,
     select {
-      font-family: inherit;
+      font-family: var(--font-main);
     }
 
     /*
-      Der Intro-Text verwendet exakt dieselbe
-      Typografie wie der Fließtext im About-Bereich.
+      Normale Texte
+    */
+
+    p,
+    li,
+    span,
+    a,
+    button,
+    input,
+    textarea,
+    select {
+      font-weight: var(--font-light);
+    }
+
+    /*
+      Headlines / starke Typografie
+    */
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    strong,
+    b,
+    .kpi,
+    .label,
+    .principle-number,
+    .founder-kicker,
+    .home-hero-eyebrow,
+    .statement-label,
+    .user-avatar-button {
+      font-weight: var(--font-heading);
+    }
+
+    /*
+      Intro-Text
+      Gleiche Schriftfamilie und gleicher Light-Schnitt
+      wie auf der Challenges-Seite.
     */
 
     .home-intro .intro-copy {
-      font-family: inherit;
+      font-family: var(--font-main);
       font-size: 18px;
       line-height: 1.75;
-      font-weight: 400;
+      font-weight: var(--font-light);
       letter-spacing: normal;
       color: #777;
       max-width: 760px;
@@ -106,6 +148,7 @@
 
     .intro-eyebrow {
       color: var(--miles-blue);
+      font-weight: var(--font-heading);
     }
 
     .founder-kicker {
@@ -161,7 +204,7 @@
     .home-hero-eyebrow {
       color: var(--miles-blue);
       font-size: 11px;
-      font-weight: 900;
+      font-weight: var(--font-heading);
       letter-spacing: 2.5px;
       text-transform: uppercase;
       margin-bottom: 18px;
@@ -173,18 +216,19 @@
       font-size: clamp(46px, 7vw, 94px);
       line-height: .94;
       letter-spacing: -3px;
-      font-weight: 900;
+      font-weight: var(--font-heading);
     }
 
     .home-hero-content h1 span {
       color: var(--miles-blue);
+      font-weight: var(--font-heading);
     }
 
     .home-hero-content p {
       margin: 25px 0 0;
       font-size: 12px;
       line-height: 1.5;
-      font-weight: 700;
+      font-weight: var(--font-light);
       letter-spacing: 2px;
       text-transform: uppercase;
       color: rgba(255,255,255,.72);
@@ -242,6 +286,7 @@
       font-size: clamp(25px, 3vw, 42px);
       line-height: 1;
       letter-spacing: -1.5px;
+      font-weight: var(--font-heading);
     }
 
     .photo-caption span {
@@ -250,6 +295,7 @@
       text-transform: uppercase;
       color: #bbb;
       text-align: right;
+      font-weight: var(--font-light);
     }
 
     /* =========================================================
@@ -272,22 +318,25 @@
       line-height: .98;
       letter-spacing: -2px;
       margin: 0;
+      font-weight: var(--font-heading);
     }
 
     .about-project-text {
       font-size: 18px;
       line-height: 1.75;
-      font-weight: 400;
+      font-weight: var(--font-light);
       color: #777;
       max-width: 760px;
     }
 
     .about-project-text p {
       margin: 0 0 22px;
+      font-weight: var(--font-light);
     }
 
     .about-project-text strong {
       color: #222;
+      font-weight: var(--font-heading);
     }
 
     /* =========================================================
@@ -310,13 +359,14 @@
 
     .principle-number {
       font-size: 11px;
-      font-weight: 800;
+      font-weight: var(--font-heading);
       letter-spacing: 2px;
     }
 
     .principle h3 {
       font-size: 22px;
       margin: 38px 0 9px;
+      font-weight: var(--font-heading);
     }
 
     .principle p {
@@ -324,6 +374,7 @@
       color: #777;
       line-height: 1.55;
       font-size: 14px;
+      font-weight: var(--font-light);
     }
 
     /* =========================================================
@@ -344,7 +395,7 @@
 
     .founder-kicker {
       font-size: 11px;
-      font-weight: 800;
+      font-weight: var(--font-heading);
       letter-spacing: 2px;
       text-transform: uppercase;
       margin-bottom: 12px;
@@ -355,6 +406,7 @@
       line-height: .95;
       letter-spacing: -3px;
       margin: 0;
+      font-weight: var(--font-heading);
     }
 
     .founder-layout {
@@ -389,6 +441,7 @@
       font-size: 40px;
       letter-spacing: -1.5px;
       margin: 0 0 20px;
+      font-weight: var(--font-heading);
     }
 
     .founder-content p {
@@ -396,10 +449,12 @@
       font-size: 16px;
       line-height: 1.7;
       margin: 0 0 20px;
+      font-weight: var(--font-light);
     }
 
     .founder-content p strong {
       color: #222;
+      font-weight: var(--font-heading);
     }
 
     .founder-tags {
@@ -415,7 +470,7 @@
       padding: 8px 11px;
       font-size: 10px;
       letter-spacing: 1px;
-      font-weight: 700;
+      font-weight: var(--font-light);
       text-transform: uppercase;
       color: #666;
     }
@@ -446,6 +501,7 @@
       font-size: clamp(32px, 4vw, 52px);
       letter-spacing: -2px;
       line-height: 1;
+      font-weight: var(--font-heading);
     }
 
     .visual-story-head p {
@@ -454,6 +510,7 @@
       line-height: 1.5;
       margin: 0;
       font-size: 14px;
+      font-weight: var(--font-light);
     }
 
     .photo-grid {
@@ -497,7 +554,7 @@
 
     .statement-label {
       font-size: 11px;
-      font-weight: 900;
+      font-weight: var(--font-heading);
       letter-spacing: 2px;
       text-transform: uppercase;
       margin-bottom: 22px;
@@ -509,6 +566,7 @@
       font-size: clamp(38px, 5.5vw, 75px);
       line-height: .95;
       letter-spacing: -3px;
+      font-weight: var(--font-heading);
     }
 
     .statement p {
@@ -516,6 +574,7 @@
       margin: 28px 0 0;
       font-size: 17px;
       line-height: 1.6;
+      font-weight: var(--font-light);
     }
 
     .statement .btn {
@@ -586,6 +645,7 @@
       font-size: 13px;
       color: #666;
       white-space: nowrap;
+      font-weight: var(--font-light);
     }
 
     .login-button {
@@ -598,7 +658,7 @@
       background: #fff;
       color: #222;
       font-size: 12px;
-      font-weight: 700;
+      font-weight: var(--font-light);
       cursor: pointer;
       transition: .2s ease;
     }
@@ -618,7 +678,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 800;
+      font-weight: var(--font-heading);
       font-size: 13px;
       cursor: pointer;
       overflow: hidden;
@@ -651,7 +711,7 @@
 
     .account-menu-name {
       padding: 11px;
-      font-weight: 800;
+      font-weight: var(--font-heading);
       border-bottom: 1px solid #eee;
       margin-bottom: 5px;
     }
@@ -663,6 +723,7 @@
       border-bottom: 1px solid #eee;
       margin-bottom: 5px;
       word-break: break-word;
+      font-weight: var(--font-light);
     }
 
     .account-menu a,
@@ -678,6 +739,7 @@
       font-size: 12px;
       color: #222;
       text-decoration: none;
+      font-weight: var(--font-light);
     }
 
     .account-menu a:hover,
@@ -728,6 +790,7 @@
       line-height: 1;
       cursor: pointer;
       color: #555;
+      font-weight: var(--font-light);
     }
 
     .auth-close:hover {
@@ -737,7 +800,7 @@
     .auth-eyebrow {
       color: var(--miles-blue);
       font-size: 10px;
-      font-weight: 800;
+      font-weight: var(--font-heading);
       letter-spacing: 2px;
       text-transform: uppercase;
       margin-bottom: 10px;
@@ -748,6 +811,7 @@
       line-height: 1;
       letter-spacing: -1px;
       margin: 0 0 10px;
+      font-weight: var(--font-heading);
     }
 
     .auth-description {
@@ -755,6 +819,7 @@
       font-size: 14px;
       line-height: 1.5;
       margin: 0 0 25px;
+      font-weight: var(--font-light);
     }
 
     .auth-tabs {
@@ -770,7 +835,7 @@
       background: transparent;
       color: #888;
       font-size: 12px;
-      font-weight: 700;
+      font-weight: var(--font-light);
       cursor: pointer;
       border-bottom: 2px solid transparent;
     }
@@ -778,6 +843,7 @@
     .auth-tab.active {
       color: var(--miles-blue);
       border-bottom-color: var(--miles-blue);
+      font-weight: var(--font-light);
     }
 
     .auth-form {
@@ -795,7 +861,7 @@
     .form-group label {
       display: block;
       font-size: 11px;
-      font-weight: 700;
+      font-weight: var(--font-heading);
       margin-bottom: 7px;
       color: #333;
     }
@@ -807,8 +873,9 @@
       border: 1px solid #d7d7d3;
       background: #fafaf8;
       color: #222;
-      font-family: inherit;
+      font-family: var(--font-main);
       font-size: 14px;
+      font-weight: var(--font-light);
       outline: none;
     }
 
@@ -824,7 +891,7 @@
       color: #fff;
       padding: 14px;
       font-size: 12px;
-      font-weight: 800;
+      font-weight: var(--font-light);
       cursor: pointer;
       margin-top: 4px;
     }
@@ -845,6 +912,7 @@
       font-size: 12px;
       line-height: 1.5;
       color: #d34b4b;
+      font-weight: var(--font-light);
     }
 
     .auth-message.success {
@@ -861,6 +929,7 @@
       font-size: 11px;
       text-decoration: underline;
       cursor: pointer;
+      font-weight: var(--font-light);
     }
 
     .forgot-password:hover {
@@ -876,6 +945,7 @@
       color: #777;
       font-size: 11px;
       cursor: pointer;
+      font-weight: var(--font-light);
     }
 
     .auth-back:hover {
@@ -890,6 +960,7 @@
       color: #666;
       font-size: 11px;
       line-height: 1.5;
+      font-weight: var(--font-light);
     }
 
     /* =========================================================
