@@ -62,7 +62,6 @@ a{
    TYPOGRAPHY
    ========================================================= */
 
-/* All headings = Inter Extra Bold 800 */
 h1,
 h2,
 h3,
@@ -73,7 +72,6 @@ h6{
   font-weight:var(--font-heading);
 }
 
-/* Normal text = Inter Light 300 */
 p,
 li,
 span,
@@ -149,7 +147,9 @@ select{
   padding:12px 13px;
   border-radius:14px;
   color:#4f5a59;
-  font-weight:var(--font-light);
+
+  /* Navigation bewusst kräftiger */
+  font-weight:800;
 }
 
 .nav a:hover,
@@ -690,6 +690,9 @@ h1{
     padding:14px 14px;
     font-size:18px;
     border-radius:20px;
+
+    /* Auch mobil kräftiger */
+    font-weight:800;
   }
 
   .nav a.active:before{
@@ -800,6 +803,9 @@ h1{
     white-space:nowrap;
     overflow:hidden;
     text-overflow:ellipsis;
+
+    /* Auch auf kleinen Screens kräftig */
+    font-weight:800;
   }
 
   .main{
@@ -868,9 +874,6 @@ h1{
 
 /* =========================================================
    FINAL TYPOGRAPHY ENFORCEMENT
-   Only two weights are used across the entire website:
-   300 = Inter Light
-   800 = Inter Extra Bold
    ========================================================= */
 
 body{
@@ -895,7 +898,6 @@ h6,
 }
 
 /* Everything else stays Light */
-.nav a,
 .side-bottom small,
 .crumb,
 .lead,
@@ -906,4 +908,12 @@ h6,
 .date span,
 .tag{
   font-weight:300;
-} Jetzt solltest du alles haben. Bau mir die Home-Seite komplett nach und schick mir den Index-Code zu.
+}
+
+/* =========================================================
+   NAVIGATION — LEICHT KRÄFTIGER
+   ========================================================= */
+
+.nav a{
+  font-weight:800;
+}
