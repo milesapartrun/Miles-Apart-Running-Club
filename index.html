@@ -70,33 +70,64 @@
 
 
     /* =====================================================
-       INTRO / FIRST STATEMENT
+       INTRO STORY CARD
     ===================================================== */
 
     .home-intro {
       margin: 0 !important;
-      padding: 90px 50px !important;
-      background: #f7f7f5;
+      padding: 72px 50px 78px !important;
+      background: #fff;
       box-sizing: border-box;
-      border-bottom: 1px solid #e4e4e0;
     }
 
-    .home-intro .intro-copy {
+    .intro-card {
       width: 100%;
+      box-sizing: border-box;
+      padding: 52px 55px 50px;
+      background: #f5f5f3;
+      border: 1px solid #e2e2de;
+    }
+
+    .intro-card-lead {
       max-width: 980px;
       margin: 0;
-      padding: 0;
-
-      font-family: var(--font-main);
-      font-size: clamp(38px, 5vw, 68px);
-      line-height: 1.02;
+      color: #222;
+      font-size: clamp(34px, 4.2vw, 58px);
+      line-height: 1.03;
+      letter-spacing: -2.4px;
       font-weight: var(--font-heading);
-      letter-spacing: -2.8px;
-      color: #202020;
     }
 
-    .home-intro .intro-copy span {
+    .intro-card-lead span {
       color: var(--miles-blue);
+      font-weight: var(--font-heading);
+    }
+
+    .intro-card-bottom {
+      display: block;
+      margin-top: 48px;
+      padding-top: 34px;
+      border-top: 1px solid #dcdcd8;
+    }
+
+    .intro-card-text {
+      max-width: 850px;
+    }
+
+    .intro-card-text p {
+      margin: 0 0 22px;
+      color: #666;
+      font-size: 17px;
+      line-height: 1.72;
+      font-weight: var(--font-light);
+    }
+
+    .intro-card-text p:last-child {
+      margin-bottom: 0;
+    }
+
+    .intro-card-text strong {
+      color: #222;
       font-weight: var(--font-heading);
     }
 
@@ -988,14 +1019,25 @@
       }
 
       .home-intro {
-        padding: 70px 30px !important;
+        padding: 55px 30px 65px !important;
       }
 
-      .home-intro .intro-copy {
+      .intro-card {
+        padding: 40px 35px 38px;
+      }
+
+      .intro-card-lead {
+        font-size: 38px;
+        letter-spacing: -1.7px;
+      }
+
+      .intro-card-bottom {
+        margin-top: 38px;
+        padding-top: 30px;
+      }
+
+      .intro-card-text {
         max-width: 760px;
-        font-size: 42px;
-        line-height: 1.04;
-        letter-spacing: -2px;
       }
 
       .about-project-grid {
@@ -1063,13 +1105,28 @@
       }
 
       .home-intro {
-        padding: 55px 20px 60px !important;
+        padding: 38px 20px 48px !important;
       }
 
-      .home-intro .intro-copy {
-        font-size: 34px;
+      .intro-card {
+        padding: 30px 24px 32px;
+      }
+
+      .intro-card-lead {
+        font-size: 31px;
         line-height: 1.05;
-        letter-spacing: -1.6px;
+        letter-spacing: -1.3px;
+      }
+
+      .intro-card-bottom {
+        margin-top: 28px;
+        padding-top: 25px;
+      }
+
+      .intro-card-text p {
+        font-size: 15px;
+        line-height: 1.7;
+        margin-bottom: 16px;
       }
 
       .story-photo {
@@ -1287,11 +1344,6 @@
 
     </div>
 
-
-    <!-- =====================================================
-         HERO
-    ===================================================== -->
-
     <div class="home-hero">
 
       <img
@@ -1325,22 +1377,45 @@
 
 
     <!-- =====================================================
-         SHORT INTRO
+         INTRO STORY
     ===================================================== -->
 
     <section class="home-intro">
 
-      <p class="intro-copy">
-        Miles Apart ist für alle, die laufen wollen.
-        <span>Gemeinsam, egal wo.</span>
-      </p>
+      <div class="intro-card">
+
+        <p class="intro-card-lead">
+          Miles Apart ist für alle,
+          die laufen wollen.
+          <span>Gemeinsam, egal wo.</span>
+        </p>
+
+        <div class="intro-card-bottom">
+
+          <div class="intro-card-text">
+
+            <p>
+              Miles Apart ist die virtuelle Running-Community
+              für alle, die laufen, trainieren und gemeinsam
+              besser werden wollen.
+              <strong>Egal, wo du gerade bist.</strong>
+            </p>
+
+            <p>
+              Du musst nicht in derselben Stadt wohnen,
+              um dieselben Ziele zu teilen. Deine Kilometer,
+              deine Challenges und deine Geschichten können
+              Teil einer gemeinsamen Community sein.
+            </p>
+
+          </div>
+
+        </div>
+
+      </div>
 
     </section>
 
-
-    <!-- =====================================================
-         STORY PHOTO
-    ===================================================== -->
 
     <div class="story-photo">
 
@@ -1368,11 +1443,6 @@
       </div>
 
     </div>
-
-
-    <!-- =====================================================
-         ABOUT PROJECT
-    ===================================================== -->
 
     <section class="about-project">
 
@@ -1481,11 +1551,6 @@
 
     </section>
 
-
-    <!-- =====================================================
-         FOUNDER
-    ===================================================== -->
-
     <section class="founder">
 
       <div class="founder-head">
@@ -1591,11 +1656,6 @@
 
     </section>
 
-
-    <!-- =====================================================
-         VISUAL STORY
-    ===================================================== -->
-
     <section class="visual-story">
 
       <div class="visual-story-head">
@@ -1654,11 +1714,6 @@
 
     </section>
 
-
-    <!-- =====================================================
-         STATEMENT
-    ===================================================== -->
-
     <section class="statement">
 
       <div class="statement-label">
@@ -1686,11 +1741,6 @@
       </a>
 
     </section>
-
-
-    <!-- =====================================================
-         STATS
-    ===================================================== -->
 
     <div class="section grid g4">
 
@@ -1759,11 +1809,6 @@
       </div>
 
     </div>
-
-
-    <!-- =====================================================
-         COMMUNITY RUN + WEEKLY GOAL
-    ===================================================== -->
 
     <div class="section grid g2">
 
@@ -1898,11 +1943,6 @@
 
     </div>
 
-
-    <!-- =====================================================
-         COMMUNITY / EVENTS
-    ===================================================== -->
-
     <div class="section grid g3">
 
       <div class="card">
@@ -2017,7 +2057,6 @@
 
       </div>
 
-
       <div class="card">
 
         <div class="section-head">
@@ -2089,7 +2128,6 @@
         </div>
 
       </div>
-
 
       <div class="card">
 
@@ -2185,11 +2223,6 @@
   </main>
 
 </div>
-
-
-<!-- =======================================================
-     AUTH MODAL
-     ======================================================= -->
 
 <div
   class="auth-overlay"
@@ -2310,7 +2343,6 @@
 
     </form>
 
-
     <form
       class="auth-form"
       id="registerForm"
@@ -2380,7 +2412,6 @@
 
     </form>
 
-
     <form
       class="auth-form"
       id="forgotForm"
@@ -2431,7 +2462,6 @@
       </div>
 
     </form>
-
 
     <form
       class="auth-form"
@@ -2490,7 +2520,6 @@
   </div>
 
 </div>
-
 
 <script>
 
@@ -2604,7 +2633,6 @@
 
   let currentProfile = null;
 
-
   function getInitials(name) {
 
     if (!name) {
@@ -2631,7 +2659,6 @@
 
   }
 
-
   function getFirstName(name) {
 
     if (!name) {
@@ -2643,7 +2670,6 @@
       .split(/\s+/)[0];
 
   }
-
 
   function getUserDisplayName(user, profile) {
 
@@ -2672,12 +2698,7 @@
 
   }
 
-
-  function setMessage(
-    element,
-    text,
-    success = false
-  ) {
+  function setMessage(element, text, success = false) {
 
     element.textContent = text;
 
@@ -2688,7 +2709,6 @@
 
   }
 
-
   function clearMessages() {
 
     setMessage(loginMessage, "");
@@ -2697,7 +2717,6 @@
     setMessage(recoveryMessage, "");
 
   }
-
 
   function setButtonLoading(
     button,
@@ -2713,7 +2732,6 @@
         : normalText;
 
   }
-
 
   async function loadProfile(user) {
 
@@ -2746,27 +2764,21 @@
 
     }
 
-    currentProfile =
-      data || null;
+    currentProfile = data || null;
 
     return currentProfile;
 
   }
 
-
   function updateUserInterface() {
 
     if (!currentUser) {
 
-      guestArea.style.display =
-        "flex";
+      guestArea.style.display = "flex";
 
-      loggedInArea.style.display =
-        "none";
+      loggedInArea.style.display = "none";
 
-      accountMenu.classList.remove(
-        "open"
-      );
+      accountMenu.classList.remove("open");
 
       return;
 
@@ -2784,17 +2796,14 @@
     const initials =
       getInitials(displayName);
 
-    guestArea.style.display =
-      "none";
+    guestArea.style.display = "none";
 
-    loggedInArea.style.display =
-      "flex";
+    loggedInArea.style.display = "flex";
 
     userGreeting.textContent =
       "Hallo, " + firstName;
 
-    avatarButton.innerHTML =
-      "";
+    avatarButton.innerHTML = "";
 
     if (
       currentProfile &&
@@ -2829,20 +2838,15 @@
 
   }
 
-
   function openAuth() {
 
-    authOverlay.classList.add(
-      "open"
-    );
+    authOverlay.classList.add("open");
 
     document.body.style.overflow =
       "hidden";
 
     if (
-      recoveryForm.classList.contains(
-        "active"
-      )
+      recoveryForm.classList.contains("active")
     ) {
 
       return;
@@ -2853,12 +2857,9 @@
 
   }
 
-
   function closeAuth() {
 
-    authOverlay.classList.remove(
-      "open"
-    );
+    authOverlay.classList.remove("open");
 
     document.body.style.overflow =
       "";
@@ -2867,18 +2868,15 @@
 
   }
 
-
   openLoginButton.addEventListener(
     "click",
     openAuth
   );
 
-
   closeAuthButton.addEventListener(
     "click",
     closeAuth
   );
-
 
   authOverlay.addEventListener(
     "click",
@@ -2895,16 +2893,13 @@
     }
   );
 
-
   document.addEventListener(
     "keydown",
     function(event) {
 
       if (
         event.key === "Escape" &&
-        authOverlay.classList.contains(
-          "open"
-        )
+        authOverlay.classList.contains("open")
       ) {
 
         closeAuth();
@@ -2914,47 +2909,27 @@
     }
   );
 
-
   function hideAllForms() {
 
-    loginForm.classList.remove(
-      "active"
-    );
-
-    registerForm.classList.remove(
-      "active"
-    );
-
-    forgotForm.classList.remove(
-      "active"
-    );
-
-    recoveryForm.classList.remove(
-      "active"
-    );
+    loginForm.classList.remove("active");
+    registerForm.classList.remove("active");
+    forgotForm.classList.remove("active");
+    recoveryForm.classList.remove("active");
 
   }
-
 
   function showLogin() {
 
     hideAllForms();
     clearMessages();
 
-    loginForm.classList.add(
-      "active"
-    );
+    loginForm.classList.add("active");
 
     authTabs.style.display =
       "grid";
 
-    loginTab.classList.add(
-      "active"
-    );
-
-    registerTab.classList.remove(
-      "active"
-    );
+    loginTab.classList.add("active");
+    registerTab.classList.remove("active");
 
     authTitle.textContent =
       "Willkommen zurück.";
@@ -2964,26 +2939,18 @@
 
   }
 
-
   function showRegister() {
 
     hideAllForms();
     clearMessages();
 
-    registerForm.classList.add(
-      "active"
-    );
+    registerForm.classList.add("active");
 
     authTabs.style.display =
       "grid";
 
-    registerTab.classList.add(
-      "active"
-    );
-
-    loginTab.classList.remove(
-      "active"
-    );
+    registerTab.classList.add("active");
+    loginTab.classList.remove("active");
 
     authTitle.textContent =
       "Werde Teil der Community.";
@@ -2993,15 +2960,12 @@
 
   }
 
-
   function showForgotPassword() {
 
     hideAllForms();
     clearMessages();
 
-    forgotForm.classList.add(
-      "active"
-    );
+    forgotForm.classList.add("active");
 
     authTabs.style.display =
       "none";
@@ -3014,15 +2978,12 @@
 
   }
 
-
   function showRecovery() {
 
     hideAllForms();
     clearMessages();
 
-    recoveryForm.classList.add(
-      "active"
-    );
+    recoveryForm.classList.add("active");
 
     authTabs.style.display =
       "none";
@@ -3035,30 +2996,25 @@
 
   }
 
-
   loginTab.addEventListener(
     "click",
     showLogin
   );
-
 
   registerTab.addEventListener(
     "click",
     showRegister
   );
 
-
   forgotPasswordButton.addEventListener(
     "click",
     showForgotPassword
   );
 
-
   backToLoginButton.addEventListener(
     "click",
     showLogin
   );
-
 
   registerForm.addEventListener(
     "submit",
@@ -3070,26 +3026,20 @@
 
       const name =
         document
-          .getElementById(
-            "registerName"
-          )
+          .getElementById("registerName")
           .value
           .trim();
 
       const email =
         document
-          .getElementById(
-            "registerEmail"
-          )
+          .getElementById("registerEmail")
           .value
           .trim()
           .toLowerCase();
 
       const password =
         document
-          .getElementById(
-            "registerPassword"
-          )
+          .getElementById("registerPassword")
           .value;
 
       if (
@@ -3127,26 +3077,24 @@
       const {
         data,
         error
-      } =
-        await supabaseClient.auth.signUp({
+      } = await supabaseClient.auth.signUp({
 
-          email: email,
+        email: email,
 
-          password: password,
+        password: password,
 
-          options: {
+        options: {
 
-            data: {
-              display_name: name
-            },
+          data: {
+            display_name: name
+          },
 
-            emailRedirectTo:
-              window.location.href
-                .split("#")[0]
+          emailRedirectTo:
+            window.location.href.split("#")[0]
 
-          }
+        }
 
-        });
+      });
 
       setButtonLoading(
         registerSubmit,
@@ -3201,7 +3149,6 @@
     }
   );
 
-
   loginForm.addEventListener(
     "submit",
     async function(event) {
@@ -3212,18 +3159,14 @@
 
       const email =
         document
-          .getElementById(
-            "loginEmail"
-          )
+          .getElementById("loginEmail")
           .value
           .trim()
           .toLowerCase();
 
       const password =
         document
-          .getElementById(
-            "loginPassword"
-          )
+          .getElementById("loginPassword")
           .value;
 
       setButtonLoading(
@@ -3235,15 +3178,13 @@
       const {
         data,
         error
-      } =
-        await supabaseClient.auth
-          .signInWithPassword({
+      } = await supabaseClient.auth.signInWithPassword({
 
-            email: email,
+        email: email,
 
-            password: password
+        password: password
 
-          });
+      });
 
       setButtonLoading(
         loginSubmit,
@@ -3283,7 +3224,6 @@
     }
   );
 
-
   forgotForm.addEventListener(
     "submit",
     async function(event) {
@@ -3294,9 +3234,7 @@
 
       const email =
         document
-          .getElementById(
-            "forgotEmail"
-          )
+          .getElementById("forgotEmail")
           .value
           .trim()
           .toLowerCase();
@@ -3308,20 +3246,17 @@
       );
 
       const redirectUrl =
-        window.location.href
-          .split("#")[0];
+        window.location.href.split("#")[0];
 
       const {
         error
-      } =
-        await supabaseClient.auth
-          .resetPasswordForEmail(
-            email,
-            {
-              redirectTo:
-                redirectUrl
-            }
-          );
+      } = await supabaseClient.auth
+        .resetPasswordForEmail(
+          email,
+          {
+            redirectTo: redirectUrl
+          }
+        );
 
       setButtonLoading(
         forgotSubmit,
@@ -3354,7 +3289,6 @@
     }
   );
 
-
   recoveryForm.addEventListener(
     "submit",
     async function(event) {
@@ -3365,16 +3299,12 @@
 
       const password =
         document
-          .getElementById(
-            "newPassword"
-          )
+          .getElementById("newPassword")
           .value;
 
       const passwordConfirm =
         document
-          .getElementById(
-            "newPasswordConfirm"
-          )
+          .getElementById("newPasswordConfirm")
           .value;
 
       if (
@@ -3411,13 +3341,11 @@
 
       const {
         error
-      } =
-        await supabaseClient.auth
-          .updateUser({
+      } = await supabaseClient.auth.updateUser({
 
-            password: password
+        password: password
 
-          });
+      });
 
       setButtonLoading(
         recoverySubmit,
@@ -3457,7 +3385,6 @@
     }
   );
 
-
   avatarButton.addEventListener(
     "click",
     function(event) {
@@ -3470,7 +3397,6 @@
 
     }
   );
-
 
   document.addEventListener(
     "click",
@@ -3491,16 +3417,13 @@
     }
   );
 
-
   logoutButton.addEventListener(
     "click",
     async function() {
 
       const {
         error
-      } =
-        await supabaseClient.auth
-          .signOut();
+      } = await supabaseClient.auth.signOut();
 
       if (error) {
 
@@ -3519,7 +3442,6 @@
 
     }
   );
-
 
   supabaseClient.auth.onAuthStateChange(
     async function(event, session) {
@@ -3567,15 +3489,12 @@
     }
   );
 
-
   async function initializeAuth() {
 
     const {
       data,
       error
-    } =
-      await supabaseClient.auth
-        .getSession();
+    } = await supabaseClient.auth.getSession();
 
     if (error) {
 
@@ -3616,7 +3535,6 @@
     updateUserInterface();
 
   }
-
 
   function translateAuthError(error) {
 
@@ -3685,7 +3603,6 @@
     );
 
   }
-
 
   initializeAuth();
 
