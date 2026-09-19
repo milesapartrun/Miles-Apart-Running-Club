@@ -1,923 +1,227 @@
-<!doctype html><html lang="de"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Challenges — Miles Apart Running Club</title><link rel="stylesheet" href="style.css"></head>
-<body><div class="shell"><aside class="sidebar"><div class="brand"><a href="index.html"><img src="miles-apart-full-logo.png" alt="Miles Apart Running Club"></a></div><nav class="nav"><a class="" href="index.html">Home</a><a class="active" href="challenges.html">Challenges</a><a class="" href="community.html">Community</a><a class="" href="events.html">Events</a><a class="" href="training.html">Training</a><a class="" href="profile.html">My Run</a></nav><div class="side-bottom"><small>THIS WEEK</small><strong>23.4 / 30 KM</strong><div class="mini-progress"><i></i></div><p class="small" style="color:#aaa;margin-bottom:0">Nur 6.6 km bis zum Wochenziel.</p></div></aside><main class="main"><div class="top"><div class="crumb">MILES APART / CHALLENGES</div><div class="top-right"><span class="small muted">Guten Morgen, Alex</span><div class="avatar">A</div></div></div>
-<div class="hero"><div><h1>Challenges.</h1><p class="lead">Nicht gegen andere. Mit anderen.</p></div><a class="btn lime" href="#">+ Eigene Challenge</a></div>
-<div class="grid g3">
-<div class="card dark"><div class="row"><span class="badge lime">HOT</span><span class="small">6,740 Teilnehmer</span></div><h2 style="font-size:28px">THE COMMUNITY 10K</h2><p style="color:#bbb">10 km · 19. September · überall</p><div class="progress"><i style="width:67%"></i></div><div class="row small" style="margin-top:8px"><span>67% voll</span><b>3 Tage</b></div><a class="btn lime" style="margin-top:18px;width:100%" href="#">Teilnehmen</a></div>
-<div class="card"><div class="row"><span class="badge">TEAM</span><span class="small muted">2,310 km / 5,000</span></div><h2>Run Germany</h2><p class="muted">Als Community einmal quer durch Deutschland laufen.</p><div class="progress"><i style="width:46%"></i></div><a class="btn ghost" style="margin-top:18px;width:100%" href="#">Beitreten</a></div>
-<div class="card lime"><div class="label">BEGINNER</div><h2>First 20K</h2><p>Vier Wochen. Vier Läufe. 20 Kilometer. Perfekt, wenn du gerade anfängst.</p><div class="row"><b>4 Wochen</b><span>1,840 Runner</span></div><a class="btn" style="margin-top:18px;width:100%" href="#">Starten</a></div>
-</div>
-<div class="section grid g2">
-<div class="card"><div class="section-head"><h2>Dein Fortschritt</h2><span class="badge">September</span></div><div class="kpi">42.7 km</div><p class="muted">über alle Challenges</p><div class="progress"><i style="width:71%"></i></div><p class="small muted">Noch 17.3 km bis zum Monatsziel.</p></div>
-<div class="card"><div class="section-head"><h2>Community-Milestones</h2><span class="badge lime">LIVE</span></div><div class="rank"><span>🌍</span><div><b>Deutschland</b><div class="small muted">100,000 km im September</div></div><b>84%</b></div><div class="rank"><span>🌅</span><div><b>Early Bird Club</b><div class="small muted">10,000 Morgen-Kilometer</div></div><b>91%</b></div><div class="rank"><span>🌙</span><div><b>Nachteulen</b><div class="small muted">5,000 Abend-Kilometer</div></div><b>62%</b></div></div>
-</div>
-</main></div></body></html>
-
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;800&display=swap');
-
-/* =========================================================
-   GLOBAL
-   ========================================================= */
 
 :root{
-  --paper:#ffffff;
-  --card:#ffffff;
-  --ink:#050909;
-  --muted:#66706f;
-  --accent:#2fdff7;
-  --accent-soft:#e9fbff;
-  --line:#e4eaeb;
-  --dark:#050909;
-  --radius:22px;
-
-  --font-main:"Inter", sans-serif;
-  --font-light:300;
-  --font-heading:800;
-}
-
-*{
-  box-sizing:border-box;
-}
-
-html,
-body{
-  width:100%;
-  max-width:100%;
-  min-width:0;
-  overflow-x:hidden;
-}
-
-body{
-  margin:0;
-  background:var(--paper);
-  color:var(--ink);
-  font-family:var(--font-main);
-  font-weight:var(--font-light);
-}
-
-*,
-*::before,
-*::after{
-  min-width:0;
-}
-
-img,
-svg,
-video{
-  max-width:100%;
-}
-
-a{
-  color:inherit;
-  text-decoration:none;
-  font-weight:var(--font-light);
-}
-
-/* =========================================================
-   TYPOGRAPHY
-   ========================================================= */
-
-/* All headings = Inter Extra Bold 800 */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6{
-  font-family:var(--font-main);
-  font-weight:var(--font-heading);
-}
-
-/* Normal text = Inter Light 300 */
-p,
-li,
-span,
-a,
-button,
-input,
-textarea,
-select{
-  font-family:var(--font-main);
-  font-weight:var(--font-light);
-}
-
-/* =========================================================
-   LAYOUT
-   ========================================================= */
-
-.shell{
-  display:grid;
-  grid-template-columns:248px 1fr;
-  min-height:100vh;
-}
-
-.sidebar{
-  position:sticky;
-  top:0;
-  height:100vh;
-  background:var(--paper);
-  border-right:1px solid var(--line);
-  padding:24px 18px;
-  display:flex;
-  flex-direction:column;
-}
-
-.main{
-  padding:30px 42px 60px;
-  max-width:1500px;
-  width:100%;
-}
-
-/* =========================================================
-   BRAND / LOGO
-   ========================================================= */
-
-.brand{
-  padding:6px 8px 25px;
-  overflow:visible;
-}
-
-.brand a{
-  display:block;
-  overflow:visible;
-}
-
-.brand img{
-  display:block;
-  width:205px;
-  height:auto;
-  max-width:none;
-  object-fit:contain;
-  overflow:visible;
-}
-
-/* =========================================================
-   NAVIGATION
-   ========================================================= */
-
-.nav{
-  display:grid;
-  gap:5px;
-}
-
-.nav a{
-  padding:12px 13px;
-  border-radius:14px;
-  color:#4f5a59;
-  font-weight:var(--font-light);
-}
-
-.nav a:hover,
-.nav a.active{
-  background:var(--accent-soft);
-  color:var(--ink);
-}
-
-.nav a.active:before{
-  content:"";
-  display:inline-block;
-  width:7px;
-  height:7px;
-  background:var(--accent);
-  border-radius:50%;
-  margin:0 9px 2px 0;
-}
-
-/* =========================================================
-   SIDEBAR BOTTOM
-   ========================================================= */
-
-.side-bottom{
-  margin-top:auto;
-  background:var(--dark);
-  color:white;
-  border-radius:18px;
-  padding:15px;
-}
-
-.side-bottom small{
-  color:#aeb6b2;
-  font-weight:var(--font-light);
-}
-
-.side-bottom strong{
-  display:block;
-  margin:4px 0 12px;
-  font-weight:var(--font-heading);
-}
-
-.mini-progress{
-  height:7px;
-  background:#34403c;
-  border-radius:99px;
-  overflow:hidden;
-}
-
-.mini-progress i{
-  display:block;
-  height:100%;
-  width:72%;
-  background:var(--accent);
-}
-
-/* =========================================================
-   TOP BAR
-   ========================================================= */
-
-.top{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  margin-bottom:28px;
-}
-
-.crumb{
-  color:var(--muted);
-  font-size:12px;
-  font-weight:var(--font-light);
-  letter-spacing:.11em;
-}
-
-.top-right{
-  display:flex;
-  align-items:center;
-  gap:12px;
-}
-
-.avatar{
-  width:42px;
-  height:42px;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  background:var(--accent);
-  font-weight:var(--font-heading);
-}
-
-/* =========================================================
-   HERO
-   ========================================================= */
-
-.hero{
-  display:block;
-  margin-bottom:28px;
-}
-
-.hero-logo{
-  width:310px;
-  margin-bottom:18px;
-}
-
-.hero-logo img{
-  width:100%;
-  height:auto;
-  display:block;
-  object-fit:contain;
-}
-
-h1{
-  font-size:42px;
-  letter-spacing:-2.2px;
-  margin:0 0 8px;
-  line-height:1.05;
-  font-weight:var(--font-heading);
-}
-
-.lead{
-  color:var(--muted);
-  font-size:17px;
-  margin:0;
-  font-weight:var(--font-light);
-}
-
-.hero .btn{
-  margin-top:18px;
-}
-
-/* =========================================================
-   GRID
-   ========================================================= */
-
-.grid{
-  display:grid;
-  gap:18px;
-}
-
-.g4{
-  grid-template-columns:repeat(4,1fr);
-}
-
-.g3{
-  grid-template-columns:repeat(3,1fr);
-}
-
-.g2{
-  grid-template-columns:repeat(2,1fr);
-}
-
-/* =========================================================
-   CARDS
-   ========================================================= */
-
-.card{
-  background:var(--card);
-  border:1px solid var(--line);
-  border-radius:var(--radius);
-  padding:22px;
-  box-shadow:0 8px 25px rgba(0,0,0,.025);
-}
-
-.card.dark{
-  background:var(--dark);
-  color:white;
-  border-color:var(--dark);
-}
-
-.card.lime{
-  background:var(--accent);
-  border-color:var(--accent);
-  color:var(--ink);
-}
-
-/* =========================================================
-   KPI / LABELS
-   ========================================================= */
-
-.kpi{
-  font-size:32px;
-  font-weight:var(--font-heading);
-  letter-spacing:-1px;
-}
-
-.label{
-  color:var(--muted);
-  font-size:13px;
-  font-weight:var(--font-heading);
-  text-transform:uppercase;
-  letter-spacing:.08em;
-}
-
-.dark .label{
-  color:#a9b2ae;
-}
-
-/* =========================================================
-   GENERAL ELEMENTS
-   ========================================================= */
-
-.row{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:12px;
-}
-
-.stack{
-  display:grid;
-  gap:12px;
-}
-
-.muted{
-  color:var(--muted);
-  font-weight:var(--font-light);
-}
-
-.small{
-  font-size:13px;
-  font-weight:var(--font-light);
-}
-
-/* =========================================================
-   BUTTONS
-   ========================================================= */
-
-.btn{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  border:0;
-  border-radius:13px;
-  padding:12px 17px;
-  font-weight:var(--font-light);
-  cursor:pointer;
-  background:var(--dark);
-  color:white;
-}
-
-.btn.lime{
-  background:var(--accent);
-  color:var(--ink);
-}
-
-.btn.ghost{
-  background:#eef7f8;
-  color:#111;
-}
-
-.btn.white{
-  background:white;
-  color:#111;
-}
-
-/* =========================================================
-   PROGRESS
-   ========================================================= */
-
-.progress{
-  height:10px;
-  background:#e9ece6;
-  border-radius:99px;
-  overflow:hidden;
-}
-
-.progress i{
-  display:block;
-  height:100%;
-  background:#111;
-  border-radius:99px;
-}
-
-.dark .progress{
-  background:#34403c;
-}
-
-.dark .progress i{
-  background:var(--accent);
-}
-
-/* =========================================================
-   SECTIONS
-   ========================================================= */
-
-.section{
-  margin-top:28px;
-}
-
-.section-head{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:13px;
-}
-
-.section h2{
-  font-size:22px;
-  letter-spacing:-.7px;
-  margin:0;
-  font-weight:var(--font-heading);
-}
-
-/* =========================================================
-   BADGES
-   ========================================================= */
-
-.badge{
-  font-size:12px;
-  font-weight:var(--font-light);
-  border-radius:999px;
-  padding:6px 9px;
-  background:#eef7f8;
-}
-
-.badge.lime{
-  background:var(--accent);
-  color:var(--ink);
-}
-
-/* =========================================================
-   EVENTS
-   ========================================================= */
-
-.event{
-  display:grid;
-  grid-template-columns:70px 1fr auto;
-  gap:16px;
-  align-items:center;
-}
-
-.date{
-  background:var(--dark);
-  color:white;
-  border-radius:16px;
-  padding:10px;
-  text-align:center;
-}
-
-.date b{
-  font-size:22px;
-  display:block;
-  font-weight:var(--font-heading);
-}
-
-.date span{
-  font-size:11px;
-  text-transform:uppercase;
-  color:#bbb;
-  font-weight:var(--font-light);
-}
-
-/* =========================================================
-   RANKING
-   ========================================================= */
-
-.rank{
-  display:grid;
-  grid-template-columns:42px 1fr auto;
-  align-items:center;
-  gap:12px;
-  padding:12px 0;
-  border-bottom:1px solid var(--line);
-}
-
-.rank:last-child{
-  border:0;
-}
-
-.ranknum{
-  font-weight:var(--font-heading);
-  color:#999;
-}
-
-.person{
-  display:flex;
-  align-items:center;
-  gap:10px;
-}
-
-.pavatar{
-  width:34px;
-  height:34px;
-  border-radius:50%;
-  display:grid;
-  place-items:center;
-  background:#ddd;
-  font-size:12px;
-  font-weight:var(--font-heading);
-}
-
-/* =========================================================
-   POSTS
-   ========================================================= */
-
-.post{
-  display:grid;
-  grid-template-columns:40px 1fr;
-  gap:12px;
-}
-
-.post+.post{
-  padding-top:18px;
-  margin-top:18px;
-  border-top:1px solid var(--line);
-}
-
-.tag{
-  display:inline-block;
-  background:#eef7f8;
-  padding:5px 8px;
-  border-radius:8px;
-  font-size:11px;
-  font-weight:var(--font-light);
-  margin-right:5px;
-}
-
-/* =========================================================
-   BAR CHART
-   ========================================================= */
-
-.bar{
-  display:flex;
-  gap:7px;
-  align-items:end;
-  height:150px;
-}
-
-.bar i{
-  flex:1;
-  background:#ddd;
-  border-radius:7px 7px 2px 2px;
-}
-
-.bar i:nth-child(3),
-.bar i:nth-child(7){
-  background:#111;
-}
-
-.bar i:nth-child(7){
-  background:var(--accent);
-}
-
-/* =========================================================
-   ROUTE
-   ========================================================= */
-
-.route{
-  height:190px;
-  border-radius:18px;
-  background:
-    radial-gradient(
-      circle at 20% 70%,
-      var(--accent) 0 4px,
-      transparent 5px
-    ),
-    linear-gradient(135deg,#eef8fa,#fff);
-  position:relative;
-  overflow:hidden;
-}
-
-.route:after{
-  content:"";
-  position:absolute;
-  inset:25px 40px;
-  background:transparent;
-  border:4px solid #171716;
-  border-left-color:transparent;
-  border-bottom-color:transparent;
-  border-radius:48% 52% 48% 52%;
-  transform:rotate(-20deg);
-}
-
-/* =========================================================
-   LOGO SAFETY
-   ========================================================= */
-
+  --paper:#ffffff; --card:#ffffff; --ink:#050909; --muted:#66706f;
+  --accent:#2fdff7; --accent-soft:#e9fbff; --line:#e4eaeb; --dark:#050909; --radius:22px;
+}
+*{box-sizing:border-box} body{margin:0;background:var(--paper);color:var(--ink);font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+a{color:inherit;text-decoration:none}.shell{display:grid;grid-template-columns:248px 1fr;min-height:100vh}
+.sidebar{position:sticky;top:0;height:100vh;background:var(--paper);border-right:1px solid var(--line);padding:24px 18px;display:flex;flex-direction:column}
+.brand{padding:6px 8px 25px;overflow:visible}.brand img{display:block;width:205px;height:auto;max-width:none;overflow:visible}
+.nav{display:grid;gap:5px}.nav a{padding:12px 13px;border-radius:14px;color:#4f5a59;font-weight:750}.nav a:hover,.nav a.active{background:var(--accent-soft);color:var(--ink)}.nav a.active:before{content:"";display:inline-block;width:7px;height:7px;background:var(--accent);border-radius:50%;margin:0 9px 2px 0}
+.side-bottom{margin-top:auto;background:var(--dark);color:white;border-radius:18px;padding:15px}.side-bottom small{color:#aeb6b2}.side-bottom strong{display:block;margin:4px 0 12px}.mini-progress{height:7px;background:#34403c;border-radius:99px;overflow:hidden}.mini-progress i{display:block;height:100%;width:72%;background:var(--accent)}
+.main{padding:30px 42px 60px;max-width:1500px;width:100%}.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:28px}.crumb{color:var(--muted);font-size:12px;font-weight:800;letter-spacing:.11em}.avatar{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:var(--accent);font-weight:900}.top-right{display:flex;align-items:center;gap:12px}
+h1{font-size:42px;letter-spacing:-2.2px;margin:0 0 8px;line-height:1.05}.lead{color:var(--muted);font-size:17px;margin:0}.hero{display:flex;justify-content:space-between;gap:20px;align-items:flex-end;margin-bottom:28px}
+.hero-logo{width:min(430px,100%);margin-bottom:18px}.hero-logo img{width:100%;height:auto;display:block}
+.grid{display:grid;gap:18px}.g4{grid-template-columns:repeat(4,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g2{grid-template-columns:repeat(2,1fr)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:22px;box-shadow:0 8px 25px rgba(0,0,0,.025)}.card.dark{background:var(--dark);color:white;border-color:var(--dark)}.card.lime{background:var(--accent);border-color:var(--lime)}
+.kpi{font-size:32px;font-weight:850;letter-spacing:-1px}.label{color:var(--muted);font-size:13px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}.dark .label{color:#a9b2ae}
+.row{display:flex;justify-content:space-between;align-items:center;gap:12px}.stack{display:grid;gap:12px}.muted{color:var(--muted)}.small{font-size:13px}
+.btn{display:inline-flex;align-items:center;justify-content:center;border:0;border-radius:13px;padding:12px 17px;font-weight:800;cursor:pointer;background:var(--dark);color:white}.btn.lime{background:var(--accent);color:#111}.btn.ghost{background:#eef7f8;color:#111}.btn.white{background:white;color:#111}
+.progress{height:10px;background:#e9ece6;border-radius:99px;overflow:hidden}.progress i{display:block;height:100%;background:#111;border-radius:99px}.dark .progress{background:#34403c}.dark .progress i{background:var(--accent)}
+.section{margin-top:28px}.section-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:13px}.section h2{font-size:22px;letter-spacing:-.7px;margin:0}
+.badge{font-size:12px;font-weight:800;border-radius:999px;padding:6px 9px;background:#eef7f8}.badge.lime{background:var(--accent)}
+.event{display:grid;grid-template-columns:70px 1fr auto;gap:16px;align-items:center}.date{background:var(--dark);color:white;border-radius:16px;padding:10px;text-align:center}.date b{font-size:22px;display:block}.date span{font-size:11px;text-transform:uppercase;color:#bbb}
+.rank{display:grid;grid-template-columns:42px 1fr auto;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}.rank:last-child{border:0}.ranknum{font-weight:900;color:#999}.person{display:flex;align-items:center;gap:10px}.pavatar{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:#ddd;font-size:12px;font-weight:900}
+.post{display:grid;grid-template-columns:40px 1fr;gap:12px}.post+.post{padding-top:18px;margin-top:18px;border-top:1px solid var(--line)}
+.tag{display:inline-block;background:#eef7f8;padding:5px 8px;border-radius:8px;font-size:11px;font-weight:800;margin-right:5px}
+.bar{display:flex;gap:7px;align-items:end;height:150px}.bar i{flex:1;background:#ddd;border-radius:7px 7px 2px 2px}.bar i:nth-child(3),.bar i:nth-child(7){background:#111}.bar i:nth-child(7){background:var(--accent)}
+.route{height:190px;border-radius:18px;background:radial-gradient(circle at 20% 70%,var(--accent) 0 4px,transparent 5px),linear-gradient(135deg,#e7ebe4,#fafaf6);position:relative;overflow:hidden}.route:after{content:"";position:absolute;inset:25px 40px;background:transparent;border:4px solid #171716;border-left-color:transparent;border-bottom-color:transparent;border-radius:48% 52% 48% 52%;transform:rotate(-20deg)}
+@media(max-width:900px){
+  .shell{grid-template-columns:1fr}
+  .sidebar{position:relative;height:auto;min-height:0;overflow:visible;border-right:0;border-bottom:0;padding:30px 32px 18px}
+  .brand{padding:0 0 28px;overflow:visible}
+  .brand a{display:block;overflow:visible}
+  .brand img{width:min(390px,100%);height:auto;max-width:none;display:block}
+  .nav{grid-template-columns:1fr 1fr;gap:4px 20px}
+  .nav a{padding:14px 14px;font-size:18px;border-radius:20px}
+  .nav a.active:before{width:8px;height:8px;margin-right:10px}
+  .side-bottom{display:none}
+  .main{padding:22px 32px 90px;max-width:none}
+  .top{padding-top:18px;margin:0 0 28px;border-top:1px solid var(--line)}
+  .top-right{gap:12px}
+  .avatar{width:56px;height:56px;font-size:20px}
+  .hero{display:block;margin-bottom:28px}
+  .hero-logo{width:min(540px,100%);margin:0 auto 24px}
+  .hero-logo img{width:100%;height:auto;display:block}
+  .hero .lead{font-size:18px;line-height:1.42;max-width:560px}
+  .hero .btn{margin-top:16px}
+  .g4,.g3,.g2{grid-template-columns:1fr}
+  .card{padding:20px}
+}
+@media(max-width:600px){
+  .sidebar{padding:28px 32px 16px}
+  .brand{padding-bottom:28px}
+  .brand img{width:100%;max-width:390px}
+  .nav{grid-template-columns:1fr 1fr;gap:4px 18px}
+  .nav a{font-size:18px;padding:13px 12px;white-space:nowrap}
+  .main{padding:18px 42px 90px}
+  .top{margin-bottom:24px}
+  .crumb{font-size:12px;letter-spacing:.12em;white-space:nowrap}
+  .top-right .small{font-size:16px;white-space:nowrap}
+  .avatar{width:56px;height:56px}
+  .hero-logo{width:100%;margin-bottom:22px}
+  h1{font-size:34px}
+}.hero{display:block}.hero .btn{margin-top:18px}.hero-logo{width:310px}h1{font-size:34px}.nav{grid-template-columns:1fr 1fr}}
+
+/* Miles Apart Running Club — new CI */
+.card.lime { background:var(--accent); border-color:var(--accent); color:#050909; }
+.btn.lime { background:var(--accent); color:#050909; }
+.badge.lime { background:var(--accent); color:#050909; }
+.nav a.active:before { background:var(--accent); }
+.mini-progress i { background:var(--accent); }
+.route { background:radial-gradient(circle at 20% 70%,var(--accent) 0 4px,transparent 5px),linear-gradient(135deg,#eef8fa,#fff); }
+
+/* Logo safety: the cyan dot/edge must always remain completely visible. */
+.brand, .brand a, .brand img, .hero-logo, .hero-logo a, .hero-logo img {
+  overflow: visible !important;
+}
+.hero-logo img, .brand img {
+  object-fit: contain;
+}
+
+/* FINAL LOGO SAFETY FIX
+   The logo assets contain their own breathing room. Never clip them at any breakpoint. */
 .brand,
 .brand a,
 .brand img,
 .hero-logo,
 .hero-logo a,
-.hero-logo img{
-  overflow:visible !important;
-  clip-path:none !important;
-  contain:none !important;
+.hero-logo img {
+  overflow: visible !important;
+  clip-path: none !important;
+  contain: none !important;
 }
 
 .brand img,
-.hero-logo img{
-  max-width:100%;
-  height:auto;
-  object-fit:contain;
+.hero-logo img {
+  max-width: 100%;
+  height: auto;
+  object-fit: contain;
 }
 
-/* =========================================================
-   MOBILE — 900PX
-   ========================================================= */
-
-@media(max-width:900px){
-
-  .shell{
-    grid-template-columns:1fr;
+@media (max-width: 600px) {
+  .brand {
+    width: 100%;
+    padding-top: 12px;
+    padding-bottom: 30px;
   }
-
-  .sidebar{
-    position:relative;
-    height:auto;
-    min-height:0;
-    overflow:visible;
-    border-right:0;
-    border-bottom:0;
-    padding:30px 32px 18px;
+  .brand img {
+    width: 100%;
+    max-width: 390px;
+    margin: 0;
   }
-
-  .brand{
-    padding:0 0 28px;
-    overflow:visible;
-  }
-
-  .brand a{
-    display:block;
-    overflow:visible;
-  }
-
-  .brand img{
-    width:min(390px,100%);
-    height:auto;
-    max-width:none;
-    display:block;
-  }
-
-  .nav{
-    grid-template-columns:1fr 1fr;
-    gap:4px 20px;
-  }
-
-  .nav a{
-    padding:14px 14px;
-    font-size:18px;
-    border-radius:20px;
-  }
-
-  .nav a.active:before{
-    width:8px;
-    height:8px;
-    margin-right:10px;
-  }
-
-  .side-bottom{
-    display:none;
-  }
-
-  .main{
-    padding:22px 32px 90px;
-    max-width:none;
-  }
-
-  .top{
-    padding-top:18px;
-    margin:0 0 28px;
-    border-top:1px solid var(--line);
-  }
-
-  .top-right{
-    gap:12px;
-  }
-
-  .avatar{
-    width:56px;
-    height:56px;
-    font-size:20px;
-  }
-
-  .hero{
-    display:block;
-    margin-bottom:28px;
-  }
-
-  .hero-logo{
-    width:min(540px,100%);
-    margin:0 auto 24px;
-  }
-
-  .hero-logo img{
-    width:100%;
-    height:auto;
-    display:block;
-  }
-
-  .hero .lead{
-    font-size:18px;
-    line-height:1.42;
-    max-width:560px;
-  }
-
-  .hero .btn{
-    margin-top:16px;
-  }
-
-  .g4,
-  .g3,
-  .g2{
-    grid-template-columns:1fr;
-  }
-
-  .card{
-    padding:20px;
+  .hero-logo {
+    width: 100%;
+    margin: 0 0 24px;
   }
 }
 
 /* =========================================================
-   MOBILE — 600PX
+   MOBILE VIEWPORT FIX — prevent horizontal overflow/cropping
    ========================================================= */
+html, body {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
+}
 
-@media(max-width:600px){
+*, *::before, *::after { min-width: 0; }
+img, svg, video { max-width: 100%; }
 
-  .sidebar{
-    width:100%;
-    padding:28px 24px 16px;
+.shell, .sidebar, .main, .brand, .brand a, .nav, .top, .top-right, .hero, .hero-logo {
+  min-width: 0;
+  max-width: 100%;
+}
+
+@media (max-width: 600px) {
+  .sidebar {
+    width: 100%;
+    padding-left: 24px;
+    padding-right: 24px;
   }
 
-  .brand{
-    width:100%;
-    padding:8px 0 30px;
+  .brand {
+    width: 100%;
+    padding: 8px 0 28px;
   }
 
-  .brand a{
-    width:100%;
+  .brand a {
+    width: 100%;
   }
 
-  .brand img{
-    width:100%;
-    max-width:100%;
-    height:auto;
-    margin:0 auto;
+  .brand img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
   }
 
-  .nav{
-    width:100%;
-    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-    gap:4px 12px;
+  .nav {
+    width: 100%;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 4px 12px;
   }
 
-  .nav a{
-    min-width:0;
-    font-size:18px;
-    padding:13px 12px;
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
+  .nav a {
+    min-width: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
-  .main{
-    width:100%;
-    max-width:100%;
-    padding:18px 24px 90px;
+  .main {
+    width: 100%;
+    max-width: 100%;
+    padding: 18px 24px 90px;
   }
 
-  .top{
-    width:100%;
-    display:grid;
-    grid-template-columns:minmax(0,1fr) auto;
-    align-items:center;
-    gap:12px;
-    margin-bottom:24px;
+  .top {
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
   }
 
-  .crumb{
-    min-width:0;
-    overflow:hidden;
-    text-overflow:ellipsis;
-    white-space:nowrap;
-    font-size:11px;
-    letter-spacing:.08em;
+  .crumb {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-size: 11px;
+    letter-spacing: .08em;
   }
 
-  .top-right{
-    min-width:0;
-    display:flex;
-    align-items:center;
-    gap:8px;
+  .top-right {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
 
-  .top-right .small{
-    font-size:14px;
-    white-space:nowrap;
+  .top-right .small {
+    font-size: 14px;
+    white-space: nowrap;
   }
 
-  .avatar{
-    flex:0 0 52px;
-    width:52px;
-    height:52px;
+  .avatar {
+    flex: 0 0 52px;
+    width: 52px;
+    height: 52px;
   }
 
   .hero,
-  .hero-logo{
-    width:100%;
-    max-width:100%;
+  .hero-logo {
+    width: 100%;
+    max-width: 100%;
   }
 
-  .hero-logo{
-    margin:0 0 24px;
-  }
-
-  .hero-logo img{
-    width:100%;
-    max-width:100%;
-    height:auto;
-  }
-
-  h1{
-    font-size:34px;
-    font-weight:var(--font-heading);
+  .hero-logo img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
   }
 }
 
-/* =========================================================
-   FINAL TYPOGRAPHY ENFORCEMENT
-   Only two weights are used across the entire website:
-   300 = Inter Light
-   800 = Inter Extra Bold
-   ========================================================= */
-
-body{
-  font-weight:300;
-}
-
-/* Headings */
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.kpi,
-.label,
-.avatar,
-.side-bottom strong,
-.date b,
-.ranknum,
-.pavatar{
-  font-weight:800;
-}
-
-/* Everything else stays Light */
-.nav a,
-.side-bottom small,
-.crumb,
-.lead,
-.muted,
-.small,
-.btn,
-.badge,
-.date span,
-.tag{
-  font-weight:300;
-}
