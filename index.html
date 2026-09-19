@@ -88,33 +88,6 @@
       border: 1px solid #e2e2de;
     }
 
-    .intro-card-top {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 40px;
-      margin-bottom: 38px;
-    }
-
-    .intro-card-label {
-      color: var(--miles-blue);
-      font-size: 11px;
-      line-height: 1;
-      font-weight: var(--font-heading);
-      letter-spacing: 2.2px;
-      text-transform: uppercase;
-    }
-
-    .intro-card-number {
-      color: #999;
-      font-size: 11px;
-      line-height: 1;
-      font-weight: var(--font-light);
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      white-space: nowrap;
-    }
-
     .intro-card-lead {
       max-width: 980px;
       margin: 0;
@@ -131,20 +104,18 @@
     }
 
     .intro-card-bottom {
-      display: grid;
-      grid-template-columns: 1.15fr .85fr;
-      gap: 70px;
+      display: block;
       margin-top: 48px;
       padding-top: 34px;
       border-top: 1px solid #dcdcd8;
     }
 
     .intro-card-text {
-      max-width: 760px;
+      max-width: 850px;
     }
 
     .intro-card-text p {
-      margin: 0 0 18px;
+      margin: 0 0 22px;
       color: #666;
       font-size: 17px;
       line-height: 1.72;
@@ -158,32 +129,6 @@
     .intro-card-text strong {
       color: #222;
       font-weight: var(--font-heading);
-    }
-
-    .intro-card-statement {
-      align-self: start;
-      padding-left: 28px;
-      border-left: 3px solid var(--miles-blue);
-    }
-
-    .intro-card-statement p {
-      margin: 0;
-      color: #333;
-      font-size: 21px;
-      line-height: 1.35;
-      letter-spacing: -.4px;
-      font-weight: var(--font-heading);
-    }
-
-    .intro-card-statement small {
-      display: block;
-      margin-top: 16px;
-      color: #999;
-      font-size: 10px;
-      line-height: 1.4;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      font-weight: var(--font-light);
     }
 
 
@@ -1081,23 +1026,18 @@
         padding: 40px 35px 38px;
       }
 
-      .intro-card-top {
-        margin-bottom: 30px;
-      }
-
       .intro-card-lead {
         font-size: 38px;
         letter-spacing: -1.7px;
       }
 
       .intro-card-bottom {
-        grid-template-columns: 1fr;
-        gap: 30px;
         margin-top: 38px;
+        padding-top: 30px;
       }
 
-      .intro-card-statement {
-        max-width: 600px;
+      .intro-card-text {
+        max-width: 760px;
       }
 
       .about-project-grid {
@@ -1172,19 +1112,6 @@
         padding: 30px 24px 32px;
       }
 
-      .intro-card-top {
-        margin-bottom: 25px;
-      }
-
-      .intro-card-label {
-        font-size: 9px;
-        letter-spacing: 1.7px;
-      }
-
-      .intro-card-number {
-        font-size: 9px;
-      }
-
       .intro-card-lead {
         font-size: 31px;
         line-height: 1.05;
@@ -1192,24 +1119,14 @@
       }
 
       .intro-card-bottom {
-        gap: 27px;
-        margin-top: 30px;
-        padding-top: 27px;
+        margin-top: 28px;
+        padding-top: 25px;
       }
 
       .intro-card-text p {
         font-size: 15px;
         line-height: 1.7;
         margin-bottom: 16px;
-      }
-
-      .intro-card-statement {
-        padding-left: 20px;
-      }
-
-      .intro-card-statement p {
-        font-size: 19px;
-        line-height: 1.35;
       }
 
       .story-photo {
@@ -1467,22 +1384,10 @@
 
       <div class="intro-card">
 
-        <div class="intro-card-top">
-
-          <div class="intro-card-label">
-            THE IDEA / 01
-          </div>
-
-          <div class="intro-card-number">
-            VIRTUAL RUNNING COMMUNITY
-          </div>
-
-        </div>
-
         <p class="intro-card-lead">
           Miles Apart ist für alle,
-          die laufen wollen —
-          <span>gemeinsam, egal wo.</span>
+          die laufen wollen.
+          <span>Gemeinsam, egal wo.</span>
         </p>
 
         <div class="intro-card-bottom">
@@ -1502,19 +1407,6 @@
               deine Challenges und deine Geschichten können
               Teil einer gemeinsamen Community sein.
             </p>
-
-          </div>
-
-          <div class="intro-card-statement">
-
-            <p>
-              Du läufst vielleicht alleine los.
-              Aber du musst nicht alleine laufen.
-            </p>
-
-            <small>
-              Run together / From anywhere
-            </small>
 
           </div>
 
