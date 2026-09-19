@@ -68,16 +68,38 @@
       font-weight: var(--font-heading);
     }
 
-    .home-intro .intro-copy {
-      font-family: var(--font-main);
-      font-size: 18px;
-      line-height: 1.75;
-      font-weight: var(--font-light);
-      letter-spacing: normal;
-      color: #777;
-      max-width: 760px;
-      margin: 0;
+
+    /* =====================================================
+       INTRO / FIRST STATEMENT
+    ===================================================== */
+
+    .home-intro {
+      margin: 0 !important;
+      padding: 95px 50px 100px !important;
+      background: #fff;
+      box-sizing: border-box;
     }
+
+    .home-intro .intro-copy {
+      width: 100%;
+      max-width: 900px;
+      margin: 0;
+      padding: 0;
+
+      font-family: var(--font-main);
+      font-size: clamp(21px, 2.1vw, 28px);
+      line-height: 1.65;
+      font-weight: var(--font-light);
+      letter-spacing: -0.15px;
+      color: #555;
+
+      text-wrap: balance;
+    }
+
+
+    /* =====================================================
+       COLORS
+    ===================================================== */
 
     .lime {
       background-color: var(--miles-blue) !important;
@@ -124,6 +146,11 @@
     .principle-number {
       color: var(--miles-blue);
     }
+
+
+    /* =====================================================
+       HERO
+    ===================================================== */
 
     .home-hero {
       position: relative;
@@ -196,12 +223,17 @@
       color: rgba(255,255,255,.72);
     }
 
+
+    /* =====================================================
+       STORY PHOTO
+    ===================================================== */
+
     .story-photo {
       position: relative;
       height: min(62vw, 620px);
       min-height: 420px;
       overflow: hidden;
-      margin-top: 28px;
+      margin-top: 0;
       background: #111;
     }
 
@@ -256,8 +288,13 @@
       font-weight: var(--font-light);
     }
 
+
+    /* =====================================================
+       ABOUT PROJECT
+    ===================================================== */
+
     .about-project {
-      margin-top: 85px;
+      margin-top: 100px;
     }
 
     .about-project-grid {
@@ -293,6 +330,11 @@
       font-weight: var(--font-heading);
     }
 
+
+    /* =====================================================
+       PRINCIPLES
+    ===================================================== */
+
     .principles {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -326,6 +368,11 @@
       font-size: 14px;
       font-weight: var(--font-light);
     }
+
+
+    /* =====================================================
+       FOUNDER
+    ===================================================== */
 
     .founder {
       margin-top: 100px;
@@ -426,6 +473,11 @@
       color: var(--miles-blue);
     }
 
+
+    /* =====================================================
+       VISUAL STORY
+    ===================================================== */
+
     .visual-story {
       margin-top: 100px;
     }
@@ -483,6 +535,11 @@
       transform: scale(1.03);
     }
 
+
+    /* =====================================================
+       STATEMENT
+    ===================================================== */
+
     .statement {
       margin-top: 100px;
       padding: 70px 50px;
@@ -528,6 +585,11 @@
       border-color: #fff !important;
     }
 
+
+    /* =====================================================
+       CARDS
+    ===================================================== */
+
     .card.lime {
       background: var(--miles-blue) !important;
       color: #fff !important;
@@ -558,6 +620,11 @@
     .mini-progress i {
       background: var(--miles-blue);
     }
+
+
+    /* =====================================================
+       ACCOUNT
+    ===================================================== */
 
     .top-right {
       display: flex;
@@ -677,6 +744,11 @@
       background: #f5f5f3;
       color: var(--miles-blue);
     }
+
+
+    /* =====================================================
+       AUTH
+    ===================================================== */
 
     .auth-overlay {
       position: fixed;
@@ -889,6 +961,11 @@
       font-weight: var(--font-light);
     }
 
+
+    /* =====================================================
+       RESPONSIVE
+    ===================================================== */
+
     @media (max-width: 900px) {
 
       .home-hero {
@@ -904,6 +981,16 @@
 
       .home-hero-content h1 {
         letter-spacing: -2.5px;
+      }
+
+      .home-intro {
+        padding: 75px 30px 80px !important;
+      }
+
+      .home-intro .intro-copy {
+        max-width: 760px;
+        font-size: 22px;
+        line-height: 1.65;
       }
 
       .about-project-grid {
@@ -942,6 +1029,7 @@
 
     }
 
+
     @media (max-width: 600px) {
 
       .home-hero {
@@ -969,6 +1057,16 @@
         letter-spacing: 2px;
       }
 
+      .home-intro {
+        padding: 65px 20px 70px !important;
+      }
+
+      .home-intro .intro-copy {
+        font-size: 20px;
+        line-height: 1.7;
+        max-width: none;
+      }
+
       .story-photo {
         min-height: 400px;
       }
@@ -981,11 +1079,6 @@
 
       .photo-caption strong {
         font-size: 26px;
-      }
-
-      .home-intro .intro-copy {
-        font-size: 18px;
-        line-height: 1.75;
       }
 
       .about-project,
