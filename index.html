@@ -424,7 +424,7 @@
 
     .founder-head {
       display: flex;
-      align-items: flex-end;
+      align-items: center;
       justify-content: space-between;
       gap: 25px;
       margin-bottom: 28px;
@@ -443,6 +443,22 @@
       line-height: .95;
       letter-spacing: -3px;
       margin: 0;
+      font-weight: var(--font-heading);
+    }
+
+    .founder-head .badge.lime {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      box-sizing: border-box;
+      min-height: 38px;
+      padding: 0 20px;
+      border-radius: 999px;
+      white-space: nowrap;
+      text-align: center;
+      line-height: 1;
+      font-size: 10px;
+      letter-spacing: 1.4px;
       font-weight: var(--font-heading);
     }
 
@@ -610,6 +626,7 @@
 
     .statement h2 .statement-dark {
       color: #111;
+      font-weight: var(--font-heading);
     }
 
     .statement p {
@@ -618,27 +635,6 @@
       font-size: 17px;
       line-height: 1.6;
       font-weight: var(--font-light);
-    }
-
-    .statement .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 28px;
-      padding: 15px 25px;
-      background: #111 !important;
-      color: #fff !important;
-      border: 1px solid #111 !important;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: var(--font-light);
-      border-radius: 0;
-    }
-
-    .statement .btn:hover {
-      background: #fff !important;
-      color: #111 !important;
-      border-color: #fff !important;
     }
 
 
@@ -1144,6 +1140,17 @@
 
       .founder-content h3 {
         font-size: 32px;
+      }
+
+      .founder-head {
+        align-items: center;
+      }
+
+      .founder-head .badge.lime {
+        min-height: 34px;
+        padding: 0 15px;
+        font-size: 9px;
+        letter-spacing: 1.1px;
       }
 
       .visual-story-head {
@@ -1834,15 +1841,6 @@
         unterstützen und gemeinsam neue Ziele erreichen.
       </p>
 
-
-      <a
-        class="btn"
-        id="communityJoinButton"
-        href="community.html"
-      >
-        Teil der Community werden →
-      </a>
-
     </section>
 
   </main>
@@ -2223,9 +2221,6 @@
   const openLoginButton =
     document.getElementById("openLoginButton");
 
-  const communityJoinButton =
-    document.getElementById("communityJoinButton");
-
   const authOverlay =
     document.getElementById("authOverlay");
 
@@ -2451,10 +2446,6 @@
 
       loggedInArea.style.display = "none";
 
-      if (communityJoinButton) {
-        communityJoinButton.style.display = "inline-flex";
-      }
-
       accountMenu.classList.remove("open");
 
       return;
@@ -2476,10 +2467,6 @@
     guestArea.style.display = "none";
 
     loggedInArea.style.display = "flex";
-
-    if (communityJoinButton) {
-      communityJoinButton.style.display = "none";
-    }
 
     userGreeting.textContent =
       "Hallo, " + firstName;
