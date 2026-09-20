@@ -48,8 +48,8 @@
         <div class="crumb">MILES APART / EVENTS</div>
 
         <div class="top-right">
-          <span class="small muted">Guten Morgen, Alex</span>
-          <div class="avatar">A</div>
+          <span class="small muted" id="userGreeting">Wird geladen …</span>
+          <div class="avatar" id="userAvatar">A</div>
         </div>
       </div>
 
@@ -168,5 +168,126 @@
     </main>
 
   </div>
+
+  <!-- Supabase -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+    const SUPABASE_URL = "https://dein-projekt.supabase.co";
+    const SUPABASE_ANON_KEY = "DEIN_SUPABASE_ANON_KEY";
+
+    const supabaseClient = supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_ANON_KEY
+    );
+
+    const userGreeting = document.getElementById("userGreeting");
+    const userAvatar = document.getElementById("userAvatar");
+
+    function getUserDisplayName(user, profile) {
+      if (
+        profile &&
+        profile.display_name &&
+        String(profile.display_name).trim()
+      ) {
+        return String(profile.display_name).trim();
+      }
+
+      if (
+        user &&
+        user.user_metadata &&
+        user.user_metadata.display_name &&
+        String(user.user_metadata.display_name).trim()
+      ) {
+        return String(user.user_metadata.display_name).trim();
+      }
+
+      if (
+        user &&
+        user.user_metadata &&
+        user.user_metadata.name &&
+        String(user.user_metadata.name).trim()
+      ) {
+        return String(user.user_metadata.name).trim();
+      }
+
+      if (user && user.email) {
+        return user.email.split("@")[0].trim();
+      }
+
+      return "Runner";
+    }
+
+    function getFirstName(name) {
+      if (!name || !String(name).trim()) {
+        return "Runner";
+      }
+
+      return String(name).trim().split(/\s+/)[0];
+    }
+
+    function getInitials(name) {
+      if (!name) {
+        return "M";
+      }
+
+      const parts = name.trim().split(/\s+/);
+
+      if (parts.length === 1) {
+        return parts[0].substring(0, 1).toUpperCase();
+      }
+
+      return (
+        parts[0].substring(0, 1) +
+        parts[parts.length - 1].substring(0, 1)
+      ).toUpperCase();
+    }
+
+    async function loadUser() {
+      try {
+        const {
+          data: { user }
+        } = await supabaseClient.auth.getUser();
+
+        if (!user) {
+          userGreeting.textContent = "";
+          userGreeting.style.display = "none";
+          userAvatar.textContent = "A";
+          return;
+        }
+
+        let profile = null;
+
+        const { data } = await supabaseClient
+          .from("profiles")
+          .select("display_name")
+          .eq("id", user.id)
+          .maybeSingle();
+
+        profile = data || null;
+
+        const displayName = getUserDisplayName(user, profile);
+        const firstName = getFirstName(displayName);
+        const initials = getInitials(displayName);
+
+        userGreeting.style.display = "inline";
+        userGreeting.textContent = "Hallo " + firstName;
+        userAvatar.textContent = initials;
+
+      } catch (error) {
+        console.error("Fehler beim Laden des Benutzers:", error);
+
+        userGreeting.style.display = "none";
+        userAvatar.textContent = "A";
+      }
+    }
+
+    supabaseClient.auth.onAuthStateChange(() => {
+      loadUser();
+    });
+
+    loadUser();
+  </script>
+
 </body>
 </html>
