@@ -150,11 +150,6 @@
     }
 
 
-    /*
-      Nur der aktive Navigationspunkt bekommt
-      den blauen Punkt.
-    */
-
     .sidebar .nav a.active::before {
       content: "";
 
@@ -170,12 +165,6 @@
       background: var(--miles-blue);
     }
 
-
-    /*
-      Bei nicht aktiven Punkten gibt es keinen Punkt.
-      Dadurch entspricht die Navigation optisch
-      dem gewünschten Design.
-    */
 
     .sidebar .nav a:not(.active)::before {
       content: none !important;
@@ -427,39 +416,48 @@
 
     .quick-action {
       display: block;
-      padding: 22px;
-      border: 1px solid var(--home-line);
+      padding: 28px 24px;
+      border: 2px solid #dfe4e2;
       background: #fff;
-      transition: transform .2s ease, border-color .2s ease;
+      box-shadow: 0 4px 14px rgba(0,0,0,.035);
+      transition:
+        transform .2s ease,
+        border-color .2s ease,
+        box-shadow .2s ease;
     }
 
 
     .quick-action:hover {
-      transform: translateY(-2px);
+      transform: translateY(-3px);
       border-color: var(--miles-blue);
+      box-shadow: 0 8px 22px rgba(0,0,0,.07);
     }
 
 
     .quick-action-number {
       color: var(--miles-blue);
-      font-size: 11px;
+      font-size: 13px;
       font-weight: 900;
-      letter-spacing: 2px;
+      letter-spacing: 2.2px;
     }
 
 
     .quick-action h3 {
-      margin: 35px 0 8px;
-      font-size: 20px;
-      letter-spacing: -.5px;
+      margin: 38px 0 10px;
+      font-size: 23px;
+      line-height: 1.1;
+      letter-spacing: -.6px;
+      font-weight: 900;
+      color: #050909;
     }
 
 
     .quick-action p {
       margin: 0;
-      color: var(--home-muted);
-      font-size: 13px;
-      line-height: 1.5;
+      color: #686f6d;
+      font-size: 15px;
+      line-height: 1.55;
+      font-weight: 500;
     }
 
 
@@ -1548,12 +1546,6 @@
 
     @media (max-width: 700px) {
 
-      /*
-        Auf kleinen Bildschirmen wird die Navigation
-        bewusst weiterhin zweispaltig dargestellt,
-        damit sie dem gewünschten Grundlayout entspricht.
-      */
-
       .sidebar .nav {
         grid-template-columns: 1fr 1fr !important;
         gap: 6px 12px !important;
@@ -1628,6 +1620,17 @@
 
       .quick-actions {
         grid-template-columns: 1fr;
+      }
+
+
+      .quick-action {
+        padding: 25px 20px;
+      }
+
+
+      .quick-action h3 {
+        margin-top: 30px;
+        font-size: 22px;
       }
 
 
