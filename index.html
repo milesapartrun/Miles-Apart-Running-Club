@@ -2,7 +2,6 @@
 <html lang="de">
 
 <head>
-
   <meta charset="utf-8">
 
   <meta
@@ -446,9 +445,9 @@
     }
 
     .founder-kicker {
-      font-size: 11px;
+      font-size: 14px;
       font-weight: var(--font-heading);
-      letter-spacing: 2px;
+      letter-spacing: 2.5px;
       text-transform: uppercase;
       margin-bottom: 12px;
     }
@@ -459,6 +458,14 @@
       letter-spacing: -3px;
       margin: 0;
       font-weight: var(--font-heading);
+    }
+
+    .founder-head .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      line-height: 1.25;
     }
 
     .founder-layout {
@@ -1523,7 +1530,10 @@
             01 / CONNECT
           </div>
 
-          <div class="principle-icon" aria-hidden="true">
+          <div
+            class="principle-icon"
+            aria-hidden="true"
+          >
 
             <svg viewBox="0 0 32 32">
 
@@ -1572,7 +1582,10 @@
             02 / CHALLENGE
           </div>
 
-          <div class="principle-icon" aria-hidden="true">
+          <div
+            class="principle-icon"
+            aria-hidden="true"
+          >
 
             <svg viewBox="0 0 32 32">
 
@@ -1613,7 +1626,10 @@
             03 / SUPPORT
           </div>
 
-          <div class="principle-icon" aria-hidden="true">
+          <div
+            class="principle-icon"
+            aria-hidden="true"
+          >
 
             <svg viewBox="0 0 32 32">
 
@@ -2727,7 +2743,6 @@
     document.getElementById("recoverySubmit");
 
   let currentUser = null;
-
   let currentProfile = null;
 
   function getInitials(name) {
