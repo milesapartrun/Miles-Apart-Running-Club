@@ -1118,10 +1118,21 @@
     }
 
 
+    /*
+      WICHTIG:
+      Der Gruß steht direkt vor dem Profilbild.
+      Der Name wird per JavaScript dynamisch gesetzt.
+      Beispiel:
+      Hallo Tano
+    */
+
     .user-greeting {
+      display: inline-flex;
+      align-items: center;
       font-size: 13px;
       color: #666;
       white-space: nowrap;
+      font-weight: 500;
     }
 
 
@@ -1162,6 +1173,7 @@
       cursor: pointer;
       overflow: hidden;
       padding: 0;
+      flex-shrink: 0;
     }
 
 
@@ -1619,8 +1631,15 @@
       }
 
 
+      /*
+        Auf kleinen Displays bleibt der Gruß sichtbar,
+        damit auch mobil "Hallo Tamo" neben dem Profilbild
+        angezeigt werden kann.
+      */
+
       .top-right .user-greeting {
-        display: none;
+        display: inline-flex;
+        font-size: 12px;
       }
 
 
@@ -1787,6 +1806,14 @@
           class="user-area"
           style="display:none;position:relative;"
         >
+
+          <!--
+            Dieser Text wird dynamisch mit dem Namen
+            des eingeloggten Users gefüllt.
+
+            Beispiel:
+            Hallo Tamo
+          -->
 
           <span
             class="user-greeting"
@@ -3061,7 +3088,7 @@
         <input
           id="registerName"
           type="text"
-          placeholder="z. B. Tano"
+          placeholder="z. B. Tamo"
           autocomplete="name"
           required
         >
@@ -3514,6 +3541,19 @@
   }
 
 
+  /*
+    Diese Funktion entscheidet, welcher Name
+    für den eingeloggten User angezeigt wird.
+
+    Priorität:
+
+    1. profiles.display_name
+    2. user.user_metadata.display_name
+    3. user.user_metadata.name
+    4. Teil der E-Mail-Adresse
+    5. Runner
+  */
+
   function getUserDisplayName(
     user,
     profile
@@ -3521,10 +3561,11 @@
 
     if (
       profile &&
-      profile.display_name
+      profile.display_name &&
+      profile.display_name.trim()
     ) {
 
-      return profile.display_name;
+      return profile.display_name.trim();
 
     }
 
@@ -3532,12 +3573,23 @@
     if (
       user &&
       user.user_metadata &&
-      user.user_metadata.display_name
+      user.user_metadata.display_name &&
+      user.user_metadata.display_name.trim()
     ) {
 
-      return user
-        .user_metadata
-        .display_name;
+      return user.user_metadata.display_name.trim();
+
+    }
+
+
+    if (
+      user &&
+      user.user_metadata &&
+      user.user_metadata.name &&
+      user.user_metadata.name.trim()
+    ) {
+
+      return user.user_metadata.name.trim();
 
     }
 
@@ -3548,7 +3600,8 @@
     ) {
 
       return user.email
-        .split("@")[0];
+        .split("@")[0]
+        .trim();
 
     }
 
@@ -3914,6 +3967,10 @@
 
   function updateUserInterface() {
 
+    /*
+      GAST
+    */
+
     if (!currentUser) {
 
       guestArea.style.display =
@@ -3921,6 +3978,14 @@
 
 
       loggedInArea.style.display =
+        "none";
+
+
+      userGreeting.textContent =
+        "Hallo";
+
+
+      userGreeting.style.display =
         "none";
 
 
@@ -3954,6 +4019,10 @@
 
     }
 
+
+    /*
+      EINGELOGGTER USER
+    */
 
     const displayName =
       getUserDisplayName(
@@ -4003,13 +4072,39 @@
     );
 
 
+    /*
+      WICHTIG:
+      Hier wird der individuelle Name
+      des eingeloggten Users eingesetzt.
+
+      Beispiel:
+
+      User heißt Tamo
+      ↓
+      firstName = "Tamo"
+      ↓
+      userGreeting = "Hallo Tamo"
+    */
+
+    userGreeting.textContent =
+      "Hallo " + firstName;
+
+
+    userGreeting.style.display =
+      "inline-flex";
+
+
+    /*
+      Welcome-Bereich
+    */
+
     welcomeName.textContent =
       firstName + ".";
 
 
-    userGreeting.textContent =
-      "Hallo, " + firstName;
-
+    /*
+      Profilbild / Initialen
+    */
 
     avatarButton.innerHTML =
       "";
@@ -4044,6 +4139,10 @@
 
     }
 
+
+    /*
+      Account-Menü
+    */
 
     accountMenuName.textContent =
       displayName;
@@ -5337,6 +5436,17 @@
 
       }
 
+
+      /*
+        Wichtig:
+        Nach dem Speichern wird auch die
+        Begrüßung oben sofort aktualisiert.
+
+        Beispiel:
+        Name geändert auf Tamo
+        →
+        Hallo Tamo
+      */
 
       fillProfileForm();
       updateUserInterface();
