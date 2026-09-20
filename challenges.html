@@ -19,11 +19,160 @@
     href="style.css"
   >
 
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+
+  <style>
+
+    /* =========================================================
+       PROFILE / TOP RIGHT
+    ========================================================= */
+
+    .top-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+
+    .user-area {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+
+    .login-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      padding: 0 16px;
+      border: 1px solid #d7d7d3;
+      background: #fff;
+      color: #222;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+
+    .login-button:hover {
+      border-color: #18b8c7;
+      color: #18b8c7;
+    }
+
+
+    .user-avatar-button {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      border: 3px solid #18b8c7;
+      background: #fff;
+      color: #18b8c7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 18px;
+      cursor: pointer;
+      overflow: hidden;
+      padding: 0;
+    }
+
+
+    .user-avatar-button img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+
+    .account-menu {
+      position: absolute;
+      top: 70px;
+      right: 0;
+      width: 230px;
+      background: #fff;
+      border: 1px solid #ddd;
+      box-shadow: 0 15px 40px rgba(0,0,0,.12);
+      padding: 8px;
+      z-index: 50;
+      display: none;
+    }
+
+
+    .account-menu.open {
+      display: block;
+    }
+
+
+    .account-menu-name {
+      padding: 11px;
+      font-weight: 800;
+      border-bottom: 1px solid #eee;
+      margin-bottom: 5px;
+    }
+
+
+    .account-menu-email {
+      padding: 4px 11px 10px;
+      color: #888;
+      font-size: 11px;
+      border-bottom: 1px solid #eee;
+      margin-bottom: 5px;
+      word-break: break-word;
+    }
+
+
+    .account-menu a,
+    .account-menu button {
+      display: block;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 11px;
+      border: 0;
+      background: transparent;
+      text-align: left;
+      cursor: pointer;
+      font-size: 12px;
+      color: #222;
+      text-decoration: none;
+    }
+
+
+    .account-menu a:hover,
+    .account-menu button:hover {
+      background: #f5f5f3;
+      color: #18b8c7;
+    }
+
+
+    @media (max-width: 600px) {
+
+      .user-avatar-button {
+        width: 48px;
+        height: 48px;
+      }
+
+
+      .account-menu {
+        top: 60px;
+      }
+
+    }
+
+  </style>
+
 </head>
+
 
 <body>
 
 <div class="shell">
+
 
   <!-- =======================================================
        SIDEBAR
@@ -140,14 +289,84 @@
         MILES APART / CHALLENGES
       </div>
 
+
       <div class="top-right">
 
-        <span class="small muted">
-          Guten Morgen, Alex
-        </span>
 
-        <div class="avatar">
-          A
+        <!-- NICHT EINGELOGGT -->
+
+        <div
+          id="guestArea"
+          class="user-area"
+        >
+
+          <button
+            class="login-button"
+            id="openLoginButton"
+            type="button"
+          >
+            Anmelden
+          </button>
+
+        </div>
+
+
+        <!-- EINGELOGGT -->
+
+        <div
+          id="loggedInArea"
+          class="user-area"
+          style="display:none;position:relative;"
+        >
+
+          <button
+            class="user-avatar-button"
+            id="avatarButton"
+            type="button"
+            aria-label="My Profile öffnen"
+          >
+            M
+          </button>
+
+
+          <div
+            class="account-menu"
+            id="accountMenu"
+          >
+
+            <div
+              class="account-menu-name"
+              id="accountMenuName"
+            >
+              Runner
+            </div>
+
+
+            <div
+              class="account-menu-email"
+              id="accountMenuEmail"
+            >
+              user@email.de
+            </div>
+
+
+            <a
+              href="home.html#myRunSection"
+              id="accountProfileLink"
+            >
+              My Profile
+            </a>
+
+
+            <button
+              type="button"
+              id="logoutButton"
+            >
+              Abmelden
+            </button>
+
+          </div>
+
         </div>
 
       </div>
@@ -471,6 +690,518 @@
   </main>
 
 </div>
+
+
+<!-- =========================================================
+     SUPABASE / PROFILE JAVASCRIPT
+     ========================================================= -->
+
+<script>
+
+  const SUPABASE_URL =
+    "https://orbrkdrsihsacsnprewf.supabase.co";
+
+
+  const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_wc3w2fSuj8ItwiF6XBoQgw_HeW5_rNW";
+
+
+  const {
+    createClient
+  } = window.supabase;
+
+
+  const supabaseClient =
+    createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY
+    );
+
+
+  /* =========================================================
+     ELEMENTS
+     ========================================================= */
+
+  const guestArea =
+    document.getElementById("guestArea");
+
+
+  const loggedInArea =
+    document.getElementById("loggedInArea");
+
+
+  const avatarButton =
+    document.getElementById("avatarButton");
+
+
+  const accountMenu =
+    document.getElementById("accountMenu");
+
+
+  const accountMenuName =
+    document.getElementById("accountMenuName");
+
+
+  const accountMenuEmail =
+    document.getElementById("accountMenuEmail");
+
+
+  const logoutButton =
+    document.getElementById("logoutButton");
+
+
+  const openLoginButton =
+    document.getElementById("openLoginButton");
+
+
+  let currentUser =
+    null;
+
+
+  let currentProfile =
+    null;
+
+
+  /* =========================================================
+     HELPERS
+     ========================================================= */
+
+  function getInitials(name) {
+
+    if (!name) {
+      return "M";
+    }
+
+
+    const parts =
+      name
+        .trim()
+        .split(/\s+/)
+        .filter(Boolean);
+
+
+    if (
+      parts.length === 1
+    ) {
+
+      return parts[0]
+        .substring(0, 1)
+        .toUpperCase();
+
+    }
+
+
+    return (
+      parts[0].substring(0, 1) +
+      parts[parts.length - 1].substring(0, 1)
+    ).toUpperCase();
+
+  }
+
+
+  function getUserDisplayName(
+    user,
+    profile
+  ) {
+
+    if (
+      profile &&
+      profile.display_name
+    ) {
+
+      return profile.display_name;
+
+    }
+
+
+    if (
+      user &&
+      user.user_metadata &&
+      user.user_metadata.display_name
+    ) {
+
+      return user
+        .user_metadata
+        .display_name;
+
+    }
+
+
+    if (
+      user &&
+      user.email
+    ) {
+
+      return user.email
+        .split("@")[0];
+
+    }
+
+
+    return "Runner";
+
+  }
+
+
+  /* =========================================================
+     LOAD PROFILE
+     ========================================================= */
+
+  async function loadProfile(user) {
+
+    if (!user) {
+
+      currentProfile =
+        null;
+
+      return;
+
+    }
+
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from("profiles")
+        .select(
+          "display_name, username, avatar_url, bio, location"
+        )
+        .eq(
+          "id",
+          user.id
+        )
+        .maybeSingle();
+
+
+    if (error) {
+
+      console.error(
+        "Profil konnte nicht geladen werden:",
+        error
+      );
+
+
+      currentProfile =
+        null;
+
+
+      return;
+
+    }
+
+
+    currentProfile =
+      data || null;
+
+  }
+
+
+  /* =========================================================
+     UPDATE TOP BAR
+     ========================================================= */
+
+  function updateUserInterface() {
+
+    if (!currentUser) {
+
+      guestArea.style.display =
+        "flex";
+
+
+      loggedInArea.style.display =
+        "none";
+
+
+      accountMenu.classList.remove(
+        "open"
+      );
+
+
+      return;
+
+    }
+
+
+    const displayName =
+      getUserDisplayName(
+        currentUser,
+        currentProfile
+      );
+
+
+    const initials =
+      getInitials(
+        displayName
+      );
+
+
+    guestArea.style.display =
+      "none";
+
+
+    loggedInArea.style.display =
+      "flex";
+
+
+    avatarButton.innerHTML =
+      "";
+
+
+    if (
+      currentProfile &&
+      currentProfile.avatar_url
+    ) {
+
+      const image =
+        document.createElement("img");
+
+
+      image.src =
+        currentProfile.avatar_url;
+
+
+      image.alt =
+        displayName;
+
+
+      avatarButton.appendChild(
+        image
+      );
+
+    } else {
+
+      avatarButton.textContent =
+        initials;
+
+    }
+
+
+    accountMenuName.textContent =
+      displayName;
+
+
+    accountMenuEmail.textContent =
+      currentUser.email || "";
+
+  }
+
+
+  /* =========================================================
+     LOGIN
+     ========================================================= */
+
+  openLoginButton.addEventListener(
+    "click",
+    function() {
+
+      window.location.href =
+        "home.html";
+
+    }
+  );
+
+
+  /* =========================================================
+     PROFILE MENU
+     ========================================================= */
+
+  avatarButton.addEventListener(
+    "click",
+    function(event) {
+
+      event.stopPropagation();
+
+
+      accountMenu.classList.toggle(
+        "open"
+      );
+
+    }
+  );
+
+
+  document.addEventListener(
+    "click",
+    function(event) {
+
+      if (
+        !loggedInArea.contains(
+          event.target
+        )
+      ) {
+
+        accountMenu.classList.remove(
+          "open"
+        );
+
+      }
+
+    }
+  );
+
+
+  /* =========================================================
+     LOGOUT
+     ========================================================= */
+
+  async function logout() {
+
+    const {
+      error
+    } =
+      await supabaseClient.auth
+        .signOut();
+
+
+    if (error) {
+
+      console.error(
+        "Logout:",
+        error
+      );
+
+
+      return;
+
+    }
+
+
+    currentUser =
+      null;
+
+
+    currentProfile =
+      null;
+
+
+    updateUserInterface();
+
+  }
+
+
+  logoutButton.addEventListener(
+    "click",
+    logout
+  );
+
+
+  /* =========================================================
+     AUTH STATE
+     ========================================================= */
+
+  supabaseClient.auth
+    .onAuthStateChange(
+      async function(
+        event,
+        session
+      ) {
+
+        if (
+          session &&
+          session.user
+        ) {
+
+          currentUser =
+            session.user;
+
+
+          await loadProfile(
+            currentUser
+          );
+
+        } else {
+
+          currentUser =
+            null;
+
+
+          currentProfile =
+            null;
+
+        }
+
+
+        updateUserInterface();
+
+      }
+    );
+
+
+  /* =========================================================
+     INITIALIZE
+     ========================================================= */
+
+  async function initializeAuth() {
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient.auth
+        .getSession();
+
+
+    if (error) {
+
+      console.error(
+        "Session konnte nicht geladen werden:",
+        error
+      );
+
+
+      currentUser =
+        null;
+
+
+      currentProfile =
+        null;
+
+
+      updateUserInterface();
+
+
+      return;
+
+    }
+
+
+    if (
+      data &&
+      data.session &&
+      data.session.user
+    ) {
+
+      currentUser =
+        data.session.user;
+
+
+      await loadProfile(
+        currentUser
+      );
+
+    } else {
+
+      currentUser =
+        null;
+
+
+      currentProfile =
+        null;
+
+    }
+
+
+    updateUserInterface();
+
+  }
+
+
+  initializeAuth();
+
+</script>
+
 
 </body>
 
