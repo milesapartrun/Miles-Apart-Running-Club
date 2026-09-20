@@ -105,6 +105,10 @@
       font-weight: var(--font-heading);
     }
 
+    .intro-card-nowrap {
+      white-space: nowrap;
+    }
+
     .intro-card-bottom {
       display: block;
       margin-top: 48px;
@@ -360,6 +364,10 @@
     .about-project-text strong {
       color: #222;
       font-weight: var(--font-heading);
+    }
+
+    .about-project-nowrap {
+      white-space: nowrap;
     }
 
 
@@ -1383,7 +1391,9 @@
 
         <p class="intro-card-lead">
           Miles Apart ist für alle,
-          die laufen wollen.
+          <span class="intro-card-nowrap" style="display:inline; color:#222;">
+            die laufen wollen.
+          </span>
           <span>Gemeinsam, egal wo.</span>
         </p>
 
@@ -1477,7 +1487,9 @@
 
           <p>
             Du läufst alleine los.
-            <strong>Aber du musst nicht alleine laufen.</strong>
+            <strong class="about-project-nowrap">
+              Aber du musst nicht alleine laufen.
+            </strong>
           </p>
 
         </div>
