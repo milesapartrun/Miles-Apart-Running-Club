@@ -637,6 +637,31 @@
       font-weight: var(--font-light);
     }
 
+    .statement-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      margin-top: 34px;
+      padding: 0 22px;
+      border: 1px solid #111;
+      background: #111;
+      color: #fff;
+      text-decoration: none;
+      font-size: 11px;
+      font-weight: var(--font-heading);
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      transition: .2s ease;
+    }
+
+    .statement-cta:hover {
+      background: #fff;
+      border-color: #fff;
+      color: #111;
+      transform: translateY(-2px);
+    }
+
 
     /* =====================================================
        ACCOUNT
@@ -1177,6 +1202,13 @@
 
       .statement {
         padding: 42px 24px;
+      }
+
+      .statement-cta {
+        width: 100%;
+        box-sizing: border-box;
+        min-height: 50px;
+        margin-top: 30px;
       }
 
       .top-right .user-greeting {
@@ -1840,6 +1872,14 @@
         Eine Community, in der wir uns gegenseitig motivieren,
         unterstützen und gemeinsam neue Ziele erreichen.
       </p>
+
+
+      <a
+        class="statement-cta"
+        href="home.html"
+      >
+        Jetzt Mitglied werden →
+      </a>
 
     </section>
 
