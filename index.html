@@ -1803,8 +1803,7 @@
 
 
     <!-- =====================================================
-         HIER ENDET DER SICHTBARE SEITENINHALT
-         THE IDEA IST DER LETZTE BLOCK
+         THE IDEA
     ===================================================== -->
 
     <section class="statement">
@@ -1831,6 +1830,7 @@
 
       <a
         class="btn"
+        id="communityJoinButton"
         href="community.html"
       >
         Teil der Community werden →
@@ -1845,8 +1845,6 @@
 
 <!-- =====================================================
      AUTH OVERLAY
-     Technisch außerhalb des Seiteninhalts,
-     damit Anmeldung weiterhin funktioniert.
 ===================================================== -->
 
 <div
@@ -2218,6 +2216,9 @@
   const openLoginButton =
     document.getElementById("openLoginButton");
 
+  const communityJoinButton =
+    document.getElementById("communityJoinButton");
+
   const authOverlay =
     document.getElementById("authOverlay");
 
@@ -2443,6 +2444,10 @@
 
       loggedInArea.style.display = "none";
 
+      if (communityJoinButton) {
+        communityJoinButton.style.display = "inline-flex";
+      }
+
       accountMenu.classList.remove("open");
 
       return;
@@ -2464,6 +2469,10 @@
     guestArea.style.display = "none";
 
     loggedInArea.style.display = "flex";
+
+    if (communityJoinButton) {
+      communityJoinButton.style.display = "none";
+    }
 
     userGreeting.textContent =
       "Hallo, " + firstName;
