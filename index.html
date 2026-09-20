@@ -4,19 +4,11 @@
 <head>
   <meta charset="utf-8">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>
-    Miles Apart — Miles Apart Running Club
-  </title>
+  <title>Miles Apart — Miles Apart Running Club</title>
 
-  <link
-    rel="stylesheet"
-    href="style.css"
-  >
+  <link rel="stylesheet" href="style.css">
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -69,7 +61,7 @@
 
 
     /* =====================================================
-       INTRO STORY CARD
+       INTRO
     ===================================================== */
 
     .home-intro {
@@ -151,14 +143,8 @@
       color: var(--miles-blue);
     }
 
-    .progress i {
-      background-color: var(--miles-blue);
-    }
-
-    .mini-progress i {
-      background-color: var(--miles-blue);
-    }
-
+    .progress i,
+    .mini-progress i,
     .bar i {
       background-color: var(--miles-blue);
     }
@@ -460,14 +446,6 @@
       font-weight: var(--font-heading);
     }
 
-    .founder-head .badge {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      line-height: 1.25;
-    }
-
     .founder-layout {
       display: grid;
       grid-template-columns: 1.15fr .85fr;
@@ -521,7 +499,6 @@
       gap: 7px;
       flex-wrap: wrap;
       margin-top: 10px;
-      margin-bottom: 0;
     }
 
     .founder-tag {
@@ -532,11 +509,6 @@
       font-weight: var(--font-light);
       text-transform: uppercase;
       color: #666;
-    }
-
-    .founder-tag:hover {
-      border-color: var(--miles-blue);
-      color: var(--miles-blue);
     }
 
 
@@ -554,10 +526,6 @@
       align-items: end;
       gap: 65px;
       margin-bottom: 32px;
-    }
-
-    .visual-story-title {
-      min-width: 0;
     }
 
     .visual-story .intro-eyebrow {
@@ -613,7 +581,7 @@
 
 
     /* =====================================================
-       STATEMENT
+       THE IDEA – LETZTER SEITENINHALT
     ===================================================== */
 
     .statement {
@@ -649,52 +617,24 @@
     }
 
     .statement .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       margin-top: 28px;
+      padding: 15px 25px;
       background: #111 !important;
       color: #fff !important;
-      border-color: #111 !important;
+      border: 1px solid #111 !important;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: var(--font-light);
+      border-radius: 0;
     }
 
     .statement .btn:hover {
       background: #fff !important;
       color: #111 !important;
       border-color: #fff !important;
-    }
-
-
-    /* =====================================================
-       CARDS
-    ===================================================== */
-
-    .card.lime {
-      background: var(--miles-blue) !important;
-      color: #fff !important;
-    }
-
-    .card.lime .label,
-    .card.lime .small,
-    .card.lime .kpi {
-      color: #fff !important;
-    }
-
-    .progress {
-      background: #ddd;
-    }
-
-    .progress i {
-      background: var(--miles-blue);
-    }
-
-    .bar i {
-      background: var(--miles-blue);
-    }
-
-    .mini-progress {
-      background: #ddd;
-    }
-
-    .mini-progress i {
-      background: var(--miles-blue);
     }
 
 
@@ -917,7 +857,6 @@
     .auth-tab.active {
       color: var(--miles-blue);
       border-bottom-color: var(--miles-blue);
-      font-weight: var(--font-light);
     }
 
     .auth-form {
@@ -993,7 +932,8 @@
       color: #248b63;
     }
 
-    .forgot-password {
+    .forgot-password,
+    .auth-back {
       display: block;
       margin-top: 13px;
       border: 0;
@@ -1006,22 +946,12 @@
       font-weight: var(--font-light);
     }
 
-    .forgot-password:hover {
-      color: var(--miles-blue);
-    }
-
     .auth-back {
-      display: inline-flex;
       margin-bottom: 18px;
-      border: 0;
-      background: transparent;
-      padding: 0;
-      color: #777;
-      font-size: 11px;
-      cursor: pointer;
-      font-weight: var(--font-light);
+      text-decoration: none;
     }
 
+    .forgot-password:hover,
     .auth-back:hover {
       color: var(--miles-blue);
     }
@@ -1075,10 +1005,6 @@
       .intro-card-bottom {
         margin-top: 38px;
         padding-top: 30px;
-      }
-
-      .intro-card-text {
-        max-width: 760px;
       }
 
       .intro-card-text p {
@@ -1256,6 +1182,7 @@
 
 </head>
 
+
 <body>
 
 <div class="shell">
@@ -1274,6 +1201,7 @@
       </a>
 
     </div>
+
 
     <nav class="nav">
 
@@ -1306,6 +1234,7 @@
 
     </nav>
 
+
     <div class="side-bottom">
 
       <small>
@@ -1331,6 +1260,7 @@
 
   </aside>
 
+
   <main class="main">
 
     <div class="top">
@@ -1338,6 +1268,7 @@
       <div class="crumb">
         MILES APART / MILES APART
       </div>
+
 
       <div class="top-right">
 
@@ -1355,6 +1286,7 @@
           </button>
 
         </div>
+
 
         <div
           id="loggedInArea"
@@ -1377,6 +1309,7 @@
           >
             A
           </button>
+
 
           <div
             class="account-menu"
@@ -1416,6 +1349,11 @@
 
     </div>
 
+
+    <!-- =====================================================
+         HERO
+    ===================================================== -->
+
     <div class="home-hero">
 
       <img
@@ -1445,7 +1383,7 @@
 
 
     <!-- =====================================================
-         INTRO STORY
+         INTRO
     ===================================================== -->
 
     <section class="home-intro">
@@ -1453,12 +1391,17 @@
       <div class="intro-card">
 
         <p class="intro-card-lead">
+
           Miles Apart ist für alle,<br>
+
           die laufen wollen.
+
           <span>
             Gemeinsam, egal wo.
           </span>
+
         </p>
+
 
         <div class="intro-card-bottom">
 
@@ -1479,6 +1422,10 @@
 
     </section>
 
+
+    <!-- =====================================================
+         STORY PHOTO
+    ===================================================== -->
 
     <div class="story-photo">
 
@@ -1508,6 +1455,10 @@
     </div>
 
 
+    <!-- =====================================================
+         ABOUT
+    ===================================================== -->
+
     <section class="about-project">
 
       <div class="about-project-grid">
@@ -1524,6 +1475,7 @@
           </h2>
 
         </div>
+
 
         <div class="about-project-text">
 
@@ -1576,29 +1528,15 @@
 
             <svg viewBox="0 0 32 32">
 
-              <circle
-                cx="11"
-                cy="10"
-                r="3.5"
-              ></circle>
+              <circle cx="11" cy="10" r="3.5"></circle>
 
-              <circle
-                cx="21"
-                cy="10"
-                r="3.5"
-              ></circle>
+              <circle cx="21" cy="10" r="3.5"></circle>
 
-              <path
-                d="M4.5 24c.7-4.1 3-6.2 6.5-6.2s5.8 2.1 6.5 6.2"
-              ></path>
+              <path d="M4.5 24c.7-4.1 3-6.2 6.5-6.2s5.8 2.1 6.5 6.2"></path>
 
-              <path
-                d="M14.5 24c.7-4.1 3-6.2 6.5-6.2s5.8 2.1 6.5 6.2"
-              ></path>
+              <path d="M14.5 24c.7-4.1 3-6.2 6.5-6.2s5.8 2.1 6.5 6.2"></path>
 
-              <path
-                d="M14 10h4"
-              ></path>
+              <path d="M14 10h4"></path>
 
             </svg>
 
@@ -1629,21 +1567,13 @@
 
             <svg viewBox="0 0 32 32">
 
-              <path
-                d="M4 11h19"
-              ></path>
+              <path d="M4 11h19"></path>
 
-              <path
-                d="M18 6l5 5-5 5"
-              ></path>
+              <path d="M18 6l5 5-5 5"></path>
 
-              <path
-                d="M28 21H9"
-              ></path>
+              <path d="M28 21H9"></path>
 
-              <path
-                d="M14 16l-5 5 5 5"
-              ></path>
+              <path d="M14 16l-5 5 5 5"></path>
 
             </svg>
 
@@ -1674,17 +1604,11 @@
 
             <svg viewBox="0 0 32 32">
 
-              <path
-                d="M16 26s-9-5.7-9-12.1C7 10.7 9.2 8 12.2 8c1.8 0 3.2.9 3.8 2.2C16.6 8.9 18 8 19.8 8c3 0 5.2 2.7 5.2 5.9C25 20.3 16 26 16 26Z"
-              ></path>
+              <path d="M16 26s-9-5.7-9-12.1C7 10.7 9.2 8 12.2 8c1.8 0 3.2.9 3.8 2.2C16.6 8.9 18 8 19.8 8c3 0 5.2 2.7 5.2 5.9C25 20.3 16 26 16 26Z"></path>
 
-              <path
-                d="M7.5 17.5H5.8c-1.1 0-1.8-.9-1.4-1.9l2.1-5.1c.3-.7.9-1.1-1.7-1.1h2.1"
-              ></path>
+              <path d="M7.5 17.5H5.8c-1.1 0-1.8-.9-1.4-1.9l2.1-5.1c.3-.7.9-1.1-1.7-1.1h2.1"></path>
 
-              <path
-                d="M24.5 17.5h1.7c1.1 0 1.8-.9 1.4-1.9l-2.1-5.1c-.3-.7-.9-1.1-1.7-1.1h-2.1"
-              ></path>
+              <path d="M24.5 17.5h1.7c1.1 0 1.8-.9 1.4-1.9l-2.1-5.1c-.3-.7-.9-1.1-1.7-1.1h-2.1"></path>
 
             </svg>
 
@@ -1705,6 +1629,10 @@
 
     </section>
 
+
+    <!-- =====================================================
+         FOUNDER
+    ===================================================== -->
 
     <section class="founder">
 
@@ -1828,6 +1756,7 @@
 
         </div>
 
+
         <p>
           Laufen ist ein Teil des Ganzen.
           Training, Wettkämpfe, harte Tage, gute Tage –
@@ -1848,6 +1777,7 @@
 
         </div>
 
+
         <div class="photo-grid-item">
 
           <img
@@ -1857,11 +1787,12 @@
 
         </div>
 
+
         <div class="photo-grid-item">
 
           <img
-            src="IMG_5776.jpeg"
-            alt="Tano Loew auf der Brooklyn Bridge in New York"
+            src="IMG_5776(1).jpeg"
+            alt="Tano Loew auf der Brooklyn Bridge"
           >
 
         </div>
@@ -1871,11 +1802,17 @@
     </section>
 
 
+    <!-- =====================================================
+         HIER ENDET DER SICHTBARE SEITENINHALT
+         THE IDEA IST DER LETZTE BLOCK
+    ===================================================== -->
+
     <section class="statement">
 
       <div class="statement-label">
         THE IDEA
       </div>
+
 
       <h2>
         Du bist vielleicht alleine
@@ -1883,12 +1820,14 @@
         nicht allein unterwegs.
       </h2>
 
+
       <p>
         Miles Apart soll der virtuelle Ort für Läufer sein,
         die mehr wollen als nur ihre Kilometer aufzeichnen.
         Eine Community, in der wir uns gegenseitig motivieren,
         unterstützen und gemeinsam neue Ziele erreichen.
       </p>
+
 
       <a
         class="btn"
@@ -1899,501 +1838,16 @@
 
     </section>
 
-
-    <div class="section grid g4">
-
-      <div class="card lime">
-
-        <div class="label">
-          Community
-        </div>
-
-        <div class="kpi">
-          18,742
-        </div>
-
-        <div class="small">
-          Runner in Deutschland
-        </div>
-
-      </div>
-
-
-      <div class="card">
-
-        <div class="label">
-          Diese Woche
-        </div>
-
-        <div class="kpi">
-          23.4 km
-        </div>
-
-        <div class="small muted">
-          +18% vs. letzte Woche
-        </div>
-
-      </div>
-
-
-      <div class="card">
-
-        <div class="label">
-          Streak
-        </div>
-
-        <div class="kpi">
-          12 Tage 🔥
-        </div>
-
-        <div class="small muted">
-          Dein längster: 19 Tage
-        </div>
-
-      </div>
-
-
-      <div class="card dark">
-
-        <div class="label">
-          Heute
-        </div>
-
-        <div class="kpi">
-          1,284 km
-        </div>
-
-        <div class="small">
-          von der Community gelaufen
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div class="section grid g2">
-
-      <div class="card dark">
-
-        <div class="row">
-
-          <div>
-
-            <div class="label">
-              THE COMMUNITY RUN
-            </div>
-
-            <h2 style="font-size:29px;margin:8px 0">
-
-              10K. Ein Ziel.<br>
-              Ganz Deutschland.
-
-            </h2>
-
-          </div>
-
-          <span class="badge lime">
-            SAM 19.09.
-          </span>
-
-        </div>
-
-        <p style="color:#bdbdb7">
-
-          Lauf deine 10 Kilometer dort, wo du gerade bist.
-          Wir machen aus 10.000 einzelnen Läufen einen gemeinsamen Lauf.
-
-        </p>
-
-        <div class="progress">
-          <i style="width:67%"></i>
-        </div>
-
-        <div
-          class="row small"
-          style="margin-top:8px"
-        >
-
-          <span>
-            6,740 / 10,000 Runner
-          </span>
-
-          <b>
-            67%
-          </b>
-
-        </div>
-
-        <a
-          class="btn lime"
-          style="margin-top:18px"
-          href="challenges.html"
-        >
-          Jetzt anmelden
-        </a>
-
-      </div>
-
-
-      <div class="card">
-
-        <div class="section-head">
-
-          <h2>
-            Dein Wochenziel
-          </h2>
-
-          <span class="badge">
-            30 KM
-          </span>
-
-        </div>
-
-        <div
-          class="kpi"
-          style="font-size:48px"
-        >
-
-          23.4
-
-          <span
-            class="muted"
-            style="font-size:18px"
-          >
-            km
-          </span>
-
-        </div>
-
-        <div
-          class="progress"
-          style="margin:15px 0"
-        >
-
-          <i style="width:78%"></i>
-
-        </div>
-
-        <div class="row small">
-
-          <span>
-            6.6 km fehlen
-          </span>
-
-          <b>
-            78%
-          </b>
-
-        </div>
-
-        <div
-          class="bar"
-          style="margin-top:15px"
-        >
-
-          <i style="height:40%"></i>
-          <i style="height:58%"></i>
-          <i style="height:85%"></i>
-          <i style="height:35%"></i>
-          <i style="height:72%"></i>
-          <i style="height:48%"></i>
-          <i style="height:95%"></i>
-
-        </div>
-
-      </div>
-
-    </div>
-
-
-    <div class="section grid g3">
-
-      <div class="card">
-
-        <div class="section-head">
-
-          <h2>
-            Early Birds
-          </h2>
-
-          <span class="badge lime">
-            vor 08:00
-          </span>
-
-        </div>
-
-        <div class="rank">
-
-          <span class="ranknum">
-            01
-          </span>
-
-          <div class="person">
-
-            <div class="pavatar">
-              LM
-            </div>
-
-            <div>
-
-              <b>
-                Laura M.
-              </b>
-
-              <div class="small muted">
-                06:12 heute
-              </div>
-
-            </div>
-
-          </div>
-
-          <b>
-            11.8 km
-          </b>
-
-        </div>
-
-
-        <div class="rank">
-
-          <span class="ranknum">
-            02
-          </span>
-
-          <div class="person">
-
-            <div class="pavatar">
-              JS
-            </div>
-
-            <div>
-
-              <b>
-                Jonas S.
-              </b>
-
-              <div class="small muted">
-                06:41 heute
-              </div>
-
-            </div>
-
-          </div>
-
-          <b>
-            9.4 km
-          </b>
-
-        </div>
-
-
-        <div class="rank">
-
-          <span class="ranknum">
-            03
-          </span>
-
-          <div class="person">
-
-            <div class="pavatar">
-              NK
-            </div>
-
-            <div>
-
-              <b>
-                Nina K.
-              </b>
-
-              <div class="small muted">
-                07:05 heute
-              </div>
-
-            </div>
-
-          </div>
-
-          <b>
-            7.2 km
-          </b>
-
-        </div>
-
-      </div>
-
-
-      <div class="card">
-
-        <div class="section-head">
-
-          <h2>
-            Heute in der Community
-          </h2>
-
-          <span class="badge">
-            LIVE
-          </span>
-
-        </div>
-
-        <div class="post">
-
-          <div class="pavatar">
-            TB
-          </div>
-
-          <div>
-
-            <b>
-              Tom B.
-            </b>
-
-            <p style="margin:5px 0">
-              „Erster 5K unter 30 Minuten! 😭🔥“
-            </p>
-
-            <span class="tag">
-              5 KM
-            </span>
-
-            <span class="tag">
-              PB
-            </span>
-
-          </div>
-
-        </div>
-
-
-        <div class="post">
-
-          <div class="pavatar">
-            SK
-          </div>
-
-          <div>
-
-            <b>
-              Sarah K.
-            </b>
-
-            <p style="margin:5px 0">
-              „Wer läuft morgen früh in Mainz?“
-            </p>
-
-            <span class="tag">
-              MAINZ
-            </span>
-
-            <span class="tag">
-              PARTNER
-            </span>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <div class="card">
-
-        <div class="section-head">
-
-          <h2>
-            Nächstes Event
-          </h2>
-
-          <span class="badge">
-            34 Plätze
-          </span>
-
-        </div>
-
-        <div class="event">
-
-          <div class="date">
-
-            <b>
-              19
-            </b>
-
-            <span>
-              Sep
-            </span>
-
-          </div>
-
-          <div>
-
-            <b>
-              THE COMMUNITY 10K
-            </b>
-
-            <div class="small muted">
-              Virtuell · überall in DE
-            </div>
-
-          </div>
-
-          <a
-            class="btn ghost"
-            href="events.html"
-          >
-            Details
-          </a>
-
-        </div>
-
-
-        <div
-          class="event"
-          style="margin-top:18px"
-        >
-
-          <div class="date">
-
-            <b>
-              27
-            </b>
-
-            <span>
-              Sep
-            </span>
-
-          </div>
-
-          <div>
-
-            <b>
-              HALF MARATHON DAY
-            </b>
-
-            <div class="small muted">
-              21.1 km · gemeinsam
-            </div>
-
-          </div>
-
-          <a
-            class="btn ghost"
-            href="events.html"
-          >
-            Details
-          </a>
-
-        </div>
-
-      </div>
-
-    </div>
-
   </main>
 
 </div>
 
+
+<!-- =====================================================
+     AUTH OVERLAY
+     Technisch außerhalb des Seiteninhalts,
+     damit Anmeldung weiterhin funktioniert.
+===================================================== -->
 
 <div
   class="auth-overlay"
@@ -2416,13 +1870,16 @@
       ×
     </button>
 
+
     <div class="auth-eyebrow">
       MILES APART
     </div>
 
+
     <h2 id="authTitle">
       Willkommen zurück.
     </h2>
+
 
     <p
       class="auth-description"
@@ -2430,6 +1887,7 @@
     >
       Melde dich an und werde Teil der Community.
     </p>
+
 
     <div
       class="auth-tabs"
@@ -2720,9 +2178,11 @@
   const SUPABASE_PUBLISHABLE_KEY =
     "sb_publishable_wc3w2fSuj8ItwiF6XBoQgw_HeW5_rNW";
 
+
   const {
     createClient
   } = window.supabase;
+
 
   const supabaseClient =
     createClient(
@@ -2833,16 +2293,12 @@
     }
 
     const parts =
-      name
-        .trim()
-        .split(/\s+/);
+      name.trim().split(/\s+/);
 
     if (parts.length === 1) {
-
       return parts[0]
         .substring(0, 1)
         .toUpperCase();
-
     }
 
     return (
@@ -2866,9 +2322,15 @@
   }
 
 
-  function getUserDisplayName(user, profile) {
+  function getUserDisplayName(
+    user,
+    profile
+  ) {
 
-    if (profile && profile.display_name) {
+    if (
+      profile &&
+      profile.display_name
+    ) {
       return profile.display_name;
     }
 
@@ -2877,16 +2339,14 @@
       user.user_metadata &&
       user.user_metadata.display_name
     ) {
-
       return user.user_metadata.display_name;
-
     }
 
-    if (user && user.email) {
-
-      return user.email
-        .split("@")[0];
-
+    if (
+      user &&
+      user.email
+    ) {
+      return user.email.split("@")[0];
     }
 
     return "Runner";
@@ -2967,7 +2427,8 @@
 
     }
 
-    currentProfile = data || null;
+    currentProfile =
+      data || null;
 
     return currentProfile;
 
@@ -3023,9 +2484,7 @@
       image.alt =
         displayName;
 
-      avatarButton.appendChild(
-        image
-      );
+      avatarButton.appendChild(image);
 
     } else {
 
@@ -3053,9 +2512,7 @@
     if (
       recoveryForm.classList.contains("active")
     ) {
-
       return;
-
     }
 
     showLogin();
@@ -3094,9 +2551,7 @@
       if (
         event.target === authOverlay
       ) {
-
         closeAuth();
-
       }
 
     }
@@ -3111,9 +2566,7 @@
         event.key === "Escape" &&
         authOverlay.classList.contains("open")
       ) {
-
         closeAuth();
-
       }
 
     }
@@ -3262,9 +2715,7 @@
           .getElementById("registerPassword")
           .value;
 
-      if (
-        name.length < 2
-      ) {
+      if (name.length < 2) {
 
         setMessage(
           registerMessage,
@@ -3275,9 +2726,7 @@
 
       }
 
-      if (
-        password.length < 6
-      ) {
+      if (password.length < 6) {
 
         setMessage(
           registerMessage,
@@ -3472,13 +2921,14 @@
 
       const {
         error
-      } = await supabaseClient.auth
-        .resetPasswordForEmail(
-          email,
-          {
-            redirectTo: redirectUrl
-          }
-        );
+      } =
+        await supabaseClient.auth
+          .resetPasswordForEmail(
+            email,
+            {
+              redirectTo: redirectUrl
+            }
+          );
 
       setButtonLoading(
         forgotSubmit,
@@ -3530,9 +2980,7 @@
           .getElementById("newPasswordConfirm")
           .value;
 
-      if (
-        password.length < 6
-      ) {
+      if (password.length < 6) {
 
         setMessage(
           recoveryMessage,
@@ -3543,9 +2991,7 @@
 
       }
 
-      if (
-        password !== passwordConfirm
-      ) {
+      if (password !== passwordConfirm) {
 
         setMessage(
           recoveryMessage,
@@ -3564,11 +3010,12 @@
 
       const {
         error
-      } = await supabaseClient.auth.updateUser({
+      } =
+        await supabaseClient.auth.updateUser({
 
-        password: password
+          password: password
 
-      });
+        });
 
       setButtonLoading(
         recoverySubmit,
@@ -3628,9 +3075,7 @@
     function(event) {
 
       if (
-        !loggedInArea.contains(
-          event.target
-        )
+        !loggedInArea.contains(event.target)
       ) {
 
         accountMenu.classList.remove(
@@ -3649,7 +3094,8 @@
 
       const {
         error
-      } = await supabaseClient.auth.signOut();
+      } =
+        await supabaseClient.auth.signOut();
 
       if (error) {
 
@@ -3722,7 +3168,8 @@
     const {
       data,
       error
-    } = await supabaseClient.auth.getSession();
+    } =
+      await supabaseClient.auth.getSession();
 
     if (error) {
 
@@ -3776,55 +3223,51 @@
         error.message || ""
       ).toLowerCase();
 
+
     if (
       message.includes(
         "invalid login credentials"
       )
     ) {
-
       return "E-Mail oder Passwort ist nicht korrekt.";
-
     }
+
 
     if (
       message.includes(
         "email not confirmed"
       )
     ) {
-
       return "Bitte bestätige zuerst deine E-Mail-Adresse.";
-
     }
+
 
     if (
       message.includes(
         "password should be at least"
       )
     ) {
-
       return "Das Passwort ist zu kurz.";
-
     }
+
 
     if (
       message.includes(
         "rate limit"
       )
     ) {
-
       return "Zu viele Versuche. Bitte warte kurz und versuche es erneut.";
-
     }
+
 
     if (
       message.includes(
         "user already registered"
       )
     ) {
-
       return "Mit dieser E-Mail-Adresse existiert möglicherweise bereits ein Konto.";
-
     }
+
 
     return (
       error.message ||
@@ -3839,5 +3282,4 @@
 </script>
 
 </body>
-
 </html>
