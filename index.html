@@ -4,7 +4,10 @@
 <head>
   <meta charset="utf-8">
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
 
   <title>Miles Apart — Miles Apart Running Club</title>
 
@@ -530,7 +533,6 @@
 
     /* =====================================================
        VISUAL STORY
-       NUR NOCH EIN BILD
     ===================================================== */
 
     .visual-story {
@@ -570,16 +572,18 @@
 
     .photo-grid {
       display: grid;
-      grid-template-columns: 1fr;
-      grid-template-rows: 580px;
-      gap: 0;
+      grid-template-columns: 1.15fr .85fr;
+      grid-template-rows: 290px 290px;
+      gap: 12px;
     }
 
     .photo-grid-item {
-      width: 100%;
-      height: 100%;
       overflow: hidden;
       background: #111;
+    }
+
+    .photo-grid-item:first-child {
+      grid-row: 1 / 3;
     }
 
     .photo-grid-item img {
@@ -634,33 +638,6 @@
       font-size: 17px;
       line-height: 1.6;
       font-weight: var(--font-light);
-    }
-
-    .statement-cta {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      box-sizing: border-box;
-      min-height: 82px;
-      margin-top: 36px;
-      padding: 18px 28px;
-      border: 1px solid #111;
-      background: #111;
-      color: #fff;
-      text-decoration: none;
-      font-size: 18px;
-      line-height: 1;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      font-weight: var(--font-light);
-      transition: .2s ease;
-    }
-
-    .statement-cta:hover {
-      background: #fff;
-      color: #111;
-      border-color: #111;
     }
 
 
@@ -1069,8 +1046,11 @@
 
       .photo-grid {
         grid-template-columns: 1fr;
-        grid-template-rows: 500px;
-        gap: 0;
+        grid-template-rows: 430px 260px 260px;
+      }
+
+      .photo-grid-item:first-child {
+        grid-row: auto;
       }
 
       .statement {
@@ -1195,23 +1175,11 @@
       }
 
       .photo-grid {
-        grid-template-columns: 1fr;
-        grid-template-rows: 380px;
-        gap: 0;
+        grid-template-rows: 380px 230px 230px;
       }
 
       .statement {
         padding: 42px 24px;
-      }
-
-      .statement-cta {
-        min-height: 66px;
-        margin-top: 28px;
-        padding: 15px 14px;
-        font-size: 14px;
-        letter-spacing: 1.2px;
-        font-weight: var(--font-light);
-        text-align: center;
       }
 
       .top-right .user-greeting {
@@ -1783,7 +1751,6 @@
 
     <!-- =====================================================
          VISUAL STORY
-         NUR NOCH IMG_3021.jpeg
     ===================================================== -->
 
     <section class="visual-story">
@@ -1818,8 +1785,28 @@
         <div class="photo-grid-item">
 
           <img
+            src="IMG_0111.jpeg"
+            alt="Tano Loew bei einem Ultra Running Event"
+          >
+
+        </div>
+
+
+        <div class="photo-grid-item">
+
+          <img
             src="IMG_3021.jpeg"
             alt="Tano Loew bei einem Laufwettkampf"
+          >
+
+        </div>
+
+
+        <div class="photo-grid-item">
+
+          <img
+            src="IMG_5776.jpeg"
+            alt="Tano Loew auf der Brooklyn Bridge"
           >
 
         </div>
@@ -1856,15 +1843,6 @@
         Eine Community, in der wir uns gegenseitig motivieren,
         unterstützen und gemeinsam neue Ziele erreichen.
       </p>
-
-
-      <a
-        class="statement-cta"
-        id="statementCta"
-        href="home.html"
-      >
-        JETZT MITGLIED WERDEN →
-      </a>
 
     </section>
 
@@ -2246,9 +2224,6 @@
   const openLoginButton =
     document.getElementById("openLoginButton");
 
-  const statementCta =
-    document.getElementById("statementCta");
-
   const authOverlay =
     document.getElementById("authOverlay");
 
@@ -2476,12 +2451,6 @@
 
       accountMenu.classList.remove("open");
 
-      statementCta.textContent =
-        "JETZT MITGLIED WERDEN →";
-
-      statementCta.href =
-        "home.html";
-
       return;
 
     }
@@ -2535,12 +2504,6 @@
 
     accountMenuEmail.textContent =
       currentUser.email || "";
-
-    statementCta.textContent =
-      "ZUM MITGLIEDSBEREICH →";
-
-    statementCta.href =
-      "home.html";
 
   }
 
@@ -2732,6 +2695,10 @@
   );
 
 
+  /* =====================================================
+     REGISTRIERUNG
+  ===================================================== */
+
   registerForm.addEventListener(
     "submit",
     async function(event) {
@@ -2758,6 +2725,7 @@
           .getElementById("registerPassword")
           .value;
 
+
       if (name.length < 2) {
 
         setMessage(
@@ -2768,6 +2736,7 @@
         return;
 
       }
+
 
       if (password.length < 6) {
 
@@ -2780,39 +2749,54 @@
 
       }
 
+
       setButtonLoading(
         registerSubmit,
         true,
         "Konto erstellen →"
       );
 
+
       const {
         data,
         error
-      } = await supabaseClient.auth.signUp({
+      } =
+        await supabaseClient.auth.signUp({
 
-        email: email,
+          email: email,
 
-        password: password,
+          password: password,
 
-        options: {
+          options: {
 
-          data: {
-            display_name: name
-          },
+            data: {
+              display_name: name
+            },
 
-          emailRedirectTo:
-            window.location.href.split("#")[0]
+            emailRedirectTo:
+              window.location.href.split("#")[0]
 
-        }
+          }
 
-      });
+        });
+
 
       setButtonLoading(
         registerSubmit,
         false,
         "Konto erstellen →"
       );
+
+
+      /* =================================================
+         BEREITS REGISTRIERTE E-MAIL ERKENNEN
+
+         Supabase kann bei einer bereits vorhandenen
+         E-Mail-Adresse entweder einen Fehler zurückgeben
+         oder einen User ohne identities liefern.
+
+         Beides wird hier abgefangen.
+      ================================================= */
 
       if (error) {
 
@@ -2830,7 +2814,26 @@
 
       }
 
+
+      if (
+        data &&
+        data.user &&
+        Array.isArray(data.user.identities) &&
+        data.user.identities.length === 0
+      ) {
+
+        setMessage(
+          registerMessage,
+          "Du hast dich mit dieser E-Mail schon angemeldet. Bitte melde dich stattdessen an."
+        );
+
+        return;
+
+      }
+
+
       registerForm.reset();
+
 
       if (
         data &&
@@ -2862,6 +2865,10 @@
   );
 
 
+  /* =====================================================
+     LOGIN
+  ===================================================== */
+
   loginForm.addEventListener(
     "submit",
     async function(event) {
@@ -2882,28 +2889,33 @@
           .getElementById("loginPassword")
           .value;
 
+
       setButtonLoading(
         loginSubmit,
         true,
         "Anmelden →"
       );
 
+
       const {
         data,
         error
-      } = await supabaseClient.auth.signInWithPassword({
+      } =
+        await supabaseClient.auth.signInWithPassword({
 
-        email: email,
+          email: email,
 
-        password: password
+          password: password
 
-      });
+        });
+
 
       setButtonLoading(
         loginSubmit,
         false,
         "Anmelden →"
       );
+
 
       if (error) {
 
@@ -2920,6 +2932,7 @@
         return;
 
       }
+
 
       loginForm.reset();
 
@@ -2938,6 +2951,10 @@
   );
 
 
+  /* =====================================================
+     PASSWORT VERGESSEN
+  ===================================================== */
+
   forgotForm.addEventListener(
     "submit",
     async function(event) {
@@ -2953,14 +2970,17 @@
           .trim()
           .toLowerCase();
 
+
       setButtonLoading(
         forgotSubmit,
         true,
         "Reset-Link senden →"
       );
 
+
       const redirectUrl =
         window.location.href.split("#")[0];
+
 
       const {
         error
@@ -2973,11 +2993,13 @@
             }
           );
 
+
       setButtonLoading(
         forgotSubmit,
         false,
         "Reset-Link senden →"
       );
+
 
       if (error) {
 
@@ -2995,6 +3017,7 @@
 
       }
 
+
       setMessage(
         forgotMessage,
         "Wenn ein Konto mit dieser E-Mail existiert, wurde ein Reset-Link versendet.",
@@ -3004,6 +3027,10 @@
     }
   );
 
+
+  /* =====================================================
+     PASSWORT RECOVERY
+  ===================================================== */
 
   recoveryForm.addEventListener(
     "submit",
@@ -3023,6 +3050,7 @@
           .getElementById("newPasswordConfirm")
           .value;
 
+
       if (password.length < 6) {
 
         setMessage(
@@ -3033,6 +3061,7 @@
         return;
 
       }
+
 
       if (password !== passwordConfirm) {
 
@@ -3045,11 +3074,13 @@
 
       }
 
+
       setButtonLoading(
         recoverySubmit,
         true,
         "Neues Passwort speichern →"
       );
+
 
       const {
         error
@@ -3060,11 +3091,13 @@
 
         });
 
+
       setButtonLoading(
         recoverySubmit,
         false,
         "Neues Passwort speichern →"
       );
+
 
       if (error) {
 
@@ -3082,13 +3115,16 @@
 
       }
 
+
       recoveryForm.reset();
+
 
       setMessage(
         recoveryMessage,
         "Dein Passwort wurde erfolgreich geändert.",
         true
       );
+
 
       setTimeout(
         closeAuth,
@@ -3098,6 +3134,10 @@
     }
   );
 
+
+  /* =====================================================
+     ACCOUNT MENU
+  ===================================================== */
 
   avatarButton.addEventListener(
     "click",
@@ -3131,6 +3171,10 @@
   );
 
 
+  /* =====================================================
+     LOGOUT
+  ===================================================== */
+
   logoutButton.addEventListener(
     "click",
     async function() {
@@ -3139,6 +3183,7 @@
         error
       } =
         await supabaseClient.auth.signOut();
+
 
       if (error) {
 
@@ -3151,6 +3196,7 @@
 
       }
 
+
       accountMenu.classList.remove(
         "open"
       );
@@ -3158,6 +3204,10 @@
     }
   );
 
+
+  /* =====================================================
+     AUTH STATE
+  ===================================================== */
 
   supabaseClient.auth.onAuthStateChange(
     async function(event, session) {
@@ -3181,6 +3231,7 @@
 
       }
 
+
       if (
         session &&
         session.user
@@ -3200,11 +3251,16 @@
 
       }
 
+
       updateUserInterface();
 
     }
   );
 
+
+  /* =====================================================
+     INITIALIZE AUTH
+  ===================================================== */
 
   async function initializeAuth() {
 
@@ -3213,6 +3269,7 @@
       error
     } =
       await supabaseClient.auth.getSession();
+
 
     if (error) {
 
@@ -3229,6 +3286,7 @@
       return;
 
     }
+
 
     if (
       data &&
@@ -3250,16 +3308,22 @@
 
     }
 
+
     updateUserInterface();
 
   }
 
+
+  /* =====================================================
+     AUTH FEHLER ÜBERSETZEN
+  ===================================================== */
 
   function translateAuthError(error) {
 
     if (!error) {
       return "Es ist ein unbekannter Fehler aufgetreten.";
     }
+
 
     const message =
       String(
@@ -3272,7 +3336,9 @@
         "invalid login credentials"
       )
     ) {
+
       return "E-Mail oder Passwort ist nicht korrekt.";
+
     }
 
 
@@ -3281,7 +3347,9 @@
         "email not confirmed"
       )
     ) {
+
       return "Bitte bestätige zuerst deine E-Mail-Adresse.";
+
     }
 
 
@@ -3290,7 +3358,9 @@
         "password should be at least"
       )
     ) {
+
       return "Das Passwort ist zu kurz.";
+
     }
 
 
@@ -3299,16 +3369,29 @@
         "rate limit"
       )
     ) {
+
       return "Zu viele Versuche. Bitte warte kurz und versuche es erneut.";
+
     }
 
 
     if (
       message.includes(
         "user already registered"
+      ) ||
+      message.includes(
+        "already registered"
+      ) ||
+      message.includes(
+        "already exists"
+      ) ||
+      message.includes(
+        "email already"
       )
     ) {
-      return "Mit dieser E-Mail-Adresse existiert möglicherweise bereits ein Konto.";
+
+      return "Du hast dich mit dieser E-Mail schon angemeldet. Bitte melde dich stattdessen an.";
+
     }
 
 
@@ -3319,6 +3402,10 @@
 
   }
 
+
+  /* =====================================================
+     START
+  ===================================================== */
 
   initializeAuth();
 
