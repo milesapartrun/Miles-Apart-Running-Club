@@ -42,6 +42,13 @@
     }
 
 
+    .user-greeting {
+      font-size: 13px;
+      color: #666;
+      white-space: nowrap;
+    }
+
+
     .login-button {
       display: inline-flex;
       align-items: center;
@@ -151,6 +158,11 @@
 
 
     @media (max-width: 600px) {
+
+      .user-greeting {
+        font-size: 12px;
+      }
+
 
       .user-avatar-button {
         width: 48px;
@@ -318,6 +330,14 @@
           class="user-area"
           style="display:none;position:relative;"
         >
+
+          <span
+            class="user-greeting"
+            id="userGreeting"
+          >
+            Hallo
+          </span>
+
 
           <button
             class="user-avatar-button"
@@ -730,6 +750,10 @@
     document.getElementById("loggedInArea");
 
 
+  const userGreeting =
+    document.getElementById("userGreeting");
+
+
   const avatarButton =
     document.getElementById("avatarButton");
 
@@ -931,6 +955,12 @@
       );
 
 
+    const firstName =
+      displayName
+        .trim()
+        .split(/\s+/)[0] || "Runner";
+
+
     const initials =
       getInitials(
         displayName
@@ -943,6 +973,10 @@
 
     loggedInArea.style.display =
       "flex";
+
+
+    userGreeting.textContent =
+      "Hallo " + firstName;
 
 
     avatarButton.innerHTML =
