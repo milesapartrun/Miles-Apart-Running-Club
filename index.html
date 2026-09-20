@@ -1,683 +1,18 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
-
 <head>
-  <meta charset="utf-8">
-
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Miles Apart — Miles Apart Running Club</title>
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
-
     :root {
-      --miles-blue: #18b8c7;
-    }
-
-    body,
-    body * {
-      font-family: var(--font-main);
-    }
-
-    button,
-    input,
-    textarea,
-    select {
-      font-family: var(--font-main);
-    }
-
-    p,
-    li,
-    span,
-    a,
-    button,
-    input,
-    textarea,
-    select {
-      font-weight: var(--font-light);
-    }
-
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6,
-    strong,
-    b,
-    .kpi,
-    .label,
-    .principle-number,
-    .founder-kicker,
-    .home-hero-eyebrow,
-    .statement-label,
-    .user-avatar-button {
-      font-weight: var(--font-heading);
-    }
-
-
-    /* =====================================================
-       INTRO
-    ===================================================== */
-
-    .home-intro {
-      margin: 0 !important;
-      padding: 72px 0 62px !important;
-      background: #fff;
-      box-sizing: border-box;
-    }
-
-    .intro-card {
-      width: 100%;
-      box-sizing: border-box;
-      padding: 52px 55px 50px;
-      background: transparent;
-      border: none;
-    }
-
-    .intro-card-lead {
-      max-width: 1050px;
-      margin: 0;
-      color: #222;
-      font-size: clamp(36px, 4.2vw, 60px);
-      line-height: .98;
-      letter-spacing: -2.5px;
-      font-weight: var(--font-heading);
-    }
-
-    .intro-card-lead span {
-      display: block;
-      color: var(--miles-blue);
-      font-weight: var(--font-heading);
-    }
-
-    .intro-card-bottom {
-      display: block;
-      margin-top: 48px;
-      padding-top: 34px;
-      border-top: 1px solid #dcdcd8;
-    }
-
-    .intro-card-text {
-      max-width: 850px;
-    }
-
-    .intro-card-text p {
-      margin: 0 0 22px;
-      color: #666;
-      font-size: 20px;
-      line-height: 1.72;
-      font-weight: var(--font-light);
-    }
-
-    .intro-card-text p:last-child {
-      margin-bottom: 0;
-    }
-
-    .intro-card-text strong {
-      color: #222;
-      font-weight: var(--font-heading);
-    }
-
-
-    /* =====================================================
-       COLORS
-    ===================================================== */
-
-    .lime {
-      background-color: var(--miles-blue) !important;
-      border-color: var(--miles-blue) !important;
-      color: #ffffff !important;
-    }
-
-    .lime:hover {
-      background-color: #1199a6 !important;
-      border-color: #1199a6 !important;
-    }
-
-    .label {
-      color: var(--miles-blue);
-    }
-
-    .progress i,
-    .mini-progress i,
-    .bar i {
-      background-color: var(--miles-blue);
-    }
-
-    .badge.lime {
-      background-color: var(--miles-blue) !important;
-      border-color: var(--miles-blue) !important;
-      color: #ffffff !important;
-    }
-
-    .intro-eyebrow {
-      color: var(--miles-blue);
-      font-weight: var(--font-heading);
-    }
-
-    .founder-kicker {
-      color: var(--miles-blue);
-    }
-
-    .principle-number {
-      color: var(--miles-blue);
-    }
-
-
-    /* =====================================================
-       HERO
-    ===================================================== */
-
-    .home-hero {
-      position: relative;
-      width: 100%;
-      height: min(72vh, 760px);
-      min-height: 560px;
-      overflow: hidden;
-      background: #111;
-    }
-
-    .home-hero img {
-      width: 100%;
-      height: 100%;
-      display: block;
-      object-fit: cover;
-      object-position: center 45%;
-    }
-
-    .home-hero-overlay {
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(
-          to top,
-          rgba(0,0,0,.78) 0%,
-          rgba(0,0,0,.25) 48%,
-          rgba(0,0,0,.05) 100%
-        );
-    }
-
-    .home-hero-content {
-      position: absolute;
-      left: 50px;
-      right: 50px;
-      bottom: 28px;
-      z-index: 2;
-      color: #fff;
-    }
-
-    .home-hero-content h1 {
-      max-width: 1000px;
-      margin: 0;
-      font-size: clamp(42px, 6.3vw, 82px);
-      line-height: .94;
-      letter-spacing: -2.7px;
-      font-weight: var(--font-heading);
-    }
-
-    .home-hero-content h1 span {
-      color: var(--miles-blue);
-      font-weight: var(--font-heading);
-    }
-
-    .home-hero-content p {
-      margin: 22px 0 0;
-      font-size: 12px;
-      line-height: 1.5;
-      font-weight: var(--font-light);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,.72);
-    }
-
-
-    /* =====================================================
-       STORY PHOTO
-    ===================================================== */
-
-    .story-photo {
-      position: relative;
-      height: min(62vw, 620px);
-      min-height: 420px;
-      overflow: hidden;
-      margin-top: 0;
-      background: #111;
-    }
-
-    .story-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 38%;
-      display: block;
-    }
-
-    .story-photo::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(
-          to top,
-          rgba(0,0,0,.72) 0%,
-          rgba(0,0,0,.08) 50%,
-          rgba(0,0,0,.02) 100%
-        );
-      pointer-events: none;
-    }
-
-    .photo-caption {
-      position: absolute;
-      z-index: 2;
-      left: 30px;
-      right: 30px;
-      bottom: 26px;
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 20px;
-      color: #fff;
-    }
-
-    .photo-caption strong {
-      font-size: clamp(25px, 3vw, 42px);
-      line-height: 1;
-      letter-spacing: -1.5px;
-      font-weight: var(--font-heading);
-    }
-
-    .photo-caption span {
-      font-size: 11px;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: #bbb;
-      text-align: right;
-      font-weight: var(--font-light);
-    }
-
-
-    /* =====================================================
-       ABOUT PROJECT
-    ===================================================== */
-
-    .about-project {
-      margin-top: 100px;
-    }
-
-    .about-project .intro-eyebrow {
-      margin-bottom: 24px;
-    }
-
-    .about-project-grid {
-      display: grid;
-      grid-template-columns: 1fr 1.45fr;
-      gap: 70px;
-      align-items: start;
-    }
-
-    .about-project h2 {
-      font-size: clamp(34px, 4vw, 56px);
-      line-height: .98;
-      letter-spacing: -2px;
-      margin: 0;
-      font-weight: var(--font-heading);
-    }
-
-    .about-project-text {
-      font-size: 18px;
-      line-height: 1.75;
-      font-weight: var(--font-light);
-      color: #777;
-      max-width: 760px;
-    }
-
-    .about-project-text p {
-      margin: 0 0 22px;
-      font-weight: var(--font-light);
-    }
-
-    .about-project-text strong {
-      color: #222;
-      font-weight: var(--font-heading);
-    }
-
-    .about-project-nowrap {
-      white-space: nowrap;
-    }
-
-
-    /* =====================================================
-       PRINCIPLES
-    ===================================================== */
-
-    .principles {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      margin-top: 45px;
-    }
-
-    .principle {
-      padding: 28px;
-      min-height: 190px;
-      background: #f7f7f5;
-      border: 1px solid #e4e4e0;
-      position: relative;
-    }
-
-    .principle-number {
-      font-size: 11px;
-      font-weight: var(--font-heading);
-      letter-spacing: 2px;
-    }
-
-    .principle-icon {
-      position: absolute;
-      top: 25px;
-      right: 27px;
-      width: 30px;
-      height: 30px;
-      color: var(--miles-blue);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .principle-icon svg {
-      width: 30px;
-      height: 30px;
-      display: block;
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 1.7;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .principle h3 {
-      font-size: 22px;
-      margin: 38px 0 9px;
-      font-weight: var(--font-heading);
-    }
-
-    .principle p {
-      margin: 0;
-      color: #777;
-      line-height: 1.55;
-      font-size: 14px;
-      font-weight: var(--font-light);
-    }
-
-
-    /* =====================================================
-       FOUNDER
-    ===================================================== */
-
-    .founder {
-      margin-top: 100px;
-    }
-
-    .founder-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 25px;
-      margin-bottom: 28px;
-    }
-
-    .founder-kicker {
-      font-size: 14px;
-      font-weight: var(--font-heading);
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-
-    .founder-head h2 {
-      font-size: clamp(40px, 5vw, 68px);
-      line-height: .95;
-      letter-spacing: -3px;
-      margin: 0;
-      font-weight: var(--font-heading);
-    }
-
-    .founder-head .badge.lime {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      box-sizing: border-box;
-      min-height: 38px;
-      padding: 0 20px;
-      border-radius: 999px;
-      white-space: nowrap;
-      text-align: center;
-      line-height: 1;
-      font-size: 10px;
-      letter-spacing: 1.4px;
-      font-weight: var(--font-heading);
-    }
-
-    .founder-layout {
-      display: grid;
-      grid-template-columns: 1.15fr .85fr;
-      min-height: 590px;
-      background: #f5f5f3;
-      border: 1px solid #e2e2de;
-    }
-
-    .founder-image {
-      min-height: 590px;
-      overflow: hidden;
-    }
-
-    .founder-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 28%;
-      display: block;
-    }
-
-    .founder-content {
-      padding: 48px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .founder-content h3 {
-      font-size: 40px;
-      letter-spacing: -1.5px;
-      margin: 0 0 20px;
-      font-weight: var(--font-heading);
-    }
-
-    .founder-content p {
-      color: #777;
-      font-size: 16px;
-      line-height: 1.7;
-      margin: 0 0 20px;
-      font-weight: var(--font-light);
-    }
-
-    .founder-content p strong {
-      color: #222;
-      font-weight: var(--font-heading);
-    }
-
-    .founder-tags {
-      display: flex;
-      gap: 7px;
-      flex-wrap: wrap;
-      margin-top: 10px;
-    }
-
-    .founder-tag {
-      border: 1px solid #d7d7d3;
-      padding: 8px 11px;
-      font-size: 10px;
-      letter-spacing: 1px;
-      font-weight: var(--font-light);
-      text-transform: uppercase;
-      color: #666;
-    }
-
-
-    /* =====================================================
-       VISUAL STORY
-       NUR NOCH EIN BILD
-    ===================================================== */
-
-    .visual-story {
-      margin-top: 100px;
-    }
-
-    .visual-story-head {
-      display: grid;
-      grid-template-columns: minmax(330px, .9fr) minmax(0, 1.1fr);
-      align-items: end;
-      gap: 65px;
-      margin-bottom: 32px;
-    }
-
-    .visual-story .intro-eyebrow {
-      display: block;
-      margin-bottom: 20px;
-      white-space: nowrap;
-    }
-
-    .visual-story-head h2 {
-      margin: 0;
-      font-size: clamp(42px, 4.8vw, 64px);
-      letter-spacing: -2.8px;
-      line-height: .92;
-      font-weight: var(--font-heading);
-    }
-
-    .visual-story-head p {
-      max-width: 560px;
-      margin: 0 0 4px;
-      color: #777;
-      line-height: 1.55;
-      font-size: 20px;
-      font-weight: var(--font-light);
-    }
-
-    .photo-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      grid-template-rows: 580px;
-      gap: 0;
-    }
-
-    .photo-grid-item {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background: #111;
-    }
-
-    .photo-grid-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform .5s ease;
-    }
-
-    .photo-grid-item:hover img {
-      transform: scale(1.03);
-    }
-
-
-    /* =====================================================
-       THE IDEA
-    ===================================================== */
-
-    .statement {
-      margin-top: 100px;
-      padding: 70px 50px;
-      background: var(--miles-blue);
-      color: #fff;
-    }
-
-    .statement-label {
-      font-size: 11px;
-      font-weight: var(--font-heading);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 22px;
-    }
-
-    .statement h2 {
-      max-width: 950px;
-      margin: 0;
-      font-size: clamp(38px, 5.5vw, 75px);
-      line-height: .95;
-      letter-spacing: -3px;
-      font-weight: var(--font-heading);
-    }
-
-    .statement h2 .statement-dark {
-      color: #111;
-      font-weight: var(--font-heading);
-    }
-
-    .statement p {
-      max-width: 680px;
-      margin: 28px 0 0;
-      font-size: 17px;
-      line-height: 1.6;
-      font-weight: var(--font-light);
-    }
-
-    .statement-cta {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      box-sizing: border-box;
-      min-height: 82px;
-      margin-top: 36px;
-      padding: 18px 28px;
-      border: 1px solid #111;
-      background: #111;
-      color: #fff;
-      text-decoration: none;
-      font-size: 18px;
-      line-height: 1;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      font-weight: var(--font-light);
-      transition: .2s ease;
-    }
-
-    .statement-cta:hover {
-      background: #fff;
-      color: #111;
-      border-color: #111;
-    }
-
-
-    /* =====================================================
-       ACCOUNT
-    ===================================================== */
-
-    .top-right {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .user-area {
-      display: flex;
-      align-items: center;
-      gap: 10px;
+      --miles-blue: #163f8f;
     }
 
     .user-greeting {
@@ -687,41 +22,20 @@
       font-weight: var(--font-light);
     }
 
-    .login-button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 38px;
-      padding: 0 16px;
-      border: 1px solid #d7d7d3;
-      background: #fff;
-      color: #222;
-      font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: .2s ease;
-    }
-
-    .login-button:hover {
-      border-color: var(--miles-blue);
-      color: var(--miles-blue);
-    }
-
     .user-avatar-button {
       width: 38px;
       height: 38px;
       border-radius: 50%;
-      border: 2px solid var(--miles-blue);
-      background: #fff;
-      color: var(--miles-blue);
+      border: none;
+      background: var(--miles-blue);
+      color: white;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: var(--font-heading);
-      font-size: 13px;
-      cursor: pointer;
       overflow: hidden;
+      cursor: pointer;
       padding: 0;
+      flex-shrink: 0;
     }
 
     .user-avatar-button img {
@@ -732,15 +46,6 @@
     }
 
     .account-menu {
-      position: absolute;
-      top: 52px;
-      right: 0;
-      width: 210px;
-      background: #fff;
-      border: 1px solid #ddd;
-      box-shadow: 0 15px 40px rgba(0,0,0,.12);
-      padding: 8px;
-      z-index: 50;
       display: none;
     }
 
@@ -748,581 +53,77 @@
       display: block;
     }
 
-    .account-menu-name {
-      padding: 11px;
-      font-weight: var(--font-heading);
-      border-bottom: 1px solid #eee;
-      margin-bottom: 5px;
-    }
-
-    .account-menu-email {
-      padding: 4px 11px 10px;
-      color: #888;
-      font-size: 11px;
-      border-bottom: 1px solid #eee;
-      margin-bottom: 5px;
-      word-break: break-word;
-      font-weight: var(--font-light);
-    }
-
-    .account-menu a,
-    .account-menu button {
-      display: block;
-      width: 100%;
-      box-sizing: border-box;
-      padding: 11px;
-      border: 0;
-      background: transparent;
-      text-align: left;
-      cursor: pointer;
-      font-size: 12px;
-      color: #222;
-      text-decoration: none;
-      font-weight: var(--font-light);
-    }
-
-    .account-menu a:hover,
-    .account-menu button:hover {
-      background: #f5f5f3;
-      color: var(--miles-blue);
-    }
-
-
-    /* =====================================================
-       AUTH
-    ===================================================== */
-
-    .auth-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.55);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      z-index: 100;
-      overflow-y: auto;
-    }
-
-    .auth-overlay.open {
-      display: flex;
-    }
-
-    .auth-modal {
-      position: relative;
-      width: min(440px, 100%);
-      max-height: calc(100vh - 40px);
-      overflow-y: auto;
-      background: #fff;
-      padding: 38px;
-      box-shadow: 0 25px 80px rgba(0,0,0,.25);
-    }
-
-    .auth-close {
-      position: absolute;
-      top: 15px;
-      right: 17px;
-      width: 32px;
-      height: 32px;
-      border: 0;
-      background: transparent;
-      font-size: 25px;
-      line-height: 1;
-      cursor: pointer;
-      color: #555;
-      font-weight: var(--font-light);
-    }
-
-    .auth-close:hover {
-      color: var(--miles-blue);
-    }
-
-    .auth-eyebrow {
-      color: var(--miles-blue);
-      font-size: 10px;
-      font-weight: var(--font-heading);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-
-    .auth-modal h2 {
-      font-size: 32px;
-      line-height: 1;
-      letter-spacing: -1px;
-      margin: 0 0 10px;
-      font-weight: var(--font-heading);
-    }
-
-    .auth-description {
-      color: #777;
-      font-size: 14px;
-      line-height: 1.5;
-      margin: 0 0 25px;
-      font-weight: var(--font-light);
-    }
-
-    .auth-tabs {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      border-bottom: 1px solid #ddd;
-      margin-bottom: 25px;
-    }
-
-    .auth-tab {
-      padding: 12px 8px;
-      border: 0;
-      background: transparent;
-      color: #888;
-      font-size: 12px;
-      font-weight: var(--font-light);
-      cursor: pointer;
-      border-bottom: 2px solid transparent;
-    }
-
-    .auth-tab.active {
-      color: var(--miles-blue);
-      border-bottom-color: var(--miles-blue);
-    }
-
-    .auth-form {
-      display: none;
-    }
-
-    .auth-form.active {
-      display: block;
-    }
-
-    .form-group {
-      margin-bottom: 16px;
-    }
-
-    .form-group label {
-      display: block;
-      font-size: 11px;
-      font-weight: var(--font-heading);
-      margin-bottom: 7px;
-      color: #333;
-    }
-
-    .form-group input {
-      width: 100%;
-      box-sizing: border-box;
-      padding: 13px 14px;
-      border: 1px solid #d7d7d3;
-      background: #fafaf8;
-      color: #222;
-      font-family: var(--font-main);
-      font-size: 14px;
-      font-weight: var(--font-light);
-      outline: none;
-    }
-
-    .form-group input:focus {
-      border-color: var(--miles-blue);
-      background: #fff;
-    }
-
-    .auth-submit {
-      width: 100%;
-      border: 1px solid var(--miles-blue);
-      background: var(--miles-blue);
-      color: #fff;
-      padding: 14px;
-      font-size: 12px;
-      font-weight: var(--font-light);
-      cursor: pointer;
-      margin-top: 4px;
-    }
-
-    .auth-submit:hover {
-      background: #1199a6;
-      border-color: #1199a6;
-    }
-
-    .auth-submit:disabled {
-      opacity: .6;
-      cursor: wait;
-    }
-
-    .auth-message {
-      min-height: 18px;
-      margin-top: 12px;
-      font-size: 12px;
-      line-height: 1.5;
-      color: #d34b4b;
-      font-weight: var(--font-light);
-    }
-
-    .auth-message.success {
-      color: #248b63;
-    }
-
-    .forgot-password,
-    .auth-back {
-      display: block;
-      margin-top: 13px;
-      border: 0;
-      background: transparent;
-      padding: 0;
-      color: #777;
-      font-size: 11px;
-      text-decoration: underline;
-      cursor: pointer;
-      font-weight: var(--font-light);
-    }
-
-    .auth-back {
-      margin-bottom: 18px;
-      text-decoration: none;
-    }
-
-    .forgot-password:hover,
-    .auth-back:hover {
-      color: var(--miles-blue);
-    }
-
-    .auth-note {
-      margin-top: 14px;
-      padding: 12px;
-      background: #f5f5f3;
-      border: 1px solid #e3e3df;
-      color: #666;
-      font-size: 11px;
-      line-height: 1.5;
-      font-weight: var(--font-light);
-    }
-
-
-    /* =====================================================
-       RESPONSIVE
-    ===================================================== */
-
-    @media (max-width: 900px) {
-
-      .home-hero {
-        height: 620px;
-        min-height: 620px;
-      }
-
-      .home-hero-content {
-        left: 30px;
-        right: 30px;
-        bottom: 27px;
-      }
-
-      .home-hero-content h1 {
-        letter-spacing: -2.3px;
-      }
-
-      .home-intro {
-        padding: 55px 0 58px !important;
-      }
-
-      .intro-card {
-        padding: 40px 35px 38px;
-      }
-
-      .intro-card-lead {
-        font-size: 40px;
-        letter-spacing: -1.8px;
-      }
-
-      .intro-card-bottom {
-        margin-top: 38px;
-        padding-top: 30px;
-      }
-
-      .intro-card-text p {
-        font-size: 19px;
-      }
-
-      .about-project-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-      }
-
-      .principles {
-        grid-template-columns: 1fr;
-      }
-
-      .founder-layout {
-        grid-template-columns: 1fr;
-      }
-
-      .founder-image {
-        min-height: 500px;
-      }
-
-      .founder-content {
-        padding: 35px;
-      }
-
-      .visual-story-head {
-        grid-template-columns: 1fr;
-        gap: 24px;
-      }
-
-      .visual-story-head p {
-        max-width: 760px;
-      }
-
-      .photo-grid {
-        grid-template-columns: 1fr;
-        grid-template-rows: 500px;
-        gap: 0;
-      }
-
-      .statement {
-        padding: 50px 30px;
-      }
-
-    }
-
-
     @media (max-width: 600px) {
-
-      .home-hero {
-        height: 560px;
-        min-height: 560px;
-      }
-
-      .home-hero img {
-        object-position: center center;
-      }
-
-      .home-hero-content {
-        left: 20px;
-        right: 20px;
-        bottom: 18px;
-      }
-
-      .home-hero-content h1 {
-        font-size: 40px;
-        letter-spacing: -1.8px;
-      }
-
-      .home-intro {
-        padding: 38px 0 24px !important;
-      }
-
-      .intro-card {
-        padding: 30px 24px 20px;
-      }
-
-      .intro-card-lead {
-        font-size: 26px;
-        line-height: 1.02;
-        letter-spacing: -1.1px;
-      }
-
-      .intro-card-lead span {
-        font-size: 26px;
-        letter-spacing: -1.1px;
-      }
-
-      .intro-card-bottom {
-        margin-top: 28px;
-        padding-top: 25px;
-      }
-
-      .intro-card-text p {
-        font-size: 16px;
-        line-height: 1.7;
-        margin-bottom: 16px;
-      }
-
-      .story-photo {
-        min-height: 400px;
-      }
-
-      .photo-caption {
-        left: 20px;
-        right: 20px;
-        bottom: 20px;
-      }
-
-      .photo-caption strong {
-        font-size: 26px;
-      }
-
-      .about-project,
-      .founder,
-      .visual-story,
-      .statement {
-        margin-top: 65px;
-      }
-
-      .founder-image {
-        min-height: 430px;
-      }
-
-      .founder-content {
-        padding: 28px 24px;
-      }
-
-      .founder-content h3 {
-        font-size: 32px;
-      }
-
-      .founder-head {
-        align-items: center;
-      }
-
-      .founder-head .badge.lime {
-        min-height: 34px;
-        padding: 0 15px;
-        font-size: 9px;
-        letter-spacing: 1.1px;
-      }
-
-      .visual-story-head {
-        gap: 20px;
-      }
-
-      .visual-story .intro-eyebrow {
-        white-space: normal;
-      }
-
-      .visual-story-head h2 {
-        font-size: 42px;
-        letter-spacing: -2px;
-      }
-
-      .visual-story-head p {
-        font-size: 16px;
-        line-height: 1.65;
-      }
-
-      .photo-grid {
-        grid-template-columns: 1fr;
-        grid-template-rows: 380px;
-        gap: 0;
-      }
-
-      .statement {
-        padding: 42px 24px;
-      }
-
-      .statement-cta {
-        min-height: 66px;
-        margin-top: 28px;
-        padding: 15px 14px;
-        font-size: 14px;
-        letter-spacing: 1.2px;
-        font-weight: var(--font-light);
-        text-align: center;
-      }
-
       .top-right .user-greeting {
         display: none;
       }
-
-      .auth-modal {
-        padding: 30px 24px;
-      }
-
     }
-
   </style>
-
 </head>
-
 
 <body>
 
-<div class="shell">
+  <!-- =========================================================
+       SIDEBAR
+  ========================================================== -->
 
   <aside class="sidebar">
 
-    <div class="brand">
-
+    <div class="sidebar-logo">
       <a href="index.html">
-
-        <img
-          src="miles-apart-wordmark.png"
-          alt="Miles Apart Running Club"
-        >
-
+        <img src="miles-apart-wordmark.png" alt="Miles Apart Running Club" />
       </a>
-
     </div>
 
-
-    <nav class="nav">
-
-      <a
-        class="active"
-        href="index.html"
-      >
-        Miles Apart
-      </a>
-
-      <a href="home.html">
-        Home
-      </a>
-
-      <a href="challenges.html">
-        Challenges
-      </a>
-
-      <a href="community.html">
-        Community
-      </a>
-
-      <a href="events.html">
-        Events
-      </a>
-
-      <a href="training.html">
-        Training
-      </a>
-
+    <nav class="main-nav">
+      <a href="index.html" class="active">Miles Apart</a>
+      <a href="home.html">Home</a>
+      <a href="challenges.html">Challenges</a>
+      <a href="community.html">Community</a>
+      <a href="events.html">Events</a>
+      <a href="training.html">Training</a>
     </nav>
 
+    <div class="sidebar-week">
+      <div class="sidebar-week-label">THIS WEEK</div>
 
-    <div class="side-bottom">
-
-      <small>
-        THIS WEEK
-      </small>
-
-      <strong>
-        23.4 / 30 KM
-      </strong>
-
-      <div class="mini-progress">
-        <i></i>
+      <div class="sidebar-week-distance">
+        <strong>23.4</strong>
+        <span>/ 30 KM</span>
       </div>
 
-      <p
-        class="small"
-        style="color:#aaa;margin-bottom:0"
-      >
-        Nur 6.6 km bis zum Wochenziel.
-      </p>
-
+      <div class="sidebar-progress">
+        <div class="sidebar-progress-bar"></div>
+      </div>
     </div>
 
   </aside>
 
 
-  <main class="main">
+  <!-- =========================================================
+       MAIN
+  ========================================================== -->
 
-    <div class="top">
+  <main class="main-content">
 
-      <div class="crumb">
-        MILES APART / MILES APART
+    <!-- TOP BAR -->
+
+    <header class="top-bar">
+
+      <div class="top-left">
+        <span>MILES APART</span>
+        <span>/</span>
+        <span>MILES APART</span>
       </div>
 
-
       <div class="top-right">
+
+        <!-- Gast -->
 
         <div
           id="guestArea"
           class="user-area"
         >
-
           <button
             class="login-button"
             id="openLoginButton"
@@ -1330,9 +131,10 @@
           >
             Anmelden
           </button>
-
         </div>
 
+
+        <!-- Eingeloggt -->
 
         <div
           id="loggedInArea"
@@ -1355,7 +157,6 @@
           >
             A
           </button>
-
 
           <div
             class="account-menu"
@@ -1393,280 +194,140 @@
 
       </div>
 
-    </div>
+    </header>
 
 
-    <!-- =====================================================
+    <!-- =========================================================
          HERO
-    ===================================================== -->
+    ========================================================== -->
 
-    <div class="home-hero">
+    <section class="hero-section">
 
-      <img
-        src="IMG_5745.jpeg"
-        alt="Miles Apart – Running in New York"
-      >
+      <div class="hero-image">
+        <img
+          src="IMG_5745.jpeg"
+          alt="Läuferinnen und Läufer"
+        />
+      </div>
 
-      <div class="home-hero-overlay"></div>
+      <div class="hero-content">
 
-      <div class="home-hero-content">
+        <div class="eyebrow">
+          MILES APART RUNNING CLUB
+        </div>
 
         <h1>
-          Laufen verbindet.<br>
-          <span>
-            Auch wenn wir miles apart sind.
-          </span>
+          Laufen verbindet.<br />
+          Auch wenn wir<br />
+          miles apart sind.
         </h1>
 
         <p>
-          One community.<br>
-          Countless miles.
+          One community. Countless miles.
         </p>
-
-      </div>
-
-    </div>
-
-
-    <!-- =====================================================
-         INTRO
-    ===================================================== -->
-
-    <section class="home-intro">
-
-      <div class="intro-card">
-
-        <p class="intro-card-lead">
-
-          Miles Apart ist für alle,<br>
-
-          die laufen wollen.
-
-          <span>
-            Gemeinsam, egal wo.
-          </span>
-
-        </p>
-
-
-        <div class="intro-card-bottom">
-
-          <div class="intro-card-text">
-
-            <p>
-              Miles Apart ist die virtuelle Running-Community
-              für alle, die laufen, trainieren und gemeinsam
-              besser werden wollen.
-              <strong>Egal, wo du gerade bist.</strong>
-            </p>
-
-          </div>
-
-        </div>
 
       </div>
 
     </section>
 
 
-    <!-- =====================================================
-         STORY PHOTO
-    ===================================================== -->
+    <!-- =========================================================
+         INTRO
+    ========================================================== -->
 
-    <div class="story-photo">
+    <section class="intro-section">
 
-      <img
-        src="IMG_1978.jpeg"
-        alt="Läufer beim Munich Backyard"
-      >
+      <div class="section-label">
+        01 / ABOUT
+      </div>
 
-      <div class="photo-caption">
+      <div class="intro-content">
 
-        <div>
+        <h2>
+          Miles Apart ist für alle,<br />
+          die laufen wollen.<br />
+          Gemeinsam, egal wo.
+        </h2>
 
-          <strong>
-            ONE COMMUNITY.<br>
-            COUNTLESS MILES.
-          </strong>
-
-        </div>
-
-        <span>
-          Run together<br>
-          from anywhere
-        </span>
+        <p>
+          Eine Laufcommunity für Menschen, die nicht am selben Ort
+          sein müssen, um gemeinsam unterwegs zu sein.
+        </p>
 
       </div>
 
-    </div>
+    </section>
 
 
-    <!-- =====================================================
-         ABOUT
-    ===================================================== -->
+    <!-- =========================================================
+         STORY
+    ========================================================== -->
 
-    <section class="about-project">
+    <section class="story-section">
+
+      <div class="story-image">
+        <img
+          src="IMG_1978.jpeg"
+          alt="Miles Apart Community"
+        />
+      </div>
+
+      <div class="story-content">
+
+        <div class="section-label">
+          02 / THE IDEA
+        </div>
+
+        <h2>
+          Miles Apart bedeutet,
+          dass Distanz keine Rolle spielt.
+        </h2>
+
+        <p>
+          Wir laufen an unterschiedlichen Orten, zu unterschiedlichen
+          Zeiten und mit unterschiedlichen Zielen.
+        </p>
+
+        <p>
+          Was uns verbindet, ist nicht die Strecke.
+          Es ist die Community.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================================
+         ABOUT PROJECT
+    ========================================================== -->
+
+    <section class="about-project-section">
+
+      <div class="section-label">
+        03 / THE PROJECT
+      </div>
 
       <div class="about-project-grid">
 
         <div>
-
-          <div class="intro-eyebrow">
-            WAS IST MILES APART?
-          </div>
-
           <h2>
-            Ein Run Club.<br>
-            Nur ohne Grenzen.
+            One community.<br />
+            Countless miles.
           </h2>
-
         </div>
 
-
-        <div class="about-project-text">
+        <div>
 
           <p>
-            Überall entstehen neue
-            <strong>Run Clubs.</strong>
-            Menschen treffen sich nach Feierabend,
-            laufen gemeinsam durch ihre Stadt und
-            motivieren sich gegenseitig.
+            Miles Apart ist mehr als ein Running Club.
+            Es ist ein Ort für alle, die laufen, sich bewegen
+            und Teil einer Community sein möchten.
           </p>
 
           <p>
-            Wir glauben:
-            Dieses Gefühl sollte nicht davon abhängen,
-            <strong>wo du gerade wohnst.</strong>
-          </p>
-
-          <p>
-            Miles Apart verbindet Läuferinnen und Läufer
-            über Städte und Länder hinweg. Hier kannst du
-            dich mit anderen austauschen, an Challenges
-            teilnehmen, deine Läufe teilen, Fragen stellen,
-            neue Trainingspartner finden und dich gegenseitig pushen.
-          </p>
-
-          <p>
-            Du läufst alleine los.
-            <strong class="about-project-nowrap">
-              Aber du musst nicht alleine laufen.
-            </strong>
-          </p>
-
-        </div>
-
-      </div>
-
-
-      <div class="principles">
-
-        <div class="principle">
-
-          <div class="principle-number">
-            01 / CONNECT
-          </div>
-
-          <div
-            class="principle-icon"
-            aria-hidden="true"
-          >
-
-            <svg viewBox="0 0 32 32">
-
-              <circle cx="11" cy="10" r="3.5"></circle>
-
-              <circle cx="21" cy="10" r="3.5"></circle>
-
-              <path d="M4.5 24c.7-4.1 3-6.2 6.5-6.2s5.8 2.1 6.5 6.2"></path>
-
-              <path d="M14.5 24c.7-4.1 3-6.2 6.5-6.2s5.8 2.1 6.5 6.2"></path>
-
-              <path d="M14 10h4"></path>
-
-            </svg>
-
-          </div>
-
-          <h3>
-            Menschen verbinden
-          </h3>
-
-          <p>
-            Finde andere Runner, tausche dich aus und werde Teil
-            einer Community, die deine Leidenschaft versteht.
-          </p>
-
-        </div>
-
-
-        <div class="principle">
-
-          <div class="principle-number">
-            02 / CHALLENGE
-          </div>
-
-          <div
-            class="principle-icon"
-            aria-hidden="true"
-          >
-
-            <svg viewBox="0 0 32 32">
-
-              <path d="M4 11h19"></path>
-
-              <path d="M18 6l5 5-5 5"></path>
-
-              <path d="M28 21H9"></path>
-
-              <path d="M14 16l-5 5 5 5"></path>
-
-            </svg>
-
-          </div>
-
-          <h3>
-            Gemeinsam herausfordern
-          </h3>
-
-          <p>
-            Challenges machen aus einzelnen Läufen gemeinsame Ziele.
-            Jeder Kilometer zählt.
-          </p>
-
-        </div>
-
-
-        <div class="principle">
-
-          <div class="principle-number">
-            03 / SUPPORT
-          </div>
-
-          <div
-            class="principle-icon"
-            aria-hidden="true"
-          >
-
-            <svg viewBox="0 0 32 32">
-
-              <path d="M16 26s-9-5.7-9-12.1C7 10.7 9.2 8 12.2 8c1.8 0 3.2.9 3.8 2.2C16.6 8.9 18 8 19.8 8c3 0 5.2 2.7 5.2 5.9C25 20.3 16 26 16 26Z"></path>
-
-              <path d="M7.5 17.5H5.8c-1.1 0-1.8-.9-1.4-1.9l2.1-5.1c.3-.7.9-1.1-1.7-1.1h2.1"></path>
-
-              <path d="M24.5 17.5h1.7c1.1 0 1.8-.9 1.4-1.9l-2.1-5.1c-.3-.7-.9-1.1-1.7-1.1h-2.1"></path>
-
-            </svg>
-
-          </div>
-
-          <h3>
-            Gegenseitig pushen
-          </h3>
-
-          <p>
-            Gute Läufe feiern. Schlechte Tage teilen.
-            Dranbleiben, auch wenn die Motivation mal fehlt.
+            Egal ob Anfänger, Marathonläufer oder jemand,
+            der einfach seine erste Runde drehen möchte.
           </p>
 
         </div>
@@ -1676,103 +337,85 @@
     </section>
 
 
-    <!-- =====================================================
+    <!-- =========================================================
+         PRINCIPLES
+    ========================================================== -->
+
+    <section class="principles-section">
+
+      <div class="section-label">
+        04 / OUR PRINCIPLES
+      </div>
+
+      <div class="principles-grid">
+
+        <div class="principle">
+          <span>01</span>
+          <h3>Gemeinsam</h3>
+          <p>
+            Wir laufen nicht alleine.
+            Auch dann nicht, wenn wir kilometerweit voneinander entfernt sind.
+          </p>
+        </div>
+
+        <div class="principle">
+          <span>02</span>
+          <h3>Offen</h3>
+          <p>
+            Jeder kann mitmachen.
+            Pace, Distanz und Erfahrung spielen keine Rolle.
+          </p>
+        </div>
+
+        <div class="principle">
+          <span>03</span>
+          <h3>Echt</h3>
+          <p>
+            Keine perfekten Läufe.
+            Keine perfekten Menschen.
+            Einfach laufen.
+          </p>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =========================================================
          FOUNDER
-    ===================================================== -->
+    ========================================================== -->
 
-    <section class="founder">
+    <section class="founder-section">
 
-      <div class="founder-head">
+      <div class="section-label">
+        05 / FOUNDER
+      </div>
 
-        <div>
+      <div class="founder-grid">
 
-          <div class="founder-kicker">
-            WER STECKT DAHINTER?
-          </div>
+        <div class="founder-image">
+          <img
+            src="IMG_9227.jpeg"
+            alt="Tano"
+          />
+        </div>
+
+        <div class="founder-content">
 
           <h2>
             Meet Tano.
           </h2>
 
-        </div>
-
-        <span class="badge lime">
-          FOUNDER / ATHLETE
-        </span>
-
-      </div>
-
-
-      <div class="founder-layout">
-
-        <div class="founder-image">
-
-          <img
-            src="IMG_9227.jpeg"
-            alt="Tano Loew beim Training"
-          >
-
-        </div>
-
-
-        <div class="founder-content">
-
-          <h3>
-            Tano Loew
-          </h3>
-
           <p>
-            Ich bin Tano –
-            <strong>
-              Läufer, Athlet und Gründer von Miles Apart.
-            </strong>
+            Miles Apart entstand aus einer einfachen Idee:
+            Laufen kann Menschen verbinden, auch wenn sie
+            nicht am selben Ort sind.
           </p>
 
           <p>
-            Ich liebe es zu laufen, ins Gym zu gehen und
-            meinen Körper immer wieder vor neue Herausforderungen
-            zu stellen. Von klassischen Running-Events (10km, Halb-Marathon, Marathon) über
-            Trail-Running & Ultra-Running bis hin zu Hybrid Training und Hyrox races.
+            Aus dieser Idee wurde eine Community.
           </p>
-
-          <p>
-            Dabei habe ich gemerkt, wie stark Sport Menschen
-            zusammenbringen kann. Gleichzeitig fehlte mir ein Ort,
-            an dem diese Verbindung auch dann funktioniert,
-            wenn man gerade nicht am selben Ort ist.
-          </p>
-
-          <p>
-            Genau daraus ist Miles Apart entstanden:
-            <strong>
-              eine Community, die Menschen überall auf der Welt
-              miteinander verbindet.
-            </strong>
-          </p>
-
-          <div class="founder-tags">
-
-            <span class="founder-tag">
-              Running
-            </span>
-
-            <span class="founder-tag">
-              Ultra Running
-            </span>
-
-            <span class="founder-tag">
-              Hyrox
-            </span>
-
-            <span class="founder-tag">
-              Hybrid Athlete
-            </span>
-
-            <span class="founder-tag">
-              Strength
-            </span>
-
-          </div>
 
         </div>
 
@@ -1781,1413 +424,1238 @@
     </section>
 
 
-    <!-- =====================================================
+    <!-- =========================================================
          VISUAL STORY
-         NUR NOCH IMG_3021.jpeg
-    ===================================================== -->
+    ========================================================== -->
 
-    <section class="visual-story">
+    <section class="visual-story-section">
 
-      <div class="visual-story-head">
-
-        <div class="visual-story-title">
-
-          <div class="intro-eyebrow">
-            THE ATHLETE LIFE
-          </div>
-
-          <h2>
-            Mehr als nur<br>
-            Kilometer.
-          </h2>
-
-        </div>
-
-
-        <p>
-          Laufen ist ein Teil des Ganzen.
-          Training, Wettkämpfe, harte Tage, gute Tage –
-          und die Menschen, mit denen man sie erlebt.
-        </p>
-
-      </div>
-
-
-      <div class="photo-grid">
-
-        <div class="photo-grid-item">
-
-          <img
-            src="IMG_3021.jpeg"
-            alt="Tano Loew bei einem Laufwettkampf"
-          >
-
-        </div>
-
+      <div class="visual-story-image">
+        <img
+          src="IMG_3021.jpeg"
+          alt="Miles Apart Running Club"
+        />
       </div>
 
     </section>
 
 
-    <!-- =====================================================
-         THE IDEA
-    ===================================================== -->
+    <!-- =========================================================
+         STATEMENT
+    ========================================================== -->
 
-    <section class="statement">
+    <section class="statement-section">
 
-      <div class="statement-label">
-        THE IDEA
+      <div class="section-label">
+        06 / JOIN
       </div>
 
+      <div class="statement-content">
 
-      <h2>
-        <span class="statement-dark">
-          Du bist vielleicht alleine
-          losgelaufen.
-        </span>
-        Aber du bist
-        nicht allein unterwegs.
-      </h2>
+        <h2>
+          Wir sind miles apart.
+          Aber wir laufen gemeinsam.
+        </h2>
 
+        <a
+          id="statementCta"
+          href="home.html"
+          class="statement-cta"
+        >
+          JETZT MITGLIED WERDEN →
+        </a>
 
-      <p>
-        Miles Apart soll der virtuelle Ort für Läufer sein,
-        die mehr wollen als nur ihre Kilometer aufzeichnen.
-        Eine Community, in der wir uns gegenseitig motivieren,
-        unterstützen und gemeinsam neue Ziele erreichen.
-      </p>
-
-
-      <a
-        class="statement-cta"
-        id="statementCta"
-        href="home.html"
-      >
-        JETZT MITGLIED WERDEN →
-      </a>
+      </div>
 
     </section>
+
 
   </main>
 
-</div>
 
-
-<!-- =====================================================
-     AUTH OVERLAY
-===================================================== -->
-
-<div
-  class="auth-overlay"
-  id="authOverlay"
->
+  <!-- =========================================================
+       AUTH MODAL
+  ========================================================== -->
 
   <div
-    class="auth-modal"
-    role="dialog"
-    aria-modal="true"
-    aria-labelledby="authTitle"
+    class="auth-overlay"
+    id="authOverlay"
   >
 
-    <button
-      class="auth-close"
-      id="closeAuthButton"
-      type="button"
-      aria-label="Schließen"
-    >
-      ×
-    </button>
+    <div class="auth-modal">
+
+      <button
+        type="button"
+        class="auth-close"
+        id="closeAuthButton"
+      >
+        ×
+      </button>
 
 
-    <div class="auth-eyebrow">
-      MILES APART
+      <!-- LOGIN -->
+
+      <div
+        id="loginView"
+        class="auth-view"
+      >
+
+        <div class="auth-eyebrow">
+          MILES APART
+        </div>
+
+        <h2>
+          Willkommen zurück.
+        </h2>
+
+        <p>
+          Melde dich an und lauf mit uns.
+        </p>
+
+        <form id="loginForm">
+
+          <input
+            id="loginEmail"
+            type="email"
+            placeholder="E-Mail"
+            autocomplete="email"
+            required
+          />
+
+          <input
+            id="loginPassword"
+            type="password"
+            placeholder="Passwort"
+            autocomplete="current-password"
+            required
+          />
+
+          <button
+            type="submit"
+            class="auth-submit"
+          >
+            ANMELDEN →
+          </button>
+
+        </form>
+
+        <button
+          type="button"
+          class="auth-link"
+          id="showRegisterButton"
+        >
+          Noch kein Mitglied? Registrieren
+        </button>
+
+        <button
+          type="button"
+          class="auth-link"
+          id="showForgotButton"
+        >
+          Passwort vergessen?
+        </button>
+
+        <div
+          id="loginMessage"
+          class="auth-message"
+        ></div>
+
+      </div>
+
+
+      <!-- REGISTER -->
+
+      <div
+        id="registerView"
+        class="auth-view"
+        style="display:none;"
+      >
+
+        <div class="auth-eyebrow">
+          MILES APART
+        </div>
+
+        <h2>
+          Werde Teil der Community.
+        </h2>
+
+        <p>
+          Erstelle deinen Account.
+        </p>
+
+        <form id="registerForm">
+
+          <input
+            id="registerName"
+            type="text"
+            placeholder="Dein Name"
+            autocomplete="name"
+            required
+          />
+
+          <input
+            id="registerEmail"
+            type="email"
+            placeholder="E-Mail"
+            autocomplete="email"
+            required
+          />
+
+          <input
+            id="registerPassword"
+            type="password"
+            placeholder="Passwort"
+            autocomplete="new-password"
+            required
+          />
+
+          <button
+            type="submit"
+            class="auth-submit"
+          >
+            REGISTRIEREN →
+          </button>
+
+        </form>
+
+        <button
+          type="button"
+          class="auth-link"
+          id="showLoginFromRegisterButton"
+        >
+          Bereits Mitglied? Anmelden
+        </button>
+
+        <div
+          id="registerMessage"
+          class="auth-message"
+        ></div>
+
+      </div>
+
+
+      <!-- FORGOT PASSWORD -->
+
+      <div
+        id="forgotView"
+        class="auth-view"
+        style="display:none;"
+      >
+
+        <div class="auth-eyebrow">
+          MILES APART
+        </div>
+
+        <h2>
+          Passwort vergessen?
+        </h2>
+
+        <p>
+          Wir schicken dir einen Link zum Zurücksetzen.
+        </p>
+
+        <form id="forgotForm">
+
+          <input
+            id="forgotEmail"
+            type="email"
+            placeholder="E-Mail"
+            autocomplete="email"
+            required
+          />
+
+          <button
+            type="submit"
+            class="auth-submit"
+          >
+            LINK SENDEN →
+          </button>
+
+        </form>
+
+        <button
+          type="button"
+          class="auth-link"
+          id="showLoginFromForgotButton"
+        >
+          Zurück zum Login
+        </button>
+
+        <div
+          id="forgotMessage"
+          class="auth-message"
+        ></div>
+
+      </div>
+
+
+      <!-- PASSWORD RECOVERY -->
+
+      <div
+        id="recoveryView"
+        class="auth-view"
+        style="display:none;"
+      >
+
+        <div class="auth-eyebrow">
+          MILES APART
+        </div>
+
+        <h2>
+          Neues Passwort.
+        </h2>
+
+        <p>
+          Vergib ein neues Passwort für deinen Account.
+        </p>
+
+        <form id="recoveryForm">
+
+          <input
+            id="recoveryPassword"
+            type="password"
+            placeholder="Neues Passwort"
+            autocomplete="new-password"
+            required
+          />
+
+          <input
+            id="recoveryPasswordConfirm"
+            type="password"
+            placeholder="Passwort wiederholen"
+            autocomplete="new-password"
+            required
+          />
+
+          <button
+            type="submit"
+            class="auth-submit"
+          >
+            PASSWORT ÄNDERN →
+          </button>
+
+        </form>
+
+        <div
+          id="recoveryMessage"
+          class="auth-message"
+        ></div>
+
+      </div>
+
     </div>
-
-
-    <h2 id="authTitle">
-      Willkommen zurück.
-    </h2>
-
-
-    <p
-      class="auth-description"
-      id="authDescription"
-    >
-      Melde dich an und werde Teil der Community.
-    </p>
-
-
-    <div
-      class="auth-tabs"
-      id="authTabs"
-    >
-
-      <button
-        class="auth-tab active"
-        id="loginTab"
-        type="button"
-      >
-        Anmelden
-      </button>
-
-      <button
-        class="auth-tab"
-        id="registerTab"
-        type="button"
-      >
-        Konto erstellen
-      </button>
-
-    </div>
-
-
-    <form
-      class="auth-form active"
-      id="loginForm"
-    >
-
-      <div class="form-group">
-
-        <label for="loginEmail">
-          E-Mail
-        </label>
-
-        <input
-          id="loginEmail"
-          type="email"
-          placeholder="deine@email.de"
-          autocomplete="email"
-          required
-        >
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label for="loginPassword">
-          Passwort
-        </label>
-
-        <input
-          id="loginPassword"
-          type="password"
-          placeholder="••••••••"
-          autocomplete="current-password"
-          required
-        >
-
-      </div>
-
-
-      <button
-        class="auth-submit"
-        id="loginSubmit"
-        type="submit"
-      >
-        Anmelden →
-      </button>
-
-
-      <button
-        class="forgot-password"
-        id="forgotPasswordButton"
-        type="button"
-      >
-        Passwort vergessen?
-      </button>
-
-
-      <div
-        class="auth-message"
-        id="loginMessage"
-      ></div>
-
-    </form>
-
-
-    <form
-      class="auth-form"
-      id="registerForm"
-    >
-
-      <div class="form-group">
-
-        <label for="registerName">
-          Dein Name
-        </label>
-
-        <input
-          id="registerName"
-          type="text"
-          placeholder="z. B. Tano"
-          autocomplete="name"
-          required
-        >
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label for="registerEmail">
-          E-Mail
-        </label>
-
-        <input
-          id="registerEmail"
-          type="email"
-          placeholder="deine@email.de"
-          autocomplete="email"
-          required
-        >
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label for="registerPassword">
-          Passwort
-        </label>
-
-        <input
-          id="registerPassword"
-          type="password"
-          placeholder="Mindestens 6 Zeichen"
-          minlength="6"
-          autocomplete="new-password"
-          required
-        >
-
-      </div>
-
-
-      <button
-        class="auth-submit"
-        id="registerSubmit"
-        type="submit"
-      >
-        Konto erstellen →
-      </button>
-
-
-      <div
-        class="auth-message"
-        id="registerMessage"
-      ></div>
-
-    </form>
-
-
-    <form
-      class="auth-form"
-      id="forgotForm"
-    >
-
-      <button
-        class="auth-back"
-        id="backToLoginButton"
-        type="button"
-      >
-        ← Zurück zum Login
-      </button>
-
-
-      <div class="form-group">
-
-        <label for="forgotEmail">
-          E-Mail-Adresse
-        </label>
-
-        <input
-          id="forgotEmail"
-          type="email"
-          placeholder="deine@email.de"
-          autocomplete="email"
-          required
-        >
-
-      </div>
-
-
-      <button
-        class="auth-submit"
-        id="forgotSubmit"
-        type="submit"
-      >
-        Reset-Link senden →
-      </button>
-
-
-      <div
-        class="auth-message"
-        id="forgotMessage"
-      ></div>
-
-
-      <div class="auth-note">
-
-        Wir senden dir einen Link per E-Mail.
-        Über diesen Link kannst du ein neues Passwort festlegen.
-
-      </div>
-
-    </form>
-
-
-    <form
-      class="auth-form"
-      id="recoveryForm"
-    >
-
-      <div class="form-group">
-
-        <label for="newPassword">
-          Neues Passwort
-        </label>
-
-        <input
-          id="newPassword"
-          type="password"
-          placeholder="Mindestens 6 Zeichen"
-          minlength="6"
-          autocomplete="new-password"
-          required
-        >
-
-      </div>
-
-
-      <div class="form-group">
-
-        <label for="newPasswordConfirm">
-          Neues Passwort wiederholen
-        </label>
-
-        <input
-          id="newPasswordConfirm"
-          type="password"
-          placeholder="Passwort wiederholen"
-          minlength="6"
-          autocomplete="new-password"
-          required
-        >
-
-      </div>
-
-
-      <button
-        class="auth-submit"
-        id="recoverySubmit"
-        type="submit"
-      >
-        Neues Passwort speichern →
-      </button>
-
-
-      <div
-        class="auth-message"
-        id="recoveryMessage"
-      ></div>
-
-    </form>
 
   </div>
 
-</div>
 
+  <!-- =========================================================
+       SUPABASE / AUTH JAVASCRIPT
+  ========================================================== -->
 
-<script>
+  <script>
 
-  const SUPABASE_URL =
-    "https://orbrkdrsihsacsnprewf.supabase.co";
+    const SUPABASE_URL =
+      "https://orbrkdrsihsacsnprewf.supabase.co";
 
-  const SUPABASE_PUBLISHABLE_KEY =
-    "sb_publishable_wc3w2fSuj8ItwiF6XBoQgw_HeW5_rNW";
+    const SUPABASE_PUBLISHABLE_KEY =
+      "sb_publishable_wc3w2fSuj8ItwiF6XBoQgw_HeW5_rNW";
 
+    const { createClient } = window.supabase;
 
-  const {
-    createClient
-  } = window.supabase;
-
-
-  const supabaseClient =
-    createClient(
+    const supabaseClient = createClient(
       SUPABASE_URL,
       SUPABASE_PUBLISHABLE_KEY
     );
 
 
-  const guestArea =
-    document.getElementById("guestArea");
+    /* =========================================================
+       ELEMENTE
+    ========================================================== */
 
-  const loggedInArea =
-    document.getElementById("loggedInArea");
+    const guestArea =
+      document.getElementById("guestArea");
 
-  const userGreeting =
-    document.getElementById("userGreeting");
+    const loggedInArea =
+      document.getElementById("loggedInArea");
 
-  const avatarButton =
-    document.getElementById("avatarButton");
+    const userGreeting =
+      document.getElementById("userGreeting");
 
-  const accountMenu =
-    document.getElementById("accountMenu");
+    const avatarButton =
+      document.getElementById("avatarButton");
 
-  const accountMenuName =
-    document.getElementById("accountMenuName");
+    const accountMenu =
+      document.getElementById("accountMenu");
 
-  const accountMenuEmail =
-    document.getElementById("accountMenuEmail");
+    const accountMenuName =
+      document.getElementById("accountMenuName");
 
-  const logoutButton =
-    document.getElementById("logoutButton");
+    const accountMenuEmail =
+      document.getElementById("accountMenuEmail");
 
-  const openLoginButton =
-    document.getElementById("openLoginButton");
+    const logoutButton =
+      document.getElementById("logoutButton");
 
-  const statementCta =
-    document.getElementById("statementCta");
+    const openLoginButton =
+      document.getElementById("openLoginButton");
 
-  const authOverlay =
-    document.getElementById("authOverlay");
+    const statementCta =
+      document.getElementById("statementCta");
 
-  const closeAuthButton =
-    document.getElementById("closeAuthButton");
+    const authOverlay =
+      document.getElementById("authOverlay");
 
-  const authTabs =
-    document.getElementById("authTabs");
+    const closeAuthButton =
+      document.getElementById("closeAuthButton");
 
-  const loginTab =
-    document.getElementById("loginTab");
 
-  const registerTab =
-    document.getElementById("registerTab");
+    const loginView =
+      document.getElementById("loginView");
 
-  const loginForm =
-    document.getElementById("loginForm");
+    const registerView =
+      document.getElementById("registerView");
 
-  const registerForm =
-    document.getElementById("registerForm");
+    const forgotView =
+      document.getElementById("forgotView");
 
-  const forgotForm =
-    document.getElementById("forgotForm");
+    const recoveryView =
+      document.getElementById("recoveryView");
 
-  const recoveryForm =
-    document.getElementById("recoveryForm");
 
-  const authTitle =
-    document.getElementById("authTitle");
+    const loginForm =
+      document.getElementById("loginForm");
 
-  const authDescription =
-    document.getElementById("authDescription");
+    const registerForm =
+      document.getElementById("registerForm");
 
-  const loginMessage =
-    document.getElementById("loginMessage");
+    const forgotForm =
+      document.getElementById("forgotForm");
 
-  const registerMessage =
-    document.getElementById("registerMessage");
+    const recoveryForm =
+      document.getElementById("recoveryForm");
 
-  const forgotMessage =
-    document.getElementById("forgotMessage");
 
-  const recoveryMessage =
-    document.getElementById("recoveryMessage");
+    const showRegisterButton =
+      document.getElementById("showRegisterButton");
 
-  const forgotPasswordButton =
-    document.getElementById("forgotPasswordButton");
+    const showForgotButton =
+      document.getElementById("showForgotButton");
 
-  const backToLoginButton =
-    document.getElementById("backToLoginButton");
+    const showLoginFromRegisterButton =
+      document.getElementById("showLoginFromRegisterButton");
 
-  const loginSubmit =
-    document.getElementById("loginSubmit");
+    const showLoginFromForgotButton =
+      document.getElementById("showLoginFromForgotButton");
 
-  const registerSubmit =
-    document.getElementById("registerSubmit");
 
-  const forgotSubmit =
-    document.getElementById("forgotSubmit");
+    const loginMessage =
+      document.getElementById("loginMessage");
 
-  const recoverySubmit =
-    document.getElementById("recoverySubmit");
+    const registerMessage =
+      document.getElementById("registerMessage");
 
+    const forgotMessage =
+      document.getElementById("forgotMessage");
 
-  let currentUser = null;
-  let currentProfile = null;
+    const recoveryMessage =
+      document.getElementById("recoveryMessage");
 
 
-  function getInitials(name) {
+    let currentUser = null;
+    let currentProfile = null;
 
-    if (!name) {
-      return "M";
-    }
 
-    const parts =
-      name.trim().split(/\s+/);
+    /* =========================================================
+       PROFIL LADEN
+    ========================================================== */
 
-    if (parts.length === 1) {
-      return parts[0]
-        .substring(0, 1)
-        .toUpperCase();
-    }
+    async function loadProfile(user) {
 
-    return (
-      parts[0].substring(0, 1) +
-      parts[parts.length - 1].substring(0, 1)
-    ).toUpperCase();
-
-  }
-
-
-  function getFirstName(name) {
-
-    if (!name) {
-      return "Runner";
-    }
-
-    return name
-      .trim()
-      .split(/\s+/)[0];
-
-  }
-
-
-  function getUserDisplayName(
-    user,
-    profile
-  ) {
-
-    if (
-      profile &&
-      profile.display_name
-    ) {
-      return profile.display_name;
-    }
-
-    if (
-      user &&
-      user.user_metadata &&
-      user.user_metadata.display_name
-    ) {
-      return user.user_metadata.display_name;
-    }
-
-    if (
-      user &&
-      user.email
-    ) {
-      return user.email.split("@")[0];
-    }
-
-    return "Runner";
-
-  }
-
-
-  function setMessage(
-    element,
-    text,
-    success = false
-  ) {
-
-    element.textContent = text;
-
-    element.classList.toggle(
-      "success",
-      success
-    );
-
-  }
-
-
-  function clearMessages() {
-
-    setMessage(loginMessage, "");
-    setMessage(registerMessage, "");
-    setMessage(forgotMessage, "");
-    setMessage(recoveryMessage, "");
-
-  }
-
-
-  function setButtonLoading(
-    button,
-    loading,
-    normalText
-  ) {
-
-    button.disabled = loading;
-
-    button.textContent =
-      loading
-        ? "Bitte warten …"
-        : normalText;
-
-  }
-
-
-  async function loadProfile(user) {
-
-    if (!user) {
-      currentProfile = null;
-      return null;
-    }
-
-    const {
-      data,
-      error
-    } = await supabaseClient
-      .from("profiles")
-      .select(
-        "display_name, username, avatar_url, bio, location"
-      )
-      .eq("id", user.id)
-      .maybeSingle();
-
-    if (error) {
-
-      console.error(
-        "Profil konnte nicht geladen werden:",
-        error
-      );
-
-      currentProfile = null;
-
-      return null;
-
-    }
-
-    currentProfile =
-      data || null;
-
-    return currentProfile;
-
-  }
-
-
-  function updateUserInterface() {
-
-    if (!currentUser) {
-
-      guestArea.style.display = "flex";
-
-      loggedInArea.style.display = "none";
-
-      accountMenu.classList.remove("open");
-
-      statementCta.textContent =
-        "JETZT MITGLIED WERDEN →";
-
-      statementCta.href =
-        "home.html";
-
-      return;
-
-    }
-
-    const displayName =
-      getUserDisplayName(
-        currentUser,
-        currentProfile
-      );
-
-    const firstName =
-      getFirstName(displayName);
-
-    const initials =
-      getInitials(displayName);
-
-    guestArea.style.display = "none";
-
-    loggedInArea.style.display = "flex";
-
-    userGreeting.textContent =
-      "Hallo, " + firstName;
-
-    avatarButton.innerHTML = "";
-
-    if (
-      currentProfile &&
-      currentProfile.avatar_url
-    ) {
-
-      const image =
-        document.createElement("img");
-
-      image.src =
-        currentProfile.avatar_url;
-
-      image.alt =
-        displayName;
-
-      avatarButton.appendChild(image);
-
-    } else {
-
-      avatarButton.textContent =
-        initials;
-
-    }
-
-    accountMenuName.textContent =
-      displayName;
-
-    accountMenuEmail.textContent =
-      currentUser.email || "";
-
-    statementCta.textContent =
-      "ZUM MITGLIEDSBEREICH →";
-
-    statementCta.href =
-      "home.html";
-
-  }
-
-
-  function openAuth() {
-
-    authOverlay.classList.add("open");
-
-    document.body.style.overflow =
-      "hidden";
-
-    if (
-      recoveryForm.classList.contains("active")
-    ) {
-      return;
-    }
-
-    showLogin();
-
-  }
-
-
-  function closeAuth() {
-
-    authOverlay.classList.remove("open");
-
-    document.body.style.overflow =
-      "";
-
-    clearMessages();
-
-  }
-
-
-  openLoginButton.addEventListener(
-    "click",
-    openAuth
-  );
-
-
-  closeAuthButton.addEventListener(
-    "click",
-    closeAuth
-  );
-
-
-  authOverlay.addEventListener(
-    "click",
-    function(event) {
-
-      if (
-        event.target === authOverlay
-      ) {
-        closeAuth();
+      if (!user) {
+        currentProfile = null;
+        return null;
       }
-
-    }
-  );
-
-
-  document.addEventListener(
-    "keydown",
-    function(event) {
-
-      if (
-        event.key === "Escape" &&
-        authOverlay.classList.contains("open")
-      ) {
-        closeAuth();
-      }
-
-    }
-  );
-
-
-  function hideAllForms() {
-
-    loginForm.classList.remove("active");
-    registerForm.classList.remove("active");
-    forgotForm.classList.remove("active");
-    recoveryForm.classList.remove("active");
-
-  }
-
-
-  function showLogin() {
-
-    hideAllForms();
-    clearMessages();
-
-    loginForm.classList.add("active");
-
-    authTabs.style.display =
-      "grid";
-
-    loginTab.classList.add("active");
-    registerTab.classList.remove("active");
-
-    authTitle.textContent =
-      "Willkommen zurück.";
-
-    authDescription.textContent =
-      "Melde dich an und werde Teil der Community.";
-
-  }
-
-
-  function showRegister() {
-
-    hideAllForms();
-    clearMessages();
-
-    registerForm.classList.add("active");
-
-    authTabs.style.display =
-      "grid";
-
-    registerTab.classList.add("active");
-    loginTab.classList.remove("active");
-
-    authTitle.textContent =
-      "Werde Teil der Community.";
-
-    authDescription.textContent =
-      "Erstelle dein Konto und starte deine Miles-Apart-Reise.";
-
-  }
-
-
-  function showForgotPassword() {
-
-    hideAllForms();
-    clearMessages();
-
-    forgotForm.classList.add("active");
-
-    authTabs.style.display =
-      "none";
-
-    authTitle.textContent =
-      "Passwort zurücksetzen.";
-
-    authDescription.textContent =
-      "Wir schicken dir einen Link, mit dem du ein neues Passwort festlegen kannst.";
-
-  }
-
-
-  function showRecovery() {
-
-    hideAllForms();
-    clearMessages();
-
-    recoveryForm.classList.add("active");
-
-    authTabs.style.display =
-      "none";
-
-    authTitle.textContent =
-      "Neues Passwort festlegen.";
-
-    authDescription.textContent =
-      "Wähle ein neues Passwort für dein Miles-Apart-Konto.";
-
-  }
-
-
-  loginTab.addEventListener(
-    "click",
-    showLogin
-  );
-
-
-  registerTab.addEventListener(
-    "click",
-    showRegister
-  );
-
-
-  forgotPasswordButton.addEventListener(
-    "click",
-    showForgotPassword
-  );
-
-
-  backToLoginButton.addEventListener(
-    "click",
-    showLogin
-  );
-
-
-  registerForm.addEventListener(
-    "submit",
-    async function(event) {
-
-      event.preventDefault();
-
-      clearMessages();
-
-      const name =
-        document
-          .getElementById("registerName")
-          .value
-          .trim();
-
-      const email =
-        document
-          .getElementById("registerEmail")
-          .value
-          .trim()
-          .toLowerCase();
-
-      const password =
-        document
-          .getElementById("registerPassword")
-          .value;
-
-      if (name.length < 2) {
-
-        setMessage(
-          registerMessage,
-          "Bitte gib deinen Namen ein."
-        );
-
-        return;
-
-      }
-
-      if (password.length < 6) {
-
-        setMessage(
-          registerMessage,
-          "Das Passwort muss mindestens 6 Zeichen haben."
-        );
-
-        return;
-
-      }
-
-      setButtonLoading(
-        registerSubmit,
-        true,
-        "Konto erstellen →"
-      );
 
       const {
         data,
         error
-      } = await supabaseClient.auth.signUp({
-
-        email: email,
-
-        password: password,
-
-        options: {
-
-          data: {
-            display_name: name
-          },
-
-          emailRedirectTo:
-            window.location.href.split("#")[0]
-
-        }
-
-      });
-
-      setButtonLoading(
-        registerSubmit,
-        false,
-        "Konto erstellen →"
-      );
+      } = await supabaseClient
+        .from("profiles")
+        .select(
+          "display_name, username, avatar_url, bio, location"
+        )
+        .eq("id", user.id)
+        .maybeSingle();
 
       if (error) {
-
         console.error(
-          "Registrierung:",
+          "Profil konnte nicht geladen werden:",
           error
         );
 
-        setMessage(
-          registerMessage,
-          translateAuthError(error)
-        );
-
-        return;
-
+        currentProfile = null;
+        return null;
       }
 
-      registerForm.reset();
+      currentProfile = data || null;
+
+      return currentProfile;
+    }
+
+
+    /* =========================================================
+       DISPLAY NAME
+       
+       Reihenfolge:
+       1. profiles.display_name
+       2. user_metadata.display_name
+       3. user_metadata.name
+       4. E-Mail
+       5. Runner
+    ========================================================== */
+
+    function getUserDisplayName(user, profile) {
 
       if (
-        data &&
-        data.session
+        profile &&
+        profile.display_name &&
+        profile.display_name.trim()
       ) {
+        return profile.display_name.trim();
+      }
 
-        setMessage(
-          registerMessage,
-          "Konto erfolgreich erstellt. Du bist jetzt angemeldet.",
-          true
+
+      if (
+        user &&
+        user.user_metadata &&
+        user.user_metadata.display_name &&
+        user.user_metadata.display_name.trim()
+      ) {
+        return user.user_metadata.display_name.trim();
+      }
+
+
+      if (
+        user &&
+        user.user_metadata &&
+        user.user_metadata.name &&
+        user.user_metadata.name.trim()
+      ) {
+        return user.user_metadata.name.trim();
+      }
+
+
+      if (
+        user &&
+        user.email
+      ) {
+        return user.email
+          .split("@")[0]
+          .trim();
+      }
+
+
+      return "Runner";
+    }
+
+
+    /* =========================================================
+       VORNAME
+    ========================================================== */
+
+    function getFirstName(name) {
+
+      if (!name) {
+        return "Runner";
+      }
+
+      return name
+        .trim()
+        .split(/\s+/)[0];
+    }
+
+
+    /* =========================================================
+       INITIALEN
+    ========================================================== */
+
+    function getInitials(name) {
+
+      if (!name) {
+        return "R";
+      }
+
+      const parts =
+        name
+          .trim()
+          .split(/\s+/)
+          .filter(Boolean);
+
+      if (parts.length === 1) {
+        return parts[0]
+          .substring(0, 2)
+          .toUpperCase();
+      }
+
+      return (
+        parts[0][0] +
+        parts[parts.length - 1][0]
+      ).toUpperCase();
+    }
+
+
+    /* =========================================================
+       USER INTERFACE AKTUALISIEREN
+    ========================================================== */
+
+    function updateUserInterface() {
+
+      /* -----------------------------------------
+         NICHT EINGELOGGT
+      ----------------------------------------- */
+
+      if (!currentUser) {
+
+        guestArea.style.display = "flex";
+
+        loggedInArea.style.display = "none";
+
+        userGreeting.style.display = "none";
+
+        accountMenu.classList.remove("open");
+
+        statementCta.textContent =
+          "JETZT MITGLIED WERDEN →";
+
+        statementCta.href =
+          "home.html";
+
+        return;
+      }
+
+
+      /* -----------------------------------------
+         EINGELOGGT
+      ----------------------------------------- */
+
+      const displayName =
+        getUserDisplayName(
+          currentUser,
+          currentProfile
         );
 
-        setTimeout(
-          closeAuth,
-          900
+      const firstName =
+        getFirstName(displayName);
+
+      const initials =
+        getInitials(displayName);
+
+
+      guestArea.style.display =
+        "none";
+
+      loggedInArea.style.display =
+        "flex";
+
+
+      /*
+        HIER WIRD DER NAME ANGEZEIGT:
+
+        Beispiel:
+        displayName = "Tano"
+        firstName   = "Tano"
+
+        Ergebnis:
+        Hallo Tano
+      */
+
+      userGreeting.textContent =
+        "Hallo " + firstName;
+
+      userGreeting.style.display =
+        "inline";
+
+
+      /* -----------------------------------------
+         AVATAR
+      ----------------------------------------- */
+
+      avatarButton.innerHTML = "";
+
+
+      if (
+        currentProfile &&
+        currentProfile.avatar_url
+      ) {
+
+        const image =
+          document.createElement("img");
+
+        image.src =
+          currentProfile.avatar_url;
+
+        image.alt =
+          displayName;
+
+        avatarButton.appendChild(
+          image
         );
 
       } else {
 
-        setMessage(
-          registerMessage,
-          "Fast geschafft! Bitte bestätige deine E-Mail-Adresse. Danach kannst du dich anmelden.",
-          true
-        );
+        avatarButton.textContent =
+          initials;
 
       }
 
+
+      /* -----------------------------------------
+         ACCOUNT MENU
+      ----------------------------------------- */
+
+      accountMenuName.textContent =
+        displayName;
+
+      accountMenuEmail.textContent =
+        currentUser.email || "";
+
+
+      /* -----------------------------------------
+         CTA
+      ----------------------------------------- */
+
+      statementCta.textContent =
+        "ZUM MITGLIEDSBEREICH →";
+
+      statementCta.href =
+        "home.html";
     }
-  );
 
 
-  loginForm.addEventListener(
-    "submit",
-    async function(event) {
+    /* =========================================================
+       AUTH MODAL
+    ========================================================== */
 
-      event.preventDefault();
+    function openAuthModal(view = "login") {
 
-      clearMessages();
+      authOverlay.classList.add("open");
 
-      const email =
-        document
-          .getElementById("loginEmail")
-          .value
-          .trim()
-          .toLowerCase();
+      showAuthView(view);
+    }
 
-      const password =
-        document
-          .getElementById("loginPassword")
-          .value;
 
-      setButtonLoading(
-        loginSubmit,
-        true,
-        "Anmelden →"
-      );
+    function closeAuthModal() {
 
-      const {
-        data,
-        error
-      } = await supabaseClient.auth.signInWithPassword({
+      authOverlay.classList.remove("open");
+    }
 
-        email: email,
 
-        password: password
+    function showAuthView(view) {
 
-      });
+      loginView.style.display = "none";
+      registerView.style.display = "none";
+      forgotView.style.display = "none";
+      recoveryView.style.display = "none";
 
-      setButtonLoading(
-        loginSubmit,
-        false,
-        "Anmelden →"
-      );
 
-      if (error) {
+      if (view === "register") {
+        registerView.style.display = "block";
+      }
 
-        console.error(
-          "Login:",
+      else if (view === "forgot") {
+        forgotView.style.display = "block";
+      }
+
+      else if (view === "recovery") {
+        recoveryView.style.display = "block";
+      }
+
+      else {
+        loginView.style.display = "block";
+      }
+    }
+
+
+    /* =========================================================
+       LOGIN ÖFFNEN
+    ========================================================== */
+
+    openLoginButton.addEventListener(
+      "click",
+      () => {
+        openAuthModal("login");
+      }
+    );
+
+
+    closeAuthButton.addEventListener(
+      "click",
+      closeAuthModal
+    );
+
+
+    authOverlay.addEventListener(
+      "click",
+      (event) => {
+
+        if (
+          event.target === authOverlay
+        ) {
+          closeAuthModal();
+        }
+
+      }
+    );
+
+
+    /* =========================================================
+       AUTH NAVIGATION
+    ========================================================== */
+
+    showRegisterButton.addEventListener(
+      "click",
+      () => {
+        showAuthView("register");
+      }
+    );
+
+
+    showForgotButton.addEventListener(
+      "click",
+      () => {
+        showAuthView("forgot");
+      }
+    );
+
+
+    showLoginFromRegisterButton.addEventListener(
+      "click",
+      () => {
+        showAuthView("login");
+      }
+    );
+
+
+    showLoginFromForgotButton.addEventListener(
+      "click",
+      () => {
+        showAuthView("login");
+      }
+    );
+
+
+    /* =========================================================
+       LOGIN
+    ========================================================== */
+
+    loginForm.addEventListener(
+      "submit",
+      async (event) => {
+
+        event.preventDefault();
+
+        loginMessage.textContent = "";
+
+        const email =
+          document.getElementById(
+            "loginEmail"
+          ).value.trim();
+
+        const password =
+          document.getElementById(
+            "loginPassword"
+          ).value;
+
+
+        const {
+          data,
           error
-        );
+        } =
+          await supabaseClient.auth
+            .signInWithPassword({
+              email,
+              password
+            });
 
-        setMessage(
-          loginMessage,
-          translateAuthError(error)
-        );
 
-        return;
+        if (error) {
 
-      }
+          console.error(error);
 
-      loginForm.reset();
+          loginMessage.textContent =
+            error.message;
 
-      currentUser =
-        data.user;
+          return;
+        }
 
-      await loadProfile(
-        currentUser
-      );
-
-      updateUserInterface();
-
-      closeAuth();
-
-    }
-  );
-
-
-  forgotForm.addEventListener(
-    "submit",
-    async function(event) {
-
-      event.preventDefault();
-
-      clearMessages();
-
-      const email =
-        document
-          .getElementById("forgotEmail")
-          .value
-          .trim()
-          .toLowerCase();
-
-      setButtonLoading(
-        forgotSubmit,
-        true,
-        "Reset-Link senden →"
-      );
-
-      const redirectUrl =
-        window.location.href.split("#")[0];
-
-      const {
-        error
-      } =
-        await supabaseClient.auth
-          .resetPasswordForEmail(
-            email,
-            {
-              redirectTo: redirectUrl
-            }
-          );
-
-      setButtonLoading(
-        forgotSubmit,
-        false,
-        "Reset-Link senden →"
-      );
-
-      if (error) {
-
-        console.error(
-          "Passwort-Reset:",
-          error
-        );
-
-        setMessage(
-          forgotMessage,
-          translateAuthError(error)
-        );
-
-        return;
-
-      }
-
-      setMessage(
-        forgotMessage,
-        "Wenn ein Konto mit dieser E-Mail existiert, wurde ein Reset-Link versendet.",
-        true
-      );
-
-    }
-  );
-
-
-  recoveryForm.addEventListener(
-    "submit",
-    async function(event) {
-
-      event.preventDefault();
-
-      clearMessages();
-
-      const password =
-        document
-          .getElementById("newPassword")
-          .value;
-
-      const passwordConfirm =
-        document
-          .getElementById("newPasswordConfirm")
-          .value;
-
-      if (password.length < 6) {
-
-        setMessage(
-          recoveryMessage,
-          "Das Passwort muss mindestens 6 Zeichen haben."
-        );
-
-        return;
-
-      }
-
-      if (password !== passwordConfirm) {
-
-        setMessage(
-          recoveryMessage,
-          "Die beiden Passwörter stimmen nicht überein."
-        );
-
-        return;
-
-      }
-
-      setButtonLoading(
-        recoverySubmit,
-        true,
-        "Neues Passwort speichern →"
-      );
-
-      const {
-        error
-      } =
-        await supabaseClient.auth.updateUser({
-
-          password: password
-
-        });
-
-      setButtonLoading(
-        recoverySubmit,
-        false,
-        "Neues Passwort speichern →"
-      );
-
-      if (error) {
-
-        console.error(
-          "Passwort aktualisieren:",
-          error
-        );
-
-        setMessage(
-          recoveryMessage,
-          translateAuthError(error)
-        );
-
-        return;
-
-      }
-
-      recoveryForm.reset();
-
-      setMessage(
-        recoveryMessage,
-        "Dein Passwort wurde erfolgreich geändert.",
-        true
-      );
-
-      setTimeout(
-        closeAuth,
-        1200
-      );
-
-    }
-  );
-
-
-  avatarButton.addEventListener(
-    "click",
-    function(event) {
-
-      event.stopPropagation();
-
-      accountMenu.classList.toggle(
-        "open"
-      );
-
-    }
-  );
-
-
-  document.addEventListener(
-    "click",
-    function(event) {
-
-      if (
-        !loggedInArea.contains(event.target)
-      ) {
-
-        accountMenu.classList.remove(
-          "open"
-        );
-
-      }
-
-    }
-  );
-
-
-  logoutButton.addEventListener(
-    "click",
-    async function() {
-
-      const {
-        error
-      } =
-        await supabaseClient.auth.signOut();
-
-      if (error) {
-
-        console.error(
-          "Logout:",
-          error
-        );
-
-        return;
-
-      }
-
-      accountMenu.classList.remove(
-        "open"
-      );
-
-    }
-  );
-
-
-  supabaseClient.auth.onAuthStateChange(
-    async function(event, session) {
-
-      if (
-        event === "PASSWORD_RECOVERY"
-      ) {
 
         currentUser =
-          session
-            ? session.user
-            : null;
+          data.user;
+
+
+        await loadProfile(
+          currentUser
+        );
 
         updateUserInterface();
 
-        openAuth();
+        closeAuthModal();
+      }
+    );
 
-        showRecovery();
 
-        return;
+    /* =========================================================
+       REGISTRIEREN
+    ========================================================== */
+
+    registerForm.addEventListener(
+      "submit",
+      async (event) => {
+
+        event.preventDefault();
+
+        registerMessage.textContent = "";
+
+
+        const name =
+          document.getElementById(
+            "registerName"
+          ).value.trim();
+
+        const email =
+          document.getElementById(
+            "registerEmail"
+          ).value.trim();
+
+        const password =
+          document.getElementById(
+            "registerPassword"
+          ).value;
+
+
+        const {
+          data,
+          error
+        } =
+          await supabaseClient.auth
+            .signUp({
+
+              email: email,
+
+              password: password,
+
+              options: {
+
+                data: {
+                  display_name: name
+                },
+
+                emailRedirectTo:
+                  window.location
+                    .href
+                    .split("#")[0]
+
+              }
+
+            });
+
+
+        if (error) {
+
+          console.error(error);
+
+          registerMessage.textContent =
+            error.message;
+
+          return;
+        }
+
+
+        /*
+          Der Name wird beim Signup direkt
+          in user_metadata.display_name
+          gespeichert.
+
+          Dadurch funktioniert "Hallo Tano"
+          auch dann, wenn in der profiles-Tabelle
+          noch kein display_name vorhanden ist.
+        */
+
+        if (data && data.user) {
+
+          currentUser =
+            data.user;
+
+          await loadProfile(
+            currentUser
+          );
+
+          updateUserInterface();
+        }
+
+
+        registerMessage.textContent =
+          "Fast geschafft! Prüfe deine E-Mail und bestätige deinen Account.";
 
       }
+    );
 
-      if (
-        session &&
-        session.user
-      ) {
+
+    /* =========================================================
+       PASSWORT VERGESSEN
+    ========================================================== */
+
+    forgotForm.addEventListener(
+      "submit",
+      async (event) => {
+
+        event.preventDefault();
+
+        forgotMessage.textContent = "";
+
+
+        const email =
+          document.getElementById(
+            "forgotEmail"
+          ).value.trim();
+
+
+        const {
+          error
+        } =
+          await supabaseClient.auth
+            .resetPasswordForEmail(
+              email,
+              {
+                redirectTo:
+                  window.location
+                    .href
+                    .split("#")[0]
+              }
+            );
+
+
+        if (error) {
+
+          console.error(error);
+
+          forgotMessage.textContent =
+            error.message;
+
+          return;
+        }
+
+
+        forgotMessage.textContent =
+          "Wir haben dir einen Link zum Zurücksetzen deines Passworts geschickt.";
+      }
+    );
+
+
+    /* =========================================================
+       PASSWORT RECOVERY
+    ========================================================== */
+
+    recoveryForm.addEventListener(
+      "submit",
+      async (event) => {
+
+        event.preventDefault();
+
+        recoveryMessage.textContent = "";
+
+
+        const password =
+          document.getElementById(
+            "recoveryPassword"
+          ).value;
+
+        const confirmPassword =
+          document.getElementById(
+            "recoveryPasswordConfirm"
+          ).value;
+
+
+        if (
+          password !==
+          confirmPassword
+        ) {
+
+          recoveryMessage.textContent =
+            "Die Passwörter stimmen nicht überein.";
+
+          return;
+        }
+
+
+        const {
+          error
+        } =
+          await supabaseClient.auth
+            .updateUser({
+              password
+            });
+
+
+        if (error) {
+
+          console.error(error);
+
+          recoveryMessage.textContent =
+            error.message;
+
+          return;
+        }
+
+
+        recoveryMessage.textContent =
+          "Dein Passwort wurde erfolgreich geändert.";
+
+        setTimeout(
+          () => {
+            showAuthView("login");
+          },
+          1200
+        );
+      }
+    );
+
+
+    /* =========================================================
+       ACCOUNT MENÜ
+    ========================================================== */
+
+    avatarButton.addEventListener(
+      "click",
+      (event) => {
+
+        event.stopPropagation();
+
+        accountMenu.classList.toggle(
+          "open"
+        );
+      }
+    );
+
+
+    document.addEventListener(
+      "click",
+      (event) => {
+
+        if (
+          !loggedInArea.contains(
+            event.target
+          )
+        ) {
+
+          accountMenu.classList.remove(
+            "open"
+          );
+
+        }
+      }
+    );
+
+
+    /* =========================================================
+       LOGOUT
+    ========================================================== */
+
+    logoutButton.addEventListener(
+      "click",
+      async () => {
+
+        const {
+          error
+        } =
+          await supabaseClient.auth
+            .signOut();
+
+
+        if (error) {
+
+          console.error(error);
+
+          return;
+        }
+
+
+        currentUser = null;
+
+        currentProfile = null;
+
+        updateUserInterface();
+      }
+    );
+
+
+    /* =========================================================
+       AUTH STATE
+    ========================================================== */
+
+    supabaseClient.auth.onAuthStateChange(
+      async (
+        event,
+        session
+      ) => {
 
         currentUser =
-          session.user;
+          session?.user || null;
+
+
+        if (currentUser) {
+
+          await loadProfile(
+            currentUser
+          );
+
+        } else {
+
+          currentProfile = null;
+
+        }
+
+
+        updateUserInterface();
+
+
+        /*
+          Wenn ein Password-Recovery-Link
+          geöffnet wurde, Recovery-Ansicht zeigen.
+        */
+
+        if (
+          event ===
+          "PASSWORD_RECOVERY"
+        ) {
+
+          openAuthModal(
+            "recovery"
+          );
+        }
+
+      }
+    );
+
+
+    /* =========================================================
+       INITIALISIERUNG
+    ========================================================== */
+
+    async function initializeAuth() {
+
+      const {
+        data
+      } =
+        await supabaseClient.auth
+          .getSession();
+
+
+      currentUser =
+        data.session?.user || null;
+
+
+      if (currentUser) {
 
         await loadProfile(
           currentUser
@@ -3195,134 +1663,36 @@
 
       } else {
 
-        currentUser = null;
         currentProfile = null;
 
       }
 
-      updateUserInterface();
-
-    }
-  );
-
-
-  async function initializeAuth() {
-
-    const {
-      data,
-      error
-    } =
-      await supabaseClient.auth.getSession();
-
-    if (error) {
-
-      console.error(
-        "Session konnte nicht geladen werden:",
-        error
-      );
-
-      currentUser = null;
-      currentProfile = null;
 
       updateUserInterface();
 
-      return;
 
-    }
+      /*
+        Prüfen, ob die Seite über einen
+        Recovery-Link geöffnet wurde.
+      */
 
-    if (
-      data &&
-      data.session &&
-      data.session.user
-    ) {
+      if (
+        window.location.hash
+          .includes(
+            "type=recovery"
+          )
+      ) {
 
-      currentUser =
-        data.session.user;
-
-      await loadProfile(
-        currentUser
-      );
-
-    } else {
-
-      currentUser = null;
-      currentProfile = null;
-
-    }
-
-    updateUserInterface();
-
-  }
-
-
-  function translateAuthError(error) {
-
-    if (!error) {
-      return "Es ist ein unbekannter Fehler aufgetreten.";
-    }
-
-    const message =
-      String(
-        error.message || ""
-      ).toLowerCase();
-
-
-    if (
-      message.includes(
-        "invalid login credentials"
-      )
-    ) {
-      return "E-Mail oder Passwort ist nicht korrekt.";
+        openAuthModal(
+          "recovery"
+        );
+      }
     }
 
 
-    if (
-      message.includes(
-        "email not confirmed"
-      )
-    ) {
-      return "Bitte bestätige zuerst deine E-Mail-Adresse.";
-    }
+    initializeAuth();
 
-
-    if (
-      message.includes(
-        "password should be at least"
-      )
-    ) {
-      return "Das Passwort ist zu kurz.";
-    }
-
-
-    if (
-      message.includes(
-        "rate limit"
-      )
-    ) {
-      return "Zu viele Versuche. Bitte warte kurz und versuche es erneut.";
-    }
-
-
-    if (
-      message.includes(
-        "user already registered"
-      )
-    ) {
-      return "Mit dieser E-Mail-Adresse existiert möglicherweise bereits ein Konto.";
-    }
-
-
-    return (
-      error.message ||
-      "Es ist ein Fehler aufgetreten. Bitte versuche es erneut."
-    );
-
-  }
-
-
-  initializeAuth();
-
-</script>
+  </script>
 
 </body>
 </html>
