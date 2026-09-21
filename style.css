@@ -15,7 +15,9 @@
   --dark:#050909;
   --radius:22px;
 
-  --font-main:"Inter", sans-serif;
+  --miles-blue:#18b8c7;
+
+  --font-main:"Inter",sans-serif;
   --font-light:300;
   --font-heading:800;
 }
@@ -56,6 +58,13 @@ a{
   color:inherit;
   text-decoration:none;
   font-weight:var(--font-light);
+}
+
+button,
+input,
+textarea,
+select{
+  font-family:var(--font-main);
 }
 
 /* =========================================================
@@ -138,16 +147,6 @@ select{
    NAVIGATION
    ========================================================= */
 
-/*
-  Die Navigation besteht auf allen Seiten aus:
-
-  Miles Apart       Home
-  Challenges        Community
-  Events            Training
-
-  Also immer 2 Spalten und 3 Reihen.
-*/
-
 .nav{
   display:grid;
   grid-template-columns:1fr 1fr;
@@ -165,12 +164,13 @@ select{
 
   color:#4f5a59;
 
-  font-family:"Inter", sans-serif !important;
+  font-family:var(--font-main) !important;
   font-size:15px;
   line-height:1.15;
   font-weight:800 !important;
 
   white-space:normal;
+
   transition:
     background .18s ease,
     color .18s ease,
@@ -187,10 +187,6 @@ select{
   color:var(--ink);
 }
 
-/*
-  Blauer Punkt vor dem aktiven Menüpunkt.
-*/
-
 .nav a.active:before{
   content:"";
   display:inline-block;
@@ -204,10 +200,6 @@ select{
 
   margin:0 8px 0 0;
 }
-
-/*
-  Damit der Text bei langen Namen sauber bleibt.
-*/
 
 .nav a span{
   min-width:0;
@@ -247,7 +239,7 @@ select{
   display:block;
   height:100%;
   width:72%;
-  background:var(--accent);
+  background:var(--miles-blue);
 }
 
 /* =========================================================
@@ -255,6 +247,7 @@ select{
    ========================================================= */
 
 .top{
+  position:relative;
   display:flex;
   align-items:center;
   justify-content:space-between;
@@ -272,13 +265,8 @@ select{
   display:flex;
   align-items:center;
   gap:12px;
+  position:relative;
 }
-
-/*
-  Wichtig für das zentrale Profil-Popup:
-  Das Popup wird relativ zum Bereich
-  des Profil-Buttons positioniert.
-*/
 
 .user-area{
   position:relative;
@@ -287,14 +275,268 @@ select{
   gap:10px;
 }
 
-.avatar{
-  width:42px;
-  height:42px;
+/* =========================================================
+   LOGIN BUTTON
+   EINHEITLICH AUF ALLEN SEITEN
+   ========================================================= */
+
+.login-button{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+
+  min-height:38px !important;
+  height:38px !important;
+
+  padding:0 16px !important;
+
+  border:1px solid #d7d7d3 !important;
+  border-radius:0 !important;
+
+  background:#fff !important;
+  color:#222 !important;
+
+  font-family:var(--font-main) !important;
+  font-size:12px !important;
+  line-height:1 !important;
+  font-weight:700 !important;
+
+  cursor:pointer !important;
+
+  box-shadow:none !important;
+
+  transition:
+    border-color .2s ease,
+    color .2s ease,
+    background .2s ease !important;
+}
+
+.login-button:hover{
+  border-color:var(--miles-blue) !important;
+  color:var(--miles-blue) !important;
+  background:#fff !important;
+}
+
+/* =========================================================
+   USER GREETING
+   ========================================================= */
+
+.user-greeting{
+  display:inline;
+  color:#666;
+  font-size:13px;
+  line-height:1.2;
+  white-space:nowrap;
+  font-weight:var(--font-light);
+}
+
+/* =========================================================
+   PROFILE AVATAR
+   ========================================================= */
+
+.user-avatar-button{
+  width:58px;
+  height:58px;
+
+  flex:0 0 58px;
+
+  padding:0;
+
+  border:3px solid var(--miles-blue);
   border-radius:50%;
-  display:grid;
-  place-items:center;
-  background:var(--accent);
-  font-weight:var(--font-heading);
+
+  background:#fff;
+  color:var(--miles-blue);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-family:var(--font-main) !important;
+  font-size:18px;
+  line-height:1;
+  font-weight:var(--font-heading) !important;
+
+  cursor:pointer;
+  overflow:hidden;
+
+  box-shadow:none;
+}
+
+.user-avatar-button img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+/* =========================================================
+   ACCOUNT POPUP
+   EINHEITLICH AUF ALLEN SEITEN
+   ========================================================= */
+
+.account-menu{
+  position:absolute !important;
+
+  top:calc(100% + 12px) !important;
+  right:0 !important;
+  left:auto !important;
+
+  width:260px !important;
+  min-width:260px !important;
+  max-width:260px !important;
+
+  height:auto !important;
+  min-height:0 !important;
+  max-height:none !important;
+
+  margin:0 !important;
+  padding:0 !important;
+
+  background:#fff !important;
+
+  border:1px solid #dddddd !important;
+  border-radius:0 !important;
+
+  box-shadow:0 15px 40px rgba(0,0,0,.12) !important;
+
+  overflow:hidden !important;
+
+  z-index:9999 !important;
+
+  display:none !important;
+}
+
+.account-menu.open{
+  display:block !important;
+}
+
+/* =========================================================
+   ACCOUNT POPUP — NAME
+   ========================================================= */
+
+.account-menu-name{
+  display:block !important;
+
+  width:100% !important;
+  min-width:0 !important;
+
+  margin:0 !important;
+
+  padding:16px 18px 4px !important;
+
+  box-sizing:border-box !important;
+
+  border:0 !important;
+
+  background:#fff !important;
+  color:#111 !important;
+
+  font-family:var(--font-main) !important;
+  font-size:20px !important;
+  line-height:1.25 !important;
+  font-weight:800 !important;
+
+  white-space:normal !important;
+  overflow-wrap:anywhere !important;
+}
+
+/* =========================================================
+   ACCOUNT POPUP — EMAIL
+   ========================================================= */
+
+.account-menu-email{
+  display:block !important;
+
+  width:100% !important;
+  min-width:0 !important;
+
+  margin:0 !important;
+
+  padding:0 18px 16px !important;
+
+  box-sizing:border-box !important;
+
+  border:0 !important;
+  border-bottom:1px solid #e8e8e8 !important;
+
+  background:#fff !important;
+  color:#888 !important;
+
+  font-family:var(--font-main) !important;
+  font-size:13px !important;
+  line-height:1.4 !important;
+  font-weight:300 !important;
+
+  overflow-wrap:anywhere !important;
+  word-break:break-word !important;
+}
+
+/* =========================================================
+   ACCOUNT POPUP — MENÜPUNKTE
+   ========================================================= */
+
+.account-menu a,
+.account-menu button,
+.account-menu .profile-menu-button,
+.account-menu .logout-button{
+  display:block !important;
+
+  width:100% !important;
+  min-width:0 !important;
+  max-width:none !important;
+
+  height:auto !important;
+  min-height:0 !important;
+
+  margin:0 !important;
+
+  padding:16px 18px !important;
+
+  box-sizing:border-box !important;
+
+  border:0 !important;
+  border-radius:0 !important;
+  border-bottom:1px solid #e8e8e8 !important;
+
+  background:#fff !important;
+
+  color:#222 !important;
+
+  text-align:left !important;
+  text-decoration:none !important;
+
+  font-family:var(--font-main) !important;
+  font-size:16px !important;
+  line-height:1.3 !important;
+  font-weight:300 !important;
+
+  letter-spacing:normal !important;
+  text-transform:none !important;
+
+  box-shadow:none !important;
+
+  cursor:pointer !important;
+
+  appearance:none !important;
+  -webkit-appearance:none !important;
+}
+
+.account-menu a:hover,
+.account-menu button:hover,
+.account-menu .profile-menu-button:hover,
+.account-menu .logout-button:hover{
+  background:#f5f5f3 !important;
+  color:#222 !important;
+}
+
+.account-menu .logout-button{
+  border-bottom:0 !important;
+  color:#888 !important;
+}
+
+.account-menu .logout-button:hover{
+  color:#555 !important;
 }
 
 /* =========================================================
@@ -377,9 +619,9 @@ h1{
 }
 
 .card.lime{
-  background:var(--accent);
-  border-color:var(--accent);
-  color:var(--ink);
+  background:var(--miles-blue);
+  border-color:var(--miles-blue);
+  color:#fff;
 }
 
 /* =========================================================
@@ -393,7 +635,7 @@ h1{
 }
 
 .label{
-  color:var(--muted);
+  color:var(--miles-blue);
   font-size:13px;
   font-weight:var(--font-heading);
   text-transform:uppercase;
@@ -438,18 +680,23 @@ h1{
   display:inline-flex;
   align-items:center;
   justify-content:center;
+
   border:0;
   border-radius:13px;
+
   padding:12px 17px;
+
   font-weight:var(--font-light);
+
   cursor:pointer;
+
   background:var(--dark);
   color:white;
 }
 
 .btn.lime{
-  background:var(--accent);
-  color:var(--ink);
+  background:var(--miles-blue);
+  color:#fff;
 }
 
 .btn.ghost{
@@ -458,7 +705,7 @@ h1{
 }
 
 .btn.white{
-  background:white;
+  background:#fff;
   color:#111;
 }
 
@@ -476,7 +723,7 @@ h1{
 .progress i{
   display:block;
   height:100%;
-  background:#111;
+  background:var(--miles-blue);
   border-radius:99px;
 }
 
@@ -485,7 +732,7 @@ h1{
 }
 
 .dark .progress i{
-  background:var(--accent);
+  background:var(--miles-blue);
 }
 
 /* =========================================================
@@ -523,8 +770,8 @@ h1{
 }
 
 .badge.lime{
-  background:var(--accent);
-  color:var(--ink);
+  background:var(--miles-blue);
+  color:#fff;
 }
 
 /* =========================================================
@@ -647,7 +894,7 @@ h1{
 }
 
 .bar i:nth-child(7){
-  background:var(--accent);
+  background:var(--miles-blue);
 }
 
 /* =========================================================
@@ -660,7 +907,7 @@ h1{
   background:
     radial-gradient(
       circle at 20% 70%,
-      var(--accent) 0 4px,
+      var(--miles-blue) 0 4px,
       transparent 5px
     ),
     linear-gradient(135deg,#eef8fa,#fff);
@@ -703,277 +950,8 @@ h1{
 }
 
 /* =========================================================
-   AUTH / LOGIN BUTTON
-   EINHEITLICH AUF ALLEN SEITEN
-========================================================= */
-
-/*
-  Dieser Button ist jetzt zentral definiert.
-  Jede Seite, die:
-
-  <button class="login-button">
-
-  verwendet, bekommt automatisch
-  exakt dieses Design.
-*/
-
-.login-button{
-  display:inline-flex !important;
-  align-items:center !important;
-  justify-content:center !important;
-
-  min-height:38px !important;
-  padding:0 16px !important;
-
-  border:1px solid #d7d7d3 !important;
-  background:#fff !important;
-  color:#222 !important;
-
-  font-family:var(--font-main) !important;
-  font-size:12px !important;
-  font-weight:700 !important;
-  line-height:normal !important;
-
-  cursor:pointer !important;
-  transition:.2s ease !important;
-}
-
-.login-button:hover{
-  border-color:#18b8c7 !important;
-  color:#18b8c7 !important;
-}
-
-/* =========================================================
-   PROFILE ICON
-   EINHEITLICH AUF ALLEN SEITEN
-========================================================= */
-
-.user-avatar-button{
-  width:38px;
-  height:38px;
-
-  flex:0 0 38px;
-
-  border-radius:50%;
-  border:2px solid #18b8c7;
-
-  background:#fff;
-  color:#18b8c7;
-
-  display:flex;
-  align-items:center;
-  justify-content:center;
-
-  font-family:var(--font-main);
-  font-size:13px;
-  font-weight:800;
-
-  cursor:pointer;
-  overflow:hidden;
-  padding:0;
-}
-
-.user-avatar-button:hover{
-  background:#f4fcfd;
-}
-
-.user-avatar-button img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-}
-
-/* =========================================================
-   USER GREETING
-   EINHEITLICH AUF ALLEN SEITEN
-========================================================= */
-
-.user-greeting{
-  font-family:var(--font-main);
-  font-size:13px;
-  font-weight:300;
-  color:#666;
-  white-space:nowrap;
-}
-
-/* =========================================================
-   ACCOUNT / PROFILE POPUP
-   ZENTRAL AUF ALLEN SEITEN
-========================================================= */
-
-/*
-  Das Popup sitzt immer direkt unterhalb
-  des Bereichs mit Profilbild / User-Icon.
-
-  Referenz aus deinem Screenshot:
-  - 300 px breit
-  - weiß
-  - rechteckig
-  - dünner grauer Rand
-  - kein Radius
-  - dezenter Schatten
-  - drei klare Bereiche
-*/
-
-.account-menu{
-  position:absolute !important;
-
-  top:calc(100% + 12px) !important;
-  right:0 !important;
-  left:auto !important;
-
-  width:300px !important;
-  min-width:300px !important;
-  max-width:300px !important;
-
-  height:auto !important;
-  min-height:0 !important;
-  max-height:none !important;
-
-  box-sizing:border-box !important;
-
-  padding:0 !important;
-  margin:0 !important;
-
-  background:#ffffff !important;
-
-  border:1px solid #dddddd !important;
-  border-radius:0 !important;
-
-  box-shadow:0 14px 35px rgba(0,0,0,.12) !important;
-
-  z-index:1000 !important;
-
-  display:none;
-
-  overflow:hidden !important;
-}
-
-.account-menu.open{
-  display:block !important;
-}
-
-/* =========================================================
-   ACCOUNT POPUP — USER INFORMATION
-========================================================= */
-
-.account-menu-user{
-  display:block !important;
-
-  width:100% !important;
-
-  box-sizing:border-box !important;
-
-  padding:22px 24px 20px !important;
-  margin:0 !important;
-
-  border:0 !important;
-  border-bottom:1px solid #e8e8e8 !important;
-
-  background:#ffffff !important;
-}
-
-.account-menu-name{
-  display:block !important;
-
-  margin:0 !important;
-  padding:0 !important;
-
-  color:#111111 !important;
-
-  font-family:var(--font-main) !important;
-  font-size:24px !important;
-  line-height:1.2 !important;
-  font-weight:800 !important;
-}
-
-.account-menu-email{
-  display:block !important;
-
-  margin:7px 0 0 !important;
-  padding:0 !important;
-
-  color:#888888 !important;
-
-  font-family:var(--font-main) !important;
-  font-size:16px !important;
-  line-height:1.35 !important;
-  font-weight:400 !important;
-
-  overflow-wrap:anywhere;
-  word-break:break-word;
-}
-
-/* =========================================================
-   ACCOUNT POPUP — BUTTONS
-========================================================= */
-
-.account-menu button,
-.account-menu #myProfileButton,
-.account-menu .logout-button{
-  display:block !important;
-
-  width:100% !important;
-  min-width:0 !important;
-  max-width:none !important;
-
-  height:auto !important;
-  min-height:0 !important;
-
-  box-sizing:border-box !important;
-
-  margin:0 !important;
-  padding:22px 24px !important;
-
-  border:0 !important;
-  border-radius:0 !important;
-
-  border-bottom:1px solid #e8e8e8 !important;
-
-  background:#ffffff !important;
-
-  text-align:left !important;
-  text-decoration:none !important;
-
-  cursor:pointer !important;
-
-  font-family:var(--font-main) !important;
-  font-size:20px !important;
-  line-height:1.3 !important;
-  font-weight:400 !important;
-  letter-spacing:normal !important;
-  text-transform:none !important;
-
-  color:#222222 !important;
-
-  box-shadow:none !important;
-}
-
-.account-menu button:hover,
-.account-menu #myProfileButton:hover,
-.account-menu .logout-button:hover{
-  background:#f7f7f7 !important;
-  color:#222222 !important;
-}
-
-.account-menu button:last-child,
-.account-menu .logout-button{
-  border-bottom:0 !important;
-}
-
-.account-menu .logout-button{
-  color:#888888 !important;
-}
-
-.account-menu .logout-button:hover{
-  color:#555555 !important;
-  background:#f7f7f7 !important;
-}
-
-/* =========================================================
-   AUTH MODAL
-========================================================= */
+   AUTH
+   ========================================================= */
 
 .auth-overlay{
   position:fixed;
@@ -982,12 +960,13 @@ h1{
   background:rgba(0,0,0,.55);
 
   display:none;
+
   align-items:center;
   justify-content:center;
 
   padding:20px;
 
-  z-index:100;
+  z-index:10000;
 
   overflow-y:auto;
 }
@@ -1021,6 +1000,7 @@ h1{
   height:32px;
 
   border:0;
+
   background:transparent;
 
   font-size:25px;
@@ -1029,17 +1009,19 @@ h1{
   cursor:pointer;
 
   color:#555;
+
+  font-weight:var(--font-light);
 }
 
 .auth-close:hover{
-  color:#18b8c7;
+  color:var(--miles-blue);
 }
 
 .auth-eyebrow{
-  color:#18b8c7;
+  color:var(--miles-blue);
 
   font-size:10px;
-  font-weight:800;
+  font-weight:var(--font-heading);
 
   letter-spacing:2px;
   text-transform:uppercase;
@@ -1053,6 +1035,8 @@ h1{
   letter-spacing:-1px;
 
   margin:0 0 10px;
+
+  font-weight:var(--font-heading);
 }
 
 .auth-description{
@@ -1062,6 +1046,8 @@ h1{
   line-height:1.5;
 
   margin:0 0 25px;
+
+  font-weight:var(--font-light);
 }
 
 .auth-tabs{
@@ -1077,12 +1063,13 @@ h1{
   padding:12px 8px;
 
   border:0;
+
   background:transparent;
 
   color:#888;
 
   font-size:12px;
-  font-weight:700;
+  font-weight:var(--font-light);
 
   cursor:pointer;
 
@@ -1090,8 +1077,8 @@ h1{
 }
 
 .auth-tab.active{
-  color:#18b8c7;
-  border-bottom-color:#18b8c7;
+  color:var(--miles-blue);
+  border-bottom-color:var(--miles-blue);
 }
 
 .auth-form{
@@ -1110,7 +1097,7 @@ h1{
   display:block;
 
   font-size:11px;
-  font-weight:700;
+  font-weight:var(--font-heading);
 
   margin-bottom:7px;
 
@@ -1119,6 +1106,7 @@ h1{
 
 .form-group input{
   width:100%;
+
   box-sizing:border-box;
 
   padding:13px 14px;
@@ -1126,31 +1114,35 @@ h1{
   border:1px solid #d7d7d3;
 
   background:#fafaf8;
+
   color:#222;
 
-  font-family:inherit;
+  font-family:var(--font-main);
+
   font-size:14px;
+  font-weight:var(--font-light);
 
   outline:none;
 }
 
 .form-group input:focus{
-  border-color:#18b8c7;
+  border-color:var(--miles-blue);
   background:#fff;
 }
 
 .auth-submit{
   width:100%;
 
-  border:1px solid #18b8c7;
+  border:1px solid var(--miles-blue);
 
-  background:#18b8c7;
+  background:var(--miles-blue);
+
   color:#fff;
 
   padding:14px;
 
   font-size:12px;
-  font-weight:800;
+  font-weight:var(--font-light);
 
   cursor:pointer;
 
@@ -1176,18 +1168,22 @@ h1{
   line-height:1.5;
 
   color:#d34b4b;
+
+  font-weight:var(--font-light);
 }
 
 .auth-message.success{
   color:#248b63;
 }
 
-.forgot-password{
+.forgot-password,
+.auth-back{
   display:block;
 
   margin-top:13px;
 
   border:0;
+
   background:transparent;
 
   padding:0;
@@ -1199,31 +1195,18 @@ h1{
   text-decoration:underline;
 
   cursor:pointer;
-}
 
-.forgot-password:hover{
-  color:#18b8c7;
+  font-weight:var(--font-light);
 }
 
 .auth-back{
-  display:inline-flex;
-
   margin-bottom:18px;
-
-  border:0;
-  background:transparent;
-
-  padding:0;
-
-  color:#777;
-
-  font-size:11px;
-
-  cursor:pointer;
+  text-decoration:none;
 }
 
+.forgot-password:hover,
 .auth-back:hover{
-  color:#18b8c7;
+  color:var(--miles-blue);
 }
 
 .auth-note{
@@ -1239,11 +1222,13 @@ h1{
 
   font-size:11px;
   line-height:1.5;
+
+  font-weight:var(--font-light);
 }
 
 /* =========================================================
    FINAL TYPOGRAPHY ENFORCEMENT
-========================================================= */
+   ========================================================= */
 
 body{
   font-weight:300;
@@ -1265,27 +1250,15 @@ h6,
   font-weight:800;
 }
 
-.side-bottom small,
-.crumb,
-.lead,
-.muted,
-.small,
-.btn,
-.badge,
-.date span,
-.tag{
-  font-weight:300;
-}
-
 /* =========================================================
    FINAL NAVIGATION ENFORCEMENT
-========================================================= */
+   ========================================================= */
 
 .nav,
 .nav a,
 .nav a:link,
 .nav a:visited{
-  font-family:"Inter", sans-serif !important;
+  font-family:var(--font-main) !important;
 }
 
 .nav a,
@@ -1317,7 +1290,7 @@ h6,
 
 /* =========================================================
    MOBILE / TABLET — 900PX
-========================================================= */
+   ========================================================= */
 
 @media(max-width:900px){
 
@@ -1327,7 +1300,6 @@ h6,
 
   .sidebar{
     position:relative;
-
     height:auto;
     min-height:0;
 
@@ -1352,16 +1324,9 @@ h6,
   .brand img{
     width:min(390px,100%);
     height:auto;
-
     max-width:none;
-
     display:block;
   }
-
-  /*
-    Navigation bleibt auch auf Tablet
-    exakt als 2 x 3 Grid.
-  */
 
   .nav{
     grid-template-columns:minmax(0,1fr) minmax(0,1fr);
@@ -1377,16 +1342,14 @@ h6,
 
     border-radius:20px;
 
-    font-family:"Inter", sans-serif !important;
+    font-family:var(--font-main) !important;
     font-weight:800 !important;
   }
 
   .nav a.active:before{
     width:8px;
     height:8px;
-
     flex-basis:8px;
-
     margin-right:10px;
   }
 
@@ -1414,34 +1377,23 @@ h6,
   .avatar{
     width:56px;
     height:56px;
-
     font-size:20px;
   }
 
-  .hero{
-    display:block;
-    margin-bottom:28px;
+  .user-avatar-button{
+    width:58px;
+    height:58px;
+    flex-basis:58px;
   }
 
-  .hero-logo{
-    width:min(540px,100%);
-    margin:0 auto 24px;
-  }
+  .account-menu{
+    top:calc(100% + 12px) !important;
+    right:0 !important;
+    left:auto !important;
 
-  .hero-logo img{
-    width:100%;
-    height:auto;
-    display:block;
-  }
-
-  .hero .lead{
-    font-size:18px;
-    line-height:1.42;
-    max-width:560px;
-  }
-
-  .hero .btn{
-    margin-top:16px;
+    width:260px !important;
+    min-width:260px !important;
+    max-width:260px !important;
   }
 
   .g4,
@@ -1456,51 +1408,8 @@ h6,
 }
 
 /* =========================================================
-   MOBILE — 700PX
-========================================================= */
-
-@media(max-width:700px){
-
-  /*
-    Profil-Popup auf kleinen Geräten:
-    nicht mehr an die Breite des Buttons gebunden,
-    sondern als sauberer eigener Kasten.
-  */
-
-  .account-menu{
-    position:fixed !important;
-
-    top:76px !important;
-    right:12px !important;
-    left:12px !important;
-
-    width:auto !important;
-    min-width:0 !important;
-    max-width:none !important;
-  }
-
-  .account-menu-name{
-    font-size:23px !important;
-  }
-
-  .account-menu-email{
-    font-size:16px !important;
-  }
-
-  .account-menu button,
-  .account-menu #myProfileButton,
-  .account-menu .logout-button{
-    padding:22px 24px !important;
-
-    font-size:20px !important;
-    line-height:1.3 !important;
-    font-weight:400 !important;
-  }
-}
-
-/* =========================================================
    MOBILE — 600PX
-========================================================= */
+   ========================================================= */
 
 @media(max-width:600px){
 
@@ -1525,15 +1434,12 @@ h6,
     margin:0 auto;
   }
 
-  /*
-    Auch auf dem Handy:
-    immer 2 Spalten.
-  */
-
   .nav{
     width:100%;
 
-    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    grid-template-columns:
+      minmax(0,1fr)
+      minmax(0,1fr);
 
     gap:6px 12px;
   }
@@ -1548,20 +1454,17 @@ h6,
     border-radius:18px;
 
     white-space:nowrap;
-
     overflow:hidden;
     text-overflow:ellipsis;
 
-    font-family:"Inter", sans-serif !important;
+    font-family:var(--font-main) !important;
     font-weight:800 !important;
   }
 
   .nav a.active:before{
     width:7px;
     height:7px;
-
     flex-basis:7px;
-
     margin-right:8px;
   }
 
@@ -1577,7 +1480,9 @@ h6,
 
     display:grid;
 
-    grid-template-columns:minmax(0,1fr) auto;
+    grid-template-columns:
+      minmax(0,1fr)
+      auto;
 
     align-items:center;
 
@@ -1594,6 +1499,7 @@ h6,
     white-space:nowrap;
 
     font-size:11px;
+
     letter-spacing:.08em;
   }
 
@@ -1612,31 +1518,87 @@ h6,
     white-space:nowrap;
   }
 
-  .avatar{
-    flex:0 0 52px;
-
-    width:52px;
-    height:52px;
+  .user-greeting{
+    font-size:12px;
   }
 
-  .hero,
-  .hero-logo{
-    width:100%;
-    max-width:100%;
+  .user-avatar-button{
+    width:48px;
+    height:48px;
+    flex-basis:48px;
+
+    border-width:2px;
   }
 
-  .hero-logo{
-    margin:0 0 24px;
+  /*
+    POPUP AUCH AUF DEM HANDY
+    EXAKT DIE GLEICHE BREITE
+    UND GLEICHE TYPOGRAFIE.
+  */
+
+  .account-menu{
+    top:calc(100% + 10px) !important;
+
+    right:0 !important;
+    left:auto !important;
+
+    width:260px !important;
+    min-width:260px !important;
+    max-width:260px !important;
+
+    padding:0 !important;
   }
 
-  .hero-logo img{
-    width:100%;
-    max-width:100%;
-    height:auto;
+  .account-menu-name{
+    padding:16px 18px 4px !important;
+
+    font-size:20px !important;
+    line-height:1.25 !important;
+    font-weight:800 !important;
   }
 
-  h1{
-    font-size:34px;
-    font-weight:var(--font-heading);
+  .account-menu-email{
+    padding:0 18px 16px !important;
+
+    font-size:13px !important;
+    line-height:1.4 !important;
+    font-weight:300 !important;
   }
+
+  .account-menu a,
+  .account-menu button,
+  .account-menu .profile-menu-button,
+  .account-menu .logout-button{
+    padding:16px 18px !important;
+
+    font-size:16px !important;
+    line-height:1.3 !important;
+    font-weight:300 !important;
+  }
+
+  .auth-modal{
+    padding:30px 24px;
+  }
+}
+
+/* =========================================================
+   LOGO SAFETY — FINAL
+   ========================================================= */
+
+.brand,
+.brand a,
+.brand img,
+.hero-logo,
+.hero-logo a,
+.hero-logo img{
+  overflow:visible !important;
+  clip-path:none !important;
+  contain:none !important;
+}
+
+.brand img,
+.hero-logo img{
+  max-width:100%;
+  height:auto;
+  object-fit:contain;
 }
