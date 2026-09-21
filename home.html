@@ -988,11 +988,6 @@
       gap: 10px;
     }
 
-    /*
-      GLEICH WIE INDEX:
-      "Hallo Tano" / "Hallo [Name]"
-    */
-
     .user-greeting {
       display: inline;
       color: #666;
@@ -1025,12 +1020,10 @@
       color: var(--miles-blue);
     }
 
-    /*
-      PROFILBILD:
-      EXAKT WIE AUF DER INDEX-SEITE
-      58 x 58 px
-      3 px türkisfarbener Rand
-    */
+    /* =========================================================
+       PROFILBILD
+       WIE AUF DER INDEX-SEITE
+    ========================================================= */
 
     .user-avatar-button {
       width: 58px;
@@ -1070,18 +1063,20 @@
 
     /* =========================================================
        ACCOUNT POPUP
-       KLEIN BEIBEHALTEN
+       1:1 KLEIN WIE AUF DER INDEX-SEITE
+       ÖFFNET NACH UNTEN
     ========================================================= */
 
     .account-menu {
       position: absolute !important;
+
       top: calc(100% + 12px) !important;
       right: 0 !important;
       left: auto !important;
 
-      width: 300px !important;
-      min-width: 300px !important;
-      max-width: 300px !important;
+      width: 260px !important;
+      min-width: 260px !important;
+      max-width: 260px !important;
 
       height: auto !important;
       min-height: 0 !important;
@@ -1093,6 +1088,7 @@
       margin: 0 !important;
 
       background: #ffffff !important;
+
       border: 1px solid #dddddd !important;
       border-radius: 0 !important;
 
@@ -1101,6 +1097,7 @@
       z-index: 1000 !important;
 
       display: none;
+
       overflow: hidden !important;
     }
 
@@ -1110,10 +1107,12 @@
 
     .account-menu-user {
       display: block !important;
+
       width: 100% !important;
+
       box-sizing: border-box !important;
 
-      padding: 22px 24px 20px !important;
+      padding: 20px !important;
       margin: 0 !important;
 
       border: 0 !important;
@@ -1131,7 +1130,7 @@
       color: #111111 !important;
 
       font-family: var(--font-main, "Inter", sans-serif) !important;
-      font-size: 24px !important;
+      font-size: 20px !important;
       line-height: 1.2 !important;
       font-weight: 800 !important;
     }
@@ -1139,13 +1138,13 @@
     .account-menu-email {
       display: block !important;
 
-      margin: 7px 0 0 !important;
+      margin: 6px 0 0 !important;
       padding: 0 !important;
 
       color: #888888 !important;
 
       font-family: var(--font-main, "Inter", sans-serif) !important;
-      font-size: 16px !important;
+      font-size: 14px !important;
       line-height: 1.35 !important;
       font-weight: 400 !important;
 
@@ -1153,15 +1152,10 @@
       word-break: break-word;
     }
 
-    /*
-      Mein Profil und Abmelden:
-      exakt dieselbe Typeface,
-      Größe, Gewichtung, Höhe und Ausrichtung.
-    */
-
     .account-menu button,
     .account-menu #myProfileButton,
     .account-menu .logout-button {
+
       display: block !important;
 
       width: 100% !important;
@@ -1174,10 +1168,12 @@
       box-sizing: border-box !important;
 
       margin: 0 !important;
-      padding: 22px 24px !important;
+
+      padding: 16px 20px !important;
 
       border: 0 !important;
       border-radius: 0 !important;
+
       border-bottom: 1px solid #e8e8e8 !important;
 
       background: #ffffff !important;
@@ -1188,7 +1184,7 @@
       cursor: pointer;
 
       font-family: var(--font-main, "Inter", sans-serif) !important;
-      font-size: 20px !important;
+      font-size: 16px !important;
       line-height: 1.3 !important;
       font-weight: 400 !important;
       letter-spacing: normal !important;
@@ -1513,32 +1509,37 @@
         grid-template-columns: 1fr;
       }
 
-      /* Kleines Popup bleibt auch mobil erhalten */
+      /*
+        ACCOUNT POPUP:
+        KLEIN WIE AUF DER INDEX-SEITE.
+      */
 
       .account-menu {
         position: fixed !important;
-        top: 76px !important;
-        right: 12px !important;
-        left: 12px !important;
 
-        width: auto !important;
-        min-width: 0 !important;
-        max-width: none !important;
+        top: 76px !important;
+
+        right: 12px !important;
+        left: auto !important;
+
+        width: 260px !important;
+        min-width: 260px !important;
+        max-width: 260px !important;
       }
 
       .account-menu-name {
-        font-size: 23px !important;
+        font-size: 20px !important;
       }
 
       .account-menu-email {
-        font-size: 16px !important;
+        font-size: 14px !important;
       }
 
       .account-menu button,
       .account-menu #myProfileButton,
       .account-menu .logout-button {
-        padding: 22px 24px !important;
-        font-size: 20px !important;
+        padding: 16px 20px !important;
+        font-size: 16px !important;
         line-height: 1.3 !important;
         font-weight: 400 !important;
       }
@@ -1597,12 +1598,6 @@
         width: 110px;
         height: 110px;
       }
-
-      /*
-        PROFILBILD OBEN RECHTS:
-        EXAKT WIE AUF DER INDEX-SEITE
-        AUCH AUF MOBILE.
-      */
 
       .user-avatar-button {
         width: 48px;
@@ -1805,10 +1800,6 @@
 
     <div class="home-page">
 
-      <!-- ===================================================
-           LOGGED-IN WELCOME
-      =================================================== -->
-
       <section
         class="home-welcome"
         id="memberWelcome"
@@ -1861,10 +1852,6 @@
 
       </section>
 
-      <!-- ===================================================
-           GUEST WELCOME
-      =================================================== -->
-
       <section
         class="guest-hero"
         id="guestWelcome"
@@ -1916,10 +1903,6 @@
 
       </section>
 
-      <!-- ===================================================
-           MEMBER HERO
-      =================================================== -->
-
       <section
         class="member-hero"
         id="memberHero"
@@ -1970,10 +1953,6 @@
         </div>
 
       </section>
-
-      <!-- ===================================================
-           QUICK ACTIONS
-      =================================================== -->
 
       <section class="quick-actions">
 
@@ -2055,13 +2034,7 @@
 
       </section>
 
-      <!-- ===================================================
-           MAIN DASHBOARD
-      =================================================== -->
-
       <section class="home-grid">
-
-        <!-- WEEKLY GOAL — NUR FÜR EINGELOGGTE -->
 
         <div
           class="home-card dark member-only-card"
@@ -2130,8 +2103,6 @@
 
         </div>
 
-        <!-- PROFILE COMPLETION — NUR FÜR EINGELOGGTE -->
-
         <div
           class="home-card member-only-card"
           id="profileCompletionCard"
@@ -2190,8 +2161,6 @@
           </a>
 
         </div>
-
-        <!-- COMMUNITY — NUR FÜR EINGELOGGTE -->
 
         <div
           class="home-card member-only-card"
@@ -2301,8 +2270,6 @@
 
         </div>
 
-        <!-- EVENTS — FÜR ALLE SICHTBAR -->
-
         <div class="home-card">
 
           <div class="home-card-head">
@@ -2402,10 +2369,6 @@
 
       </section>
 
-      <!-- ===================================================
-           COMMUNITY INVITATION
-      =================================================== -->
-
       <section class="community-invitation">
 
         <div class="community-invitation-label">
@@ -2438,10 +2401,6 @@
         </a>
 
       </section>
-
-      <!-- ===================================================
-           MY RUN
-      =================================================== -->
 
       <section
         class="home-card"
@@ -3003,10 +2962,6 @@
       SUPABASE_PUBLISHABLE_KEY
     );
 
-  /* =========================================================
-     ELEMENTS
-  ========================================================= */
-
   const guestArea =
     document.getElementById("guestArea");
 
@@ -3175,10 +3130,6 @@
   const profileCompletionText =
     document.getElementById("profileCompletionText");
 
-  /* =========================================================
-     MEMBER-ONLY CARDS
-  ========================================================= */
-
   const memberOnlyCards = [
     document.getElementById("weeklyGoalCard"),
     document.getElementById("profileCompletionCard"),
@@ -3190,10 +3141,6 @@
 
   let currentProfile =
     null;
-
-  /* =========================================================
-     HELPERS
-  ========================================================= */
 
   function getInitials(name) {
 
@@ -3360,10 +3307,6 @@
     );
 
   }
-
-  /* =========================================================
-     PROFILE
-  ========================================================= */
 
   async function loadProfile(user) {
 
@@ -3557,10 +3500,6 @@
 
   }
 
-  /* =========================================================
-     MEMBER-ONLY CONTENT
-  ========================================================= */
-
   function updateMemberOnlyCards(
     isLoggedIn
   ) {
@@ -3581,10 +3520,6 @@
     );
 
   }
-
-  /* =========================================================
-     UPDATE USER INTERFACE
-  ========================================================= */
 
   function updateUserInterface() {
 
@@ -3661,11 +3596,6 @@
     welcomeName.textContent =
       firstName + ".";
 
-    /* =======================================================
-       OBEN RECHTS:
-       NAME DES EINGELOGGTEN USERS
-    ======================================================= */
-
     userGreeting.textContent =
       "Hallo " + displayName;
 
@@ -3706,10 +3636,6 @@
     fillProfileForm();
 
   }
-
-  /* =========================================================
-     AUTH OPEN / CLOSE
-  ========================================================= */
 
   function openAuth() {
 
@@ -3813,10 +3739,6 @@
 
     }
   );
-
-  /* =========================================================
-     AUTH FORMS
-  ========================================================= */
 
   function hideAllForms() {
 
@@ -3924,10 +3846,6 @@
     "click",
     showLogin
   );
-
-  /* =========================================================
-     REGISTER
-  ========================================================= */
 
   registerForm.addEventListener(
     "submit",
@@ -4074,10 +3992,6 @@
     }
   );
 
-  /* =========================================================
-     LOGIN
-  ========================================================= */
-
   loginForm.addEventListener(
     "submit",
     async function(event) {
@@ -4155,10 +4069,6 @@
     }
   );
 
-  /* =========================================================
-     FORGOT PASSWORD
-  ========================================================= */
-
   forgotForm.addEventListener(
     "submit",
     async function(event) {
@@ -4226,10 +4136,6 @@
 
     }
   );
-
-  /* =========================================================
-     RECOVERY
-  ========================================================= */
 
   recoveryForm.addEventListener(
     "submit",
@@ -4331,7 +4237,7 @@
 
   /* =========================================================
      ACCOUNT MENU
-     PROFILBILD ÖFFNET NUR DAS MENÜ
+     NUR DAS VERHALTEN DES PROFIL-MENÜS
   ========================================================= */
 
   avatarButton.addEventListener(
@@ -4383,10 +4289,6 @@
 
     }
   );
-
-  /* =========================================================
-     AVATAR UPLOAD
-  ========================================================= */
 
   avatarFileInput.addEventListener(
     "change",
@@ -4592,10 +4494,6 @@
     }
   );
 
-  /* =========================================================
-     DELETE AVATAR
-  ========================================================= */
-
   deleteAvatarButton.addEventListener(
     "click",
     async function() {
@@ -4690,10 +4588,6 @@
 
     }
   );
-
-  /* =========================================================
-     SAVE PROFILE
-  ========================================================= */
 
   profileForm.addEventListener(
     "submit",
@@ -4835,10 +4729,6 @@
     }
   );
 
-  /* =========================================================
-     CHANGE PASSWORD
-  ========================================================= */
-
   passwordForm.addEventListener(
     "submit",
     async function(event) {
@@ -4931,10 +4821,6 @@
     }
   );
 
-  /* =========================================================
-     LOGOUT
-  ========================================================= */
-
   async function logout() {
 
     const {
@@ -4982,10 +4868,6 @@
     "click",
     logout
   );
-
-  /* =========================================================
-     AUTH STATE
-  ========================================================= */
 
   supabaseClient.auth
     .onAuthStateChange(
@@ -5049,10 +4931,6 @@
       }
     );
 
-  /* =========================================================
-     INITIALIZE AUTH
-  ========================================================= */
-
   async function initializeAuth() {
 
     const {
@@ -5107,10 +4985,6 @@
     updateUserInterface();
 
   }
-
-  /* =========================================================
-     AUTH ERROR TRANSLATION
-  ========================================================= */
 
   function translateAuthError(
     error
@@ -5192,10 +5066,6 @@
     );
 
   }
-
-  /* =========================================================
-     START
-  ========================================================= */
 
   initializeAuth();
 
