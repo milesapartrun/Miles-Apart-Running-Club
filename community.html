@@ -36,6 +36,8 @@
 
 
     .user-area {
+      position: relative;
+
       display: flex;
       align-items: center;
       gap: 10px;
@@ -72,6 +74,206 @@
       height: 100%;
       object-fit: cover;
       display: block;
+    }
+
+
+    /* =====================================================
+       ACCOUNT MENU
+    ===================================================== */
+
+    .account-menu {
+      position: absolute;
+
+      top: calc(100% + 10px);
+      right: 0;
+
+      width: 235px;
+
+      background: #fff;
+
+      border: 1px solid #ddd;
+
+      box-shadow:
+        0 18px 50px rgba(0,0,0,.14);
+
+      padding: 8px;
+
+      z-index: 500;
+
+      display: none;
+
+      box-sizing: border-box;
+    }
+
+
+    .account-menu.open {
+      display: block;
+    }
+
+
+    .account-menu-name {
+      padding: 10px 11px 4px;
+
+      color: #111;
+
+      font-size: 14px;
+
+      font-weight: 800;
+    }
+
+
+    .account-menu-email {
+      padding: 0 11px 11px;
+
+      color: #888;
+
+      font-size: 11px;
+
+      line-height: 1.4;
+
+      word-break: break-word;
+
+      border-bottom: 1px solid #eee;
+    }
+
+
+    .account-menu button {
+      display: block;
+
+      width: 100%;
+
+      border: 0;
+
+      background: transparent;
+
+      padding: 12px 11px;
+
+      color: #222;
+
+      text-align: left;
+
+      font: inherit;
+
+      font-size: 13px;
+
+      cursor: pointer;
+    }
+
+
+    .account-menu button:hover {
+      background: #f5f5f3;
+
+      color: #18b8c7;
+    }
+
+
+    .account-menu-logout {
+      margin-top: 4px;
+
+      border-top: 1px solid #eee !important;
+
+      color: #777 !important;
+    }
+
+
+    .account-menu-logout:hover {
+      color: #c83b3b !important;
+    }
+
+
+    /* =====================================================
+       PROFILE IFRAME MODAL
+    ===================================================== */
+
+    .profile-popup-overlay {
+      position: fixed;
+
+      inset: 0;
+
+      z-index: 2000;
+
+      display: none;
+
+      align-items: center;
+
+      justify-content: center;
+
+      padding: 20px;
+
+      box-sizing: border-box;
+
+      background: rgba(0,0,0,.55);
+    }
+
+
+    .profile-popup-overlay.open {
+      display: flex;
+    }
+
+
+    .profile-popup {
+      position: relative;
+
+      width: min(1100px, 100%);
+
+      height: min(850px, calc(100vh - 40px));
+
+      background: #fff;
+
+      box-shadow:
+        0 25px 80px rgba(0,0,0,.28);
+
+      overflow: hidden;
+    }
+
+
+    .profile-popup-close {
+      position: absolute;
+
+      top: 12px;
+
+      right: 12px;
+
+      z-index: 20;
+
+      width: 42px;
+
+      height: 42px;
+
+      border: 0;
+
+      border-radius: 50%;
+
+      background: rgba(255,255,255,.95);
+
+      color: #333;
+
+      font-size: 28px;
+
+      line-height: 1;
+
+      cursor: pointer;
+
+      box-shadow:
+        0 3px 15px rgba(0,0,0,.15);
+    }
+
+
+    .profile-popup-close:hover {
+      color: #18b8c7;
+    }
+
+
+    .profile-popup iframe {
+      display: block;
+
+      width: 100%;
+
+      height: 100%;
+
+      border: 0;
+
+      background: #fff;
     }
 
 
@@ -788,6 +990,31 @@
       }
 
 
+      .account-menu {
+        width: 220px;
+      }
+
+
+      .profile-popup-overlay {
+        padding: 0;
+      }
+
+
+      .profile-popup {
+        width: 100%;
+
+        height: 100%;
+
+        max-height: none;
+      }
+
+
+      .profile-popup-close {
+        top: 10px;
+        right: 10px;
+      }
+
+
       #postsContainer {
         display: block !important;
 
@@ -1062,22 +1289,73 @@
       <div class="top-right">
 
 
-        <span
-          class="user-greeting"
-          id="userGreeting"
+        <div
+          class="user-area"
+          id="userArea"
         >
-          Hallo
-        </span>
 
 
-        <button
-          class="user-avatar-button"
-          id="topAvatar"
-          type="button"
-          aria-label="Mein Profil"
-        >
-          M
-        </button>
+          <span
+            class="user-greeting"
+            id="userGreeting"
+          >
+            Hallo
+          </span>
+
+
+          <button
+            class="user-avatar-button"
+            id="topAvatar"
+            type="button"
+            aria-label="Account-Menü öffnen"
+          >
+            M
+          </button>
+
+
+          <!-- ACCOUNT MENU -->
+
+          <div
+            class="account-menu"
+            id="accountMenu"
+          >
+
+            <div
+              class="account-menu-name"
+              id="accountMenuName"
+            >
+              Runner
+            </div>
+
+
+            <div
+              class="account-menu-email"
+              id="accountMenuEmail"
+            >
+              —
+            </div>
+
+
+            <button
+              type="button"
+              id="myProfileButton"
+            >
+              My Profile
+            </button>
+
+
+            <button
+              type="button"
+              class="account-menu-logout"
+              id="accountLogoutButton"
+            >
+              Abmelden
+            </button>
+
+          </div>
+
+
+        </div>
 
 
       </div>
@@ -1401,6 +1679,40 @@
 </div>
 
 
+<!-- =====================================================
+     PROFILE POPUP
+===================================================== -->
+
+<div
+  class="profile-popup-overlay"
+  id="profilePopupOverlay"
+>
+
+  <div
+    class="profile-popup"
+  >
+
+    <button
+      type="button"
+      class="profile-popup-close"
+      id="profilePopupClose"
+      aria-label="Profil schließen"
+    >
+      ×
+    </button>
+
+
+    <iframe
+      id="profilePopupFrame"
+      src="about:blank"
+      title="Mein Profil"
+    ></iframe>
+
+  </div>
+
+</div>
+
+
 <script>
 
 
@@ -1441,6 +1753,60 @@
   const topAvatar =
     document.getElementById(
       "topAvatar"
+    );
+
+
+  const userArea =
+    document.getElementById(
+      "userArea"
+    );
+
+
+  const accountMenu =
+    document.getElementById(
+      "accountMenu"
+    );
+
+
+  const accountMenuName =
+    document.getElementById(
+      "accountMenuName"
+    );
+
+
+  const accountMenuEmail =
+    document.getElementById(
+      "accountMenuEmail"
+    );
+
+
+  const myProfileButton =
+    document.getElementById(
+      "myProfileButton"
+    );
+
+
+  const accountLogoutButton =
+    document.getElementById(
+      "accountLogoutButton"
+    );
+
+
+  const profilePopupOverlay =
+    document.getElementById(
+      "profilePopupOverlay"
+    );
+
+
+  const profilePopupFrame =
+    document.getElementById(
+      "profilePopupFrame"
+    );
+
+
+  const profilePopupClose =
+    document.getElementById(
+      "profilePopupClose"
     );
 
 
@@ -1673,6 +2039,232 @@
 
 
   /* =====================================================
+     ACCOUNT MENU
+  ===================================================== */
+
+  function updateAccountMenu() {
+
+    if (!currentUser) {
+      return;
+    }
+
+
+    const profile =
+      currentProfile || {};
+
+
+    const name =
+      profile.display_name ||
+
+      currentUser
+        .user_metadata
+        ?.display_name ||
+
+      currentUser
+        .user_metadata
+        ?.name ||
+
+      currentUser
+        .email
+        ?.split("@")[0] ||
+
+      "Miles Apart Member";
+
+
+    accountMenuName.textContent =
+      name;
+
+
+    accountMenuEmail.textContent =
+      currentUser.email || "";
+
+  }
+
+
+  topAvatar.addEventListener(
+    "click",
+    (event) => {
+
+      event.stopPropagation();
+
+
+      accountMenu.classList.toggle(
+        "open"
+      );
+
+    }
+  );
+
+
+  document.addEventListener(
+    "click",
+    (event) => {
+
+      if (
+        !event.target.closest(
+          "#userArea"
+        )
+      ) {
+
+        accountMenu.classList.remove(
+          "open"
+        );
+
+      }
+
+    }
+  );
+
+
+  /* =====================================================
+     PROFILE POPUP
+  ===================================================== */
+
+  function closeProfilePopup() {
+
+    profilePopupOverlay.classList.remove(
+      "open"
+    );
+
+
+    document.body.style.overflow =
+      "";
+
+
+    profilePopupFrame.src =
+      "about:blank";
+
+  }
+
+
+  myProfileButton.addEventListener(
+    "click",
+    () => {
+
+      accountMenu.classList.remove(
+        "open"
+      );
+
+
+      profilePopupFrame.src =
+        "profile.html";
+
+
+      profilePopupOverlay.classList.add(
+        "open"
+      );
+
+
+      document.body.style.overflow =
+        "hidden";
+
+    }
+  );
+
+
+  profilePopupClose.addEventListener(
+    "click",
+    closeProfilePopup
+  );
+
+
+  profilePopupOverlay.addEventListener(
+    "click",
+    (event) => {
+
+      if (
+        event.target ===
+        profilePopupOverlay
+      ) {
+
+        closeProfilePopup();
+
+      }
+
+    }
+  );
+
+
+  document.addEventListener(
+    "keydown",
+    (event) => {
+
+      if (
+        event.key === "Escape"
+      ) {
+
+        accountMenu.classList.remove(
+          "open"
+        );
+
+
+        if (
+          profilePopupOverlay.classList.contains(
+            "open"
+          )
+        ) {
+
+          closeProfilePopup();
+
+        }
+
+      }
+
+    }
+  );
+
+
+  /* =====================================================
+     LOGOUT
+  ===================================================== */
+
+  accountLogoutButton.addEventListener(
+    "click",
+    async () => {
+
+      accountLogoutButton.disabled =
+        true;
+
+
+      accountLogoutButton.textContent =
+        "Wird abgemeldet …";
+
+
+      const {
+        error
+      } =
+        await supabaseClient.auth.signOut();
+
+
+      if (error) {
+
+        console.error(
+          "Logout:",
+          error
+        );
+
+
+        accountLogoutButton.disabled =
+          false;
+
+
+        accountLogoutButton.textContent =
+          "Abmelden";
+
+
+        return;
+
+      }
+
+
+      window.location.href =
+        "home.html";
+
+    }
+  );
+
+
+  /* =====================================================
      CURRENT USER
   ===================================================== */
 
@@ -1749,6 +2341,9 @@
         location: null
 
       };
+
+
+    updateAccountMenu();
 
 
     const name =
@@ -2901,21 +3496,6 @@
           "Post veröffentlichen";
 
       }
-
-    }
-  );
-
-
-  /* =====================================================
-     PROFILE
-  ===================================================== */
-
-  topAvatar.addEventListener(
-    "click",
-    () => {
-
-      window.location.href =
-        "profile.html";
 
     }
   );
