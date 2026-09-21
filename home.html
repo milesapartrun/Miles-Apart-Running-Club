@@ -71,7 +71,8 @@
     }
 
     /* =========================================================
-       NAVIGATION — WIE INDEX
+       NAVIGATION
+       IDENTISCH ZUR INDEX-SEITE
     ========================================================= */
 
     .sidebar .nav {
@@ -80,52 +81,93 @@
       column-gap: 24px !important;
       row-gap: 26px !important;
       width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
     }
 
-    .sidebar .nav a {
+    .sidebar .nav a,
+    .sidebar .nav a:visited,
+    .sidebar .nav a:link {
+      min-width: 0 !important;
       min-height: 48px !important;
       height: 48px !important;
+      width: 100% !important;
+
       display: flex !important;
       align-items: center !important;
+
+      box-sizing: border-box !important;
+
+      margin: 0 !important;
       padding: 0 !important;
+
+      border: 0 !important;
       border-radius: 999px !important;
+
+      background: transparent !important;
+
       color: #565e5c !important;
+
       font-size: 18px !important;
       line-height: 1 !important;
       font-weight: 800 !important;
+
+      letter-spacing: 0 !important;
       text-decoration: none !important;
+
       transition:
         background .2s ease,
         color .2s ease,
         transform .2s ease !important;
     }
 
-    .sidebar .nav a:hover {
+    .sidebar .nav a:hover,
+    .sidebar .nav a:focus {
       background: transparent !important;
       color: #111 !important;
       transform: none !important;
+      outline: none !important;
     }
 
-    .sidebar .nav a.active {
+    .sidebar .nav a.active,
+    .sidebar .nav a.active:visited,
+    .sidebar .nav a.active:link {
       min-height: 48px !important;
       height: 48px !important;
+
       padding: 0 24px !important;
+
+      background: #e8f9fc !important;
+      color: #050909 !important;
+
+      border: 0 !important;
+      border-radius: 999px !important;
+    }
+
+    .sidebar .nav a.active:hover,
+    .sidebar .nav a.active:focus {
       background: #e8f9fc !important;
       color: #050909 !important;
     }
 
     .sidebar .nav a.active::before {
       content: "";
+
       width: 11px;
       height: 11px;
+      min-width: 11px;
       flex: 0 0 11px;
+
       margin-right: 18px;
+
       border-radius: 50%;
+
       background: var(--miles-blue);
     }
 
     .sidebar .nav a:not(.active)::before {
       content: none !important;
+      display: none !important;
     }
 
     /* =========================================================
@@ -473,8 +515,6 @@
       white-space: nowrap;
     }
 
-    /* DAILY BARS */
-
     .daily-chart {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
@@ -535,8 +575,6 @@
       color: var(--miles-blue-dark);
     }
 
-    /* SUMMARY BARS */
-
     .summary-bars {
       display: grid;
       gap: 16px;
@@ -588,7 +626,7 @@
     }
 
     /* =========================================================
-       STATS CARDS
+       STATS
     ========================================================= */
 
     .stat-grid {
@@ -1617,6 +1655,12 @@
 
     </div>
 
+    <!--
+      NAVIGATION:
+      exakt gleiche Struktur und Optik wie auf index.html.
+      Auf dieser Seite ist lediglich "Home" aktiv.
+    -->
+
     <nav class="nav">
 
       <a href="index.html">
@@ -1680,10 +1724,6 @@
 
   <main class="main">
 
-    <!-- =====================================================
-         TOP
-    ===================================================== -->
-
     <div class="top">
 
       <div class="crumb">
@@ -1691,8 +1731,6 @@
       </div>
 
       <div class="top-right">
-
-        <!-- AUSGELOGGT -->
 
         <div
           id="guestArea"
@@ -1708,8 +1746,6 @@
           </button>
 
         </div>
-
-        <!-- EINGELOGGT -->
 
         <div
           id="loggedInArea"
@@ -1779,13 +1815,7 @@
 
     </div>
 
-    <!-- =====================================================
-         HOME DASHBOARD
-    ===================================================== -->
-
     <div class="home-page">
-
-      <!-- PREVIEW HINWEIS -->
 
       <div
         class="preview-notice"
@@ -1805,8 +1835,6 @@
         </button>
 
       </div>
-
-      <!-- HEADER -->
 
       <section class="dashboard-header">
 
@@ -1838,10 +1866,6 @@
         </div>
 
       </section>
-
-      <!-- ===================================================
-           KILOMETER
-      =================================================== -->
 
       <section class="dashboard-section">
 
@@ -1891,18 +1915,10 @@
 
           </div>
 
-          <!-- TAGE -->
-
           <div
             class="daily-chart"
             id="dailyChart"
-          >
-
-            <!-- Wird per JavaScript aufgebaut -->
-
-          </div>
-
-          <!-- WOCHE / MONAT / JAHR -->
+          ></div>
 
           <div class="summary-bars">
 
@@ -1976,8 +1992,6 @@
 
         </div>
 
-        <!-- ZUSATZ-ZAHLEN -->
-
         <div class="stat-grid">
 
           <div class="stat-card">
@@ -2031,10 +2045,6 @@
         </div>
 
       </section>
-
-      <!-- ===================================================
-           BESTZEITEN
-      =================================================== -->
 
       <section class="dashboard-section">
 
@@ -2284,10 +2294,6 @@
 
       </section>
 
-      <!-- ===================================================
-           LAUF EINTRAGEN
-      =================================================== -->
-
       <section class="dashboard-section">
 
         <div class="dashboard-section-header">
@@ -2490,10 +2496,6 @@
 
       </section>
 
-      <!-- ===================================================
-           LETZTE LÄUFE
-      =================================================== -->
-
       <section
         class="dashboard-section"
         id="recentRunsSection"
@@ -2595,8 +2597,6 @@
 
     </div>
 
-    <!-- LOGIN -->
-
     <form
       class="auth-form active"
       id="loginForm"
@@ -2656,8 +2656,6 @@
       ></div>
 
     </form>
-
-    <!-- REGISTRIERUNG -->
 
     <form
       class="auth-form"
@@ -2725,8 +2723,6 @@
 
       <div class="registration-requirements">
 
-        <!-- INSTAGRAM -->
-
         <section
           class="requirement-card"
           id="followRequirement"
@@ -2785,8 +2781,6 @@
           </label>
 
         </section>
-
-        <!-- EINLADUNG -->
 
         <section
           class="requirement-card"
@@ -2946,8 +2940,6 @@
 
     </form>
 
-    <!-- PASSWORT VERGESSEN -->
-
     <form
       class="auth-form"
       id="forgotForm"
@@ -2998,8 +2990,6 @@
       </div>
 
     </form>
-
-    <!-- RECOVERY -->
 
     <form
       class="auth-form"
@@ -3058,10 +3048,6 @@
   </div>
 
 </div>
-
-<!-- =========================================================
-     JAVASCRIPT
-========================================================= -->
 
 <script>
 
@@ -3370,7 +3356,7 @@
     false;
 
   /* =========================================================
-     DEMO DATEN FÜR AUSGELOGGTE BESUCHER
+     DEMO DATEN
   ========================================================= */
 
   const DEMO_RUNS = [
@@ -3768,7 +3754,7 @@
   }
 
   /* =========================================================
-     KILOMETER AUSRECHNEN
+     KILOMETER
   ========================================================= */
 
   function calculateTotals(
@@ -3820,15 +3806,11 @@
           );
 
         if (date >= yearStart) {
-
           year += distance;
-
         }
 
         if (date >= monthStart) {
-
           month += distance;
-
         }
 
         if (date >= weekStart) {
@@ -4497,10 +4479,6 @@
 
   }
 
-  /* =========================================================
-     GESAMTES RUN DASHBOARD
-  ========================================================= */
-
   function renderRunDashboard(
     runs
   ) {
@@ -4681,31 +4659,31 @@
         data,
         error
       } =
-        await supabaseClient
-          .from("runs")
-          .insert({
+      await supabaseClient
+        .from("runs")
+        .insert({
 
-            user_id:
-              currentUser.id,
+          user_id:
+            currentUser.id,
 
-            run_date:
-              date,
+          run_date:
+            date,
 
-            distance_km:
-              distance,
+          distance_km:
+            distance,
 
-            duration_seconds:
-              duration,
+          duration_seconds:
+            duration,
 
-            note:
-              note || null,
+          note:
+            note || null,
 
-            run_type:
-              runType.value
+          run_type:
+            runType.value
 
-          })
-          .select()
-          .single();
+        })
+        .select()
+        .single();
 
       setButtonLoading(
         saveRunButton,
@@ -4753,7 +4731,7 @@
   );
 
   /* =========================================================
-     LOGIN/REGISTRIERUNG
+     AUTH
   ========================================================= */
 
   function openAuth() {
@@ -5742,7 +5720,7 @@
   );
 
   /* =========================================================
-     PROFILE LADEN
+     PROFILE
   ========================================================= */
 
   async function loadProfile(
