@@ -71,24 +71,26 @@
     }
 
     /* =========================================================
-       NAVIGATION
+       NAVIGATION — WIE INDEX
     ========================================================= */
 
     .sidebar .nav {
       display: grid !important;
       grid-template-columns: 1fr 1fr !important;
-      gap: 8px 18px !important;
+      column-gap: 24px !important;
+      row-gap: 26px !important;
       width: 100% !important;
     }
 
     .sidebar .nav a {
-      min-height: 64px !important;
+      min-height: 48px !important;
+      height: 48px !important;
       display: flex !important;
       align-items: center !important;
-      padding: 0 16px !important;
-      border-radius: 34px !important;
+      padding: 0 !important;
+      border-radius: 999px !important;
       color: #565e5c !important;
-      font-size: 20px !important;
+      font-size: 18px !important;
       line-height: 1 !important;
       font-weight: 800 !important;
       text-decoration: none !important;
@@ -99,22 +101,25 @@
     }
 
     .sidebar .nav a:hover {
-      background: #f5f7f6 !important;
+      background: transparent !important;
       color: #111 !important;
-      transform: translateY(-1px);
+      transform: none !important;
     }
 
     .sidebar .nav a.active {
+      min-height: 48px !important;
+      height: 48px !important;
+      padding: 0 24px !important;
       background: #e8f9fc !important;
       color: #050909 !important;
     }
 
     .sidebar .nav a.active::before {
       content: "";
-      width: 13px;
-      height: 13px;
-      flex: 0 0 13px;
-      margin-right: 25px;
+      width: 11px;
+      height: 11px;
+      flex: 0 0 11px;
+      margin-right: 18px;
       border-radius: 50%;
       background: var(--miles-blue);
     }
@@ -4024,11 +4029,6 @@
         totals.year
       ) +
       ' <span>km</span>';
-
-    /*
-      Die Balken sind bewusst relativ zueinander.
-      Sie stellen keine Trainingsziele dar.
-    */
 
     const largest =
       Math.max(
