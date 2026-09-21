@@ -655,7 +655,6 @@
 
     /* =====================================================
        ACCOUNT MENU
-       KLEINER POPUP - PROFILBILD ÖFFNET NUR DAS MENÜ
     ===================================================== */
 
     .top-right {
@@ -720,13 +719,6 @@
       object-fit: cover;
       display: block;
     }
-
-    /*
-      WICHTIG:
-      Der Account-Kasten hat eine feste kleine Breite.
-      !important verhindert, dass Regeln aus style.css
-      ihn auf die komplette Seitenbreite ziehen.
-    */
 
     .account-menu {
       position: absolute !important;
@@ -805,12 +797,6 @@
       overflow-wrap: anywhere;
       word-break: break-word;
     }
-
-    /*
-      Mein Profil und Abmelden:
-      EXAKT dieselbe Schrift, Größe, Gewichtung,
-      Höhe und Ausrichtung.
-    */
 
     .account-menu a,
     .account-menu button,
@@ -3056,6 +3042,10 @@
     }
   );
 
+  /* =====================================================
+     LOGIN
+     ===================================================== */
+
   loginForm.addEventListener(
     "submit",
     async function(event) {
@@ -3075,6 +3065,57 @@
         document
           .getElementById("loginPassword")
           .value;
+
+      /*
+        Prüfen, ob bereits eine aktive Session existiert.
+
+        Wenn die eingegebene E-Mail dieselbe ist wie
+        die E-Mail des aktuell angemeldeten Kontos,
+        wird kein erneuter Login durchgeführt.
+      */
+
+      const {
+        data: sessionData,
+        error: sessionError
+      } =
+        await supabaseClient.auth.getSession();
+
+      if (sessionError) {
+
+        console.error(
+          "Session konnte nicht geprüft werden:",
+          sessionError
+        );
+
+      }
+
+      const currentSession =
+        sessionData &&
+        sessionData.session
+          ? sessionData.session
+          : null;
+
+      const currentSessionUser =
+        currentSession
+          ? currentSession.user
+          : null;
+
+      if (
+        currentSessionUser &&
+        currentSessionUser.email &&
+        currentSessionUser.email
+          .trim()
+          .toLowerCase() === email
+      ) {
+
+        setMessage(
+          loginMessage,
+          "Du hast dich mit dieser E-Mail schon angemeldet. Bitte melde dich stattdessen an."
+        );
+
+        return;
+
+      }
 
       setButtonLoading(
         loginSubmit,
