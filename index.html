@@ -654,8 +654,8 @@
     }
 
     /* =====================================================
-       ACCOUNT
-       EXAKT WIE CHALLENGES
+       ACCOUNT MENU
+       KLEINER POPUP - PROFILBILD ÖFFNET NUR DAS MENÜ
     ===================================================== */
 
     .top-right {
@@ -721,60 +721,153 @@
       display: block;
     }
 
+    /*
+      WICHTIG:
+      Der Account-Kasten hat eine feste kleine Breite.
+      !important verhindert, dass Regeln aus style.css
+      ihn auf die komplette Seitenbreite ziehen.
+    */
+
     .account-menu {
-      position: absolute;
-      top: 70px;
-      right: 0;
-      width: 230px;
-      background: #fff;
-      border: 1px solid #ddd;
+      position: absolute !important;
+      top: calc(100% + 12px) !important;
+      right: 0 !important;
+      left: auto !important;
+
+      width: 260px !important;
+      min-width: 260px !important;
+      max-width: 260px !important;
+
+      height: auto !important;
+      min-height: 0 !important;
+      max-height: none !important;
+
+      box-sizing: border-box !important;
+
+      padding: 0 !important;
+      margin: 0 !important;
+
+      background: #ffffff !important;
+      border: 1px solid #dddddd !important;
+      border-radius: 0 !important;
+
       box-shadow: 0 15px 40px rgba(0,0,0,.12);
-      padding: 8px;
-      z-index: 50;
+
+      z-index: 1000 !important;
+
       display: none;
+      overflow: hidden !important;
     }
 
     .account-menu.open {
-      display: block;
+      display: block !important;
     }
 
     .account-menu-name {
-      padding: 11px;
-      font-weight: var(--font-heading);
-      border-bottom: 1px solid #eee;
-      margin-bottom: 5px;
+      display: block !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+
+      padding: 16px 18px 4px !important;
+      margin: 0 !important;
+
+      border: 0 !important;
+      border-bottom: 0 !important;
+
+      background: #ffffff !important;
+      color: #111111 !important;
+
+      font-family: var(--font-main, "Inter", sans-serif) !important;
+      font-size: 20px !important;
+      line-height: 1.25 !important;
+      font-weight: var(--font-heading) !important;
     }
 
     .account-menu-email {
-      padding: 4px 11px 10px;
-      color: #888;
-      font-size: 11px;
-      border-bottom: 1px solid #eee;
-      margin-bottom: 5px;
+      display: block !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+
+      padding: 0 18px 16px !important;
+      margin: 0 !important;
+
+      border: 0 !important;
+      border-bottom: 1px solid #e8e8e8 !important;
+
+      background: #ffffff !important;
+      color: #888888 !important;
+
+      font-family: var(--font-main, "Inter", sans-serif) !important;
+      font-size: 13px !important;
+      line-height: 1.4 !important;
+      font-weight: var(--font-light) !important;
+
+      overflow-wrap: anywhere;
       word-break: break-word;
-      font-weight: var(--font-light);
     }
 
+    /*
+      Mein Profil und Abmelden:
+      EXAKT dieselbe Schrift, Größe, Gewichtung,
+      Höhe und Ausrichtung.
+    */
+
     .account-menu a,
-    .account-menu button {
-      display: block;
-      width: 100%;
-      box-sizing: border-box;
-      padding: 11px;
-      border: 0;
-      background: transparent;
-      text-align: left;
+    .account-menu button,
+    .account-menu .profile-menu-button,
+    .account-menu .logout-button {
+      display: block !important;
+
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: none !important;
+
+      height: auto !important;
+      min-height: 0 !important;
+
+      box-sizing: border-box !important;
+
+      margin: 0 !important;
+      padding: 16px 18px !important;
+
+      border: 0 !important;
+      border-radius: 0 !important;
+      border-bottom: 1px solid #e8e8e8 !important;
+
+      background: #ffffff !important;
+
+      text-align: left !important;
+      text-decoration: none !important;
+
       cursor: pointer;
-      font-size: 12px;
-      color: #222;
-      text-decoration: none;
-      font-weight: var(--font-light);
+
+      font-family: var(--font-main, "Inter", sans-serif) !important;
+      font-size: 16px !important;
+      line-height: 1.3 !important;
+      font-weight: var(--font-light) !important;
+      letter-spacing: normal !important;
+      text-transform: none !important;
+
+      color: #222222 !important;
+
+      box-shadow: none !important;
     }
 
     .account-menu a:hover,
-    .account-menu button:hover {
-      background: #f5f5f3;
-      color: var(--miles-blue);
+    .account-menu button:hover,
+    .account-menu .profile-menu-button:hover,
+    .account-menu .logout-button:hover {
+      background: #f5f5f3 !important;
+      color: #222222 !important;
+    }
+
+    .account-menu .logout-button {
+      border-bottom: 0 !important;
+      color: #888888 !important;
+    }
+
+    .account-menu .logout-button:hover {
+      color: #555555 !important;
     }
 
     /* =====================================================
@@ -1201,12 +1294,6 @@
         text-align: center;
       }
 
-      /*
-        Die Begrüßung bleibt auch auf Mobile sichtbar,
-        damit sie wie auf den anderen Seiten neben dem
-        Profilbild angezeigt wird.
-      */
-
       .top-right .user-greeting {
         display: inline;
         font-size: 12px;
@@ -1216,6 +1303,34 @@
         width: 48px;
         height: 48px;
         border-width: 2px;
+      }
+
+      .account-menu {
+        top: calc(100% + 10px) !important;
+        right: 0 !important;
+        left: auto !important;
+
+        width: 260px !important;
+        min-width: 260px !important;
+        max-width: 260px !important;
+      }
+
+      .account-menu-name {
+        font-size: 20px !important;
+      }
+
+      .account-menu-email {
+        font-size: 13px !important;
+      }
+
+      .account-menu a,
+      .account-menu button,
+      .account-menu .profile-menu-button,
+      .account-menu .logout-button {
+        padding: 16px 18px !important;
+        font-size: 16px !important;
+        line-height: 1.3 !important;
+        font-weight: var(--font-light) !important;
       }
 
       .auth-modal {
@@ -1369,12 +1484,17 @@
               user@email.de
             </div>
 
-            <a href="home.html#myRunSection">
-              My Profile
-            </a>
+            <button
+              type="button"
+              class="profile-menu-button"
+              id="profileButton"
+            >
+              Mein Profil
+            </button>
 
             <button
               type="button"
+              class="logout-button"
               id="logoutButton"
             >
               Abmelden
@@ -2185,6 +2305,9 @@
   const accountMenuEmail =
     document.getElementById("accountMenuEmail");
 
+  const profileButton =
+    document.getElementById("profileButton");
+
   const logoutButton =
     document.getElementById("logoutButton");
 
@@ -2533,11 +2656,6 @@
       "flex";
 
 
-    /*
-      Exakt wie auf Challenges, Home und Community:
-      "Hallo [Vorname]" direkt neben dem Profilbild.
-    */
-
     userGreeting.style.display =
       "inline";
 
@@ -2828,6 +2946,24 @@
   backToLoginButton.addEventListener(
     "click",
     showLogin
+  );
+
+
+  profileButton.addEventListener(
+    "click",
+    function(event) {
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      accountMenu.classList.remove(
+        "open"
+      );
+
+      window.location.href =
+        "profile.html";
+
+    }
   );
 
 
@@ -3201,10 +3337,17 @@
   );
 
 
+  /*
+    PROFILBILD:
+    Nur Popup öffnen/schließen.
+    KEIN href, KEINE Weiterleitung.
+  */
+
   avatarButton.addEventListener(
     "click",
     function(event) {
 
+      event.preventDefault();
       event.stopPropagation();
 
       accountMenu.classList.toggle(
