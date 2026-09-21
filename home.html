@@ -817,6 +817,75 @@
       box-shadow: 0 0 0 3px rgba(24,184,199,.08);
     }
 
+    /* =========================================================
+       RUN PHOTO
+    ========================================================= */
+
+    .run-photo-help {
+      margin: 0;
+      color: #858d8a;
+      font-size: 11px;
+      line-height: 1.45;
+    }
+
+    .run-photo-input {
+      padding: 11px 12px !important;
+      background: rgba(255,255,255,.9) !important;
+      cursor: pointer;
+    }
+
+    .run-photo-preview {
+      display: none;
+      width: 100%;
+      max-width: 420px;
+      margin-top: 4px;
+      border: 1px solid #d2e4e5;
+      background: #fff;
+      padding: 6px;
+      box-sizing: border-box;
+    }
+
+    .run-photo-preview.show {
+      display: block;
+    }
+
+    .run-photo-preview img {
+      display: block;
+      width: 100%;
+      max-height: 280px;
+      object-fit: contain;
+      background: #f4f7f6;
+    }
+
+    .run-photo-name {
+      margin-top: 7px;
+      color: #6f7774;
+      font-size: 10px;
+      line-height: 1.4;
+      overflow-wrap: anywhere;
+    }
+
+    .run-photo-remove {
+      display: none;
+      align-self: flex-start;
+      border: 0;
+      padding: 0;
+      background: transparent;
+      color: #888;
+      font-size: 10px;
+      font-weight: 700;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .run-photo-remove.show {
+      display: inline-block;
+    }
+
+    .run-photo-remove:hover {
+      color: var(--home-red);
+    }
+
     .run-form-actions {
       grid-column: 1 / -1;
       display: flex;
@@ -911,6 +980,18 @@
       font-weight: 900;
       text-transform: uppercase;
       letter-spacing: .8px;
+    }
+
+    .run-photo-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 5px;
+      color: var(--miles-blue-dark);
+      font-size: 9px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .5px;
     }
 
     .empty-runs {
@@ -1054,6 +1135,406 @@
     .form-group input:focus {
       border-color: var(--miles-blue);
       background: #fff;
+    }
+
+    /* =========================================================
+       REGISTRATION
+    ========================================================= */
+
+    .register-intro {
+      margin: -4px 0 22px;
+      padding: 15px 17px;
+      background: #f1fbfc;
+      border: 1px solid #d5f1f4;
+      color: #456062;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .register-intro strong {
+      color: #111;
+    }
+
+    .registration-requirements {
+      display: grid;
+      gap: 14px;
+      margin: 22px 0;
+    }
+
+    .requirement-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid #e2e7e5;
+      border-radius: 18px;
+      background: #fafbf9;
+      padding: 20px;
+    }
+
+    .requirement-card.completed {
+      border-color: #9edec0;
+      background: #f5fcf8;
+    }
+
+    .requirement-card.completed::after {
+      content: "✓";
+      position: absolute;
+      top: 15px;
+      right: 16px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #248b63;
+      color: #fff;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .requirement-head {
+      display: grid;
+      grid-template-columns: 48px minmax(0,1fr);
+      gap: 14px;
+      align-items: start;
+    }
+
+    .requirement-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: #fff;
+      border: 1px solid #e1e5e3;
+      font-size: 22px;
+    }
+
+    .requirement-title {
+      margin: 1px 0 5px;
+      padding-right: 35px;
+      color: #101313;
+      font-size: 17px;
+      line-height: 1.25;
+      font-weight: 850;
+    }
+
+    .requirement-text {
+      margin: 0;
+      color: #777f7c;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .instagram-handle {
+      display: inline-block;
+      margin-top: 8px;
+      color: #d62976;
+      font-size: 14px;
+      font-weight: 850;
+    }
+
+    .instagram-open-button {
+      width: 100%;
+      min-height: 48px;
+      margin-top: 17px;
+      padding: 12px 16px;
+      border: 1px solid #d9dddb;
+      border-radius: 12px;
+      background: #fff;
+      color: #171919;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .instagram-open-button:hover {
+      border-color: #d62976;
+      background: #fff7fa;
+    }
+
+    .requirement-check {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      margin-top: 17px;
+      padding-top: 16px;
+      border-top: 1px solid #e6e9e7;
+      cursor: pointer;
+    }
+
+    .requirement-check input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .custom-check {
+      width: 22px;
+      height: 22px;
+      flex: 0 0 22px;
+      margin-top: 1px;
+      border: 2px solid #c8cecb;
+      border-radius: 7px;
+      background: #fff;
+      box-sizing: border-box;
+      display: grid;
+      place-items: center;
+    }
+
+    .requirement-check input:checked + .custom-check {
+      background: var(--miles-blue);
+      border-color: var(--miles-blue);
+    }
+
+    .requirement-check input:checked + .custom-check::after {
+      content: "✓";
+      color: #fff;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .requirement-check-text {
+      color: #333;
+      font-size: 13px;
+      line-height: 1.5;
+      font-weight: 700;
+    }
+
+    .requirement-check-text small {
+      display: block;
+      margin-top: 3px;
+      color: #8a918f;
+      font-size: 11px;
+      font-weight: 400;
+    }
+
+    .invite-preview {
+      position: relative;
+      overflow: hidden;
+      min-height: 180px;
+      margin-top: 18px;
+      padding: 24px;
+      box-sizing: border-box;
+      border-radius: 16px;
+      background:
+        radial-gradient(
+          circle at 90% 10%,
+          rgba(24,184,199,.34) 0,
+          rgba(24,184,199,0) 38%
+        ),
+        #071112;
+      color: #fff;
+    }
+
+    .invite-preview-kicker {
+      color: var(--miles-blue);
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 4px;
+    }
+
+    .invite-preview-title {
+      margin: 25px 0 0;
+      color: #fff;
+      font-size: clamp(31px,7vw,48px);
+      line-height: .92;
+      letter-spacing: -2.5px;
+      font-weight: 900;
+    }
+
+    .invite-preview-title span {
+      color: var(--miles-blue);
+    }
+
+    .invite-preview-subtitle {
+      max-width: 340px;
+      margin: 14px 0 0;
+      color: rgba(255,255,255,.78);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .invite-preview-footer {
+      margin-top: 25px;
+      color: rgba(255,255,255,.52);
+      font-size: 9px;
+      letter-spacing: 3px;
+    }
+
+    .share-buttons {
+      display: grid;
+      gap: 10px;
+      margin-top: 13px;
+    }
+
+    .share-button {
+      width: 100%;
+      min-height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 13px 16px;
+      border: 0;
+      border-radius: 13px;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 850;
+      cursor: pointer;
+    }
+
+    .share-button.whatsapp {
+      background: #20b858;
+    }
+
+    .share-button.instagram {
+      background: linear-gradient(
+        100deg,
+        #c92b82 0%,
+        #d84b72 42%,
+        #f1a13d 100%
+      );
+    }
+
+    .share-icon {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(255,255,255,.18);
+    }
+
+    .share-status {
+      min-height: 19px;
+      margin-top: 11px;
+      color: #248b63;
+      font-size: 11px;
+      line-height: 1.5;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .invite-check {
+      opacity: .55;
+      pointer-events: none;
+    }
+
+    .invite-check.ready {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .registration-status {
+      display: grid;
+      gap: 7px;
+      margin: 20px 0 15px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      background: #f6f7f5;
+      border: 1px solid #e5e8e6;
+    }
+
+    .registration-status-row {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      color: #7b827f;
+      font-size: 11px;
+    }
+
+    .registration-status-row.done {
+      color: #248b63;
+      font-weight: 700;
+    }
+
+    .registration-status-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      flex: 0 0 18px;
+      display: grid;
+      place-items: center;
+      background: #e2e6e4;
+      color: #fff;
+      font-size: 10px;
+      font-weight: 900;
+    }
+
+    .registration-status-row.done .registration-status-dot {
+      background: #248b63;
+    }
+
+    /* =========================================================
+       AUTH BUTTONS
+    ========================================================= */
+
+    .auth-submit {
+      width: 100%;
+      min-height: 50px;
+      border: 1px solid var(--miles-blue);
+      background: var(--miles-blue);
+      color: #fff;
+      padding: 14px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      margin-top: 4px;
+    }
+
+    .auth-submit:hover:not(:disabled) {
+      background: var(--miles-blue-dark);
+      border-color: var(--miles-blue-dark);
+    }
+
+    .auth-submit:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+    }
+
+    .auth-message {
+      min-height: 18px;
+      margin-top: 12px;
+      font-size: 12px;
+      line-height: 1.5;
+      color: #d34b4b;
+    }
+
+    .auth-message.success {
+      color: #248b63;
+    }
+
+    .forgot-password,
+    .auth-back {
+      border: 0;
+      background: transparent;
+      color: #777;
+      font-size: 11px;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    .forgot-password {
+      display: block;
+      margin-top: 13px;
+      padding: 0;
+    }
+
+    .auth-back {
+      display: inline-flex;
+      margin-bottom: 18px;
+      padding: 0;
+      text-decoration: none;
+    }
+
+    .auth-note {
+      margin-top: 14px;
+      padding: 12px;
+      background: #f5f5f3;
+      border: 1px solid #e3e3df;
+      color: #666;
+      font-size: 11px;
+      line-height: 1.5;
     }
 
     /* =========================================================
@@ -1608,10 +2089,6 @@
         width: 260px !important;
       }
 
-      /* =====================================================
-         PROFIL AUF MOBILE — WIE INDEX
-      ===================================================== */
-
       .top-right .user-greeting {
         display: inline !important;
         font-size: 12px !important;
@@ -1642,10 +2119,6 @@
 <body>
 
 <div class="shell">
-
-  <!-- =======================================================
-       SIDEBAR
-  ======================================================= -->
 
   <aside class="sidebar">
 
@@ -1718,10 +2191,6 @@
     </div>
 
   </aside>
-
-  <!-- =======================================================
-       MAIN
-  ======================================================= -->
 
   <main class="main">
 
@@ -2495,6 +2964,52 @@
 
             </div>
 
+            <div class="run-form-group full">
+
+              <label for="runPhoto">
+                Lauf-Foto / Nachweis <span style="color:#888;font-weight:500;">(optional)</span>
+              </label>
+
+              <input
+                class="run-photo-input"
+                id="runPhoto"
+                type="file"
+                accept="image/*"
+              >
+
+              <p class="run-photo-help">
+                Optional: z. B. Strava-Screenshot, Rennfoto oder Ergebnisnachweis.
+                Maximal 10 MB.
+              </p>
+
+              <div
+                class="run-photo-preview"
+                id="runPhotoPreview"
+              >
+
+                <img
+                  id="runPhotoPreviewImage"
+                  src=""
+                  alt="Vorschau des Lauf-Fotos"
+                >
+
+                <div
+                  class="run-photo-name"
+                  id="runPhotoName"
+                ></div>
+
+              </div>
+
+              <button
+                class="run-photo-remove"
+                id="runPhotoRemove"
+                type="button"
+              >
+                Foto entfernen
+              </button>
+
+            </div>
+
             <div class="run-form-actions">
 
               <div
@@ -3093,6 +3608,12 @@
       SUPABASE_PUBLISHABLE_KEY
     );
 
+  const RUN_PHOTO_BUCKET =
+    "run-photos";
+
+  const MAX_RUN_PHOTO_SIZE =
+    10 * 1024 * 1024;
+
   /* =========================================================
      ELEMENTE
   ========================================================= */
@@ -3303,6 +3824,21 @@
   const runNote =
     document.getElementById("runNote");
 
+  const runPhoto =
+    document.getElementById("runPhoto");
+
+  const runPhotoPreview =
+    document.getElementById("runPhotoPreview");
+
+  const runPhotoPreviewImage =
+    document.getElementById("runPhotoPreviewImage");
+
+  const runPhotoName =
+    document.getElementById("runPhotoName");
+
+  const runPhotoRemove =
+    document.getElementById("runPhotoRemove");
+
   const saveRunButton =
     document.getElementById("saveRunButton");
 
@@ -3379,6 +3915,12 @@
 
   let inviteActionStarted =
     false;
+
+  let selectedRunPhoto =
+    null;
+
+  let runPhotoPreviewUrl =
+    null;
 
   /* =========================================================
      DEMO WOCHENWERTE
@@ -3818,6 +4360,9 @@
     }
 
     if (
+      hours < 0 ||
+      minutes < 0 ||
+      seconds < 0 ||
       minutes > 59 ||
       seconds > 59
     ) {
@@ -3897,6 +4442,322 @@
     );
 
   }
+
+  /* =========================================================
+     FOTO
+  ========================================================= */
+
+  function getFileExtension(
+    file
+  ) {
+
+    const fileName =
+      String(
+        file &&
+        file.name ||
+        ""
+      );
+
+    const parts =
+      fileName.split(".");
+
+    if (
+      parts.length > 1
+    ) {
+
+      const extension =
+        parts
+          .pop()
+          .toLowerCase()
+          .replace(
+            /[^a-z0-9]/g,
+            ""
+          );
+
+      if (extension) {
+        return extension;
+      }
+
+    }
+
+    if (
+      file &&
+      file.type === "image/png"
+    ) {
+      return "png";
+    }
+
+    if (
+      file &&
+      file.type === "image/webp"
+    ) {
+      return "webp";
+    }
+
+    return "jpg";
+
+  }
+
+  function resetRunPhoto() {
+
+    selectedRunPhoto =
+      null;
+
+    runPhoto.value =
+      "";
+
+    if (runPhotoPreviewUrl) {
+
+      URL.revokeObjectURL(
+        runPhotoPreviewUrl
+      );
+
+      runPhotoPreviewUrl =
+        null;
+
+    }
+
+    runPhotoPreview.classList.remove(
+      "show"
+    );
+
+    runPhotoPreviewImage.src =
+      "";
+
+    runPhotoName.textContent =
+      "";
+
+    runPhotoRemove.classList.remove(
+      "show"
+    );
+
+  }
+
+  function handleRunPhotoSelection() {
+
+    const file =
+      runPhoto.files &&
+      runPhoto.files[0]
+        ? runPhoto.files[0]
+        : null;
+
+    if (!file) {
+
+      resetRunPhoto();
+
+      return;
+
+    }
+
+    if (
+      !file.type ||
+      !file.type.startsWith("image/")
+    ) {
+
+      resetRunPhoto();
+
+      setMessage(
+        runFormMessage,
+        "Bitte wähle eine Bilddatei aus."
+      );
+
+      return;
+
+    }
+
+    if (
+      file.size >
+      MAX_RUN_PHOTO_SIZE
+    ) {
+
+      resetRunPhoto();
+
+      setMessage(
+        runFormMessage,
+        "Das Foto ist zu groß. Maximal 10 MB sind erlaubt."
+      );
+
+      return;
+
+    }
+
+    if (runPhotoPreviewUrl) {
+
+      URL.revokeObjectURL(
+        runPhotoPreviewUrl
+      );
+
+    }
+
+    selectedRunPhoto =
+      file;
+
+    runPhotoPreviewUrl =
+      URL.createObjectURL(
+        file
+      );
+
+    runPhotoPreviewImage.src =
+      runPhotoPreviewUrl;
+
+    runPhotoName.textContent =
+      file.name +
+      " · " +
+      (
+        file.size /
+        (1024 * 1024)
+      ).toFixed(2) +
+      " MB";
+
+    runPhotoPreview.classList.add(
+      "show"
+    );
+
+    runPhotoRemove.classList.add(
+      "show"
+    );
+
+  }
+
+  async function uploadRunPhoto(
+    file
+  ) {
+
+    if (!file) {
+      return null;
+    }
+
+    if (!currentUser) {
+      throw new Error(
+        "Für den Foto-Upload musst du angemeldet sein."
+      );
+    }
+
+    if (
+      file.size >
+      MAX_RUN_PHOTO_SIZE
+    ) {
+
+      throw new Error(
+        "Das Foto ist zu groß. Maximal 10 MB sind erlaubt."
+      );
+
+    }
+
+    const extension =
+      getFileExtension(
+        file
+      );
+
+    const uniqueId =
+      typeof crypto !== "undefined" &&
+      typeof crypto.randomUUID === "function"
+        ? crypto.randomUUID()
+        : (
+            Date.now() +
+            "-" +
+            Math.random()
+              .toString(36)
+              .substring(2)
+          );
+
+    const path =
+      currentUser.id +
+      "/" +
+      uniqueId +
+      "." +
+      extension;
+
+    const {
+      error
+    } =
+      await supabaseClient
+        .storage
+        .from(RUN_PHOTO_BUCKET)
+        .upload(
+          path,
+          file,
+          {
+            cacheControl: "3600",
+            upsert: false,
+            contentType:
+              file.type ||
+              "image/jpeg"
+          }
+        );
+
+    if (error) {
+
+      console.error(
+        "Lauf-Foto Upload:",
+        error
+      );
+
+      throw new Error(
+        error.message ||
+        "Das Foto konnte nicht hochgeladen werden."
+      );
+
+    }
+
+    return path;
+
+  }
+
+  async function deleteRunPhoto(
+    path
+  ) {
+
+    if (!path) {
+      return;
+    }
+
+    const {
+      error
+    } =
+      await supabaseClient
+        .storage
+        .from(RUN_PHOTO_BUCKET)
+        .remove([
+          path
+        ]);
+
+    if (error) {
+
+      console.error(
+        "Lauf-Foto konnte nicht gelöscht werden:",
+        error
+      );
+
+    }
+
+  }
+
+  runPhoto.addEventListener(
+    "change",
+    function() {
+
+      clearMessages();
+
+      handleRunPhotoSelection();
+
+    }
+  );
+
+  runPhotoRemove.addEventListener(
+    "click",
+    function() {
+
+      resetRunPhoto();
+
+      setMessage(
+        runFormMessage,
+        "Foto entfernt.",
+        true
+      );
+
+    }
+  );
 
   /* =========================================================
      DEMO WOCHENWERTE
@@ -4339,6 +5200,15 @@
 
   /* =========================================================
      BESTZEITEN
+     
+     GPS-KARENZEN:
+     5K        4,90 – 5,50 km
+     10K       9,80 – 11,00 km
+     HM       20,90 – 22,50 km
+     Marathon 41,90 – 44,00 km
+     50K      49,00 – 53,00 km
+     100K     98,00 – 106,00 km
+     100+     >106,00 km
   ========================================================= */
 
   function findBestRun(
@@ -4451,7 +5321,7 @@
       findBestRun(
         runs,
         4.90,
-        5.15
+        5.50
       )
     );
 
@@ -4459,8 +5329,8 @@
       "10k",
       findBestRun(
         runs,
-        9.85,
-        10.25
+        9.80,
+        11.00
       )
     );
 
@@ -4469,7 +5339,7 @@
       findBestRun(
         runs,
         20.90,
-        21.35
+        22.50
       )
     );
 
@@ -4478,7 +5348,7 @@
       findBestRun(
         runs,
         41.90,
-        42.50
+        44.00
       )
     );
 
@@ -4486,8 +5356,8 @@
       "50k",
       findBestRun(
         runs,
-        49.50,
-        50.75
+        49.00,
+        53.00
       )
     );
 
@@ -4495,8 +5365,8 @@
       "100k",
       findBestRun(
         runs,
-        99.0,
-        101.0
+        98.00,
+        106.00
       )
     );
 
@@ -4504,7 +5374,7 @@
       "100plus",
       findBestRun(
         runs,
-        101.01,
+        106.000001,
         Infinity
       )
     );
@@ -4697,6 +5567,25 @@
           note
         );
 
+        if (run.photo_path) {
+
+          const photoBadge =
+            document.createElement(
+              "div"
+            );
+
+          photoBadge.className =
+            "run-photo-badge";
+
+          photoBadge.textContent =
+            "📷 Foto hinterlegt";
+
+          distance.appendChild(
+            photoBadge
+          );
+
+        }
+
         const time =
           document.createElement(
             "div"
@@ -4807,7 +5696,7 @@
       await supabaseClient
         .from("runs")
         .select(
-          "id, run_date, distance_km, duration_seconds, note, run_type, created_at"
+          "id, run_date, distance_km, duration_seconds, note, run_type, photo_path, created_at"
         )
         .eq(
           "user_id",
@@ -4886,6 +5775,9 @@
       const note =
         runNote.value.trim();
 
+      const photo =
+        selectedRunPhoto;
+
       if (!date) {
 
         setMessage(
@@ -4924,19 +5816,62 @@
 
       }
 
+      if (
+        photo &&
+        photo.size >
+        MAX_RUN_PHOTO_SIZE
+      ) {
+
+        setMessage(
+          runFormMessage,
+          "Das Foto ist zu groß. Maximal 10 MB sind erlaubt."
+        );
+
+        return;
+
+      }
+
       setButtonLoading(
         saveRunButton,
         true,
         "Lauf speichern →"
       );
 
-      const {
-        data,
-        error
-      } =
-      await supabaseClient
-        .from("runs")
-        .insert({
+      let uploadedPhotoPath =
+        null;
+
+      try {
+
+        /*
+         * Foto zuerst hochladen.
+         * So kann der Pfad anschließend zusammen
+         * mit dem Lauf in runs.photo_path gespeichert werden.
+         */
+
+        if (photo) {
+
+          setMessage(
+            runFormMessage,
+            "Foto wird hochgeladen …",
+            true
+          );
+
+          uploadedPhotoPath =
+            await uploadRunPhoto(
+              photo
+            );
+
+        }
+
+        setMessage(
+          runFormMessage,
+          uploadedPhotoPath
+            ? "Lauf wird gespeichert …"
+            : "Lauf wird gespeichert …",
+          true
+        );
+
+        const runPayload = {
 
           user_id:
             currentUser.id,
@@ -4956,17 +5891,77 @@
           run_type:
             runType.value
 
-        })
-        .select()
-        .single();
+        };
 
-      setButtonLoading(
-        saveRunButton,
-        false,
-        "Lauf speichern →"
-      );
+        if (
+          uploadedPhotoPath
+        ) {
 
-      if (error) {
+          runPayload.photo_path =
+            uploadedPhotoPath;
+
+        }
+
+        const {
+          data,
+          error
+        } =
+          await supabaseClient
+            .from("runs")
+            .insert(
+              runPayload
+            )
+            .select()
+            .single();
+
+        if (error) {
+
+          if (
+            uploadedPhotoPath
+          ) {
+
+            await deleteRunPhoto(
+              uploadedPhotoPath
+            );
+
+          }
+
+          console.error(
+            "Lauf speichern:",
+            error
+          );
+
+          throw new Error(
+            error.message ||
+            "Der Lauf konnte nicht gespeichert werden."
+          );
+
+        }
+
+        currentRuns.unshift(
+          data
+        );
+
+        runForm.reset();
+
+        runDate.value =
+          getTodayDateString();
+
+        resetRunPhoto();
+
+        setMessage(
+          runFormMessage,
+          uploadedPhotoPath
+            ? "Lauf und Foto erfolgreich gespeichert."
+            : "Lauf erfolgreich gespeichert.",
+          true
+        );
+
+        renderRunDashboard(
+          currentRuns
+        );
+
+      } catch (error) {
 
         console.error(
           "Lauf speichern:",
@@ -4975,32 +5970,21 @@
 
         setMessage(
           runFormMessage,
-          error.message ||
-          "Der Lauf konnte nicht gespeichert werden."
+          error &&
+          error.message
+            ? error.message
+            : "Der Lauf konnte nicht gespeichert werden."
         );
 
-        return;
+      } finally {
+
+        setButtonLoading(
+          saveRunButton,
+          false,
+          "Lauf speichern →"
+        );
 
       }
-
-      currentRuns.unshift(
-        data
-      );
-
-      runForm.reset();
-
-      runDate.value =
-        getTodayDateString();
-
-      setMessage(
-        runFormMessage,
-        "Lauf erfolgreich gespeichert.",
-        true
-      );
-
-      renderRunDashboard(
-        currentRuns
-      );
 
     }
   );
@@ -6246,6 +7230,8 @@
 
     currentRuns =
       [];
+
+    resetRunPhoto();
 
     accountMenu.classList.remove(
       "open"
