@@ -48,10 +48,6 @@
       font-family: inherit;
     }
 
-    /* =========================================================
-       GLOBAL
-    ========================================================= */
-
     .lime {
       background-color: var(--miles-blue) !important;
       border-color: var(--miles-blue) !important;
@@ -73,7 +69,6 @@
 
     /* =========================================================
        TOP BAR
-       NICHT VERÄNDERT
     ========================================================= */
 
     .top-right {
@@ -1714,7 +1709,6 @@
 
   <!-- =======================================================
        SIDEBAR
-       NAVIGATION BLEIBT UNVERÄNDERT.
   ======================================================= -->
 
   <aside class="sidebar">
@@ -3464,16 +3458,7 @@
     7.0
   ];
 
-  /*
-     Historische Demo-Läufe.
-     Der längste Demo-Lauf ist bewusst der 50-km-Lauf.
-     Für 100 km und 100+ km gibt es in der Demo
-     bewusst noch keinen eingetragenen Lauf.
-  */
-
   const DEMO_RUNS = [
-
-    /* Weitere Läufe im aktuellen Monat */
 
     {
       run_date: "2026-09-10",
@@ -3506,8 +3491,6 @@
       note: "September Start",
       run_type: "normal"
     },
-
-    /* Bestzeiten */
 
     {
       run_date: "2026-06-13",
@@ -3548,8 +3531,6 @@
       note: "50K Ultra",
       run_type: "ultra"
     },
-
-    /* Weitere Jahreskilometer */
 
     {
       run_date: "2026-08-23",
@@ -3682,6 +3663,39 @@
     }
 
     return "Runner";
+
+  }
+
+  /*
+    NEU:
+    Der Begrüßungstext verwendet nur den ersten Namensteil.
+    Beispiel:
+    "Tano Loew" -> "Tano"
+    "Max Mustermann" -> "Max"
+    "Tano" -> "Tano"
+  */
+
+  function getUserFirstName(
+    user,
+    profile
+  ) {
+
+    const displayName =
+      getUserDisplayName(
+        user,
+        profile
+      );
+
+    const parts =
+      displayName
+        .trim()
+        .split(/\s+/)
+        .filter(Boolean);
+
+    return (
+      parts[0] ||
+      "Runner"
+    );
 
   }
 
@@ -4534,13 +4548,6 @@
       )
     );
 
-    /*
-      100 km:
-      Bewusst leer in der Demo.
-      Sobald ein echter Lauf zwischen 99,0 und 101,0 km
-      eingetragen wird, erscheint automatisch die Bestzeit.
-    */
-
     renderBestTime(
       "100k",
       findBestRun(
@@ -4550,13 +4557,6 @@
       )
     );
 
-    /*
-      100+ km:
-      Hier werden nur Läufe oberhalb von 101 km berücksichtigt.
-      Damit kann beispielsweise ein 100-Meiler oder ein
-      langer Backyard Ultra automatisch erscheinen.
-    */
-
     renderBestTime(
       "100plus",
       findBestRun(
@@ -4565,12 +4565,6 @@
         Infinity
       )
     );
-
-    /*
-      Der längste Lauf wird bewusst separat
-      als maximale Distanz aus allen Läufen bestimmt.
-      In der Demo ist das weiterhin der 50-km-Lauf.
-    */
 
     const longest =
       runs.reduce(
@@ -6151,21 +6145,46 @@
     saveRunButton.textContent =
       "Lauf speichern →";
 
+    /*
+      Vollständiger Name für das Profilmenü.
+    */
+
     const displayName =
       getUserDisplayName(
         currentUser,
         currentProfile
       );
 
+    /*
+      NEU:
+      Nur der Vorname für die Begrüßung.
+    */
+
+    const firstName =
+      getUserFirstName(
+        currentUser,
+        currentProfile
+      );
+
     userGreeting.textContent =
       "Hallo " +
-      displayName;
+      firstName;
+
+    /*
+      Im Account-Menü bleibt der vollständige Name.
+    */
 
     accountMenuName.textContent =
       displayName;
 
     accountMenuEmail.textContent =
       currentUser.email || "";
+
+    /*
+      Profilbild laden.
+      Falls kein Bild vorhanden ist,
+      werden die Initialen angezeigt.
+    */
 
     avatarButton.innerHTML =
       "";
