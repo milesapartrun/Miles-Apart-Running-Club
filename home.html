@@ -129,7 +129,7 @@
     }
 
     /* =========================================================
-       PROFIL AVATAR — WIE INDEX
+       PROFIL AVATAR
     ========================================================= */
 
     .user-avatar-button {
@@ -1538,406 +1538,6 @@
     }
 
     /* =========================================================
-       REGISTRATION
-    ========================================================= */
-
-    .register-intro {
-      margin: -4px 0 22px;
-      padding: 15px 17px;
-      background: #f1fbfc;
-      border: 1px solid #d5f1f4;
-      color: #456062;
-      font-size: 12px;
-      line-height: 1.6;
-    }
-
-    .register-intro strong {
-      color: #111;
-    }
-
-    .registration-requirements {
-      display: grid;
-      gap: 14px;
-      margin: 22px 0;
-    }
-
-    .requirement-card {
-      position: relative;
-      overflow: hidden;
-      border: 1px solid #e2e7e5;
-      border-radius: 18px;
-      background: #fafbf9;
-      padding: 20px;
-    }
-
-    .requirement-card.completed {
-      border-color: #9edec0;
-      background: #f5fcf8;
-    }
-
-    .requirement-card.completed::after {
-      content: "✓";
-      position: absolute;
-      top: 15px;
-      right: 16px;
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      background: #248b63;
-      color: #fff;
-      font-size: 14px;
-      font-weight: 900;
-    }
-
-    .requirement-head {
-      display: grid;
-      grid-template-columns: 48px minmax(0,1fr);
-      gap: 14px;
-      align-items: start;
-    }
-
-    .requirement-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
-      display: grid;
-      place-items: center;
-      background: #fff;
-      border: 1px solid #e1e5e3;
-      font-size: 22px;
-    }
-
-    .requirement-title {
-      margin: 1px 0 5px;
-      padding-right: 35px;
-      color: #101313;
-      font-size: 17px;
-      line-height: 1.25;
-      font-weight: 850;
-    }
-
-    .requirement-text {
-      margin: 0;
-      color: #777f7c;
-      font-size: 13px;
-      line-height: 1.55;
-    }
-
-    .instagram-handle {
-      display: inline-block;
-      margin-top: 8px;
-      color: #d62976;
-      font-size: 14px;
-      font-weight: 850;
-    }
-
-    .instagram-open-button {
-      width: 100%;
-      min-height: 48px;
-      margin-top: 17px;
-      padding: 12px 16px;
-      border: 1px solid #d9dddb;
-      border-radius: 12px;
-      background: #fff;
-      color: #171919;
-      font-size: 13px;
-      font-weight: 800;
-      cursor: pointer;
-    }
-
-    .instagram-open-button:hover {
-      border-color: #d62976;
-      background: #fff7fa;
-    }
-
-    .requirement-check {
-      display: flex;
-      align-items: flex-start;
-      gap: 11px;
-      margin-top: 17px;
-      padding-top: 16px;
-      border-top: 1px solid #e6e9e7;
-      cursor: pointer;
-    }
-
-    .requirement-check input {
-      position: absolute;
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .custom-check {
-      width: 22px;
-      height: 22px;
-      flex: 0 0 22px;
-      margin-top: 1px;
-      border: 2px solid #c8cecb;
-      border-radius: 7px;
-      background: #fff;
-      box-sizing: border-box;
-      display: grid;
-      place-items: center;
-    }
-
-    .requirement-check input:checked + .custom-check {
-      background: var(--miles-blue);
-      border-color: var(--miles-blue);
-    }
-
-    .requirement-check input:checked + .custom-check::after {
-      content: "✓";
-      color: #fff;
-      font-size: 13px;
-      font-weight: 900;
-    }
-
-    .requirement-check-text {
-      color: #333;
-      font-size: 13px;
-      line-height: 1.5;
-      font-weight: 700;
-    }
-
-    .requirement-check-text small {
-      display: block;
-      margin-top: 3px;
-      color: #8a918f;
-      font-size: 11px;
-      font-weight: 400;
-    }
-
-    .invite-preview {
-      position: relative;
-      overflow: hidden;
-      min-height: 180px;
-      margin-top: 18px;
-      padding: 24px;
-      box-sizing: border-box;
-      border-radius: 16px;
-      background:
-        radial-gradient(
-          circle at 90% 10%,
-          rgba(24,184,199,.34) 0,
-          rgba(24,184,199,0) 38%
-        ),
-        #071112;
-      color: #fff;
-    }
-
-    .invite-preview-kicker {
-      color: var(--miles-blue);
-      font-size: 9px;
-      font-weight: 900;
-      letter-spacing: 4px;
-    }
-
-    .invite-preview-title {
-      margin: 25px 0 0;
-      color: #fff;
-      font-size: clamp(31px,7vw,48px);
-      line-height: .92;
-      letter-spacing: -2.5px;
-      font-weight: 900;
-    }
-
-    .invite-preview-title span {
-      color: var(--miles-blue);
-    }
-
-    .invite-preview-subtitle {
-      max-width: 340px;
-      margin: 14px 0 0;
-      color: rgba(255,255,255,.78);
-      font-size: 12px;
-      line-height: 1.45;
-    }
-
-    .invite-preview-footer {
-      margin-top: 25px;
-      color: rgba(255,255,255,.52);
-      font-size: 9px;
-      letter-spacing: 3px;
-    }
-
-    .share-buttons {
-      display: grid;
-      gap: 10px;
-      margin-top: 13px;
-    }
-
-    .share-button {
-      width: 100%;
-      min-height: 52px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      padding: 13px 16px;
-      border: 0;
-      border-radius: 13px;
-      color: #fff;
-      font-size: 13px;
-      font-weight: 850;
-      cursor: pointer;
-    }
-
-    .share-button.whatsapp {
-      background: #20b858;
-    }
-
-    .share-button.instagram {
-      background: linear-gradient(
-        100deg,
-        #c92b82 0%,
-        #d84b72 42%,
-        #f1a13d 100%
-      );
-    }
-
-    .share-icon {
-      width: 25px;
-      height: 25px;
-      border-radius: 50%;
-      display: grid;
-      place-items: center;
-      background: rgba(255,255,255,.18);
-    }
-
-    .share-status {
-      min-height: 19px;
-      margin-top: 11px;
-      color: #248b63;
-      font-size: 11px;
-      line-height: 1.5;
-      font-weight: 700;
-      text-align: center;
-    }
-
-    .invite-check {
-      opacity: .55;
-      pointer-events: none;
-    }
-
-    .invite-check.ready {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .registration-status {
-      display: grid;
-      gap: 7px;
-      margin: 20px 0 15px;
-      padding: 14px 16px;
-      border-radius: 12px;
-      background: #f6f7f5;
-      border: 1px solid #e5e8e6;
-    }
-
-    .registration-status-row {
-      display: flex;
-      align-items: center;
-      gap: 9px;
-      color: #7b827f;
-      font-size: 11px;
-    }
-
-    .registration-status-row.done {
-      color: #248b63;
-      font-weight: 700;
-    }
-
-    .registration-status-dot {
-      width: 18px;
-      height: 18px;
-      border-radius: 50%;
-      flex: 0 0 18px;
-      display: grid;
-      place-items: center;
-      background: #e2e6e4;
-      color: #fff;
-      font-size: 10px;
-      font-weight: 900;
-    }
-
-    .registration-status-row.done .registration-status-dot {
-      background: #248b63;
-    }
-
-    /* =========================================================
-       AUTH BUTTONS
-    ========================================================= */
-
-    .auth-submit {
-      width: 100%;
-      min-height: 50px;
-      border: 1px solid var(--miles-blue);
-      background: var(--miles-blue);
-      color: #fff;
-      padding: 14px;
-      font-size: 12px;
-      font-weight: 800;
-      cursor: pointer;
-      margin-top: 4px;
-    }
-
-    .auth-submit:hover:not(:disabled) {
-      background: var(--miles-blue-dark);
-      border-color: var(--miles-blue-dark);
-    }
-
-    .auth-submit:disabled {
-      opacity: .45;
-      cursor: not-allowed;
-    }
-
-    .auth-message {
-      min-height: 18px;
-      margin-top: 12px;
-      font-size: 12px;
-      line-height: 1.5;
-      color: #d34b4b;
-    }
-
-    .auth-message.success {
-      color: #248b63;
-    }
-
-    .forgot-password,
-    .auth-back {
-      border: 0;
-      background: transparent;
-      color: #777;
-      font-size: 11px;
-      cursor: pointer;
-      text-decoration: underline;
-    }
-
-    .forgot-password {
-      display: block;
-      margin-top: 13px;
-      padding: 0;
-    }
-
-    .auth-back {
-      display: inline-flex;
-      margin-bottom: 18px;
-      padding: 0;
-      text-decoration: none;
-    }
-
-    .auth-note {
-      margin-top: 14px;
-      padding: 12px;
-      background: #f5f5f3;
-      border: 1px solid #e3e3df;
-      color: #666;
-      font-size: 11px;
-      line-height: 1.5;
-    }
-
-    /* =========================================================
        RESPONSIVE
     ========================================================= */
 
@@ -2303,9 +1903,7 @@
 
         <div class="dashboard-copy">
 
-          <div class="dashboard-eyebrow">
-            MILES APART / MY RUN
-          </div>
+          <!-- MY RUN ENTFERNT -->
 
           <h1>
             Deine Kilometer.<br>
@@ -2967,7 +2565,7 @@
             <div class="run-form-group full">
 
               <label for="runPhoto">
-                Lauf-Foto / Nachweis <span style="color:#888;font-weight:500;">(optional)</span>
+                Lauf-Foto / Nachweis
               </label>
 
               <input
@@ -2975,10 +2573,11 @@
                 id="runPhoto"
                 type="file"
                 accept="image/*"
+                required
               >
 
               <p class="run-photo-help">
-                Optional: z. B. Strava-Screenshot, Rennfoto oder Ergebnisnachweis.
+                Pflicht: z. B. Strava-Screenshot, Rennfoto oder Ergebnisnachweis.
                 Maximal 10 MB.
               </p>
 
@@ -4624,7 +4223,9 @@
   ) {
 
     if (!file) {
-      return null;
+      throw new Error(
+        "Bitte lade ein Foto oder einen Nachweis hoch."
+      );
     }
 
     if (!currentUser) {
@@ -4752,8 +4353,7 @@
 
       setMessage(
         runFormMessage,
-        "Foto entfernt.",
-        true
+        "Foto entfernt. Bitte wähle ein Foto aus, bevor du den Lauf speicherst."
       );
 
     }
@@ -5200,7 +4800,7 @@
 
   /* =========================================================
      BESTZEITEN
-     
+
      GPS-KARENZEN:
      5K        4,90 – 5,50 km
      10K       9,80 – 11,00 km
@@ -5816,8 +5416,24 @@
 
       }
 
+      /* =====================================================
+         FOTO IST PFLICHT
+      ===================================================== */
+
+      if (!photo) {
+
+        setMessage(
+          runFormMessage,
+          "Bitte lade ein Foto oder einen Nachweis hoch. Das Foto ist für jeden Lauf erforderlich."
+        );
+
+        runPhoto.focus();
+
+        return;
+
+      }
+
       if (
-        photo &&
         photo.size >
         MAX_RUN_PHOTO_SIZE
       ) {
@@ -5844,30 +5460,23 @@
 
         /*
          * Foto zuerst hochladen.
-         * So kann der Pfad anschließend zusammen
-         * mit dem Lauf in runs.photo_path gespeichert werden.
+         * Das Foto ist verpflichtend.
          */
-
-        if (photo) {
-
-          setMessage(
-            runFormMessage,
-            "Foto wird hochgeladen …",
-            true
-          );
-
-          uploadedPhotoPath =
-            await uploadRunPhoto(
-              photo
-            );
-
-        }
 
         setMessage(
           runFormMessage,
-          uploadedPhotoPath
-            ? "Lauf wird gespeichert …"
-            : "Lauf wird gespeichert …",
+          "Foto wird hochgeladen …",
+          true
+        );
+
+        uploadedPhotoPath =
+          await uploadRunPhoto(
+            photo
+          );
+
+        setMessage(
+          runFormMessage,
+          "Lauf wird gespeichert …",
           true
         );
 
@@ -5889,18 +5498,12 @@
             note || null,
 
           run_type:
-            runType.value
+            runType.value,
+
+          photo_path:
+            uploadedPhotoPath
 
         };
-
-        if (
-          uploadedPhotoPath
-        ) {
-
-          runPayload.photo_path =
-            uploadedPhotoPath;
-
-        }
 
         const {
           data,
@@ -5951,9 +5554,7 @@
 
         setMessage(
           runFormMessage,
-          uploadedPhotoPath
-            ? "Lauf und Foto erfolgreich gespeichert."
-            : "Lauf erfolgreich gespeichert.",
+          "Lauf und Foto erfolgreich gespeichert.",
           true
         );
 
