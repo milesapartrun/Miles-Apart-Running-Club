@@ -1102,6 +1102,7 @@
 
     /* =========================================================
        AUTH AREA
+       ANGLEICHUNG AN DIE INDEX-SEITE
     ========================================================= */
 
     .top-right {
@@ -1118,10 +1119,18 @@
     }
 
 
+    /*
+      GLEICH WIE INDEX:
+      "Hallo Tano" / "Hallo [Name]"
+    */
+
     .user-greeting {
-      font-size: 13px;
+      display: inline;
       color: #666;
+      font-size: 13px;
+      line-height: 1.2;
       white-space: nowrap;
+      font-weight: 300;
     }
 
 
@@ -1130,11 +1139,14 @@
       align-items: center;
       justify-content: center;
       min-height: 38px;
+      height: 38px;
       padding: 0 16px;
       border: 1px solid #d7d7d3;
+      border-radius: 0;
       background: #fff;
       color: #222;
       font-size: 12px;
+      line-height: 1;
       font-weight: 700;
       cursor: pointer;
       transition: .2s ease;
@@ -1147,21 +1159,40 @@
     }
 
 
+    /*
+      PROFILBILD:
+      EXAKT WIE AUF DER INDEX-SEITE
+      58 x 58 px
+      3 px türkisfarbener Rand
+    */
+
     .user-avatar-button {
-      width: 38px;
-      height: 38px;
+      width: 58px;
+      height: 58px;
+
+      flex: 0 0 58px;
+
+      padding: 0;
+
+      border: 3px solid var(--miles-blue);
       border-radius: 50%;
-      border: 2px solid var(--miles-blue);
+
       background: #fff;
       color: var(--miles-blue);
+
       display: flex;
       align-items: center;
       justify-content: center;
+
+      font-family: var(--font-main) !important;
+      font-size: 18px;
+      line-height: 1;
       font-weight: 800;
-      font-size: 13px;
+
       cursor: pointer;
       overflow: hidden;
-      padding: 0;
+
+      box-shadow: none;
     }
 
 
@@ -1768,6 +1799,20 @@
       .my-run-avatar {
         width: 110px;
         height: 110px;
+      }
+
+
+      /*
+        PROFILBILD OBEN RECHTS:
+        EXAKT WIE AUF DER INDEX-SEITE
+        AUCH AUF MOBILE.
+      */
+
+      .user-avatar-button {
+        width: 48px;
+        height: 48px;
+        flex: 0 0 48px;
+        border-width: 2px;
       }
 
     }
