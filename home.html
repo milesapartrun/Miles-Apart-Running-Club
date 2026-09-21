@@ -72,6 +72,7 @@
 
     /* =========================================================
        TOP BAR
+       UNVERÄNDERT
     ========================================================= */
 
     .top-right {
@@ -312,28 +313,38 @@
 
     .preview-notice {
       display: none;
-      margin-bottom: 18px;
-      padding: 13px 16px;
-      background: #f1fbfc;
-      border: 1px solid #d5f1f4;
+      position: relative;
+      margin-bottom: 22px;
+      padding: 20px 22px 20px 25px;
+      background:
+        linear-gradient(
+          135deg,
+          #e9fbfd 0%,
+          #f6fdfe 58%,
+          #ffffff 100%
+        );
+      border: 1px solid #bfe9ed;
+      border-left: 5px solid var(--miles-blue);
       color: #506566;
-      font-size: 12px;
-      line-height: 1.5;
+      font-size: 13px;
+      line-height: 1.6;
+      box-shadow: 0 8px 25px rgba(24,184,199,.08);
+    }
+
+    .preview-notice::before {
+      content: "PREVIEW";
+      display: block;
+      margin-bottom: 6px;
+      color: var(--miles-blue-dark);
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 2px;
     }
 
     .preview-notice strong {
       color: #111;
-    }
-
-    .preview-notice button {
-      border: 0;
-      background: transparent;
-      color: var(--miles-blue-dark);
-      font-weight: 800;
-      cursor: pointer;
-      padding: 0;
-      margin-left: 4px;
-      text-decoration: underline;
+      font-size: 14px;
+      font-weight: 900;
     }
 
     /* =========================================================
@@ -383,6 +394,7 @@
       background: #fff;
       border: 1px solid var(--home-line);
       padding: 25px;
+      box-shadow: 0 10px 30px rgba(5,9,9,.035);
     }
 
     .kilometer-card-top {
@@ -463,6 +475,15 @@
       background: var(--home-dark);
     }
 
+    .daily-column.future .daily-value {
+      color: #c8cfcd;
+    }
+
+    .daily-column.future .daily-bar {
+      background: #edf1ef;
+      opacity: .7;
+    }
+
     .daily-label {
       margin-top: 9px;
       color: #6d7472;
@@ -477,7 +498,7 @@
 
     .summary-bars {
       display: grid;
-      gap: 16px;
+      gap: 12px;
       margin-top: 30px;
       padding-top: 25px;
       border-top: 1px solid var(--home-line);
@@ -488,6 +509,20 @@
       grid-template-columns: 115px minmax(0, 1fr) 75px;
       align-items: center;
       gap: 15px;
+      padding: 12px 14px;
+      border-radius: 12px;
+    }
+
+    .summary-bar-row:nth-child(1) {
+      background: #eefbfd;
+    }
+
+    .summary-bar-row:nth-child(2) {
+      background: #f4f7f6;
+    }
+
+    .summary-bar-row.year {
+      background: #111817;
     }
 
     .summary-bar-label {
@@ -498,11 +533,23 @@
       letter-spacing: 1px;
     }
 
+    .summary-bar-row.year .summary-bar-label {
+      color: #fff;
+    }
+
     .summary-track {
       height: 11px;
-      background: #e8ecea;
+      background: rgba(255,255,255,.65);
       border-radius: 99px;
       overflow: hidden;
+    }
+
+    .summary-bar-row:nth-child(2) .summary-track {
+      background: #e1e7e4;
+    }
+
+    .summary-bar-row.year .summary-track {
+      background: #2b3432;
     }
 
     .summary-fill {
@@ -514,7 +561,7 @@
     }
 
     .summary-bar-row.year .summary-fill {
-      background: var(--home-dark);
+      background: var(--miles-blue);
     }
 
     .summary-value {
@@ -523,6 +570,10 @@
       font-size: 13px;
       font-weight: 900;
       white-space: nowrap;
+    }
+
+    .summary-bar-row.year .summary-value {
+      color: #fff;
     }
 
     /* =========================================================
@@ -537,9 +588,50 @@
     }
 
     .stat-card {
-      border: 1px solid var(--home-line);
-      background: #fff;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid #d8edef;
+      background:
+        linear-gradient(
+          145deg,
+          #eafafd 0%,
+          #f8feff 100%
+        );
       padding: 20px;
+      box-shadow: 0 8px 22px rgba(24,184,199,.06);
+    }
+
+    .stat-card:nth-child(2) {
+      border-color: #dfe7e4;
+      background:
+        linear-gradient(
+          145deg,
+          #f2f7f5 0%,
+          #ffffff 100%
+        );
+      box-shadow: 0 8px 22px rgba(5,9,9,.035);
+    }
+
+    .stat-card:nth-child(3) {
+      border-color: #202826;
+      background:
+        linear-gradient(
+          145deg,
+          #111817 0%,
+          #1d2826 100%
+        );
+      box-shadow: 0 8px 22px rgba(5,9,9,.08);
+    }
+
+    .stat-card::after {
+      content: "";
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      right: -28px;
+      bottom: -35px;
+      border-radius: 50%;
+      background: rgba(24,184,199,.14);
     }
 
     .stat-card-label {
@@ -548,6 +640,10 @@
       font-weight: 900;
       letter-spacing: 1.5px;
       text-transform: uppercase;
+    }
+
+    .stat-card:nth-child(3) .stat-card-label {
+      color: #9aa5a1;
     }
 
     .stat-card-value {
@@ -559,11 +655,19 @@
       font-weight: 900;
     }
 
+    .stat-card:nth-child(3) .stat-card-value {
+      color: #fff;
+    }
+
     .stat-card-value span {
       color: #777;
       font-size: 13px;
       letter-spacing: 0;
       font-weight: 600;
+    }
+
+    .stat-card:nth-child(3) .stat-card-value span {
+      color: #9aa5a1;
     }
 
     /* =========================================================
@@ -671,9 +775,27 @@
     ========================================================= */
 
     .run-entry-card {
-      background: #fff;
-      border: 1px solid var(--home-line);
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(
+          135deg,
+          #ffffff 0%,
+          #f2fbfc 100%
+        );
+      border: 1px solid #cfeaed;
       padding: 25px;
+      box-shadow: 0 10px 30px rgba(24,184,199,.055);
+    }
+
+    .run-entry-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--miles-blue);
     }
 
     .run-entry-top {
@@ -699,12 +821,13 @@
 
     .login-required-label {
       padding: 9px 12px;
-      background: #f5f6f4;
-      color: #777;
+      background: #e8f9fc;
+      color: var(--miles-blue-dark);
       font-size: 10px;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 1px;
+      border: 1px solid #cceef1;
     }
 
     .run-form {
@@ -735,12 +858,13 @@
       width: 100%;
       box-sizing: border-box;
       padding: 13px 14px;
-      border: 1px solid #d7d7d3;
-      background: #fafaf8;
+      border: 1px solid #d2e4e5;
+      background: rgba(255,255,255,.82);
       color: #222;
       font: inherit;
       font-size: 13px;
       outline: none;
+      transition: .2s ease;
     }
 
     .run-form-group textarea {
@@ -754,6 +878,7 @@
     .run-form-group textarea:focus {
       border-color: var(--miles-blue);
       background: #fff;
+      box-shadow: 0 0 0 3px rgba(24,184,199,.08);
     }
 
     .run-form-actions {
@@ -763,7 +888,7 @@
       justify-content: space-between;
       gap: 15px;
       padding-top: 15px;
-      border-top: 1px solid var(--home-line);
+      border-top: 1px solid #dceced;
     }
 
     .run-form-message {
@@ -782,9 +907,15 @@
     ========================================================= */
 
     .runs-list-card {
-      background: #fff;
-      border: 1px solid var(--home-line);
+      background:
+        linear-gradient(
+          145deg,
+          #ffffff 0%,
+          #f7fbfa 100%
+        );
+      border: 1px solid #dfe9e6;
       padding: 25px;
+      box-shadow: 0 10px 30px rgba(5,9,9,.035);
     }
 
     .runs-list {
@@ -796,8 +927,13 @@
       grid-template-columns: 100px 1fr 100px 120px;
       align-items: center;
       gap: 15px;
-      padding: 15px 0;
+      padding: 15px 12px;
       border-bottom: 1px solid var(--home-line);
+      transition: background .2s ease;
+    }
+
+    .run-list-row:hover {
+      background: #eefbfd;
     }
 
     .run-list-row:last-child {
@@ -1385,6 +1521,90 @@
     }
 
     /* =========================================================
+       NAVIGATION
+       UNVERÄNDERT
+    ========================================================= */
+
+    .sidebar .nav {
+      display: grid !important;
+      grid-template-columns: 1fr 1fr !important;
+      column-gap: 24px !important;
+      row-gap: 26px !important;
+      width: 100% !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    .sidebar .nav a,
+    .sidebar .nav a:visited,
+    .sidebar .nav a:link {
+      min-width: 0 !important;
+      min-height: 48px !important;
+      height: 48px !important;
+      width: 100% !important;
+      display: flex !important;
+      align-items: center !important;
+      box-sizing: border-box !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      border: 0 !important;
+      border-radius: 999px !important;
+      background: transparent !important;
+      color: #565e5c !important;
+      font-size: 18px !important;
+      line-height: 1 !important;
+      font-weight: 800 !important;
+      letter-spacing: 0 !important;
+      text-decoration: none !important;
+      transition:
+        background .2s ease,
+        color .2s ease,
+        transform .2s ease !important;
+    }
+
+    .sidebar .nav a:hover,
+    .sidebar .nav a:focus {
+      background: transparent !important;
+      color: #111 !important;
+      transform: none !important;
+      outline: none !important;
+    }
+
+    .sidebar .nav a.active,
+    .sidebar .nav a.active:visited,
+    .sidebar .nav a.active:link {
+      min-height: 48px !important;
+      height: 48px !important;
+      padding: 0 24px !important;
+      background: #e8f9fc !important;
+      color: #050909 !important;
+      border: 0 !important;
+      border-radius: 999px !important;
+    }
+
+    .sidebar .nav a.active:hover,
+    .sidebar .nav a.active:focus {
+      background: #e8f9fc !important;
+      color: #050909 !important;
+    }
+
+    .sidebar .nav a.active::before {
+      content: "";
+      width: 11px;
+      height: 11px;
+      min-width: 11px;
+      flex: 0 0 11px;
+      margin-right: 18px;
+      border-radius: 50%;
+      background: var(--miles-blue);
+    }
+
+    .sidebar .nav a:not(.active)::before {
+      content: none !important;
+      display: none !important;
+    }
+
+    /* =========================================================
        RESPONSIVE
     ========================================================= */
 
@@ -1720,13 +1940,6 @@
         Du siehst gerade eine Vorschau.
         Nach der Anmeldung werden hier deine eigenen Läufe,
         Kilometer und Bestzeiten angezeigt.
-
-        <button
-          type="button"
-          id="previewLoginButton"
-        >
-          Anmelden →
-        </button>
 
       </div>
 
@@ -2999,9 +3212,6 @@
   const openLoginButton =
     document.getElementById("openLoginButton");
 
-  const previewLoginButton =
-    document.getElementById("previewLoginButton");
-
   const previewNotice =
     document.getElementById("previewNotice");
 
@@ -3251,7 +3461,21 @@
 
   /* =========================================================
      DEMO DATEN
+     
+     Diese Werte werden nur für nicht eingeloggte Besucher
+     verwendet. Die Anzeige wird automatisch auf die bereits
+     vergangenen Wochentage begrenzt.
   ========================================================= */
+
+  const DEMO_DAILY_KM = [
+    6.2,
+    7.4,
+    5.8,
+    8.1,
+    6.5,
+    10.2,
+    7.0
+  ];
 
   const DEMO_RUNS = [
 
@@ -3622,6 +3846,85 @@
   }
 
   /* =========================================================
+     DEMO WOCHENWERTE
+  ========================================================= */
+
+  function getDemoWeeklyRuns() {
+
+    const today =
+      new Date();
+
+    const jsDay =
+      today.getDay();
+
+    const todayIndex =
+      jsDay === 0
+        ? 6
+        : jsDay - 1;
+
+    const weekStart =
+      startOfWeek(today);
+
+    const runs = [];
+
+    for (
+      let index = 0;
+      index <= todayIndex;
+      index++
+    ) {
+
+      const date =
+        new Date(
+          weekStart
+        );
+
+      date.setDate(
+        date.getDate() +
+        index
+      );
+
+      const year =
+        date.getFullYear();
+
+      const month =
+        String(
+          date.getMonth() + 1
+        ).padStart(2, "0");
+
+      const day =
+        String(
+          date.getDate()
+        ).padStart(2, "0");
+
+      runs.push({
+
+        run_date:
+          `${year}-${month}-${day}`,
+
+        distance_km:
+          DEMO_DAILY_KM[index],
+
+        duration_seconds:
+          Math.round(
+            DEMO_DAILY_KM[index] *
+            330
+          ),
+
+        note:
+          "Miles Apart Vorschau",
+
+        run_type:
+          "normal"
+
+      });
+
+    }
+
+    return runs;
+
+  }
+
+  /* =========================================================
      DATUM
   ========================================================= */
 
@@ -3792,6 +4095,17 @@
 
         }
 
+        if (
+          index >
+          todayIndex
+        ) {
+
+          column.classList.add(
+            "future"
+          );
+
+        }
+
         const valueElement =
           document.createElement(
             "div"
@@ -3801,7 +4115,9 @@
           "daily-value";
 
         valueElement.textContent =
-          formatNumber(value);
+          value > 0
+            ? formatNumber(value)
+            : "—";
 
         const barArea =
           document.createElement(
@@ -4409,7 +4725,7 @@
     if (!currentUser) {
 
       currentRuns =
-        DEMO_RUNS;
+        getDemoWeeklyRuns();
 
       renderRunDashboard(
         currentRuns
@@ -4668,11 +4984,6 @@
   }
 
   openLoginButton.addEventListener(
-    "click",
-    openAuth
-  );
-
-  previewLoginButton.addEventListener(
     "click",
     openAuth
   );
