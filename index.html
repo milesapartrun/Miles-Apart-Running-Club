@@ -2912,6 +2912,10 @@
     }
   );
 
+  /* =====================================================
+     REGISTRIERUNG
+     ===================================================== */
+
   registerForm.addEventListener(
     "submit",
     async function(event) {
@@ -2995,12 +2999,62 @@
         "Konto erstellen →"
       );
 
+      /*
+        WICHTIG:
+
+        Supabase kann bei einer bereits registrierten
+        E-Mail-Adresse absichtlich keinen normalen Fehler
+        zurückgeben.
+
+        Wenn identities leer ist, handelt es sich um eine
+        bereits vorhandene E-Mail-Adresse.
+      */
+
+      if (
+        data &&
+        data.user &&
+        Array.isArray(data.user.identities) &&
+        data.user.identities.length === 0
+      ) {
+
+        setMessage(
+          registerMessage,
+          "Du hast dich mit diesem E-Mail angemeldet, bitte melde dich stattdessen an."
+        );
+
+        return;
+
+      }
+
       if (error) {
 
         console.error(
           "Registrierung:",
           error
         );
+
+        const errorText =
+          String(
+            error.message || ""
+          ).toLowerCase();
+
+        if (
+          errorText.includes("already registered") ||
+          errorText.includes("already exists") ||
+          errorText.includes("email already") ||
+          errorText.includes("user already") ||
+          errorText.includes("email_exists") ||
+          errorText.includes("user_already_exists")
+        ) {
+
+          setMessage(
+            registerMessage,
+            "Du hast dich mit diesem E-Mail angemeldet, bitte melde dich stattdessen an."
+          );
+
+          return;
+
+        }
 
         setMessage(
           registerMessage,
@@ -3110,7 +3164,7 @@
 
         setMessage(
           loginMessage,
-          "Du hast dich mit dieser E-Mail schon angemeldet. Bitte melde dich stattdessen an."
+          "Du hast dich mit diesem E-Mail angemeldet, bitte melde dich stattdessen an."
         );
 
         return;
@@ -3173,6 +3227,10 @@
 
     }
   );
+
+  /* =====================================================
+     PASSWORT VERGESSEN
+     ===================================================== */
 
   forgotForm.addEventListener(
     "submit",
@@ -3239,6 +3297,10 @@
 
     }
   );
+
+  /* =====================================================
+     PASSWORT RECOVERY
+     ===================================================== */
 
   recoveryForm.addEventListener(
     "submit",
@@ -3555,7 +3617,7 @@
         "user already registered"
       )
     ) {
-      return "Mit dieser E-Mail-Adresse existiert möglicherweise bereits ein Konto.";
+      return "Du hast dich mit diesem E-Mail angemeldet, bitte melde dich stattdessen an.";
     }
 
     return (
