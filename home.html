@@ -1175,95 +1175,163 @@
 
     /* =========================================================
        ACCOUNT POPUP
+       EXAKT WIE BEI MILES APART
     ========================================================= */
 
     .account-menu {
-      position: absolute;
-      top: calc(100% + 12px);
-      right: 0;
-      width: 300px;
-      background: #ffffff;
-      border: 1px solid #dddddd;
-      box-shadow: 0 14px 35px rgba(0,0,0,0.12);
-      z-index: 1000;
+      position: absolute !important;
+      top: calc(100% + 12px) !important;
+      right: 0 !important;
+      left: auto !important;
+
+      width: 300px !important;
+      min-width: 300px !important;
+      max-width: 300px !important;
+
+      height: auto !important;
+      min-height: 0 !important;
+      max-height: none !important;
+
+      box-sizing: border-box !important;
+
+      padding: 0 !important;
+      margin: 0 !important;
+
+      background: #ffffff !important;
+      border: 1px solid #dddddd !important;
+      border-radius: 0 !important;
+
+      box-shadow: 0 14px 35px rgba(0,0,0,.12);
+
+      z-index: 1000 !important;
+
       display: none;
-      overflow: hidden;
+      overflow: hidden !important;
     }
 
 
     .account-menu.open {
-      display: block;
+      display: block !important;
     }
 
 
     .account-menu-user {
-      padding: 22px 24px 20px;
-      border-bottom: 1px solid #e8e8e8;
-      background: #ffffff;
+      display: block !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+
+      padding: 22px 24px 20px !important;
+      margin: 0 !important;
+
+      border: 0 !important;
+      border-bottom: 1px solid #e8e8e8 !important;
+
+      background: #ffffff !important;
     }
 
 
     .account-menu-name {
-      margin: 0;
-      color: #111111;
-      font-size: 24px;
-      line-height: 1.2;
-      font-weight: 800;
+      display: block !important;
+
+      margin: 0 !important;
+      padding: 0 !important;
+
+      color: #111111 !important;
+
+      font-family: var(--font-main, "Inter", sans-serif) !important;
+      font-size: 24px !important;
+      line-height: 1.2 !important;
+      font-weight: 800 !important;
     }
 
 
     .account-menu-email {
-      margin-top: 7px;
-      color: #888888;
-      font-size: 16px;
-      line-height: 1.35;
-      font-weight: 400;
+      display: block !important;
+
+      margin: 7px 0 0 !important;
+      padding: 0 !important;
+
+      color: #888888 !important;
+
+      font-family: var(--font-main, "Inter", sans-serif) !important;
+      font-size: 16px !important;
+      line-height: 1.35 !important;
+      font-weight: 400 !important;
+
       overflow-wrap: anywhere;
+      word-break: break-word;
     }
 
 
-    .account-menu button {
-      display: block;
-      width: 100%;
-      height: auto;
-      min-height: 0;
-      border: 0;
-      border-bottom: 1px solid #e8e8e8;
-      border-radius: 0;
-      background: transparent;
-      padding: 22px 24px;
-      margin: 0;
-      color: #222222;
-      text-align: left;
-      font-family: inherit;
-      font-size: 20px;
-      line-height: 1.3;
-      font-weight: 400;
-      letter-spacing: normal;
-      text-transform: none;
-      box-shadow: none;
+    /*
+      Mein Profil und Abmelden:
+      exakt dieselbe Typeface,
+      Größe, Gewichtung, Höhe und Ausrichtung.
+    */
+
+    .account-menu button,
+    .account-menu #myProfileButton,
+    .account-menu .logout-button {
+      display: block !important;
+
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: none !important;
+
+      height: auto !important;
+      min-height: 0 !important;
+
+      box-sizing: border-box !important;
+
+      margin: 0 !important;
+      padding: 22px 24px !important;
+
+      border: 0 !important;
+      border-radius: 0 !important;
+      border-bottom: 1px solid #e8e8e8 !important;
+
+      background: #ffffff !important;
+
+      text-align: left !important;
+      text-decoration: none !important;
+
       cursor: pointer;
+
+      font-family: var(--font-main, "Inter", sans-serif) !important;
+      font-size: 20px !important;
+      line-height: 1.3 !important;
+      font-weight: 400 !important;
+      letter-spacing: normal !important;
+      text-transform: none !important;
+
+      color: #222222 !important;
+
+      box-shadow: none !important;
     }
 
 
-    .account-menu button:hover {
-      background: #f7f7f7;
+    .account-menu button:hover,
+    .account-menu #myProfileButton:hover,
+    .account-menu .logout-button:hover {
+      background: #f7f7f7 !important;
+      color: #222222 !important;
     }
 
 
-    .account-menu button:last-child {
-      border-bottom: 0;
+    .account-menu button:last-child,
+    .account-menu .logout-button {
+      border-bottom: 0 !important;
     }
 
 
     .account-menu .logout-button {
-      color: #888888;
+      color: #888888 !important;
     }
 
 
     .account-menu .logout-button:hover {
-      color: #555555;
-      background: #f7f7f7;
+      color: #555555 !important;
+      background: #f7f7f7 !important;
     }
 
 
@@ -1603,31 +1671,37 @@
       }
 
 
+      /* Gleiches mobiles Verhalten wie bei Miles Apart */
+
       .account-menu {
-        position: fixed;
-        top: 76px;
-        right: 12px;
-        left: 12px;
-        width: auto;
-        max-width: none;
+        position: fixed !important;
+        top: 76px !important;
+        right: 12px !important;
+        left: 12px !important;
+
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: none !important;
       }
 
 
       .account-menu-name {
-        font-size: 23px;
+        font-size: 23px !important;
       }
 
 
       .account-menu-email {
-        font-size: 16px;
+        font-size: 16px !important;
       }
 
 
-      .account-menu button {
-        padding: 22px 24px;
-        font-size: 20px;
-        line-height: 1.3;
-        font-weight: 400;
+      .account-menu button,
+      .account-menu #myProfileButton,
+      .account-menu .logout-button {
+        padding: 22px 24px !important;
+        font-size: 20px !important;
+        line-height: 1.3 !important;
+        font-weight: 400 !important;
       }
 
     }
@@ -1862,7 +1936,7 @@
             class="user-avatar-button"
             id="avatarButton"
             type="button"
-            aria-label="Account-Menü öffnen"
+            aria-label="Profilmenü öffnen"
           >
             M
           </button>
@@ -4854,12 +4928,14 @@
 
   /* =========================================================
      ACCOUNT MENU
+     PROFILBILD ÖFFNET NUR DAS MENÜ
   ========================================================= */
 
   avatarButton.addEventListener(
     "click",
     function(event) {
 
+      event.preventDefault();
       event.stopPropagation();
 
       accountMenu.classList.toggle(
@@ -4872,7 +4948,10 @@
 
   myProfileButton.addEventListener(
     "click",
-    function() {
+    function(event) {
+
+      event.preventDefault();
+      event.stopPropagation();
 
       accountMenu.classList.remove(
         "open"
@@ -5575,6 +5654,11 @@
 
     currentProfile =
       null;
+
+
+    accountMenu.classList.remove(
+      "open"
+    );
 
 
     updateUserInterface();
