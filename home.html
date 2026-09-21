@@ -1175,7 +1175,7 @@
 
     /* =========================================================
        ACCOUNT POPUP
-       EXAKT WIE BEI MILES APART
+       KLEIN BEIBEHALTEN
     ========================================================= */
 
     .account-menu {
@@ -1671,7 +1671,7 @@
       }
 
 
-      /* Gleiches mobiles Verhalten wie bei Miles Apart */
+      /* Kleines Popup bleibt auch mobil erhalten */
 
       .account-menu {
         position: fixed !important;
@@ -1752,11 +1752,6 @@
       .community-invitation h2 {
         font-size: 38px;
         letter-spacing: -2px;
-      }
-
-
-      .top-right .user-greeting {
-        display: none;
       }
 
 
@@ -1928,7 +1923,7 @@
             class="user-greeting"
             id="userGreeting"
           >
-            Hallo
+            Runner
           </span>
 
 
@@ -4149,8 +4144,13 @@
       firstName + ".";
 
 
+    /* =======================================================
+       OBEN RECHTS:
+       NAME DES EINGELOGGTEN USERS
+    ======================================================= */
+
     userGreeting.textContent =
-      "Hallo, " + firstName;
+      displayName;
 
 
     avatarButton.innerHTML =
