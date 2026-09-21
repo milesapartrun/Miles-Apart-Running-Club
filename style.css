@@ -274,6 +274,19 @@ select{
   gap:12px;
 }
 
+/*
+  Wichtig für das zentrale Profil-Popup:
+  Das Popup wird relativ zum Bereich
+  des Profil-Buttons positioniert.
+*/
+
+.user-area{
+  position:relative;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
 .avatar{
   width:42px;
   height:42px;
@@ -690,8 +703,621 @@ h1{
 }
 
 /* =========================================================
+   AUTH / LOGIN BUTTON
+   EINHEITLICH AUF ALLEN SEITEN
+========================================================= */
+
+/*
+  Dieser Button ist jetzt zentral definiert.
+  Jede Seite, die:
+
+  <button class="login-button">
+
+  verwendet, bekommt automatisch
+  exakt dieses Design.
+*/
+
+.login-button{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+
+  min-height:38px !important;
+  padding:0 16px !important;
+
+  border:1px solid #d7d7d3 !important;
+  background:#fff !important;
+  color:#222 !important;
+
+  font-family:var(--font-main) !important;
+  font-size:12px !important;
+  font-weight:700 !important;
+  line-height:normal !important;
+
+  cursor:pointer !important;
+  transition:.2s ease !important;
+}
+
+.login-button:hover{
+  border-color:#18b8c7 !important;
+  color:#18b8c7 !important;
+}
+
+/* =========================================================
+   PROFILE ICON
+   EINHEITLICH AUF ALLEN SEITEN
+========================================================= */
+
+.user-avatar-button{
+  width:38px;
+  height:38px;
+
+  flex:0 0 38px;
+
+  border-radius:50%;
+  border:2px solid #18b8c7;
+
+  background:#fff;
+  color:#18b8c7;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-family:var(--font-main);
+  font-size:13px;
+  font-weight:800;
+
+  cursor:pointer;
+  overflow:hidden;
+  padding:0;
+}
+
+.user-avatar-button:hover{
+  background:#f4fcfd;
+}
+
+.user-avatar-button img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+/* =========================================================
+   USER GREETING
+   EINHEITLICH AUF ALLEN SEITEN
+========================================================= */
+
+.user-greeting{
+  font-family:var(--font-main);
+  font-size:13px;
+  font-weight:300;
+  color:#666;
+  white-space:nowrap;
+}
+
+/* =========================================================
+   ACCOUNT / PROFILE POPUP
+   ZENTRAL AUF ALLEN SEITEN
+========================================================= */
+
+/*
+  Das Popup sitzt immer direkt unterhalb
+  des Bereichs mit Profilbild / User-Icon.
+
+  Referenz aus deinem Screenshot:
+  - 300 px breit
+  - weiß
+  - rechteckig
+  - dünner grauer Rand
+  - kein Radius
+  - dezenter Schatten
+  - drei klare Bereiche
+*/
+
+.account-menu{
+  position:absolute !important;
+
+  top:calc(100% + 12px) !important;
+  right:0 !important;
+  left:auto !important;
+
+  width:300px !important;
+  min-width:300px !important;
+  max-width:300px !important;
+
+  height:auto !important;
+  min-height:0 !important;
+  max-height:none !important;
+
+  box-sizing:border-box !important;
+
+  padding:0 !important;
+  margin:0 !important;
+
+  background:#ffffff !important;
+
+  border:1px solid #dddddd !important;
+  border-radius:0 !important;
+
+  box-shadow:0 14px 35px rgba(0,0,0,.12) !important;
+
+  z-index:1000 !important;
+
+  display:none;
+
+  overflow:hidden !important;
+}
+
+.account-menu.open{
+  display:block !important;
+}
+
+/* =========================================================
+   ACCOUNT POPUP — USER INFORMATION
+========================================================= */
+
+.account-menu-user{
+  display:block !important;
+
+  width:100% !important;
+
+  box-sizing:border-box !important;
+
+  padding:22px 24px 20px !important;
+  margin:0 !important;
+
+  border:0 !important;
+  border-bottom:1px solid #e8e8e8 !important;
+
+  background:#ffffff !important;
+}
+
+.account-menu-name{
+  display:block !important;
+
+  margin:0 !important;
+  padding:0 !important;
+
+  color:#111111 !important;
+
+  font-family:var(--font-main) !important;
+  font-size:24px !important;
+  line-height:1.2 !important;
+  font-weight:800 !important;
+}
+
+.account-menu-email{
+  display:block !important;
+
+  margin:7px 0 0 !important;
+  padding:0 !important;
+
+  color:#888888 !important;
+
+  font-family:var(--font-main) !important;
+  font-size:16px !important;
+  line-height:1.35 !important;
+  font-weight:400 !important;
+
+  overflow-wrap:anywhere;
+  word-break:break-word;
+}
+
+/* =========================================================
+   ACCOUNT POPUP — BUTTONS
+========================================================= */
+
+.account-menu button,
+.account-menu #myProfileButton,
+.account-menu .logout-button{
+  display:block !important;
+
+  width:100% !important;
+  min-width:0 !important;
+  max-width:none !important;
+
+  height:auto !important;
+  min-height:0 !important;
+
+  box-sizing:border-box !important;
+
+  margin:0 !important;
+  padding:22px 24px !important;
+
+  border:0 !important;
+  border-radius:0 !important;
+
+  border-bottom:1px solid #e8e8e8 !important;
+
+  background:#ffffff !important;
+
+  text-align:left !important;
+  text-decoration:none !important;
+
+  cursor:pointer !important;
+
+  font-family:var(--font-main) !important;
+  font-size:20px !important;
+  line-height:1.3 !important;
+  font-weight:400 !important;
+  letter-spacing:normal !important;
+  text-transform:none !important;
+
+  color:#222222 !important;
+
+  box-shadow:none !important;
+}
+
+.account-menu button:hover,
+.account-menu #myProfileButton:hover,
+.account-menu .logout-button:hover{
+  background:#f7f7f7 !important;
+  color:#222222 !important;
+}
+
+.account-menu button:last-child,
+.account-menu .logout-button{
+  border-bottom:0 !important;
+}
+
+.account-menu .logout-button{
+  color:#888888 !important;
+}
+
+.account-menu .logout-button:hover{
+  color:#555555 !important;
+  background:#f7f7f7 !important;
+}
+
+/* =========================================================
+   AUTH MODAL
+========================================================= */
+
+.auth-overlay{
+  position:fixed;
+  inset:0;
+
+  background:rgba(0,0,0,.55);
+
+  display:none;
+  align-items:center;
+  justify-content:center;
+
+  padding:20px;
+
+  z-index:100;
+
+  overflow-y:auto;
+}
+
+.auth-overlay.open{
+  display:flex;
+}
+
+.auth-modal{
+  position:relative;
+
+  width:min(440px,100%);
+  max-height:calc(100vh - 40px);
+
+  overflow-y:auto;
+
+  background:#fff;
+
+  padding:38px;
+
+  box-shadow:0 25px 80px rgba(0,0,0,.25);
+}
+
+.auth-close{
+  position:absolute;
+
+  top:15px;
+  right:17px;
+
+  width:32px;
+  height:32px;
+
+  border:0;
+  background:transparent;
+
+  font-size:25px;
+  line-height:1;
+
+  cursor:pointer;
+
+  color:#555;
+}
+
+.auth-close:hover{
+  color:#18b8c7;
+}
+
+.auth-eyebrow{
+  color:#18b8c7;
+
+  font-size:10px;
+  font-weight:800;
+
+  letter-spacing:2px;
+  text-transform:uppercase;
+
+  margin-bottom:10px;
+}
+
+.auth-modal h2{
+  font-size:32px;
+  line-height:1;
+  letter-spacing:-1px;
+
+  margin:0 0 10px;
+}
+
+.auth-description{
+  color:#777;
+
+  font-size:14px;
+  line-height:1.5;
+
+  margin:0 0 25px;
+}
+
+.auth-tabs{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+
+  border-bottom:1px solid #ddd;
+
+  margin-bottom:25px;
+}
+
+.auth-tab{
+  padding:12px 8px;
+
+  border:0;
+  background:transparent;
+
+  color:#888;
+
+  font-size:12px;
+  font-weight:700;
+
+  cursor:pointer;
+
+  border-bottom:2px solid transparent;
+}
+
+.auth-tab.active{
+  color:#18b8c7;
+  border-bottom-color:#18b8c7;
+}
+
+.auth-form{
+  display:none;
+}
+
+.auth-form.active{
+  display:block;
+}
+
+.form-group{
+  margin-bottom:16px;
+}
+
+.form-group label{
+  display:block;
+
+  font-size:11px;
+  font-weight:700;
+
+  margin-bottom:7px;
+
+  color:#333;
+}
+
+.form-group input{
+  width:100%;
+  box-sizing:border-box;
+
+  padding:13px 14px;
+
+  border:1px solid #d7d7d3;
+
+  background:#fafaf8;
+  color:#222;
+
+  font-family:inherit;
+  font-size:14px;
+
+  outline:none;
+}
+
+.form-group input:focus{
+  border-color:#18b8c7;
+  background:#fff;
+}
+
+.auth-submit{
+  width:100%;
+
+  border:1px solid #18b8c7;
+
+  background:#18b8c7;
+  color:#fff;
+
+  padding:14px;
+
+  font-size:12px;
+  font-weight:800;
+
+  cursor:pointer;
+
+  margin-top:4px;
+}
+
+.auth-submit:hover{
+  background:#1199a6;
+  border-color:#1199a6;
+}
+
+.auth-submit:disabled{
+  opacity:.6;
+  cursor:wait;
+}
+
+.auth-message{
+  min-height:18px;
+
+  margin-top:12px;
+
+  font-size:12px;
+  line-height:1.5;
+
+  color:#d34b4b;
+}
+
+.auth-message.success{
+  color:#248b63;
+}
+
+.forgot-password{
+  display:block;
+
+  margin-top:13px;
+
+  border:0;
+  background:transparent;
+
+  padding:0;
+
+  color:#777;
+
+  font-size:11px;
+
+  text-decoration:underline;
+
+  cursor:pointer;
+}
+
+.forgot-password:hover{
+  color:#18b8c7;
+}
+
+.auth-back{
+  display:inline-flex;
+
+  margin-bottom:18px;
+
+  border:0;
+  background:transparent;
+
+  padding:0;
+
+  color:#777;
+
+  font-size:11px;
+
+  cursor:pointer;
+}
+
+.auth-back:hover{
+  color:#18b8c7;
+}
+
+.auth-note{
+  margin-top:14px;
+
+  padding:12px;
+
+  background:#f5f5f3;
+
+  border:1px solid #e3e3df;
+
+  color:#666;
+
+  font-size:11px;
+  line-height:1.5;
+}
+
+/* =========================================================
+   FINAL TYPOGRAPHY ENFORCEMENT
+========================================================= */
+
+body{
+  font-weight:300;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.kpi,
+.label,
+.avatar,
+.side-bottom strong,
+.date b,
+.ranknum,
+.pavatar{
+  font-weight:800;
+}
+
+.side-bottom small,
+.crumb,
+.lead,
+.muted,
+.small,
+.btn,
+.badge,
+.date span,
+.tag{
+  font-weight:300;
+}
+
+/* =========================================================
+   FINAL NAVIGATION ENFORCEMENT
+========================================================= */
+
+.nav,
+.nav a,
+.nav a:link,
+.nav a:visited{
+  font-family:"Inter", sans-serif !important;
+}
+
+.nav a,
+.nav a:link,
+.nav a:visited{
+  font-weight:800 !important;
+}
+
+.nav a.active{
+  background:var(--accent-soft);
+  color:var(--ink);
+}
+
+.nav a.active:before{
+  content:"";
+  display:inline-block;
+
+  flex:0 0 7px;
+
+  width:7px;
+  height:7px;
+
+  background:var(--accent);
+
+  border-radius:50%;
+
+  margin:0 8px 0 0;
+}
+
+/* =========================================================
    MOBILE / TABLET — 900PX
-   ========================================================= */
+========================================================= */
 
 @media(max-width:900px){
 
@@ -701,11 +1327,15 @@ h1{
 
   .sidebar{
     position:relative;
+
     height:auto;
     min-height:0;
+
     overflow:visible;
+
     border-right:0;
     border-bottom:0;
+
     padding:30px 32px 18px;
   }
 
@@ -722,7 +1352,9 @@ h1{
   .brand img{
     width:min(390px,100%);
     height:auto;
+
     max-width:none;
+
     display:block;
   }
 
@@ -738,8 +1370,11 @@ h1{
 
   .nav a{
     min-width:0;
+
     padding:15px 14px;
+
     font-size:20px;
+
     border-radius:20px;
 
     font-family:"Inter", sans-serif !important;
@@ -749,7 +1384,9 @@ h1{
   .nav a.active:before{
     width:8px;
     height:8px;
+
     flex-basis:8px;
+
     margin-right:10px;
   }
 
@@ -764,7 +1401,9 @@ h1{
 
   .top{
     padding-top:18px;
+
     margin:0 0 28px;
+
     border-top:1px solid var(--line);
   }
 
@@ -775,6 +1414,7 @@ h1{
   .avatar{
     width:56px;
     height:56px;
+
     font-size:20px;
   }
 
@@ -816,8 +1456,51 @@ h1{
 }
 
 /* =========================================================
+   MOBILE — 700PX
+========================================================= */
+
+@media(max-width:700px){
+
+  /*
+    Profil-Popup auf kleinen Geräten:
+    nicht mehr an die Breite des Buttons gebunden,
+    sondern als sauberer eigener Kasten.
+  */
+
+  .account-menu{
+    position:fixed !important;
+
+    top:76px !important;
+    right:12px !important;
+    left:12px !important;
+
+    width:auto !important;
+    min-width:0 !important;
+    max-width:none !important;
+  }
+
+  .account-menu-name{
+    font-size:23px !important;
+  }
+
+  .account-menu-email{
+    font-size:16px !important;
+  }
+
+  .account-menu button,
+  .account-menu #myProfileButton,
+  .account-menu .logout-button{
+    padding:22px 24px !important;
+
+    font-size:20px !important;
+    line-height:1.3 !important;
+    font-weight:400 !important;
+  }
+}
+
+/* =========================================================
    MOBILE — 600PX
-   ========================================================= */
+========================================================= */
 
 @media(max-width:600px){
 
@@ -849,17 +1532,23 @@ h1{
 
   .nav{
     width:100%;
+
     grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+
     gap:6px 12px;
   }
 
   .nav a{
     min-width:0;
+
     font-size:18px;
+
     padding:14px 12px;
+
     border-radius:18px;
 
     white-space:nowrap;
+
     overflow:hidden;
     text-overflow:ellipsis;
 
@@ -870,38 +1559,51 @@ h1{
   .nav a.active:before{
     width:7px;
     height:7px;
+
     flex-basis:7px;
+
     margin-right:8px;
   }
 
   .main{
     width:100%;
     max-width:100%;
+
     padding:18px 24px 90px;
   }
 
   .top{
     width:100%;
+
     display:grid;
+
     grid-template-columns:minmax(0,1fr) auto;
+
     align-items:center;
+
     gap:12px;
+
     margin-bottom:24px;
   }
 
   .crumb{
     min-width:0;
+
     overflow:hidden;
     text-overflow:ellipsis;
     white-space:nowrap;
+
     font-size:11px;
     letter-spacing:.08em;
   }
 
   .top-right{
     min-width:0;
+
     display:flex;
+
     align-items:center;
+
     gap:8px;
   }
 
@@ -912,6 +1614,7 @@ h1{
 
   .avatar{
     flex:0 0 52px;
+
     width:52px;
     height:52px;
   }
@@ -936,104 +1639,4 @@ h1{
     font-size:34px;
     font-weight:var(--font-heading);
   }
-}
-
-/* =========================================================
-   FINAL TYPOGRAPHY ENFORCEMENT
-   ========================================================= */
-
-body{
-  font-weight:300;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-.kpi,
-.label,
-.avatar,
-.side-bottom strong,
-.date b,
-.ranknum,
-.pavatar{
-  font-weight:800;
-}
-
-.side-bottom small,
-.crumb,
-.lead,
-.muted,
-.small,
-.btn,
-.badge,
-.date span,
-.tag{
-  font-weight:300;
-}
-
-/* =========================================================
-   FINAL NAVIGATION ENFORCEMENT
-   ========================================================= */
-
-.nav,
-.nav a,
-.nav a:link,
-.nav a:visited{
-  font-family:"Inter", sans-serif !important;
-}
-
-.nav a,
-.nav a:link,
-.nav a:visited{
-  font-weight:800 !important;
-}
-
-.nav a.active{
-  background:var(--accent-soft);
-  color:var(--ink);
-}
-
-.nav a.active:before{
-  content:"";
-  display:inline-block;
-  flex:0 0 7px;
-  width:7px;
-  height:7px;
-  background:var(--accent);
-  border-radius:50%;
-  margin:0 8px 0 0;
-}
-
-/* =========================================================
-   GLOBAL LOGIN BUTTON
-   EINHEITLICH AUF ALLEN SEITEN
-   ========================================================= */
-
-.login-button{
-  display:inline-flex !important;
-  align-items:center !important;
-  justify-content:center !important;
-
-  min-height:38px !important;
-  padding:0 16px !important;
-
-  border:1px solid #d7d7d3 !important;
-  background:#fff !important;
-  color:#222 !important;
-
-  font-family:var(--font-main) !important;
-  font-size:12px !important;
-  font-weight:700 !important;
-  line-height:normal !important;
-
-  cursor:pointer !important;
-  transition:.2s ease !important;
-}
-
-.login-button:hover{
-  border-color:#18b8c7 !important;
-  color:#18b8c7 !important;
 }
