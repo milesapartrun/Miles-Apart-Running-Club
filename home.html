@@ -3847,6 +3847,12 @@
     showLogin
   );
 
+  /* =========================================================
+     REGISTRIERUNG
+     BEREITS REGISTRIERTE E-MAILS WERDEN WIE AUF DER INDEX-SEITE
+     ROT ANGEZEIGT
+  ========================================================= */
+
   registerForm.addEventListener(
     "submit",
     async function(event) {
@@ -3936,6 +3942,11 @@
         "Konto erstellen →"
       );
 
+      /* =====================================================
+         FALL 1:
+         SUPABASE GIBT EINEN FEHLER ZURÜCK
+      ===================================================== */
+
       if (error) {
 
         console.error(
@@ -3943,9 +3954,74 @@
           error
         );
 
+        const errorText =
+          String(
+            error.message || ""
+          ).toLowerCase();
+
+        if (
+          errorText.includes(
+            "user already registered"
+          ) ||
+          errorText.includes(
+            "already registered"
+          ) ||
+          errorText.includes(
+            "already exists"
+          ) ||
+          errorText.includes(
+            "email already"
+          ) ||
+          errorText.includes(
+            "user already"
+          ) ||
+          errorText.includes(
+            "email_exists"
+          ) ||
+          errorText.includes(
+            "user_already_exists"
+          )
+        ) {
+
+          setMessage(
+            registerMessage,
+            "Du hast dich mit dieser Mail bereits registriert. Melde dich stattdessen an."
+          );
+
+          return;
+
+        }
+
         setMessage(
           registerMessage,
           translateAuthError(error)
+        );
+
+        return;
+
+      }
+
+      /* =====================================================
+         FALL 2:
+         SUPABASE MELDET KEINEN FEHLER,
+         ABER DIE E-MAIL EXISTIERT BEREITS.
+
+         Bei aktivierter E-Mail-Bestätigung kann Supabase
+         in diesem Fall einen User ohne Identität zurückgeben.
+      ===================================================== */
+
+      if (
+        data &&
+        data.user &&
+        Array.isArray(
+          data.user.identities
+        ) &&
+        data.user.identities.length === 0
+      ) {
+
+        setMessage(
+          registerMessage,
+          "Du hast dich mit dieser Mail bereits registriert. Melde dich stattdessen an."
         );
 
         return;
@@ -5044,10 +5120,28 @@
     if (
       message.includes(
         "user already registered"
+      ) ||
+      message.includes(
+        "already registered"
+      ) ||
+      message.includes(
+        "already exists"
+      ) ||
+      message.includes(
+        "email already"
+      ) ||
+      message.includes(
+        "user already"
+      ) ||
+      message.includes(
+        "email_exists"
+      ) ||
+      message.includes(
+        "user_already_exists"
       )
     ) {
 
-      return "Mit dieser E-Mail-Adresse existiert möglicherweise bereits ein Konto.";
+      return "Du hast dich mit dieser Mail bereits registriert. Melde dich stattdessen an.";
 
     }
 
