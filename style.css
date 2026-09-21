@@ -16,6 +16,7 @@
   --radius:22px;
 
   --miles-blue:#18b8c7;
+  --miles-blue-dark:#1199a6;
 
   --font-main:"Inter",sans-serif;
   --font-light:300;
@@ -145,64 +146,123 @@ select{
 
 /* =========================================================
    NAVIGATION
+   ZENTRAL FÜR ALLE SEITEN
    ========================================================= */
 
 .nav{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:8px 8px;
-  width:100%;
+  display:grid !important;
+
+  grid-template-columns:1fr 1fr !important;
+
+  column-gap:24px !important;
+  row-gap:26px !important;
+
+  width:100% !important;
+
+  margin:0 !important;
+  padding:0 !important;
 }
 
-.nav a{
-  display:flex;
-  align-items:center;
-  min-width:0;
+.nav a,
+.nav a:link,
+.nav a:visited{
+  display:flex !important;
 
-  padding:13px 10px;
-  border-radius:18px;
+  align-items:center !important;
 
-  color:#4f5a59;
+  width:100% !important;
+  min-width:0 !important;
+
+  height:48px !important;
+  min-height:48px !important;
+
+  box-sizing:border-box !important;
+
+  margin:0 !important;
+  padding:0 !important;
+
+  border:0 !important;
+  border-radius:999px !important;
+
+  background:transparent !important;
+
+  color:#565e5c !important;
 
   font-family:var(--font-main) !important;
-  font-size:15px;
-  line-height:1.15;
+  font-size:18px !important;
+  line-height:1 !important;
   font-weight:800 !important;
 
-  white-space:normal;
+  letter-spacing:0 !important;
+
+  text-decoration:none !important;
+
+  white-space:nowrap !important;
 
   transition:
-    background .18s ease,
-    color .18s ease,
-    transform .18s ease;
+    background .2s ease,
+    color .2s ease,
+    transform .2s ease !important;
 }
 
-.nav a:hover{
-  background:#f3fafb;
-  color:var(--ink);
+.nav a:hover,
+.nav a:focus{
+  background:transparent !important;
+  color:#111 !important;
+  transform:none !important;
+  outline:none !important;
 }
 
-.nav a.active{
-  background:var(--accent-soft);
-  color:var(--ink);
+/* AKTIVE SEITE */
+
+.nav a.active,
+.nav a.active:link,
+.nav a.active:visited{
+  height:48px !important;
+  min-height:48px !important;
+
+  padding:0 24px !important;
+
+  background:#e8f9fc !important;
+
+  color:#050909 !important;
+
+  border:0 !important;
+  border-radius:999px !important;
 }
 
-.nav a.active:before{
+.nav a.active:hover,
+.nav a.active:focus{
+  background:#e8f9fc !important;
+  color:#050909 !important;
+}
+
+/* BLAUER PUNKT NUR BEI AKTIVER SEITE */
+
+.nav a.active::before{
   content:"";
-  display:inline-block;
-  flex:0 0 7px;
 
-  width:7px;
-  height:7px;
+  width:11px !important;
+  height:11px !important;
 
-  background:var(--accent);
-  border-radius:50%;
+  min-width:11px !important;
 
-  margin:0 8px 0 0;
+  flex:0 0 11px !important;
+
+  margin-right:18px !important;
+
+  border-radius:50% !important;
+
+  background:var(--miles-blue) !important;
+}
+
+.nav a:not(.active)::before{
+  content:none !important;
+  display:none !important;
 }
 
 .nav a span{
-  min-width:0;
+  min-width:0 !important;
 }
 
 /* =========================================================
@@ -1251,44 +1311,6 @@ h6,
 }
 
 /* =========================================================
-   FINAL NAVIGATION ENFORCEMENT
-   ========================================================= */
-
-.nav,
-.nav a,
-.nav a:link,
-.nav a:visited{
-  font-family:var(--font-main) !important;
-}
-
-.nav a,
-.nav a:link,
-.nav a:visited{
-  font-weight:800 !important;
-}
-
-.nav a.active{
-  background:var(--accent-soft);
-  color:var(--ink);
-}
-
-.nav a.active:before{
-  content:"";
-  display:inline-block;
-
-  flex:0 0 7px;
-
-  width:7px;
-  height:7px;
-
-  background:var(--accent);
-
-  border-radius:50%;
-
-  margin:0 8px 0 0;
-}
-
-/* =========================================================
    MOBILE / TABLET — 900PX
    ========================================================= */
 
@@ -1328,29 +1350,48 @@ h6,
     display:block;
   }
 
+  /* NAVIGATION */
+
   .nav{
-    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
-    gap:8px 20px;
+    grid-template-columns:
+      minmax(0,1fr)
+      minmax(0,1fr) !important;
+
+    column-gap:20px !important;
+    row-gap:8px !important;
   }
 
-  .nav a{
-    min-width:0;
+  .nav a,
+  .nav a:link,
+  .nav a:visited{
+    height:48px !important;
+    min-height:48px !important;
 
-    padding:15px 14px;
+    padding:0 14px !important;
 
-    font-size:20px;
+    font-size:20px !important;
 
-    border-radius:20px;
+    border-radius:20px !important;
 
     font-family:var(--font-main) !important;
     font-weight:800 !important;
   }
 
-  .nav a.active:before{
-    width:8px;
-    height:8px;
-    flex-basis:8px;
-    margin-right:10px;
+  .nav a.active,
+  .nav a.active:link,
+  .nav a.active:visited{
+    padding:0 14px !important;
+  }
+
+  .nav a.active::before{
+    width:8px !important;
+    height:8px !important;
+
+    min-width:8px !important;
+
+    flex-basis:8px !important;
+
+    margin-right:10px !important;
   }
 
   .side-bottom{
@@ -1434,38 +1475,54 @@ h6,
     margin:0 auto;
   }
 
+  /* NAVIGATION */
+
   .nav{
-    width:100%;
+    width:100% !important;
 
     grid-template-columns:
       minmax(0,1fr)
-      minmax(0,1fr);
+      minmax(0,1fr) !important;
 
-    gap:6px 12px;
+    column-gap:12px !important;
+    row-gap:6px !important;
   }
 
-  .nav a{
-    min-width:0;
+  .nav a,
+  .nav a:link,
+  .nav a:visited{
+    height:48px !important;
+    min-height:48px !important;
 
-    font-size:18px;
+    font-size:18px !important;
 
-    padding:14px 12px;
+    padding:0 12px !important;
 
-    border-radius:18px;
+    border-radius:18px !important;
 
-    white-space:nowrap;
-    overflow:hidden;
-    text-overflow:ellipsis;
+    white-space:nowrap !important;
+    overflow:hidden !important;
+    text-overflow:ellipsis !important;
 
     font-family:var(--font-main) !important;
     font-weight:800 !important;
   }
 
-  .nav a.active:before{
-    width:7px;
-    height:7px;
-    flex-basis:7px;
-    margin-right:8px;
+  .nav a.active,
+  .nav a.active:link,
+  .nav a.active:visited{
+    padding:0 12px !important;
+  }
+
+  .nav a.active::before{
+    width:7px !important;
+    height:7px !important;
+
+    min-width:7px !important;
+
+    flex-basis:7px !important;
+
+    margin-right:8px !important;
   }
 
   .main{
@@ -1531,9 +1588,8 @@ h6,
   }
 
   /*
-    POPUP AUCH AUF DEM HANDY
-    EXAKT DIE GLEICHE BREITE
-    UND GLEICHE TYPOGRAFIE.
+    ACCOUNT POPUP AUCH AUF DEM HANDY
+    GLEICHE BREITE UND TYPOGRAFIE
   */
 
   .account-menu{
