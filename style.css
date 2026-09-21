@@ -1006,3 +1006,34 @@ h6,
   border-radius:50%;
   margin:0 8px 0 0;
 }
+
+/* =========================================================
+   GLOBAL LOGIN BUTTON
+   EINHEITLICH AUF ALLEN SEITEN
+   ========================================================= */
+
+.login-button{
+  display:inline-flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+
+  min-height:38px !important;
+  padding:0 16px !important;
+
+  border:1px solid #d7d7d3 !important;
+  background:#fff !important;
+  color:#222 !important;
+
+  font-family:var(--font-main) !important;
+  font-size:12px !important;
+  font-weight:700 !important;
+  line-height:normal !important;
+
+  cursor:pointer !important;
+  transition:.2s ease !important;
+}
+
+.login-button:hover{
+  border-color:#18b8c7 !important;
+  color:#18b8c7 !important;
+}
