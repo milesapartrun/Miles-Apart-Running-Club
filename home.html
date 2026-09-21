@@ -1173,17 +1173,21 @@
     }
 
 
+    /* =========================================================
+       ACCOUNT POPUP
+    ========================================================= */
+
     .account-menu {
       position: absolute;
-      top: 52px;
+      top: calc(100% + 12px);
       right: 0;
-      width: 210px;
-      background: #fff;
-      border: 1px solid #ddd;
-      box-shadow: 0 15px 40px rgba(0,0,0,.12);
-      padding: 8px;
-      z-index: 50;
+      width: 300px;
+      background: #ffffff;
+      border: 1px solid #dddddd;
+      box-shadow: 0 14px 35px rgba(0,0,0,0.12);
+      z-index: 1000;
       display: none;
+      overflow: hidden;
     }
 
 
@@ -1192,44 +1196,74 @@
     }
 
 
+    .account-menu-user {
+      padding: 22px 24px 20px;
+      border-bottom: 1px solid #e8e8e8;
+      background: #ffffff;
+    }
+
+
     .account-menu-name {
-      padding: 11px;
+      margin: 0;
+      color: #111111;
+      font-size: 24px;
+      line-height: 1.2;
       font-weight: 800;
-      border-bottom: 1px solid #eee;
-      margin-bottom: 5px;
     }
 
 
     .account-menu-email {
-      padding: 4px 11px 10px;
-      color: #888;
-      font-size: 11px;
-      border-bottom: 1px solid #eee;
-      margin-bottom: 5px;
-      word-break: break-word;
+      margin-top: 7px;
+      color: #888888;
+      font-size: 16px;
+      line-height: 1.35;
+      font-weight: 400;
+      overflow-wrap: anywhere;
     }
 
 
-    .account-menu a,
     .account-menu button {
       display: block;
       width: 100%;
-      box-sizing: border-box;
-      padding: 11px;
+      height: auto;
+      min-height: 0;
       border: 0;
+      border-bottom: 1px solid #e8e8e8;
+      border-radius: 0;
       background: transparent;
+      padding: 22px 24px;
+      margin: 0;
+      color: #222222;
       text-align: left;
+      font-family: inherit;
+      font-size: 20px;
+      line-height: 1.3;
+      font-weight: 400;
+      letter-spacing: normal;
+      text-transform: none;
+      box-shadow: none;
       cursor: pointer;
-      font-size: 12px;
-      color: #222;
-      text-decoration: none;
     }
 
 
-    .account-menu a:hover,
     .account-menu button:hover {
-      background: #f5f5f3;
-      color: var(--miles-blue);
+      background: #f7f7f7;
+    }
+
+
+    .account-menu button:last-child {
+      border-bottom: 0;
+    }
+
+
+    .account-menu .logout-button {
+      color: #888888;
+    }
+
+
+    .account-menu .logout-button:hover {
+      color: #555555;
+      background: #f7f7f7;
     }
 
 
@@ -1568,6 +1602,34 @@
         grid-template-columns: 1fr;
       }
 
+
+      .account-menu {
+        position: fixed;
+        top: 76px;
+        right: 12px;
+        left: 12px;
+        width: auto;
+        max-width: none;
+      }
+
+
+      .account-menu-name {
+        font-size: 23px;
+      }
+
+
+      .account-menu-email {
+        font-size: 16px;
+      }
+
+
+      .account-menu button {
+        padding: 22px 24px;
+        font-size: 20px;
+        line-height: 1.3;
+        font-weight: 400;
+      }
+
     }
 
 
@@ -1800,7 +1862,7 @@
             class="user-avatar-button"
             id="avatarButton"
             type="button"
-            aria-label="My Run öffnen"
+            aria-label="Account-Menü öffnen"
           >
             M
           </button>
@@ -1811,36 +1873,42 @@
             id="accountMenu"
           >
 
-            <div
-              class="account-menu-name"
-              id="accountMenuName"
-            >
-              Runner
+            <div class="account-menu-user">
+
+              <div
+                class="account-menu-name"
+                id="accountMenuName"
+              >
+                Runner
+              </div>
+
+
+              <div
+                class="account-menu-email"
+                id="accountMenuEmail"
+              >
+                user@email.de
+              </div>
+
             </div>
 
 
-            <div
-              class="account-menu-email"
-              id="accountMenuEmail"
+            <button
+              type="button"
+              id="myProfileButton"
             >
-              user@email.de
-            </div>
-
-
-            <a
-              href="#myRunSection"
-              id="accountMyRunLink"
-            >
-              My Run
-            </a>
+              Mein Profil
+            </button>
 
 
             <button
               type="button"
               id="logoutButton"
+              class="logout-button"
             >
               Abmelden
             </button>
+
 
           </div>
 
@@ -3296,14 +3364,14 @@
   const accountMenuEmail =
     document.getElementById("accountMenuEmail");
 
+  const myProfileButton =
+    document.getElementById("myProfileButton");
+
   const logoutButton =
     document.getElementById("logoutButton");
 
   const myRunLogoutButton =
     document.getElementById("myRunLogoutButton");
-
-  const accountMyRunLink =
-    document.getElementById("accountMyRunLink");
 
   const openLoginButton =
     document.getElementById("openLoginButton");
@@ -4802,13 +4870,17 @@
   );
 
 
-  accountMyRunLink.addEventListener(
+  myProfileButton.addEventListener(
     "click",
-    function(event) {
+    function() {
 
-      event.preventDefault();
+      accountMenu.classList.remove(
+        "open"
+      );
 
-      scrollToMyRun();
+
+      window.location.href =
+        "profile.html";
 
     }
   );
