@@ -961,6 +961,26 @@
     }
 
     /* =====================================================
+       REGISTRATION INTRO
+    ===================================================== */
+
+    .registration-intro {
+      margin: 0 0 22px;
+      padding: 21px 22px;
+      background: #f2fbfc;
+      border: 1px solid #cceef1;
+      color: #52696b;
+      font-size: 14px;
+      line-height: 1.7;
+      font-weight: var(--font-light);
+    }
+
+    .registration-intro strong {
+      color: #222;
+      font-weight: var(--font-heading);
+    }
+
+    /* =====================================================
        REGISTRATION GATE
     ===================================================== */
 
@@ -972,8 +992,8 @@
     }
 
     .gate-card {
-      background: #f7f8f7;
-      border: 1px solid #e0e4e1;
+      background: #fafbf9;
+      border: 1px solid #dfe3e0;
       border-radius: 18px;
       padding: 22px;
     }
@@ -985,22 +1005,22 @@
     }
 
     .gate-icon {
-      width: 52px;
-      height: 52px;
-      flex: 0 0 52px;
-      border-radius: 15px;
+      width: 58px;
+      height: 58px;
+      flex: 0 0 58px;
+      border-radius: 16px;
       background: #fff;
-      border: 1px solid #e0e3e1;
+      border: 1px solid #dfe3e0;
       display: flex;
       align-items: center;
       justify-content: center;
-      color: var(--miles-pink);
-      box-shadow: 0 3px 10px rgba(0,0,0,.04);
+      color: #222;
+      box-shadow: 0 3px 10px rgba(0,0,0,.03);
     }
 
     .gate-icon svg {
-      width: 25px;
-      height: 25px;
+      width: 27px;
+      height: 27px;
       fill: none;
       stroke: currentColor;
       stroke-width: 1.8;
@@ -1014,27 +1034,33 @@
     }
 
     .gate-copy h3 {
-      margin: 0 0 6px;
+      margin: 2px 0 8px;
       font-size: 21px;
-      line-height: 1.12;
-      letter-spacing: -.5px;
+      line-height: 1.15;
+      letter-spacing: -.4px;
       color: #171717;
       font-weight: var(--font-heading);
     }
 
     .gate-copy p {
       margin: 0;
-      color: #777;
+      color: #858b88;
       font-size: 13px;
-      line-height: 1.55;
+      line-height: 1.65;
       font-weight: var(--font-light);
     }
 
+    .gate-copy p strong {
+      color: #4b5352;
+      font-weight: var(--font-heading);
+    }
+
     .instagram-handle {
-      display: inline-block;
-      margin-top: 8px;
-      color: #222;
-      font-size: 15px;
+      display: block;
+      margin-top: 10px;
+      color: #cf348e;
+      font-size: 16px;
+      line-height: 1;
       font-weight: var(--font-heading);
     }
 
@@ -1044,30 +1070,36 @@
       justify-content: center;
       width: 100%;
       box-sizing: border-box;
-      min-height: 46px;
-      margin-top: 18px;
-      padding: 12px 16px;
-      border: 1px solid #d9d9d7;
+      min-height: 58px;
+      margin-top: 20px;
+      padding: 14px 16px;
+      border: 1px solid #d6dad7;
       background: #fff;
       color: #222;
       text-decoration: none;
       font-size: 13px;
       font-weight: var(--font-heading);
       transition: .2s ease;
-      border-radius: 10px;
+      border-radius: 15px;
     }
 
     .instagram-open:hover {
-      border-color: var(--miles-pink);
-      color: var(--miles-pink);
+      border-color: var(--miles-blue);
+      color: var(--miles-blue);
       transform: translateY(-1px);
+    }
+
+    .gate-divider {
+      height: 1px;
+      margin: 22px 0 18px;
+      background: #e2e5e2;
     }
 
     .gate-check {
       display: flex;
       align-items: flex-start;
-      gap: 11px;
-      margin-top: 17px;
+      gap: 13px;
+      margin-top: 0;
       cursor: pointer;
     }
 
@@ -1078,15 +1110,15 @@
     }
 
     .custom-check {
-      width: 22px;
-      height: 22px;
-      flex: 0 0 22px;
+      width: 42px;
+      height: 42px;
+      flex: 0 0 42px;
       box-sizing: border-box;
-      border: 2px solid #c9cecb;
-      border-radius: 7px;
+      border: 2px solid #cfd5d2;
+      border-radius: 12px;
       background: #fff;
       position: relative;
-      margin-top: 1px;
+      margin-top: 0;
       transition: .2s ease;
     }
 
@@ -1098,54 +1130,69 @@
     .gate-check input:checked + .custom-check::after {
       content: "";
       position: absolute;
-      width: 6px;
-      height: 11px;
-      left: 6px;
-      top: 2px;
-      border-right: 2px solid #fff;
-      border-bottom: 2px solid #fff;
+      width: 8px;
+      height: 15px;
+      left: 14px;
+      top: 8px;
+      border-right: 3px solid #fff;
+      border-bottom: 3px solid #fff;
       transform: rotate(45deg);
     }
 
     .gate-check-text {
-      color: #333;
+      color: #8b908e;
       font-size: 13px;
       line-height: 1.5;
       font-weight: var(--font-light);
+      padding-top: 3px;
     }
 
     .gate-check-text strong {
-      color: #111;
+      display: block;
+      color: #222;
+      font-size: 15px;
+      line-height: 1.4;
       font-weight: var(--font-heading);
     }
 
-    /* invitation */
+    .gate-check-text small {
+      display: block;
+      margin-top: 4px;
+      color: #999;
+      font-size: 11px;
+      line-height: 1.45;
+      font-weight: var(--font-light);
+    }
+
+    /* =====================================================
+       INVITATION VISUAL
+    ===================================================== */
 
     .invite-card {
       background:
         radial-gradient(
-          circle at 85% 25%,
-          rgba(65,182,198,.24),
+          circle at 86% 24%,
+          rgba(65,182,198,.28),
           transparent 34%
         ),
         radial-gradient(
           circle at 20% 100%,
-          rgba(38,94,98,.32),
-          transparent 38%
+          rgba(38,94,98,.36),
+          transparent 40%
         ),
         linear-gradient(
           135deg,
-          #111a1b 0%,
-          #1c3132 45%,
-          #31585a 100%
+          #071214 0%,
+          #102324 44%,
+          #173b3d 100%
         );
       color: #fff;
-      border-radius: 16px;
+      border-radius: 18px;
       overflow: hidden;
       position: relative;
-      min-height: 205px;
+      min-height: 270px;
       margin-top: 20px;
-      padding: 26px 25px;
+      padding: 28px 24px 25px;
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
@@ -1162,17 +1209,17 @@
     }
 
     .invite-card::before {
-      width: 300px;
-      height: 300px;
-      left: 18%;
-      top: -145px;
+      width: 310px;
+      height: 310px;
+      left: 42%;
+      top: -165px;
     }
 
     .invite-card::after {
       width: 280px;
       height: 280px;
-      right: -55px;
-      bottom: -155px;
+      left: -65px;
+      bottom: -180px;
     }
 
     .invite-brand {
@@ -1181,48 +1228,50 @@
       color: #49c6d4;
       font-size: 10px;
       line-height: 1;
-      letter-spacing: 5px;
+      letter-spacing: 6px;
       font-weight: var(--font-heading);
     }
 
     .invite-title {
       position: relative;
       z-index: 1;
-      margin-top: 17px;
-      font-size: clamp(32px, 6vw, 48px);
-      line-height: .9;
-      letter-spacing: -2px;
+      margin-top: 29px;
+      font-size: clamp(42px, 7vw, 60px);
+      line-height: .84;
+      letter-spacing: -2.8px;
       font-weight: var(--font-heading);
     }
 
     .invite-title span {
-      color: #31bdd0;
+      color: #42bfd0;
       font-weight: var(--font-heading);
     }
 
     .invite-subtitle {
       position: relative;
       z-index: 1;
-      max-width: 260px;
-      margin-top: 9px;
-      margin-left: auto;
-      text-align: right;
-      color: #fff;
-      font-size: 13px;
-      line-height: 1.25;
+      max-width: 470px;
+      margin-top: 25px;
+      color: rgba(255,255,255,.84);
+      font-size: 14px;
+      line-height: 1.55;
       font-weight: var(--font-heading);
     }
 
     .invite-footer {
       position: relative;
       z-index: 1;
-      margin-top: 23px;
-      color: rgba(255,255,255,.7);
+      margin-top: 34px;
+      color: rgba(255,255,255,.58);
       font-size: 9px;
-      letter-spacing: 3.5px;
+      letter-spacing: 4px;
       text-transform: uppercase;
       font-weight: var(--font-light);
     }
+
+    /* =====================================================
+       SHARE BUTTONS
+    ===================================================== */
 
     .share-buttons {
       display: grid;
@@ -1232,9 +1281,9 @@
     }
 
     .share-button {
-      min-height: 50px;
+      min-height: 62px;
       border: 0;
-      border-radius: 11px;
+      border-radius: 14px;
       color: #fff;
       cursor: pointer;
       display: flex;
@@ -1242,9 +1291,11 @@
       justify-content: center;
       gap: 9px;
       padding: 12px 14px;
-      font-size: 12px;
+      font-size: 13px;
       font-weight: var(--font-heading);
-      transition: transform .18s ease, filter .18s ease;
+      transition:
+        transform .18s ease,
+        filter .18s ease;
     }
 
     .share-button:hover {
@@ -1253,9 +1304,9 @@
     }
 
     .share-button svg {
-      width: 18px;
-      height: 18px;
-      flex: 0 0 18px;
+      width: 21px;
+      height: 21px;
+      flex: 0 0 21px;
       fill: none;
       stroke: currentColor;
       stroke-width: 1.8;
@@ -1264,55 +1315,67 @@
     }
 
     .share-whatsapp {
-      background: #27b85e;
+      background: #57b95f;
     }
 
     .share-instagram {
-      background: linear-gradient(
-        100deg,
-        #c72a91,
-        #dc4e68 58%,
-        #f1a13b
-      );
+      background:
+        linear-gradient(
+          100deg,
+          #c32d82,
+          #d74f70 55%,
+          #efa23e
+        );
     }
 
-    .share-email,
-    .share-copy {
-      background: #f0f1ef;
-      color: #222;
-      border: 1px solid #dedfdb;
-    }
+    /* =====================================================
+       INVITE CONFIRMATION
+    ===================================================== */
 
     .invite-confirmation {
-      margin-top: 14px;
-      padding-top: 14px;
-      border-top: 1px solid #e3e5e2;
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid #e0e3e0;
+      opacity: .45;
+      pointer-events: none;
+      transition: .2s ease;
+    }
+
+    .invite-confirmation.available {
+      opacity: 1;
+      pointer-events: auto;
     }
 
     .invite-confirmation .gate-check {
       margin-top: 0;
     }
 
+    /* =====================================================
+       REGISTRATION STATUS
+    ===================================================== */
+
     .registration-status {
       display: flex;
       align-items: center;
-      gap: 8px;
-      margin-top: 14px;
-      padding: 11px 13px;
+      gap: 10px;
+      margin-top: 16px;
+      padding: 14px 16px;
       background: #f5f6f4;
-      border: 1px solid #e3e4e0;
-      border-radius: 9px;
+      border: 1px solid #e1e3df;
+      border-radius: 10px;
       color: #888;
       font-size: 11px;
-      line-height: 1.4;
+      line-height: 1.5;
+      font-weight: var(--font-light);
+      transition: .2s ease;
     }
 
     .registration-status-dot {
-      width: 8px;
-      height: 8px;
+      width: 9px;
+      height: 9px;
       border-radius: 50%;
-      flex: 0 0 8px;
-      background: #c5c8c5;
+      flex: 0 0 9px;
+      background: #c8ccca;
     }
 
     .registration-status.ready {
@@ -1325,6 +1388,61 @@
       background: #248b63;
     }
 
+    /* =====================================================
+       REGISTRATION PROGRESS
+    ===================================================== */
+
+    .registration-progress {
+      margin-top: 18px;
+      padding: 18px 20px;
+      border: 1px solid #e0e2df;
+      border-radius: 16px;
+      background: #f7f7f5;
+    }
+
+    .registration-progress-row {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      color: #8a8e8c;
+      font-size: 12px;
+      line-height: 1.4;
+      font-weight: var(--font-light);
+      transition: .2s ease;
+    }
+
+    .registration-progress-row + .registration-progress-row {
+      margin-top: 12px;
+    }
+
+    .registration-progress-number {
+      width: 30px;
+      height: 30px;
+      flex: 0 0 30px;
+      border-radius: 50%;
+      background: #e1e4e2;
+      color: #8b8f8d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: var(--font-heading);
+    }
+
+    .registration-progress-row.complete {
+      color: #222;
+    }
+
+    .registration-progress-row.complete
+    .registration-progress-number {
+      background: var(--miles-blue);
+      color: #fff;
+    }
+
+    /* =====================================================
+       AUTH BUTTON
+    ===================================================== */
+
     .auth-submit {
       width: 100%;
       border: 1px solid var(--miles-blue);
@@ -1334,7 +1452,7 @@
       font-size: 12px;
       font-weight: var(--font-light);
       cursor: pointer;
-      margin-top: 4px;
+      margin-top: 14px;
       transition: .2s ease;
     }
 
@@ -1344,7 +1462,10 @@
     }
 
     .auth-submit:disabled {
-      opacity: .45;
+      background: #a7dfe4;
+      border-color: #a7dfe4;
+      color: #fff;
+      opacity: 1;
       cursor: not-allowed;
     }
 
@@ -1676,20 +1797,31 @@
         font-size: 13px;
       }
 
+      .registration-intro {
+        padding: 18px 19px;
+        font-size: 13px;
+        line-height: 1.7;
+      }
+
       .gate-card {
         padding: 18px;
-        border-radius: 15px;
+        border-radius: 16px;
       }
 
       .gate-top {
-        gap: 12px;
+        gap: 13px;
       }
 
       .gate-icon {
-        width: 44px;
-        height: 44px;
-        flex-basis: 44px;
-        border-radius: 12px;
+        width: 46px;
+        height: 46px;
+        flex-basis: 46px;
+        border-radius: 13px;
+      }
+
+      .gate-icon svg {
+        width: 23px;
+        height: 23px;
       }
 
       .gate-copy h3 {
@@ -1701,30 +1833,73 @@
       }
 
       .instagram-handle {
+        font-size: 15px;
+      }
+
+      .instagram-open {
+        min-height: 56px;
+        border-radius: 15px;
+      }
+
+      .custom-check {
+        width: 40px;
+        height: 40px;
+        flex-basis: 40px;
+      }
+
+      .gate-check input:checked + .custom-check::after {
+        left: 13px;
+        top: 7px;
+      }
+
+      .gate-check-text strong {
         font-size: 14px;
       }
 
       .invite-card {
-        min-height: 195px;
-        padding: 22px 19px;
-        border-radius: 13px;
+        min-height: 260px;
+        padding: 25px 20px 23px;
+        border-radius: 15px;
+      }
+
+      .invite-brand {
+        font-size: 9px;
+        letter-spacing: 5px;
       }
 
       .invite-title {
-        font-size: 36px;
+        margin-top: 27px;
+        font-size: 40px;
+        letter-spacing: -2.2px;
       }
 
       .invite-subtitle {
+        margin-top: 23px;
         font-size: 12px;
-        max-width: 220px;
+      }
+
+      .invite-footer {
+        margin-top: 29px;
+        font-size: 8px;
+        letter-spacing: 3px;
       }
 
       .share-buttons {
         grid-template-columns: 1fr;
+        gap: 10px;
       }
 
       .share-button {
-        min-height: 48px;
+        min-height: 58px;
+        border-radius: 14px;
+      }
+
+      .registration-progress {
+        padding: 17px 18px;
+      }
+
+      .registration-status {
+        font-size: 11px;
       }
 
     }
@@ -2164,8 +2339,10 @@
           <p>
             Ich liebe es zu laufen, ins Gym zu gehen und
             meinen Körper immer wieder vor neue Herausforderungen
-            zu stellen. Von klassischen Running-Events (10km, Halb-Marathon, Marathon) über
-            Trail-Running & Ultra-Running bis hin zu Hybrid Training und Hyrox races.
+            zu stellen. Von klassischen Running-Events
+            (10km, Halb-Marathon, Marathon) über
+            Trail-Running & Ultra-Running bis hin zu
+            Hybrid Training und Hyrox races.
           </p>
 
           <p>
@@ -2282,6 +2459,7 @@
 
 </div>
 
+
 <!-- =====================================================
      AUTH OVERLAY
 ===================================================== -->
@@ -2315,11 +2493,17 @@
       Willkommen zurück.
     </h2>
 
-    <p class="auth-description" id="authDescription">
+    <p
+      class="auth-description"
+      id="authDescription"
+    >
       Melde dich an und werde Teil der Community.
     </p>
 
-    <div class="auth-tabs" id="authTabs">
+    <div
+      class="auth-tabs"
+      id="authTabs"
+    >
 
       <button
         class="auth-tab active"
@@ -2339,9 +2523,15 @@
 
     </div>
 
-    <!-- LOGIN -->
 
-    <form class="auth-form active" id="loginForm">
+    <!-- =================================================
+         LOGIN
+    ================================================= -->
+
+    <form
+      class="auth-form active"
+      id="loginForm"
+    >
 
       <div class="form-group">
 
@@ -2398,9 +2588,30 @@
 
     </form>
 
-    <!-- REGISTRATION -->
 
-    <form class="auth-form" id="registerForm">
+    <!-- =================================================
+         REGISTRATION
+    ================================================= -->
+
+    <form
+      class="auth-form"
+      id="registerForm"
+    >
+
+      <!-- INTRO WIE AUF DER HOMESEITE -->
+
+      <div class="registration-intro">
+
+        <strong>Bevor du loslegst:</strong>
+        Miles Apart soll eine echte Community sein.
+        Deshalb gehören zwei kleine Schritte zur Registrierung:
+        Tano Loew auf Instagram folgen und einen Freund zur
+        Community einladen.
+
+      </div>
+
+
+      <!-- NAME -->
 
       <div class="form-group">
 
@@ -2418,6 +2629,9 @@
 
       </div>
 
+
+      <!-- EMAIL -->
+
       <div class="form-group">
 
         <label for="registerEmail">
@@ -2433,6 +2647,9 @@
         >
 
       </div>
+
+
+      <!-- PASSWORD -->
 
       <div class="form-group">
 
@@ -2451,11 +2668,17 @@
 
       </div>
 
-      <!-- REGISTRATION REQUIREMENTS -->
+
+      <!-- =================================================
+           REGISTRATION REQUIREMENTS
+      ================================================= -->
 
       <div class="registration-gate">
 
-        <!-- INSTAGRAM -->
+
+        <!-- =================================================
+             SCHRITT 1
+        ================================================= -->
 
         <div class="gate-card">
 
@@ -2464,9 +2687,26 @@
             <div class="gate-icon">
 
               <svg viewBox="0 0 32 32">
-                <rect x="6" y="6" width="20" height="20" rx="6"></rect>
-                <circle cx="16" cy="16" r="5"></circle>
-                <circle cx="22.5" cy="9.5" r="1"></circle>
+                <rect
+                  x="6"
+                  y="6"
+                  width="20"
+                  height="20"
+                  rx="6"
+                ></rect>
+
+                <circle
+                  cx="16"
+                  cy="16"
+                  r="5"
+                ></circle>
+
+                <circle
+                  cx="22.5"
+                  cy="9.5"
+                  r="1"
+                ></circle>
+
               </svg>
 
             </div>
@@ -2474,13 +2714,13 @@
             <div class="gate-copy">
 
               <h3>
-                Folge Tano auf Instagram
+                Folge Tano Loew auf Instagram
               </h3>
 
               <p>
-                Folge
-                <strong>@tano.loew</strong>
-                und bleib immer auf dem Laufenden.
+                Folge meinem persönlichen Instagram-Account
+                und bleib über Miles Apart, Running und neue
+                Community-Aktionen auf dem Laufenden.
               </p>
 
               <span class="instagram-handle">
@@ -2491,6 +2731,7 @@
 
           </div>
 
+
           <a
             class="instagram-open"
             href="https://www.instagram.com/tano.loew/"
@@ -2499,6 +2740,10 @@
           >
             Instagram öffnen&nbsp; →
           </a>
+
+
+          <div class="gate-divider"></div>
+
 
           <label class="gate-check">
 
@@ -2510,26 +2755,57 @@
             <span class="custom-check"></span>
 
             <span class="gate-check-text">
-              <strong>Ja, ich folge Tano Loew bereits.</strong>
+
+              <strong>
+                Ja, ich folge Tano Loew bereits.
+              </strong>
+
+              <small>
+                Mit dem Haken bestätigst du dies.
+              </small>
+
             </span>
 
           </label>
 
         </div>
 
-        <!-- INVITE -->
+
+        <!-- =================================================
+             SCHRITT 2
+        ================================================= -->
 
         <div class="gate-card">
 
           <div class="gate-top">
 
-            <div class="gate-icon" style="color:#315f70;">
+            <div
+              class="gate-icon"
+              style="color:#315f70;"
+            >
 
               <svg viewBox="0 0 32 32">
-                <circle cx="11" cy="11" r="4"></circle>
-                <circle cx="21" cy="11" r="4"></circle>
-                <path d="M4 25c.5-5 3-7.5 7-7.5s6.5 2.5 7 7.5"></path>
-                <path d="M14 25c.5-5 3-7.5 7-7.5s6.5 2.5 7 7.5"></path>
+
+                <circle
+                  cx="11"
+                  cy="11"
+                  r="4"
+                ></circle>
+
+                <circle
+                  cx="21"
+                  cy="11"
+                  r="4"
+                ></circle>
+
+                <path
+                  d="M4 25c.5-5 3-7.5 7-7.5s6.5 2.5 7 7.5"
+                ></path>
+
+                <path
+                  d="M14 25c.5-5 3-7.5 7-7.5s6.5 2.5 7 7.5"
+                ></path>
+
               </svg>
 
             </div>
@@ -2542,7 +2818,7 @@
 
               <p>
                 Teile Miles Apart mit einem Freund –
-                per WhatsApp, Instagram oder E-Mail.
+                über WhatsApp oder Instagram.
                 Gemeinsam läuft's besser.
               </p>
 
@@ -2550,34 +2826,36 @@
 
           </div>
 
-          <!-- INVITATION VISUAL -->
+
+          <!-- =================================================
+               RUN TOGETHER VISUAL
+          ================================================= -->
 
           <div class="invite-card">
 
-            <div>
+            <div class="invite-brand">
+              MILES APART
+            </div>
 
-              <div class="invite-brand">
-                MILES APART
-              </div>
+            <div class="invite-title">
+              RUN <span>TOGETHER</span>
+            </div>
 
-              <div class="invite-title">
-                RUN <span>TOGETHER</span>
-              </div>
-
-              <div class="invite-subtitle">
-                Komm mit in die<br>
-                Miles Apart Community!
-              </div>
-
+            <div class="invite-subtitle">
+              Komm mit in die Miles Apart Community.
+              Eine Community. Keine Grenzen.
             </div>
 
             <div class="invite-footer">
-              EINE COMMUNITY. &nbsp; KEINE GRENZEN.
+              RUN · CONNECT · REPEAT
             </div>
 
           </div>
 
-          <!-- SHARE BUTTONS -->
+
+          <!-- =================================================
+               SHARE BUTTONS
+          ================================================= -->
 
           <div class="share-buttons">
 
@@ -2588,13 +2866,21 @@
             >
 
               <svg viewBox="0 0 32 32">
-                <path d="M25.5 6.5A13.2 13.2 0 0 0 4.7 22.1L3 28.2l6.3-1.6A13.2 13.2 0 1 0 25.5 6.5Z"></path>
-                <path d="M11.3 10.7c.3-.4.7-.4 1-.1l1.5 2c.2.3.2.6 0 .9l-.8 1c1 2 2.5 3.5 4.5 4.5l1-.8c.3-.2.6-.2.9 0l2 1.5c.3.3.3.7-.1 1-1 .9-2.2 1.2-3.5.8-4.5-1.4-7.9-4.8-9.3-9.3-.4-1.3-.1-2.5.8-3.5Z"></path>
+
+                <path
+                  d="M25.5 6.5A13.2 13.2 0 0 0 4.7 22.1L3 28.2l6.3-1.6A13.2 13.2 0 1 0 25.5 6.5Z"
+                ></path>
+
+                <path
+                  d="M11.3 10.7c.3-.4.7-.4 1-.1l1.5 2c.2.3.2.6 0 .9l-.8 1c1 2 2.5 3.5 4.5 4.5l1-.8c.3-.2.6-.2.9 0l2 1.5c.3.3.3.7-.1 1-1 .9-2.2 1.2-3.5.8-4.5-1.4-7.9-4.8-9.3-9.3-.4-1.3-.1-2.5.8-3.5Z"
+                ></path>
+
               </svg>
 
               Über WhatsApp teilen
 
             </button>
+
 
             <button
               type="button"
@@ -2603,50 +2889,44 @@
             >
 
               <svg viewBox="0 0 32 32">
-                <rect x="6" y="6" width="20" height="20" rx="6"></rect>
-                <circle cx="16" cy="16" r="5"></circle>
-                <circle cx="22.5" cy="9.5" r="1"></circle>
+
+                <rect
+                  x="6"
+                  y="6"
+                  width="20"
+                  height="20"
+                  rx="6"
+                ></rect>
+
+                <circle
+                  cx="16"
+                  cy="16"
+                  r="5"
+                ></circle>
+
+                <circle
+                  cx="22.5"
+                  cy="9.5"
+                  r="1"
+                ></circle>
+
               </svg>
 
               Über Instagram teilen
 
             </button>
 
-            <button
-              type="button"
-              class="share-button share-email"
-              id="shareEmail"
-            >
-
-              <svg viewBox="0 0 32 32">
-                <rect x="4" y="7" width="24" height="18" rx="2"></rect>
-                <path d="M5 9l11 9L27 9"></path>
-              </svg>
-
-              Per E-Mail teilen
-
-            </button>
-
-            <button
-              type="button"
-              class="share-button share-copy"
-              id="shareCopy"
-            >
-
-              <svg viewBox="0 0 32 32">
-                <rect x="10" y="10" width="15" height="15" rx="2"></rect>
-                <path d="M7 21H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2v1"></path>
-              </svg>
-
-              Link kopieren
-
-            </button>
-
           </div>
 
-          <!-- INVITE CONFIRMATION -->
 
-          <div class="invite-confirmation">
+          <!-- =================================================
+               INVITE CONFIRMATION
+          ================================================= -->
+
+          <div
+            class="invite-confirmation"
+            id="inviteConfirmationArea"
+          >
 
             <label class="gate-check">
 
@@ -2658,9 +2938,15 @@
               <span class="custom-check"></span>
 
               <span class="gate-check-text">
+
                 <strong>
-                  Ja, ich habe einen Freund zu Miles Apart eingeladen.
+                  Ja, ich habe einen Freund eingeladen.
                 </strong>
+
+                <small>
+                  Teile zuerst über WhatsApp oder Instagram.
+                </small>
+
               </span>
 
             </label>
@@ -2671,6 +2957,51 @@
 
       </div>
 
+
+      <!-- =================================================
+           PROGRESS
+      ================================================= -->
+
+      <div class="registration-progress">
+
+        <div
+          class="registration-progress-row"
+          id="progressInstagram"
+        >
+
+          <span class="registration-progress-number">
+            1
+          </span>
+
+          <span>
+            Instagram-Follow bestätigen
+          </span>
+
+        </div>
+
+
+        <div
+          class="registration-progress-row"
+          id="progressInvite"
+        >
+
+          <span class="registration-progress-number">
+            2
+          </span>
+
+          <span>
+            Freund einladen
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <!-- =================================================
+           STATUS
+      ================================================= -->
+
       <div
         class="registration-status"
         id="registrationStatus"
@@ -2679,10 +3010,16 @@
         <span class="registration-status-dot"></span>
 
         <span id="registrationStatusText">
-          Erledige beide Schritte oben, um dein Konto zu erstellen.
+          Bestätige das Instagram-Follow und lade anschließend
+          einen Freund ein.
         </span>
 
       </div>
+
+
+      <!-- =================================================
+           REGISTER BUTTON
+      ================================================= -->
 
       <button
         class="auth-submit"
@@ -2690,8 +3027,9 @@
         type="submit"
         disabled
       >
-        Konto erstellen →
+        Erst Voraussetzungen erfüllen
       </button>
+
 
       <div
         class="auth-message"
@@ -2700,9 +3038,15 @@
 
     </form>
 
-    <!-- FORGOT PASSWORD -->
 
-    <form class="auth-form" id="forgotForm">
+    <!-- =================================================
+         FORGOT PASSWORD
+    ================================================= -->
+
+    <form
+      class="auth-form"
+      id="forgotForm"
+    >
 
       <button
         class="auth-back"
@@ -2750,9 +3094,15 @@
 
     </form>
 
-    <!-- RECOVERY -->
 
-    <form class="auth-form" id="recoveryForm">
+    <!-- =================================================
+         RECOVERY
+    ================================================= -->
+
+    <form
+      class="auth-form"
+      id="recoveryForm"
+    >
 
       <div class="form-group">
 
@@ -2807,7 +3157,12 @@
 
 </div>
 
+
 <script>
+
+  /* =====================================================
+     SUPABASE
+  ===================================================== */
 
   const SUPABASE_URL =
     "https://orbrkdrsihsacsnprewf.supabase.co";
@@ -2824,6 +3179,11 @@
       SUPABASE_URL,
       SUPABASE_PUBLISHABLE_KEY
     );
+
+
+  /* =====================================================
+     ELEMENTS
+  ===================================================== */
 
   const guestArea =
     document.getElementById("guestArea");
@@ -2927,11 +3287,20 @@
   const inviteConfirmation =
     document.getElementById("inviteConfirmation");
 
+  const inviteConfirmationArea =
+    document.getElementById("inviteConfirmationArea");
+
   const registrationStatus =
     document.getElementById("registrationStatus");
 
   const registrationStatusText =
     document.getElementById("registrationStatusText");
+
+  const progressInstagram =
+    document.getElementById("progressInstagram");
+
+  const progressInvite =
+    document.getElementById("progressInvite");
 
   const shareWhatsapp =
     document.getElementById("shareWhatsapp");
@@ -2939,14 +3308,20 @@
   const shareInstagram =
     document.getElementById("shareInstagram");
 
-  const shareEmail =
-    document.getElementById("shareEmail");
 
-  const shareCopy =
-    document.getElementById("shareCopy");
+  /* =====================================================
+     STATE
+  ===================================================== */
 
   let currentUser = null;
   let currentProfile = null;
+
+  let inviteActionCompleted = false;
+
+
+  /* =====================================================
+     USER HELPERS
+  ===================================================== */
 
   function getInitials(name) {
 
@@ -2975,6 +3350,7 @@
 
   }
 
+
   function getFirstName(name) {
 
     if (!name) {
@@ -2989,6 +3365,7 @@
     );
 
   }
+
 
   function getUserDisplayName(
     user,
@@ -3052,6 +3429,11 @@
 
   }
 
+
+  /* =====================================================
+     MESSAGES
+  ===================================================== */
+
   function setMessage(
     element,
     text,
@@ -3068,14 +3450,35 @@
 
   }
 
+
   function clearMessages() {
 
-    setMessage(loginMessage, "");
-    setMessage(registerMessage, "");
-    setMessage(forgotMessage, "");
-    setMessage(recoveryMessage, "");
+    setMessage(
+      loginMessage,
+      ""
+    );
+
+    setMessage(
+      registerMessage,
+      ""
+    );
+
+    setMessage(
+      forgotMessage,
+      ""
+    );
+
+    setMessage(
+      recoveryMessage,
+      ""
+    );
 
   }
+
+
+  /* =====================================================
+     BUTTON LOADING
+  ===================================================== */
 
   function setButtonLoading(
     button,
@@ -3092,6 +3495,11 @@
         : normalText;
 
   }
+
+
+  /* =====================================================
+     PROFILE
+  ===================================================== */
 
   async function loadProfile(user) {
 
@@ -3139,6 +3547,11 @@
     return currentProfile;
 
   }
+
+
+  /* =====================================================
+     USER INTERFACE
+  ===================================================== */
 
   function updateUserInterface() {
 
@@ -3240,6 +3653,11 @@
 
   }
 
+
+  /* =====================================================
+     AUTH OPEN / CLOSE
+  ===================================================== */
+
   function openAuth() {
 
     authOverlay.classList.add(
@@ -3263,6 +3681,7 @@
 
   }
 
+
   function closeAuth() {
 
     authOverlay.classList.remove(
@@ -3276,15 +3695,18 @@
 
   }
 
+
   openLoginButton.addEventListener(
     "click",
     openAuth
   );
 
+
   closeAuthButton.addEventListener(
     "click",
     closeAuth
   );
+
 
   authOverlay.addEventListener(
     "click",
@@ -3300,6 +3722,7 @@
 
     }
   );
+
 
   document.addEventListener(
     "keydown",
@@ -3319,27 +3742,52 @@
     }
   );
 
+
+  /* =====================================================
+     FORMS / TABS
+  ===================================================== */
+
   function hideAllForms() {
 
-    loginForm.classList.remove("active");
-    registerForm.classList.remove("active");
-    forgotForm.classList.remove("active");
-    recoveryForm.classList.remove("active");
+    loginForm.classList.remove(
+      "active"
+    );
+
+    registerForm.classList.remove(
+      "active"
+    );
+
+    forgotForm.classList.remove(
+      "active"
+    );
+
+    recoveryForm.classList.remove(
+      "active"
+    );
 
   }
+
 
   function showLogin() {
 
     hideAllForms();
+
     clearMessages();
 
-    loginForm.classList.add("active");
+    loginForm.classList.add(
+      "active"
+    );
 
     authTabs.style.display =
       "grid";
 
-    loginTab.classList.add("active");
-    registerTab.classList.remove("active");
+    loginTab.classList.add(
+      "active"
+    );
+
+    registerTab.classList.remove(
+      "active"
+    );
 
     authTitle.textContent =
       "Willkommen zurück.";
@@ -3349,18 +3797,27 @@
 
   }
 
+
   function showRegister() {
 
     hideAllForms();
+
     clearMessages();
 
-    registerForm.classList.add("active");
+    registerForm.classList.add(
+      "active"
+    );
 
     authTabs.style.display =
       "grid";
 
-    registerTab.classList.add("active");
-    loginTab.classList.remove("active");
+    registerTab.classList.add(
+      "active"
+    );
+
+    loginTab.classList.remove(
+      "active"
+    );
 
     authTitle.textContent =
       "Werde Teil der Community.";
@@ -3372,12 +3829,16 @@
 
   }
 
+
   function showForgotPassword() {
 
     hideAllForms();
+
     clearMessages();
 
-    forgotForm.classList.add("active");
+    forgotForm.classList.add(
+      "active"
+    );
 
     authTabs.style.display =
       "none";
@@ -3390,12 +3851,16 @@
 
   }
 
+
   function showRecovery() {
 
     hideAllForms();
+
     clearMessages();
 
-    recoveryForm.classList.add("active");
+    recoveryForm.classList.add(
+      "active"
+    );
 
     authTabs.style.display =
       "none";
@@ -3408,25 +3873,34 @@
 
   }
 
+
   loginTab.addEventListener(
     "click",
     showLogin
   );
+
 
   registerTab.addEventListener(
     "click",
     showRegister
   );
 
+
   forgotPasswordButton.addEventListener(
     "click",
     showForgotPassword
   );
 
+
   backToLoginButton.addEventListener(
     "click",
     showLogin
   );
+
+
+  /* =====================================================
+     PROFILE BUTTON
+  ===================================================== */
 
   profileButton.addEventListener(
     "click",
@@ -3444,6 +3918,7 @@
 
     }
   );
+
 
   /* =====================================================
      REGISTRATION GATE
@@ -3464,15 +3939,38 @@
     registerSubmit.disabled =
       !ready;
 
+
+    /* Instagram progress */
+
+    progressInstagram.classList.toggle(
+      "complete",
+      follows
+    );
+
+
+    /* Invitation progress */
+
+    progressInvite.classList.toggle(
+      "complete",
+      invited
+    );
+
+
+    /* Status */
+
     registrationStatus.classList.toggle(
       "ready",
       ready
     );
 
+
     if (ready) {
 
       registrationStatusText.textContent =
         "Alles bereit. Du kannst jetzt dein Miles-Apart-Konto erstellen.";
+
+      registerSubmit.textContent =
+        "Konto erstellen →";
 
     } else if (
       !follows &&
@@ -3482,32 +3980,65 @@
       registrationStatusText.textContent =
         "Bestätige das Instagram-Follow und lade anschließend einen Freund ein.";
 
+      registerSubmit.textContent =
+        "Erst Voraussetzungen erfüllen";
+
     } else if (!follows) {
 
       registrationStatusText.textContent =
         "Noch ein Schritt: Bestätige, dass du Tano auf Instagram folgst.";
+
+      registerSubmit.textContent =
+        "Erst Voraussetzungen erfüllen";
 
     } else {
 
       registrationStatusText.textContent =
         "Noch ein Schritt: Lade einen Freund zu Miles Apart ein.";
 
+      registerSubmit.textContent =
+        "Erst Voraussetzungen erfüllen";
+
     }
 
   }
+
 
   followConfirmation.addEventListener(
     "change",
     updateRegistrationGate
   );
 
+
   inviteConfirmation.addEventListener(
     "change",
-    updateRegistrationGate
+    function() {
+
+      /*
+        Die Checkbox darf erst benutzt werden,
+        nachdem WhatsApp oder Instagram geöffnet
+        bzw. der Share-Vorgang gestartet wurde.
+      */
+
+      if (
+        !inviteActionCompleted
+      ) {
+
+        inviteConfirmation.checked =
+          false;
+
+        return;
+
+      }
+
+      updateRegistrationGate();
+
+    }
   );
 
+
   /* =====================================================
-     SHARE
+     INVITATION
   ===================================================== */
 
   function getInviteUrl() {
@@ -3518,6 +4049,7 @@
     );
 
   }
+
 
   function getInviteMessage() {
 
@@ -3530,24 +4062,50 @@
 
   }
 
+
+  function markInviteActionStarted() {
+
+    inviteActionCompleted =
+      true;
+
+    inviteConfirmationArea.classList.add(
+      "available"
+    );
+
+    updateRegistrationGate();
+
+  }
+
+
+  /* =====================================================
+     WHATSAPP
+  ===================================================== */
+
   shareWhatsapp.addEventListener(
     "click",
     function() {
 
-      const url =
+      const whatsappUrl =
         "https://wa.me/?text=" +
         encodeURIComponent(
           getInviteMessage()
         );
 
+      markInviteActionStarted();
+
       window.open(
-        url,
+        whatsappUrl,
         "_blank",
         "noopener,noreferrer"
       );
 
     }
   );
+
+
+  /* =====================================================
+     INSTAGRAM SHARE
+  ===================================================== */
 
   shareInstagram.addEventListener(
     "click",
@@ -3556,34 +4114,56 @@
       const message =
         getInviteMessage();
 
-      try {
+      /*
+        Wenn das Gerät den nativen Share-Dialog
+        unterstützt, wird dieser verwendet.
+        Auf Smartphones kann der Nutzer dort
+        anschließend Instagram auswählen.
+      */
 
-        if (
-          navigator.share
-        ) {
+      if (
+        navigator.share
+      ) {
+
+        try {
 
           await navigator.share({
-            title: "Miles Apart Running Club",
-            text: message,
-            url: getInviteUrl()
+
+            title:
+              "Miles Apart Running Club",
+
+            text:
+              message,
+
+            url:
+              getInviteUrl()
+
           });
 
-          return;
-
-        }
-
-      } catch (error) {
-
-        if (
-          error &&
-          error.name === "AbortError"
-        ) {
+          markInviteActionStarted();
 
           return;
+
+        } catch (error) {
+
+          if (
+            error &&
+            error.name === "AbortError"
+          ) {
+
+            return;
+
+          }
 
         }
 
       }
+
+
+      /*
+        Fallback:
+        Nachricht kopieren und Instagram öffnen.
+      */
 
       try {
 
@@ -3594,11 +4174,13 @@
       } catch (error) {
 
         console.error(
-          "Link konnte nicht kopiert werden:",
+          "Einladungsnachricht konnte nicht kopiert werden:",
           error
         );
 
       }
+
+      markInviteActionStarted();
 
       window.open(
         "https://www.instagram.com/",
@@ -3609,73 +4191,9 @@
     }
   );
 
-  shareEmail.addEventListener(
-    "click",
-    function() {
-
-      const subject =
-        "Komm mit zu Miles Apart 🏃‍♂️";
-
-      const body =
-        getInviteMessage();
-
-      window.location.href =
-        "mailto:?subject=" +
-        encodeURIComponent(subject) +
-        "&body=" +
-        encodeURIComponent(body);
-
-    }
-  );
-
-  shareCopy.addEventListener(
-    "click",
-    async function() {
-
-      const url =
-        getInviteUrl();
-
-      try {
-
-        await navigator.clipboard.writeText(
-          url
-        );
-
-        const original =
-          shareCopy.innerHTML;
-
-        shareCopy.textContent =
-          "✓ Link kopiert";
-
-        setTimeout(
-          function() {
-
-            shareCopy.innerHTML =
-              original;
-
-          },
-          1800
-        );
-
-      } catch (error) {
-
-        console.error(
-          "Link konnte nicht kopiert werden:",
-          error
-        );
-
-        setMessage(
-          registerMessage,
-          "Der Link konnte nicht automatisch kopiert werden. Bitte kopiere die Seitenadresse manuell."
-        );
-
-      }
-
-    }
-  );
 
   /* =====================================================
-     REGISTRIERUNG
+     REGISTRATION
   ===================================================== */
 
   registerForm.addEventListener(
@@ -3685,6 +4203,12 @@
       event.preventDefault();
 
       clearMessages();
+
+
+      /*
+        Sicherheitsprüfung im Browser:
+        Beide Voraussetzungen müssen erfüllt sein.
+      */
 
       if (
         !followConfirmation.checked ||
@@ -3702,11 +4226,13 @@
 
       }
 
+
       const name =
         document
           .getElementById("registerName")
           .value
           .trim();
+
 
       const email =
         document
@@ -3715,12 +4241,16 @@
           .trim()
           .toLowerCase();
 
+
       const password =
         document
           .getElementById("registerPassword")
           .value;
 
-      if (name.length < 2) {
+
+      if (
+        name.length < 2
+      ) {
 
         setMessage(
           registerMessage,
@@ -3731,7 +4261,10 @@
 
       }
 
-      if (password.length < 6) {
+
+      if (
+        password.length < 6
+      ) {
 
         setMessage(
           registerMessage,
@@ -3742,11 +4275,13 @@
 
       }
 
+
       setButtonLoading(
         registerSubmit,
         true,
         "Konto erstellen →"
       );
+
 
       const {
         data,
@@ -3754,14 +4289,19 @@
       } =
         await supabaseClient.auth.signUp({
 
-          email: email,
+          email:
+            email,
 
-          password: password,
+          password:
+            password,
 
           options: {
 
             data: {
-              display_name: name
+
+              display_name:
+                name
+
             },
 
             emailRedirectTo:
@@ -3771,25 +4311,24 @@
 
         });
 
+
       setButtonLoading(
         registerSubmit,
         false,
         "Konto erstellen →"
       );
 
-      /*
-        Supabase kann bei einer bereits registrierten
-        E-Mail-Adresse absichtlich keinen normalen Fehler
-        zurückgeben.
 
-        Wenn identities leer ist, handelt es sich um eine
-        bereits vorhandene E-Mail-Adresse.
+      /*
+        Bereits registrierte E-Mail.
       */
 
       if (
         data &&
         data.user &&
-        Array.isArray(data.user.identities) &&
+        Array.isArray(
+          data.user.identities
+        ) &&
         data.user.identities.length === 0
       ) {
 
@@ -3802,6 +4341,7 @@
 
       }
 
+
       if (error) {
 
         console.error(
@@ -3809,18 +4349,32 @@
           error
         );
 
+
         const errorText =
           String(
             error.message || ""
           ).toLowerCase();
 
+
         if (
-          errorText.includes("already registered") ||
-          errorText.includes("already exists") ||
-          errorText.includes("email already") ||
-          errorText.includes("user already") ||
-          errorText.includes("email_exists") ||
-          errorText.includes("user_already_exists")
+          errorText.includes(
+            "already registered"
+          ) ||
+          errorText.includes(
+            "already exists"
+          ) ||
+          errorText.includes(
+            "email already"
+          ) ||
+          errorText.includes(
+            "user already"
+          ) ||
+          errorText.includes(
+            "email_exists"
+          ) ||
+          errorText.includes(
+            "user_already_exists"
+          )
         ) {
 
           setMessage(
@@ -3832,6 +4386,7 @@
 
         }
 
+
         setMessage(
           registerMessage,
           translateAuthError(error)
@@ -3841,9 +4396,23 @@
 
       }
 
+
       registerForm.reset();
 
+      /*
+        Nach Reset soll der Gate wieder
+        zurückgesetzt werden.
+      */
+
+      inviteActionCompleted =
+        false;
+
+      inviteConfirmationArea.classList.remove(
+        "available"
+      );
+
       updateRegistrationGate();
+
 
       if (
         data &&
@@ -3874,6 +4443,7 @@
     }
   );
 
+
   /* =====================================================
      LOGIN
   ===================================================== */
@@ -3886,6 +4456,7 @@
 
       clearMessages();
 
+
       const email =
         document
           .getElementById("loginEmail")
@@ -3893,16 +4464,19 @@
           .trim()
           .toLowerCase();
 
+
       const password =
         document
           .getElementById("loginPassword")
           .value;
+
 
       const {
         data: sessionData,
         error: sessionError
       } =
         await supabaseClient.auth.getSession();
+
 
       if (sessionError) {
 
@@ -3913,16 +4487,19 @@
 
       }
 
+
       const currentSession =
         sessionData &&
         sessionData.session
           ? sessionData.session
           : null;
 
+
       const currentSessionUser =
         currentSession
           ? currentSession.user
           : null;
+
 
       if (
         currentSessionUser &&
@@ -3941,11 +4518,13 @@
 
       }
 
+
       setButtonLoading(
         loginSubmit,
         true,
         "Anmelden →"
       );
+
 
       const {
         data,
@@ -3954,16 +4533,21 @@
         await supabaseClient.auth
           .signInWithPassword({
 
-            email: email,
-            password: password
+            email:
+              email,
+
+            password:
+              password
 
           });
+
 
       setButtonLoading(
         loginSubmit,
         false,
         "Anmelden →"
       );
+
 
       if (error) {
 
@@ -3981,6 +4565,7 @@
 
       }
 
+
       loginForm.reset();
 
       currentUser =
@@ -3997,6 +4582,7 @@
     }
   );
 
+
   /* =====================================================
      PASSWORT VERGESSEN
   ===================================================== */
@@ -4009,6 +4595,7 @@
 
       clearMessages();
 
+
       const email =
         document
           .getElementById("forgotEmail")
@@ -4016,14 +4603,17 @@
           .trim()
           .toLowerCase();
 
+
       setButtonLoading(
         forgotSubmit,
         true,
         "Reset-Link senden →"
       );
 
+
       const redirectUrl =
         window.location.href.split("#")[0];
+
 
       const {
         error
@@ -4032,15 +4622,18 @@
           .resetPasswordForEmail(
             email,
             {
-              redirectTo: redirectUrl
+              redirectTo:
+                redirectUrl
             }
           );
+
 
       setButtonLoading(
         forgotSubmit,
         false,
         "Reset-Link senden →"
       );
+
 
       if (error) {
 
@@ -4058,6 +4651,7 @@
 
       }
 
+
       setMessage(
         forgotMessage,
         "Wenn ein Konto mit dieser E-Mail existiert, wurde ein Reset-Link versendet.",
@@ -4066,6 +4660,7 @@
 
     }
   );
+
 
   /* =====================================================
      PASSWORT RECOVERY
@@ -4079,17 +4674,22 @@
 
       clearMessages();
 
+
       const password =
         document
           .getElementById("newPassword")
           .value;
+
 
       const passwordConfirm =
         document
           .getElementById("newPasswordConfirm")
           .value;
 
-      if (password.length < 6) {
+
+      if (
+        password.length < 6
+      ) {
 
         setMessage(
           recoveryMessage,
@@ -4100,7 +4700,10 @@
 
       }
 
-      if (password !== passwordConfirm) {
+
+      if (
+        password !== passwordConfirm
+      ) {
 
         setMessage(
           recoveryMessage,
@@ -4111,26 +4714,32 @@
 
       }
 
+
       setButtonLoading(
         recoverySubmit,
         true,
         "Neues Passwort speichern →"
       );
 
+
       const {
         error
       } =
-        await supabaseClient.auth.updateUser({
+        await supabaseClient.auth
+          .updateUser({
 
-          password: password
+            password:
+              password
 
-        });
+          });
+
 
       setButtonLoading(
         recoverySubmit,
         false,
         "Neues Passwort speichern →"
       );
+
 
       if (error) {
 
@@ -4148,13 +4757,16 @@
 
       }
 
+
       recoveryForm.reset();
+
 
       setMessage(
         recoveryMessage,
         "Dein Passwort wurde erfolgreich geändert.",
         true
       );
+
 
       setTimeout(
         closeAuth,
@@ -4164,8 +4776,9 @@
     }
   );
 
+
   /* =====================================================
-     ACCOUNT
+     ACCOUNT MENU
   ===================================================== */
 
   avatarButton.addEventListener(
@@ -4181,6 +4794,7 @@
 
     }
   );
+
 
   document.addEventListener(
     "click",
@@ -4201,6 +4815,7 @@
     }
   );
 
+
   logoutButton.addEventListener(
     "click",
     async function() {
@@ -4210,6 +4825,7 @@
       } =
         await supabaseClient.auth
           .signOut();
+
 
       if (error) {
 
@@ -4222,12 +4838,14 @@
 
       }
 
+
       accountMenu.classList.remove(
         "open"
       );
 
     }
   );
+
 
   /* =====================================================
      AUTH STATE
@@ -4240,7 +4858,8 @@
     ) {
 
       if (
-        event === "PASSWORD_RECOVERY"
+        event ===
+        "PASSWORD_RECOVERY"
       ) {
 
         currentUser =
@@ -4257,6 +4876,7 @@
         return;
 
       }
+
 
       if (
         session &&
@@ -4280,10 +4900,16 @@
 
       }
 
+
       updateUserInterface();
 
     }
   );
+
+
+  /* =====================================================
+     INITIALIZE AUTH
+  ===================================================== */
 
   async function initializeAuth() {
 
@@ -4293,6 +4919,7 @@
     } =
       await supabaseClient.auth
         .getSession();
+
 
     if (error) {
 
@@ -4312,6 +4939,7 @@
       return;
 
     }
+
 
     if (
       data &&
@@ -4336,60 +4964,97 @@
 
     }
 
+
     updateUserInterface();
 
   }
 
+
+  /* =====================================================
+     AUTH ERROR TRANSLATION
+  ===================================================== */
+
   function translateAuthError(error) {
 
     if (!error) {
-      return "Es ist ein unbekannter Fehler aufgetreten.";
+
+      return (
+        "Es ist ein unbekannter Fehler aufgetreten."
+      );
+
     }
+
 
     const message =
       String(
         error.message || ""
       ).toLowerCase();
 
+
     if (
       message.includes(
         "invalid login credentials"
       )
     ) {
-      return "E-Mail oder Passwort ist nicht korrekt.";
+
+      return (
+        "E-Mail oder Passwort ist nicht korrekt."
+      );
+
     }
+
 
     if (
       message.includes(
         "email not confirmed"
       )
     ) {
-      return "Bitte bestätige zuerst deine E-Mail-Adresse.";
+
+      return (
+        "Bitte bestätige zuerst deine E-Mail-Adresse."
+      );
+
     }
+
 
     if (
       message.includes(
         "password should be at least"
       )
     ) {
-      return "Das Passwort ist zu kurz.";
+
+      return (
+        "Das Passwort ist zu kurz."
+      );
+
     }
+
 
     if (
       message.includes(
         "rate limit"
       )
     ) {
-      return "Zu viele Versuche. Bitte warte kurz und versuche es erneut.";
+
+      return (
+        "Zu viele Versuche. Bitte warte kurz und versuche es erneut."
+      );
+
     }
+
 
     if (
       message.includes(
         "user already registered"
       )
     ) {
-      return "Du hast dich mit dieser Mail bereits registriert. Melde dich stattdessen an.";
+
+      return (
+        "Du hast dich mit dieser Mail bereits registriert. Melde dich stattdessen an."
+      );
+
     }
+
 
     return (
       error.message ||
@@ -4398,7 +5063,13 @@
 
   }
 
+
+  /* =====================================================
+     INITIAL START
+  ===================================================== */
+
   updateRegistrationGate();
+
   initializeAuth();
 
 </script>
