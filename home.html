@@ -1,33 +1,39 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home – Miles Apart Running Club</title>
 
-  <link rel="stylesheet" href="style.css">
+<head>
+
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <title>
+    Home — Miles Apart Running Club
+  </title>
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <style>
+
     :root {
       --miles-blue: #18b8c7;
       --miles-blue-dark: #1199a6;
-      --miles-blue-soft: #e9fafc;
-      --miles-blue-pale: #f4fcfd;
-
+      --miles-blue-soft: #eafafd;
       --home-bg: #ffffff;
-      --home-soft: #f6f7f5;
-      --home-line: #e4e8e7;
+      --home-soft: #f6f8f7;
+      --home-line: #e1e7e5;
       --home-muted: #737b79;
       --home-dark: #050909;
       --home-green: #248b63;
       --home-red: #d34b4b;
-      --home-ink-soft: #111817;
-    }
-
-    * {
-      box-sizing: border-box;
     }
 
     body,
@@ -35,50 +41,40 @@
       font-family: inherit;
     }
 
-    body {
-      margin: 0;
-      background: var(--home-bg);
-      color: var(--home-dark);
+    button,
+    input,
+    textarea,
+    select {
+      font-family: inherit;
     }
 
-    .home-page {
-      width: 100%;
+    /* =========================================================
+       GLOBAL
+    ========================================================= */
+
+    .lime {
+      background-color: var(--miles-blue) !important;
+      border-color: var(--miles-blue) !important;
+      color: #fff !important;
+    }
+
+    .lime:hover {
+      background-color: var(--miles-blue-dark) !important;
+      border-color: var(--miles-blue-dark) !important;
+    }
+
+    .label {
+      color: var(--miles-blue);
+    }
+
+    .mini-progress i {
+      background-color: var(--miles-blue);
     }
 
     /* =========================================================
        TOP BAR
-       ========================================================= */
-
-    .topbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      padding: 18px 28px;
-      border-bottom: 1px solid var(--home-line);
-      background: #fff;
-    }
-
-    .topbar-title {
-      min-width: 0;
-    }
-
-    .topbar-kicker {
-      margin: 0 0 4px;
-      color: var(--miles-blue-dark);
-      font-size: 10px;
-      font-weight: 800;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-    }
-
-    .topbar-title h1 {
-      margin: 0;
-      font-size: 21px;
-      line-height: 1.15;
-      font-weight: 850;
-      letter-spacing: -0.5px;
-    }
+       NICHT VERÄNDERT
+    ========================================================= */
 
     .top-right {
       display: flex;
@@ -93,127 +89,753 @@
     }
 
     .user-greeting {
-      color: var(--home-muted);
-      font-size: 12px;
-      font-weight: 700;
+      display: inline;
+      color: #666;
+      font-size: 13px;
+      line-height: 1.2;
+      white-space: nowrap;
+      font-weight: 300;
     }
 
     .login-button {
-      appearance: none;
-      border: 1px solid var(--miles-blue);
-      background: var(--miles-blue);
-      color: #fff;
-      padding: 10px 15px;
-      font-size: 11px;
-      font-weight: 800;
-      letter-spacing: .7px;
-      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      height: 38px;
+      padding: 0 16px;
+      border: 1px solid #d7d7d3;
+      border-radius: 0;
+      background: #fff;
+      color: #222;
+      font-size: 12px;
+      line-height: 1;
+      font-weight: 700;
       cursor: pointer;
       transition: .2s ease;
     }
 
     .login-button:hover {
-      background: var(--miles-blue-dark);
-      border-color: var(--miles-blue-dark);
+      border-color: var(--miles-blue);
+      color: var(--miles-blue);
     }
 
-    .avatar-button {
-      width: 34px;
-      height: 34px;
-      border: 1px solid var(--home-line);
+    /* =========================================================
+       USER AVATAR
+    ========================================================= */
+
+    .user-avatar-button {
+      width: 58px;
+      height: 58px;
+      flex: 0 0 58px;
+      padding: 0;
+      border: 3px solid var(--miles-blue);
       border-radius: 50%;
-      background: var(--miles-blue-soft);
-      color: var(--miles-blue-dark);
-      font-size: 11px;
-      font-weight: 850;
-      cursor: pointer;
-    }
-
-    .account-menu-wrap {
-      position: relative;
-    }
-
-    .account-menu {
-      position: absolute;
-      top: calc(100% + 10px);
-      right: 0;
-      z-index: 50;
-      width: 230px;
-      padding: 14px;
       background: #fff;
-      border: 1px solid var(--home-line);
-      box-shadow: 0 18px 45px rgba(5, 9, 9, .12);
-      display: none;
+      color: var(--miles-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+      line-height: 1;
+      font-weight: 800;
+      cursor: pointer;
+      overflow: hidden;
     }
 
-    .account-menu.open {
+    .user-avatar-button img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
       display: block;
     }
 
+    /* =========================================================
+       ACCOUNT MENU
+    ========================================================= */
+
+    .account-menu {
+      position: absolute !important;
+      top: calc(100% + 12px) !important;
+      right: 0 !important;
+      left: auto !important;
+      width: 260px !important;
+      min-width: 260px !important;
+      max-width: 260px !important;
+      height: auto !important;
+      min-height: 0 !important;
+      max-height: none !important;
+      box-sizing: border-box !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      background: #fff !important;
+      border: 1px solid #ddd !important;
+      border-radius: 0 !important;
+      box-shadow: 0 14px 35px rgba(0,0,0,.12);
+      z-index: 1000 !important;
+      display: none;
+      overflow: hidden !important;
+    }
+
+    .account-menu.open {
+      display: block !important;
+    }
+
+    .account-menu-user {
+      display: block !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+      padding: 20px !important;
+      margin: 0 !important;
+      border-bottom: 1px solid #e8e8e8 !important;
+      background: #fff !important;
+    }
+
     .account-menu-name {
-      font-size: 12px;
-      font-weight: 850;
-      margin-bottom: 3px;
+      display: block !important;
+      margin: 0 !important;
+      padding: 0 !important;
+      color: #111 !important;
+      font-size: 20px !important;
+      line-height: 1.2 !important;
+      font-weight: 800 !important;
     }
 
     .account-menu-email {
-      font-size: 10px;
-      color: var(--home-muted);
-      margin-bottom: 14px;
-      word-break: break-word;
+      display: block !important;
+      margin: 6px 0 0 !important;
+      padding: 0 !important;
+      color: #888 !important;
+      font-size: 14px !important;
+      line-height: 1.35 !important;
+      overflow-wrap: anywhere;
     }
 
-    .account-menu button {
+    .account-menu button,
+    .account-menu #myProfileButton,
+    .account-menu .logout-button {
+      display: block !important;
+      width: 100% !important;
+      min-width: 0 !important;
+      max-width: none !important;
+      height: auto !important;
+      min-height: 0 !important;
+      box-sizing: border-box !important;
+      margin: 0 !important;
+      padding: 16px 20px !important;
+      border: 0 !important;
+      border-bottom: 1px solid #e8e8e8 !important;
+      border-radius: 0 !important;
+      background: #fff !important;
+      text-align: left !important;
+      cursor: pointer;
+      font-size: 16px !important;
+      line-height: 1.3 !important;
+      font-weight: 400 !important;
+      color: #222 !important;
+      box-shadow: none !important;
+    }
+
+    .account-menu button:hover,
+    .account-menu #myProfileButton:hover,
+    .account-menu .logout-button:hover {
+      background: #f7f7f7 !important;
+    }
+
+    .account-menu .logout-button {
+      border-bottom: 0 !important;
+      color: #888 !important;
+    }
+
+    /* =========================================================
+       HOME HEADER
+    ========================================================= */
+
+    .home-page {
       width: 100%;
+    }
+
+    .dashboard-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+
+    .dashboard-copy {
+      max-width: 850px;
+    }
+
+    .dashboard-eyebrow {
+      color: var(--miles-blue);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 11px;
+    }
+
+    .dashboard-header h1 {
+      margin: 0;
+      font-size: clamp(40px, 5vw, 68px);
+      line-height: .94;
+      letter-spacing: -3px;
+      font-weight: 900;
+    }
+
+    .dashboard-header h1 span {
+      color: var(--miles-blue);
+    }
+
+    .dashboard-subtitle {
+      margin: 18px 0 0;
+      color: var(--home-muted);
+      font-size: 16px;
+      line-height: 1.65;
+      max-width: 680px;
+    }
+
+    .dashboard-date {
+      flex-shrink: 0;
+      padding: 14px 17px;
       border: 1px solid var(--home-line);
       background: #fff;
-      padding: 9px 10px;
-      text-align: left;
-      font-size: 10px;
+      color: #555;
+      font-size: 11px;
       font-weight: 800;
-      cursor: pointer;
-      margin-top: 6px;
-    }
-
-    .account-menu button:hover {
-      background: var(--miles-blue-pale);
-      border-color: #cceef1;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 6px 20px rgba(5,9,9,.025);
     }
 
     /* =========================================================
        PREVIEW NOTICE
-       ========================================================= */
+    ========================================================= */
 
     .preview-notice {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      margin: 25px 28px 0;
-      padding: 15px 17px;
-      border: 1px solid #cceef1;
+      display: none;
+      position: relative;
+      margin-bottom: 28px;
+      padding: 20px 22px 20px 25px;
       background:
-        linear-gradient(100deg, #eefbfd 0%, #f8ffff 55%, #edfafa 100%);
+        linear-gradient(
+          135deg,
+          #e9fbfd 0%,
+          #f6fdfe 58%,
+          #ffffff 100%
+        );
+      border: 1px solid #bfe9ed;
+      border-left: 5px solid var(--miles-blue);
+      color: #506566;
+      font-size: 13px;
+      line-height: 1.6;
+      box-shadow: 0 8px 25px rgba(24,184,199,.08);
     }
 
-    .preview-notice-copy {
+    .preview-notice::before {
+      content: "PREVIEW";
+      display: block;
+      margin-bottom: 6px;
+      color: var(--miles-blue-dark);
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 2px;
+    }
+
+    .preview-notice strong {
+      color: #111;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    /* =========================================================
+       SECTIONS
+    ========================================================= */
+
+    .dashboard-section {
+      margin-top: 32px;
+    }
+
+    .dashboard-section + .dashboard-section {
+      margin-top: 54px;
+    }
+
+    .dashboard-section-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 17px;
+    }
+
+    .dashboard-section-label {
+      color: var(--miles-blue);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 7px;
+    }
+
+    .dashboard-section-header h2 {
+      margin: 0;
+      font-size: 30px;
+      line-height: 1;
+      letter-spacing: -1px;
+    }
+
+    .dashboard-section-description {
+      margin: 8px 0 0;
+      color: var(--home-muted);
+      font-size: 13px;
+      line-height: 1.55;
+      max-width: 720px;
+    }
+
+    /* =========================================================
+       KM DASHBOARD
+    ========================================================= */
+
+    .kilometer-card {
+      background: #fff;
+      border: 1px solid var(--home-line);
+      padding: 27px;
+      box-shadow: 0 12px 34px rgba(5,9,9,.04);
+    }
+
+    .kilometer-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+      margin-bottom: 30px;
+    }
+
+    .kilometer-card-title {
+      margin: 0;
+      font-size: 22px;
+      letter-spacing: -.6px;
+    }
+
+    .kilometer-card-small {
+      margin: 5px 0 0;
+      color: #8a918f;
+      font-size: 11px;
+    }
+
+    .current-day-badge {
+      background: var(--home-dark);
+      color: #fff;
+      padding: 8px 11px;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      white-space: nowrap;
+    }
+
+    .daily-chart {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 12px;
+      height: 245px;
+      align-items: end;
+      border-bottom: 1px solid #dfe4e2;
+      padding: 0 4px;
+    }
+
+    .daily-column {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
       min-width: 0;
     }
 
-    .preview-notice-title {
-      margin: 0 0 4px;
-      font-size: 11px;
-      font-weight: 850;
+    .daily-value {
+      min-height: 17px;
+      margin-bottom: 6px;
+      color: #555;
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .daily-bar-area {
+      width: 100%;
+      max-width: 48px;
+      height: 190px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+
+    .daily-bar {
+      width: 100%;
+      min-height: 3px;
+      background: var(--miles-blue);
+      border-radius: 7px 7px 0 0;
+      transition: height .45s ease;
+    }
+
+    .daily-column.today .daily-bar {
+      background: var(--home-dark);
+    }
+
+    .daily-column.future .daily-value {
+      color: #c8cfcd;
+    }
+
+    .daily-column.future .daily-bar {
+      background: #edf1ef;
+      opacity: .7;
+    }
+
+    .daily-label {
+      margin-top: 9px;
+      color: #6d7472;
+      font-size: 10px;
+      font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: .9px;
+    }
+
+    .daily-column.today .daily-label {
       color: var(--miles-blue-dark);
     }
 
-    .preview-notice-text {
-      margin: 0;
-      color: #56615f;
+    .summary-bars {
+      display: grid;
+      gap: 12px;
+      margin-top: 30px;
+      padding-top: 25px;
+      border-top: 1px solid var(--home-line);
+    }
+
+    .summary-bar-row {
+      display: grid;
+      grid-template-columns: 115px minmax(0, 1fr) 75px;
+      align-items: center;
+      gap: 15px;
+      padding: 12px 14px;
+      border-radius: 12px;
+    }
+
+    .summary-bar-row:nth-child(1) {
+      background: #eefbfd;
+    }
+
+    .summary-bar-row:nth-child(2) {
+      background: #f4f7f6;
+    }
+
+    .summary-bar-row.year {
+      background: #111817;
+    }
+
+    .summary-bar-label {
+      color: #333;
       font-size: 11px;
-      line-height: 1.55;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .summary-bar-row.year .summary-bar-label {
+      color: #fff;
+    }
+
+    .summary-track {
+      height: 11px;
+      background: rgba(255,255,255,.65);
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .summary-bar-row:nth-child(2) .summary-track {
+      background: #e1e7e4;
+    }
+
+    .summary-bar-row.year .summary-track {
+      background: #2b3432;
+    }
+
+    .summary-fill {
+      height: 100%;
+      width: 0;
+      background: var(--miles-blue);
+      border-radius: 99px;
+      transition: width .5s ease;
+    }
+
+    .summary-bar-row.year .summary-fill {
+      background: var(--miles-blue);
+    }
+
+    .summary-value {
+      text-align: right;
+      color: #111;
+      font-size: 13px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .summary-bar-row.year .summary-value {
+      color: #fff;
+    }
+
+    /* =========================================================
+       STATS
+    ========================================================= */
+
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 15px;
+    }
+
+    .stat-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid #d8edef;
+      background:
+        linear-gradient(
+          145deg,
+          #eafafd 0%,
+          #f8feff 100%
+        );
+      padding: 21px;
+      box-shadow: 0 8px 22px rgba(24,184,199,.06);
+    }
+
+    .stat-card:nth-child(2) {
+      border-color: #dfe7e4;
+      background:
+        linear-gradient(
+          145deg,
+          #f2f7f5 0%,
+          #ffffff 100%
+        );
+      box-shadow: 0 8px 22px rgba(5,9,9,.035);
+    }
+
+    .stat-card:nth-child(3) {
+      border-color: #202826;
+      background:
+        linear-gradient(
+          145deg,
+          #111817 0%,
+          #1d2826 100%
+        );
+      box-shadow: 0 8px 22px rgba(5,9,9,.08);
+    }
+
+    .stat-card::after {
+      content: "";
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      right: -28px;
+      bottom: -35px;
+      border-radius: 50%;
+      background: rgba(24,184,199,.14);
+    }
+
+    .stat-card-label {
+      color: var(--home-muted);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .stat-card:nth-child(3) .stat-card-label {
+      color: #9aa5a1;
+    }
+
+    .stat-card-value {
+      margin-top: 14px;
+      color: #111;
+      font-size: 34px;
+      line-height: 1;
+      letter-spacing: -1.5px;
+      font-weight: 900;
+    }
+
+    .stat-card:nth-child(3) .stat-card-value {
+      color: #fff;
+    }
+
+    .stat-card-value span {
+      color: #777;
+      font-size: 13px;
+      letter-spacing: 0;
+      font-weight: 600;
+    }
+
+    .stat-card:nth-child(3) .stat-card-value span {
+      color: #9aa5a1;
+    }
+
+    /* =========================================================
+       PERSONAL BESTS
+    ========================================================= */
+
+    .best-times-card {
+      background: var(--home-dark);
+      color: #fff;
+      border: 1px solid var(--home-dark);
+      padding: 27px;
+      box-shadow: 0 16px 40px rgba(5,9,9,.10);
+    }
+
+    .best-times-header {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 22px;
+    }
+
+    .best-times-header h2 {
+      margin: 0;
+      font-size: 28px;
+      letter-spacing: -1px;
+    }
+
+    .best-times-header p {
+      max-width: 500px;
+      margin: 6px 0 0;
+      color: #aeb7b4;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .best-times-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .best-time-row {
+      position: relative;
+      padding: 18px;
+      background: #111817;
+      border: 1px solid #27302e;
+      min-height: 112px;
+      box-sizing: border-box;
+    }
+
+    .best-time-row:hover {
+      border-color: #3b4a47;
+      background: #151d1c;
+    }
+
+    .best-time-distance {
+      color: var(--miles-blue);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+    }
+
+    .best-time-value {
+      margin-top: 15px;
+      color: #fff;
+      font-size: 27px;
+      line-height: 1;
+      letter-spacing: -1px;
+      font-weight: 900;
+    }
+
+    .best-time-value.empty {
+      color: #68716e;
+      font-size: 16px;
+      letter-spacing: -.2px;
+    }
+
+    .best-time-date {
+      margin-top: 9px;
+      color: #89928f;
+      font-size: 10px;
+    }
+
+    .best-time-note {
+      margin-top: 7px;
+      color: #aeb7b4;
+      font-size: 10px;
+      line-height: 1.4;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .longest-run {
+      grid-column: 1 / -1;
+      min-height: 100px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 20px;
+      background:
+        linear-gradient(
+          135deg,
+          #151f1d 0%,
+          #111817 100%
+        );
+    }
+
+    .longest-run .best-time-value {
+      margin-top: 9px;
+    }
+
+    /* =========================================================
+       ADD RUN
+    ========================================================= */
+
+    .run-entry-card {
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(
+          135deg,
+          #ffffff 0%,
+          #f2fbfc 100%
+        );
+      border: 1px solid #cfeaed;
+      padding: 27px;
+      box-shadow: 0 12px 32px rgba(24,184,199,.055);
+    }
+
+    .run-entry-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: var(--miles-blue);
+    }
+
+    .run-entry-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .run-entry-top h2 {
+      margin: 0;
+      font-size: 25px;
+      letter-spacing: -.8px;
+    }
+
+    .run-entry-top p {
+      margin: 6px 0 0;
+      color: var(--home-muted);
+      font-size: 12px;
+      line-height: 1.5;
     }
 
     .login-required-label {
@@ -234,707 +856,176 @@
       overflow-wrap: break-word;
     }
 
-    /* =========================================================
-       DASHBOARD HEADER
-       ========================================================= */
-
-    .dashboard-header {
-      padding: 34px 28px 0;
-    }
-
-    .dashboard-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 9px;
-      color: var(--miles-blue-dark);
-      font-size: 10px;
-      font-weight: 850;
-      text-transform: uppercase;
-      letter-spacing: 1.4px;
-    }
-
-    .dashboard-eyebrow::before {
-      content: "";
-      width: 23px;
-      height: 2px;
-      background: var(--miles-blue);
-    }
-
-    .dashboard-header h2 {
-      margin: 0;
-      max-width: 800px;
-      font-size: clamp(28px, 4vw, 48px);
-      line-height: .98;
-      letter-spacing: -1.8px;
-      font-weight: 900;
-    }
-
-    .dashboard-subtitle {
-      max-width: 670px;
-      margin: 13px 0 0;
-      color: var(--home-muted);
-      font-size: 13px;
-      line-height: 1.7;
-    }
-
-    /* =========================================================
-       SECTIONS
-       ========================================================= */
-
-    .dashboard-section {
-      margin: 18px 28px 0;
-    }
-
-    .dashboard-section + .dashboard-section {
-      margin-top: 34px;
-    }
-
-    .dashboard-section-header {
-      margin-bottom: 16px;
-    }
-
-    .dashboard-section-label {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 7px;
-      color: var(--miles-blue-dark);
-      font-size: 9px;
-      font-weight: 850;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-    }
-
-    .dashboard-section-label::after {
-      content: "";
-      width: 34px;
-      height: 2px;
-      background: var(--miles-blue);
-      opacity: .55;
-    }
-
-    .dashboard-section-header h3 {
-      margin: 0;
-      font-size: 19px;
-      font-weight: 850;
-      letter-spacing: -.3px;
-    }
-
-    .dashboard-section-description {
-      margin: 6px 0 0;
-      max-width: 680px;
-      color: var(--home-muted);
-      font-size: 11px;
-      line-height: 1.55;
-    }
-
-    /* =========================================================
-       KILOMETER SECTION
-       ========================================================= */
-
-    .stats-grid {
+    .run-form {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 15px;
     }
 
-    .stat-card {
-      position: relative;
-      overflow: hidden;
-      min-height: 160px;
-      padding: 19px;
-      border: 1px solid var(--home-line);
-      background: #fff;
-      transition:
-        transform .2s ease,
-        box-shadow .2s ease,
-        border-color .2s ease;
-    }
-
-    .stat-card::after {
-      content: "";
-      position: absolute;
-      right: -35px;
-      bottom: -45px;
-      width: 130px;
-      height: 130px;
-      border-radius: 50%;
-      background: var(--miles-blue-soft);
-      opacity: .75;
-    }
-
-    .stat-card:nth-child(2) {
-      background: linear-gradient(145deg, #fff 0%, #f5fcfd 100%);
-    }
-
-    .stat-card:nth-child(3) {
-      background: linear-gradient(145deg, #eefbfd 0%, #fff 100%);
-    }
-
-    .stat-card:hover {
-      transform: translateY(-2px);
-      border-color: #cbeef1;
-      box-shadow: 0 12px 28px rgba(17, 153, 166, .08);
-    }
-
-    .stat-card-top {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    .stat-card-label {
-      color: var(--home-muted);
-      font-size: 9px;
-      font-weight: 850;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .stat-card-icon {
-      color: var(--miles-blue-dark);
-      font-size: 15px;
-      font-weight: 900;
-    }
-
-    .stat-value {
-      position: relative;
-      z-index: 1;
-      margin-top: 25px;
-      font-size: 34px;
-      line-height: 1;
-      font-weight: 900;
-      letter-spacing: -1.4px;
-    }
-
-    .stat-unit {
-      margin-left: 4px;
-      color: var(--miles-blue-dark);
-      font-size: 12px;
-      letter-spacing: 0;
-    }
-
-    .stat-detail {
-      position: relative;
-      z-index: 1;
-      margin-top: 9px;
-      color: var(--home-muted);
-      font-size: 10px;
-    }
-
-    .summary-bar {
-      margin-top: 10px;
-      padding: 17px 18px;
-      border: 1px solid var(--home-line);
-      background: var(--home-soft);
-    }
-
-    .summary-bar-row {
-      display: grid;
-      grid-template-columns: 70px 1fr 75px;
-      align-items: center;
-      gap: 12px;
-      padding: 7px 0;
-    }
-
-    .summary-bar-row + .summary-bar-row {
-      border-top: 1px solid #e9eceb;
-    }
-
-    .summary-bar-label {
-      color: var(--home-muted);
-      font-size: 9px;
-      font-weight: 850;
-      text-transform: uppercase;
-      letter-spacing: .7px;
-    }
-
-    .summary-progress {
-      height: 6px;
-      overflow: hidden;
-      background: #e2e8e7;
-    }
-
-    .summary-progress-fill {
-      height: 100%;
-      min-width: 2px;
-      background: linear-gradient(90deg, var(--miles-blue), #64d7df);
-    }
-
-    .summary-bar-value {
-      text-align: right;
-      font-size: 10px;
-      font-weight: 850;
-    }
-
-    /* =========================================================
-       DAILY CHART
-       ========================================================= */
-
-    .daily-chart-card {
-      margin-top: 10px;
-      padding: 18px;
-      border: 1px solid var(--home-line);
-      background:
-        linear-gradient(145deg, #ffffff 0%, #f8fdfd 100%);
-    }
-
-    .daily-chart-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 18px;
-    }
-
-    .daily-chart-title {
-      font-size: 10px;
-      font-weight: 850;
-      text-transform: uppercase;
-      letter-spacing: .9px;
-    }
-
-    .daily-chart-date {
-      color: var(--home-muted);
-      font-size: 10px;
-    }
-
-    .chart-bars {
-      display: grid;
-      grid-template-columns: repeat(7, 1fr);
-      align-items: end;
-      gap: 9px;
-      height: 145px;
-      border-bottom: 1px solid var(--home-line);
-    }
-
-    .chart-day {
+    .run-form-group {
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: flex-end;
       gap: 7px;
-      height: 100%;
-      min-width: 0;
     }
 
-    .chart-bar-wrap {
+    .run-form-group.full {
+      grid-column: 1 / -1;
+    }
+
+    .run-form-group label {
+      color: #333;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .run-form-group input,
+    .run-form-group select,
+    .run-form-group textarea {
       width: 100%;
-      height: 108px;
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
+      box-sizing: border-box;
+      padding: 13px 14px;
+      border: 1px solid #d2e4e5;
+      background: rgba(255,255,255,.82);
+      color: #222;
+      font: inherit;
+      font-size: 13px;
+      outline: none;
+      transition: .2s ease;
     }
 
-    .chart-bar {
-      width: min(30px, 70%);
-      min-height: 3px;
-      background: linear-gradient(
-        to top,
-        var(--miles-blue-dark),
-        #68d7df
-      );
-      transition: height .3s ease;
-    }
-
-    .chart-bar.today {
-      background: var(--home-dark);
-    }
-
-    .chart-value {
-      color: var(--home-muted);
-      font-size: 8px;
-      font-weight: 800;
-    }
-
-    .chart-label {
-      color: var(--home-muted);
-      font-size: 8px;
-      font-weight: 800;
-      text-transform: uppercase;
-    }
-
-    /* =========================================================
-       BEST TIMES
-       ========================================================= */
-
-    .best-times-shell {
-      padding: 18px;
-      background:
-        linear-gradient(135deg, #050909 0%, #0a1515 58%, #0b2427 100%);
-      border: 1px solid #050909;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .best-times-shell::before {
-      content: "";
-      position: absolute;
-      top: -130px;
-      right: -90px;
-      width: 300px;
-      height: 300px;
-      border-radius: 50%;
-      background: rgba(24, 184, 199, .13);
-    }
-
-    .best-times-shell::after {
-      content: "";
-      position: absolute;
-      bottom: -170px;
-      left: 25%;
-      width: 340px;
-      height: 340px;
-      border-radius: 50%;
-      background: rgba(24, 184, 199, .06);
-    }
-
-    .best-times-intro {
-      position: relative;
-      z-index: 1;
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      gap: 20px;
-      padding: 4px 3px 17px;
-      border-bottom: 1px solid rgba(255,255,255,.1);
-      margin-bottom: 12px;
-    }
-
-    .best-times-intro h4 {
-      margin: 0;
-      color: #fff;
-      font-size: 17px;
-      font-weight: 850;
-    }
-
-    .best-times-intro p {
-      margin: 5px 0 0;
-      color: rgba(255,255,255,.55);
-      font-size: 10px;
+    .run-form-group textarea {
+      min-height: 90px;
+      resize: vertical;
       line-height: 1.5;
     }
 
-    .best-times-badge {
-      flex: 0 0 auto;
-      padding: 7px 9px;
-      color: #bff8fc;
-      border: 1px solid rgba(24,184,199,.4);
-      background: rgba(24,184,199,.08);
-      font-size: 8px;
-      font-weight: 850;
-      letter-spacing: .8px;
-      text-transform: uppercase;
-    }
-
-    .best-times-grid {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-    }
-
-    .best-time-row {
-      min-height: 118px;
-      padding: 15px;
-      border: 1px solid rgba(255,255,255,.09);
-      background: rgba(255,255,255,.055);
-      transition:
-        transform .2s ease,
-        background .2s ease,
-        border-color .2s ease;
-    }
-
-    .best-time-row:hover {
-      transform: translateY(-2px);
-      background: rgba(24,184,199,.09);
-      border-color: rgba(24,184,199,.32);
-    }
-
-    .best-time-distance {
-      color: rgba(255,255,255,.55);
-      font-size: 9px;
-      font-weight: 850;
-      text-transform: uppercase;
-      letter-spacing: .9px;
-    }
-
-    .best-time-value {
-      margin-top: 17px;
-      color: #fff;
-      font-size: 25px;
-      line-height: 1;
-      font-weight: 900;
-      letter-spacing: -1px;
-    }
-
-    .best-time-value.empty {
-      color: rgba(255,255,255,.28);
-      font-size: 16px;
-      letter-spacing: -.2px;
-    }
-
-    .best-time-meta {
-      margin-top: 10px;
-      color: rgba(255,255,255,.48);
-      font-size: 9px;
-      line-height: 1.45;
-    }
-
-    .best-time-note {
-      margin-top: 3px;
-      color: rgba(255,255,255,.7);
-      font-size: 9px;
-    }
-
-    .longest-run {
-      grid-column: 1 / -1;
-      min-height: 100px;
-      display: grid;
-      grid-template-columns: 1fr auto;
-      align-items: center;
-      gap: 20px;
-      background:
-        linear-gradient(
-          105deg,
-          rgba(24,184,199,.17),
-          rgba(255,255,255,.055)
-        );
-      border-color: rgba(24,184,199,.25);
-    }
-
-    .longest-run .best-time-value {
-      color: #9ff2f7;
-      font-size: 31px;
-    }
-
-    .longest-run-badge {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 75px;
-      min-height: 75px;
-      padding: 10px;
-      border: 1px solid rgba(24,184,199,.3);
-      background: rgba(24,184,199,.08);
-      color: #8debf1;
-      font-size: 8px;
-      font-weight: 850;
-      text-align: center;
-      line-height: 1.35;
-      text-transform: uppercase;
-      letter-spacing: .6px;
-    }
-
-    /* =========================================================
-       RUN FORM
-       ========================================================= */
-
-    .run-entry-card {
-      position: relative;
-      overflow: hidden;
-      padding: 20px;
-      border: 1px solid #cceef1;
-      background:
-        linear-gradient(135deg, #effbfd 0%, #ffffff 58%, #f5fcfd 100%);
-    }
-
-    .run-entry-card::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 4px;
-      background: var(--miles-blue);
-    }
-
-    .run-entry-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 12px;
-    }
-
-    .form-field {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .form-field.full {
-      grid-column: 1 / -1;
-    }
-
-    .form-field label {
-      color: var(--home-ink-soft);
-      font-size: 9px;
-      font-weight: 850;
-      text-transform: uppercase;
-      letter-spacing: .8px;
-    }
-
-    .form-field input,
-    .form-field select,
-    .form-field textarea {
-      width: 100%;
-      border: 1px solid var(--home-line);
-      background: #fff;
-      color: var(--home-dark);
-      padding: 10px 11px;
-      outline: none;
-      font-size: 11px;
-      border-radius: 0;
-    }
-
-    .form-field textarea {
-      min-height: 76px;
-      resize: vertical;
-    }
-
-    .form-field input:focus,
-    .form-field select:focus,
-    .form-field textarea:focus {
+    .run-form-group input:focus,
+    .run-form-group select:focus,
+    .run-form-group textarea:focus {
       border-color: var(--miles-blue);
+      background: #fff;
       box-shadow: 0 0 0 3px rgba(24,184,199,.08);
     }
 
-    .duration-fields {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 7px;
-    }
-
-    .run-form-footer {
+    .run-form-actions {
+      grid-column: 1 / -1;
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 15px;
-      margin-top: 15px;
-      padding-top: 14px;
-      border-top: 1px solid rgba(17,153,166,.12);
+      padding-top: 15px;
+      border-top: 1px solid #dceced;
     }
 
     .run-form-message {
-      color: var(--home-muted);
-      font-size: 10px;
+      min-height: 18px;
+      color: var(--home-red);
+      font-size: 11px;
       line-height: 1.5;
     }
 
-    .save-run-button {
-      flex: 0 0 auto;
-      border: 1px solid var(--miles-blue);
-      background: var(--miles-blue);
-      color: #fff;
-      padding: 11px 17px;
-      font-size: 10px;
-      font-weight: 850;
-      letter-spacing: .7px;
-      text-transform: uppercase;
-      cursor: pointer;
-    }
-
-    .save-run-button:hover {
-      background: var(--miles-blue-dark);
-      border-color: var(--miles-blue-dark);
+    .run-form-message.success {
+      color: var(--home-green);
     }
 
     /* =========================================================
-       RUN HISTORY
-       ========================================================= */
+       RECENT RUNS
+    ========================================================= */
 
     .runs-list-card {
-      overflow: hidden;
-      border: 1px solid var(--home-line);
-      background: #fff;
+      background:
+        linear-gradient(
+          145deg,
+          #ffffff 0%,
+          #f7fbfa 100%
+        );
+      border: 1px solid #dfe9e6;
+      padding: 27px;
+      box-shadow: 0 12px 32px rgba(5,9,9,.035);
     }
 
-    .runs-list-header {
+    .runs-list {
       display: grid;
-      grid-template-columns: 1fr 120px 100px 150px;
-      gap: 15px;
-      padding: 10px 15px;
-      background: var(--home-soft);
-      border-bottom: 1px solid var(--home-line);
-      color: var(--home-muted);
-      font-size: 8px;
-      font-weight: 850;
-      letter-spacing: .8px;
-      text-transform: uppercase;
     }
 
     .run-list-row {
       display: grid;
-      grid-template-columns: 1fr 120px 100px 150px;
-      gap: 15px;
+      grid-template-columns: 100px 1fr 100px 120px;
       align-items: center;
-      padding: 14px 15px;
-      border-bottom: 1px solid #edf0ef;
+      gap: 15px;
+      padding: 15px 12px;
+      border-bottom: 1px solid var(--home-line);
       transition: background .2s ease;
+    }
+
+    .run-list-row:hover {
+      background: #eefbfd;
     }
 
     .run-list-row:last-child {
       border-bottom: 0;
     }
 
-    .run-list-row:hover {
-      background: var(--miles-blue-pale);
-    }
-
-    .run-main {
-      min-width: 0;
-    }
-
-    .run-main-title {
+    .run-list-date {
+      color: #777;
       font-size: 11px;
-      font-weight: 850;
+      font-weight: 700;
     }
 
-    .run-main-note {
-      margin-top: 3px;
-      color: var(--home-muted);
-      font-size: 9px;
+    .run-list-distance {
+      color: #111;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .run-list-note {
+      color: #888;
+      font-size: 11px;
+      margin-top: 4px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
-    .run-date,
-    .run-distance,
-    .run-duration {
-      font-size: 10px;
-      font-weight: 750;
+    .run-list-time {
+      text-align: right;
+      color: #111;
+      font-size: 13px;
+      font-weight: 800;
     }
 
-    .run-distance {
+    .run-list-kind {
+      text-align: right;
       color: var(--miles-blue-dark);
+      font-size: 10px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .8px;
     }
 
     .empty-runs {
-      padding: 25px 15px;
-      color: var(--home-muted);
-      font-size: 11px;
-      text-align: center;
+      padding: 25px 0 5px;
+      color: #888;
+      font-size: 12px;
+      line-height: 1.6;
     }
 
     /* =========================================================
        AUTH MODAL
-       ========================================================= */
+    ========================================================= */
 
     .auth-overlay {
       position: fixed;
       inset: 0;
-      z-index: 100;
+      background: rgba(5,9,9,.68);
+      backdrop-filter: blur(7px);
+      -webkit-backdrop-filter: blur(7px);
       display: none;
       align-items: center;
       justify-content: center;
       padding: 20px;
-      background: rgba(5,9,9,.55);
-      backdrop-filter: blur(4px);
+      z-index: 100;
+      overflow-y: auto;
     }
 
     .auth-overlay.open {
@@ -943,81 +1034,79 @@
 
     .auth-modal {
       position: relative;
-      width: min(460px, 100%);
-      max-height: 90vh;
+      width: min(600px, 100%);
+      max-height: calc(100vh - 40px);
       overflow-y: auto;
       background: #fff;
-      box-shadow: 0 25px 70px rgba(0,0,0,.22);
+      padding: 42px;
+      box-shadow: 0 30px 100px rgba(0,0,0,.30);
     }
 
     .auth-close {
       position: absolute;
-      top: 12px;
-      right: 12px;
-      width: 30px;
-      height: 30px;
-      border: 1px solid var(--home-line);
-      background: #fff;
-      cursor: pointer;
-      font-size: 16px;
-      z-index: 2;
-    }
-
-    .auth-header {
-      padding: 25px 25px 18px;
-      background:
-        linear-gradient(135deg, #eafafd 0%, #fff 75%);
-      border-bottom: 1px solid var(--home-line);
-    }
-
-    .auth-header-kicker {
-      color: var(--miles-blue-dark);
-      font-size: 9px;
-      font-weight: 850;
-      text-transform: uppercase;
-      letter-spacing: 1.2px;
-    }
-
-    .auth-header h3 {
-      margin: 7px 0 6px;
+      top: 15px;
+      right: 17px;
+      width: 36px;
+      height: 36px;
+      border: 0;
+      background: #f5f6f5;
+      border-radius: 50%;
       font-size: 25px;
-      font-weight: 900;
-      letter-spacing: -1px;
+      line-height: 1;
+      cursor: pointer;
+      color: #555;
+      z-index: 10;
     }
 
-    .auth-header p {
-      margin: 0;
-      color: var(--home-muted);
+    .auth-close:hover {
+      color: var(--miles-blue);
+      background: #eefafa;
+    }
+
+    .auth-eyebrow {
+      color: var(--miles-blue);
       font-size: 10px;
-      line-height: 1.55;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .auth-modal h2 {
+      font-size: 32px;
+      line-height: 1;
+      letter-spacing: -1px;
+      margin: 0 0 10px;
+    }
+
+    .auth-description {
+      color: #777;
+      font-size: 14px;
+      line-height: 1.5;
+      margin: 0 0 25px;
     }
 
     .auth-tabs {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      border-bottom: 1px solid var(--home-line);
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid #ddd;
+      margin-bottom: 25px;
     }
 
     .auth-tab {
+      padding: 12px 8px;
       border: 0;
-      border-bottom: 2px solid transparent;
-      background: #fff;
-      color: var(--home-muted);
-      padding: 12px;
-      font-size: 9px;
-      font-weight: 850;
-      text-transform: uppercase;
-      letter-spacing: .8px;
+      background: transparent;
+      color: #888;
+      font-size: 12px;
+      font-weight: 700;
       cursor: pointer;
+      border-bottom: 2px solid transparent;
     }
 
     .auth-tab.active {
-      color: var(--miles-blue-dark);
+      color: var(--miles-blue);
       border-bottom-color: var(--miles-blue);
-    }
-
-    .auth-body {
-      padding: 20px 25px 25px;
     }
 
     .auth-form {
@@ -1028,194 +1117,519 @@
       display: block;
     }
 
-    .auth-field {
-      margin-bottom: 12px;
+    .form-group {
+      margin-bottom: 16px;
     }
 
-    .auth-field label {
+    .form-group label {
       display: block;
-      margin-bottom: 6px;
-      color: var(--home-ink-soft);
-      font-size: 9px;
-      font-weight: 850;
-      text-transform: uppercase;
-      letter-spacing: .7px;
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 7px;
+      color: #333;
     }
 
-    .auth-field input {
+    .form-group input {
       width: 100%;
-      border: 1px solid var(--home-line);
-      padding: 11px;
-      font-size: 11px;
+      box-sizing: border-box;
+      padding: 13px 14px;
+      border: 1px solid #d7d7d3;
+      background: #fafaf8;
+      color: #222;
+      font-family: inherit;
+      font-size: 14px;
       outline: none;
     }
 
-    .auth-field input:focus {
+    .form-group input:focus {
       border-color: var(--miles-blue);
-      box-shadow: 0 0 0 3px rgba(24,184,199,.08);
+      background: #fff;
     }
 
-    .auth-submit {
-      width: 100%;
-      border: 1px solid var(--miles-blue);
-      background: var(--miles-blue);
+    /* =========================================================
+       REGISTRATION
+    ========================================================= */
+
+    .register-intro {
+      margin: -4px 0 22px;
+      padding: 15px 17px;
+      background: #f1fbfc;
+      border: 1px solid #d5f1f4;
+      color: #456062;
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    .register-intro strong {
+      color: #111;
+    }
+
+    .registration-requirements {
+      display: grid;
+      gap: 14px;
+      margin: 22px 0;
+    }
+
+    .requirement-card {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid #e2e7e5;
+      border-radius: 18px;
+      background: #fafbf9;
+      padding: 20px;
+    }
+
+    .requirement-card.completed {
+      border-color: #9edec0;
+      background: #f5fcf8;
+    }
+
+    .requirement-card.completed::after {
+      content: "✓";
+      position: absolute;
+      top: 15px;
+      right: 16px;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: #248b63;
       color: #fff;
-      padding: 12px;
-      font-size: 10px;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .requirement-head {
+      display: grid;
+      grid-template-columns: 48px minmax(0,1fr);
+      gap: 14px;
+      align-items: start;
+    }
+
+    .requirement-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      background: #fff;
+      border: 1px solid #e1e5e3;
+      font-size: 22px;
+    }
+
+    .requirement-title {
+      margin: 1px 0 5px;
+      padding-right: 35px;
+      color: #101313;
+      font-size: 17px;
+      line-height: 1.25;
       font-weight: 850;
-      letter-spacing: .8px;
-      text-transform: uppercase;
-      cursor: pointer;
     }
 
-    .auth-submit:hover {
-      background: var(--miles-blue-dark);
-      border-color: var(--miles-blue-dark);
+    .requirement-text {
+      margin: 0;
+      color: #777f7c;
+      font-size: 13px;
+      line-height: 1.55;
     }
 
-    .auth-secondary {
-      width: 100%;
+    .instagram-handle {
+      display: inline-block;
       margin-top: 8px;
-      padding: 10px;
-      border: 0;
-      background: transparent;
-      color: var(--miles-blue-dark);
-      font-size: 9px;
+      color: #d62976;
+      font-size: 14px;
+      font-weight: 850;
+    }
+
+    .instagram-open-button {
+      width: 100%;
+      min-height: 48px;
+      margin-top: 17px;
+      padding: 12px 16px;
+      border: 1px solid #d9dddb;
+      border-radius: 12px;
+      background: #fff;
+      color: #171919;
+      font-size: 13px;
       font-weight: 800;
       cursor: pointer;
     }
 
-    .auth-message {
-      min-height: 16px;
-      margin: 10px 0 0;
-      font-size: 10px;
+    .instagram-open-button:hover {
+      border-color: #d62976;
+      background: #fff7fa;
+    }
+
+    .requirement-check {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      margin-top: 17px;
+      padding-top: 16px;
+      border-top: 1px solid #e6e9e7;
+      cursor: pointer;
+    }
+
+    .requirement-check input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .custom-check {
+      width: 22px;
+      height: 22px;
+      flex: 0 0 22px;
+      margin-top: 1px;
+      border: 2px solid #c8cecb;
+      border-radius: 7px;
+      background: #fff;
+      box-sizing: border-box;
+      display: grid;
+      place-items: center;
+    }
+
+    .requirement-check input:checked + .custom-check {
+      background: var(--miles-blue);
+      border-color: var(--miles-blue);
+    }
+
+    .requirement-check input:checked + .custom-check::after {
+      content: "✓";
+      color: #fff;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .requirement-check-text {
+      color: #333;
+      font-size: 13px;
+      line-height: 1.5;
+      font-weight: 700;
+    }
+
+    .requirement-check-text small {
+      display: block;
+      margin-top: 3px;
+      color: #8a918f;
+      font-size: 11px;
+      font-weight: 400;
+    }
+
+    .invite-preview {
+      position: relative;
+      overflow: hidden;
+      min-height: 180px;
+      margin-top: 18px;
+      padding: 24px;
+      box-sizing: border-box;
+      border-radius: 16px;
+      background:
+        radial-gradient(
+          circle at 90% 10%,
+          rgba(24,184,199,.34) 0,
+          rgba(24,184,199,0) 38%
+        ),
+        #071112;
+      color: #fff;
+    }
+
+    .invite-preview-kicker {
+      color: var(--miles-blue);
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 4px;
+    }
+
+    .invite-preview-title {
+      margin: 25px 0 0;
+      color: #fff;
+      font-size: clamp(31px,7vw,48px);
+      line-height: .92;
+      letter-spacing: -2.5px;
+      font-weight: 900;
+    }
+
+    .invite-preview-title span {
+      color: var(--miles-blue);
+    }
+
+    .invite-preview-subtitle {
+      max-width: 340px;
+      margin: 14px 0 0;
+      color: rgba(255,255,255,.78);
+      font-size: 12px;
       line-height: 1.45;
     }
 
-    .auth-message.error {
-      color: var(--home-red);
+    .invite-preview-footer {
+      margin-top: 25px;
+      color: rgba(255,255,255,.52);
+      font-size: 9px;
+      letter-spacing: 3px;
     }
 
-    .auth-message.success {
-      color: var(--home-green);
+    .share-buttons {
+      display: grid;
+      gap: 10px;
+      margin-top: 13px;
+    }
+
+    .share-button {
+      width: 100%;
+      min-height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 13px 16px;
+      border: 0;
+      border-radius: 13px;
+      color: #fff;
+      font-size: 13px;
+      font-weight: 850;
+      cursor: pointer;
+    }
+
+    .share-button.whatsapp {
+      background: #20b858;
+    }
+
+    .share-button.instagram {
+      background: linear-gradient(
+        100deg,
+        #c92b82 0%,
+        #d84b72 42%,
+        #f1a13d 100%
+      );
+    }
+
+    .share-icon {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background: rgba(255,255,255,.18);
+    }
+
+    .share-status {
+      min-height: 19px;
+      margin-top: 11px;
+      color: #248b63;
+      font-size: 11px;
+      line-height: 1.5;
+      font-weight: 700;
+      text-align: center;
+    }
+
+    .invite-check {
+      opacity: .55;
+      pointer-events: none;
+    }
+
+    .invite-check.ready {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .registration-status {
+      display: grid;
+      gap: 7px;
+      margin: 20px 0 15px;
+      padding: 14px 16px;
+      border-radius: 12px;
+      background: #f6f7f5;
+      border: 1px solid #e5e8e6;
+    }
+
+    .registration-status-row {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      color: #7b827f;
+      font-size: 11px;
+    }
+
+    .registration-status-row.done {
+      color: #248b63;
+      font-weight: 700;
+    }
+
+    .registration-status-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      flex: 0 0 18px;
+      display: grid;
+      place-items: center;
+      background: #e2e6e4;
+      color: #fff;
+      font-size: 10px;
+      font-weight: 900;
+    }
+
+    .registration-status-row.done .registration-status-dot {
+      background: #248b63;
     }
 
     /* =========================================================
-       REGISTRATION EXTRAS
-       ========================================================= */
+       AUTH BUTTONS
+    ========================================================= */
 
-    .registration-note {
-      margin-bottom: 15px;
-      padding: 11px;
-      background: var(--miles-blue-pale);
-      border: 1px solid #d5f1f3;
-      color: #52605e;
-      font-size: 9px;
-      line-height: 1.5;
-    }
-
-    .requirement-list {
-      margin: 14px 0;
-      padding: 12px;
-      border: 1px solid var(--home-line);
-      background: var(--home-soft);
-    }
-
-    .requirement-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 8px;
-      margin-bottom: 9px;
-    }
-
-    .requirement-item:last-child {
-      margin-bottom: 0;
-    }
-
-    .requirement-item input {
-      margin-top: 2px;
-      accent-color: var(--miles-blue);
-    }
-
-    .requirement-item label {
-      color: #4e5856;
-      font-size: 9px;
-      line-height: 1.45;
-    }
-
-    .share-actions {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-      margin-top: 9px;
-    }
-
-    .share-actions button {
-      border: 1px solid var(--home-line);
-      background: #fff;
-      padding: 9px;
-      color: var(--home-dark);
-      font-size: 8px;
-      font-weight: 850;
+    .auth-submit {
+      width: 100%;
+      min-height: 50px;
+      border: 1px solid var(--miles-blue);
+      background: var(--miles-blue);
+      color: #fff;
+      padding: 14px;
+      font-size: 12px;
+      font-weight: 800;
       cursor: pointer;
-      text-transform: uppercase;
-      letter-spacing: .5px;
+      margin-top: 4px;
     }
 
-    .share-actions button:hover {
-      background: var(--miles-blue-pale);
-      border-color: #cceef1;
+    .auth-submit:hover:not(:disabled) {
+      background: var(--miles-blue-dark);
+      border-color: var(--miles-blue-dark);
     }
 
-    .follow-status,
-    .invite-status {
-      margin-top: 5px;
-      font-size: 8px;
-      color: var(--home-muted);
+    .auth-submit:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+    }
+
+    .auth-message {
+      min-height: 18px;
+      margin-top: 12px;
+      font-size: 12px;
+      line-height: 1.5;
+      color: #d34b4b;
+    }
+
+    .auth-message.success {
+      color: #248b63;
+    }
+
+    .forgot-password,
+    .auth-back {
+      border: 0;
+      background: transparent;
+      color: #777;
+      font-size: 11px;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+
+    .forgot-password {
+      display: block;
+      margin-top: 13px;
+      padding: 0;
+    }
+
+    .auth-back {
+      display: inline-flex;
+      margin-bottom: 18px;
+      padding: 0;
+      text-decoration: none;
+    }
+
+    .auth-note {
+      margin-top: 14px;
+      padding: 12px;
+      background: #f5f5f3;
+      border: 1px solid #e3e3df;
+      color: #666;
+      font-size: 11px;
+      line-height: 1.5;
     }
 
     /* =========================================================
        RESPONSIVE
-       ========================================================= */
+    ========================================================= */
 
-    @media (max-width: 900px) {
-      .stats-grid,
+    @media (max-width: 1000px) {
+
       .best-times-grid {
         grid-template-columns: repeat(2, 1fr);
       }
 
-      .run-entry-grid {
+      .stat-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .run-form {
         grid-template-columns: 1fr 1fr;
       }
 
-      .runs-list-header,
-      .run-list-row {
-        grid-template-columns: 1fr 100px 90px;
-      }
-
-      .runs-list-header > :last-child,
-      .run-list-row > :last-child {
-        display: none;
-      }
     }
 
     @media (max-width: 700px) {
-      .topbar {
-        padding: 15px 17px;
+
+      .dashboard-header {
+        display: block;
       }
 
-      .topbar-title h1 {
-        font-size: 18px;
+      .dashboard-date {
+        display: inline-block;
+        margin-top: 18px;
       }
 
-      .user-greeting {
+      .dashboard-section + .dashboard-section {
+        margin-top: 42px;
+      }
+
+      .daily-chart {
+        gap: 6px;
+      }
+
+      .daily-bar-area {
+        max-width: 35px;
+      }
+
+      .summary-bar-row {
+        grid-template-columns: 85px minmax(0,1fr) 65px;
+        gap: 9px;
+      }
+
+      .best-times-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .longest-run {
+        grid-column: auto;
+      }
+
+      .stat-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .run-list-row {
+        grid-template-columns: 75px 1fr 80px;
+      }
+
+      .run-list-kind {
         display: none;
       }
 
-      .preview-notice {
-        margin: 18px 17px 0;
-        align-items: flex-start;
+      .run-form {
+        grid-template-columns: 1fr;
+      }
+
+      .run-form-group.full {
+        grid-column: auto;
+      }
+
+      .run-form-actions {
+        grid-column: auto;
         flex-direction: column;
+        align-items: stretch;
+      }
+
+      .run-entry-top {
+        display: block;
       }
 
       .login-required-label {
@@ -1224,85 +1638,74 @@
         max-width: 100%;
       }
 
-      .dashboard-header {
-        padding: 28px 17px 0;
+    }
+
+    @media (max-width: 600px) {
+
+      .dashboard-header h1 {
+        font-size: 42px;
+        letter-spacing: -2px;
       }
 
-      .dashboard-section {
-        margin-left: 17px;
-        margin-right: 17px;
+      .kilometer-card,
+      .best-times-card,
+      .run-entry-card,
+      .runs-list-card {
+        padding: 18px;
       }
 
-      .dashboard-section + .dashboard-section {
-        margin-top: 28px;
+      .daily-chart {
+        height: 205px;
       }
 
-      .stats-grid,
-      .best-times-grid,
-      .run-entry-grid {
-        grid-template-columns: 1fr;
+      .daily-bar-area {
+        height: 155px;
       }
 
-      .longest-run {
-        grid-column: auto;
-        grid-template-columns: 1fr auto;
+      .daily-label {
+        font-size: 8px;
       }
 
-      .best-times-intro {
-        align-items: flex-start;
-        flex-direction: column;
+      .daily-value {
+        font-size: 9px;
       }
 
       .summary-bar-row {
-        grid-template-columns: 62px 1fr 65px;
+        grid-template-columns: 1fr;
+        gap: 7px;
       }
 
-      .chart-bars {
-        gap: 5px;
+      .summary-value {
+        text-align: left;
       }
 
-      .chart-bar {
-        width: 65%;
+      .auth-overlay {
+        align-items: flex-start;
+        padding: 10px;
       }
 
-      .run-form-footer {
-        align-items: stretch;
-        flex-direction: column;
-      }
-
-      .save-run-button {
+      .auth-modal {
         width: 100%;
+        max-height: calc(100vh - 20px);
+        padding: 32px 18px 24px;
       }
 
-      .runs-list-card {
-        overflow-x: auto;
+      .account-menu {
+        position: fixed !important;
+        top: 76px !important;
+        right: 12px !important;
+        left: auto !important;
+        width: 260px !important;
       }
 
-      .runs-list-header,
-      .run-list-row {
-        min-width: 500px;
+      .user-greeting {
+        display: none;
       }
+
     }
 
-    @media (max-width: 430px) {
-      .dashboard-header h2 {
-        font-size: 32px;
-      }
-
-      .longest-run {
-        grid-template-columns: 1fr;
-      }
-
-      .longest-run-badge {
-        width: 100%;
-        min-height: auto;
-      }
-
-      .duration-fields {
-        grid-template-columns: 1fr;
-      }
-    }
   </style>
+
 </head>
 
 <body>
@@ -1311,574 +1714,870 @@
 
   <!-- =======================================================
        SIDEBAR
-       ======================================================= -->
+       NAVIGATION BLEIBT UNVERÄNDERT.
+  ======================================================= -->
 
   <aside class="sidebar">
+
     <div class="brand">
+
       <a href="index.html">
-        <img src="miles-apart-wordmark.png" alt="Miles Apart Running Club">
+
+        <img
+          src="miles-apart-wordmark.png"
+          alt="Miles Apart Running Club"
+        >
+
       </a>
+
     </div>
 
     <nav class="nav">
-      <a href="index.html">Miles Apart</a>
-      <a class="active" href="home.html">Home</a>
-      <a href="challenges.html">Challenges</a>
-      <a href="community.html">Community</a>
-      <a href="events.html">Events</a>
-      <a href="training.html">Training</a>
+
+      <a href="index.html">
+        Miles Apart
+      </a>
+
+      <a
+        class="active"
+        href="home.html"
+      >
+        Home
+      </a>
+
+      <a href="challenges.html">
+        Challenges
+      </a>
+
+      <a href="community.html">
+        Community
+      </a>
+
+      <a href="events.html">
+        Events
+      </a>
+
+      <a href="training.html">
+        Training
+      </a>
+
     </nav>
+
+    <div class="side-bottom">
+
+      <small>
+        THIS WEEK
+      </small>
+
+      <strong id="sidebarWeekKm">
+        0.0 / 30 KM
+      </strong>
+
+      <div class="mini-progress">
+        <i id="sidebarWeekProgress"></i>
+      </div>
+
+      <p
+        class="small"
+        id="sidebarWeekText"
+        style="color:#aaa;margin-bottom:0"
+      >
+        Deine Kilometer dieser Woche.
+      </p>
+
+    </div>
+
   </aside>
 
   <!-- =======================================================
        MAIN
-       ======================================================= -->
+  ======================================================= -->
 
   <main class="main">
-    <div class="home-page">
 
-      <!-- TOP BAR -->
-      <header class="topbar">
-        <div class="topbar-title">
-          <p class="topbar-kicker">Miles Apart Running Club</p>
-          <h1>Home Dashboard</h1>
-        </div>
+    <div class="top">
 
-        <div class="top-right">
-
-          <div class="user-area" id="guestArea">
-            <button class="login-button" id="openLoginButton">
-              Login
-            </button>
-          </div>
-
-          <div class="user-area" id="loggedInArea" style="display:none;">
-            <span class="user-greeting" id="userGreeting">
-              Willkommen
-            </span>
-
-            <div class="account-menu-wrap">
-              <button
-                class="avatar-button"
-                id="avatarButton"
-                type="button"
-                aria-label="Account öffnen"
-              >
-                MA
-              </button>
-
-              <div class="account-menu" id="accountMenu">
-                <div class="account-menu-name" id="accountMenuName">
-                  Miles Apart
-                </div>
-
-                <div class="account-menu-email" id="accountMenuEmail">
-                  —
-                </div>
-
-                <button id="myProfileButton" type="button">
-                  Mein Profil
-                </button>
-
-                <button id="logoutButton" type="button">
-                  Ausloggen
-                </button>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </header>
-
-      <!-- PREVIEW -->
-      <div class="preview-notice">
-        <div class="preview-notice-copy">
-          <p class="preview-notice-title">Live Dashboard</p>
-          <p class="preview-notice-text">
-            Du kannst das Dashboard bereits als Beispiel ansehen.
-            Für eigene Läufe, persönliche Bestzeiten und deine Laufhistorie
-            musst du dich einloggen.
-          </p>
-        </div>
-
-        <div class="login-required-label">
-          Login für persönliche Daten
-        </div>
+      <div class="crumb">
+        HOME / MILES APART
       </div>
 
-      <!-- DASHBOARD HEADER -->
+      <div class="top-right">
+
+        <div
+          id="guestArea"
+          class="user-area"
+        >
+
+          <button
+            class="login-button"
+            id="openLoginButton"
+            type="button"
+          >
+            Anmelden
+          </button>
+
+        </div>
+
+        <div
+          id="loggedInArea"
+          class="user-area"
+          style="display:none;position:relative;"
+        >
+
+          <span
+            class="user-greeting"
+            id="userGreeting"
+          >
+            Hallo Runner
+          </span>
+
+          <button
+            class="user-avatar-button"
+            id="avatarButton"
+            type="button"
+            aria-label="Profilmenü öffnen"
+          >
+            M
+          </button>
+
+          <div
+            class="account-menu"
+            id="accountMenu"
+          >
+
+            <div class="account-menu-user">
+
+              <div
+                class="account-menu-name"
+                id="accountMenuName"
+              >
+                Runner
+              </div>
+
+              <div
+                class="account-menu-email"
+                id="accountMenuEmail"
+              >
+                user@email.de
+              </div>
+
+            </div>
+
+            <button
+              type="button"
+              id="myProfileButton"
+            >
+              Mein Profil
+            </button>
+
+            <button
+              type="button"
+              id="logoutButton"
+              class="logout-button"
+            >
+              Abmelden
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="home-page">
+
+      <div
+        class="preview-notice"
+        id="previewNotice"
+      >
+
+        <strong>Das ist dein zukünftiges Dashboard.</strong>
+        Du siehst gerade eine Vorschau.
+        Nach der Anmeldung werden hier deine eigenen Läufe,
+        Kilometer und Bestzeiten angezeigt.
+
+      </div>
+
       <section class="dashboard-header">
-        <div class="dashboard-eyebrow">Running Data</div>
 
-        <h2>
-          Deine Läufe.<br>
-          Deine Kilometer.
-        </h2>
+        <div class="dashboard-copy">
 
-        <p class="dashboard-subtitle">
-          Ein kompakter Überblick über deine Laufleistung, Wochenkilometer,
-          persönliche Bestzeiten und deine bisherigen Läufe.
-        </p>
-      </section>
-
-      <!-- =====================================================
-           01 – KILOMETER
-           ===================================================== -->
-
-      <section class="dashboard-section">
-
-        <div class="dashboard-section-header">
-          <div class="dashboard-section-label">
-            01 · Kilometer
+          <div class="dashboard-eyebrow">
+            MILES APART / MY RUN
           </div>
 
-          <h3>Deine Laufleistung</h3>
+          <h1>
+            Deine Kilometer.<br>
+            <span>Deine Geschichte.</span>
+          </h1>
 
-          <p class="dashboard-section-description">
-            Woche, Monat und Jahr auf einen Blick. Die Beispielwoche wird
-            automatisch bis zum aktuellen Tag aufgebaut.
+          <p class="dashboard-subtitle">
+            Alle deine Läufe an einem Ort.
+            Woche für Woche, Kilometer für Kilometer.
+            Auch Läufe, die du schon vor Miles Apart gelaufen bist,
+            kannst du hier hinzufügen.
           </p>
-        </div>
-
-        <div class="stats-grid">
-
-          <article class="stat-card">
-            <div class="stat-card-top">
-              <span class="stat-card-label">Diese Woche</span>
-              <span class="stat-card-icon">↗</span>
-            </div>
-
-            <div class="stat-value">
-              <span id="weekTotal">0,0</span>
-              <span class="stat-unit">km</span>
-            </div>
-
-            <div class="stat-detail" id="weekStat">
-              Laufleistung dieser Woche
-            </div>
-          </article>
-
-          <article class="stat-card">
-            <div class="stat-card-top">
-              <span class="stat-card-label">Dieser Monat</span>
-              <span class="stat-card-icon">◌</span>
-            </div>
-
-            <div class="stat-value">
-              <span id="monthTotal">0,0</span>
-              <span class="stat-unit">km</span>
-            </div>
-
-            <div class="stat-detail" id="monthStat">
-              Laufleistung dieses Monats
-            </div>
-          </article>
-
-          <article class="stat-card">
-            <div class="stat-card-top">
-              <span class="stat-card-label">Dieses Jahr</span>
-              <span class="stat-card-icon">↑</span>
-            </div>
-
-            <div class="stat-value">
-              <span id="yearTotal">0,0</span>
-              <span class="stat-unit">km</span>
-            </div>
-
-            <div class="stat-detail" id="yearStat">
-              Laufleistung dieses Jahres
-            </div>
-          </article>
 
         </div>
 
-        <div class="summary-bar">
-
-          <div class="summary-bar-row">
-            <div class="summary-bar-label">Woche</div>
-
-            <div class="summary-progress">
-              <div
-                class="summary-progress-fill"
-                id="weekBar"
-                style="width:0%;"
-              ></div>
-            </div>
-
-            <div class="summary-bar-value" id="weekTotalBar">
-              0,0 km
-            </div>
-          </div>
-
-          <div class="summary-bar-row">
-            <div class="summary-bar-label">Monat</div>
-
-            <div class="summary-progress">
-              <div
-                class="summary-progress-fill"
-                id="monthBar"
-                style="width:0%;"
-              ></div>
-            </div>
-
-            <div class="summary-bar-value" id="monthTotalBar">
-              0,0 km
-            </div>
-          </div>
-
-          <div class="summary-bar-row">
-            <div class="summary-bar-label">Jahr</div>
-
-            <div class="summary-progress">
-              <div
-                class="summary-progress-fill"
-                id="yearBar"
-                style="width:0%;"
-              ></div>
-            </div>
-
-            <div class="summary-bar-value" id="yearTotalBar">
-              0,0 km
-            </div>
-          </div>
-
-        </div>
-
-        <div class="daily-chart-card">
-
-          <div class="daily-chart-head">
-            <div class="daily-chart-title">
-              Aktuelle Woche
-            </div>
-
-            <div class="daily-chart-date" id="dashboardDate">
-              —
-            </div>
-          </div>
-
-          <div class="chart-bars" id="dailyChart"></div>
-
+        <div
+          class="dashboard-date"
+          id="dashboardDate"
+        >
+          Montag, 21. September 2026
         </div>
 
       </section>
 
-      <!-- =====================================================
-           02 – BESTZEITEN
-           ===================================================== -->
-
       <section class="dashboard-section">
 
         <div class="dashboard-section-header">
-          <div class="dashboard-section-label">
-            02 · Bestzeiten
+
+          <div>
+
+            <div class="dashboard-section-label">
+              01 / KILOMETER
+            </div>
+
+            <h2>
+              Dein Laufjahr.
+            </h2>
+
+            <p class="dashboard-section-description">
+              Deine gelaufenen Kilometer von Montag bis Sonntag
+              und deine aktuellen Summen.
+            </p>
+
           </div>
 
-          <h3>Persönliche Rekorde</h3>
-
-          <p class="dashboard-section-description">
-            Von 5 km bis Ultra. Auch 100 km und Läufe über 100 km können
-            später als eigene Kategorien automatisch erfasst werden.
-          </p>
         </div>
 
-        <div class="best-times-shell">
+        <div class="kilometer-card">
 
-          <div class="best-times-intro">
+          <div class="kilometer-card-top">
+
             <div>
-              <h4>Best Times</h4>
-              <p>
-                Die schnellste gespeicherte Zeit pro Distanz.
+
+              <h3 class="kilometer-card-title">
+                Diese Woche
+              </h3>
+
+              <p class="kilometer-card-small">
+                Wochenansicht · Montag bis Sonntag
               </p>
+
             </div>
 
-            <div class="best-times-badge">
-              Personal Records
+            <div
+              class="current-day-badge"
+              id="currentDayBadge"
+            >
+              HEUTE
             </div>
+
+          </div>
+
+          <div
+            class="daily-chart"
+            id="dailyChart"
+          ></div>
+
+          <div class="summary-bars">
+
+            <div class="summary-bar-row">
+
+              <div class="summary-bar-label">
+                Woche
+              </div>
+
+              <div class="summary-track">
+                <div
+                  class="summary-fill"
+                  id="weekBar"
+                ></div>
+              </div>
+
+              <div
+                class="summary-value"
+                id="weekTotal"
+              >
+                0,0 km
+              </div>
+
+            </div>
+
+            <div class="summary-bar-row">
+
+              <div class="summary-bar-label">
+                Monat
+              </div>
+
+              <div class="summary-track">
+                <div
+                  class="summary-fill"
+                  id="monthBar"
+                ></div>
+              </div>
+
+              <div
+                class="summary-value"
+                id="monthTotal"
+              >
+                0,0 km
+              </div>
+
+            </div>
+
+            <div class="summary-bar-row year">
+
+              <div class="summary-bar-label">
+                Kalenderjahr
+              </div>
+
+              <div class="summary-track">
+                <div
+                  class="summary-fill"
+                  id="yearBar"
+                ></div>
+              </div>
+
+              <div
+                class="summary-value"
+                id="yearTotal"
+              >
+                0,0 km
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="stat-grid">
+
+          <div class="stat-card">
+
+            <div class="stat-card-label">
+              Woche
+            </div>
+
+            <div
+              class="stat-card-value"
+              id="weekStat"
+            >
+              0,0
+              <span>km</span>
+            </div>
+
+          </div>
+
+          <div class="stat-card">
+
+            <div class="stat-card-label">
+              Monat
+            </div>
+
+            <div
+              class="stat-card-value"
+              id="monthStat"
+            >
+              0,0
+              <span>km</span>
+            </div>
+
+          </div>
+
+          <div class="stat-card">
+
+            <div class="stat-card-label">
+              Jahr
+            </div>
+
+            <div
+              class="stat-card-value"
+              id="yearStat"
+            >
+              0,0
+              <span>km</span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <section class="dashboard-section">
+
+        <div class="dashboard-section-header">
+
+          <div>
+
+            <div class="dashboard-section-label">
+              02 / PERSONAL BESTS
+            </div>
+
+            <h2>
+              Deine Bestzeiten.
+            </h2>
+
+            <p class="dashboard-section-description">
+              Das System sucht automatisch deine schnellste
+              Zeit für jede Distanz aus deinen gespeicherten Läufen.
+            </p>
+
+          </div>
+
+        </div>
+
+        <div class="best-times-card">
+
+          <div class="best-times-header">
+
+            <div>
+
+              <h2>
+                Persönliche Bestleistungen
+              </h2>
+
+              <p>
+                Auch alte Rennen zählen.
+                Trage einfach einen Lauf aus der Vergangenheit ein
+                und Miles Apart berücksichtigt ihn bei deinen Bestzeiten.
+              </p>
+
+            </div>
+
           </div>
 
           <div class="best-times-grid">
 
-            <!-- 5 KM -->
-            <div class="best-time-row">
+            <div
+              class="best-time-row"
+              data-best="5k"
+            >
+
               <div class="best-time-distance">
                 5 Kilometer
               </div>
 
-              <div class="best-time-value" id="best5k">
-                —
-              </div>
-
-              <div class="best-time-meta" id="best5kDate">
+              <div
+                class="best-time-value"
+                id="best5k"
+              >
                 Noch kein Lauf
               </div>
 
-              <div class="best-time-note" id="best5kNote"></div>
+              <div
+                class="best-time-date"
+                id="best5kDate"
+              ></div>
+
+              <div
+                class="best-time-note"
+                id="best5kNote"
+              ></div>
+
             </div>
 
-            <!-- 10 KM -->
-            <div class="best-time-row">
+            <div
+              class="best-time-row"
+              data-best="10k"
+            >
+
               <div class="best-time-distance">
                 10 Kilometer
               </div>
 
-              <div class="best-time-value" id="best10k">
-                —
-              </div>
-
-              <div class="best-time-meta" id="best10kDate">
+              <div
+                class="best-time-value"
+                id="best10k"
+              >
                 Noch kein Lauf
               </div>
 
-              <div class="best-time-note" id="best10kNote"></div>
+              <div
+                class="best-time-date"
+                id="best10kDate"
+              ></div>
+
+              <div
+                class="best-time-note"
+                id="best10kNote"
+              ></div>
+
             </div>
 
-            <!-- HALF -->
-            <div class="best-time-row">
+            <div
+              class="best-time-row"
+              data-best="half"
+            >
+
               <div class="best-time-distance">
                 Halbmarathon
               </div>
 
-              <div class="best-time-value" id="bestHalf">
-                —
-              </div>
-
-              <div class="best-time-meta" id="bestHalfDate">
+              <div
+                class="best-time-value"
+                id="bestHalf"
+              >
                 Noch kein Lauf
               </div>
 
-              <div class="best-time-note" id="bestHalfNote"></div>
+              <div
+                class="best-time-date"
+                id="bestHalfDate"
+              ></div>
+
+              <div
+                class="best-time-note"
+                id="bestHalfNote"
+              ></div>
+
             </div>
 
-            <!-- MARATHON -->
-            <div class="best-time-row">
+            <div
+              class="best-time-row"
+              data-best="marathon"
+            >
+
               <div class="best-time-distance">
                 Marathon
               </div>
 
-              <div class="best-time-value" id="bestMarathon">
-                —
-              </div>
-
-              <div class="best-time-meta" id="bestMarathonDate">
+              <div
+                class="best-time-value"
+                id="bestMarathon"
+              >
                 Noch kein Lauf
               </div>
 
-              <div class="best-time-note" id="bestMarathonNote"></div>
+              <div
+                class="best-time-date"
+                id="bestMarathonDate"
+              ></div>
+
+              <div
+                class="best-time-note"
+                id="bestMarathonNote"
+              ></div>
+
             </div>
 
-            <!-- 50 KM -->
-            <div class="best-time-row">
+            <div
+              class="best-time-row"
+              data-best="50k"
+            >
+
               <div class="best-time-distance">
                 50 Kilometer
               </div>
 
-              <div class="best-time-value" id="best50k">
-                —
-              </div>
-
-              <div class="best-time-meta" id="best50kDate">
+              <div
+                class="best-time-value"
+                id="best50k"
+              >
                 Noch kein Lauf
               </div>
 
-              <div class="best-time-note" id="best50kNote"></div>
+              <div
+                class="best-time-date"
+                id="best50kDate"
+              ></div>
+
+              <div
+                class="best-time-note"
+                id="best50kNote"
+              ></div>
+
             </div>
 
-            <!-- 100 KM -->
-            <div class="best-time-row">
+            <div
+              class="best-time-row"
+              data-best="100k"
+            >
+
               <div class="best-time-distance">
                 100 Kilometer
               </div>
 
-              <div class="best-time-value empty" id="best100k">
+              <div
+                class="best-time-value"
+                id="best100k"
+              >
                 Noch kein Lauf
               </div>
 
-              <div class="best-time-meta" id="best100kDate">
-                Wird automatisch erfasst
-              </div>
+              <div
+                class="best-time-date"
+                id="best100kDate"
+              ></div>
 
-              <div class="best-time-note" id="best100kNote"></div>
+              <div
+                class="best-time-note"
+                id="best100kNote"
+              ></div>
+
             </div>
 
-            <!-- 100+ KM -->
-            <div class="best-time-row">
+            <div
+              class="best-time-row"
+              data-best="100plus"
+            >
+
               <div class="best-time-distance">
                 100+ Kilometer
               </div>
 
-              <div class="best-time-value empty" id="best100plus">
+              <div
+                class="best-time-value"
+                id="best100plus"
+              >
                 Noch kein Lauf
               </div>
 
-              <div class="best-time-meta" id="best100plusDate">
-                100 Meilen · Backyard · Ultra
-              </div>
+              <div
+                class="best-time-date"
+                id="best100plusDate"
+              ></div>
 
-              <div class="best-time-note" id="best100plusNote"></div>
+              <div
+                class="best-time-note"
+                id="best100plusNote"
+              ></div>
+
             </div>
 
-            <!-- LONGEST -->
             <div class="best-time-row longest-run">
 
               <div>
+
                 <div class="best-time-distance">
                   Längster Lauf
                 </div>
 
-                <div class="best-time-value" id="longestRun">
-                  —
+                <div
+                  class="best-time-value"
+                  id="longestRun"
+                >
+                  50,0 km
                 </div>
 
-                <div class="best-time-meta" id="longestRunDate">
-                  Noch kein Lauf
-                </div>
+                <div
+                  class="best-time-date"
+                  id="longestRunDate"
+                ></div>
 
-                <div class="best-time-note" id="longestRunNote"></div>
               </div>
 
-              <div class="longest-run-badge">
-                Distance<br>
-                Record
-              </div>
+              <div
+                class="best-time-note"
+                id="longestRunNote"
+              ></div>
 
             </div>
 
           </div>
+
         </div>
 
       </section>
 
-      <!-- =====================================================
-           03 – LAUF EINTRAGEN
-           ===================================================== -->
-
       <section class="dashboard-section">
 
         <div class="dashboard-section-header">
-          <div class="dashboard-section-label">
-            03 · Lauf eintragen
+
+          <div>
+
+            <div class="dashboard-section-label">
+              03 / RUN UPLOAD
+            </div>
+
+            <h2>
+              Lauf hinzufügen.
+            </h2>
+
+            <p class="dashboard-section-description">
+              Egal ob gestern, letzte Woche oder vor fünf Jahren.
+              Deine Laufgeschichte gehört hierher.
+            </p>
+
           </div>
 
-          <h3>Neuen Lauf hinzufügen</h3>
-
-          <p class="dashboard-section-description">
-            Trage Distanz, Zeit und optional eine Notiz ein. Die
-            Bestzeiten werden danach automatisch neu berechnet.
-          </p>
         </div>
 
         <div class="run-entry-card">
 
-          <form id="runForm">
+          <div class="run-entry-top">
 
-            <div class="run-entry-grid">
+            <div>
 
-              <div class="form-field">
-                <label for="runDate">Datum</label>
+              <h2>
+                Einen Lauf speichern
+              </h2>
 
-                <input
-                  type="date"
-                  id="runDate"
-                  required
-                >
-              </div>
-
-              <div class="form-field">
-                <label for="runDistance">Distanz in km</label>
-
-                <input
-                  type="number"
-                  id="runDistance"
-                  min="0.1"
-                  step="0.001"
-                  placeholder="z. B. 12.5"
-                  required
-                >
-              </div>
-
-              <div class="form-field">
-                <label for="runType">Lauftyp</label>
-
-                <select id="runType">
-                  <option value="easy">Easy Run</option>
-                  <option value="tempo">Tempo Run</option>
-                  <option value="interval">Intervalle</option>
-                  <option value="long">Long Run</option>
-                  <option value="race">Wettkampf</option>
-                  <option value="trail">Trail</option>
-                  <option value="ultra">Ultra</option>
-                  <option value="other">Sonstiger Lauf</option>
-                </select>
-              </div>
-
-              <div class="form-field full">
-                <label>
-                  Zeit
-                </label>
-
-                <div class="duration-fields">
-
-                  <input
-                    type="number"
-                    id="runHours"
-                    min="0"
-                    max="999"
-                    placeholder="Stunden"
-                  >
-
-                  <input
-                    type="number"
-                    id="runMinutes"
-                    min="0"
-                    max="59"
-                    placeholder="Minuten"
-                  >
-
-                  <input
-                    type="number"
-                    id="runSeconds"
-                    min="0"
-                    max="59"
-                    placeholder="Sekunden"
-                  >
-
-                </div>
-              </div>
-
-              <div class="form-field full">
-                <label for="runNote">
-                  Notiz
-                </label>
-
-                <textarea
-                  id="runNote"
-                  placeholder="z. B. Berlin Marathon, Trailrace, Backyard Ultra …"
-                ></textarea>
-              </div>
+              <p>
+                Der Lauf wird anschließend automatisch
+                für deine Kilometer und Bestzeiten berücksichtigt.
+              </p>
 
             </div>
 
-            <div class="run-form-footer">
+            <div
+              class="login-required-label"
+              id="runLoginLabel"
+            >
+              Anmeldung erforderlich
+            </div>
 
-              <div>
-                <div class="run-form-message" id="runFormMessage">
-                  Bitte einloggen, um einen Lauf zu speichern.
-                </div>
+          </div>
 
-                <div
-                  class="login-required-label"
-                  id="runLoginLabel"
-                >
-                  Login erforderlich
-                </div>
-              </div>
+          <form
+            class="run-form"
+            id="runForm"
+          >
+
+            <div class="run-form-group">
+
+              <label for="runDate">
+                Laufdatum
+              </label>
+
+              <input
+                id="runDate"
+                type="date"
+                required
+              >
+
+            </div>
+
+            <div class="run-form-group">
+
+              <label for="runDistance">
+                Distanz
+              </label>
+
+              <input
+                id="runDistance"
+                type="number"
+                min="0.1"
+                step="0.01"
+                placeholder="z. B. 10"
+                required
+              >
+
+            </div>
+
+            <div class="run-form-group">
+
+              <label for="runType">
+                Laufart
+              </label>
+
+              <select id="runType">
+
+                <option value="normal">
+                  Normaler Lauf
+                </option>
+
+                <option value="race">
+                  Wettkampf
+                </option>
+
+                <option value="trail">
+                  Trail
+                </option>
+
+                <option value="ultra">
+                  Ultra
+                </option>
+
+                <option value="backyard">
+                  Backyard Ultra
+                </option>
+
+              </select>
+
+            </div>
+
+            <div class="run-form-group">
+
+              <label for="runHours">
+                Stunden
+              </label>
+
+              <input
+                id="runHours"
+                type="number"
+                min="0"
+                max="99"
+                placeholder="00"
+              >
+
+            </div>
+
+            <div class="run-form-group">
+
+              <label for="runMinutes">
+                Minuten
+              </label>
+
+              <input
+                id="runMinutes"
+                type="number"
+                min="0"
+                max="59"
+                placeholder="00"
+              >
+
+            </div>
+
+            <div class="run-form-group">
+
+              <label for="runSeconds">
+                Sekunden
+              </label>
+
+              <input
+                id="runSeconds"
+                type="number"
+                min="0"
+                max="59"
+                placeholder="00"
+              >
+
+            </div>
+
+            <div class="run-form-group full">
+
+              <label for="runNote">
+                Notiz
+              </label>
+
+              <textarea
+                id="runNote"
+                maxlength="500"
+                placeholder="z. B. Berlin Marathon, 100-Meiler, Backyard Ultra …"
+              ></textarea>
+
+            </div>
+
+            <div class="run-form-actions">
+
+              <div
+                class="run-form-message"
+                id="runFormMessage"
+              ></div>
 
               <button
-                class="save-run-button"
+                class="btn lime"
                 id="saveRunButton"
                 type="submit"
               >
-                Lauf speichern
+                Lauf speichern →
               </button>
 
             </div>
@@ -1889,56 +2588,59 @@
 
       </section>
 
-      <!-- =====================================================
-           04 – LAUFHISTORIE
-           ===================================================== -->
-
-      <section class="dashboard-section">
+      <section
+        class="dashboard-section"
+        id="recentRunsSection"
+      >
 
         <div class="dashboard-section-header">
-          <div class="dashboard-section-label">
-            04 · Laufhistorie
+
+          <div>
+
+            <div class="dashboard-section-label">
+              04 / RUN HISTORY
+            </div>
+
+            <h2>
+              Deine letzten Läufe.
+            </h2>
+
           </div>
 
-          <h3>Deine bisherigen Läufe</h3>
-
-          <p class="dashboard-section-description">
-            Deine letzten gespeicherten Läufe werden hier chronologisch
-            dargestellt.
-          </p>
         </div>
 
         <div class="runs-list-card">
 
-          <div class="runs-list-header">
-            <div>Lauf</div>
-            <div>Datum</div>
-            <div>Distanz</div>
-            <div>Zeit</div>
-          </div>
-
-          <div id="runsList"></div>
+          <div
+            class="runs-list"
+            id="runsList"
+          ></div>
 
         </div>
 
       </section>
 
     </div>
+
   </main>
 
 </div>
 
 <!-- =========================================================
      AUTH MODAL
-     ========================================================= -->
+========================================================= -->
 
 <div
   class="auth-overlay"
   id="authOverlay"
-  aria-hidden="true"
 >
 
-  <div class="auth-modal">
+  <div
+    class="auth-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="authTitle"
+  >
 
     <button
       class="auth-close"
@@ -1949,31 +2651,32 @@
       ×
     </button>
 
-    <div class="auth-header">
-
-      <div class="auth-header-kicker">
-        Miles Apart
-      </div>
-
-      <h3 id="authTitle">
-        Willkommen zurück
-      </h3>
-
-      <p id="authDescription">
-        Logge dich ein, um deine Läufe und persönlichen Bestzeiten
-        zu speichern.
-      </p>
-
+    <div class="auth-eyebrow">
+      MILES APART
     </div>
 
-    <div class="auth-tabs">
+    <h2 id="authTitle">
+      Willkommen zurück.
+    </h2>
+
+    <p
+      class="auth-description"
+      id="authDescription"
+    >
+      Melde dich an und werde Teil der Community.
+    </p>
+
+    <div
+      class="auth-tabs"
+      id="authTabs"
+    >
 
       <button
         class="auth-tab active"
         id="loginTab"
         type="button"
       >
-        Login
+        Anmelden
       </button>
 
       <button
@@ -1981,296 +2684,468 @@
         id="registerTab"
         type="button"
       >
-        Registrieren
+        Konto erstellen
       </button>
 
     </div>
 
-    <div class="auth-body">
+    <form
+      class="auth-form active"
+      id="loginForm"
+    >
 
-      <!-- LOGIN -->
+      <div class="form-group">
 
-      <form class="auth-form active" id="loginForm">
+        <label for="loginEmail">
+          E-Mail
+        </label>
 
-        <div class="auth-field">
-          <label for="loginEmail">
-            E-Mail
-          </label>
-
-          <input
-            type="email"
-            id="loginEmail"
-            autocomplete="email"
-            required
-          >
-        </div>
-
-        <div class="auth-field">
-          <label for="loginPassword">
-            Passwort
-          </label>
-
-          <input
-            type="password"
-            id="loginPassword"
-            autocomplete="current-password"
-            required
-          >
-        </div>
-
-        <button
-          class="auth-submit"
-          id="loginSubmit"
-          type="submit"
+        <input
+          id="loginEmail"
+          type="email"
+          placeholder="deine@email.de"
+          autocomplete="email"
+          required
         >
-          Einloggen
-        </button>
 
-        <button
-          class="auth-secondary"
-          id="forgotPasswordButton"
-          type="button"
+      </div>
+
+      <div class="form-group">
+
+        <label for="loginPassword">
+          Passwort
+        </label>
+
+        <input
+          id="loginPassword"
+          type="password"
+          placeholder="••••••••"
+          autocomplete="current-password"
+          required
         >
-          Passwort vergessen?
-        </button>
 
-        <div
-          class="auth-message"
-          id="loginMessage"
-        ></div>
+      </div>
 
-      </form>
+      <button
+        class="auth-submit"
+        id="loginSubmit"
+        type="submit"
+      >
+        Anmelden →
+      </button>
 
-      <!-- REGISTER -->
+      <button
+        class="forgot-password"
+        id="forgotPasswordButton"
+        type="button"
+      >
+        Passwort vergessen?
+      </button>
 
-      <form class="auth-form" id="registerForm">
+      <div
+        class="auth-message"
+        id="loginMessage"
+      ></div>
 
-        <div class="registration-note">
-          Willkommen bei Miles Apart. Für die Registrierung kannst du
-          zusätzlich unseren Instagram-Account besuchen und den Club
-          weiterempfehlen.
-        </div>
+    </form>
 
-        <div class="auth-field">
-          <label for="registerName">
-            Name
-          </label>
+    <form
+      class="auth-form"
+      id="registerForm"
+    >
 
-          <input
-            type="text"
-            id="registerName"
-            autocomplete="name"
-            required
+      <div class="register-intro">
+
+        <strong>Bevor du loslegst:</strong>
+        Miles Apart soll eine echte Community sein.
+        Deshalb gehören zwei kleine Schritte zur Registrierung:
+        Tano Loew auf Instagram folgen und einen Freund zur
+        Community einladen.
+
+      </div>
+
+      <div class="form-group">
+
+        <label for="registerName">
+          Dein Name
+        </label>
+
+        <input
+          id="registerName"
+          type="text"
+          placeholder="z. B. Tano"
+          autocomplete="name"
+          required
+        >
+
+      </div>
+
+      <div class="form-group">
+
+        <label for="registerEmail">
+          E-Mail
+        </label>
+
+        <input
+          id="registerEmail"
+          type="email"
+          placeholder="deine@email.de"
+          autocomplete="email"
+          required
+        >
+
+      </div>
+
+      <div class="form-group">
+
+        <label for="registerPassword">
+          Passwort
+        </label>
+
+        <input
+          id="registerPassword"
+          type="password"
+          placeholder="Mindestens 6 Zeichen"
+          minlength="6"
+          autocomplete="new-password"
+          required
+        >
+
+      </div>
+
+      <div class="registration-requirements">
+
+        <section
+          class="requirement-card"
+          id="followRequirement"
+        >
+
+          <div class="requirement-head">
+
+            <div class="requirement-icon">
+              ◎
+            </div>
+
+            <div>
+
+              <h3 class="requirement-title">
+                Folge Tano Loew auf Instagram
+              </h3>
+
+              <p class="requirement-text">
+                Folge meinem persönlichen Instagram-Account
+                und bleib über Miles Apart, Running und neue
+                Community-Aktionen auf dem Laufenden.
+              </p>
+
+              <span class="instagram-handle">
+                @tano.loew
+              </span>
+
+            </div>
+
+          </div>
+
+          <button
+            class="instagram-open-button"
+            id="openInstagramButton"
+            type="button"
           >
-        </div>
+            Instagram öffnen →
+          </button>
 
-        <div class="auth-field">
-          <label for="registerEmail">
-            E-Mail
-          </label>
-
-          <input
-            type="email"
-            id="registerEmail"
-            autocomplete="email"
-            required
-          >
-        </div>
-
-        <div class="auth-field">
-          <label for="registerPassword">
-            Passwort
-          </label>
-
-          <input
-            type="password"
-            id="registerPassword"
-            autocomplete="new-password"
-            minlength="6"
-            required
-          >
-        </div>
-
-        <div class="requirement-list">
-
-          <div class="requirement-item">
+          <label class="requirement-check">
 
             <input
-              type="checkbox"
               id="followCheckbox"
+              type="checkbox"
             >
 
-            <label for="followCheckbox">
-              Ich habe Miles Apart auf Instagram besucht bzw.
-              folge dem Account.
-            </label>
+            <span class="custom-check"></span>
+
+            <span class="requirement-check-text">
+              Ja, ich folge Tano Loew bereits.
+              <small>
+                Mit dem Haken bestätigst du dies.
+              </small>
+            </span>
+
+          </label>
+
+        </section>
+
+        <section
+          class="requirement-card"
+          id="inviteRequirement"
+        >
+
+          <div class="requirement-head">
+
+            <div class="requirement-icon">
+              👥
+            </div>
+
+            <div>
+
+              <h3 class="requirement-title">
+                Lade jetzt einen Freund ein
+              </h3>
+
+              <p class="requirement-text">
+                Teile Miles Apart mit einem Freund –
+                über WhatsApp oder Instagram.
+                Gemeinsam läuft's besser.
+              </p>
+
+            </div>
 
           </div>
 
-          <div class="follow-status" id="followStatus">
-            Optionaler Instagram-Schritt
+          <div class="invite-preview">
+
+            <div class="invite-preview-kicker">
+              MILES APART
+            </div>
+
+            <div class="invite-preview-title">
+              RUN <span>TOGETHER</span>
+            </div>
+
+            <div class="invite-preview-subtitle">
+              Komm mit in die Miles Apart Community.
+              Eine Community. Keine Grenzen.
+            </div>
+
+            <div class="invite-preview-footer">
+              RUN · CONNECT · REPEAT
+            </div>
+
           </div>
 
-          <div class="share-actions">
+          <div class="share-buttons">
 
             <button
+              class="share-button whatsapp"
+              id="whatsappShareButton"
               type="button"
-              id="openInstagramButton"
             >
-              Instagram öffnen
+              <span class="share-icon">
+                ↗
+              </span>
+              Über WhatsApp teilen
+            </button>
+
+            <button
+              class="share-button instagram"
+              id="instagramShareButton"
+              type="button"
+            >
+              <span class="share-icon">
+                ◎
+              </span>
+              Über Instagram teilen
             </button>
 
           </div>
 
           <div
-            class="requirement-item"
-            style="margin-top:12px;"
+            class="share-status"
+            id="shareStatus"
+          ></div>
+
+          <label
+            class="requirement-check invite-check"
+            id="inviteCheckLabel"
           >
 
             <input
-              type="checkbox"
               id="inviteCheckbox"
+              type="checkbox"
+              disabled
             >
 
-            <label for="inviteCheckbox">
-              Ich habe Miles Apart an eine Person weiterempfohlen.
-            </label>
+            <span class="custom-check"></span>
 
-          </div>
+            <span class="requirement-check-text">
+              Ja, ich habe einen Freund eingeladen.
+              <small>
+                Teile zuerst über WhatsApp oder Instagram.
+              </small>
+            </span>
 
-          <div class="invite-status" id="inviteStatus">
-            Optionaler Empfehlungs-Schritt
-          </div>
-
-          <div class="share-actions">
-
-            <button
-              type="button"
-              id="whatsappShareButton"
-            >
-              WhatsApp teilen
-            </button>
-
-            <button
-              type="button"
-              id="instagramShareButton"
-            >
-              Instagram teilen
-            </button>
-
-          </div>
-
-        </div>
-
-        <button
-          class="auth-submit"
-          id="registerSubmit"
-          type="submit"
-        >
-          Account erstellen
-        </button>
-
-        <div
-          class="auth-message"
-          id="registerMessage"
-        ></div>
-
-      </form>
-
-      <!-- FORGOT PASSWORD -->
-
-      <form class="auth-form" id="forgotForm">
-
-        <div class="auth-field">
-          <label for="forgotEmail">
-            E-Mail
           </label>
 
-          <input
-            type="email"
-            id="forgotEmail"
-            autocomplete="email"
-            required
-          >
-        </div>
+        </section>
 
-        <button
-          class="auth-submit"
-          id="forgotSubmit"
-          type="submit"
-        >
-          Reset-Link senden
-        </button>
+      </div>
 
-        <button
-          class="auth-secondary"
-          id="backToLoginButton"
-          type="button"
-        >
-          Zurück zum Login
-        </button>
+      <div
+        class="registration-status"
+        id="registrationStatus"
+      >
 
         <div
-          class="auth-message"
-          id="forgotMessage"
-        ></div>
-
-      </form>
-
-      <!-- RECOVERY -->
-
-      <form class="auth-form" id="recoveryForm">
-
-        <div class="auth-field">
-          <label for="recoveryPassword">
-            Neues Passwort
-          </label>
-
-          <input
-            type="password"
-            id="recoveryPassword"
-            minlength="6"
-            required
-          >
-        </div>
-
-        <div class="auth-field">
-          <label for="recoveryPasswordConfirm">
-            Passwort bestätigen
-          </label>
-
-          <input
-            type="password"
-            id="recoveryPasswordConfirm"
-            minlength="6"
-            required
-          >
-        </div>
-
-        <button
-          class="auth-submit"
-          id="recoverySubmit"
-          type="submit"
+          class="registration-status-row"
+          id="followStatus"
         >
-          Passwort ändern
-        </button>
+
+          <span class="registration-status-dot">
+            1
+          </span>
+
+          <span>
+            Instagram-Follow bestätigen
+          </span>
+
+        </div>
 
         <div
-          class="auth-message"
-          id="recoveryMessage"
-        ></div>
+          class="registration-status-row"
+          id="inviteStatus"
+        >
 
-      </form>
+          <span class="registration-status-dot">
+            2
+          </span>
 
-    </div>
+          <span>
+            Freund einladen
+          </span>
+
+        </div>
+
+      </div>
+
+      <button
+        class="auth-submit"
+        id="registerSubmit"
+        type="submit"
+        disabled
+      >
+        Erst Voraussetzungen erfüllen
+      </button>
+
+      <div
+        class="auth-message"
+        id="registerMessage"
+      ></div>
+
+    </form>
+
+    <form
+      class="auth-form"
+      id="forgotForm"
+    >
+
+      <button
+        class="auth-back"
+        id="backToLoginButton"
+        type="button"
+      >
+        ← Zurück zum Login
+      </button>
+
+      <div class="form-group">
+
+        <label for="forgotEmail">
+          E-Mail-Adresse
+        </label>
+
+        <input
+          id="forgotEmail"
+          type="email"
+          placeholder="deine@email.de"
+          autocomplete="email"
+          required
+        >
+
+      </div>
+
+      <button
+        class="auth-submit"
+        id="forgotSubmit"
+        type="submit"
+      >
+        Reset-Link senden →
+      </button>
+
+      <div
+        class="auth-message"
+        id="forgotMessage"
+      ></div>
+
+      <div class="auth-note">
+
+        Wir senden dir einen Link per E-Mail.
+        Über diesen Link kannst du ein neues Passwort festlegen.
+
+      </div>
+
+    </form>
+
+    <form
+      class="auth-form"
+      id="recoveryForm"
+    >
+
+      <div class="form-group">
+
+        <label for="newPassword">
+          Neues Passwort
+        </label>
+
+        <input
+          id="newPassword"
+          type="password"
+          placeholder="Mindestens 6 Zeichen"
+          minlength="6"
+          autocomplete="new-password"
+          required
+        >
+
+      </div>
+
+      <div class="form-group">
+
+        <label for="newPasswordConfirm">
+          Neues Passwort wiederholen
+        </label>
+
+        <input
+          id="newPasswordConfirm"
+          type="password"
+          placeholder="Passwort wiederholen"
+          minlength="6"
+          autocomplete="new-password"
+          required
+        >
+
+      </div>
+
+      <button
+        class="auth-submit"
+        id="recoverySubmit"
+        type="submit"
+      >
+        Neues Passwort speichern →
+      </button>
+
+      <div
+        class="auth-message"
+        id="recoveryMessage"
+      ></div>
+
+    </form>
+
   </div>
+
 </div>
 
-
 <script>
+
   /* =========================================================
      SUPABASE
-     ========================================================= */
+  ========================================================= */
 
   const SUPABASE_URL =
     "https://orbrkdrsihsacsnprewf.supabase.co";
@@ -2278,189 +3153,19 @@
   const SUPABASE_PUBLISHABLE_KEY =
     "sb_publishable_wc3w2fSuj8ItwiF6XBoQgw_HeW5_rNW";
 
-  const { createClient } = window.supabase;
+  const {
+    createClient
+  } = window.supabase;
 
-  const supabaseClient = createClient(
-    SUPABASE_URL,
-    SUPABASE_PUBLISHABLE_KEY
-  );
-
-
-  /* =========================================================
-     CONFIG
-     ========================================================= */
-
-  const INSTAGRAM_URL =
-    "https://www.instagram.com/tano.loew/";
-
+  const supabaseClient =
+    createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY
+    );
 
   /* =========================================================
-     DEMO DATA
-     =========================================================
-     
-     Wichtig:
-     - Keine Demo-Läufe mit 100 km
-     - Keine Demo-Läufe über 100 km
-     - Längster Demo-Lauf = 50 km
-     - Die Kategorien 100 km und 100+ km bleiben trotzdem
-       vollständig aktiv und können durch echte Nutzerdaten
-       automatisch befüllt werden.
-  */
-
-  const DEMO_DAILY_KM = [
-    6.2,
-    7.4,
-    5.8,
-    8.1,
-    6.5,
-    10.2,
-    7.0
-  ];
-
-  const DEMO_RUNS = [
-
-    {
-      run_date: "2026-09-10",
-      distance_km: 8.6,
-      duration_seconds: 2780,
-      note: "Easy Run",
-      run_type: "easy"
-    },
-
-    {
-      run_date: "2026-09-07",
-      distance_km: 12.4,
-      duration_seconds: 4440,
-      note: "Long Run",
-      run_type: "long"
-    },
-
-    {
-      run_date: "2026-09-04",
-      distance_km: 6.8,
-      duration_seconds: 2460,
-      note: "Tempo Run",
-      run_type: "tempo"
-    },
-
-    {
-      run_date: "2026-09-01",
-      distance_km: 9.5,
-      duration_seconds: 3210,
-      note: "Easy Run",
-      run_type: "easy"
-    },
-
-    {
-      run_date: "2026-06-13",
-      distance_km: 5.0,
-      duration_seconds: 1110,
-      note: "5K Bestzeit",
-      run_type: "race"
-    },
-
-    {
-      run_date: "2026-04-18",
-      distance_km: 10.0,
-      duration_seconds: 2460,
-      note: "10K Bestzeit",
-      run_type: "race"
-    },
-
-    {
-      run_date: "2026-03-22",
-      distance_km: 21.0975,
-      duration_seconds: 5220,
-      note: "Halbmarathon",
-      run_type: "race"
-    },
-
-    {
-      run_date: "2026-05-10",
-      distance_km: 42.195,
-      duration_seconds: 11940,
-      note: "Marathon",
-      run_type: "race"
-    },
-
-    {
-      run_date: "2026-07-19",
-      distance_km: 50.0,
-      duration_seconds: 17400,
-      note: "50K Ultra",
-      run_type: "ultra"
-    },
-
-    {
-      run_date: "2026-08-23",
-      distance_km: 21.0975,
-      duration_seconds: 5400,
-      note: "Long Run",
-      run_type: "long"
-    },
-
-    {
-      run_date: "2026-07-05",
-      distance_km: 15.2,
-      duration_seconds: 5700,
-      note: "Trail Run",
-      run_type: "trail"
-    },
-
-    {
-      run_date: "2026-06-27",
-      distance_km: 13.8,
-      duration_seconds: 4920,
-      note: "Long Run",
-      run_type: "long"
-    },
-
-    {
-      run_date: "2026-05-31",
-      distance_km: 18.4,
-      duration_seconds: 7020,
-      note: "Trail Run",
-      run_type: "trail"
-    },
-
-    {
-      run_date: "2026-04-11",
-      distance_km: 14.6,
-      duration_seconds: 5100,
-      note: "Long Run",
-      run_type: "long"
-    },
-
-    {
-      run_date: "2026-03-08",
-      distance_km: 16.3,
-      duration_seconds: 5940,
-      note: "Easy Run",
-      run_type: "easy"
-    },
-
-    {
-      run_date: "2026-02-21",
-      distance_km: 11.7,
-      duration_seconds: 4320,
-      note: "Easy Run",
-      run_type: "easy"
-    },
-
-    {
-      run_date: "2026-01-17",
-      distance_km: 12.1,
-      duration_seconds: 4500,
-      note: "Long Run",
-      run_type: "long"
-    }
-
-  ];
-
-
-  /* =========================================================
-     ELEMENTS
-     ========================================================= */
+     ELEMENTE
+  ========================================================= */
 
   const guestArea =
     document.getElementById("guestArea");
@@ -2492,17 +3197,17 @@
   const openLoginButton =
     document.getElementById("openLoginButton");
 
+  const previewNotice =
+    document.getElementById("previewNotice");
+
   const authOverlay =
     document.getElementById("authOverlay");
 
   const closeAuthButton =
     document.getElementById("closeAuthButton");
 
-  const authTitle =
-    document.getElementById("authTitle");
-
-  const authDescription =
-    document.getElementById("authDescription");
+  const authTabs =
+    document.getElementById("authTabs");
 
   const loginTab =
     document.getElementById("loginTab");
@@ -2522,11 +3227,11 @@
   const recoveryForm =
     document.getElementById("recoveryForm");
 
-  const forgotPasswordButton =
-    document.getElementById("forgotPasswordButton");
+  const authTitle =
+    document.getElementById("authTitle");
 
-  const backToLoginButton =
-    document.getElementById("backToLoginButton");
+  const authDescription =
+    document.getElementById("authDescription");
 
   const loginMessage =
     document.getElementById("loginMessage");
@@ -2539,6 +3244,28 @@
 
   const recoveryMessage =
     document.getElementById("recoveryMessage");
+
+  const forgotPasswordButton =
+    document.getElementById("forgotPasswordButton");
+
+  const backToLoginButton =
+    document.getElementById("backToLoginButton");
+
+  const loginSubmit =
+    document.getElementById("loginSubmit");
+
+  const registerSubmit =
+    document.getElementById("registerSubmit");
+
+  const forgotSubmit =
+    document.getElementById("forgotSubmit");
+
+  const recoverySubmit =
+    document.getElementById("recoverySubmit");
+
+  /* =========================================================
+     REGISTRATION
+  ========================================================= */
 
   const followCheckbox =
     document.getElementById("followCheckbox");
@@ -2555,11 +3282,72 @@
   const instagramShareButton =
     document.getElementById("instagramShareButton");
 
+  const shareStatus =
+    document.getElementById("shareStatus");
+
+  const followRequirement =
+    document.getElementById("followRequirement");
+
+  const inviteRequirement =
+    document.getElementById("inviteRequirement");
+
+  const inviteCheckLabel =
+    document.getElementById("inviteCheckLabel");
+
   const followStatus =
     document.getElementById("followStatus");
 
   const inviteStatus =
     document.getElementById("inviteStatus");
+
+  /* =========================================================
+     RUN ELEMENTE
+  ========================================================= */
+
+  const dashboardDate =
+    document.getElementById("dashboardDate");
+
+  const currentDayBadge =
+    document.getElementById("currentDayBadge");
+
+  const dailyChart =
+    document.getElementById("dailyChart");
+
+  const weekBar =
+    document.getElementById("weekBar");
+
+  const monthBar =
+    document.getElementById("monthBar");
+
+  const yearBar =
+    document.getElementById("yearBar");
+
+  const weekTotal =
+    document.getElementById("weekTotal");
+
+  const monthTotal =
+    document.getElementById("monthTotal");
+
+  const yearTotal =
+    document.getElementById("yearTotal");
+
+  const weekStat =
+    document.getElementById("weekStat");
+
+  const monthStat =
+    document.getElementById("monthStat");
+
+  const yearStat =
+    document.getElementById("yearStat");
+
+  const sidebarWeekKm =
+    document.getElementById("sidebarWeekKm");
+
+  const sidebarWeekProgress =
+    document.getElementById("sidebarWeekProgress");
+
+  const sidebarWeekText =
+    document.getElementById("sidebarWeekText");
 
   const runForm =
     document.getElementById("runForm");
@@ -2597,36 +3385,374 @@
   const runsList =
     document.getElementById("runsList");
 
-
   /* =========================================================
-     STATE
-     ========================================================= */
+     BESTZEITEN
+  ========================================================= */
 
-  let currentUser = null;
-  let currentRuns = [];
+  const bestElements = {
 
+    "5k": {
+      value: document.getElementById("best5k"),
+      date: document.getElementById("best5kDate"),
+      note: document.getElementById("best5kNote")
+    },
 
-  /* =========================================================
-     HELPERS
-     ========================================================= */
+    "10k": {
+      value: document.getElementById("best10k"),
+      date: document.getElementById("best10kDate"),
+      note: document.getElementById("best10kNote")
+    },
 
-  function formatKm(value) {
-    return Number(value || 0)
-      .toLocaleString("de-DE", {
-        minimumFractionDigits: 1,
-        maximumFractionDigits: 1
-      });
-  }
+    "half": {
+      value: document.getElementById("bestHalf"),
+      date: document.getElementById("bestHalfDate"),
+      note: document.getElementById("bestHalfNote")
+    },
 
+    "marathon": {
+      value: document.getElementById("bestMarathon"),
+      date: document.getElementById("bestMarathonDate"),
+      note: document.getElementById("bestMarathonNote")
+    },
 
-  function formatDate(dateString) {
-    if (!dateString) {
-      return "—";
+    "50k": {
+      value: document.getElementById("best50k"),
+      date: document.getElementById("best50kDate"),
+      note: document.getElementById("best50kNote")
+    },
+
+    "100k": {
+      value: document.getElementById("best100k"),
+      date: document.getElementById("best100kDate"),
+      note: document.getElementById("best100kNote")
+    },
+
+    "100plus": {
+      value: document.getElementById("best100plus"),
+      date: document.getElementById("best100plusDate"),
+      note: document.getElementById("best100plusNote")
     }
 
-    const date = new Date(
-      dateString + "T12:00:00"
+  };
+
+  const INSTAGRAM_URL =
+    "https://www.instagram.com/tano.loew/";
+
+  let currentUser =
+    null;
+
+  let currentProfile =
+    null;
+
+  let currentRuns =
+    [];
+
+  let inviteActionStarted =
+    false;
+
+  /* =========================================================
+     DEMO WOCHENWERTE
+  ========================================================= */
+
+  const DEMO_DAILY_KM = [
+    6.2,
+    7.4,
+    5.8,
+    8.1,
+    6.5,
+    10.2,
+    7.0
+  ];
+
+  /*
+     Historische Demo-Läufe.
+     Der längste Demo-Lauf ist bewusst der 50-km-Lauf.
+     Für 100 km und 100+ km gibt es in der Demo
+     bewusst noch keinen eingetragenen Lauf.
+  */
+
+  const DEMO_RUNS = [
+
+    /* Weitere Läufe im aktuellen Monat */
+
+    {
+      run_date: "2026-09-10",
+      distance_km: 8.6,
+      duration_seconds: 2940,
+      note: "Morgenrunde",
+      run_type: "normal"
+    },
+
+    {
+      run_date: "2026-09-07",
+      distance_km: 12.4,
+      duration_seconds: 4300,
+      note: "Long Run",
+      run_type: "normal"
+    },
+
+    {
+      run_date: "2026-09-04",
+      distance_km: 6.8,
+      duration_seconds: 2250,
+      note: "Recovery Run",
+      run_type: "normal"
+    },
+
+    {
+      run_date: "2026-09-01",
+      distance_km: 9.5,
+      duration_seconds: 3240,
+      note: "September Start",
+      run_type: "normal"
+    },
+
+    /* Bestzeiten */
+
+    {
+      run_date: "2026-06-13",
+      distance_km: 5.0,
+      duration_seconds: 1110,
+      note: "5K Bestzeit",
+      run_type: "race"
+    },
+
+    {
+      run_date: "2026-04-18",
+      distance_km: 10.0,
+      duration_seconds: 2460,
+      note: "10K Bestzeit",
+      run_type: "race"
+    },
+
+    {
+      run_date: "2026-03-22",
+      distance_km: 21.0975,
+      duration_seconds: 5220,
+      note: "Halbmarathon Bestzeit",
+      run_type: "race"
+    },
+
+    {
+      run_date: "2026-05-10",
+      distance_km: 42.195,
+      duration_seconds: 11940,
+      note: "Marathon Bestzeit",
+      run_type: "race"
+    },
+
+    {
+      run_date: "2026-07-19",
+      distance_km: 50.0,
+      duration_seconds: 17400,
+      note: "50K Ultra",
+      run_type: "ultra"
+    },
+
+    /* Weitere Jahreskilometer */
+
+    {
+      run_date: "2026-08-23",
+      distance_km: 21.0975,
+      duration_seconds: 5700,
+      note: "Halbmarathon",
+      run_type: "race"
+    },
+
+    {
+      run_date: "2026-07-05",
+      distance_km: 15.2,
+      duration_seconds: 5300,
+      note: "Long Run",
+      run_type: "normal"
+    },
+
+    {
+      run_date: "2026-06-27",
+      distance_km: 13.8,
+      duration_seconds: 4920,
+      note: "Trail Run",
+      run_type: "trail"
+    },
+
+    {
+      run_date: "2026-05-31",
+      distance_km: 18.4,
+      duration_seconds: 6700,
+      note: "Sonntagslauf",
+      run_type: "normal"
+    },
+
+    {
+      run_date: "2026-04-11",
+      distance_km: 14.6,
+      duration_seconds: 5100,
+      note: "Frühlingslauf",
+      run_type: "normal"
+    },
+
+    {
+      run_date: "2026-03-08",
+      distance_km: 16.3,
+      duration_seconds: 5750,
+      note: "Base Run",
+      run_type: "normal"
+    },
+
+    {
+      run_date: "2026-02-21",
+      distance_km: 11.7,
+      duration_seconds: 4200,
+      note: "Winter Run",
+      run_type: "normal"
+    },
+
+    {
+      run_date: "2026-01-17",
+      distance_km: 12.1,
+      duration_seconds: 4350,
+      note: "Jahresstart",
+      run_type: "normal"
+    }
+
+  ];
+
+  /* =========================================================
+     HILFSFUNKTIONEN
+  ========================================================= */
+
+  function getInitials(name) {
+
+    if (!name) {
+      return "M";
+    }
+
+    const parts =
+      name
+        .trim()
+        .split(/\s+/)
+        .filter(Boolean);
+
+    if (parts.length === 1) {
+
+      return parts[0]
+        .substring(0, 1)
+        .toUpperCase();
+
+    }
+
+    return (
+      parts[0].substring(0, 1) +
+      parts[parts.length - 1].substring(0, 1)
+    ).toUpperCase();
+
+  }
+
+  function getUserDisplayName(
+    user,
+    profile
+  ) {
+
+    if (
+      profile &&
+      profile.display_name
+    ) {
+
+      return profile.display_name;
+
+    }
+
+    if (
+      user &&
+      user.user_metadata &&
+      user.user_metadata.display_name
+    ) {
+
+      return user.user_metadata.display_name;
+
+    }
+
+    if (
+      user &&
+      user.email
+    ) {
+
+      return user.email.split("@")[0];
+
+    }
+
+    return "Runner";
+
+  }
+
+  function setMessage(
+    element,
+    text,
+    success = false
+  ) {
+
+    element.textContent =
+      text;
+
+    element.classList.toggle(
+      "success",
+      success
     );
+
+  }
+
+  function clearMessages() {
+
+    setMessage(loginMessage, "");
+    setMessage(registerMessage, "");
+    setMessage(forgotMessage, "");
+    setMessage(recoveryMessage, "");
+    setMessage(runFormMessage, "");
+
+  }
+
+  function setButtonLoading(
+    button,
+    loading,
+    normalText
+  ) {
+
+    button.disabled =
+      loading;
+
+    button.textContent =
+      loading
+        ? "Bitte warten …"
+        : normalText;
+
+  }
+
+  function formatNumber(value) {
+
+    return Number(value || 0)
+      .toLocaleString(
+        "de-DE",
+        {
+          minimumFractionDigits: 1,
+          maximumFractionDigits: 1
+        }
+      );
+
+  }
+
+  function formatDate(
+    dateString
+  ) {
+
+    if (!dateString) {
+      return "";
+    }
+
+    const date =
+      new Date(
+        dateString +
+        "T12:00:00"
+      );
 
     return date.toLocaleDateString(
       "de-DE",
@@ -2636,54 +3762,146 @@
         year: "numeric"
       }
     );
+
   }
 
+  function formatLongDate(
+    date
+  ) {
 
-  function formatDuration(totalSeconds) {
+    return date.toLocaleDateString(
+      "de-DE",
+      {
+        weekday: "long",
+        day: "2-digit",
+        month: "long",
+        year: "numeric"
+      }
+    );
 
-    const seconds =
-      Math.max(0, Math.round(Number(totalSeconds) || 0));
-
-    const hours =
-      Math.floor(seconds / 3600);
-
-    const minutes =
-      Math.floor((seconds % 3600) / 60);
-
-    const secs =
-      seconds % 60;
-
-    return [
-      String(hours).padStart(2, "0"),
-      String(minutes).padStart(2, "0"),
-      String(secs).padStart(2, "0")
-    ].join(":");
   }
 
+  function formatDuration(
+    seconds
+  ) {
 
-  function formatShortDuration(totalSeconds) {
+    if (
+      seconds === null ||
+      seconds === undefined ||
+      seconds === ""
+    ) {
 
-    const seconds =
-      Math.max(0, Math.round(Number(totalSeconds) || 0));
+      return "—";
 
-    const hours =
-      Math.floor(seconds / 3600);
-
-    const minutes =
-      Math.floor((seconds % 3600) / 60);
-
-    const secs =
-      seconds % 60;
-
-    if (hours > 0) {
-      return `${hours}h ${String(minutes).padStart(2, "0")}m`;
     }
 
-    return `${minutes}m ${String(secs).padStart(2, "0")}s`;
+    const total =
+      Math.round(
+        Number(seconds)
+      );
+
+    const hours =
+      Math.floor(
+        total / 3600
+      );
+
+    const minutes =
+      Math.floor(
+        (total % 3600) / 60
+      );
+
+    const secs =
+      total % 60;
+
+    if (hours > 0) {
+
+      return (
+        String(hours).padStart(2, "0") +
+        ":" +
+        String(minutes).padStart(2, "0") +
+        ":" +
+        String(secs).padStart(2, "0")
+      );
+
+    }
+
+    return (
+      String(minutes).padStart(2, "0") +
+      ":" +
+      String(secs).padStart(2, "0")
+    );
+
   }
 
+  function parseDuration() {
 
-  function getMonday(date) {
+    const hours =
+      Number(
+        runHours.value || 0
+      );
+
+    const minutes =
+      Number(
+        runMinutes.value || 0
+      );
+
+    const seconds =
+      Number(
+        runSeconds.value || 0
+      );
+
+    if (
+      hours === 0 &&
+      minutes === 0 &&
+      seconds === 0
+    ) {
+
+      return null;
+
+    }
+
+    if (
+      minutes > 59 ||
+      seconds > 59
+    ) {
+
+      return NaN;
+
+    }
+
+    return (
+      hours * 3600 +
+      minutes * 60 +
+      seconds
+    );
+
+  }
+
+  function getTodayDateString() {
+
+    const date =
+      new Date();
+
+    const year =
+      date.getFullYear();
+
+    const month =
+      String(
+        date.getMonth() + 1
+      ).padStart(2, "0");
+
+    const day =
+      String(
+        date.getDate()
+      ).padStart(2, "0");
+
+    return `${year}-${month}-${day}`;
+
+  }
+
+  function startOfWeek(
+    date
+  ) {
 
     const result =
       new Date(date);
@@ -2691,598 +3909,241 @@
     const day =
       result.getDay();
 
-    const diff =
-      day === 0 ? -6 : 1 - day;
+    const difference =
+      day === 0
+        ? -6
+        : 1 - day;
 
     result.setDate(
-      result.getDate() + diff
+      result.getDate() +
+      difference
     );
 
     result.setHours(
-      12, 0, 0, 0
+      0,
+      0,
+      0,
+      0
     );
 
     return result;
+
   }
 
+  function dateFromRun(
+    run
+  ) {
 
-  function dateToIso(date) {
+    return new Date(
+      run.run_date +
+      "T12:00:00"
+    );
 
-    const year =
-      date.getFullYear();
-
-    const month =
-      String(date.getMonth() + 1)
-        .padStart(2, "0");
-
-    const day =
-      String(date.getDate())
-        .padStart(2, "0");
-
-    return `${year}-${month}-${day}`;
   }
 
+  /* =========================================================
+     DEMO WOCHENWERTE
+  ========================================================= */
 
   function getDemoWeeklyRuns() {
 
     const today =
       new Date();
 
-    today.setHours(
-      12, 0, 0, 0
-    );
+    const jsDay =
+      today.getDay();
 
-    const monday =
-      getMonday(today);
-
-    const weeklyRuns = [];
-
-    const dayIndex =
-      today.getDay() === 0
+    const todayIndex =
+      jsDay === 0
         ? 6
-        : today.getDay() - 1;
+        : jsDay - 1;
+
+    const weekStart =
+      startOfWeek(today);
+
+    const runs = [];
 
     for (
-      let i = 0;
-      i <= dayIndex;
-      i++
+      let index = 0;
+      index <= todayIndex;
+      index++
     ) {
 
       const date =
-        new Date(monday);
+        new Date(
+          weekStart
+        );
 
       date.setDate(
-        monday.getDate() + i
+        date.getDate() +
+        index
       );
 
-      weeklyRuns.push({
-        run_date: dateToIso(date),
+      const year =
+        date.getFullYear();
+
+      const month =
+        String(
+          date.getMonth() + 1
+        ).padStart(2, "0");
+
+      const day =
+        String(
+          date.getDate()
+        ).padStart(2, "0");
+
+      runs.push({
+
+        run_date:
+          `${year}-${month}-${day}`,
+
         distance_km:
-          DEMO_DAILY_KM[i],
+          DEMO_DAILY_KM[index],
+
         duration_seconds:
           Math.round(
-            DEMO_DAILY_KM[i] * 6.1 * 60
+            DEMO_DAILY_KM[index] *
+            330
           ),
+
         note:
-          i === dayIndex
-            ? "Heute"
-            : "Wochenlauf",
+          "Miles Apart Vorschau",
+
         run_type:
-          i >= 5
-            ? "long"
-            : "easy"
+          "normal"
+
       });
+
     }
 
     return [
-      ...weeklyRuns,
+      ...runs,
       ...DEMO_RUNS
     ];
+
   }
-
-
-  function getAllRuns() {
-    return currentUser
-      ? currentRuns
-      : getDemoWeeklyRuns();
-  }
-
-
-  function getCurrentWeekRuns(runs) {
-
-    const monday =
-      getMonday(new Date());
-
-    const mondayIso =
-      dateToIso(monday);
-
-    return runs.filter(
-      run => run.run_date >= mondayIso
-    );
-  }
-
-
-  function getMonthRuns(runs) {
-
-    const now =
-      new Date();
-
-    const year =
-      now.getFullYear();
-
-    const month =
-      now.getMonth();
-
-    return runs.filter(run => {
-
-      const date =
-        new Date(
-          run.run_date + "T12:00:00"
-        );
-
-      return (
-        date.getFullYear() === year &&
-        date.getMonth() === month
-      );
-    });
-  }
-
-
-  function getYearRuns(runs) {
-
-    const year =
-      new Date().getFullYear();
-
-    return runs.filter(run => {
-
-      const date =
-        new Date(
-          run.run_date + "T12:00:00"
-        );
-
-      return date.getFullYear() === year;
-    });
-  }
-
-
-  function sumDistance(runs) {
-
-    return runs.reduce(
-      (sum, run) =>
-        sum + Number(run.distance_km || 0),
-      0
-    );
-  }
-
-
-  function setProgress(elementId, value, max) {
-
-    const element =
-      document.getElementById(elementId);
-
-    if (!element) {
-      return;
-    }
-
-    const percentage =
-      max > 0
-        ? Math.min(
-            100,
-            Math.max(
-              3,
-              value / max * 100
-            )
-          )
-        : 3;
-
-    element.style.width =
-      `${percentage}%`;
-  }
-
 
   /* =========================================================
-     AUTH UI
-     ========================================================= */
+     DATUM
+  ========================================================= */
 
-  function openAuth(mode = "login") {
-
-    authOverlay.classList.add("open");
-    authOverlay.setAttribute(
-      "aria-hidden",
-      "false"
-    );
-
-    showAuthMode(mode);
-  }
-
-
-  function closeAuth() {
-
-    authOverlay.classList.remove("open");
-
-    authOverlay.setAttribute(
-      "aria-hidden",
-      "true"
-    );
-  }
-
-
-  function showAuthMode(mode) {
-
-    loginTab.classList.remove("active");
-    registerTab.classList.remove("active");
-
-    loginForm.classList.remove("active");
-    registerForm.classList.remove("active");
-    forgotForm.classList.remove("active");
-    recoveryForm.classList.remove("active");
-
-    if (mode === "register") {
-
-      registerTab.classList.add("active");
-      registerForm.classList.add("active");
-
-      authTitle.textContent =
-        "Account erstellen";
-
-      authDescription.textContent =
-        "Erstelle deinen Miles Apart Account und speichere deine Läufe.";
-
-      return;
-    }
-
-    if (mode === "forgot") {
-
-      forgotForm.classList.add("active");
-
-      authTitle.textContent =
-        "Passwort zurücksetzen";
-
-      authDescription.textContent =
-        "Wir senden dir einen Link zum Zurücksetzen deines Passworts.";
-
-      return;
-    }
-
-    if (mode === "recovery") {
-
-      recoveryForm.classList.add("active");
-
-      authTitle.textContent =
-        "Neues Passwort";
-
-      authDescription.textContent =
-        "Lege ein neues Passwort für deinen Account fest.";
-
-      return;
-    }
-
-    loginTab.classList.add("active");
-    loginForm.classList.add("active");
-
-    authTitle.textContent =
-      "Willkommen zurück";
-
-    authDescription.textContent =
-      "Logge dich ein, um deine Läufe und persönlichen Bestzeiten zu speichern.";
-  }
-
-
-  function setMessage(
-    element,
-    text,
-    type = ""
-  ) {
-
-    element.textContent =
-      text || "";
-
-    element.className =
-      "auth-message";
-
-    if (type) {
-      element.classList.add(type);
-    }
-  }
-
-
-  /* =========================================================
-     AUTH STATE
-     ========================================================= */
-
-  async function updateAuthUI() {
-
-    if (currentUser) {
-
-      guestArea.style.display =
-        "none";
-
-      loggedInArea.style.display =
-        "flex";
-
-      const email =
-        currentUser.email || "";
-
-      const metadata =
-        currentUser.user_metadata || {};
-
-      const name =
-        metadata.full_name ||
-        metadata.name ||
-        email.split("@")[0] ||
-        "Runner";
-
-      userGreeting.textContent =
-        `Hi ${name}`;
-
-      accountMenuName.textContent =
-        name;
-
-      accountMenuEmail.textContent =
-        email;
-
-      avatarButton.textContent =
-        name
-          .split(/\s+/)
-          .map(part => part[0])
-          .slice(0, 2)
-          .join("")
-          .toUpperCase();
-
-      runLoginLabel.style.display =
-        "none";
-
-      runFormMessage.textContent =
-        "Dein Lauf wird in deinem persönlichen Profil gespeichert.";
-
-      saveRunButton.disabled =
-        false;
-
-      await loadUserRuns();
-
-    } else {
-
-      guestArea.style.display =
-        "flex";
-
-      loggedInArea.style.display =
-        "none";
-
-      runLoginLabel.style.display =
-        "inline-block";
-
-      runFormMessage.textContent =
-        "Bitte einloggen, um einen Lauf zu speichern.";
-
-      saveRunButton.disabled =
-        false;
-
-      currentRuns = [];
-
-      renderDashboard();
-    }
-  }
-
-
-  /* =========================================================
-     USER RUNS
-     ========================================================= */
-
-  async function loadUserRuns() {
-
-    if (!currentUser) {
-      return;
-    }
-
-    const {
-      data,
-      error
-    } = await supabaseClient
-      .from("runs")
-      .select("*")
-      .eq(
-        "user_id",
-        currentUser.id
-      )
-      .order(
-        "run_date",
-        {
-          ascending: false
-        }
-      );
-
-    if (error) {
-
-      console.error(
-        "Runs konnten nicht geladen werden:",
-        error
-      );
-
-      currentRuns = [];
-      renderDashboard();
-
-      return;
-    }
-
-    currentRuns =
-      Array.isArray(data)
-        ? data
-        : [];
-
-    renderDashboard();
-  }
-
-
-  /* =========================================================
-     DASHBOARD
-     ========================================================= */
-
-  function renderDashboard() {
-
-    const runs =
-      getAllRuns();
-
-    renderKilometers(runs);
-    renderDailyChart(runs);
-    renderBestTimes(runs);
-    renderRunsList(runs);
-  }
-
-
-  function renderKilometers(runs) {
-
-    const weekRuns =
-      getCurrentWeekRuns(runs);
-
-    const monthRuns =
-      getMonthRuns(runs);
-
-    const yearRuns =
-      getYearRuns(runs);
-
-    const week =
-      sumDistance(weekRuns);
-
-    const month =
-      sumDistance(monthRuns);
-
-    const year =
-      sumDistance(yearRuns);
-
-    document.getElementById(
-      "weekTotal"
-    ).textContent =
-      formatKm(week);
-
-    document.getElementById(
-      "monthTotal"
-    ).textContent =
-      formatKm(month);
-
-    document.getElementById(
-      "yearTotal"
-    ).textContent =
-      formatKm(year);
-
-    document.getElementById(
-      "weekStat"
-    ).textContent =
-      `${weekRuns.length} ${
-        weekRuns.length === 1
-          ? "Lauf"
-          : "Läufe"
-      } diese Woche`;
-
-    document.getElementById(
-      "monthStat"
-    ).textContent =
-      `${monthRuns.length} ${
-        monthRuns.length === 1
-          ? "Lauf"
-          : "Läufe"
-      } diesen Monat`;
-
-    document.getElementById(
-      "yearStat"
-    ).textContent =
-      `${yearRuns.length} ${
-        yearRuns.length === 1
-          ? "Lauf"
-          : "Läufe"
-      } dieses Jahr`;
-
-    document.getElementById(
-      "weekTotalBar"
-    ).textContent =
-      `${formatKm(week)} km`;
-
-    document.getElementById(
-      "monthTotalBar"
-    ).textContent =
-      `${formatKm(month)} km`;
-
-    document.getElementById(
-      "yearTotalBar"
-    ).textContent =
-      `${formatKm(year)} km`;
-
-    const max =
-      Math.max(
-        week,
-        month / 2,
-        year / 8,
-        1
-      );
-
-    setProgress(
-      "weekBar",
-      week,
-      max
-    );
-
-    setProgress(
-      "monthBar",
-      month,
-      max
-    );
-
-    setProgress(
-      "yearBar",
-      year,
-      max
-    );
-
-    const now =
-      new Date();
-
-    document.getElementById(
-      "dashboardDate"
-    ).textContent =
-      now.toLocaleDateString(
-        "de-DE",
-        {
-          weekday: "long",
-          day: "2-digit",
-          month: "2-digit",
-          year: "numeric"
-        }
-      );
-
-    document.getElementById(
-      "sidebarWeekKm"
-    )?.replaceChildren(
-      document.createTextNode(
-        formatKm(week)
-      )
-    );
-  }
-
-
-  /* =========================================================
-     DAILY CHART
-     ========================================================= */
-
-  function renderDailyChart(runs) {
-
-    const chart =
-      document.getElementById(
-        "dailyChart"
-      );
-
-    chart.innerHTML = "";
+  function updateDashboardDate() {
 
     const today =
       new Date();
 
-    today.setHours(
-      12,
-      0,
-      0,
-      0
+    dashboardDate.textContent =
+      formatLongDate(today);
+
+    currentDayBadge.textContent =
+      (
+        "HEUTE / " +
+        today.toLocaleDateString(
+          "de-DE",
+          {
+            day: "2-digit",
+            month: "2-digit"
+          }
+        )
+      ).toUpperCase();
+
+  }
+
+  /* =========================================================
+     KILOMETER
+  ========================================================= */
+
+  function calculateTotals(
+    runs
+  ) {
+
+    const now =
+      new Date();
+
+    const weekStart =
+      startOfWeek(now);
+
+    const monthStart =
+      new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        1
+      );
+
+    const yearStart =
+      new Date(
+        now.getFullYear(),
+        0,
+        1
+      );
+
+    let week =
+      0;
+
+    let month =
+      0;
+
+    let year =
+      0;
+
+    const daily = [
+      0, 0, 0, 0, 0, 0, 0
+    ];
+
+    runs.forEach(
+      run => {
+
+        const date =
+          dateFromRun(run);
+
+        const distance =
+          Number(
+            run.distance_km || 0
+          );
+
+        if (date >= yearStart) {
+          year += distance;
+        }
+
+        if (date >= monthStart) {
+          month += distance;
+        }
+
+        if (date >= weekStart) {
+
+          week += distance;
+
+          const jsDay =
+            date.getDay();
+
+          const mondayIndex =
+            jsDay === 0
+              ? 6
+              : jsDay - 1;
+
+          daily[mondayIndex] +=
+            distance;
+
+        }
+
+      }
     );
 
-    const monday =
-      getMonday(today);
+    return {
+      week,
+      month,
+      year,
+      daily
+    };
+
+  }
+
+  function renderDailyChart(
+    daily
+  ) {
+
+    dailyChart.innerHTML =
+      "";
 
     const labels = [
       "Mo",
@@ -3294,131 +4155,234 @@
       "So"
     ];
 
-    const values = [];
-
-    for (
-      let i = 0;
-      i < 7;
-      i++
-    ) {
-
-      const date =
-        new Date(monday);
-
-      date.setDate(
-        monday.getDate() + i
-      );
-
-      const iso =
-        dateToIso(date);
-
-      const value =
-        runs
-          .filter(
-            run =>
-              run.run_date === iso
-          )
-          .reduce(
-            (sum, run) =>
-              sum +
-              Number(
-                run.distance_km || 0
-              ),
-            0
-          );
-
-      values.push(value);
-    }
-
     const max =
       Math.max(
-        ...values,
+        ...daily,
         1
       );
 
-    const currentDayIndex =
-      today.getDay() === 0
-        ? 6
-        : today.getDay() - 1;
+    const today =
+      new Date();
 
-    values.forEach(
+    const todayJsDay =
+      today.getDay();
+
+    const todayIndex =
+      todayJsDay === 0
+        ? 6
+        : todayJsDay - 1;
+
+    daily.forEach(
       (value, index) => {
 
-        const day =
-          document.createElement("div");
+        const column =
+          document.createElement(
+            "div"
+          );
 
-        day.className =
-          "chart-day";
+        column.className =
+          "daily-column";
+
+        if (
+          index ===
+          todayIndex
+        ) {
+
+          column.classList.add(
+            "today"
+          );
+
+        }
+
+        if (
+          index >
+          todayIndex
+        ) {
+
+          column.classList.add(
+            "future"
+          );
+
+        }
 
         const valueElement =
-          document.createElement("div");
+          document.createElement(
+            "div"
+          );
 
         valueElement.className =
-          "chart-value";
+          "daily-value";
 
         valueElement.textContent =
           value > 0
-            ? `${formatKm(value)} km`
+            ? formatNumber(value)
             : "—";
 
-        const barWrap =
-          document.createElement("div");
+        const barArea =
+          document.createElement(
+            "div"
+          );
 
-        barWrap.className =
-          "chart-bar-wrap";
+        barArea.className =
+          "daily-bar-area";
 
         const bar =
-          document.createElement("div");
+          document.createElement(
+            "div"
+          );
 
         bar.className =
-          "chart-bar";
+          "daily-bar";
 
-        if (
-          index === currentDayIndex
-        ) {
-          bar.classList.add("today");
-        }
+        const height =
+          value > 0
+            ? Math.max(
+                5,
+                (value / max) * 100
+              )
+            : 2;
 
         bar.style.height =
-          value > 0
-            ? `${Math.max(
-                4,
-                value / max * 100
-              )}%`
-            : "3px";
+          height + "%";
+
+        barArea.appendChild(
+          bar
+        );
 
         const label =
-          document.createElement("div");
+          document.createElement(
+            "div"
+          );
 
         label.className =
-          "chart-label";
+          "daily-label";
 
         label.textContent =
           labels[index];
 
-        barWrap.appendChild(bar);
-
-        day.appendChild(
+        column.appendChild(
           valueElement
         );
 
-        day.appendChild(
-          barWrap
+        column.appendChild(
+          barArea
         );
 
-        day.appendChild(
+        column.appendChild(
           label
         );
 
-        chart.appendChild(day);
+        dailyChart.appendChild(
+          column
+        );
+
       }
     );
+
   }
 
+  function renderTotals(
+    totals
+  ) {
+
+    weekTotal.textContent =
+      formatNumber(
+        totals.week
+      ) +
+      " km";
+
+    monthTotal.textContent =
+      formatNumber(
+        totals.month
+      ) +
+      " km";
+
+    yearTotal.textContent =
+      formatNumber(
+        totals.year
+      ) +
+      " km";
+
+    weekStat.innerHTML =
+      formatNumber(
+        totals.week
+      ) +
+      ' <span>km</span>';
+
+    monthStat.innerHTML =
+      formatNumber(
+        totals.month
+      ) +
+      ' <span>km</span>';
+
+    yearStat.innerHTML =
+      formatNumber(
+        totals.year
+      ) +
+      ' <span>km</span>';
+
+    const largest =
+      Math.max(
+        totals.week,
+        totals.month,
+        totals.year,
+        1
+      );
+
+    weekBar.style.width =
+      (
+        totals.week /
+        largest *
+        100
+      ) + "%";
+
+    monthBar.style.width =
+      (
+        totals.month /
+        largest *
+        100
+      ) + "%";
+
+    yearBar.style.width =
+      (
+        totals.year /
+        largest *
+        100
+      ) + "%";
+
+    const progress =
+      Math.min(
+        100,
+        (
+          totals.week /
+          30
+        ) * 100
+      );
+
+    sidebarWeekKm.textContent =
+      formatNumber(
+        totals.week
+      ) +
+      " / 30 KM";
+
+    sidebarWeekProgress.style.width =
+      progress + "%";
+
+    sidebarWeekText.textContent =
+      totals.week >= 30
+        ? "Wochenziel erreicht."
+        : (
+          formatNumber(
+            30 - totals.week
+          ) +
+          " km bis zum Wochenziel."
+        );
+
+  }
 
   /* =========================================================
-     BEST TIMES
-     ========================================================= */
+     BESTZEITEN
+  ========================================================= */
 
   function findBestRun(
     runs,
@@ -3426,232 +4390,216 @@
     maxDistance
   ) {
 
-    const candidates =
-      runs.filter(run => {
+    const eligible =
+      runs.filter(
+        run => {
 
-        const distance =
-          Number(
-            run.distance_km || 0
+          const distance =
+            Number(
+              run.distance_km
+            );
+
+          const duration =
+            Number(
+              run.duration_seconds
+            );
+
+          return (
+            distance >= minDistance &&
+            distance <= maxDistance &&
+            duration > 0
           );
 
-        return (
-          distance >= minDistance &&
-          distance <= maxDistance &&
-          Number(
-            run.duration_seconds || 0
-          ) > 0
-        );
-      });
+        }
+      );
 
-    if (!candidates.length) {
+    if (!eligible.length) {
       return null;
     }
 
-    return candidates.sort(
+    eligible.sort(
       (
         a,
         b
       ) =>
-        Number(a.duration_seconds) -
-        Number(b.duration_seconds)
-    )[0];
+        Number(
+          a.duration_seconds
+        ) -
+        Number(
+          b.duration_seconds
+        )
+    );
+
+    return eligible[0];
+
   }
 
-
-  function renderBestCard(
-    valueId,
-    dateId,
-    noteId,
-    run,
-    emptyText = "Noch kein Lauf"
+  function renderBestTime(
+    key,
+    run
   ) {
 
-    const valueElement =
-      document.getElementById(
-        valueId
-      );
+    const elements =
+      bestElements[key];
 
-    const dateElement =
-      document.getElementById(
-        dateId
-      );
-
-    const noteElement =
-      document.getElementById(
-        noteId
-      );
-
-    if (!run) {
-
-      valueElement.textContent =
-        emptyText;
-
-      valueElement.classList.add(
-        "empty"
-      );
-
-      dateElement.textContent =
-        "Noch kein Lauf";
-
-      noteElement.textContent =
-        "";
-
+    if (!elements) {
       return;
     }
 
-    valueElement.classList.remove(
-      "empty"
-    );
+    if (!run) {
 
-    valueElement.textContent =
+      elements.value.textContent =
+        "Noch kein Lauf";
+
+      elements.value.classList.add(
+        "empty"
+      );
+
+      elements.date.textContent =
+        "";
+
+      elements.note.textContent =
+        "";
+
+      return;
+
+    }
+
+    elements.value.textContent =
       formatDuration(
         run.duration_seconds
       );
 
-    dateElement.textContent =
+    elements.value.classList.remove(
+      "empty"
+    );
+
+    elements.date.textContent =
       formatDate(
         run.run_date
       );
 
-    noteElement.textContent =
-      run.note || "";
+    elements.note.textContent =
+      run.note ||
+      "";
+
   }
 
+  function renderBestTimes(
+    runs
+  ) {
 
-  function renderBestTimes(runs) {
-
-    const best5k =
+    renderBestTime(
+      "5k",
       findBestRun(
         runs,
-        4.9,
-        5.1
-      );
+        4.90,
+        5.15
+      )
+    );
 
-    const best10k =
+    renderBestTime(
+      "10k",
       findBestRun(
         runs,
-        9.9,
-        10.1
-      );
+        9.85,
+        10.25
+      )
+    );
 
-    const bestHalf =
+    renderBestTime(
+      "half",
       findBestRun(
         runs,
-        20.9,
-        21.3
-      );
+        20.90,
+        21.35
+      )
+    );
 
-    const bestMarathon =
+    renderBestTime(
+      "marathon",
       findBestRun(
         runs,
-        41.8,
-        42.5
-      );
+        41.90,
+        42.50
+      )
+    );
 
-    const best50k =
+    renderBestTime(
+      "50k",
       findBestRun(
         runs,
-        49.0,
-        51.0
-      );
+        49.50,
+        50.75
+      )
+    );
 
-    const best100k =
+    /*
+      100 km:
+      Bewusst leer in der Demo.
+      Sobald ein echter Lauf zwischen 99,0 und 101,0 km
+      eingetragen wird, erscheint automatisch die Bestzeit.
+    */
+
+    renderBestTime(
+      "100k",
       findBestRun(
         runs,
         99.0,
         101.0
-      );
-
-    const best100plus =
-      findBestRun(
-        runs,
-        100.001,
-        Infinity
-      );
-
-    renderBestCard(
-      "best5k",
-      "best5kDate",
-      "best5kNote",
-      best5k
-    );
-
-    renderBestCard(
-      "best10k",
-      "best10kDate",
-      "best10kNote",
-      best10k
-    );
-
-    renderBestCard(
-      "bestHalf",
-      "bestHalfDate",
-      "bestHalfNote",
-      bestHalf
-    );
-
-    renderBestCard(
-      "bestMarathon",
-      "bestMarathonDate",
-      "bestMarathonNote",
-      bestMarathon
-    );
-
-    renderBestCard(
-      "best50k",
-      "best50kDate",
-      "best50kNote",
-      best50k
-    );
-
-    renderBestCard(
-      "best100k",
-      "best100kDate",
-      "best100kNote",
-      best100k
-    );
-
-    renderBestCard(
-      "best100plus",
-      "best100plusDate",
-      "best100plusNote",
-      best100plus
+      )
     );
 
     /*
-      Der längste Lauf wird unabhängig von den
-      Bestzeit-Kategorien bestimmt.
+      100+ km:
+      Hier werden nur Läufe oberhalb von 101 km berücksichtigt.
+      Damit kann beispielsweise ein 100-Meiler oder ein
+      langer Backyard Ultra automatisch erscheinen.
+    */
 
-      Im Demo-Datensatz ist deshalb 50 km der längste Lauf.
-      Wenn ein Nutzer später z. B. 100 km, 161 km oder
-      220 km einträgt, wird hier automatisch dieser Lauf
-      als längster Lauf angezeigt.
+    renderBestTime(
+      "100plus",
+      findBestRun(
+        runs,
+        101.01,
+        Infinity
+      )
+    );
+
+    /*
+      Der längste Lauf wird bewusst separat
+      als maximale Distanz aus allen Läufen bestimmt.
+      In der Demo ist das weiterhin der 50-km-Lauf.
     */
 
     const longest =
-      runs.length
-        ? [...runs]
-            .filter(
-              run =>
-                Number(
-                  run.distance_km || 0
-                ) > 0
-            )
-            .sort(
-              (
-                a,
-                b
-              ) =>
-                Number(
-                  b.distance_km
-                ) -
-                Number(
-                  a.distance_km
-                )
-            )[0]
-        : null;
+      runs.reduce(
+        (
+          longestRun,
+          run
+        ) => {
 
-    const longestValue =
+          if (
+            !longestRun ||
+            Number(
+              run.distance_km
+            ) >
+            Number(
+              longestRun.distance_km
+            )
+          ) {
+
+            return run;
+
+          }
+
+          return longestRun;
+
+        },
+        null
+      );
+
+    const longestElement =
       document.getElementById(
         "longestRun"
       );
@@ -3668,21 +4616,30 @@
 
     if (!longest) {
 
-      longestValue.textContent =
-        "—";
+      longestElement.textContent =
+        "Noch kein Lauf";
+
+      longestElement.classList.add(
+        "empty"
+      );
 
       longestDate.textContent =
-        "Noch kein Lauf";
+        "";
 
       longestNote.textContent =
         "";
 
     } else {
 
-      longestValue.textContent =
-        `${formatKm(
+      longestElement.textContent =
+        formatNumber(
           longest.distance_km
-        )} km`;
+        ) +
+        " km";
+
+      longestElement.classList.remove(
+        "empty"
+      );
 
       longestDate.textContent =
         formatDate(
@@ -3690,283 +4647,460 @@
         );
 
       longestNote.textContent =
-        longest.note || "";
-    }
-  }
+        longest.note ||
+        longest.run_type ||
+        "";
 
+    }
+
+  }
 
   /* =========================================================
      RUN HISTORY
-     ========================================================= */
+  ========================================================= */
 
-  function renderRunsList(runs) {
+  function renderRunsList(
+    runs
+  ) {
+
+    runsList.innerHTML =
+      "";
 
     if (!runs.length) {
 
-      runsList.innerHTML = `
-        <div class="empty-runs">
-          Noch keine Läufe gespeichert.
-        </div>
-      `;
+      const empty =
+        document.createElement(
+          "div"
+        );
+
+      empty.className =
+        "empty-runs";
+
+      empty.textContent =
+        "Noch keine Läufe gespeichert. Dein erster Lauf kann hier beginnen.";
+
+      runsList.appendChild(
+        empty
+      );
 
       return;
+
     }
 
     const sorted =
-      [...runs].sort(
-        (
-          a,
-          b
-        ) =>
-          String(
-            b.run_date
-          ).localeCompare(
-            String(
+      [...runs]
+        .sort(
+          (
+            a,
+            b
+          ) =>
+            new Date(
+              b.run_date
+            ) -
+            new Date(
               a.run_date
             )
-          )
-      );
-
-    runsList.innerHTML =
-      sorted
-        .slice(0, 20)
-        .map(
-          run => {
-
-            const title =
-              run.note ||
-              getRunTypeLabel(
-                run.run_type
-              );
-
-            return `
-              <div class="run-list-row">
-
-                <div class="run-main">
-                  <div class="run-main-title">
-                    ${escapeHtml(title)}
-                  </div>
-
-                  <div class="run-main-note">
-                    ${escapeHtml(
-                      getRunTypeLabel(
-                        run.run_type
-                      )
-                    )}
-                  </div>
-                </div>
-
-                <div class="run-date">
-                  ${formatDate(
-                    run.run_date
-                  )}
-                </div>
-
-                <div class="run-distance">
-                  ${formatKm(
-                    run.distance_km
-                  )} km
-                </div>
-
-                <div class="run-duration">
-                  ${formatDuration(
-                    run.duration_seconds
-                  )}
-                </div>
-
-              </div>
-            `;
-          }
         )
-        .join("");
-  }
+        .slice(
+          0,
+          10
+        );
 
+    sorted.forEach(
+      run => {
 
-  function getRunTypeLabel(type) {
+        const row =
+          document.createElement(
+            "div"
+          );
 
-    const labels = {
-      easy: "Easy Run",
-      tempo: "Tempo Run",
-      interval: "Intervalle",
-      long: "Long Run",
-      race: "Wettkampf",
-      trail: "Trail",
-      ultra: "Ultra",
-      other: "Sonstiger Lauf"
-    };
+        row.className =
+          "run-list-row";
 
-    return (
-      labels[type] ||
-      "Lauf"
+        const date =
+          document.createElement(
+            "div"
+          );
+
+        date.className =
+          "run-list-date";
+
+        date.textContent =
+          formatDate(
+            run.run_date
+          );
+
+        const distance =
+          document.createElement(
+            "div"
+          );
+
+        distance.className =
+          "run-list-distance";
+
+        distance.textContent =
+          formatNumber(
+            run.distance_km
+          ) +
+          " km";
+
+        const note =
+          document.createElement(
+            "div"
+          );
+
+        note.className =
+          "run-list-note";
+
+        note.textContent =
+          run.note ||
+          "";
+
+        distance.appendChild(
+          note
+        );
+
+        const time =
+          document.createElement(
+            "div"
+          );
+
+        time.className =
+          "run-list-time";
+
+        time.textContent =
+          formatDuration(
+            run.duration_seconds
+          );
+
+        const kind =
+          document.createElement(
+            "div"
+          );
+
+        kind.className =
+          "run-list-kind";
+
+        kind.textContent =
+          run.run_type === "race"
+            ? "Wettkampf"
+            : run.run_type === "trail"
+              ? "Trail"
+              : run.run_type === "ultra"
+                ? "Ultra"
+                : run.run_type === "backyard"
+                  ? "Backyard"
+                  : "Run";
+
+        row.appendChild(
+          date
+        );
+
+        row.appendChild(
+          distance
+        );
+
+        row.appendChild(
+          time
+        );
+
+        row.appendChild(
+          kind
+        );
+
+        runsList.appendChild(
+          row
+        );
+
+      }
     );
+
   }
 
+  function renderRunDashboard(
+    runs
+  ) {
 
-  function escapeHtml(value) {
-
-    return String(
-      value ?? ""
-    )
-      .replace(
-        /&/g,
-        "&amp;"
-      )
-      .replace(
-        /</g,
-        "&lt;"
-      )
-      .replace(
-        />/g,
-        "&gt;"
-      )
-      .replace(
-        /"/g,
-        "&quot;"
-      )
-      .replace(
-        /'/g,
-        "&#039;"
+    const totals =
+      calculateTotals(
+        runs
       );
-  }
 
+    renderDailyChart(
+      totals.daily
+    );
+
+    renderTotals(
+      totals
+    );
+
+    renderBestTimes(
+      runs
+    );
+
+    renderRunsList(
+      runs
+    );
+
+  }
 
   /* =========================================================
-     SAVE RUN
-     ========================================================= */
+     RUNS LADEN
+  ========================================================= */
+
+  async function loadRuns() {
+
+    if (!currentUser) {
+
+      currentRuns =
+        getDemoWeeklyRuns();
+
+      renderRunDashboard(
+        currentRuns
+      );
+
+      return;
+
+    }
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from("runs")
+        .select(
+          "id, run_date, distance_km, duration_seconds, note, run_type, created_at"
+        )
+        .eq(
+          "user_id",
+          currentUser.id
+        )
+        .order(
+          "run_date",
+          {
+            ascending: false
+          }
+        );
+
+    if (error) {
+
+      console.error(
+        "Läufe konnten nicht geladen werden:",
+        error
+      );
+
+      currentRuns =
+        [];
+
+      renderRunDashboard(
+        []
+      );
+
+      setMessage(
+        runFormMessage,
+        "Die Läufe konnten gerade nicht geladen werden."
+      );
+
+      return;
+
+    }
+
+    currentRuns =
+      data || [];
+
+    renderRunDashboard(
+      currentRuns
+    );
+
+  }
+
+  /* =========================================================
+     RUN SPEICHERN
+  ========================================================= */
 
   runForm.addEventListener(
     "submit",
-    async event => {
+    async function(event) {
 
       event.preventDefault();
 
+      clearMessages();
+
       if (!currentUser) {
 
-        openAuth("login");
+        openAuth();
 
         return;
+
       }
+
+      const date =
+        runDate.value;
 
       const distance =
         Number(
           runDistance.value
         );
 
-      const hours =
-        Number(
-          runHours.value || 0
+      const duration =
+        parseDuration();
+
+      const note =
+        runNote.value.trim();
+
+      if (!date) {
+
+        setMessage(
+          runFormMessage,
+          "Bitte gib das Laufdatum ein."
         );
 
-      const minutes =
-        Number(
-          runMinutes.value || 0
-        );
+        return;
 
-      const seconds =
-        Number(
-          runSeconds.value || 0
-        );
+      }
 
       if (
-        !runDate.value ||
         !distance ||
         distance <= 0
       ) {
 
-        runFormMessage.textContent =
-          "Bitte Datum und Distanz eingeben.";
+        setMessage(
+          runFormMessage,
+          "Bitte gib eine gültige Distanz ein."
+        );
 
         return;
-      }
 
-      const totalSeconds =
-        hours * 3600 +
-        minutes * 60 +
-        seconds;
+      }
 
       if (
-        totalSeconds <= 0
+        Number.isNaN(duration)
       ) {
 
-        runFormMessage.textContent =
-          "Bitte auch eine Laufzeit eingeben.";
+        setMessage(
+          runFormMessage,
+          "Minuten und Sekunden dürfen maximal 59 sein."
+        );
 
         return;
+
       }
 
-      saveRunButton.disabled =
-        true;
-
-      runFormMessage.textContent =
-        "Lauf wird gespeichert …";
-
-      const payload = {
-        user_id:
-          currentUser.id,
-
-        run_date:
-          runDate.value,
-
-        distance_km:
-          distance,
-
-        duration_seconds:
-          totalSeconds,
-
-        run_type:
-          runType.value,
-
-        note:
-          runNote.value.trim()
-      };
+      setButtonLoading(
+        saveRunButton,
+        true,
+        "Lauf speichern →"
+      );
 
       const {
+        data,
         error
-      } = await supabaseClient
+      } =
+      await supabaseClient
         .from("runs")
-        .insert(payload);
+        .insert({
+
+          user_id:
+            currentUser.id,
+
+          run_date:
+            date,
+
+          distance_km:
+            distance,
+
+          duration_seconds:
+            duration,
+
+          note:
+            note || null,
+
+          run_type:
+            runType.value
+
+        })
+        .select()
+        .single();
+
+      setButtonLoading(
+        saveRunButton,
+        false,
+        "Lauf speichern →"
+      );
 
       if (error) {
 
         console.error(
-          "Fehler beim Speichern:",
+          "Lauf speichern:",
           error
         );
 
-        runFormMessage.textContent =
-          "Der Lauf konnte nicht gespeichert werden.";
-
-        saveRunButton.disabled =
-          false;
+        setMessage(
+          runFormMessage,
+          error.message ||
+          "Der Lauf konnte nicht gespeichert werden."
+        );
 
         return;
+
       }
+
+      currentRuns.unshift(
+        data
+      );
 
       runForm.reset();
 
       runDate.value =
-        dateToIso(
-          new Date()
-        );
+        getTodayDateString();
 
-      runFormMessage.textContent =
-        "Lauf erfolgreich gespeichert.";
+      setMessage(
+        runFormMessage,
+        "Lauf erfolgreich gespeichert.",
+        true
+      );
 
-      await loadUserRuns();
+      renderRunDashboard(
+        currentRuns
+      );
 
-      saveRunButton.disabled =
-        false;
     }
   );
 
-
   /* =========================================================
-     AUTH EVENTS
-     ========================================================= */
+     AUTH
+  ========================================================= */
+
+  function openAuth() {
+
+    authOverlay.classList.add(
+      "open"
+    );
+
+    document.body.style.overflow =
+      "hidden";
+
+    showLogin();
+
+  }
+
+  function closeAuth() {
+
+    authOverlay.classList.remove(
+      "open"
+    );
+
+    document.body.style.overflow =
+      "";
+
+    clearMessages();
+
+  }
 
   openLoginButton.addEventListener(
     "click",
-    () => openAuth("login")
+    openAuth
   );
 
   closeAuthButton.addEventListener(
@@ -3976,216 +5110,800 @@
 
   authOverlay.addEventListener(
     "click",
-    event => {
+    function(event) {
 
       if (
         event.target ===
         authOverlay
       ) {
+
         closeAuth();
+
       }
+
     }
   );
 
+  document.addEventListener(
+    "keydown",
+    function(event) {
+
+      if (
+        event.key === "Escape" &&
+        authOverlay.classList.contains(
+          "open"
+        )
+      ) {
+
+        closeAuth();
+
+      }
+
+    }
+  );
+
+  function hideAllForms() {
+
+    loginForm.classList.remove(
+      "active"
+    );
+
+    registerForm.classList.remove(
+      "active"
+    );
+
+    forgotForm.classList.remove(
+      "active"
+    );
+
+    recoveryForm.classList.remove(
+      "active"
+    );
+
+  }
+
+  function showLogin() {
+
+    hideAllForms();
+    clearMessages();
+
+    loginForm.classList.add(
+      "active"
+    );
+
+    authTabs.style.display =
+      "grid";
+
+    loginTab.classList.add(
+      "active"
+    );
+
+    registerTab.classList.remove(
+      "active"
+    );
+
+    authTitle.textContent =
+      "Willkommen zurück.";
+
+    authDescription.textContent =
+      "Melde dich an und werde Teil der Community.";
+
+  }
+
+  function showRegister() {
+
+    hideAllForms();
+    clearMessages();
+
+    registerForm.classList.add(
+      "active"
+    );
+
+    authTabs.style.display =
+      "grid";
+
+    registerTab.classList.add(
+      "active"
+    );
+
+    loginTab.classList.remove(
+      "active"
+    );
+
+    authTitle.textContent =
+      "Werde Teil der Community.";
+
+    authDescription.textContent =
+      "Zwei kleine Schritte. Dann bist du dabei.";
+
+    resetRegistrationGate();
+
+  }
+
+  function showForgotPassword() {
+
+    hideAllForms();
+    clearMessages();
+
+    forgotForm.classList.add(
+      "active"
+    );
+
+    authTabs.style.display =
+      "none";
+
+    authTitle.textContent =
+      "Passwort zurücksetzen.";
+
+    authDescription.textContent =
+      "Wir schicken dir einen Link, mit dem du ein neues Passwort festlegen kannst.";
+
+  }
+
+  function showRecovery() {
+
+    hideAllForms();
+    clearMessages();
+
+    recoveryForm.classList.add(
+      "active"
+    );
+
+    authTabs.style.display =
+      "none";
+
+    authTitle.textContent =
+      "Neues Passwort festlegen.";
+
+    authDescription.textContent =
+      "Wähle ein neues Passwort für dein Miles-Apart-Konto.";
+
+  }
+
   loginTab.addEventListener(
     "click",
-    () => showAuthMode("login")
+    showLogin
   );
 
   registerTab.addEventListener(
     "click",
-    () => showAuthMode("register")
+    showRegister
   );
 
   forgotPasswordButton.addEventListener(
     "click",
-    () => showAuthMode("forgot")
+    showForgotPassword
   );
 
   backToLoginButton.addEventListener(
     "click",
-    () => showAuthMode("login")
+    showLogin
   );
 
-
   /* =========================================================
-     LOGIN
-     ========================================================= */
+     REGISTRATION GATE
+  ========================================================= */
 
-  loginForm.addEventListener(
-    "submit",
-    async event => {
+  function updateRegistrationGate() {
 
-      event.preventDefault();
+    const followed =
+      followCheckbox.checked;
 
-      setMessage(
-        loginMessage,
-        ""
+    const invited =
+      inviteCheckbox.checked;
+
+    followRequirement.classList.toggle(
+      "completed",
+      followed
+    );
+
+    inviteRequirement.classList.toggle(
+      "completed",
+      invited
+    );
+
+    followStatus.classList.toggle(
+      "done",
+      followed
+    );
+
+    inviteStatus.classList.toggle(
+      "done",
+      invited
+    );
+
+    followStatus
+      .querySelector(
+        ".registration-status-dot"
+      )
+      .textContent =
+      followed
+        ? "✓"
+        : "1";
+
+    inviteStatus
+      .querySelector(
+        ".registration-status-dot"
+      )
+      .textContent =
+      invited
+        ? "✓"
+        : "2";
+
+    const ready =
+      followed &&
+      invited;
+
+    registerSubmit.disabled =
+      !ready;
+
+    registerSubmit.textContent =
+      ready
+        ? "Konto erstellen →"
+        : "Erst Voraussetzungen erfüllen";
+
+  }
+
+  function resetRegistrationGate() {
+
+    followCheckbox.checked =
+      false;
+
+    inviteCheckbox.checked =
+      false;
+
+    inviteCheckbox.disabled =
+      true;
+
+    inviteActionStarted =
+      false;
+
+    inviteCheckLabel.classList.remove(
+      "ready"
+    );
+
+    shareStatus.textContent =
+      "";
+
+    updateRegistrationGate();
+
+  }
+
+  function getInviteUrl() {
+
+    return (
+      window.location.href
+        .split("#")[0]
+    );
+
+  }
+
+  function getInviteText() {
+
+    return (
+      "Hey! 🏃 Ich bin gerade Miles Apart beigetreten. " +
+      "Komm mit in die Running-Community. " +
+      "Gemeinsam läuft's besser! 🔥\n\n" +
+      getInviteUrl()
+    );
+
+  }
+
+  function markInviteActionStarted(
+    source
+  ) {
+
+    inviteActionStarted =
+      true;
+
+    inviteCheckbox.disabled =
+      false;
+
+    inviteCheckLabel.classList.add(
+      "ready"
+    );
+
+    shareStatus.textContent =
+      source === "WhatsApp"
+        ? "WhatsApp wurde geöffnet. Bestätige unten, sobald du die Einladung verschickt hast."
+        : "Instagram wurde geöffnet. Bestätige unten, sobald du die Einladung verschickt hast.";
+
+    updateRegistrationGate();
+
+  }
+
+  openInstagramButton.addEventListener(
+    "click",
+    function() {
+
+      window.open(
+        INSTAGRAM_URL,
+        "_blank",
+        "noopener,noreferrer"
       );
 
-      const email =
-        document.getElementById(
-          "loginEmail"
-        ).value.trim();
-
-      const password =
-        document.getElementById(
-          "loginPassword"
-        ).value;
-
-      const {
-        data,
-        error
-      } =
-        await supabaseClient.auth.signInWithPassword({
-          email,
-          password
-        });
-
-      if (error) {
-
-        setMessage(
-          loginMessage,
-          error.message,
-          "error"
-        );
-
-        return;
-      }
-
-      currentUser =
-        data.user;
-
-      closeAuth();
-
-      await updateAuthUI();
     }
   );
 
+  followCheckbox.addEventListener(
+    "change",
+    updateRegistrationGate
+  );
+
+  whatsappShareButton.addEventListener(
+    "click",
+    function() {
+
+      const url =
+        "https://wa.me/?text=" +
+        encodeURIComponent(
+          getInviteText()
+        );
+
+      markInviteActionStarted(
+        "WhatsApp"
+      );
+
+      window.open(
+        url,
+        "_blank",
+        "noopener,noreferrer"
+      );
+
+    }
+  );
+
+  instagramShareButton.addEventListener(
+    "click",
+    async function() {
+
+      const message =
+        getInviteText();
+
+      if (
+        navigator.share
+      ) {
+
+        try {
+
+          await navigator.share({
+
+            title:
+              "Miles Apart Running Club",
+
+            text:
+              message,
+
+            url:
+              getInviteUrl()
+
+          });
+
+          markInviteActionStarted(
+            "Instagram"
+          );
+
+          return;
+
+        } catch (error) {
+
+          if (
+            error &&
+            error.name === "AbortError"
+          ) {
+
+            return;
+
+          }
+
+        }
+
+      }
+
+      try {
+
+        if (
+          navigator.clipboard &&
+          navigator.clipboard.writeText
+        ) {
+
+          await navigator.clipboard.writeText(
+            message
+          );
+
+        }
+
+      } catch (error) {
+
+        console.error(
+          "Clipboard:",
+          error
+        );
+
+      }
+
+      markInviteActionStarted(
+        "Instagram"
+      );
+
+      setTimeout(
+        function() {
+
+          window.open(
+            "https://www.instagram.com/",
+            "_blank",
+            "noopener,noreferrer"
+          );
+
+        },
+        200
+      );
+
+    }
+  );
+
+  inviteCheckbox.addEventListener(
+    "change",
+    function() {
+
+      updateRegistrationGate();
+
+      if (
+        inviteCheckbox.checked
+      ) {
+
+        shareStatus.textContent =
+          "Einladung bestätigt ✓";
+
+      }
+
+    }
+  );
 
   /* =========================================================
-     REGISTER
-     ========================================================= */
+     REGISTRIEREN
+  ========================================================= */
 
   registerForm.addEventListener(
     "submit",
-    async event => {
+    async function(event) {
 
       event.preventDefault();
 
-      setMessage(
-        registerMessage,
-        ""
-      );
+      clearMessages();
 
-      const name =
-        document.getElementById(
-          "registerName"
-        ).value.trim();
-
-      const email =
-        document.getElementById(
-          "registerEmail"
-        ).value.trim();
-
-      const password =
-        document.getElementById(
-          "registerPassword"
-        ).value;
-
-      if (!name) {
+      if (
+        !followCheckbox.checked
+      ) {
 
         setMessage(
           registerMessage,
-          "Bitte gib deinen Namen ein.",
-          "error"
+          "Bitte bestätige zuerst, dass du Tano Loew auf Instagram folgst."
         );
 
         return;
+
       }
+
+      if (
+        !inviteActionStarted ||
+        !inviteCheckbox.checked
+      ) {
+
+        setMessage(
+          registerMessage,
+          "Bitte lade zuerst einen Freund über WhatsApp oder Instagram ein."
+        );
+
+        return;
+
+      }
+
+      const name =
+        document
+          .getElementById("registerName")
+          .value
+          .trim();
+
+      const email =
+        document
+          .getElementById("registerEmail")
+          .value
+          .trim()
+          .toLowerCase();
+
+      const password =
+        document
+          .getElementById("registerPassword")
+          .value;
+
+      if (
+        name.length < 2
+      ) {
+
+        setMessage(
+          registerMessage,
+          "Bitte gib deinen Namen ein."
+        );
+
+        return;
+
+      }
+
+      if (
+        password.length < 6
+      ) {
+
+        setMessage(
+          registerMessage,
+          "Das Passwort muss mindestens 6 Zeichen haben."
+        );
+
+        return;
+
+      }
+
+      setButtonLoading(
+        registerSubmit,
+        true,
+        "Konto erstellen →"
+      );
 
       const {
         data,
         error
       } =
         await supabaseClient.auth.signUp({
+
           email,
+
           password,
+
           options: {
+
             data: {
-              full_name: name
-            }
+
+              display_name:
+                name,
+
+              instagram_follow_confirmed:
+                true,
+
+              invite_confirmed:
+                true
+
+            },
+
+            emailRedirectTo:
+              window.location.href
+                .split("#")[0]
+
           }
+
         });
+
+      setButtonLoading(
+        registerSubmit,
+        false,
+        "Konto erstellen →"
+      );
+
+      if (error) {
+
+        console.error(
+          "Registrierung:",
+          error
+        );
+
+        const errorText =
+          String(
+            error.message || ""
+          ).toLowerCase();
+
+        if (
+          errorText.includes(
+            "already registered"
+          ) ||
+          errorText.includes(
+            "already exists"
+          ) ||
+          errorText.includes(
+            "email already"
+          ) ||
+          errorText.includes(
+            "user already"
+          )
+        ) {
+
+          setMessage(
+            registerMessage,
+            "Du hast dich mit dieser Mail bereits registriert. Melde dich stattdessen an."
+          );
+
+          return;
+
+        }
+
+        setMessage(
+          registerMessage,
+          translateAuthError(error)
+        );
+
+        return;
+
+      }
+
+      if (
+        data &&
+        data.user &&
+        Array.isArray(
+          data.user.identities
+        ) &&
+        data.user.identities.length === 0
+      ) {
+
+        setMessage(
+          registerMessage,
+          "Du hast dich mit dieser Mail bereits registriert. Melde dich stattdessen an."
+        );
+
+        return;
+
+      }
+
+      registerForm.reset();
+
+      resetRegistrationGate();
+
+      if (
+        data &&
+        data.session
+      ) {
+
+        currentUser =
+          data.user;
+
+        await loadProfile(
+          currentUser
+        );
+
+        previewNotice.style.display =
+          "none";
+
+        updateUserInterface();
+
+        await loadRuns();
+
+        setMessage(
+          registerMessage,
+          "Konto erfolgreich erstellt. Du bist jetzt angemeldet.",
+          true
+        );
+
+        setTimeout(
+          closeAuth,
+          900
+        );
+
+      } else {
+
+        setMessage(
+          registerMessage,
+          "Fast geschafft! Bitte bestätige deine E-Mail-Adresse. Danach kannst du dich anmelden.",
+          true
+        );
+
+      }
+
+    }
+  );
+
+  /* =========================================================
+     LOGIN
+  ========================================================= */
+
+  loginForm.addEventListener(
+    "submit",
+    async function(event) {
+
+      event.preventDefault();
+
+      clearMessages();
+
+      const email =
+        document
+          .getElementById("loginEmail")
+          .value
+          .trim()
+          .toLowerCase();
+
+      const password =
+        document
+          .getElementById("loginPassword")
+          .value;
+
+      setButtonLoading(
+        loginSubmit,
+        true,
+        "Anmelden →"
+      );
+
+      const {
+        data,
+        error
+      } =
+        await supabaseClient.auth
+          .signInWithPassword({
+
+            email,
+
+            password
+
+          });
+
+      setButtonLoading(
+        loginSubmit,
+        false,
+        "Anmelden →"
+      );
 
       if (error) {
 
         setMessage(
-          registerMessage,
-          error.message,
-          "error"
+          loginMessage,
+          translateAuthError(error)
         );
 
         return;
+
       }
 
-      if (data.user && !data.session) {
-
-        setMessage(
-          registerMessage,
-          "Account erstellt. Bitte prüfe deine E-Mail zur Bestätigung.",
-          "success"
-        );
-
-        return;
-      }
+      loginForm.reset();
 
       currentUser =
         data.user;
 
-      setMessage(
-        registerMessage,
-        "Account erfolgreich erstellt.",
-        "success"
+      await loadProfile(
+        currentUser
       );
 
-      setTimeout(
-        async () => {
+      updateUserInterface();
 
-          closeAuth();
+      await loadRuns();
 
-          await updateAuthUI();
+      closeAuth();
 
-        },
-        700
-      );
     }
   );
 
-
   /* =========================================================
-     FORGOT PASSWORD
-     ========================================================= */
+     PASSWORT RESET
+  ========================================================= */
 
   forgotForm.addEventListener(
     "submit",
-    async event => {
+    async function(event) {
 
       event.preventDefault();
 
-      setMessage(
-        forgotMessage,
-        ""
-      );
+      clearMessages();
 
       const email =
-        document.getElementById(
-          "forgotEmail"
-        ).value.trim();
+        document
+          .getElementById("forgotEmail")
+          .value
+          .trim()
+          .toLowerCase();
+
+      setButtonLoading(
+        forgotSubmit,
+        true,
+        "Reset-Link senden →"
+      );
 
       const redirectUrl =
-        window.location.origin +
-        window.location.pathname;
+        window.location.href
+          .split("#")[0];
 
       const {
         error
@@ -4199,64 +5917,86 @@
             }
           );
 
+      setButtonLoading(
+        forgotSubmit,
+        false,
+        "Reset-Link senden →"
+      );
+
       if (error) {
 
         setMessage(
           forgotMessage,
-          error.message,
-          "error"
+          translateAuthError(error)
         );
 
         return;
+
       }
 
       setMessage(
         forgotMessage,
-        "Wenn die E-Mail existiert, wurde ein Reset-Link versendet.",
-        "success"
+        "Wenn ein Konto mit dieser E-Mail existiert, wurde ein Reset-Link versendet.",
+        true
       );
+
     }
   );
 
-
   /* =========================================================
-     PASSWORD RECOVERY
-     ========================================================= */
+     RECOVERY
+  ========================================================= */
 
   recoveryForm.addEventListener(
     "submit",
-    async event => {
+    async function(event) {
 
       event.preventDefault();
 
-      setMessage(
-        recoveryMessage,
-        ""
-      );
+      clearMessages();
 
       const password =
-        document.getElementById(
-          "recoveryPassword"
-        ).value;
+        document
+          .getElementById("newPassword")
+          .value;
 
-      const confirmation =
-        document.getElementById(
-          "recoveryPasswordConfirm"
-        ).value;
+      const passwordConfirm =
+        document
+          .getElementById("newPasswordConfirm")
+          .value;
 
       if (
-        password !==
-        confirmation
+        password.length < 6
       ) {
 
         setMessage(
           recoveryMessage,
-          "Die Passwörter stimmen nicht überein.",
-          "error"
+          "Das Passwort muss mindestens 6 Zeichen haben."
         );
 
         return;
+
       }
+
+      if (
+        password !==
+        passwordConfirm
+      ) {
+
+        setMessage(
+          recoveryMessage,
+          "Die beiden Passwörter stimmen nicht überein."
+        );
+
+        return;
+
+      }
+
+      setButtonLoading(
+        recoverySubmit,
+        true,
+        "Neues Passwort speichern →"
+      );
 
       const {
         error
@@ -4266,70 +6006,222 @@
             password
           });
 
+      setButtonLoading(
+        recoverySubmit,
+        false,
+        "Neues Passwort speichern →"
+      );
+
       if (error) {
 
         setMessage(
           recoveryMessage,
-          error.message,
-          "error"
+          translateAuthError(error)
         );
 
         return;
+
       }
+
+      recoveryForm.reset();
 
       setMessage(
         recoveryMessage,
-        "Passwort erfolgreich geändert.",
-        "success"
+        "Dein Passwort wurde erfolgreich geändert.",
+        true
       );
 
       setTimeout(
         closeAuth,
-        800
+        1200
       );
+
     }
   );
 
+  /* =========================================================
+     PROFILE
+  ========================================================= */
+
+  async function loadProfile(
+    user
+  ) {
+
+    if (!user) {
+
+      currentProfile =
+        null;
+
+      return;
+
+    }
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from("profiles")
+        .select(
+          "display_name, username, avatar_url"
+        )
+        .eq(
+          "id",
+          user.id
+        )
+        .maybeSingle();
+
+    if (error) {
+
+      console.error(
+        "Profil:",
+        error
+      );
+
+      currentProfile =
+        null;
+
+      return;
+
+    }
+
+    currentProfile =
+      data || null;
+
+  }
+
+  /* =========================================================
+     USER INTERFACE
+  ========================================================= */
+
+  function updateUserInterface() {
+
+    if (!currentUser) {
+
+      guestArea.style.display =
+        "flex";
+
+      loggedInArea.style.display =
+        "none";
+
+      previewNotice.style.display =
+        "block";
+
+      runLoginLabel.textContent =
+        "Anmeldung erforderlich";
+
+      runForm.querySelectorAll(
+        "input, select, textarea"
+      ).forEach(
+        field => {
+          field.disabled = true;
+        }
+      );
+
+      saveRunButton.textContent =
+        "Anmelden, um Lauf zu speichern →";
+
+      saveRunButton.disabled =
+        false;
+
+      return;
+
+    }
+
+    guestArea.style.display =
+      "none";
+
+    loggedInArea.style.display =
+      "flex";
+
+    previewNotice.style.display =
+      "none";
+
+    runLoginLabel.textContent =
+      "Eingeloggt";
+
+    runForm.querySelectorAll(
+      "input, select, textarea"
+    ).forEach(
+      field => {
+        field.disabled = false;
+      }
+    );
+
+    saveRunButton.textContent =
+      "Lauf speichern →";
+
+    const displayName =
+      getUserDisplayName(
+        currentUser,
+        currentProfile
+      );
+
+    userGreeting.textContent =
+      "Hallo " +
+      displayName;
+
+    accountMenuName.textContent =
+      displayName;
+
+    accountMenuEmail.textContent =
+      currentUser.email || "";
+
+    avatarButton.innerHTML =
+      "";
+
+    if (
+      currentProfile &&
+      currentProfile.avatar_url
+    ) {
+
+      const image =
+        document.createElement(
+          "img"
+        );
+
+      image.src =
+        currentProfile.avatar_url;
+
+      image.alt =
+        displayName;
+
+      avatarButton.appendChild(
+        image
+      );
+
+    } else {
+
+      avatarButton.textContent =
+        getInitials(
+          displayName
+        );
+
+    }
+
+  }
 
   /* =========================================================
      ACCOUNT MENU
-     ========================================================= */
+  ========================================================= */
 
   avatarButton.addEventListener(
     "click",
-    event => {
+    function(event) {
 
+      event.preventDefault();
       event.stopPropagation();
 
       accountMenu.classList.toggle(
         "open"
       );
+
     }
   );
-
-  document.addEventListener(
-    "click",
-    event => {
-
-      if (
-        !accountMenu.contains(
-          event.target
-        ) &&
-        event.target !==
-          avatarButton
-      ) {
-
-        accountMenu.classList.remove(
-          "open"
-        );
-      }
-    }
-  );
-
 
   myProfileButton.addEventListener(
     "click",
-    () => {
+    function() {
 
       accountMenu.classList.remove(
         "open"
@@ -4337,180 +6229,298 @@
 
       window.location.href =
         "profile.html";
+
     }
   );
 
+  document.addEventListener(
+    "click",
+    function(event) {
+
+      if (
+        !loggedInArea.contains(
+          event.target
+        )
+      ) {
+
+        accountMenu.classList.remove(
+          "open"
+        );
+
+      }
+
+    }
+  );
+
+  /* =========================================================
+     LOGOUT
+  ========================================================= */
+
+  async function logout() {
+
+    const {
+      error
+    } =
+      await supabaseClient.auth
+        .signOut();
+
+    if (error) {
+
+      console.error(
+        "Logout:",
+        error
+      );
+
+      return;
+
+    }
+
+    currentUser =
+      null;
+
+    currentProfile =
+      null;
+
+    currentRuns =
+      [];
+
+    accountMenu.classList.remove(
+      "open"
+    );
+
+    updateUserInterface();
+
+    loadRuns();
+
+  }
 
   logoutButton.addEventListener(
     "click",
-    async () => {
-
-      await supabaseClient.auth.signOut();
-
-      currentUser = null;
-      currentRuns = [];
-
-      accountMenu.classList.remove(
-        "open"
-      );
-
-      await updateAuthUI();
-    }
+    logout
   );
-
 
   /* =========================================================
-     SOCIAL / REGISTRATION ACTIONS
-     ========================================================= */
+     AUTH STATE
+  ========================================================= */
 
-  openInstagramButton.addEventListener(
-    "click",
-    () => {
-
-      window.open(
-        INSTAGRAM_URL,
-        "_blank",
-        "noopener,noreferrer"
-      );
-
-      followCheckbox.checked =
-        true;
-
-      followStatus.textContent =
-        "Instagram wurde geöffnet.";
-    }
-  );
-
-
-  followCheckbox.addEventListener(
-    "change",
-    () => {
-
-      followStatus.textContent =
-        followCheckbox.checked
-          ? "Instagram-Schritt bestätigt."
-          : "Optionaler Instagram-Schritt";
-    }
-  );
-
-
-  inviteCheckbox.addEventListener(
-    "change",
-    () => {
-
-      inviteStatus.textContent =
-        inviteCheckbox.checked
-          ? "Empfehlung bestätigt."
-          : "Optionaler Empfehlungs-Schritt";
-    }
-  );
-
-
-  whatsappShareButton.addEventListener(
-    "click",
-    () => {
-
-      const text =
-        "Schau dir Miles Apart Running Club an.";
-
-      const url =
-        "https://wa.me/?text=" +
-        encodeURIComponent(
-          text
-        );
-
-      window.open(
-        url,
-        "_blank",
-        "noopener,noreferrer"
-      );
-
-      inviteCheckbox.checked =
-        true;
-
-      inviteStatus.textContent =
-        "WhatsApp wurde geöffnet.";
-    }
-  );
-
-
-  instagramShareButton.addEventListener(
-    "click",
-    () => {
-
-      window.open(
-        INSTAGRAM_URL,
-        "_blank",
-        "noopener,noreferrer"
-      );
-
-      inviteCheckbox.checked =
-        true;
-
-      inviteStatus.textContent =
-        "Instagram wurde geöffnet.";
-    }
-  );
-
-
-  /* =========================================================
-     AUTH STATE LISTENER
-     ========================================================= */
-
-  supabaseClient.auth.onAuthStateChange(
-    async (
-      event,
-      session
-    ) => {
-
-      currentUser =
-        session?.user || null;
-
-      if (
-        event ===
-        "PASSWORD_RECOVERY"
+  supabaseClient.auth
+    .onAuthStateChange(
+      async function(
+        event,
+        session
       ) {
 
-        openAuth("recovery");
+        if (
+          event ===
+          "PASSWORD_RECOVERY"
+        ) {
 
-        return;
+          currentUser =
+            session
+              ? session.user
+              : null;
+
+          if (currentUser) {
+
+            await loadProfile(
+              currentUser
+            );
+
+          }
+
+          updateUserInterface();
+
+          openAuth();
+
+          showRecovery();
+
+          return;
+
+        }
+
+        if (
+          session &&
+          session.user
+        ) {
+
+          currentUser =
+            session.user;
+
+          await loadProfile(
+            currentUser
+          );
+
+        } else {
+
+          currentUser =
+            null;
+
+          currentProfile =
+            null;
+
+        }
+
+        updateUserInterface();
+
+        await loadRuns();
+
       }
-
-      await updateAuthUI();
-    }
-  );
-
+    );
 
   /* =========================================================
-     INITIALIZE
-     ========================================================= */
+     AUTH FEHLER
+  ========================================================= */
+
+  function translateAuthError(
+    error
+  ) {
+
+    if (!error) {
+
+      return "Es ist ein unbekannter Fehler aufgetreten.";
+
+    }
+
+    const message =
+      String(
+        error.message || ""
+      ).toLowerCase();
+
+    if (
+      message.includes(
+        "invalid login credentials"
+      )
+    ) {
+
+      return "E-Mail oder Passwort ist nicht korrekt.";
+
+    }
+
+    if (
+      message.includes(
+        "email not confirmed"
+      )
+    ) {
+
+      return "Bitte bestätige zuerst deine E-Mail-Adresse.";
+
+    }
+
+    if (
+      message.includes(
+        "password should be at least"
+      )
+    ) {
+
+      return "Das Passwort ist zu kurz.";
+
+    }
+
+    if (
+      message.includes(
+        "rate limit"
+      )
+    ) {
+
+      return "Zu viele Versuche. Bitte warte kurz und versuche es erneut.";
+
+    }
+
+    if (
+      message.includes(
+        "already registered"
+      ) ||
+      message.includes(
+        "already exists"
+      ) ||
+      message.includes(
+        "email already"
+      ) ||
+      message.includes(
+        "user already"
+      )
+    ) {
+
+      return "Du hast dich mit dieser Mail bereits registriert. Melde dich stattdessen an.";
+
+    }
+
+    return (
+      error.message ||
+      "Es ist ein Fehler aufgetreten. Bitte versuche es erneut."
+    );
+
+  }
+
+  /* =========================================================
+     INITIALISIEREN
+  ========================================================= */
 
   async function initialize() {
 
+    updateDashboardDate();
+
     runDate.value =
-      dateToIso(
-        new Date()
-      );
+      getTodayDateString();
 
     const {
-      data
+      data,
+      error
     } =
       await supabaseClient.auth
         .getSession();
 
-    currentUser =
-      data.session?.user ||
-      null;
+    if (error) {
 
-    await updateAuthUI();
+      console.error(
+        "Session:",
+        error
+      );
 
-    renderDashboard();
+      currentUser =
+        null;
+
+      updateUserInterface();
+
+      await loadRuns();
+
+      return;
+
+    }
+
+    if (
+      data &&
+      data.session &&
+      data.session.user
+    ) {
+
+      currentUser =
+        data.session.user;
+
+      await loadProfile(
+        currentUser
+      );
+
+    } else {
+
+      currentUser =
+        null;
+
+      currentProfile =
+        null;
+
+    }
+
+    updateUserInterface();
+
+    await loadRuns();
+
   }
-
 
   initialize();
 
 </script>
 
 </body>
+
 </html>
