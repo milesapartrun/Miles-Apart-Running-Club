@@ -129,6 +129,35 @@
     }
 
     /* =========================================================
+       PROFIL AVATAR — WIE INDEX
+    ========================================================= */
+
+    .user-avatar-button {
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      border: 3px solid var(--miles-blue);
+      background: #fff;
+      color: var(--miles-blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 18px;
+      cursor: pointer;
+      overflow: hidden;
+      padding: 0;
+      flex: 0 0 58px;
+    }
+
+    .user-avatar-button img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* =========================================================
        HOME HEADER
     ========================================================= */
 
@@ -1580,15 +1609,11 @@
       }
 
       /* =====================================================
-         PROFIL AUF MOBILE
-         WICHTIG:
-         Begrüßung bleibt sichtbar.
+         PROFIL AUF MOBILE — WIE INDEX
       ===================================================== */
 
-      .user-greeting {
-        display: inline-flex !important;
-        align-items: center;
-        flex: 0 0 auto;
+      .top-right .user-greeting {
+        display: inline !important;
         font-size: 12px !important;
         white-space: nowrap;
       }
@@ -1726,23 +1751,23 @@
         <div
           id="loggedInArea"
           class="user-area"
-          style="display:none;"
+          style="display:none; position:relative;"
         >
 
           <span
             class="user-greeting"
             id="userGreeting"
           >
-            Hallo Runner
+            Hallo
           </span>
 
           <button
             class="user-avatar-button"
             id="avatarButton"
             type="button"
-            aria-label="Profilmenü öffnen"
+            aria-label="Account-Menü öffnen"
           >
-            M
+            A
           </button>
 
           <div
@@ -1756,7 +1781,7 @@
                 class="account-menu-name"
                 id="accountMenuName"
               >
-                Runner
+                User
               </div>
 
               <div
@@ -1770,7 +1795,7 @@
 
             <button
               type="button"
-              id="myProfileButton"
+              id="profileButton"
             >
               Mein Profil
             </button>
@@ -3093,8 +3118,8 @@
   const accountMenuEmail =
     document.getElementById("accountMenuEmail");
 
-  const myProfileButton =
-    document.getElementById("myProfileButton");
+  const profileButton =
+    document.getElementById("profileButton");
 
   const logoutButton =
     document.getElementById("logoutButton");
@@ -3540,6 +3565,21 @@
 
   }
 
+  function getFirstName(name) {
+
+    if (!name) {
+      return "Runner";
+    }
+
+    return (
+      name
+        .trim()
+        .split(/\s+/)[0] ||
+      "Runner"
+    );
+
+  }
+
   function getUserDisplayName(
     user,
     profile
@@ -3547,20 +3587,43 @@
 
     if (
       profile &&
-      profile.display_name
+      profile.display_name &&
+      String(profile.display_name).trim()
     ) {
 
-      return profile.display_name;
+      return String(
+        profile.display_name
+      ).trim();
 
     }
 
     if (
       user &&
       user.user_metadata &&
-      user.user_metadata.display_name
+      user.user_metadata.display_name &&
+      String(
+        user.user_metadata.display_name
+      ).trim()
     ) {
 
-      return user.user_metadata.display_name;
+      return String(
+        user.user_metadata.display_name
+      ).trim();
+
+    }
+
+    if (
+      user &&
+      user.user_metadata &&
+      user.user_metadata.name &&
+      String(
+        user.user_metadata.name
+      ).trim()
+    ) {
+
+      return String(
+        user.user_metadata.name
+      ).trim();
 
     }
 
@@ -3569,35 +3632,13 @@
       user.email
     ) {
 
-      return user.email.split("@")[0];
+      return user.email
+        .split("@")[0]
+        .trim();
 
     }
 
     return "Runner";
-
-  }
-
-  function getUserFirstName(
-    user,
-    profile
-  ) {
-
-    const displayName =
-      getUserDisplayName(
-        user,
-        profile
-      );
-
-    const parts =
-      displayName
-        .trim()
-        .split(/\s+/)
-        .filter(Boolean);
-
-    return (
-      parts[0] ||
-      "Runner"
-    );
 
   }
 
@@ -5948,7 +5989,7 @@
       currentProfile =
         null;
 
-      return;
+      return null;
 
     }
 
@@ -5959,7 +6000,7 @@
       await supabaseClient
         .from("profiles")
         .select(
-          "display_name, username, avatar_url"
+          "display_name, username, avatar_url, bio, location"
         )
         .eq(
           "id",
@@ -5977,12 +6018,14 @@
       currentProfile =
         null;
 
-      return;
+      return null;
 
     }
 
     currentProfile =
       data || null;
+
+    return currentProfile;
 
   }
 
@@ -5999,6 +6042,16 @@
 
       loggedInArea.style.display =
         "none";
+
+      userGreeting.textContent =
+        "Hallo";
+
+      userGreeting.style.display =
+        "none";
+
+      accountMenu.classList.remove(
+        "open"
+      );
 
       previewNotice.style.display =
         "block";
@@ -6024,6 +6077,22 @@
 
     }
 
+    const displayName =
+      getUserDisplayName(
+        currentUser,
+        currentProfile
+      );
+
+    const firstName =
+      getFirstName(
+        displayName
+      );
+
+    const initials =
+      getInitials(
+        displayName
+      );
+
     guestArea.style.display =
       "none";
 
@@ -6047,52 +6116,12 @@
     saveRunButton.textContent =
       "Lauf speichern →";
 
-    /*
-      Vollständiger Name für das Profilmenü.
-    */
-
-    const displayName =
-      getUserDisplayName(
-        currentUser,
-        currentProfile
-      );
-
-    /*
-      Nur der Vorname für die Begrüßung.
-    */
-
-    const firstName =
-      getUserFirstName(
-        currentUser,
-        currentProfile
-      );
-
-    /*
-      WICHTIG:
-      Die Begrüßung wird immer gesetzt.
-      Beispiel:
-      Tano Loew -> Hallo Tano
-    */
+    userGreeting.style.display =
+      "inline";
 
     userGreeting.textContent =
       "Hallo " +
       firstName;
-
-    /*
-      Vollständiger Name im Account-Menü.
-    */
-
-    accountMenuName.textContent =
-      displayName;
-
-    accountMenuEmail.textContent =
-      currentUser.email || "";
-
-    /*
-      Profilbild laden.
-      Falls kein Bild vorhanden ist,
-      werden die Initialen angezeigt.
-    */
 
     avatarButton.innerHTML =
       "";
@@ -6120,17 +6149,38 @@
     } else {
 
       avatarButton.textContent =
-        getInitials(
-          displayName
-        );
+        initials;
 
     }
+
+    accountMenuName.textContent =
+      displayName;
+
+    accountMenuEmail.textContent =
+      currentUser.email || "";
 
   }
 
   /* =========================================================
      ACCOUNT MENU
   ========================================================= */
+
+  profileButton.addEventListener(
+    "click",
+    function(event) {
+
+      event.preventDefault();
+      event.stopPropagation();
+
+      accountMenu.classList.remove(
+        "open"
+      );
+
+      window.location.href =
+        "profile.html";
+
+    }
+  );
 
   avatarButton.addEventListener(
     "click",
@@ -6142,20 +6192,6 @@
       accountMenu.classList.toggle(
         "open"
       );
-
-    }
-  );
-
-  myProfileButton.addEventListener(
-    "click",
-    function() {
-
-      accountMenu.classList.remove(
-        "open"
-      );
-
-      window.location.href =
-        "profile.html";
 
     }
   );
