@@ -460,6 +460,13 @@ button,input,textarea,select{font-family:inherit}
   height:4px;
   background:var(--miles-blue)
 }
+.run-entry-card.editing{
+  border-color:#111817;
+  box-shadow:0 14px 38px rgba(5,9,9,.09)
+}
+.run-entry-card.editing::before{
+  background:#111817
+}
 .run-entry-top{
   display:flex;
   align-items:flex-start;
@@ -663,6 +670,31 @@ button,input,textarea,select{font-family:inherit}
 }
 .run-photo-remove.show{display:inline-block}
 .run-photo-remove:hover{color:var(--home-red)}
+
+.run-existing-photo{
+  display:none;
+  margin-top:4px;
+  padding:13px 14px;
+  background:#f3fafb;
+  border:1px solid #cfeaed;
+  color:#526466;
+  font-size:11px;
+  line-height:1.5
+}
+.run-existing-photo.show{display:block}
+.run-existing-photo strong{
+  color:#222;
+  font-weight:900
+}
+.run-existing-photo-link{
+  display:inline-block;
+  margin-top:6px;
+  color:var(--miles-blue-dark);
+  font-weight:800;
+  text-decoration:underline;
+  cursor:pointer
+}
+
 .run-form-actions{
   grid-column:1/-1;
   display:flex;
@@ -679,6 +711,28 @@ button,input,textarea,select{font-family:inherit}
   line-height:1.5
 }
 .run-form-message.success{color:var(--home-green)}
+
+.run-form-action-buttons{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:10px
+}
+.cancel-edit-button{
+  min-height:44px;
+  padding:0 16px;
+  border:1px solid #cfd8d5;
+  background:#fff;
+  color:#555;
+  font-size:11px;
+  font-weight:800;
+  cursor:pointer;
+  white-space:nowrap
+}
+.cancel-edit-button:hover{
+  border-color:#111817;
+  color:#111817
+}
 
 .import-card{
   position:relative;
@@ -988,6 +1042,35 @@ button,input,textarea,select{font-family:inherit}
 }
 .run-photo-badge{color:var(--miles-blue-dark)}
 .run-pb-badge{color:var(--home-green);font-weight:900}
+
+.run-list-actions{
+  display:flex;
+  align-items:center;
+  justify-content:flex-end;
+  gap:7px;
+  margin-top:7px
+}
+.run-edit-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:30px;
+  padding:0 10px;
+  border:1px solid #cfdedc;
+  background:#fff;
+  color:#4e5a57;
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.4px;
+  text-transform:uppercase;
+  cursor:pointer
+}
+.run-edit-button:hover{
+  border-color:var(--miles-blue);
+  color:var(--miles-blue-dark);
+  background:#f6fdfe
+}
+
 .empty-runs{
   padding:25px 0 5px;
   color:#888;
@@ -1437,7 +1520,10 @@ button,input,textarea,select{font-family:inherit}
   }
   .best-times-grid{grid-template-columns:1fr}
   .longest-run{grid-column:auto}
-  .run-list-row{grid-template-columns:75px 1fr 80px}
+  .run-list-row{
+    grid-template-columns:75px 1fr 80px;
+    gap:10px
+  }
   .run-list-kind{display:none}
   .run-form{grid-template-columns:1fr}
   .run-form-group.full{grid-column:auto}
@@ -1445,6 +1531,15 @@ button,input,textarea,select{font-family:inherit}
     grid-column:auto;
     flex-direction:column;
     align-items:stretch
+  }
+  .run-form-action-buttons{
+    width:100%;
+    flex-direction:column-reverse;
+    align-items:stretch
+  }
+  .cancel-edit-button,
+  .run-form-action-buttons .btn{
+    width:100%
   }
   .run-entry-top,.import-top{display:block}
   .login-required-label,.import-login-label{
@@ -1832,15 +1927,15 @@ Deine Laufgeschichte gehört hierher.
 
 </div>
 
-<div class="run-entry-card">
+<div class="run-entry-card" id="runEntryCard">
 
 <div class="run-entry-top">
 
 <div>
 
-<h2>Einen Lauf speichern</h2>
+<h2 id="runFormTitle">Einen Lauf speichern</h2>
 
-<p>
+<p id="runFormDescription">
 Der Lauf wird für deine Kilometer berücksichtigt.
 Eine Bestzeit wird nur übernommen, wenn du sie
 ausdrücklich als solche markierst.
@@ -1952,10 +2047,20 @@ placeholder="z. B. Berlin Marathon, 100-Meiler, Backyard Ultra …"></textarea>
 
 <input class="run-photo-input" id="runPhoto" type="file" accept="image/*" required>
 
-<p class="run-photo-help">
+<p class="run-photo-help" id="runPhotoHelp">
 Pflicht: z. B. Strava-Screenshot, Rennfoto oder Ergebnisnachweis.
 Maximal 10 MB.
 </p>
+
+<div class="run-existing-photo" id="runExistingPhoto">
+<strong>Bestehendes Foto bleibt erhalten.</strong>
+Wenn du ein neues Foto auswählst, wird dieses beim Speichern
+als neuer Nachweis verwendet.
+<br>
+<a class="run-existing-photo-link" id="runExistingPhotoLink" href="#" target="_blank" rel="noopener">
+Bestehendes Foto öffnen →
+</a>
+</div>
 
 <div class="run-photo-preview" id="runPhotoPreview">
 
@@ -1975,9 +2080,17 @@ Foto entfernen
 
 <div class="run-form-message" id="runFormMessage"></div>
 
+<div class="run-form-action-buttons">
+
+<button class="cancel-edit-button" id="cancelEditButton" type="button" style="display:none">
+Bearbeitung abbrechen
+</button>
+
 <button class="btn lime" id="saveRunButton" type="submit">
 Lauf speichern →
 </button>
+
+</div>
 
 </div>
 
@@ -2533,6 +2646,9 @@ const sidebarWeekProgress=document.getElementById("sidebarWeekProgress");
 const sidebarWeekText=document.getElementById("sidebarWeekText");
 
 const runForm=document.getElementById("runForm");
+const runEntryCard=document.getElementById("runEntryCard");
+const runFormTitle=document.getElementById("runFormTitle");
+const runFormDescription=document.getElementById("runFormDescription");
 const runDate=document.getElementById("runDate");
 const runDistance=document.getElementById("runDistance");
 const runType=document.getElementById("runType");
@@ -2545,11 +2661,15 @@ const runBestCategory=document.getElementById("runBestCategory");
 const bestTimeSuggestion=document.getElementById("bestTimeSuggestion");
 const runNote=document.getElementById("runNote");
 const runPhoto=document.getElementById("runPhoto");
+const runPhotoHelp=document.getElementById("runPhotoHelp");
+const runExistingPhoto=document.getElementById("runExistingPhoto");
+const runExistingPhotoLink=document.getElementById("runExistingPhotoLink");
 const runPhotoPreview=document.getElementById("runPhotoPreview");
 const runPhotoPreviewImage=document.getElementById("runPhotoPreviewImage");
 const runPhotoName=document.getElementById("runPhotoName");
 const runPhotoRemove=document.getElementById("runPhotoRemove");
 const saveRunButton=document.getElementById("saveRunButton");
+const cancelEditButton=document.getElementById("cancelEditButton");
 const runFormMessage=document.getElementById("runFormMessage");
 const runLoginLabel=document.getElementById("runLoginLabel");
 const runsList=document.getElementById("runsList");
@@ -2617,6 +2737,14 @@ let currentRuns=[];
 let inviteActionStarted=false;
 let selectedRunPhoto=null;
 let runPhotoPreviewUrl=null;
+
+/* =========================================================
+   BEARBEITEN
+========================================================= */
+
+let editingRunId=null;
+let editingRunOriginalPhotoPath=null;
+let editingRunOriginalPhotoUrl=null;
 
 const BEST_TIME_CATEGORIES={
   "5k":{label:"5 Kilometer",min:4.90,max:5.50},
@@ -3050,7 +3178,11 @@ function handleRunPhotoSelection(){
     :null;
 
   if(!file){
-    resetRunPhoto();
+    selectedRunPhoto=null;
+    runPhotoPreview.classList.remove("show");
+    runPhotoPreviewImage.src="";
+    runPhotoName.textContent="";
+    runPhotoRemove.classList.remove("show");
     return;
   }
 
@@ -3155,6 +3287,60 @@ async function deleteRunPhoto(path){
     console.error("Lauf-Foto konnte nicht gelöscht werden:",error);
 }
 
+async function getRunPhotoUrl(path){
+
+  if(!path)return null;
+
+  const{data,error}=await supabaseClient
+    .storage
+    .from(RUN_PHOTO_BUCKET)
+    .createSignedUrl(path,3600);
+
+  if(error){
+
+    console.error("Lauf-Foto URL:",error);
+    return null;
+  }
+
+  return data&&data.signedUrl
+    ?data.signedUrl
+    :null;
+}
+
+async function showExistingRunPhoto(path){
+
+  editingRunOriginalPhotoPath=path||null;
+
+  if(!path){
+
+    runExistingPhoto.classList.remove("show");
+    runExistingPhotoLink.removeAttribute("href");
+    editingRunOriginalPhotoUrl=null;
+
+    return;
+  }
+
+  runExistingPhoto.classList.add("show");
+
+  runExistingPhotoLink.textContent="Bestehendes Foto wird geladen …";
+  runExistingPhotoLink.removeAttribute("href");
+
+  const url=await getRunPhotoUrl(path);
+
+  if(url){
+
+    editingRunOriginalPhotoUrl=url;
+
+    runExistingPhotoLink.href=url;
+    runExistingPhotoLink.textContent="Bestehendes Foto öffnen →";
+
+  }else{
+
+    runExistingPhotoLink.textContent=
+      "Bestehendes Foto konnte nicht geöffnet werden.";
+  }
+}
+
 runPhoto.addEventListener("change",function(){
 
   clearMessages();
@@ -3166,1276 +3352,208 @@ runPhotoRemove.addEventListener("click",function(){
 
   resetRunPhoto();
 
+  if(editingRunId&&editingRunOriginalPhotoPath){
+
+    setMessage(
+      runFormMessage,
+      "Das bestehende Foto bleibt erhalten, solange du kein neues Foto auswählst."
+    );
+
+    return;
+  }
+
   setMessage(
     runFormMessage,
     "Foto entfernt. Bitte wähle ein Foto aus, bevor du den Lauf speicherst."
   );
 });
 
-function normalizeCsvHeader(value){
-
-  return String(value||"")
-    .replace(/^\uFEFF/,"")
-    .trim()
-    .toLowerCase()
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g,"")
-    .replace(/[\s_\-()./]+/g,"");
-}
-
-function detectCsvDelimiter(text){
-
-  const firstLines=text
-    .split(/\r?\n/)
-    .filter(line=>line.trim())
-    .slice(0,5);
-
-  const sample=firstLines.join("\n");
-
-  let commaCount=0;
-  let semicolonCount=0;
-  let tabCount=0;
-  let insideQuotes=false;
-
-  for(let i=0;i<sample.length;i++){
-
-    const char=sample[i];
-    const next=sample[i+1];
-
-    if(char==='"'){
-
-      if(insideQuotes&&next==='"'){
-        i++;
-        continue;
-      }
-
-      insideQuotes=!insideQuotes;
-      continue;
-    }
-
-    if(insideQuotes)continue;
-
-    if(char===",")commaCount++;
-    if(char===";")semicolonCount++;
-    if(char==="\t")tabCount++;
-  }
-
-  if(tabCount>commaCount&&tabCount>semicolonCount)return"\t";
-
-  return semicolonCount>commaCount?";":",";
-}
-
-function parseCsvText(text,delimiter){
-
-  const rows=[];
-  let row=[];
-  let cell="";
-  let insideQuotes=false;
-
-  for(let i=0;i<text.length;i++){
-
-    const char=text[i];
-    const next=text[i+1];
-
-    if(char==='"'){
-
-      if(insideQuotes&&next==='"'){
-        cell+='"';
-        i++;
-      }else{
-        insideQuotes=!insideQuotes;
-      }
-
-      continue;
-    }
-
-    if(char===delimiter&&!insideQuotes){
-
-      row.push(cell);
-      cell="";
-      continue;
-    }
-
-    if((char==="\n"||char==="\r")&&!insideQuotes){
-
-      if(char==="\r"&&next==="\n")i++;
-
-      row.push(cell);
-      cell="";
-
-      if(row.some(value=>String(value).trim()!==""))
-        rows.push(row);
-
-      row=[];
-      continue;
-    }
-
-    cell+=char;
-  }
-
-  if(cell!==""||row.length){
-
-    row.push(cell);
-
-    if(row.some(value=>String(value).trim()!==""))
-      rows.push(row);
-  }
-
-  return rows;
-}
-
-function findCsvColumn(headers,aliases){
-
-  const normalized=headers.map(normalizeCsvHeader);
-  const normalizedAliases=aliases.map(normalizeCsvHeader);
-
-  for(const alias of normalizedAliases){
-
-    const index=normalized.indexOf(alias);
-
-    if(index!==-1)return index;
-  }
-
-  for(let index=0;index<normalized.length;index++){
-
-    const header=normalized[index];
-
-    if(
-      normalizedAliases.some(
-        alias=>header.includes(alias)||alias.includes(header)
-      )
-    )return index;
-  }
-
-  return-1;
-}
-
-function parseCsvNumber(value){
-
-  let text=String(value??"")
-    .trim()
-    .replace(/^["']|["']$/g,"")
-    .replace(/\s/g,"");
-
-  if(!text)return NaN;
-
-  text=text.replace(/[^0-9,.\-+]/g,"");
-
-  if(!text)return NaN;
-
-  if(text.includes(",")&&text.includes(".")){
-
-    if(text.lastIndexOf(",")>text.lastIndexOf(".")){
-
-      text=text.replace(/\./g,"").replace(",",".");
-    }else{
-      text=text.replace(/,/g,"");
-    }
-
-  }else if(text.includes(",")){
-
-    const commaParts=text.split(",");
-
-    if(commaParts.length===2&&commaParts[1].length<=3){
-      text=text.replace(",",".");
-    }else{
-      text=text.replace(/,/g,"");
-    }
-  }
-
-  return Number(text);
-}
-
-function parseCsvDistance(value,header){
-
-  const numeric=parseCsvNumber(value);
-
-  if(!Number.isFinite(numeric)||numeric<=0)return NaN;
-
-  const normalizedHeader=normalizeCsvHeader(header);
-
-  if(
-    normalizedHeader.includes("meter")||
-    normalizedHeader==="m"||
-    normalizedHeader.includes("distance(m)")
-  )return numeric/1000;
-
-  if(
-    normalizedHeader.includes("mile")||
-    normalizedHeader==="mi"||
-    normalizedHeader.includes("distancemi")
-  )return numeric*1.609344;
-
-  return numeric;
-}
-
-function parseCsvDate(value){
-
-  const raw=String(value??"")
-    .trim()
-    .replace(/^["']|["']$/g,"");
-
-  if(!raw)return null;
-
-  let match=raw.match(/^(\d{1,2})[.\/-](\d{1,2})[.\/-](\d{4})/);
-
-  if(match){
-
-    const day=Number(match[1]);
-    const month=Number(match[2]);
-    const year=Number(match[3]);
-
-    if(month>=1&&month<=12&&day>=1&&day<=31){
-
-      return String(year).padStart(4,"0")+"-"+
-        String(month).padStart(2,"0")+"-"+
-        String(day).padStart(2,"0");
-    }
-  }
-
-  match=raw.match(/^(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})/);
-
-  if(match){
-
-    const year=Number(match[1]);
-    const month=Number(match[2]);
-    const day=Number(match[3]);
-
-    if(month>=1&&month<=12&&day>=1&&day<=31){
-
-      return String(year).padStart(4,"0")+"-"+
-        String(month).padStart(2,"0")+"-"+
-        String(day).padStart(2,"0");
-    }
-  }
-
-  const parsed=new Date(raw);
-
-  if(!Number.isNaN(parsed.getTime())){
-
-    const year=parsed.getFullYear();
-    const month=String(parsed.getMonth()+1).padStart(2,"0");
-    const day=String(parsed.getDate()).padStart(2,"0");
-
-    return`${year}-${month}-${day}`;
-  }
-
-  return null;
-}
-
-function parseCsvDuration(value){
-
-  const raw=String(value??"")
-    .trim()
-    .replace(/^["']|["']$/g,"");
-
-  if(!raw)return null;
-
-  if(raw.includes(":")){
-
-    const parts=raw.split(":")
-      .map(part=>Number(part.replace(",",".")));
-
-    if(parts.some(part=>!Number.isFinite(part)))return null;
-
-    if(parts.length===3)
-      return Math.round(parts[0]*3600+parts[1]*60+parts[2]);
-
-    if(parts.length===2)
-      return Math.round(parts[0]*60+parts[1]);
-
-    return null;
-  }
-
-  const numeric=parseCsvNumber(raw);
-
-  if(!Number.isFinite(numeric)||numeric<=0)return null;
-
-  return Math.round(numeric);
-}
-
-function normalizeImportedRunType(value){
-
-  const raw=String(value??"")
-    .trim()
-    .toLowerCase();
-
-  if(!raw)return"normal";
-
-  if(raw.includes("backyard"))return"backyard";
-
-  if(
-    raw.includes("ultra")||
-    raw.includes("100k")||
-    raw.includes("50k")
-  )return"ultra";
-
-  if(raw.includes("trail"))return"trail";
-
-  if(
-    raw.includes("race")||
-    raw.includes("wettkampf")||
-    raw.includes("competition")||
-    raw.includes("rennen")||
-    raw.includes("marathon")||
-    raw.includes("halbmarathon")||
-    raw.includes("half marathon")
-  )return"race";
-
-  return"normal";
-}
-
-function getImportedRunTypeLabel(type){
-
-  if(type==="race")return"Wettkampf";
-  if(type==="trail")return"Trail";
-  if(type==="ultra")return"Ultra";
-  if(type==="backyard")return"Backyard";
-
-  return"Run";
-}
-
-function clearImportPreview(){
-
-  parsedImportRuns=[];
-
-  importPreview.classList.remove("show");
-
-  importPreviewTableBody.innerHTML="";
-
-  importErrorBox.textContent="";
-  importErrorBox.classList.remove("show");
-
-  importInfoBox.textContent="";
-  importInfoBox.classList.remove("show");
-
-  importMessage.textContent="";
-  importMessage.classList.remove("success");
-
-  importRunsButton.disabled=true;
-
-  importPreviewStatus.textContent="Bereit";
-  importRunCount.textContent="0";
-  importKmTotal.textContent="0,0 km";
-  importDateRange.textContent="—";
-}
-
-function showImportError(message){
-
-  importErrorBox.textContent=message;
-  importErrorBox.classList.add("show");
-}
-
-function showImportInfo(message){
-
-  importInfoBox.textContent=message;
-  importInfoBox.classList.add("show");
-}
-
-function renderImportPreview(runs){
-
-  parsedImportRuns=runs;
-
-  importPreview.classList.add("show");
-
-  importErrorBox.textContent="";
-  importErrorBox.classList.remove("show");
-
-  importPreviewTableBody.innerHTML="";
-
-  const totalKm=runs.reduce(
-    (total,run)=>total+Number(run.distance_km||0),
-    0
-  );
-
-  const dates=runs
-    .map(run=>run.run_date)
-    .filter(Boolean)
-    .sort();
-
-  importRunCount.textContent=runs.length.toLocaleString("de-DE");
-  importKmTotal.textContent=formatNumber(totalKm)+" km";
-
-  if(dates.length)
-    importDateRange.textContent=
-      formatDate(dates[0])+" – "+formatDate(dates[dates.length-1]);
-  else
-    importDateRange.textContent="—";
-
-  importPreviewStatus.textContent=
-    runs.length+(runs.length===1?" Lauf erkannt":" Läufe erkannt");
-
-  runs.slice(0,10).forEach(run=>{
-
-    const tr=document.createElement("tr");
-
-    const date=document.createElement("td");
-    date.textContent=formatDate(run.run_date);
-
-    const distance=document.createElement("td");
-    distance.textContent=formatNumber(run.distance_km)+" km";
-
-    const duration=document.createElement("td");
-    duration.textContent=formatDuration(run.duration_seconds);
-
-    const type=document.createElement("td");
-    type.textContent=getImportedRunTypeLabel(run.run_type);
-
-    const note=document.createElement("td");
-    note.textContent=run.note||"—";
-
-    tr.appendChild(date);
-    tr.appendChild(distance);
-    tr.appendChild(duration);
-    tr.appendChild(type);
-    tr.appendChild(note);
-
-    importPreviewTableBody.appendChild(tr);
-  });
-
-  if(runs.length>10){
-
-    const tr=document.createElement("tr");
-    const td=document.createElement("td");
-
-    td.colSpan=5;
-    td.textContent="… und "+(runs.length-10)+" weitere Läufe.";
-    td.style.color="#7d8582";
-
-    tr.appendChild(td);
-    importPreviewTableBody.appendChild(tr);
-  }
-
-  importRunsButton.disabled=!currentUser||!runs.length;
-}
-
-function getRunImportKey(run){
-
-  const date=String(run.run_date||"").trim();
-  const distance=Number(run.distance_km||0).toFixed(3);
-  const duration=Number(run.duration_seconds||0);
-  const type=String(run.run_type||"normal").trim().toLowerCase();
-  const note=String(run.note||"").trim().toLowerCase();
-
-  return[date,distance,duration,type,note].join("|");
-}
-
-function parseImportedCsv(text){
-
-  const cleanedText=String(text||"").replace(/^\uFEFF/,"");
-
-  if(!cleanedText.trim())
-    throw new Error("Die CSV-Datei ist leer.");
-
-  const delimiter=detectCsvDelimiter(cleanedText);
-  const rows=parseCsvText(cleanedText,delimiter);
-
-  if(rows.length<2)
-    throw new Error("Die CSV-Datei enthält keine Datenzeilen.");
-
-  const headers=rows[0];
-
-  const dateIndex=findCsvColumn(headers,[
-    "date","datum","run_date","start_date","activity_date",
-    "activitydate","startdate","aktivitätsdatum","aktivitaetsdatum",
-    "laufdatum","startzeit","datetime","timestamp"
-  ]);
-
-  const distanceIndex=findCsvColumn(headers,[
-    "distance","distanz","distance_km","distance km","km",
-    "kilometer","kilometers","distance(km)","distanz(km)",
-    "distance m","distance(m)","meter","meters","distance mi",
-    "distance(mi)","mile","miles"
-  ]);
-
-  let durationIndex=findCsvColumn(headers,[
-    "moving_time","movingtime","bewegungszeit","moving time"
-  ]);
-
-  if(durationIndex===-1){
-
-    durationIndex=findCsvColumn(headers,[
-      "duration","dauer","zeit","time","elapsed_time",
-      "elapsedtime","verstrichenezeit","verstrichene zeit"
-    ]);
-  }
-
-  const typeIndex=findCsvColumn(headers,[
-    "run_type","runtype","type","sport","activity_type",
-    "activitytype","activity","aktivitätsart","aktivitaetsart",
-    "laufart","sportart"
-  ]);
-
-  const noteIndex=findCsvColumn(headers,[
-    "note","notiz","name","activity_name","activityname",
-    "activity name","title","beschreibung","description",
-    "name der aktivität","name der aktivitaet"
-  ]);
-
-  if(dateIndex===-1)
-    throw new Error(
-      "Keine Datumsspalte erkannt. Erwartet wird z. B. „Aktivitätsdatum“, „Datum“, „Activity Date“ oder „run_date“."
-    );
-
-  if(distanceIndex===-1)
-    throw new Error(
-      "Keine Distanzspalte erkannt. Erwartet wird z. B. „Distanz“, „Distance“, „km“ oder „distance_km“."
-    );
-
-  const importedRuns=[];
-  const errors=[];
-
-  let skippedNonRuns=0;
-  let skippedZeroDistance=0;
-  let skippedInvalid=0;
-
-  for(let rowIndex=1;rowIndex<rows.length;rowIndex++){
-
-    const row=rows[rowIndex];
-
-    if(
-      !row||
-      !row.some(value=>String(value).trim()!=="")
-    )continue;
-
-    if(typeIndex!==-1){
-
-      const rawActivityType=String(row[typeIndex]||"")
-        .trim()
-        .toLowerCase();
-
-      const normalizedActivityType=rawActivityType
-        .normalize("NFD")
-        .replace(/[\u0300-\u036f]/g,"");
-
-      const isRun=
-        normalizedActivityType==="lauf"||
-        normalizedActivityType==="run"||
-        normalizedActivityType==="running"||
-        normalizedActivityType.includes("lauf");
-
-      if(!isRun){
-
-        skippedNonRuns++;
-        continue;
-      }
-    }
-
-    const rawDate=row[dateIndex];
-    const rawDistance=row[distanceIndex];
-
-    const parsedDate=parseCsvDate(rawDate);
-
-    if(!parsedDate){
-
-      errors.push(
-        "Zeile "+(rowIndex+1)+": ungültiges Datum („"+
-        String(rawDate||"")+"“)."
-      );
-
-      skippedInvalid++;
-      continue;
-    }
-
-    const parsedDistance=parseCsvDistance(
-      rawDistance,
-      headers[distanceIndex]
-    );
-
-    if(
-      !Number.isFinite(parsedDistance)||
-      parsedDistance<=0
-    ){
-
-      skippedZeroDistance++;
-      continue;
-    }
-
-    let duration=null;
-
-    if(durationIndex!==-1)
-      duration=parseCsvDuration(row[durationIndex]);
-
-    const type=
-      typeIndex!==-1
-        ?normalizeImportedRunType(row[typeIndex])
-        :"normal";
-
-    const note=
-      noteIndex!==-1
-        ?String(row[noteIndex]||"").trim()
-        :"";
-
-    importedRuns.push({
-      run_date:parsedDate,
-      distance_km:Math.round(parsedDistance*1000)/1000,
-      duration_seconds:duration,
-      note:note?note.substring(0,500):null,
-      run_type:type,
-      photo_path:null,
-      best_time_category:null
-    });
-  }
-
-  if(!importedRuns.length)
-    throw new Error(
-      "Es konnte kein gültiger Lauf gefunden werden. Bitte prüfe, ob deine CSV tatsächlich Laufaktivitäten enthält."
-    );
-
-  return{
-    runs:importedRuns,
-    errors,
-    skippedNonRuns,
-    skippedZeroDistance,
-    skippedInvalid,
-    totalDataRows:rows.length-1,
-    detectedTypeColumn:typeIndex!==-1,
-    detectedDateColumn:headers[dateIndex],
-    detectedDistanceColumn:headers[distanceIndex],
-    detectedDurationColumn:durationIndex!==-1?headers[durationIndex]:null,
-    detectedNoteColumn:noteIndex!==-1?headers[noteIndex]:null
-  };
-}
-
-csvImportFile.addEventListener("change",async function(){
-
-  clearImportPreview();
-
-  const file=
-    csvImportFile.files&&csvImportFile.files[0]
-      ?csvImportFile.files[0]
-      :null;
-
-  if(!file)return;
-
-  if(!currentUser){
-
-    showImportError(
-      "Bitte melde dich zuerst an, um deine Laufhistorie zu importieren."
-    );
-
-    importPreview.classList.add("show");
-
-    return;
-  }
-
-  try{
-
-    importPreview.classList.add("show");
-    importPreviewStatus.textContent="CSV wird geprüft …";
-
-    const text=await file.text();
-    const result=parseImportedCsv(text);
-
-    renderImportPreview(result.runs);
-
-    if(result.skippedNonRuns>0){
-
-      showImportInfo(
-        result.skippedNonRuns+
-        (result.skippedNonRuns===1
-          ?" andere Aktivität wurde"
-          :" andere Aktivitäten wurden")+
-        " automatisch übersprungen. Es werden nur Laufaktivitäten importiert."
-      );
-    }
-
-    const details=[];
-
-    if(result.detectedDateColumn)
-      details.push("Datum: "+result.detectedDateColumn);
-
-    if(result.detectedDistanceColumn)
-      details.push("Distanz: "+result.detectedDistanceColumn);
-
-    if(result.detectedDurationColumn)
-      details.push("Zeit: "+result.detectedDurationColumn);
-
-    if(result.detectedTypeColumn)
-      details.push("Aktivitätsart erkannt");
-
-    if(details.length){
-
-      showImportInfo(
-        (result.skippedNonRuns>0
-          ?result.skippedNonRuns+" andere Aktivitäten wurden übersprungen. "
-          :"")+
-        details.join(" · ")
-      );
-    }
-
-    if(result.errors.length){
-
-      showImportError(
-        result.errors.slice(0,8).join(" ")+
-        (result.errors.length>8
-          ?" Weitere fehlerhafte Zeilen wurden ebenfalls übersprungen."
-          :"")
-      );
-    }
-
-    importMessage.textContent=
-      result.runs.length+
-      " Läufe sind bereit für den Import.";
-
-  }catch(error){
-
-    console.error("CSV Import:",error);
-
-    importPreview.classList.add("show");
-    importPreviewStatus.textContent="Prüfung fehlgeschlagen";
-
-    showImportError(
-      error&&error.message
-        ?error.message
-        :"Die CSV-Datei konnte nicht gelesen werden."
-    );
-
-    importRunsButton.disabled=true;
-  }
-});
-
-async function importRunsInBatches(runs){
-
-  if(!currentUser)
-    throw new Error("Bitte melde dich zuerst an.");
-
-  if(!runs||!runs.length)
-    throw new Error("Es wurden keine Läufe zum Import gefunden.");
-
-  let existingRuns=Array.isArray(currentRuns)?currentRuns:[];
-
-  if(!existingRuns.length){
-
-    const{data,error}=await supabaseClient
-      .from("runs")
-      .select("id, run_date, distance_km, duration_seconds, note, run_type, best_time_category")
-      .eq("user_id",currentUser.id)
-      .limit(10000);
-
-    if(error){
-
-      console.error(
-        "Bestehende Läufe für Duplikatprüfung:",
-        error
-      );
-
-    }else{
-
-      existingRuns=data||[];
-    }
-  }
-
-  const seenKeys=new Set(existingRuns.map(getRunImportKey));
-  const runsToImport=[];
-  let skippedDuplicates=0;
-
-  for(const run of runs){
-
-    const key=getRunImportKey(run);
-
-    if(skipDuplicateRuns.checked&&seenKeys.has(key)){
-
-      skippedDuplicates++;
-      continue;
-    }
-
-    seenKeys.add(key);
-    runsToImport.push(run);
-  }
-
-  if(!runsToImport.length)
-    return{imported:0,skippedDuplicates};
-
-  let importedCount=0;
-
-  for(
-    let start=0;
-    start<runsToImport.length;
-    start+=IMPORT_BATCH_SIZE
-  ){
-
-    const batch=runsToImport
-      .slice(start,start+IMPORT_BATCH_SIZE)
-      .map(run=>({
-        user_id:currentUser.id,
-        run_date:run.run_date,
-        distance_km:run.distance_km,
-        duration_seconds:run.duration_seconds,
-        note:run.note||null,
-        run_type:run.run_type||"normal",
-        photo_path:null,
-        best_time_category:null
-      }));
-
-    const{data,error}=await supabaseClient
-      .from("runs")
-      .insert(batch)
-      .select();
-
-    if(error){
-
-      console.error("CSV Batch Import:",error);
-
-      throw new Error(
-        "Der Import ist nach "+
-        importedCount+
-        " Läufen abgebrochen: "+
-        (error.message||"Unbekannter Datenbankfehler.")
-      );
-    }
-
-    importedCount+=Array.isArray(data)?data.length:batch.length;
-
-    importPreviewStatus.textContent=
-      importedCount+" / "+runsToImport.length+" Läufe importiert …";
-  }
-
-  return{
-    imported:importedCount,
-    skippedDuplicates
-  };
-}
-
-importRunsButton.addEventListener("click",async function(){
-
-  if(!currentUser){
-
-    setMessage(
-      importMessage,
-      "Bitte melde dich zuerst an."
-    );
-
-    return;
-  }
-
-  if(!parsedImportRuns.length){
-
-    setMessage(
-      importMessage,
-      "Bitte wähle zuerst eine gültige CSV-Datei aus."
-    );
-
-    return;
-  }
-
-  importRunsButton.disabled=true;
-  csvImportFile.disabled=true;
-
-  setMessage(
-    importMessage,
-    "Import wird vorbereitet …",
-    true
-  );
-
-  try{
-
-    const result=await importRunsInBatches(parsedImportRuns);
-
-    const imported=result.imported;
-    const skipped=result.skippedDuplicates;
-
-    let message=
-      imported+
-      (imported===1?" Lauf wurde":" Läufe wurden")+
-      " erfolgreich importiert.";
-
-    if(skipped>0){
-
-      message+=" "+skipped+
-        (skipped===1
-          ?" bereits vorhandener Lauf wurde"
-          :" bereits vorhandene Läufe wurden")+
-        " übersprungen.";
-    }
-
-    setMessage(importMessage,message,true);
-
-    importPreviewStatus.textContent="Import abgeschlossen";
-
-    currentRuns=[];
-
-    await loadRuns();
-
-    csvImportFile.value="";
-    parsedImportRuns=[];
-    importRunsButton.disabled=true;
-
-  }catch(error){
-
-    console.error("CSV Import:",error);
-
-    setMessage(
-      importMessage,
-      error&&error.message
-        ?error.message
-        :"Der Import konnte nicht vollständig abgeschlossen werden."
-    );
-
-  }finally{
-
-    csvImportFile.disabled=!currentUser;
-
-    if(parsedImportRuns.length&&currentUser)
-      importRunsButton.disabled=false;
-  }
-});
-
-downloadCsvTemplateButton.addEventListener("click",function(){
-
-  const csv=[
-    ["Datum","Distanz","Dauer","Laufart","Notiz"].join(";"),
-    ["2026-09-21","10,00","00:52:30","Normaler Lauf","Beispiel Lauf"].join(";"),
-    ["2026-09-20","21,10","01:48:20","Wettkampf","Halbmarathon"].join(";")
-  ].join("\r\n");
-
-  const blob=new Blob(
-    ["\uFEFF"+csv],
-    {type:"text/csv;charset=utf-8;"}
-  );
-
-  const url=URL.createObjectURL(blob);
-  const link=document.createElement("a");
-
-  link.href=url;
-  link.download="miles-apart-laufhistorie-vorlage.csv";
-
-  document.body.appendChild(link);
-  link.click();
-  link.remove();
-
-  URL.revokeObjectURL(url);
-});
-
-function getDemoWeeklyRuns(){
-
-  const today=new Date();
-  const jsDay=today.getDay();
-  const todayIndex=jsDay===0?6:jsDay-1;
-  const weekStart=startOfWeek(today);
-  const runs=[];
-
-  for(let index=0;index<=todayIndex;index++){
-
-    const date=new Date(weekStart);
-    date.setDate(date.getDate()+index);
-
-    const year=date.getFullYear();
-    const month=String(date.getMonth()+1).padStart(2,"0");
-    const day=String(date.getDate()).padStart(2,"0");
-
-    runs.push({
-      run_date:`${year}-${month}-${day}`,
-      distance_km:DEMO_DAILY_KM[index],
-      duration_seconds:Math.round(DEMO_DAILY_KM[index]*330),
-      note:"Miles Apart Vorschau",
-      run_type:"normal",
-      best_time_category:null
-    });
-  }
-
-  return[...runs,...DEMO_RUNS];
-}
-
-function updateDashboardDate(){
-
-  const today=new Date();
-
-  dashboardDate.textContent=formatLongDate(today);
-
-  currentDayBadge.textContent=(
-    "HEUTE / "+
-    today.toLocaleDateString("de-DE",{
-      day:"2-digit",
-      month:"2-digit"
-    })
-  ).toUpperCase();
-}
-
-function calculateTotals(runs){
-
-  const now=new Date();
-  const weekStart=startOfWeek(now);
-
-  const monthStart=new Date(
-    now.getFullYear(),
-    now.getMonth(),
-    1
-  );
-
-  const yearStart=new Date(
-    now.getFullYear(),
-    0,
-    1
-  );
-
-  let week=0;
-  let month=0;
-  let year=0;
-
-  const daily=[0,0,0,0,0,0,0];
-
-  runs.forEach(run=>{
-
-    const date=dateFromRun(run);
-    const distance=Number(run.distance_km||0);
-
-    if(date>=yearStart)year+=distance;
-    if(date>=monthStart)month+=distance;
-
-    if(date>=weekStart){
-
-      week+=distance;
-
-      const jsDay=date.getDay();
-      const mondayIndex=jsDay===0?6:jsDay-1;
-
-      daily[mondayIndex]+=distance;
-    }
-  });
-
-  return{week,month,year,daily};
-}
-
-function renderDailyChart(daily){
-
-  dailyChart.innerHTML="";
-
-  const labels=["Mo","Di","Mi","Do","Fr","Sa","So"];
-
-  const max=Math.max(...daily,1);
-
-  const today=new Date();
-  const todayJsDay=today.getDay();
-  const todayIndex=todayJsDay===0?6:todayJsDay-1;
-
-  daily.forEach((value,index)=>{
-
-    const column=document.createElement("div");
-    column.className="daily-column";
-
-    if(index===todayIndex)column.classList.add("today");
-    if(index>todayIndex)column.classList.add("future");
-
-    const valueElement=document.createElement("div");
-    valueElement.className="daily-value";
-    valueElement.textContent=value>0?formatNumber(value):"—";
-
-    const barArea=document.createElement("div");
-    barArea.className="daily-bar-area";
-
-    const bar=document.createElement("div");
-    bar.className="daily-bar";
-
-    const height=value>0?Math.max(5,(value/max)*100):2;
-
-    bar.style.height=height+"%";
-    barArea.appendChild(bar);
-
-    const label=document.createElement("div");
-    label.className="daily-label";
-    label.textContent=labels[index];
-
-    column.appendChild(valueElement);
-    column.appendChild(barArea);
-    column.appendChild(label);
-
-    dailyChart.appendChild(column);
-  });
-}
-
-function renderTotals(totals){
-
-  weekTotal.textContent=formatNumber(totals.week)+" km";
-  monthTotal.textContent=formatNumber(totals.month)+" km";
-  yearTotal.textContent=formatNumber(totals.year)+" km";
-
-  const largest=Math.max(
-    totals.week,
-    totals.month,
-    totals.year,
-    1
-  );
-
-  weekBar.style.width=(totals.week/largest*100)+"%";
-  monthBar.style.width=(totals.month/largest*100)+"%";
-  yearBar.style.width=(totals.year/largest*100)+"%";
-
-  const progress=Math.min(100,(totals.week/30)*100);
-
-  sidebarWeekKm.textContent=
-    formatNumber(totals.week)+" / 30 KM";
-
-  sidebarWeekProgress.style.width=progress+"%";
-
-  sidebarWeekText.textContent=
-    totals.week>=30
-      ?"Wochenziel erreicht."
-      :formatNumber(30-totals.week)+" km bis zum Wochenziel.";
-}
-
-function findBestRunByCategory(runs,category){
-
-  const eligible=runs.filter(run=>{
-
-    const duration=Number(run.duration_seconds);
-
-    return(
-      run.best_time_category===category&&
-      duration>0
-    );
-  });
-
-  if(!eligible.length)return null;
-
-  eligible.sort(
-    (a,b)=>
-      Number(a.duration_seconds)-
-      Number(b.duration_seconds)
-  );
-
-  return eligible[0];
-}
-
 /* =========================================================
-   BESTZEIT DARSTELLUNG
-   Gesamtzeit groß + Pace daneben
+   BEARBEITIEREN
 ========================================================= */
 
-function renderBestTime(key,run){
+function setRunFormMode(editing){
 
-  const elements=bestElements[key];
+  runEntryCard.classList.toggle("editing",editing);
 
-  if(!elements)return;
+  if(editing){
 
-  if(!run){
+    runFormTitle.textContent="Lauf bearbeiten";
 
-    elements.value.textContent="Noch kein Lauf";
+    runFormDescription.textContent=
+      "Korrigiere die Angaben deines bereits gespeicherten Laufs. "+
+      "Ohne neues Foto bleibt der bisherige Nachweis erhalten.";
 
-    elements.value.classList.add("empty");
+    runLoginLabel.textContent="Lauf wird bearbeitet";
 
-    elements.date.textContent="";
-    elements.note.textContent="";
+    saveRunButton.textContent="Änderungen speichern →";
 
-    return;
-  }
+    cancelEditButton.style.display="inline-flex";
 
-  const duration=formatDuration(run.duration_seconds);
+    runPhoto.required=false;
 
-  const pace=formatPace(
-    run.duration_seconds,
-    run.distance_km
-  );
-
-  /*
-   * 100+ km:
-   *
-   * 160,0 km · 18:42:15
-   *
-   * Die Pace steht kleiner darunter.
-   */
-  if(key==="100plus"){
-
-    elements.value.textContent=
-      formatNumber(run.distance_km)+
-      " km · "+
-      duration;
-
-    elements.value.classList.remove("empty");
-
-    elements.date.textContent=
-      formatDate(run.run_date);
-
-    elements.note.innerHTML=
-      '<span class="best-time-pace">'+
-      pace+
-      "</span>"+
-      (run.note?" · "+run.note:"");
-
-    return;
-  }
-
-  /*
-   * Normale PB:
-   *
-   * 18:30 · 03:42 min/km
-   *
-   * Gesamtzeit groß,
-   * Pace kleiner daneben.
-   */
-  elements.value.innerHTML=
-    duration+
-    ' <span class="best-time-pace">· '+
-    pace+
-    "</span>";
-
-  elements.value.classList.remove("empty");
-
-  elements.date.textContent=
-    formatDate(run.run_date);
-
-  elements.note.textContent=
-    run.note||"";
-}
-
-function renderBestTimes(runs){
-
-  renderBestTime("5k",findBestRunByCategory(runs,"5k"));
-  renderBestTime("10k",findBestRunByCategory(runs,"10k"));
-  renderBestTime("half",findBestRunByCategory(runs,"half"));
-  renderBestTime("marathon",findBestRunByCategory(runs,"marathon"));
-  renderBestTime("50k",findBestRunByCategory(runs,"50k"));
-  renderBestTime("100k",findBestRunByCategory(runs,"100k"));
-  renderBestTime("100plus",findBestRunByCategory(runs,"100plus"));
-
-  const longest=runs.reduce(
-    (longestRun,run)=>{
-
-      if(
-        !longestRun||
-        Number(run.distance_km)>
-        Number(longestRun.distance_km)
-      )return run;
-
-      return longestRun;
-    },
-    null
-  );
-
-  const longestElement=document.getElementById("longestRun");
-  const longestDate=document.getElementById("longestRunDate");
-  const longestNote=document.getElementById("longestRunNote");
-
-  if(!longest){
-
-    longestElement.textContent="Noch kein Lauf";
-    longestElement.classList.add("empty");
-    longestDate.textContent="";
-    longestNote.textContent="";
+    runPhotoHelp.textContent=
+      "Optional: Wähle ein neues Foto, wenn du den bisherigen Nachweis ersetzen möchtest. Maximal 10 MB.";
 
   }else{
 
-    longestElement.textContent=
-      formatNumber(longest.distance_km)+" km";
+    runFormTitle.textContent="Einen Lauf speichern";
 
-    longestElement.classList.remove("empty");
+    runFormDescription.textContent=
+      "Der Lauf wird für deine Kilometer berücksichtigt. "+
+      "Eine Bestzeit wird nur übernommen, wenn du sie ausdrücklich als solche markierst.";
 
-    longestDate.textContent=
-      formatDate(longest.run_date);
+    runLoginLabel.textContent=
+      currentUser?"Eingeloggt":"Anmeldung erforderlich";
 
-    longestNote.textContent=
-      longest.note||
-      longest.run_type||
-      "";
+    saveRunButton.textContent=
+      currentUser
+        ?"Lauf speichern →"
+        :"Anmelden, um Lauf zu speichern →";
+
+    cancelEditButton.style.display="none";
+
+    runPhoto.required=true;
+
+    runPhotoHelp.textContent=
+      "Pflicht: z. B. Strava-Screenshot, Rennfoto oder Ergebnisnachweis. Maximal 10 MB.";
   }
 }
 
-function getBestCategoryLabel(category){
+function getDurationParts(seconds){
 
-  if(!category||!BEST_TIME_CATEGORIES[category])return"";
+  const total=Math.max(0,Math.round(Number(seconds)||0));
 
-  return BEST_TIME_CATEGORIES[category].label;
+  return{
+    hours:Math.floor(total/3600),
+    minutes:Math.floor((total%3600)/60),
+    seconds:total%60
+  };
 }
+
+async function startEditRun(runId){
+
+  if(!currentUser){
+
+    openAuth();
+    return;
+  }
+
+  const run=currentRuns.find(
+    item=>String(item.id)===String(runId)
+  );
+
+  if(!run){
+
+    setMessage(
+      runFormMessage,
+      "Dieser Lauf konnte nicht gefunden werden."
+    );
+
+    return;
+  }
+
+  if(run.user_id&&String(run.user_id)!==String(currentUser.id)){
+
+    setMessage(
+      runFormMessage,
+      "Du kannst nur deine eigenen Läufe bearbeiten."
+    );
+
+    return;
+  }
+
+  editingRunId=run.id;
+  editingRunOriginalPhotoPath=run.photo_path||null;
+  editingRunOriginalPhotoUrl=null;
+
+  runDate.value=run.run_date||"";
+  runDistance.value=
+    Number.isFinite(Number(run.distance_km))
+      ?Number(run.distance_km)
+      :"";
+
+  runType.value=run.run_type||"normal";
+
+  const durationParts=getDurationParts(run.duration_seconds);
+
+  runHours.value=durationParts.hours||"";
+  runMinutes.value=durationParts.minutes||"";
+  runSeconds.value=durationParts.seconds||"";
+
+  runNote.value=run.note||"";
+
+  runIsBestTime.checked=Boolean(run.best_time_category);
+
+  if(run.best_time_category){
+
+    runBestCategory.value=run.best_time_category;
+
+    updateBestTimeControls();
+
+    /*
+     * Beim Bearbeiten soll die gespeicherte PB-Kategorie
+     * nicht automatisch durch die Distanz-Vorschlagslogik
+     * überschrieben werden.
+     */
+    if(
+      !isDistanceValidForCategory(
+        run.distance_km,
+        run.best_time_category
+      )
+    ){
+
+      bestTimeSuggestion.classList.add("warning");
+
+      bestTimeSuggestion.textContent=
+        "Die aktuell gespeicherte Bestzeit-Kategorie passt nicht zur eingegebenen Distanz. Bitte korrigiere die Angaben.";
+
+    }
+
+  }else{
+
+    resetBestTimeControls();
+  }
+
+  resetRunPhoto();
+
+  setRunFormMode(true);
+
+  await showExistingRunPhoto(run.photo_path||null);
+
+  setMessage(
+    runFormMessage,
+    "Du bearbeitest jetzt den Lauf vom "+
+    formatDate(run.run_date)+".",
+    true
+  );
+
+  runEntryCard.scrollIntoView({
+    behavior:"smooth",
+    block:"start"
+  });
+}
+
+function cancelEditRun(){
+
+  editingRunId=null;
+  editingRunOriginalPhotoPath=null;
+  editingRunOriginalPhotoUrl=null;
+
+  runForm.reset();
+
+  runDate.value=getTodayDateString();
+
+  resetRunPhoto();
+  resetBestTimeControls();
+  setRunFormMode(false);
+
+  clearMessages();
+}
+
+cancelEditButton.addEventListener("click",function(){
+  cancelEditRun();
+});
 
 function renderRunsList(runs){
 
@@ -4505,6 +3623,37 @@ function renderRunsList(runs){
       distance.appendChild(pbBadge);
     }
 
+    /*
+     * Bearbeiten erscheint nur bei eingeloggten Nutzern.
+     * Die zusätzliche user_id-Prüfung verhindert,
+     * dass ein fremder Lauf über die UI bearbeitet wird.
+     */
+    if(
+      currentUser&&
+      (!run.user_id||
+       String(run.user_id)===String(currentUser.id))
+    ){
+
+      const actions=document.createElement("div");
+
+      actions.className="run-list-actions";
+
+      const editButton=document.createElement("button");
+
+      editButton.type="button";
+      editButton.className="run-edit-button";
+      editButton.textContent="Bearbeiten";
+
+      editButton.addEventListener("click",function(){
+
+        startEditRun(run.id);
+
+      });
+
+      actions.appendChild(editButton);
+      distance.appendChild(actions);
+    }
+
     const time=document.createElement("div");
     time.className="run-list-time";
     time.textContent=formatDuration(run.duration_seconds);
@@ -4522,1148 +3671,56 @@ function renderRunsList(runs){
   });
 }
 
-function renderRunDashboard(runs){
+/* =========================================================
+   CSV IMPORT
+========================================================= */
 
-  const totals=calculateTotals(runs);
+function normalizeCsvHeader(value){
 
-  renderDailyChart(totals.daily);
-  renderTotals(totals);
-  renderBestTimes(runs);
-  renderRunsList(runs);
+  return String(value||"")
+    .replace(/^\uFEFF/,"")
+    .trim()
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g,"")
+    .replace(/[\s_\-()./]+/g,"");
 }
 
-async function loadRuns(){
+function detectCsvDelimiter(text){
 
-  if(!currentUser){
+  const firstLines=text
+    .split(/\r?\n/)
+    .filter(line=>line.trim())
+    .slice(0,5);
 
-    currentRuns=getDemoWeeklyRuns();
+  const sample=firstLines.join("\n");
 
-    renderRunDashboard(currentRuns);
+  let commaCount=0;
+  let semicolonCount=0;
+  let tabCount=0;
+  let insideQuotes=false;
 
-    return;
-  }
+  for(let i=0;i<sample.length;i++){
 
-  const PAGE_SIZE=1000;
+    const char=sample[i];
+    const next=sample[i+1];
 
-  let allRuns=[];
-  let from=0;
+    if(char==='"'){
 
-  while(true){
+      if(insideQuotes&&next==='"'){
+        i++;
+        continue;
+      }
 
-    const{data,error}=await supabaseClient
-      .from("runs")
-      .select(
-        "id, run_date, distance_km, duration_seconds, note, run_type, photo_path, best_time_category, created_at"
-      )
-      .eq("user_id",currentUser.id)
-      .order("run_date",{ascending:false})
-      .range(from,from+PAGE_SIZE-1);
-
-    if(error){
-
-      console.error("Läufe konnten nicht geladen werden:",error);
-
-      currentRuns=[];
-      renderRunDashboard([]);
-
-      setMessage(
-        runFormMessage,
-        "Die Läufe konnten gerade nicht geladen werden."
-      );
-
-      return;
+      insideQuotes=!insideQuotes;
+      continue;
     }
 
-    const page=data||[];
+    if(insideQuotes)continue;
 
-    allRuns.push(...page);
-
-    if(page.length<PAGE_SIZE)break;
-
-    from+=PAGE_SIZE;
+    if(char===",")commaCount++;
+    if(char===";")semicolonCount++;
+    if(char==="\t")tabCount++;
   }
 
-  currentRuns=allRuns;
-
-  renderRunDashboard(currentRuns);
-}
-
-runForm.addEventListener("submit",async function(event){
-
-  event.preventDefault();
-
-  clearMessages();
-
-  if(!currentUser){
-
-    openAuth();
-    return;
-  }
-
-  const date=runDate.value;
-  const distance=Number(runDistance.value);
-  const duration=parseDuration();
-  const note=runNote.value.trim();
-  const photo=selectedRunPhoto;
-  const isBestTime=runIsBestTime.checked;
-
-  const bestTimeCategory=
-    isBestTime
-      ?runBestCategory.value
-      :null;
-
-  if(!date){
-
-    setMessage(runFormMessage,"Bitte gib das Laufdatum ein.");
-    return;
-  }
-
-  if(!distance||distance<=0){
-
-    setMessage(runFormMessage,"Bitte gib eine gültige Distanz ein.");
-    return;
-  }
-
-  if(Number.isNaN(duration)){
-
-    setMessage(
-      runFormMessage,
-      "Minuten und Sekunden dürfen maximal 59 sein."
-    );
-
-    return;
-  }
-
-  if(!duration||duration<=0){
-
-    setMessage(
-      runFormMessage,
-      "Bitte gib eine Laufzeit ein."
-    );
-
-    return;
-  }
-
-  if(isBestTime){
-
-    if(runType.value!=="race"){
-
-      setMessage(
-        runFormMessage,
-        "Eine persönliche Bestzeit kann nur für einen Lauf der Art „Wettkampf“ gespeichert werden."
-      );
-
-      return;
-    }
-
-    if(!bestTimeCategory){
-
-      setMessage(
-        runFormMessage,
-        "Bitte wähle aus, für welche Distanz dieser Lauf als Bestzeit zählen soll."
-      );
-
-      return;
-    }
-
-    if(
-      !isDistanceValidForCategory(
-        distance,
-        bestTimeCategory
-      )
-    ){
-
-      setMessage(
-        runFormMessage,
-        "Die eingegebene Distanz passt nicht zur ausgewählten Bestzeit-Kategorie."
-      );
-
-      return;
-    }
-  }
-
-  if(!photo){
-
-    setMessage(
-      runFormMessage,
-      "Bitte lade ein Foto oder einen Nachweis hoch. Das Foto ist für jeden Lauf erforderlich."
-    );
-
-    runPhoto.focus();
-
-    return;
-  }
-
-  if(photo.size>MAX_RUN_PHOTO_SIZE){
-
-    setMessage(
-      runFormMessage,
-      "Das Foto ist zu groß. Maximal 10 MB sind erlaubt."
-    );
-
-    return;
-  }
-
-  setButtonLoading(
-    saveRunButton,
-    true,
-    "Lauf speichern →"
-  );
-
-  let uploadedPhotoPath=null;
-
-  try{
-
-    setMessage(
-      runFormMessage,
-      "Foto wird hochgeladen …",
-      true
-    );
-
-    uploadedPhotoPath=await uploadRunPhoto(photo);
-
-    setMessage(
-      runFormMessage,
-      "Lauf wird gespeichert …",
-      true
-    );
-
-    const runPayload={
-      user_id:currentUser.id,
-      run_date:date,
-      distance_km:distance,
-      duration_seconds:duration,
-      note:note||null,
-      run_type:runType.value,
-      photo_path:uploadedPhotoPath,
-      best_time_category:bestTimeCategory
-    };
-
-    const{data,error}=await supabaseClient
-      .from("runs")
-      .insert(runPayload)
-      .select()
-      .single();
-
-    if(error){
-
-      if(uploadedPhotoPath)
-        await deleteRunPhoto(uploadedPhotoPath);
-
-      console.error("Lauf speichern:",error);
-
-      throw new Error(
-        error.message||
-        "Der Lauf konnte nicht gespeichert werden."
-      );
-    }
-
-    currentRuns.unshift(data);
-
-    runForm.reset();
-
-    runDate.value=getTodayDateString();
-
-    resetRunPhoto();
-    resetBestTimeControls();
-
-    setMessage(
-      runFormMessage,
-      isBestTime
-        ?(
-          "Lauf und Foto erfolgreich gespeichert. Der Lauf wurde als "+
-          getBestCategoryLabel(bestTimeCategory)+
-          "-Bestzeit markiert."
-        )
-        :"Lauf und Foto erfolgreich gespeichert.",
-      true
-    );
-
-    renderRunDashboard(currentRuns);
-
-  }catch(error){
-
-    console.error("Lauf speichern:",error);
-
-    setMessage(
-      runFormMessage,
-      error&&error.message
-        ?error.message
-        :"Der Lauf konnte nicht gespeichert werden."
-    );
-
-  }finally{
-
-    setButtonLoading(
-      saveRunButton,
-      false,
-      "Lauf speichern →"
-    );
-  }
-});
-
-function openAuth(){
-
-  authOverlay.classList.add("open");
-  document.body.style.overflow="";
-
-  document.body.style.overflow="hidden";
-
-  showLogin();
-}
-
-function closeAuth(){
-
-  authOverlay.classList.remove("open");
-  document.body.style.overflow="";
-  clearMessages();
-}
-
-openLoginButton.addEventListener("click",openAuth);
-closeAuthButton.addEventListener("click",closeAuth);
-
-authOverlay.addEventListener("click",function(event){
-
-  if(event.target===authOverlay)closeAuth();
-});
-
-document.addEventListener("keydown",function(event){
-
-  if(
-    event.key==="Escape"&&
-    authOverlay.classList.contains("open")
-  )closeAuth();
-});
-
-function hideAllForms(){
-
-  loginForm.classList.remove("active");
-  registerForm.classList.remove("active");
-  forgotForm.classList.remove("active");
-  recoveryForm.classList.remove("active");
-}
-
-function showLogin(){
-
-  hideAllForms();
-  clearMessages();
-
-  loginForm.classList.add("active");
-
-  authTabs.style.display="grid";
-
-  loginTab.classList.add("active");
-  registerTab.classList.remove("active");
-
-  authTitle.textContent="Willkommen zurück.";
-  authDescription.textContent=
-    "Melde dich an und werde Teil der Community.";
-}
-
-function showRegister(){
-
-  hideAllForms();
-  clearMessages();
-
-  registerForm.classList.add("active");
-
-  authTabs.style.display="grid";
-
-  registerTab.classList.add("active");
-  loginTab.classList.remove("active");
-
-  authTitle.textContent="Werde Teil der Community.";
-  authDescription.textContent=
-    "Zwei kleine Schritte. Dann bist du dabei.";
-
-  resetRegistrationGate();
-}
-
-function showForgotPassword(){
-
-  hideAllForms();
-  clearMessages();
-
-  forgotForm.classList.add("active");
-
-  authTabs.style.display="none";
-
-  authTitle.textContent="Passwort zurücksetzen.";
-  authDescription.textContent=
-    "Wir schicken dir einen Link, mit dem du ein neues Passwort festlegen kannst.";
-}
-
-function showRecovery(){
-
-  hideAllForms();
-  clearMessages();
-
-  recoveryForm.classList.add("active");
-
-  authTabs.style.display="none";
-
-  authTitle.textContent="Neues Passwort festlegen.";
-  authDescription.textContent=
-    "Wähle ein neues Passwort für dein Miles-Apart-Konto.";
-}
-
-loginTab.addEventListener("click",showLogin);
-registerTab.addEventListener("click",showRegister);
-forgotPasswordButton.addEventListener("click",showForgotPassword);
-backToLoginButton.addEventListener("click",showLogin);
-
-function updateRegistrationGate(){
-
-  const followed=followCheckbox.checked;
-  const invited=inviteCheckbox.checked;
-
-  followRequirement.classList.toggle("completed",followed);
-  inviteRequirement.classList.toggle("completed",invited);
-
-  followStatus.classList.toggle("done",followed);
-  inviteStatus.classList.toggle("done",invited);
-
-  followStatus.querySelector(".registration-status-dot").textContent=
-    followed?"✓":"1";
-
-  inviteStatus.querySelector(".registration-status-dot").textContent=
-    invited?"✓":"2";
-
-  const ready=followed&&invited;
-
-  registerSubmit.disabled=!ready;
-
-  registerSubmit.textContent=
-    ready
-      ?"Konto erstellen →"
-      :"Erst Voraussetzungen erfüllen";
-}
-
-function resetRegistrationGate(){
-
-  followCheckbox.checked=false;
-  inviteCheckbox.checked=false;
-  inviteCheckbox.disabled=true;
-  inviteActionStarted=false;
-
-  inviteCheckLabel.classList.remove("ready");
-
-  shareStatus.textContent="";
-
-  updateRegistrationGate();
-}
-
-function getInviteUrl(){
-
-  return window.location.href.split("#")[0];
-}
-
-function getInviteText(){
-
-  return(
-    "Hey! 🏃 Ich bin gerade Miles Apart beigetreten. "+
-    "Komm mit in die Running-Community. "+
-    "Gemeinsam läuft's besser! 🔥\n\n"+
-    getInviteUrl()
-  );
-}
-
-function markInviteActionStarted(source){
-
-  inviteActionStarted=true;
-
-  inviteCheckbox.disabled=false;
-
-  inviteCheckLabel.classList.add("ready");
-
-  shareStatus.textContent=
-    source==="WhatsApp"
-      ?"WhatsApp wurde geöffnet. Bestätige unten, sobald du die Einladung verschickt hast."
-      :"Instagram wurde geöffnet. Bestätige unten, sobald du die Einladung verschickt hast.";
-
-  updateRegistrationGate();
-}
-
-openInstagramButton.addEventListener("click",function(){
-
-  window.open(
-    INSTAGRAM_URL,
-    "_blank",
-    "noopener,noreferrer"
-  );
-});
-
-followCheckbox.addEventListener(
-  "change",
-  updateRegistrationGate
-);
-
-whatsappShareButton.addEventListener("click",function(){
-
-  const url=
-    "https://wa.me/?text="+
-    encodeURIComponent(getInviteText());
-
-  markInviteActionStarted("WhatsApp");
-
-  window.open(
-    url,
-    "_blank",
-    "noopener,noreferrer"
-  );
-});
-
-instagramShareButton.addEventListener("click",async function(){
-
-  const message=getInviteText();
-
-  if(navigator.share){
-
-    try{
-
-      await navigator.share({
-        title:"Miles Apart Running Club",
-        text:message,
-        url:getInviteUrl()
-      });
-
-      markInviteActionStarted("Instagram");
-      return;
-
-    }catch(error){
-
-      if(error&&error.name==="AbortError")return;
-    }
-  }
-
-  try{
-
-    if(navigator.clipboard&&navigator.clipboard.writeText)
-      await navigator.clipboard.writeText(message);
-
-  }catch(error){
-
-    console.error("Clipboard:",error);
-  }
-
-  markInviteActionStarted("Instagram");
-
-  setTimeout(function(){
-
-    window.open(
-      "https://www.instagram.com/",
-      "_blank",
-      "noopener,noreferrer"
-    );
-
-  },200);
-});
-
-inviteCheckbox.addEventListener("change",function(){
-
-  updateRegistrationGate();
-
-  if(inviteCheckbox.checked)
-    shareStatus.textContent="Einladung bestätigt ✓";
-});
-
-registerForm.addEventListener("submit",async function(event){
-
-  event.preventDefault();
-
-  clearMessages();
-
-  if(!followCheckbox.checked){
-
-    setMessage(
-      registerMessage,
-      "Bitte bestätige zuerst, dass du Tano Loew auf Instagram folgst."
-    );
-
-    return;
-  }
-
-  if(!inviteActionStarted||!inviteCheckbox.checked){
-
-    setMessage(
-      registerMessage,
-      "Bitte lade zuerst einen Freund über WhatsApp oder Instagram ein."
-    );
-
-    return;
-  }
-
-  const name=document.getElementById("registerName").value.trim();
-  const email=document.getElementById("registerEmail").value.trim().toLowerCase();
-  const password=document.getElementById("registerPassword").value;
-
-  if(name.length<2){
-
-    setMessage(registerMessage,"Bitte gib deinen Namen ein.");
-    return;
-  }
-
-  if(password.length<6){
-
-    setMessage(
-      registerMessage,
-      "Das Passwort muss mindestens 6 Zeichen haben."
-    );
-
-    return;
-  }
-
-  setButtonLoading(
-    registerSubmit,
-    true,
-    "Konto erstellen →"
-  );
-
-  const{data,error}=await supabaseClient.auth.signUp({
-
-    email,
-    password,
-
-    options:{
-      data:{
-        display_name:name,
-        instagram_follow_confirmed:true,
-        invite_confirmed:true
-      },
-
-      emailRedirectTo:
-        window.location.href.split("#")[0]
-    }
-  });
-
-  setButtonLoading(
-    registerSubmit,
-    false,
-    "Konto erstellen →"
-  );
-
-  if(error){
-
-    console.error("Registrierung:",error);
-
-    const errorText=String(error.message||"").toLowerCase();
-
-    if(
-      errorText.includes("already registered")||
-      errorText.includes("already exists")||
-      errorText.includes("email already")||
-      errorText.includes("user already")
-    ){
-
-      setMessage(
-        registerMessage,
-        "Du hast dich mit dieser Mail bereits registriert. Melde dich stattdessen an."
-      );
-
-      return;
-    }
-
-    setMessage(
-      registerMessage,
-      translateAuthError(error)
-    );
-
-    return;
-  }
-
-  if(
-    data&&
-    data.user&&
-    Array.isArray(data.user.identities)&&
-    data.user.identities.length===0
-  ){
-
-    setMessage(
-      registerMessage,
-      "Du hast dich mit dieser Mail bereits registriert. Melde dich stattdessen an."
-    );
-
-    return;
-  }
-
-  registerForm.reset();
-  resetRegistrationGate();
-
-  if(data&&data.session){
-
-    currentUser=data.user;
-
-    await loadProfile(currentUser);
-
-    previewNotice.style.display="none";
-
-    updateUserInterface();
-
-    await loadRuns();
-
-    setMessage(
-      registerMessage,
-      "Konto erfolgreich erstellt. Du bist jetzt angemeldet.",
-      true
-    );
-
-    setTimeout(closeAuth,900);
-
-  }else{
-
-    setMessage(
-      registerMessage,
-      "Fast geschafft! Bitte bestätige deine E-Mail-Adresse. Danach kannst du dich anmelden.",
-      true
-    );
-  }
-});
-
-loginForm.addEventListener("submit",async function(event){
-
-  event.preventDefault();
-
-  clearMessages();
-
-  const email=document.getElementById("loginEmail").value.trim().toLowerCase();
-  const password=document.getElementById("loginPassword").value;
-
-  setButtonLoading(
-    loginSubmit,
-    true,
-    "Anmelden →"
-  );
-
-  const{data,error}=await supabaseClient.auth.signInWithPassword({
-    email,
-    password
-  });
-
-  setButtonLoading(
-    loginSubmit,
-    false,
-    "Anmelden →"
-  );
-
-  if(error){
-
-    setMessage(
-      loginMessage,
-      translateAuthError(error)
-    );
-
-    return;
-  }
-
-  loginForm.reset();
-
-  currentUser=data.user;
-
-  await loadProfile(currentUser);
-
-  updateUserInterface();
-
-  await loadRuns();
-
-  closeAuth();
-});
-
-forgotForm.addEventListener("submit",async function(event){
-
-  event.preventDefault();
-
-  clearMessages();
-
-  const email=document.getElementById("forgotEmail").value.trim().toLowerCase();
-
-  setButtonLoading(
-    forgotSubmit,
-    true,
-    "Reset-Link senden →"
-  );
-
-  const redirectUrl=window.location.href.split("#")[0];
-
-  const{error}=await supabaseClient.auth.resetPasswordForEmail(
-    email,
-    {redirectTo:redirectUrl}
-  );
-
-  setButtonLoading(
-    forgotSubmit,
-    false,
-    "Reset-Link senden →"
-  );
-
-  if(error){
-
-    setMessage(
-      forgotMessage,
-      translateAuthError(error)
-    );
-
-    return;
-  }
-
-  setMessage(
-    forgotMessage,
-    "Wenn ein Konto mit dieser E-Mail existiert, wurde ein Reset-Link versendet.",
-    true
-  );
-});
-
-recoveryForm.addEventListener("submit",async function(event){
-
-  event.preventDefault();
-
-  clearMessages();
-
-  const password=document.getElementById("newPassword").value;
-  const passwordConfirm=document.getElementById("newPasswordConfirm").value;
-
-  if(password.length<6){
-
-    setMessage(
-      recoveryMessage,
-      "Das Passwort muss mindestens 6 Zeichen haben."
-    );
-
-    return;
-  }
-
-  if(password!==passwordConfirm){
-
-    setMessage(
-      recoveryMessage,
-      "Die beiden Passwörter stimmen nicht überein."
-    );
-
-    return;
-  }
-
-  setButtonLoading(
-    recoverySubmit,
-    true,
-    "Neues Passwort speichern →"
-  );
-
-  const{error}=await supabaseClient.auth.updateUser({
-    password
-  });
-
-  setButtonLoading(
-    recoverySubmit,
-    false,
-    "Neues Passwort speichern →"
-  );
-
-  if(error){
-
-    setMessage(
-      recoveryMessage,
-      translateAuthError(error)
-    );
-
-    return;
-  }
-
-  recoveryForm.reset();
-
-  setMessage(
-    recoveryMessage,
-    "Dein Passwort wurde erfolgreich geändert.",
-    true
-  );
-
-  setTimeout(closeAuth,1200);
-});
-
-async function loadProfile(user){
-
-  if(!user){
-
-    currentProfile=null;
-    return null;
-  }
-
-  const{data,error}=await supabaseClient
-    .from("profiles")
-    .select("display_name, username, avatar_url, bio, location")
-    .eq("id",user.id)
-    .maybeSingle();
-
-  if(error){
-
-    console.error("Profil:",error);
-
-    currentProfile=null;
-
-    return null;
-  }
-
-  currentProfile=data||null;
-
-  return currentProfile;
-}
-
-function updateUserInterface(){
-
-  if(!currentUser){
-
-    guestArea.style.display="flex";
-    loggedInArea.style.display="none";
-
-    userGreeting.textContent="Hallo";
-    userGreeting.style.display="none";
-
-    accountMenu.classList.remove("open");
-
-    previewNotice.style.display="block";
-
-    runLoginLabel.textContent="Anmeldung erforderlich";
-    importLoginLabel.textContent="Anmeldung erforderlich";
-
-    runForm.querySelectorAll(
-      "input, select, textarea"
-    ).forEach(field=>{
-      field.disabled=true;
-    });
-
-    csvImportFile.disabled=true;
-
-    saveRunButton.textContent=
-      "Anmelden, um Lauf zu speichern →";
-
-    saveRunButton.disabled=false;
-
-    importRunsButton.disabled=true;
-
-    return;
-  }
-
-  const displayName=getUserDisplayName(
-    currentUser,
-    currentProfile
-  );
-
-  const firstName=getFirstName(displayName);
-  const initials=getInitials(displayName);
-
-  guestArea.style.display="none";
-  loggedInArea.style.display="flex";
-
-  previewNotice.style.display="none";
-
-  runLoginLabel.textContent="Eingeloggt";
-  importLoginLabel.textContent="Eingeloggt";
-
-  runForm.querySelectorAll(
-    "input, select, textarea"
-  ).forEach(field=>{
-    field.disabled=false;
-  });
-
-  csvImportFile.disabled=false;
-
-  updateBestTimeControls();
-
-  saveRunButton.textContent="Lauf speichern →";
-
-  userGreeting.style.display="inline";
-  userGreeting.textContent="Hallo "+firstName;
-
-  avatarButton.innerHTML="";
-
-  if(currentProfile&&currentProfile.avatar_url){
-
-    const image=document.createElement("img");
-
-    image.src=currentProfile.avatar_url;
-    image.alt=displayName;
-
-    avatarButton.appendChild(image);
-
-  }else{
-
-    avatarButton.textContent=initials;
-  }
-
-  accountMenuName.textContent=displayName;
-  accountMenuEmail.textContent=currentUser.email||"";
-
-  importRunsButton.disabled=!parsedImportRuns.length;
-}
-
-profileButton.addEventListener("click",function(event){
-
-  event.preventDefault();
-  event.stopPropagation();
-
-  accountMenu.classList.remove("open");
-
-  window.location.href="profile.html";
-});
-
-avatarButton.addEventListener("click",function(event){
-
-  event.preventDefault();
-  event.stopPropagation();
-
-  accountMenu.classList.toggle("open");
-});
-
-document.addEventListener("click",function(event){
-
-  if(!loggedInArea.contains(event.target))
-    accountMenu.classList.remove("open");
-});
-
-async function logout(){
-
-  const{error}=await supabaseClient.auth.signOut();
-
-  if(error){
-
-    console.error("Logout:",error);
-    return;
-  }
-
-  currentUser=null;
-  currentProfile=null;
-  currentRuns=[];
-
-  resetRunPhoto();
-  resetBestTimeControls();
-  clearImportPreview();
-
-  csvImportFile.value="";
-
-  accountMenu.classList.remove("open");
-
-  updateUserInterface();
-
-  loadRuns();
-}
-
-logoutButton.addEventListener("click",logout);
-
-supabaseClient.auth.onAuthStateChange(
-  async function(event,session){
-
-    if(event==="PASSWORD_RECOVERY"){
-
-      currentUser=session?session.user:null;
-
-      if(currentUser)
-        await loadProfile(currentUser);
-
-      updateUserInterface();
-
-      openAuth();
-      showRecovery();
-
-      return;
-    }
-
-    if(session&&session.user){
-
-      currentUser=session.user;
-
-      await loadProfile(currentUser);
-
-    }else{
-
-      currentUser=null;
-      currentProfile=null;
-    }
-
-    updateUserInterface();
-
-    await loadRuns();
-  }
-);
-
-function translateAuthError(error){
-
-  if(!error)
-    return"Es ist ein unbekannter Fehler aufgetreten.";
-
-  const message=String(error.message||"").toLowerCase();
-
-  if(message.includes("invalid login credentials"))
-    return"E-Mail oder Passwort ist nicht korrekt.";
-
-  if(message.includes("email not confirmed"))
-    return"Bitte bestätige zuerst deine E-Mail-Adresse.";
-
-  if(message.includes("password should be at least"))
-    return"Das Passwort ist zu kurz.";
-
-  if(message.includes("rate limit"))
-    return"Zu viele Versuche. Bitte warte kurz und versuche es erneut.";
-
-  if(
-    message.includes("already registered")||
-    message.includes("already exists")||
-    message.includes("email already")||
-    message.includes("user already")
-  )
-    return"Du hast dich mit dieser Mail bereits registriert. Melde dich stattdessen an.";
-
-  return(
-    error.message||
-    "Es ist ein Fehler aufgetreten. Bitte versuche es erneut."
-  );
-}
-
-async function initialize(){
-
-  updateDashboardDate();
-
-  runDate.value=getTodayDateString();
-
-  resetBestTimeControls();
-
-  clearImportPreview();
-
-  const{data,error}=await supabaseClient.auth.getSession();
-
-  if(error){
-
-    console.error("Session:",error);
-
-    currentUser=null;
-
-    updateUserInterface();
-
-    await loadRuns();
-
-    return;
-  }
-
-  if(
-    data&&
-    data.session&&
-    data.session.user
-  ){
-
-    currentUser=data.session.user;
-
-    await loadProfile(currentUser);
-
-  }else{
-
-    currentUser=null;
-    currentProfile=null;
-  }
-
-  updateUserInterface();
-
-  await loadRuns();
-}
-
-initialize();
-</script>
-
-</body>
-</html>
+  if(tab
