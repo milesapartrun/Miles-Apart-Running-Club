@@ -441,20 +441,14 @@
       border-radius: 12px;
     }
 
-    /* WOCHE – WEISS */
-
     .summary-bar-row:nth-child(1) {
       background: #ffffff;
       border: 1px solid var(--home-line);
     }
 
-    /* MONAT – TÜRKIS */
-
     .summary-bar-row:nth-child(2) {
       background: var(--miles-blue);
     }
-
-    /* JAHR – SCHWARZ */
 
     .summary-bar-row.year {
       background: #111817;
@@ -468,10 +462,7 @@
       letter-spacing: 1px;
     }
 
-    .summary-bar-row:nth-child(2) .summary-bar-label {
-      color: #fff;
-    }
-
+    .summary-bar-row:nth-child(2) .summary-bar-label,
     .summary-bar-row.year .summary-bar-label {
       color: #fff;
     }
@@ -483,19 +474,13 @@
       overflow: hidden;
     }
 
-    /* WOCHE */
-
     .summary-bar-row:nth-child(1) .summary-track {
       background: #e8eeec;
     }
 
-    /* MONAT */
-
     .summary-bar-row:nth-child(2) .summary-track {
       background: rgba(255,255,255,.35);
     }
-
-    /* JAHR */
 
     .summary-bar-row.year .summary-track {
       background: #2b3432;
@@ -509,19 +494,13 @@
       transition: width .5s ease;
     }
 
-    /* WOCHE – TÜRKISER BALKEN */
-
     .summary-bar-row:nth-child(1) .summary-fill {
       background: var(--miles-blue);
     }
 
-    /* MONAT – WEISSER BALKEN */
-
     .summary-bar-row:nth-child(2) .summary-fill {
       background: #fff;
     }
-
-    /* JAHR – TÜRKISER BALKEN */
 
     .summary-bar-row.year .summary-fill {
       background: var(--miles-blue);
@@ -535,10 +514,7 @@
       white-space: nowrap;
     }
 
-    .summary-bar-row:nth-child(2) .summary-value {
-      color: #fff;
-    }
-
+    .summary-bar-row:nth-child(2) .summary-value,
     .summary-bar-row.year .summary-value {
       color: #fff;
     }
@@ -774,6 +750,114 @@
     }
 
     /* =========================================================
+       BESTZEIT AUSWAHL
+    ========================================================= */
+
+    .best-time-control {
+      grid-column: 1 / -1;
+      padding: 17px;
+      border: 1px solid #cfeaed;
+      background: rgba(255,255,255,.72);
+    }
+
+    .best-time-checkbox-label {
+      display: flex;
+      align-items: flex-start;
+      gap: 11px;
+      cursor: pointer;
+    }
+
+    .best-time-checkbox-label input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .best-time-custom-check {
+      width: 22px;
+      height: 22px;
+      flex: 0 0 22px;
+      margin-top: 1px;
+      border: 2px solid #c8d5d4;
+      border-radius: 6px;
+      background: #fff;
+      box-sizing: border-box;
+      display: grid;
+      place-items: center;
+    }
+
+    .best-time-checkbox-label input:checked + .best-time-custom-check {
+      background: var(--miles-blue);
+      border-color: var(--miles-blue);
+    }
+
+    .best-time-checkbox-label input:checked + .best-time-custom-check::after {
+      content: "✓";
+      color: #fff;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .best-time-checkbox-copy {
+      color: #222;
+      font-size: 13px;
+      line-height: 1.45;
+      font-weight: 800;
+    }
+
+    .best-time-checkbox-copy small {
+      display: block;
+      margin-top: 3px;
+      color: #7d8582;
+      font-size: 11px;
+      line-height: 1.5;
+      font-weight: 400;
+    }
+
+    .best-time-category-wrap {
+      display: none;
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid #dceced;
+    }
+
+    .best-time-category-wrap.show {
+      display: block;
+    }
+
+    .best-time-category-wrap label {
+      display: block;
+      margin-bottom: 7px;
+      color: #333;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .best-time-category-wrap select {
+      width: 100%;
+      max-width: 360px;
+      padding: 12px 13px;
+      border: 1px solid #cfe0e1;
+      background: #fff;
+      color: #222;
+      font: inherit;
+      font-size: 13px;
+      outline: none;
+    }
+
+    .best-time-suggestion {
+      min-height: 18px;
+      margin-top: 8px;
+      color: var(--miles-blue-dark);
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .best-time-suggestion.warning {
+      color: var(--home-red);
+    }
+
+    /* =========================================================
        RUN PHOTO
     ========================================================= */
 
@@ -946,6 +1030,18 @@
       color: var(--miles-blue-dark);
       font-size: 9px;
       font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: .5px;
+    }
+
+    .run-pb-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      margin-top: 5px;
+      color: var(--home-green);
+      font-size: 9px;
+      font-weight: 900;
       text-transform: uppercase;
       letter-spacing: .5px;
     }
@@ -1851,8 +1947,6 @@
 
         <div class="dashboard-copy">
 
-          <!-- MY RUN ENTFERNT -->
-
           <h1>
             Deine Kilometer.<br>
             <span>Deine Geschichte.</span>
@@ -1938,10 +2032,12 @@
               </div>
 
               <div class="summary-track">
+
                 <div
                   class="summary-fill"
                   id="weekBar"
                 ></div>
+
               </div>
 
               <div
@@ -1960,10 +2056,12 @@
               </div>
 
               <div class="summary-track">
+
                 <div
                   class="summary-fill"
                   id="monthBar"
                 ></div>
+
               </div>
 
               <div
@@ -1982,10 +2080,12 @@
               </div>
 
               <div class="summary-track">
+
                 <div
                   class="summary-fill"
                   id="yearBar"
                 ></div>
+
               </div>
 
               <div
@@ -2018,8 +2118,8 @@
             </h2>
 
             <p class="dashboard-section-description">
-              Das System sucht automatisch deine schnellste
-              Zeit für jede Distanz aus deinen gespeicherten Läufen.
+              Nur Läufe, die du beim Speichern ausdrücklich
+              als persönliche Bestzeit markiert hast, zählen hier.
             </p>
 
           </div>
@@ -2037,9 +2137,9 @@
               </h2>
 
               <p>
-                Auch alte Rennen zählen.
-                Trage einfach einen Lauf aus der Vergangenheit ein
-                und Miles Apart berücksichtigt ihn bei deinen Bestzeiten.
+                Ein normaler Trainingslauf wird niemals automatisch
+                zur Bestzeit. Markiere einen offiziellen Wettkampf
+                beim Speichern ausdrücklich als Bestzeit.
               </p>
 
             </div>
@@ -2313,8 +2413,9 @@
               </h2>
 
               <p>
-                Der Lauf wird anschließend automatisch
-                für deine Kilometer und Bestzeiten berücksichtigt.
+                Der Lauf wird für deine Kilometer berücksichtigt.
+                Eine Bestzeit wird nur übernommen, wenn du sie
+                ausdrücklich als solche markierst.
               </p>
 
             </div>
@@ -2441,6 +2542,92 @@
                 max="59"
                 placeholder="00"
               >
+
+            </div>
+
+            <!-- =====================================================
+                 BESTZEIT
+            ====================================================== -->
+
+            <div class="best-time-control">
+
+              <label class="best-time-checkbox-label">
+
+                <input
+                  id="runIsBestTime"
+                  type="checkbox"
+                >
+
+                <span class="best-time-custom-check"></span>
+
+                <span class="best-time-checkbox-copy">
+
+                  Diesen Lauf als persönliche Bestzeit werten
+
+                  <small>
+                    Nur aktivieren, wenn es ein offizieller Wettkampf
+                    war und du diese Leistung für die entsprechende
+                    Distanz als Bestzeit eintragen möchtest.
+                  </small>
+
+                </span>
+
+              </label>
+
+              <div
+                class="best-time-category-wrap"
+                id="bestTimeCategoryWrap"
+              >
+
+                <label for="runBestCategory">
+                  Für welche Bestzeit?
+                </label>
+
+                <select
+                  id="runBestCategory"
+                  disabled
+                >
+
+                  <option value="">
+                    Bitte Distanz auswählen
+                  </option>
+
+                  <option value="5k">
+                    5 Kilometer
+                  </option>
+
+                  <option value="10k">
+                    10 Kilometer
+                  </option>
+
+                  <option value="half">
+                    Halbmarathon
+                  </option>
+
+                  <option value="marathon">
+                    Marathon
+                  </option>
+
+                  <option value="50k">
+                    50 Kilometer
+                  </option>
+
+                  <option value="100k">
+                    100 Kilometer
+                  </option>
+
+                  <option value="100plus">
+                    100+ Kilometer
+                  </option>
+
+                </select>
+
+                <div
+                  class="best-time-suggestion"
+                  id="bestTimeSuggestion"
+                ></div>
+
+              </div>
 
             </div>
 
@@ -3307,6 +3494,18 @@
   const runSeconds =
     document.getElementById("runSeconds");
 
+  const runIsBestTime =
+    document.getElementById("runIsBestTime");
+
+  const bestTimeCategoryWrap =
+    document.getElementById("bestTimeCategoryWrap");
+
+  const runBestCategory =
+    document.getElementById("runBestCategory");
+
+  const bestTimeSuggestion =
+    document.getElementById("bestTimeSuggestion");
+
   const runNote =
     document.getElementById("runNote");
 
@@ -3409,6 +3608,63 @@
     null;
 
   /* =========================================================
+     BESTZEIT KATEGORIEN
+
+     Diese Toleranzen dienen ausschließlich dazu,
+     eine passende Kategorie vorzuschlagen bzw.
+     die Eingabe auf Plausibilität zu prüfen.
+
+     Die Kategorie wird NICHT automatisch als Bestzeit
+     gespeichert.
+  ========================================================= */
+
+  const BEST_TIME_CATEGORIES = {
+
+    "5k": {
+      label: "5 Kilometer",
+      min: 4.90,
+      max: 5.50
+    },
+
+    "10k": {
+      label: "10 Kilometer",
+      min: 9.80,
+      max: 11.00
+    },
+
+    "half": {
+      label: "Halbmarathon",
+      min: 20.90,
+      max: 22.50
+    },
+
+    "marathon": {
+      label: "Marathon",
+      min: 41.90,
+      max: 44.00
+    },
+
+    "50k": {
+      label: "50 Kilometer",
+      min: 49.00,
+      max: 53.00
+    },
+
+    "100k": {
+      label: "100 Kilometer",
+      min: 98.00,
+      max: 106.00
+    },
+
+    "100plus": {
+      label: "100+ Kilometer",
+      min: 106.000001,
+      max: Infinity
+    }
+
+  };
+
+  /* =========================================================
      DEMO WOCHENWERTE
   ========================================================= */
 
@@ -3429,7 +3685,8 @@
       distance_km: 8.6,
       duration_seconds: 2940,
       note: "Morgenrunde",
-      run_type: "normal"
+      run_type: "normal",
+      best_time_category: null
     },
 
     {
@@ -3437,7 +3694,8 @@
       distance_km: 12.4,
       duration_seconds: 4300,
       note: "Long Run",
-      run_type: "normal"
+      run_type: "normal",
+      best_time_category: null
     },
 
     {
@@ -3445,7 +3703,8 @@
       distance_km: 6.8,
       duration_seconds: 2250,
       note: "Recovery Run",
-      run_type: "normal"
+      run_type: "normal",
+      best_time_category: null
     },
 
     {
@@ -3453,7 +3712,8 @@
       distance_km: 9.5,
       duration_seconds: 3240,
       note: "September Start",
-      run_type: "normal"
+      run_type: "normal",
+      best_time_category: null
     },
 
     {
@@ -3461,7 +3721,8 @@
       distance_km: 5.0,
       duration_seconds: 1110,
       note: "5K Bestzeit",
-      run_type: "race"
+      run_type: "race",
+      best_time_category: "5k"
     },
 
     {
@@ -3469,7 +3730,8 @@
       distance_km: 10.0,
       duration_seconds: 2460,
       note: "10K Bestzeit",
-      run_type: "race"
+      run_type: "race",
+      best_time_category: "10k"
     },
 
     {
@@ -3477,7 +3739,8 @@
       distance_km: 21.0975,
       duration_seconds: 5220,
       note: "Halbmarathon Bestzeit",
-      run_type: "race"
+      run_type: "race",
+      best_time_category: "half"
     },
 
     {
@@ -3485,7 +3748,8 @@
       distance_km: 42.195,
       duration_seconds: 11940,
       note: "Marathon Bestzeit",
-      run_type: "race"
+      run_type: "race",
+      best_time_category: "marathon"
     },
 
     {
@@ -3493,7 +3757,8 @@
       distance_km: 50.0,
       duration_seconds: 17400,
       note: "50K Ultra",
-      run_type: "ultra"
+      run_type: "ultra",
+      best_time_category: "50k"
     },
 
     {
@@ -3501,7 +3766,8 @@
       distance_km: 21.0975,
       duration_seconds: 5700,
       note: "Halbmarathon",
-      run_type: "race"
+      run_type: "race",
+      best_time_category: null
     },
 
     {
@@ -3509,7 +3775,8 @@
       distance_km: 15.2,
       duration_seconds: 5300,
       note: "Long Run",
-      run_type: "normal"
+      run_type: "normal",
+      best_time_category: null
     },
 
     {
@@ -3517,7 +3784,8 @@
       distance_km: 13.8,
       duration_seconds: 4920,
       note: "Trail Run",
-      run_type: "trail"
+      run_type: "trail",
+      best_time_category: null
     },
 
     {
@@ -3525,7 +3793,8 @@
       distance_km: 18.4,
       duration_seconds: 6700,
       note: "Sonntagslauf",
-      run_type: "normal"
+      run_type: "normal",
+      best_time_category: null
     },
 
     {
@@ -3533,7 +3802,8 @@
       distance_km: 14.6,
       duration_seconds: 5100,
       note: "Frühlingslauf",
-      run_type: "normal"
+      run_type: "normal",
+      best_time_category: null
     },
 
     {
@@ -3541,7 +3811,8 @@
       distance_km: 16.3,
       duration_seconds: 5750,
       note: "Base Run",
-      run_type: "normal"
+      run_type: "normal",
+      best_time_category: null
     },
 
     {
@@ -3549,7 +3820,8 @@
       distance_km: 11.7,
       duration_seconds: 4200,
       note: "Winter Run",
-      run_type: "normal"
+      run_type: "normal",
+      best_time_category: null
     },
 
     {
@@ -3557,7 +3829,8 @@
       distance_km: 12.1,
       duration_seconds: 4350,
       note: "Jahresstart",
-      run_type: "normal"
+      run_type: "normal",
+      best_time_category: null
     }
 
   ];
@@ -3928,6 +4201,356 @@
     );
 
   }
+
+  /* =========================================================
+     BESTZEIT LOGIK
+  ========================================================= */
+
+  function getSuggestedBestCategory(
+    distance
+  ) {
+
+    const km =
+      Number(distance);
+
+    if (
+      !Number.isFinite(km) ||
+      km <= 0
+    ) {
+
+      return null;
+
+    }
+
+    const candidates =
+      Object.entries(
+        BEST_TIME_CATEGORIES
+      )
+      .filter(
+        ([key, category]) => {
+
+          return (
+            km >= category.min &&
+            km <= category.max
+          );
+
+        }
+      );
+
+    if (!candidates.length) {
+      return null;
+    }
+
+    candidates.sort(
+      (
+        a,
+        b
+      ) => {
+
+        const centerA =
+          a[1].max === Infinity
+            ? a[1].min
+            : (
+              a[1].min +
+              a[1].max
+            ) / 2;
+
+        const centerB =
+          b[1].max === Infinity
+            ? b[1].min
+            : (
+              b[1].min +
+              b[1].max
+            ) / 2;
+
+        return (
+          Math.abs(km - centerA) -
+          Math.abs(km - centerB)
+        );
+
+      }
+    );
+
+    return candidates[0][0];
+
+  }
+
+  function isDistanceValidForCategory(
+    distance,
+    categoryKey
+  ) {
+
+    const category =
+      BEST_TIME_CATEGORIES[
+        categoryKey
+      ];
+
+    if (!category) {
+      return false;
+    }
+
+    const km =
+      Number(distance);
+
+    return (
+      Number.isFinite(km) &&
+      km >= category.min &&
+      km <= category.max
+    );
+
+  }
+
+  function updateBestTimeControls() {
+
+    const checked =
+      runIsBestTime.checked;
+
+    bestTimeCategoryWrap.classList.toggle(
+      "show",
+      checked
+    );
+
+    runBestCategory.disabled =
+      !checked;
+
+    if (!checked) {
+
+      runBestCategory.value =
+        "";
+
+      bestTimeSuggestion.textContent =
+        "";
+
+      bestTimeSuggestion.classList.remove(
+        "warning"
+      );
+
+      return;
+
+    }
+
+    const distance =
+      Number(
+        runDistance.value
+      );
+
+    const suggested =
+      getSuggestedBestCategory(
+        distance
+      );
+
+    if (suggested) {
+
+      const currentlySelected =
+        runBestCategory.value;
+
+      if (
+        !currentlySelected ||
+        !isDistanceValidForCategory(
+          distance,
+          currentlySelected
+        )
+      ) {
+
+        runBestCategory.value =
+          suggested;
+
+      }
+
+      const selectedCategory =
+        runBestCategory.value;
+
+      if (
+        selectedCategory &&
+        isDistanceValidForCategory(
+          distance,
+          selectedCategory
+        )
+      ) {
+
+        bestTimeSuggestion.classList.remove(
+          "warning"
+        );
+
+        bestTimeSuggestion.textContent =
+          "Distanz passt zu " +
+          BEST_TIME_CATEGORIES[
+            selectedCategory
+          ].label +
+          ". Bitte nur als Bestzeit speichern, wenn es tatsächlich ein offizieller Wettkampf war.";
+
+      } else {
+
+        bestTimeSuggestion.classList.add(
+          "warning"
+        );
+
+        bestTimeSuggestion.textContent =
+          "Die eingegebene Distanz passt nicht zur ausgewählten Bestzeit-Kategorie.";
+
+      }
+
+    } else {
+
+      bestTimeSuggestion.classList.add(
+        "warning"
+      );
+
+      bestTimeSuggestion.textContent =
+        "Für diese Distanz gibt es keine passende Bestzeit-Kategorie.";
+
+    }
+
+  }
+
+  function resetBestTimeControls() {
+
+    runIsBestTime.checked =
+      false;
+
+    runBestCategory.value =
+      "";
+
+    runBestCategory.disabled =
+      true;
+
+    bestTimeCategoryWrap.classList.remove(
+      "show"
+    );
+
+    bestTimeSuggestion.textContent =
+      "";
+
+    bestTimeSuggestion.classList.remove(
+      "warning"
+    );
+
+  }
+
+  runDistance.addEventListener(
+    "input",
+    function() {
+
+      if (
+        runIsBestTime.checked
+      ) {
+
+        updateBestTimeControls();
+
+      }
+
+    }
+  );
+
+  runIsBestTime.addEventListener(
+    "change",
+    function() {
+
+      updateBestTimeControls();
+
+    }
+  );
+
+  runBestCategory.addEventListener(
+    "change",
+    function() {
+
+      if (
+        !runIsBestTime.checked
+      ) {
+        return;
+      }
+
+      const distance =
+        Number(
+          runDistance.value
+        );
+
+      const category =
+        runBestCategory.value;
+
+      if (
+        !category
+      ) {
+
+        bestTimeSuggestion.textContent =
+          "";
+
+        return;
+
+      }
+
+      if (
+        isDistanceValidForCategory(
+          distance,
+          category
+        )
+      ) {
+
+        bestTimeSuggestion.classList.remove(
+          "warning"
+        );
+
+        bestTimeSuggestion.textContent =
+          "Kategorie ausgewählt: " +
+          BEST_TIME_CATEGORIES[
+            category
+          ].label +
+          ".";
+
+      } else {
+
+        bestTimeSuggestion.classList.add(
+          "warning"
+        );
+
+        bestTimeSuggestion.textContent =
+          "Die Distanz " +
+          formatNumber(distance) +
+          " km passt nicht zur Kategorie " +
+          BEST_TIME_CATEGORIES[
+            category
+          ].label +
+          ".";
+
+      }
+
+    }
+  );
+
+  runType.addEventListener(
+    "change",
+    function() {
+
+      if (
+        runIsBestTime.checked
+      ) {
+
+        if (
+          runType.value === "race"
+        ) {
+
+          bestTimeSuggestion.classList.remove(
+            "warning"
+          );
+
+          updateBestTimeControls();
+
+        } else {
+
+          bestTimeSuggestion.classList.add(
+            "warning"
+          );
+
+          bestTimeSuggestion.textContent =
+            "Für eine persönliche Bestzeit muss die Laufart „Wettkampf“ sein.";
+
+        }
+
+      }
+
+    }
+  );
 
   /* =========================================================
      FOTO
@@ -4315,7 +4938,10 @@
           "Miles Apart Vorschau",
 
         run_type:
-          "normal"
+          "normal",
+
+        best_time_category:
+          null
 
       });
 
@@ -4670,30 +5296,21 @@
   /* =========================================================
      BESTZEITEN
 
-     GPS-KARENZEN:
-     5K        4,90 – 5,50 km
-     10K       9,80 – 11,00 km
-     HM       20,90 – 22,50 km
-     Marathon 41,90 – 44,00 km
-     50K      49,00 – 53,00 km
-     100K     98,00 – 106,00 km
-     100+     >106,00 km
+     WICHTIG:
+     Hier wird NICHT mehr anhand der Distanz gesucht.
+
+     Ein Lauf zählt nur dann für eine Kategorie, wenn
+     best_time_category exakt auf diese Kategorie gesetzt ist.
   ========================================================= */
 
-  function findBestRun(
+  function findBestRunByCategory(
     runs,
-    minDistance,
-    maxDistance
+    category
   ) {
 
     const eligible =
       runs.filter(
         run => {
-
-          const distance =
-            Number(
-              run.distance_km
-            );
 
           const duration =
             Number(
@@ -4701,8 +5318,8 @@
             );
 
           return (
-            distance >= minDistance &&
-            distance <= maxDistance &&
+            run.best_time_category ===
+            category &&
             duration > 0
           );
 
@@ -4787,66 +5404,64 @@
 
     renderBestTime(
       "5k",
-      findBestRun(
+      findBestRunByCategory(
         runs,
-        4.90,
-        5.50
+        "5k"
       )
     );
 
     renderBestTime(
       "10k",
-      findBestRun(
+      findBestRunByCategory(
         runs,
-        9.80,
-        11.00
+        "10k"
       )
     );
 
     renderBestTime(
       "half",
-      findBestRun(
+      findBestRunByCategory(
         runs,
-        20.90,
-        22.50
+        "half"
       )
     );
 
     renderBestTime(
       "marathon",
-      findBestRun(
+      findBestRunByCategory(
         runs,
-        41.90,
-        44.00
+        "marathon"
       )
     );
 
     renderBestTime(
       "50k",
-      findBestRun(
+      findBestRunByCategory(
         runs,
-        49.00,
-        53.00
+        "50k"
       )
     );
 
     renderBestTime(
       "100k",
-      findBestRun(
+      findBestRunByCategory(
         runs,
-        98.00,
-        106.00
+        "100k"
       )
     );
 
     renderBestTime(
       "100plus",
-      findBestRun(
+      findBestRunByCategory(
         runs,
-        106.000001,
-        Infinity
+        "100plus"
       )
     );
+
+    /* =======================================================
+       LÄNGSTER LAUF
+       Unabhängig von Bestzeit-Kategorien.
+    ======================================================== */
 
     const longest =
       runs.reduce(
@@ -4934,6 +5549,27 @@
   /* =========================================================
      RUN HISTORY
   ========================================================= */
+
+  function getBestCategoryLabel(
+    category
+  ) {
+
+    if (
+      !category ||
+      !BEST_TIME_CATEGORIES[
+        category
+      ]
+    ) {
+
+      return "";
+
+    }
+
+    return BEST_TIME_CATEGORIES[
+      category
+    ].label;
+
+  }
 
   function renderRunsList(
     runs
@@ -5055,6 +5691,30 @@
 
         }
 
+        if (
+          run.best_time_category
+        ) {
+
+          const pbBadge =
+            document.createElement(
+              "div"
+            );
+
+          pbBadge.className =
+            "run-pb-badge";
+
+          pbBadge.textContent =
+            "✓ Bestzeit: " +
+            getBestCategoryLabel(
+              run.best_time_category
+            );
+
+          distance.appendChild(
+            pbBadge
+          );
+
+        }
+
         const time =
           document.createElement(
             "div"
@@ -5165,7 +5825,7 @@
       await supabaseClient
         .from("runs")
         .select(
-          "id, run_date, distance_km, duration_seconds, note, run_type, photo_path, created_at"
+          "id, run_date, distance_km, duration_seconds, note, run_type, photo_path, best_time_category, created_at"
         )
         .eq(
           "user_id",
@@ -5247,6 +5907,14 @@
       const photo =
         selectedRunPhoto;
 
+      const isBestTime =
+        runIsBestTime.checked;
+
+      const bestTimeCategory =
+        isBestTime
+          ? runBestCategory.value
+          : null;
+
       if (!date) {
 
         setMessage(
@@ -5282,6 +5950,70 @@
         );
 
         return;
+
+      }
+
+      if (!duration || duration <= 0) {
+
+        setMessage(
+          runFormMessage,
+          "Bitte gib eine Laufzeit ein."
+        );
+
+        return;
+
+      }
+
+      /* =====================================================
+         BESTZEIT VALIDIERUNG
+
+         Nur "Wettkampf" + explizite Bestzeit +
+         passende Kategorie.
+      ====================================================== */
+
+      if (isBestTime) {
+
+        if (
+          runType.value !== "race"
+        ) {
+
+          setMessage(
+            runFormMessage,
+            "Eine persönliche Bestzeit kann nur für einen Lauf der Art „Wettkampf“ gespeichert werden."
+          );
+
+          return;
+
+        }
+
+        if (
+          !bestTimeCategory
+        ) {
+
+          setMessage(
+            runFormMessage,
+            "Bitte wähle aus, für welche Distanz dieser Lauf als Bestzeit zählen soll."
+          );
+
+          return;
+
+        }
+
+        if (
+          !isDistanceValidForCategory(
+            distance,
+            bestTimeCategory
+          )
+        ) {
+
+          setMessage(
+            runFormMessage,
+            "Die eingegebene Distanz passt nicht zur ausgewählten Bestzeit-Kategorie."
+          );
+
+          return;
+
+        }
 
       }
 
@@ -5361,7 +6093,10 @@
             runType.value,
 
           photo_path:
-            uploadedPhotoPath
+            uploadedPhotoPath,
+
+          best_time_category:
+            bestTimeCategory
 
         };
 
@@ -5412,9 +6147,19 @@
 
         resetRunPhoto();
 
+        resetBestTimeControls();
+
         setMessage(
           runFormMessage,
-          "Lauf und Foto erfolgreich gespeichert.",
+          isBestTime
+            ? (
+              "Lauf und Foto erfolgreich gespeichert. Der Lauf wurde als " +
+              getBestCategoryLabel(
+                bestTimeCategory
+              ) +
+              "-Bestzeit markiert."
+            )
+            : "Lauf und Foto erfolgreich gespeichert.",
           true
         );
 
@@ -6558,6 +7303,13 @@
       }
     );
 
+    /*
+      Die Bestzeit-Kategorie bleibt trotzdem deaktiviert,
+      solange die Bestzeit-Checkbox nicht aktiviert ist.
+    */
+
+    updateBestTimeControls();
+
     saveRunButton.textContent =
       "Lauf speichern →";
 
@@ -6693,6 +7445,8 @@
       [];
 
     resetRunPhoto();
+
+    resetBestTimeControls();
 
     accountMenu.classList.remove(
       "open"
@@ -6872,6 +7626,8 @@
 
     runDate.value =
       getTodayDateString();
+
+    resetBestTimeControls();
 
     const {
       data,
