@@ -207,7 +207,7 @@
     }
 
     /* =========================================================
-       DATUM – TÜRKIS
+       DATUM
     ========================================================= */
 
     .dashboard-date {
@@ -424,13 +424,6 @@
       padding-top: 25px;
       border-top: 1px solid var(--home-line);
     }
-
-    /* =========================================================
-       SUMMARY BARS
-       WOCHE = WEISS
-       MONAT = TÜRKIS
-       JAHR = SCHWARZ
-    ========================================================= */
 
     .summary-bar-row {
       display: grid;
@@ -945,6 +938,293 @@
 
     .run-form-message.success {
       color: var(--home-green);
+    }
+
+    /* =========================================================
+       CSV IMPORT
+    ========================================================= */
+
+    .import-card {
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(
+          135deg,
+          #ffffff 0%,
+          #f8fbfa 100%
+        );
+      border: 1px solid #dfe8e5;
+      padding: 27px;
+      box-shadow: 0 12px 32px rgba(5,9,9,.035);
+    }
+
+    .import-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: #111817;
+    }
+
+    .import-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 20px;
+    }
+
+    .import-top h2 {
+      margin: 0;
+      font-size: 25px;
+      letter-spacing: -.8px;
+    }
+
+    .import-top p {
+      margin: 6px 0 0;
+      color: var(--home-muted);
+      font-size: 12px;
+      line-height: 1.55;
+      max-width: 720px;
+    }
+
+    .import-login-label {
+      flex: 0 0 auto;
+      padding: 8px 10px;
+      background: #f1f3f2;
+      color: #707875;
+      border: 1px solid #dfe4e2;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+    }
+
+    .import-drop {
+      padding: 20px;
+      border: 1px dashed #b9c9c6;
+      background: #fff;
+      transition: .2s ease;
+    }
+
+    .import-drop:hover {
+      border-color: var(--miles-blue);
+      background: #fbfeff;
+    }
+
+    .import-file-label {
+      display: block;
+      color: #333;
+      font-size: 11px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .import-file-input {
+      width: 100%;
+      box-sizing: border-box;
+      padding: 11px 12px;
+      border: 1px solid #d7e2df;
+      background: #fafcfb;
+      color: #333;
+      font: inherit;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .import-help {
+      margin: 9px 0 0;
+      color: #7d8582;
+      font-size: 10px;
+      line-height: 1.55;
+    }
+
+    .import-template-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 38px;
+      margin-top: 13px;
+      padding: 0 14px;
+      border: 1px solid #d4dedb;
+      background: #fff;
+      color: #333;
+      font-size: 11px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .import-template-button:hover {
+      border-color: var(--miles-blue);
+      color: var(--miles-blue-dark);
+    }
+
+    .import-preview {
+      display: none;
+      margin-top: 18px;
+      border: 1px solid #d9e6e3;
+      background: #fff;
+    }
+
+    .import-preview.show {
+      display: block;
+    }
+
+    .import-preview-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 15px 17px;
+      border-bottom: 1px solid #e3e9e7;
+      background: #f8fbfa;
+    }
+
+    .import-preview-title {
+      margin: 0;
+      color: #111;
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    .import-preview-status {
+      color: var(--miles-blue-dark);
+      font-size: 10px;
+      font-weight: 800;
+    }
+
+    .import-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: #e1e8e5;
+    }
+
+    .import-stat {
+      padding: 16px;
+      background: #fff;
+    }
+
+    .import-stat-label {
+      color: #808986;
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .import-stat-value {
+      margin-top: 6px;
+      color: #111;
+      font-size: 19px;
+      line-height: 1.15;
+      font-weight: 900;
+    }
+
+    .import-error-box {
+      display: none;
+      margin: 15px;
+      padding: 13px 15px;
+      background: #fff6f6;
+      border: 1px solid #f0cccc;
+      color: #a44343;
+      font-size: 11px;
+      line-height: 1.55;
+    }
+
+    .import-error-box.show {
+      display: block;
+    }
+
+    .import-preview-table-wrap {
+      overflow-x: auto;
+      border-top: 1px solid #e4eae8;
+    }
+
+    .import-preview-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 560px;
+    }
+
+    .import-preview-table th,
+    .import-preview-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid #edf0ef;
+      text-align: left;
+      font-size: 10px;
+      white-space: nowrap;
+    }
+
+    .import-preview-table th {
+      background: #fafcfb;
+      color: #747c79;
+      font-size: 9px;
+      font-weight: 900;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+    }
+
+    .import-preview-table td {
+      color: #333;
+    }
+
+    .import-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      padding: 16px;
+      border-top: 1px solid #e3e9e7;
+    }
+
+    .import-message {
+      min-height: 18px;
+      color: var(--home-red);
+      font-size: 11px;
+      line-height: 1.5;
+    }
+
+    .import-message.success {
+      color: var(--home-green);
+    }
+
+    .import-button {
+      min-height: 44px;
+      padding: 0 18px;
+      border: 1px solid var(--miles-blue);
+      background: var(--miles-blue);
+      color: #fff;
+      font-size: 11px;
+      font-weight: 900;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .import-button:hover:not(:disabled) {
+      background: var(--miles-blue-dark);
+      border-color: var(--miles-blue-dark);
+    }
+
+    .import-button:disabled {
+      opacity: .45;
+      cursor: not-allowed;
+    }
+
+    .import-note {
+      margin: 14px 0 0;
+      padding: 13px 15px;
+      background: #f2f8f7;
+      border: 1px solid #dce8e5;
+      color: #64716e;
+      font-size: 10px;
+      line-height: 1.55;
+    }
+
+    .import-note strong {
+      color: #333;
     }
 
     /* =========================================================
@@ -1663,14 +1943,29 @@
         align-items: stretch;
       }
 
-      .run-entry-top {
+      .run-entry-top,
+      .import-top {
         display: block;
       }
 
-      .login-required-label {
+      .login-required-label,
+      .import-login-label {
         display: inline-block;
         margin-top: 15px;
         max-width: 100%;
+      }
+
+      .import-stats {
+        grid-template-columns: 1fr;
+      }
+
+      .import-actions {
+        display: block;
+      }
+
+      .import-button {
+        width: 100%;
+        margin-top: 12px;
       }
 
     }
@@ -1685,6 +1980,7 @@
       .kilometer-card,
       .best-times-card,
       .run-entry-card,
+      .import-card,
       .runs-list-card {
         padding: 18px;
       }
@@ -2148,10 +2444,7 @@
 
           <div class="best-times-grid">
 
-            <div
-              class="best-time-row"
-              data-best="5k"
-            >
+            <div class="best-time-row">
 
               <div class="best-time-distance">
                 5 Kilometer
@@ -2176,10 +2469,7 @@
 
             </div>
 
-            <div
-              class="best-time-row"
-              data-best="10k"
-            >
+            <div class="best-time-row">
 
               <div class="best-time-distance">
                 10 Kilometer
@@ -2204,10 +2494,7 @@
 
             </div>
 
-            <div
-              class="best-time-row"
-              data-best="half"
-            >
+            <div class="best-time-row">
 
               <div class="best-time-distance">
                 Halbmarathon
@@ -2232,10 +2519,7 @@
 
             </div>
 
-            <div
-              class="best-time-row"
-              data-best="marathon"
-            >
+            <div class="best-time-row">
 
               <div class="best-time-distance">
                 Marathon
@@ -2260,10 +2544,7 @@
 
             </div>
 
-            <div
-              class="best-time-row"
-              data-best="50k"
-            >
+            <div class="best-time-row">
 
               <div class="best-time-distance">
                 50 Kilometer
@@ -2288,10 +2569,7 @@
 
             </div>
 
-            <div
-              class="best-time-row"
-              data-best="100k"
-            >
+            <div class="best-time-row">
 
               <div class="best-time-distance">
                 100 Kilometer
@@ -2316,10 +2594,7 @@
 
             </div>
 
-            <div
-              class="best-time-row"
-              data-best="100plus"
-            >
+            <div class="best-time-row">
 
               <div class="best-time-distance">
                 100+ Kilometer
@@ -2356,7 +2631,7 @@
                   class="best-time-value"
                   id="longestRun"
                 >
-                  50,0 km
+                  0,0 km
                 </div>
 
                 <div
@@ -2545,10 +2820,6 @@
 
             </div>
 
-            <!-- =====================================================
-                 BESTZEIT
-            ====================================================== -->
-
             <div class="best-time-control">
 
               <label class="best-time-checkbox-label">
@@ -2715,6 +2986,252 @@
 
       </section>
 
+      <!-- =====================================================
+           CSV LAUFHISTORIE
+      ====================================================== -->
+
+      <section class="dashboard-section">
+
+        <div class="dashboard-section-header">
+
+          <div>
+
+            <div class="dashboard-section-label">
+              04 / IMPORT
+            </div>
+
+            <h2>
+              Laufhistorie importieren.
+            </h2>
+
+            <p class="dashboard-section-description">
+              Du bist neu bei Miles Apart und hast bereits viele Läufe
+              in Strava, Garmin, COROS, Polar oder einer anderen App?
+              Lade deine CSV-Datei hoch und übertrage deine bisherige
+              Laufgeschichte gesammelt.
+            </p>
+
+          </div>
+
+        </div>
+
+        <div class="import-card">
+
+          <div class="import-top">
+
+            <div>
+
+              <h2>
+                CSV-Import
+              </h2>
+
+              <p>
+                Für den Import werden Datum und Distanz benötigt.
+                Laufzeit, Laufart und Notiz werden übernommen, wenn
+                diese Spalten in deiner Datei vorhanden sind.
+              </p>
+
+            </div>
+
+            <div
+              class="import-login-label"
+              id="importLoginLabel"
+            >
+              Anmeldung erforderlich
+            </div>
+
+          </div>
+
+          <div class="import-drop">
+
+            <label
+              class="import-file-label"
+              for="csvImportFile"
+            >
+              CSV-Datei auswählen
+            </label>
+
+            <input
+              class="import-file-input"
+              id="csvImportFile"
+              type="file"
+              accept=".csv,text/csv"
+              disabled
+            >
+
+            <p class="import-help">
+              Unterstützt werden Komma- und Semikolon-CSV.
+              Erkannte Spalten sind z. B. Datum, Distanz, Dauer,
+              Laufart und Notiz. Die Datei wird zunächst nur geprüft
+              und noch nicht gespeichert.
+            </p>
+
+            <button
+              class="import-template-button"
+              id="downloadCsvTemplateButton"
+              type="button"
+            >
+              CSV-Vorlage herunterladen
+            </button>
+
+          </div>
+
+          <div
+            class="import-preview"
+            id="importPreview"
+          >
+
+            <div class="import-preview-head">
+
+              <h3 class="import-preview-title">
+                Import-Vorschau
+              </h3>
+
+              <div
+                class="import-preview-status"
+                id="importPreviewStatus"
+              >
+                Bereit
+              </div>
+
+            </div>
+
+            <div class="import-stats">
+
+              <div class="import-stat">
+
+                <div class="import-stat-label">
+                  Läufe
+                </div>
+
+                <div
+                  class="import-stat-value"
+                  id="importRunCount"
+                >
+                  0
+                </div>
+
+              </div>
+
+              <div class="import-stat">
+
+                <div class="import-stat-label">
+                  Kilometer
+                </div>
+
+                <div
+                  class="import-stat-value"
+                  id="importKmTotal"
+                >
+                  0,0 km
+                </div>
+
+              </div>
+
+              <div class="import-stat">
+
+                <div class="import-stat-label">
+                  Zeitraum
+                </div>
+
+                <div
+                  class="import-stat-value"
+                  id="importDateRange"
+                >
+                  —
+                </div>
+
+              </div>
+
+            </div>
+
+            <div
+              class="import-error-box"
+              id="importErrorBox"
+            ></div>
+
+            <div
+              class="import-preview-table-wrap"
+              id="importPreviewTableWrap"
+            >
+
+              <table class="import-preview-table">
+
+                <thead>
+
+                  <tr>
+
+                    <th>
+                      Datum
+                    </th>
+
+                    <th>
+                      Distanz
+                    </th>
+
+                    <th>
+                      Zeit
+                    </th>
+
+                    <th>
+                      Laufart
+                    </th>
+
+                    <th>
+                      Notiz
+                    </th>
+
+                  </tr>
+
+                </thead>
+
+                <tbody
+                  id="importPreviewTableBody"
+                ></tbody>
+
+              </table>
+
+            </div>
+
+            <div class="import-actions">
+
+              <div
+                class="import-message"
+                id="importMessage"
+              ></div>
+
+              <button
+                class="import-button"
+                id="importRunsButton"
+                type="button"
+                disabled
+              >
+                Läufe importieren →
+              </button>
+
+            </div>
+
+          </div>
+
+          <div class="import-note">
+
+            <strong>Wichtig:</strong>
+            Importierte Läufe zählen sofort zu deinen Kilometerwerten.
+            Sie werden absichtlich nicht automatisch als persönliche
+            Bestzeit markiert und benötigen kein Foto.
+            So wird verhindert, dass alte Trainingsläufe versehentlich
+            als PB erscheinen.
+
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- =====================================================
+           RUN HISTORY
+      ====================================================== -->
+
       <section
         class="dashboard-section"
         id="recentRunsSection"
@@ -2725,7 +3242,7 @@
           <div>
 
             <div class="dashboard-section-label">
-              04 / RUN HISTORY
+              05 / RUN HISTORY
             </div>
 
             <h2>
@@ -3296,6 +3813,9 @@
   const MAX_RUN_PHOTO_SIZE =
     10 * 1024 * 1024;
 
+  const IMPORT_BATCH_SIZE =
+    250;
+
   /* =========================================================
      ELEMENTE
   ========================================================= */
@@ -3537,6 +4057,71 @@
     document.getElementById("runsList");
 
   /* =========================================================
+     CSV IMPORT ELEMENTE
+  ========================================================= */
+
+  const csvImportFile =
+    document.getElementById("csvImportFile");
+
+  const downloadCsvTemplateButton =
+    document.getElementById(
+      "downloadCsvTemplateButton"
+    );
+
+  const importLoginLabel =
+    document.getElementById(
+      "importLoginLabel"
+    );
+
+  const importPreview =
+    document.getElementById(
+      "importPreview"
+    );
+
+  const importPreviewStatus =
+    document.getElementById(
+      "importPreviewStatus"
+    );
+
+  const importRunCount =
+    document.getElementById(
+      "importRunCount"
+    );
+
+  const importKmTotal =
+    document.getElementById(
+      "importKmTotal"
+    );
+
+  const importDateRange =
+    document.getElementById(
+      "importDateRange"
+    );
+
+  const importErrorBox =
+    document.getElementById(
+      "importErrorBox"
+    );
+
+  const importPreviewTableBody =
+    document.getElementById(
+      "importPreviewTableBody"
+    );
+
+  const importMessage =
+    document.getElementById(
+      "importMessage"
+    );
+
+  const importRunsButton =
+    document.getElementById(
+      "importRunsButton"
+    );
+
+  let parsedImportRuns =
+    [];
+
+  /* =========================================================
      BESTZEITEN
   ========================================================= */
 
@@ -3609,13 +4194,6 @@
 
   /* =========================================================
      BESTZEIT KATEGORIEN
-
-     Diese Toleranzen dienen ausschließlich dazu,
-     eine passende Kategorie vorzuschlagen bzw.
-     die Eingabe auf Plausibilität zu prüfen.
-
-     Die Kategorie wird NICHT automatisch als Bestzeit
-     gespeichert.
   ========================================================= */
 
   const BEST_TIME_CATEGORIES = {
@@ -3665,7 +4243,7 @@
   };
 
   /* =========================================================
-     DEMO WOCHENWERTE
+     DEMO DATEN
   ========================================================= */
 
   const DEMO_DAILY_KM = [
@@ -3785,51 +4363,6 @@
       duration_seconds: 4920,
       note: "Trail Run",
       run_type: "trail",
-      best_time_category: null
-    },
-
-    {
-      run_date: "2026-05-31",
-      distance_km: 18.4,
-      duration_seconds: 6700,
-      note: "Sonntagslauf",
-      run_type: "normal",
-      best_time_category: null
-    },
-
-    {
-      run_date: "2026-04-11",
-      distance_km: 14.6,
-      duration_seconds: 5100,
-      note: "Frühlingslauf",
-      run_type: "normal",
-      best_time_category: null
-    },
-
-    {
-      run_date: "2026-03-08",
-      distance_km: 16.3,
-      duration_seconds: 5750,
-      note: "Base Run",
-      run_type: "normal",
-      best_time_category: null
-    },
-
-    {
-      run_date: "2026-02-21",
-      distance_km: 11.7,
-      duration_seconds: 4200,
-      note: "Winter Run",
-      run_type: "normal",
-      best_time_category: null
-    },
-
-    {
-      run_date: "2026-01-17",
-      distance_km: 12.1,
-      duration_seconds: 4350,
-      note: "Jahresstart",
-      run_type: "normal",
       best_time_category: null
     }
 
@@ -4058,6 +4591,10 @@
         Number(seconds)
       );
 
+    if (!Number.isFinite(total)) {
+      return "—";
+    }
+
     const hours =
       Math.floor(
         total / 3600
@@ -4227,14 +4764,9 @@
         BEST_TIME_CATEGORIES
       )
       .filter(
-        ([key, category]) => {
-
-          return (
-            km >= category.min &&
-            km <= category.max
-          );
-
-        }
+        ([key, category]) =>
+          km >= category.min &&
+          km <= category.max
       );
 
     if (!candidates.length) {
@@ -4242,10 +4774,7 @@
     }
 
     candidates.sort(
-      (
-        a,
-        b
-      ) => {
+      (a, b) => {
 
         const centerA =
           a[1].max === Infinity
@@ -4444,11 +4973,7 @@
 
   runIsBestTime.addEventListener(
     "change",
-    function() {
-
-      updateBestTimeControls();
-
-    }
+    updateBestTimeControls
   );
 
   runBestCategory.addEventListener(
@@ -4469,9 +4994,7 @@
       const category =
         runBestCategory.value;
 
-      if (
-        !category
-      ) {
+      if (!category) {
 
         bestTimeSuggestion.textContent =
           "";
@@ -4864,6 +5387,1646 @@
       setMessage(
         runFormMessage,
         "Foto entfernt. Bitte wähle ein Foto aus, bevor du den Lauf speicherst."
+      );
+
+    }
+  );
+
+  /* =========================================================
+     CSV IMPORT
+  ========================================================= */
+
+  function normalizeCsvHeader(
+    value
+  ) {
+
+    return String(
+      value || ""
+    )
+      .replace(
+        /^\uFEFF/,
+        ""
+      )
+      .trim()
+      .toLowerCase()
+      .normalize("NFD")
+      .replace(
+        /[\u0300-\u036f]/g,
+        ""
+      )
+      .replace(
+        /[\s_\-()./]+/g,
+        ""
+      );
+
+  }
+
+  function detectCsvDelimiter(
+    text
+  ) {
+
+    const firstLines =
+      text
+        .split(/\r?\n/)
+        .filter(
+          line =>
+            line.trim()
+        )
+        .slice(
+          0,
+          5
+        );
+
+    const sample =
+      firstLines.join("\n");
+
+    let commaCount =
+      0;
+
+    let semicolonCount =
+      0;
+
+    let tabCount =
+      0;
+
+    let insideQuotes =
+      false;
+
+    for (
+      let i = 0;
+      i < sample.length;
+      i++
+    ) {
+
+      const char =
+        sample[i];
+
+      if (char === '"') {
+
+        if (
+          insideQuotes &&
+          sample[i + 1] === '"'
+        ) {
+
+          i++;
+
+          continue;
+
+        }
+
+        insideQuotes =
+          !insideQuotes;
+
+        continue;
+
+      }
+
+      if (insideQuotes) {
+        continue;
+      }
+
+      if (char === ",") {
+        commaCount++;
+      }
+
+      if (char === ";") {
+        semicolonCount++;
+      }
+
+      if (char === "\t") {
+        tabCount++;
+      }
+
+    }
+
+    if (
+      tabCount > commaCount &&
+      tabCount > semicolonCount
+    ) {
+      return "\t";
+    }
+
+    return semicolonCount > commaCount
+      ? ";"
+      : ",";
+
+  }
+
+  function parseCsvText(
+    text,
+    delimiter
+  ) {
+
+    const rows = [];
+
+    let row = [];
+
+    let cell = "";
+
+    let insideQuotes =
+      false;
+
+    for (
+      let i = 0;
+      i < text.length;
+      i++
+    ) {
+
+      const char =
+        text[i];
+
+      const next =
+        text[i + 1];
+
+      if (char === '"') {
+
+        if (
+          insideQuotes &&
+          next === '"'
+        ) {
+
+          cell += '"';
+
+          i++;
+
+        } else {
+
+          insideQuotes =
+            !insideQuotes;
+
+        }
+
+        continue;
+
+      }
+
+      if (
+        char === delimiter &&
+        !insideQuotes
+      ) {
+
+        row.push(
+          cell
+        );
+
+        cell =
+          "";
+
+        continue;
+
+      }
+
+      if (
+        (
+          char === "\n" ||
+          char === "\r"
+        ) &&
+        !insideQuotes
+      ) {
+
+        if (
+          char === "\r" &&
+          next === "\n"
+        ) {
+
+          i++;
+
+        }
+
+        row.push(
+          cell
+        );
+
+        cell =
+          "";
+
+        if (
+          row.some(
+            value =>
+              String(value)
+                .trim() !== ""
+          )
+        ) {
+
+          rows.push(
+            row
+          );
+
+        }
+
+        row =
+          [];
+
+        continue;
+
+      }
+
+      cell +=
+        char;
+
+    }
+
+    if (
+      cell !== "" ||
+      row.length
+    ) {
+
+      row.push(
+        cell
+      );
+
+      if (
+        row.some(
+          value =>
+            String(value)
+              .trim() !== ""
+        )
+      ) {
+
+        rows.push(
+          row
+        );
+
+      }
+
+    }
+
+    return rows;
+
+  }
+
+  function findCsvColumn(
+    headers,
+    aliases
+  ) {
+
+    const normalized =
+      headers.map(
+        normalizeCsvHeader
+      );
+
+    const normalizedAliases =
+      aliases.map(
+        normalizeCsvHeader
+      );
+
+    for (
+      const alias of normalizedAliases
+    ) {
+
+      const index =
+        normalized.indexOf(
+          alias
+        );
+
+      if (index !== -1) {
+        return index;
+      }
+
+    }
+
+    for (
+      let index = 0;
+      index < normalized.length;
+      index++
+    ) {
+
+      const header =
+        normalized[index];
+
+      if (
+        normalizedAliases.some(
+          alias =>
+            header.includes(alias) ||
+            alias.includes(header)
+        )
+      ) {
+
+        return index;
+
+      }
+
+    }
+
+    return -1;
+
+  }
+
+  function parseCsvNumber(
+    value
+  ) {
+
+    let text =
+      String(
+        value ?? ""
+      )
+        .trim()
+        .replace(
+          /\s/g,
+          ""
+        );
+
+    if (!text) {
+      return NaN;
+    }
+
+    if (
+      text.includes(",") &&
+      text.includes(".")
+    ) {
+
+      if (
+        text.lastIndexOf(",") >
+        text.lastIndexOf(".")
+      ) {
+
+        text =
+          text
+            .replace(
+              /\./g,
+              ""
+            )
+            .replace(
+              ",",
+              "."
+            );
+
+      } else {
+
+        text =
+          text.replace(
+            /,/g,
+            ""
+          );
+
+      }
+
+    } else if (
+      text.includes(",")
+    ) {
+
+      text =
+        text.replace(
+          ",",
+          "."
+        );
+
+    }
+
+    text =
+      text.replace(
+        /[^0-9.+-]/g,
+        ""
+      );
+
+    return Number(
+      text
+    );
+
+  }
+
+  function parseCsvDate(
+    value
+  ) {
+
+    const raw =
+      String(
+        value ?? ""
+      )
+        .trim();
+
+    if (!raw) {
+      return null;
+    }
+
+    let match =
+      raw.match(
+        /^(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})/
+      );
+
+    if (match) {
+
+      const year =
+        Number(match[1]);
+
+      const month =
+        Number(match[2]);
+
+      const day =
+        Number(match[3]);
+
+      if (
+        month >= 1 &&
+        month <= 12 &&
+        day >= 1 &&
+        day <= 31
+      ) {
+
+        return (
+          String(year).padStart(4, "0") +
+          "-" +
+          String(month).padStart(2, "0") +
+          "-" +
+          String(day).padStart(2, "0")
+        );
+
+      }
+
+    }
+
+    match =
+      raw.match(
+        /^(\d{1,2})[.\/-](\d{1,2})[.\/-](\d{4})/
+      );
+
+    if (match) {
+
+      const day =
+        Number(match[1]);
+
+      const month =
+        Number(match[2]);
+
+      const year =
+        Number(match[3]);
+
+      if (
+        month >= 1 &&
+        month <= 12 &&
+        day >= 1 &&
+        day <= 31
+      ) {
+
+        return (
+          String(year).padStart(4, "0") +
+          "-" +
+          String(month).padStart(2, "0") +
+          "-" +
+          String(day).padStart(2, "0")
+        );
+
+      }
+
+    }
+
+    const parsed =
+      new Date(
+        raw
+      );
+
+    if (
+      !Number.isNaN(
+        parsed.getTime()
+      )
+    ) {
+
+      const year =
+        parsed.getFullYear();
+
+      const month =
+        String(
+          parsed.getMonth() + 1
+        ).padStart(2, "0");
+
+      const day =
+        String(
+          parsed.getDate()
+        ).padStart(2, "0");
+
+      return (
+        `${year}-${month}-${day}`
+      );
+
+    }
+
+    return null;
+
+  }
+
+  function parseCsvDuration(
+    value
+  ) {
+
+    const raw =
+      String(
+        value ?? ""
+      )
+        .trim();
+
+    if (!raw) {
+      return null;
+    }
+
+    if (
+      raw.includes(":")
+    ) {
+
+      const parts =
+        raw
+          .split(":")
+          .map(
+            part =>
+              Number(
+                part.replace(
+                  ",",
+                  "."
+                )
+              )
+          );
+
+      if (
+        parts.some(
+          part =>
+            !Number.isFinite(part)
+        )
+      ) {
+
+        return null;
+
+      }
+
+      if (parts.length === 3) {
+
+        return Math.round(
+          parts[0] * 3600 +
+          parts[1] * 60 +
+          parts[2]
+        );
+
+      }
+
+      if (parts.length === 2) {
+
+        return Math.round(
+          parts[0] * 60 +
+          parts[1]
+        );
+
+      }
+
+      return null;
+
+    }
+
+    const numeric =
+      parseCsvNumber(
+        raw
+      );
+
+    if (
+      !Number.isFinite(numeric) ||
+      numeric <= 0
+    ) {
+
+      return null;
+
+    }
+
+    return Math.round(
+      numeric
+    );
+
+  }
+
+  function normalizeImportedRunType(
+    value
+  ) {
+
+    const raw =
+      String(
+        value ?? ""
+      )
+        .trim()
+        .toLowerCase();
+
+    if (!raw) {
+      return "normal";
+    }
+
+    if (
+      raw.includes("race") ||
+      raw.includes("wettkampf") ||
+      raw.includes("competition") ||
+      raw.includes("rennen") ||
+      raw.includes("marathon") ||
+      raw.includes("halbmarathon") ||
+      raw.includes("half marathon")
+    ) {
+
+      return "race";
+
+    }
+
+    if (
+      raw.includes("backyard")
+    ) {
+
+      return "backyard";
+
+    }
+
+    if (
+      raw.includes("ultra") ||
+      raw.includes("100k") ||
+      raw.includes("50k")
+    ) {
+
+      return "ultra";
+
+    }
+
+    if (
+      raw.includes("trail")
+    ) {
+
+      return "trail";
+
+    }
+
+    return "normal";
+
+  }
+
+  function getImportedRunTypeLabel(
+    type
+  ) {
+
+    if (
+      type === "race"
+    ) {
+      return "Wettkampf";
+    }
+
+    if (
+      type === "trail"
+    ) {
+      return "Trail";
+    }
+
+    if (
+      type === "ultra"
+    ) {
+      return "Ultra";
+    }
+
+    if (
+      type === "backyard"
+    ) {
+      return "Backyard";
+    }
+
+    return "Run";
+
+  }
+
+  function clearImportPreview() {
+
+    parsedImportRuns =
+      [];
+
+    importPreview.classList.remove(
+      "show"
+    );
+
+    importPreviewTableBody.innerHTML =
+      "";
+
+    importErrorBox.textContent =
+      "";
+
+    importErrorBox.classList.remove(
+      "show"
+    );
+
+    importMessage.textContent =
+      "";
+
+    importMessage.classList.remove(
+      "success"
+    );
+
+    importRunsButton.disabled =
+      true;
+
+    importPreviewStatus.textContent =
+      "Bereit";
+
+    importRunCount.textContent =
+      "0";
+
+    importKmTotal.textContent =
+      "0,0 km";
+
+    importDateRange.textContent =
+      "—";
+
+  }
+
+  function showImportError(
+    message
+  ) {
+
+    importErrorBox.textContent =
+      message;
+
+    importErrorBox.classList.add(
+      "show"
+    );
+
+  }
+
+  function renderImportPreview(
+    runs
+  ) {
+
+    parsedImportRuns =
+      runs;
+
+    importPreview.classList.add(
+      "show"
+    );
+
+    importErrorBox.textContent =
+      "";
+
+    importErrorBox.classList.remove(
+      "show"
+    );
+
+    importPreviewTableBody.innerHTML =
+      "";
+
+    const totalKm =
+      runs.reduce(
+        (
+          total,
+          run
+        ) =>
+          total +
+          Number(
+            run.distance_km || 0
+          ),
+        0
+      );
+
+    const dates =
+      runs
+        .map(
+          run =>
+            run.run_date
+        )
+        .filter(Boolean)
+        .sort();
+
+    importRunCount.textContent =
+      runs.length.toLocaleString(
+        "de-DE"
+      );
+
+    importKmTotal.textContent =
+      formatNumber(
+        totalKm
+      ) +
+      " km";
+
+    if (
+      dates.length
+    ) {
+
+      importDateRange.textContent =
+        formatDate(
+          dates[0]
+        ) +
+        " – " +
+        formatDate(
+          dates[dates.length - 1]
+        );
+
+    } else {
+
+      importDateRange.textContent =
+        "—";
+
+    }
+
+    importPreviewStatus.textContent =
+      runs.length +
+      (
+        runs.length === 1
+          ? " Lauf erkannt"
+          : " Läufe erkannt"
+      );
+
+    runs
+      .slice(
+        0,
+        10
+      )
+      .forEach(
+        run => {
+
+          const tr =
+            document.createElement(
+              "tr"
+            );
+
+          const date =
+            document.createElement(
+              "td"
+            );
+
+          date.textContent =
+            formatDate(
+              run.run_date
+            );
+
+          const distance =
+            document.createElement(
+              "td"
+            );
+
+          distance.textContent =
+            formatNumber(
+              run.distance_km
+            ) +
+            " km";
+
+          const duration =
+            document.createElement(
+              "td"
+            );
+
+          duration.textContent =
+            formatDuration(
+              run.duration_seconds
+            );
+
+          const type =
+            document.createElement(
+              "td"
+            );
+
+          type.textContent =
+            getImportedRunTypeLabel(
+              run.run_type
+            );
+
+          const note =
+            document.createElement(
+              "td"
+            );
+
+          note.textContent =
+            run.note ||
+            "—";
+
+          tr.appendChild(date);
+          tr.appendChild(distance);
+          tr.appendChild(duration);
+          tr.appendChild(type);
+          tr.appendChild(note);
+
+          importPreviewTableBody.appendChild(
+            tr
+          );
+
+        }
+      );
+
+    if (
+      runs.length > 10
+    ) {
+
+      const tr =
+        document.createElement(
+          "tr"
+        );
+
+      const td =
+        document.createElement(
+          "td"
+        );
+
+      td.colSpan =
+        5;
+
+      td.textContent =
+        "… und " +
+        (
+          runs.length - 10
+        ) +
+        " weitere Läufe.";
+
+      td.style.color =
+        "#7d8582";
+
+      tr.appendChild(
+        td
+      );
+
+      importPreviewTableBody.appendChild(
+        tr
+      );
+
+    }
+
+    importRunsButton.disabled =
+      !currentUser ||
+      !runs.length;
+
+  }
+
+  function parseImportedCsv(
+    text
+  ) {
+
+    const cleanedText =
+      String(
+        text || ""
+      )
+        .replace(
+          /^\uFEFF/,
+          ""
+        );
+
+    if (
+      !cleanedText.trim()
+    ) {
+
+      throw new Error(
+        "Die CSV-Datei ist leer."
+      );
+
+    }
+
+    const delimiter =
+      detectCsvDelimiter(
+        cleanedText
+      );
+
+    const rows =
+      parseCsvText(
+        cleanedText,
+        delimiter
+      );
+
+    if (
+      rows.length < 2
+    ) {
+
+      throw new Error(
+        "Die CSV-Datei enthält keine Datenzeilen."
+      );
+
+    }
+
+    const headers =
+      rows[0];
+
+    const dateIndex =
+      findCsvColumn(
+        headers,
+        [
+          "date",
+          "datum",
+          "run_date",
+          "start_date",
+          "activity_date",
+          "activitydate",
+          "startdate"
+        ]
+      );
+
+    const distanceIndex =
+      findCsvColumn(
+        headers,
+        [
+          "distance",
+          "distanz",
+          "distance_km",
+          "distance km",
+          "km",
+          "kilometer",
+          "distance(km)",
+          "distanz(km)"
+        ]
+      );
+
+    const durationIndex =
+      findCsvColumn(
+        headers,
+        [
+          "duration",
+          "dauer",
+          "zeit",
+          "time",
+          "elapsed_time",
+          "elapsedtime",
+          "moving_time",
+          "movingtime"
+        ]
+      );
+
+    const typeIndex =
+      findCsvColumn(
+        headers,
+        [
+          "run_type",
+          "runtype",
+          "type",
+          "sport",
+          "activity_type",
+          "activitytype",
+          "activity"
+        ]
+      );
+
+    const noteIndex =
+      findCsvColumn(
+        headers,
+        [
+          "note",
+          "notiz",
+          "name",
+          "activity_name",
+          "activityname",
+          "title",
+          "beschreibung",
+          "description"
+        ]
+      );
+
+    if (
+      dateIndex === -1
+    ) {
+
+      throw new Error(
+        "Keine Datumsspalte erkannt. Erwartet wird z. B. „Datum“, „Date“ oder „run_date“."
+      );
+
+    }
+
+    if (
+      distanceIndex === -1
+    ) {
+
+      throw new Error(
+        "Keine Distanzspalte erkannt. Erwartet wird z. B. „Distanz“, „Distance“, „km“ oder „distance_km“."
+      );
+
+    }
+
+    const importedRuns =
+      [];
+
+    const errors =
+      [];
+
+    for (
+      let rowIndex = 1;
+      rowIndex < rows.length;
+      rowIndex++
+    ) {
+
+      const row =
+        rows[rowIndex];
+
+      if (
+        !row ||
+        !row.some(
+          value =>
+            String(value)
+              .trim() !== ""
+        )
+      ) {
+
+        continue;
+
+      }
+
+      const rawDate =
+        row[dateIndex];
+
+      const rawDistance =
+        row[distanceIndex];
+
+      const parsedDate =
+        parseCsvDate(
+          rawDate
+        );
+
+      const parsedDistance =
+        parseCsvNumber(
+          rawDistance
+        );
+
+      if (!parsedDate) {
+
+        errors.push(
+          "Zeile " +
+          (rowIndex + 1) +
+          ": ungültiges Datum („" +
+          String(rawDate || "") +
+          "“)."
+        );
+
+        continue;
+
+      }
+
+      if (
+        !Number.isFinite(
+          parsedDistance
+        ) ||
+        parsedDistance <= 0
+      ) {
+
+        errors.push(
+          "Zeile " +
+          (rowIndex + 1) +
+          ": ungültige Distanz („" +
+          String(rawDistance || "") +
+          "“)."
+        );
+
+        continue;
+
+      }
+
+      let duration =
+        null;
+
+      if (
+        durationIndex !== -1
+      ) {
+
+        duration =
+          parseCsvDuration(
+            row[durationIndex]
+          );
+
+      }
+
+      const type =
+        typeIndex !== -1
+          ? normalizeImportedRunType(
+              row[typeIndex]
+            )
+          : "normal";
+
+      const note =
+        noteIndex !== -1
+          ? String(
+              row[noteIndex] || ""
+            ).trim()
+          : "";
+
+      importedRuns.push({
+
+        run_date:
+          parsedDate,
+
+        distance_km:
+          Math.round(
+            parsedDistance *
+            1000
+          ) / 1000,
+
+        duration_seconds:
+          duration,
+
+        note:
+          note
+            ? note.substring(
+                0,
+                500
+              )
+            : null,
+
+        run_type:
+          type,
+
+        photo_path:
+          null,
+
+        best_time_category:
+          null
+
+      });
+
+    }
+
+    if (
+      !importedRuns.length
+    ) {
+
+      throw new Error(
+        "Es konnte kein gültiger Lauf importiert werden."
+      );
+
+    }
+
+    return {
+      runs:
+        importedRuns,
+      errors
+    };
+
+  }
+
+  csvImportFile.addEventListener(
+    "change",
+    async function() {
+
+      clearImportPreview();
+
+      const file =
+        csvImportFile.files &&
+        csvImportFile.files[0]
+          ? csvImportFile.files[0]
+          : null;
+
+      if (!file) {
+        return;
+      }
+
+      if (!currentUser) {
+
+        showImportError(
+          "Bitte melde dich zuerst an, um deine Laufhistorie zu importieren."
+        );
+
+        importPreview.classList.add(
+          "show"
+        );
+
+        return;
+
+      }
+
+      try {
+
+        importPreview.classList.add(
+          "show"
+        );
+
+        importPreviewStatus.textContent =
+          "CSV wird geprüft …";
+
+        const text =
+          await file.text();
+
+        const result =
+          parseImportedCsv(
+            text
+          );
+
+        renderImportPreview(
+          result.runs
+        );
+
+        if (
+          result.errors.length
+        ) {
+
+          showImportError(
+            result.errors
+              .slice(
+                0,
+                8
+              )
+              .join(" ")
+              +
+              (
+                result.errors.length > 8
+                  ? " Weitere fehlerhafte Zeilen wurden ebenfalls übersprungen."
+                  : ""
+              )
+          );
+
+        }
+
+        importMessage.textContent =
+          result.runs.length +
+          " Läufe sind bereit für den Import.";
+
+      } catch (error) {
+
+        console.error(
+          "CSV Import:",
+          error
+        );
+
+        importPreview.classList.add(
+          "show"
+        );
+
+        importPreviewStatus.textContent =
+          "Prüfung fehlgeschlagen";
+
+        showImportError(
+          error &&
+          error.message
+            ? error.message
+            : "Die CSV-Datei konnte nicht gelesen werden."
+        );
+
+        importRunsButton.disabled =
+          true;
+
+      }
+
+    }
+  );
+
+  async function importRunsInBatches(
+    runs
+  ) {
+
+    if (!currentUser) {
+
+      throw new Error(
+        "Bitte melde dich zuerst an."
+      );
+
+    }
+
+    if (
+      !runs ||
+      !runs.length
+    ) {
+
+      throw new Error(
+        "Es wurden keine Läufe zum Import gefunden."
+      );
+
+    }
+
+    let importedCount =
+      0;
+
+    for (
+      let start = 0;
+      start < runs.length;
+      start += IMPORT_BATCH_SIZE
+    ) {
+
+      const batch =
+        runs.slice(
+          start,
+          start +
+          IMPORT_BATCH_SIZE
+        )
+        .map(
+          run => ({
+
+            user_id:
+              currentUser.id,
+
+            run_date:
+              run.run_date,
+
+            distance_km:
+              run.distance_km,
+
+            duration_seconds:
+              run.duration_seconds,
+
+            note:
+              run.note || null,
+
+            run_type:
+              run.run_type || "normal",
+
+            photo_path:
+              null,
+
+            best_time_category:
+              null
+
+          })
+        );
+
+      const {
+        data,
+        error
+      } =
+        await supabaseClient
+          .from("runs")
+          .insert(
+            batch
+          )
+          .select();
+
+      if (error) {
+
+        console.error(
+          "CSV Batch Import:",
+          error
+        );
+
+        throw new Error(
+          "Der Import ist nach " +
+          importedCount +
+          " Läufen abgebrochen: " +
+          (
+            error.message ||
+            "Unbekannter Datenbankfehler."
+          )
+        );
+
+      }
+
+      importedCount +=
+        Array.isArray(data)
+          ? data.length
+          : batch.length;
+
+      importPreviewStatus.textContent =
+        importedCount +
+        " / " +
+        runs.length +
+        " Läufe importiert …";
+
+    }
+
+    return importedCount;
+
+  }
+
+  importRunsButton.addEventListener(
+    "click",
+    async function() {
+
+      if (
+        !currentUser
+      ) {
+
+        setMessage(
+          importMessage,
+          "Bitte melde dich zuerst an."
+        );
+
+        return;
+
+      }
+
+      if (
+        !parsedImportRuns.length
+      ) {
+
+        setMessage(
+          importMessage,
+          "Bitte wähle zuerst eine gültige CSV-Datei aus."
+        );
+
+        return;
+
+      }
+
+      importRunsButton.disabled =
+        true;
+
+      csvImportFile.disabled =
+        true;
+
+      setMessage(
+        importMessage,
+        "Import wird vorbereitet …",
+        true
+      );
+
+      try {
+
+        const count =
+          await importRunsInBatches(
+            parsedImportRuns
+          );
+
+        setMessage(
+          importMessage,
+          count +
+          (
+            count === 1
+              ? " Lauf wurde"
+              : " Läufe wurden"
+          ) +
+          " erfolgreich importiert.",
+          true
+        );
+
+        importPreviewStatus.textContent =
+          "Import abgeschlossen";
+
+        currentRuns =
+          [];
+
+        await loadRuns();
+
+        csvImportFile.value =
+          "";
+
+        parsedImportRuns =
+          [];
+
+      } catch (error) {
+
+        console.error(
+          "CSV Import:",
+          error
+        );
+
+        setMessage(
+          importMessage,
+          error &&
+          error.message
+            ? error.message
+            : "Der Import konnte nicht vollständig abgeschlossen werden."
+        );
+
+      } finally {
+
+        csvImportFile.disabled =
+          !currentUser;
+
+        importRunsButton.disabled =
+          !parsedImportRuns.length;
+
+      }
+
+    }
+  );
+
+  downloadCsvTemplateButton.addEventListener(
+    "click",
+    function() {
+
+      const csv =
+        [
+          [
+            "Datum",
+            "Distanz",
+            "Dauer",
+            "Laufart",
+            "Notiz"
+          ].join(";"),
+
+          [
+            "2026-09-21",
+            "10,00",
+            "00:52:30",
+            "Normaler Lauf",
+            "Beispiel Lauf"
+          ].join(";"),
+
+          [
+            "2026-09-20",
+            "21,10",
+            "01:48:20",
+            "Wettkampf",
+            "Halbmarathon"
+          ].join(";")
+
+        ].join("\r\n");
+
+      const blob =
+        new Blob(
+          [
+            "\uFEFF" +
+            csv
+          ],
+          {
+            type:
+              "text/csv;charset=utf-8;"
+          }
+        );
+
+      const url =
+        URL.createObjectURL(
+          blob
+        );
+
+      const link =
+        document.createElement(
+          "a"
+        );
+
+      link.href =
+        url;
+
+      link.download =
+        "miles-apart-laufhistorie-vorlage.csv";
+
+      document.body.appendChild(
+        link
+      );
+
+      link.click();
+
+      link.remove();
+
+      URL.revokeObjectURL(
+        url
       );
 
     }
@@ -5295,12 +7458,6 @@
 
   /* =========================================================
      BESTZEITEN
-
-     WICHTIG:
-     Hier wird NICHT mehr anhand der Distanz gesucht.
-
-     Ein Lauf zählt nur dann für eine Kategorie, wenn
-     best_time_category exakt auf diese Kategorie gesetzt ist.
   ========================================================= */
 
   function findBestRunByCategory(
@@ -5457,11 +7614,6 @@
         "100plus"
       )
     );
-
-    /* =======================================================
-       LÄNGSTER LAUF
-       Unabhängig von Bestzeit-Kategorien.
-    ======================================================== */
 
     const longest =
       runs.reduce(
@@ -5737,15 +7889,9 @@
           "run-list-kind";
 
         kind.textContent =
-          run.run_type === "race"
-            ? "Wettkampf"
-            : run.run_type === "trail"
-              ? "Trail"
-              : run.run_type === "ultra"
-                ? "Ultra"
-                : run.run_type === "backyard"
-                  ? "Backyard"
-                  : "Run";
+          getImportedRunTypeLabel(
+            run.run_type
+          );
 
         row.appendChild(
           date
@@ -5963,13 +8109,6 @@
         return;
 
       }
-
-      /* =====================================================
-         BESTZEIT VALIDIERUNG
-
-         Nur "Wettkampf" + explizite Bestzeit +
-         passende Kategorie.
-      ====================================================== */
 
       if (isBestTime) {
 
@@ -7249,6 +9388,9 @@
       runLoginLabel.textContent =
         "Anmeldung erforderlich";
 
+      importLoginLabel.textContent =
+        "Anmeldung erforderlich";
+
       runForm.querySelectorAll(
         "input, select, textarea"
       ).forEach(
@@ -7257,11 +9399,17 @@
         }
       );
 
+      csvImportFile.disabled =
+        true;
+
       saveRunButton.textContent =
         "Anmelden, um Lauf zu speichern →";
 
       saveRunButton.disabled =
         false;
+
+      importRunsButton.disabled =
+        true;
 
       return;
 
@@ -7295,6 +9443,9 @@
     runLoginLabel.textContent =
       "Eingeloggt";
 
+    importLoginLabel.textContent =
+      "Eingeloggt";
+
     runForm.querySelectorAll(
       "input, select, textarea"
     ).forEach(
@@ -7303,10 +9454,8 @@
       }
     );
 
-    /*
-      Die Bestzeit-Kategorie bleibt trotzdem deaktiviert,
-      solange die Bestzeit-Checkbox nicht aktiviert ist.
-    */
+    csvImportFile.disabled =
+      false;
 
     updateBestTimeControls();
 
@@ -7355,6 +9504,9 @@
 
     accountMenuEmail.textContent =
       currentUser.email || "";
+
+    importRunsButton.disabled =
+      !parsedImportRuns.length;
 
   }
 
@@ -7447,6 +9599,11 @@
     resetRunPhoto();
 
     resetBestTimeControls();
+
+    clearImportPreview();
+
+    csvImportFile.value =
+      "";
 
     accountMenu.classList.remove(
       "open"
@@ -7628,6 +9785,8 @@
       getTodayDateString();
 
     resetBestTimeControls();
+
+    clearImportPreview();
 
     const {
       data,
