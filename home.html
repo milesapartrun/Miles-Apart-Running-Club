@@ -206,17 +206,21 @@
       max-width: 680px;
     }
 
+    /* =========================================================
+       DATUM – TÜRKIS
+    ========================================================= */
+
     .dashboard-date {
       flex-shrink: 0;
       padding: 14px 17px;
-      border: 1px solid var(--home-line);
-      background: #fff;
-      color: #555;
+      border: 1px solid var(--miles-blue);
+      background: var(--miles-blue);
+      color: #fff;
       font-size: 11px;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 1px;
-      box-shadow: 0 6px 20px rgba(5,9,9,.025);
+      box-shadow: 0 6px 20px rgba(24,184,199,.18);
     }
 
     /* =========================================================
@@ -421,6 +425,13 @@
       border-top: 1px solid var(--home-line);
     }
 
+    /* =========================================================
+       SUMMARY BARS
+       WOCHE = WEISS
+       MONAT = TÜRKIS
+       JAHR = SCHWARZ
+    ========================================================= */
+
     .summary-bar-row {
       display: grid;
       grid-template-columns: 115px minmax(0, 1fr) 75px;
@@ -430,13 +441,20 @@
       border-radius: 12px;
     }
 
+    /* WOCHE – WEISS */
+
     .summary-bar-row:nth-child(1) {
-      background: #eefbfd;
+      background: #ffffff;
+      border: 1px solid var(--home-line);
     }
 
+    /* MONAT – TÜRKIS */
+
     .summary-bar-row:nth-child(2) {
-      background: #f4f7f6;
+      background: var(--miles-blue);
     }
+
+    /* JAHR – SCHWARZ */
 
     .summary-bar-row.year {
       background: #111817;
@@ -450,20 +468,34 @@
       letter-spacing: 1px;
     }
 
+    .summary-bar-row:nth-child(2) .summary-bar-label {
+      color: #fff;
+    }
+
     .summary-bar-row.year .summary-bar-label {
       color: #fff;
     }
 
     .summary-track {
       height: 11px;
-      background: rgba(255,255,255,.65);
+      background: #e8eeec;
       border-radius: 99px;
       overflow: hidden;
     }
 
-    .summary-bar-row:nth-child(2) .summary-track {
-      background: #e1e7e4;
+    /* WOCHE */
+
+    .summary-bar-row:nth-child(1) .summary-track {
+      background: #e8eeec;
     }
+
+    /* MONAT */
+
+    .summary-bar-row:nth-child(2) .summary-track {
+      background: rgba(255,255,255,.35);
+    }
+
+    /* JAHR */
 
     .summary-bar-row.year .summary-track {
       background: #2b3432;
@@ -477,6 +509,20 @@
       transition: width .5s ease;
     }
 
+    /* WOCHE – TÜRKISER BALKEN */
+
+    .summary-bar-row:nth-child(1) .summary-fill {
+      background: var(--miles-blue);
+    }
+
+    /* MONAT – WEISSER BALKEN */
+
+    .summary-bar-row:nth-child(2) .summary-fill {
+      background: #fff;
+    }
+
+    /* JAHR – TÜRKISER BALKEN */
+
     .summary-bar-row.year .summary-fill {
       background: var(--miles-blue);
     }
@@ -489,102 +535,12 @@
       white-space: nowrap;
     }
 
+    .summary-bar-row:nth-child(2) .summary-value {
+      color: #fff;
+    }
+
     .summary-bar-row.year .summary-value {
       color: #fff;
-    }
-
-    /* =========================================================
-       STATS
-    ========================================================= */
-
-    .stat-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 15px;
-    }
-
-    .stat-card {
-      position: relative;
-      overflow: hidden;
-      border: 1px solid #d8edef;
-      background:
-        linear-gradient(
-          145deg,
-          #eafafd 0%,
-          #f8feff 100%
-        );
-      padding: 21px;
-      box-shadow: 0 8px 22px rgba(24,184,199,.06);
-    }
-
-    .stat-card:nth-child(2) {
-      border-color: #dfe7e4;
-      background:
-        linear-gradient(
-          145deg,
-          #f2f7f5 0%,
-          #ffffff 100%
-        );
-      box-shadow: 0 8px 22px rgba(5,9,9,.035);
-    }
-
-    .stat-card:nth-child(3) {
-      border-color: #202826;
-      background:
-        linear-gradient(
-          145deg,
-          #111817 0%,
-          #1d2826 100%
-        );
-      box-shadow: 0 8px 22px rgba(5,9,9,.08);
-    }
-
-    .stat-card::after {
-      content: "";
-      position: absolute;
-      width: 80px;
-      height: 80px;
-      right: -28px;
-      bottom: -35px;
-      border-radius: 50%;
-      background: rgba(24,184,199,.14);
-    }
-
-    .stat-card-label {
-      color: var(--home-muted);
-      font-size: 10px;
-      font-weight: 900;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-    }
-
-    .stat-card:nth-child(3) .stat-card-label {
-      color: #9aa5a1;
-    }
-
-    .stat-card-value {
-      margin-top: 14px;
-      color: #111;
-      font-size: 34px;
-      line-height: 1;
-      letter-spacing: -1.5px;
-      font-weight: 900;
-    }
-
-    .stat-card:nth-child(3) .stat-card-value {
-      color: #fff;
-    }
-
-    .stat-card-value span {
-      color: #777;
-      font-size: 13px;
-      letter-spacing: 0;
-      font-weight: 600;
-    }
-
-    .stat-card:nth-child(3) .stat-card-value span {
-      color: #9aa5a1;
     }
 
     /* =========================================================
@@ -1547,10 +1503,6 @@
         grid-template-columns: repeat(2, 1fr);
       }
 
-      .stat-grid {
-        grid-template-columns: repeat(3, 1fr);
-      }
-
       .run-form {
         grid-template-columns: 1fr 1fr;
       }
@@ -1591,10 +1543,6 @@
 
       .longest-run {
         grid-column: auto;
-      }
-
-      .stat-grid {
-        grid-template-columns: 1fr;
       }
 
       .run-list-row {
@@ -2047,58 +1995,6 @@
                 0,0 km
               </div>
 
-            </div>
-
-          </div>
-
-        </div>
-
-        <div class="stat-grid">
-
-          <div class="stat-card">
-
-            <div class="stat-card-label">
-              Woche
-            </div>
-
-            <div
-              class="stat-card-value"
-              id="weekStat"
-            >
-              0,0
-              <span>km</span>
-            </div>
-
-          </div>
-
-          <div class="stat-card">
-
-            <div class="stat-card-label">
-              Monat
-            </div>
-
-            <div
-              class="stat-card-value"
-              id="monthStat"
-            >
-              0,0
-              <span>km</span>
-            </div>
-
-          </div>
-
-          <div class="stat-card">
-
-            <div class="stat-card-label">
-              Jahr
-            </div>
-
-            <div
-              class="stat-card-value"
-              id="yearStat"
-            >
-              0,0
-              <span>km</span>
             </div>
 
           </div>
@@ -3380,15 +3276,6 @@
 
   const yearTotal =
     document.getElementById("yearTotal");
-
-  const weekStat =
-    document.getElementById("weekStat");
-
-  const monthStat =
-    document.getElementById("monthStat");
-
-  const yearStat =
-    document.getElementById("yearStat");
 
   const sidebarWeekKm =
     document.getElementById("sidebarWeekKm");
@@ -4721,24 +4608,6 @@
       ) +
       " km";
 
-    weekStat.innerHTML =
-      formatNumber(
-        totals.week
-      ) +
-      ' <span>km</span>';
-
-    monthStat.innerHTML =
-      formatNumber(
-        totals.month
-      ) +
-      ' <span>km</span>';
-
-    yearStat.innerHTML =
-      formatNumber(
-        totals.year
-      ) +
-      ' <span>km</span>';
-
     const largest =
       Math.max(
         totals.week,
@@ -5416,10 +5285,6 @@
 
       }
 
-      /* =====================================================
-         FOTO IST PFLICHT
-      ===================================================== */
-
       if (!photo) {
 
         setMessage(
@@ -5457,11 +5322,6 @@
         null;
 
       try {
-
-        /*
-         * Foto zuerst hochladen.
-         * Das Foto ist verpflichtend.
-         */
 
         setMessage(
           runFormMessage,
