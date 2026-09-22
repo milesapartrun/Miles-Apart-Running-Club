@@ -1601,7 +1601,7 @@ h1,h2,h3,h4,h5,h6,strong,b,.kpi,.label,.principle-number,
                 >
 
                 <div class="member-image-help">
-                  JPG, PNG oder WEBP · maximal 10 MB.
+                  JPG, PNG oder WEBP · maximal 50 MB.
                 </div>
 
               </div>
@@ -1670,7 +1670,7 @@ h1,h2,h3,h4,h5,h6,strong,b,.kpi,.label,.principle-number,
                 >
 
                 <div class="member-image-help">
-                  JPG, PNG oder WEBP · maximal 10 MB.
+                  JPG, PNG oder WEBP · maximal 50 MB.
                 </div>
 
               </div>
@@ -1739,7 +1739,7 @@ h1,h2,h3,h4,h5,h6,strong,b,.kpi,.label,.principle-number,
                 >
 
                 <div class="member-image-help">
-                  JPG, PNG oder WEBP · maximal 10 MB.
+                  JPG, PNG oder WEBP · maximal 50 MB.
                 </div>
 
               </div>
@@ -3618,13 +3618,17 @@ async function uploadMemberImage(
     );
   }
 
+  /* ===================================================
+     BILD-LIMIT: 50 MB
+  =================================================== */
+
   const maxSize =
-    10 * 1024 * 1024;
+    50 * 1024 * 1024;
 
   if(file.size > maxSize){
 
     throw new Error(
-      "Das Bild darf maximal 10 MB groß sein."
+      "Das Bild darf maximal 50 MB groß sein."
     );
   }
 
