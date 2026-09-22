@@ -1,1910 +1,1346 @@
 <!doctype html>
 <html lang="de">
-
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <title>Miles Apart — Miles Apart Running Club</title>
-
-  <link rel="stylesheet" href="style.css">
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-  <style>
-
-    :root {
-      --miles-blue: #18b8c7;
-      --miles-dark: #111b1d;
-      --miles-green: #28b963;
-      --miles-pink: #cf348e;
-      --miles-orange: #f4a23a;
-    }
-
-    body,
-    body * {
-      font-family: var(--font-main);
-    }
-
-    button,
-    input,
-    textarea,
-    select {
-      font-family: var(--font-main);
-    }
-
-    p,
-    li,
-    span,
-    a,
-    button,
-    input,
-    textarea,
-    select {
-      font-weight: var(--font-light);
-    }
-
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6,
-    strong,
-    b,
-    .kpi,
-    .label,
-    .principle-number,
-    .founder-kicker,
-    .home-hero-eyebrow,
-    .statement-label,
-    .user-avatar-button {
-      font-weight: var(--font-heading);
-    }
-
-    /* =====================================================
-       INTRO
-    ===================================================== */
-
-    .home-intro {
-      margin: 0 !important;
-      padding: 72px 0 62px !important;
-      background: #fff;
-      box-sizing: border-box;
-    }
-
-    .intro-card {
-      width: 100%;
-      box-sizing: border-box;
-      padding: 52px 55px 50px;
-      background: transparent;
-      border: none;
-    }
-
-    .intro-card-lead {
-      max-width: 1050px;
-      margin: 0;
-      color: #222;
-      font-size: clamp(36px, 4.2vw, 60px);
-      line-height: .98;
-      letter-spacing: -2.5px;
-      font-weight: var(--font-heading);
-    }
-
-    .intro-card-lead span {
-      display: block;
-      color: var(--miles-blue);
-      font-weight: var(--font-heading);
-    }
-
-    .intro-card-bottom {
-      display: block;
-      margin-top: 48px;
-      padding-top: 34px;
-      border-top: 1px solid #dcdcd8;
-    }
-
-    .intro-card-text {
-      max-width: 850px;
-    }
-
-    .intro-card-text p {
-      margin: 0 0 22px;
-      color: #666;
-      font-size: 20px;
-      line-height: 1.72;
-      font-weight: var(--font-light);
-    }
-
-    .intro-card-text p:last-child {
-      margin-bottom: 0;
-    }
-
-    .intro-card-text strong {
-      color: #222;
-      font-weight: var(--font-heading);
-    }
-
-    /* =====================================================
-       COLORS
-    ===================================================== */
-
-    .lime {
-      background-color: var(--miles-blue) !important;
-      border-color: var(--miles-blue) !important;
-      color: #ffffff !important;
-    }
-
-    .lime:hover {
-      background-color: #1199a6 !important;
-      border-color: #1199a6 !important;
-    }
-
-    .label {
-      color: var(--miles-blue);
-    }
-
-    .progress i,
-    .mini-progress i,
-    .bar i {
-      background-color: var(--miles-blue);
-    }
-
-    .badge.lime {
-      background-color: var(--miles-blue) !important;
-      border-color: var(--miles-blue) !important;
-      color: #ffffff !important;
-    }
-
-    .intro-eyebrow {
-      color: var(--miles-blue);
-      font-weight: var(--font-heading);
-    }
-
-    .founder-kicker {
-      color: var(--miles-blue);
-    }
-
-    .principle-number {
-      color: var(--miles-blue);
-    }
-
-    /* =====================================================
-       HERO
-    ===================================================== */
-
-    .home-hero {
-      position: relative;
-      width: 100%;
-      height: min(72vh, 760px);
-      min-height: 560px;
-      overflow: hidden;
-      background: #111;
-    }
-
-    .home-hero img {
-      width: 100%;
-      height: 100%;
-      display: block;
-      object-fit: cover;
-      object-position: center 45%;
-    }
-
-    .home-hero-overlay {
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(
-          to top,
-          rgba(0,0,0,.78) 0%,
-          rgba(0,0,0,.25) 48%,
-          rgba(0,0,0,.05) 100%
-        );
-    }
-
-    .home-hero-content {
-      position: absolute;
-      left: 50px;
-      right: 50px;
-      bottom: 28px;
-      z-index: 2;
-      color: #fff;
-    }
-
-    .home-hero-content h1 {
-      max-width: 1000px;
-      margin: 0;
-      font-size: clamp(42px, 6.3vw, 82px);
-      line-height: .94;
-      letter-spacing: -2.7px;
-      font-weight: var(--font-heading);
-    }
-
-    .home-hero-content h1 span {
-      color: var(--miles-blue);
-      font-weight: var(--font-heading);
-    }
-
-    .home-hero-content p {
-      margin: 22px 0 0;
-      font-size: 12px;
-      line-height: 1.5;
-      font-weight: var(--font-light);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,.72);
-    }
-
-    /* =====================================================
-       STORY PHOTO
-    ===================================================== */
-
-    .story-photo {
-      position: relative;
-      height: min(62vw, 620px);
-      min-height: 420px;
-      overflow: hidden;
-      margin-top: 0;
-      background: #111;
-    }
-
-    .story-photo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 38%;
-      display: block;
-    }
-
-    .story-photo::after {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(
-          to top,
-          rgba(0,0,0,.72) 0%,
-          rgba(0,0,0,.08) 50%,
-          rgba(0,0,0,.02) 100%
-        );
-      pointer-events: none;
-    }
-
-    .photo-caption {
-      position: absolute;
-      z-index: 2;
-      left: 30px;
-      right: 30px;
-      bottom: 26px;
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 20px;
-      color: #fff;
-    }
-
-    .photo-caption strong {
-      font-size: clamp(25px, 3vw, 42px);
-      line-height: 1;
-      letter-spacing: -1.5px;
-      font-weight: var(--font-heading);
-    }
-
-    .photo-caption span {
-      font-size: 11px;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: #bbb;
-      text-align: right;
-      font-weight: var(--font-light);
-    }
-
-    /* =====================================================
-       ABOUT PROJECT
-    ===================================================== */
-
-    .about-project {
-      margin-top: 100px;
-    }
-
-    .about-project .intro-eyebrow {
-      margin-bottom: 24px;
-    }
-
-    .about-project-grid {
-      display: grid;
-      grid-template-columns: 1fr 1.45fr;
-      gap: 70px;
-      align-items: start;
-    }
-
-    .about-project h2 {
-      font-size: clamp(34px, 4vw, 56px);
-      line-height: .98;
-      letter-spacing: -2px;
-      margin: 0;
-      font-weight: var(--font-heading);
-    }
-
-    .about-project-text {
-      font-size: 18px;
-      line-height: 1.75;
-      font-weight: var(--font-light);
-      color: #777;
-      max-width: 760px;
-    }
-
-    .about-project-text p {
-      margin: 0 0 22px;
-      font-weight: var(--font-light);
-    }
-
-    .about-project-text strong {
-      color: #222;
-      font-weight: var(--font-heading);
-    }
-
-    .about-project-nowrap {
-      white-space: nowrap;
-    }
-
-    /* =====================================================
-       PRINCIPLES
-    ===================================================== */
-
-    .principles {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      margin-top: 45px;
-    }
-
-    .principle {
-      padding: 28px;
-      min-height: 190px;
-      background: #f7f7f5;
-      border: 1px solid #e4e4e0;
-      position: relative;
-    }
-
-    .principle-number {
-      font-size: 11px;
-      font-weight: var(--font-heading);
-      letter-spacing: 2px;
-    }
-
-    .principle-icon {
-      position: absolute;
-      top: 25px;
-      right: 27px;
-      width: 30px;
-      height: 30px;
-      color: var(--miles-blue);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .principle-icon svg {
-      width: 30px;
-      height: 30px;
-      display: block;
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 1.7;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .principle h3 {
-      font-size: 22px;
-      margin: 38px 0 9px;
-      font-weight: var(--font-heading);
-    }
-
-    .principle p {
-      margin: 0;
-      color: #777;
-      line-height: 1.55;
-      font-size: 14px;
-      font-weight: var(--font-light);
-    }
-
-    /* =====================================================
-       FOUNDER
-    ===================================================== */
-
-    .founder {
-      margin-top: 100px;
-    }
-
-    .founder-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 25px;
-      margin-bottom: 28px;
-    }
-
-    .founder-kicker {
-      font-size: 14px;
-      font-weight: var(--font-heading);
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      margin-bottom: 12px;
-    }
-
-    .founder-head h2 {
-      font-size: clamp(40px, 5vw, 68px);
-      line-height: .95;
-      letter-spacing: -3px;
-      margin: 0;
-      font-weight: var(--font-heading);
-    }
-
-    .founder-head .badge.lime {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      box-sizing: border-box;
-      min-height: 38px;
-      padding: 0 20px;
-      border-radius: 999px;
-      white-space: nowrap;
-      text-align: center;
-      line-height: 1;
-      font-size: 10px;
-      letter-spacing: 1.4px;
-      font-weight: var(--font-heading);
-    }
-
-    .founder-layout {
-      display: grid;
-      grid-template-columns: 1.15fr .85fr;
-      min-height: 590px;
-      background: #f5f5f3;
-      border: 1px solid #e2e2de;
-    }
-
-    .founder-image {
-      min-height: 590px;
-      overflow: hidden;
-    }
-
-    .founder-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center 28%;
-      display: block;
-    }
-
-    .founder-content {
-      padding: 48px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .founder-content h3 {
-      font-size: 40px;
-      letter-spacing: -1.5px;
-      margin: 0 0 20px;
-      font-weight: var(--font-heading);
-    }
-
-    .founder-content p {
-      color: #777;
-      font-size: 16px;
-      line-height: 1.7;
-      margin: 0 0 20px;
-      font-weight: var(--font-light);
-    }
-
-    .founder-content p strong {
-      color: #222;
-      font-weight: var(--font-heading);
-    }
-
-    .founder-tags {
-      display: flex;
-      gap: 7px;
-      flex-wrap: wrap;
-      margin-top: 10px;
-    }
-
-    .founder-tag {
-      border: 1px solid #d7d7d3;
-      padding: 8px 11px;
-      font-size: 10px;
-      letter-spacing: 1px;
-      font-weight: var(--font-light);
-      text-transform: uppercase;
-      color: #666;
-    }
-
-    /* =====================================================
-       VISUAL STORY
-    ===================================================== */
-
-    .visual-story {
-      margin-top: 100px;
-    }
-
-    .visual-story-head {
-      display: grid;
-      grid-template-columns: minmax(330px, .9fr) minmax(0, 1.1fr);
-      align-items: end;
-      gap: 65px;
-      margin-bottom: 32px;
-    }
-
-    .visual-story .intro-eyebrow {
-      display: block;
-      margin-bottom: 20px;
-      white-space: nowrap;
-    }
-
-    .visual-story-head h2 {
-      margin: 0;
-      font-size: clamp(42px, 4.8vw, 64px);
-      letter-spacing: -2.8px;
-      line-height: .92;
-      font-weight: var(--font-heading);
-    }
-
-    .visual-story-head p {
-      max-width: 560px;
-      margin: 0 0 4px;
-      color: #777;
-      line-height: 1.55;
-      font-size: 20px;
-      font-weight: var(--font-light);
-    }
-
-    .photo-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      grid-template-rows: 580px;
-      gap: 0;
-    }
-
-    .photo-grid-item {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      background: #111;
-    }
-
-    .photo-grid-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: transform .5s ease;
-    }
-
-    .photo-grid-item:hover img {
-      transform: scale(1.03);
-    }
-
-    /* =====================================================
-       THE IDEA
-    ===================================================== */
-
-    .statement {
-      margin-top: 100px;
-      padding: 70px 50px;
-      background: var(--miles-blue);
-      color: #fff;
-    }
-
-    .statement-label {
-      font-size: 11px;
-      font-weight: var(--font-heading);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 22px;
-    }
-
-    .statement h2 {
-      max-width: 950px;
-      margin: 0;
-      font-size: clamp(38px, 5.5vw, 75px);
-      line-height: .95;
-      letter-spacing: -3px;
-      font-weight: var(--font-heading);
-    }
-
-    .statement h2 .statement-dark {
-      color: #111;
-      font-weight: var(--font-heading);
-    }
-
-    .statement p {
-      max-width: 680px;
-      margin: 28px 0 0;
-      font-size: 17px;
-      line-height: 1.6;
-      font-weight: var(--font-light);
-    }
-
-    .statement-cta {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      box-sizing: border-box;
-      min-height: 82px;
-      margin-top: 36px;
-      padding: 18px 28px;
-      border: 1px solid #111;
-      background: #111;
-      color: #fff;
-      text-decoration: none;
-      font-size: 18px;
-      line-height: 1;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      font-weight: var(--font-light);
-      transition: .2s ease;
-    }
-
-    .statement-cta:hover {
-      background: #fff;
-      color: #111;
-      border-color: #111;
-    }
-
-    /* =====================================================
-       ACCOUNT MENU
-    ===================================================== */
-
-    .top-right {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .user-area {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .user-greeting {
-      font-size: 13px;
-      color: #666;
-      white-space: nowrap;
-      font-weight: var(--font-light);
-    }
-
-    .login-button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 38px;
-      padding: 0 16px;
-      border: 1px solid #d7d7d3;
-      background: #fff;
-      color: #222;
-      font-size: 12px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: .2s ease;
-    }
-
-    .login-button:hover {
-      border-color: var(--miles-blue);
-      color: var(--miles-blue);
-    }
-
-    .user-avatar-button {
-      width: 58px;
-      height: 58px;
-      border-radius: 50%;
-      border: 3px solid var(--miles-blue);
-      background: #fff;
-      color: var(--miles-blue);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: var(--font-heading);
-      font-size: 18px;
-      cursor: pointer;
-      overflow: hidden;
-      padding: 0;
-    }
-
-    .user-avatar-button img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
-
-    .account-menu {
-      position: absolute !important;
-      top: calc(100% + 12px) !important;
-      right: 0 !important;
-      left: auto !important;
-      width: 260px !important;
-      min-width: 260px !important;
-      max-width: 260px !important;
-      height: auto !important;
-      min-height: 0 !important;
-      max-height: none !important;
-      box-sizing: border-box !important;
-      padding: 0 !important;
-      margin: 0 !important;
-      background: #ffffff !important;
-      border: 1px solid #dddddd !important;
-      border-radius: 0 !important;
-      box-shadow: 0 15px 40px rgba(0,0,0,.12);
-      z-index: 1000 !important;
-      display: none;
-      overflow: hidden !important;
-    }
-
-    .account-menu.open {
-      display: block !important;
-    }
-
-    .account-menu-name {
-      display: block !important;
-      width: 100% !important;
-      box-sizing: border-box !important;
-      padding: 16px 18px 4px !important;
-      margin: 0 !important;
-      background: #ffffff !important;
-      color: #111111 !important;
-      font-family: var(--font-main, "Inter", sans-serif) !important;
-      font-size: 20px !important;
-      line-height: 1.25 !important;
-      font-weight: var(--font-heading) !important;
-    }
-
-    .account-menu-email {
-      display: block !important;
-      width: 100% !important;
-      box-sizing: border-box !important;
-      padding: 0 18px 16px !important;
-      margin: 0 !important;
-      border-bottom: 1px solid #e8e8e8 !important;
-      background: #ffffff !important;
-      color: #888888 !important;
-      font-family: var(--font-main, "Inter", sans-serif) !important;
-      font-size: 13px !important;
-      line-height: 1.4 !important;
-      font-weight: var(--font-light) !important;
-      overflow-wrap: anywhere;
-      word-break: break-word;
-    }
-
-    .account-menu a,
-    .account-menu button,
-    .account-menu .profile-menu-button,
-    .account-menu .logout-button {
-      display: block !important;
-      width: 100% !important;
-      min-width: 0 !important;
-      max-width: none !important;
-      height: auto !important;
-      min-height: 0 !important;
-      box-sizing: border-box !important;
-      margin: 0 !important;
-      padding: 16px 18px !important;
-      border: 0 !important;
-      border-bottom: 1px solid #e8e8e8 !important;
-      border-radius: 0 !important;
-      background: #ffffff !important;
-      text-align: left !important;
-      text-decoration: none !important;
-      cursor: pointer;
-      font-family: var(--font-main, "Inter", sans-serif) !important;
-      font-size: 16px !important;
-      line-height: 1.3 !important;
-      font-weight: var(--font-light) !important;
-      color: #222222 !important;
-      box-shadow: none !important;
-    }
-
-    .account-menu a:hover,
-    .account-menu button:hover,
-    .account-menu .profile-menu-button:hover,
-    .account-menu .logout-button:hover {
-      background: #f5f5f3 !important;
-      color: #222222 !important;
-    }
-
-    .account-menu .logout-button {
-      border-bottom: 0 !important;
-      color: #888888 !important;
-    }
-
-    /* =====================================================
-       AUTH
-    ===================================================== */
-
-    .auth-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,.58);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-      z-index: 100;
-      overflow-y: auto;
-      backdrop-filter: blur(4px);
-    }
-
-    .auth-overlay.open {
-      display: flex;
-    }
-
-    .auth-modal {
-      position: relative;
-      width: min(680px, 100%);
-      max-height: calc(100vh - 40px);
-      overflow-y: auto;
-      background: #fff;
-      padding: 42px;
-      box-shadow: 0 30px 100px rgba(0,0,0,.28);
-      border-radius: 2px;
-    }
-
-    .auth-close {
-      position: absolute;
-      top: 15px;
-      right: 17px;
-      width: 32px;
-      height: 32px;
-      border: 0;
-      background: transparent;
-      font-size: 25px;
-      line-height: 1;
-      cursor: pointer;
-      color: #555;
-      font-weight: var(--font-light);
-      z-index: 5;
-    }
-
-    .auth-close:hover {
-      color: var(--miles-blue);
-    }
-
-    .auth-eyebrow {
-      color: var(--miles-blue);
-      font-size: 10px;
-      font-weight: var(--font-heading);
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-
-    .auth-modal h2 {
-      font-size: 32px;
-      line-height: 1;
-      letter-spacing: -1px;
-      margin: 0 0 10px;
-      font-weight: var(--font-heading);
-    }
-
-    .auth-description {
-      color: #777;
-      font-size: 14px;
-      line-height: 1.5;
-      margin: 0 0 25px;
-      font-weight: var(--font-light);
-    }
-
-    .auth-tabs {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      border-bottom: 1px solid #ddd;
-      margin-bottom: 25px;
-    }
-
-    .auth-tab {
-      padding: 12px 8px;
-      border: 0;
-      background: transparent;
-      color: #888;
-      font-size: 12px;
-      font-weight: var(--font-light);
-      cursor: pointer;
-      border-bottom: 2px solid transparent;
-    }
-
-    .auth-tab.active {
-      color: var(--miles-blue);
-      border-bottom-color: var(--miles-blue);
-    }
-
-    .auth-form {
-      display: none;
-    }
-
-    .auth-form.active {
-      display: block;
-    }
-
-    .form-group {
-      margin-bottom: 16px;
-    }
-
-    .form-group label {
-      display: block;
-      font-size: 11px;
-      font-weight: var(--font-heading);
-      margin-bottom: 7px;
-      color: #333;
-    }
-
-    .form-group input {
-      width: 100%;
-      box-sizing: border-box;
-      padding: 13px 14px;
-      border: 1px solid #d7d7d3;
-      background: #fafaf8;
-      color: #222;
-      font-family: var(--font-main);
-      font-size: 14px;
-      font-weight: var(--font-light);
-      outline: none;
-    }
-
-    .form-group input:focus {
-      border-color: var(--miles-blue);
-      background: #fff;
-    }
-
-    /* =====================================================
-       REGISTRATION INTRO
-    ===================================================== */
-
-    .registration-intro {
-      margin: 0 0 22px;
-      padding: 21px 22px;
-      background: #f2fbfc;
-      border: 1px solid #cceef1;
-      color: #52696b;
-      font-size: 14px;
-      line-height: 1.7;
-      font-weight: var(--font-light);
-    }
-
-    .registration-intro strong {
-      color: #222;
-      font-weight: var(--font-heading);
-    }
-
-    /* =====================================================
-       REGISTRATION GATE
-    ===================================================== */
-
-    .registration-gate {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      margin: 22px 0 18px;
-    }
-
-    .gate-card {
-      background: #fafbf9;
-      border: 1px solid #dfe3e0;
-      border-radius: 18px;
-      padding: 22px;
-    }
-
-    .gate-top {
-      display: flex;
-      align-items: flex-start;
-      gap: 16px;
-    }
-
-    .gate-icon {
-      width: 58px;
-      height: 58px;
-      flex: 0 0 58px;
-      border-radius: 16px;
-      background: #fff;
-      border: 1px solid #dfe3e0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #222;
-      box-shadow: 0 3px 10px rgba(0,0,0,.03);
-    }
-
-    .gate-icon svg {
-      width: 27px;
-      height: 27px;
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 1.8;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .gate-copy {
-      min-width: 0;
-      flex: 1;
-    }
-
-    .gate-copy h3 {
-      margin: 2px 0 8px;
-      font-size: 21px;
-      line-height: 1.15;
-      letter-spacing: -.4px;
-      color: #171717;
-      font-weight: var(--font-heading);
-    }
-
-    .gate-copy p {
-      margin: 0;
-      color: #858b88;
-      font-size: 13px;
-      line-height: 1.65;
-      font-weight: var(--font-light);
-    }
-
-    .gate-copy p strong {
-      color: #4b5352;
-      font-weight: var(--font-heading);
-    }
-
-    .instagram-handle {
-      display: block;
-      margin-top: 10px;
-      color: #cf348e;
-      font-size: 16px;
-      line-height: 1;
-      font-weight: var(--font-heading);
-    }
-
-    .instagram-open {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      box-sizing: border-box;
-      min-height: 58px;
-      margin-top: 20px;
-      padding: 14px 16px;
-      border: 1px solid #d6dad7;
-      background: #fff;
-      color: #222;
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: var(--font-heading);
-      transition: .2s ease;
-      border-radius: 15px;
-    }
-
-    .instagram-open:hover {
-      border-color: var(--miles-blue);
-      color: var(--miles-blue);
-      transform: translateY(-1px);
-    }
-
-    .gate-divider {
-      height: 1px;
-      margin: 22px 0 18px;
-      background: #e2e5e2;
-    }
-
-    .gate-check {
-      display: flex;
-      align-items: flex-start;
-      gap: 13px;
-      margin-top: 0;
-      cursor: pointer;
-    }
-
-    .gate-check input {
-      position: absolute;
-      opacity: 0;
-      pointer-events: none;
-    }
-
-    .custom-check {
-      width: 42px;
-      height: 42px;
-      flex: 0 0 42px;
-      box-sizing: border-box;
-      border: 2px solid #cfd5d2;
-      border-radius: 12px;
-      background: #fff;
-      position: relative;
-      margin-top: 0;
-      transition: .2s ease;
-    }
-
-    .gate-check input:checked + .custom-check {
-      background: var(--miles-blue);
-      border-color: var(--miles-blue);
-    }
-
-    .gate-check input:checked + .custom-check::after {
-      content: "";
-      position: absolute;
-      width: 8px;
-      height: 15px;
-      left: 14px;
-      top: 8px;
-      border-right: 3px solid #fff;
-      border-bottom: 3px solid #fff;
-      transform: rotate(45deg);
-    }
-
-    .gate-check-text {
-      color: #8b908e;
-      font-size: 13px;
-      line-height: 1.5;
-      font-weight: var(--font-light);
-      padding-top: 3px;
-    }
-
-    .gate-check-text strong {
-      display: block;
-      color: #222;
-      font-size: 15px;
-      line-height: 1.4;
-      font-weight: var(--font-heading);
-    }
-
-    .gate-check-text small {
-      display: block;
-      margin-top: 4px;
-      color: #999;
-      font-size: 11px;
-      line-height: 1.45;
-      font-weight: var(--font-light);
-    }
-
-    /* =====================================================
-       INVITATION VISUAL
-    ===================================================== */
-
-    .invite-card {
-      background:
-        radial-gradient(
-          circle at 86% 24%,
-          rgba(65,182,198,.28),
-          transparent 34%
-        ),
-        radial-gradient(
-          circle at 20% 100%,
-          rgba(38,94,98,.36),
-          transparent 40%
-        ),
-        linear-gradient(
-          135deg,
-          #071214 0%,
-          #102324 44%,
-          #173b3d 100%
-        );
-      color: #fff;
-      border-radius: 18px;
-      overflow: hidden;
-      position: relative;
-      min-height: 270px;
-      margin-top: 20px;
-      padding: 28px 24px 25px;
-      box-sizing: border-box;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .invite-card::before,
-    .invite-card::after {
-      content: "";
-      position: absolute;
-      border: 1px solid rgba(88,199,211,.18);
-      border-radius: 50%;
-      pointer-events: none;
-    }
-
-    .invite-card::before {
-      width: 310px;
-      height: 310px;
-      left: 42%;
-      top: -165px;
-    }
-
-    .invite-card::after {
-      width: 280px;
-      height: 280px;
-      left: -65px;
-      bottom: -180px;
-    }
-
-    .invite-brand {
-      position: relative;
-      z-index: 1;
-      color: #49c6d4;
-      font-size: 10px;
-      line-height: 1;
-      letter-spacing: 6px;
-      font-weight: var(--font-heading);
-    }
-
-    .invite-title {
-      position: relative;
-      z-index: 1;
-      margin-top: 29px;
-      font-size: clamp(42px, 7vw, 60px);
-      line-height: .84;
-      letter-spacing: -2.8px;
-      font-weight: var(--font-heading);
-    }
-
-    .invite-title span {
-      color: #42bfd0;
-      font-weight: var(--font-heading);
-    }
-
-    .invite-subtitle {
-      position: relative;
-      z-index: 1;
-      max-width: 470px;
-      margin-top: 25px;
-      color: rgba(255,255,255,.84);
-      font-size: 14px;
-      line-height: 1.55;
-      font-weight: var(--font-heading);
-    }
-
-    .invite-footer {
-      position: relative;
-      z-index: 1;
-      margin-top: 34px;
-      color: rgba(255,255,255,.58);
-      font-size: 9px;
-      letter-spacing: 4px;
-      text-transform: uppercase;
-      font-weight: var(--font-light);
-    }
-
-    /* =====================================================
-       SHARE BUTTONS
-    ===================================================== */
-
-    .share-buttons {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      margin-top: 14px;
-    }
-
-    .share-button {
-      min-height: 62px;
-      border: 0;
-      border-radius: 14px;
-      color: #fff;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-      padding: 12px 14px;
-      font-size: 13px;
-      font-weight: var(--font-heading);
-      transition:
-        transform .18s ease,
-        filter .18s ease;
-    }
-
-    .share-button:hover {
-      transform: translateY(-1px);
-      filter: brightness(.97);
-    }
-
-    .share-button svg {
-      width: 21px;
-      height: 21px;
-      flex: 0 0 21px;
-      fill: none;
-      stroke: currentColor;
-      stroke-width: 1.8;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .share-whatsapp {
-      background: #57b95f;
-    }
-
-    .share-instagram {
-      background:
-        linear-gradient(
-          100deg,
-          #c32d82,
-          #d74f70 55%,
-          #efa23e
-        );
-    }
-
-    /* =====================================================
-       INVITE CONFIRMATION
-    ===================================================== */
-
-    .invite-confirmation {
-      margin-top: 18px;
-      padding-top: 18px;
-      border-top: 1px solid #e0e3e0;
-      opacity: .45;
-      pointer-events: none;
-      transition: .2s ease;
-    }
-
-    .invite-confirmation.available {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .invite-confirmation .gate-check {
-      margin-top: 0;
-    }
-
-    /* =====================================================
-       REGISTRATION STATUS
-    ===================================================== */
-
-    .registration-status {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-top: 16px;
-      padding: 14px 16px;
-      background: #f5f6f4;
-      border: 1px solid #e1e3df;
-      border-radius: 10px;
-      color: #888;
-      font-size: 11px;
-      line-height: 1.5;
-      font-weight: var(--font-light);
-      transition: .2s ease;
-    }
-
-    .registration-status-dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      flex: 0 0 9px;
-      background: #c8ccca;
-    }
-
-    .registration-status.ready {
-      color: #248b63;
-      background: #f0faf5;
-      border-color: #cce8da;
-    }
-
-    .registration-status.ready .registration-status-dot {
-      background: #248b63;
-    }
-
-    /* =====================================================
-       REGISTRATION PROGRESS
-    ===================================================== */
-
-    .registration-progress {
-      margin-top: 18px;
-      padding: 18px 20px;
-      border: 1px solid #e0e2df;
-      border-radius: 16px;
-      background: #f7f7f5;
-    }
-
-    .registration-progress-row {
-      display: flex;
-      align-items: center;
-      gap: 13px;
-      color: #8a8e8c;
-      font-size: 12px;
-      line-height: 1.4;
-      font-weight: var(--font-light);
-      transition: .2s ease;
-    }
-
-    .registration-progress-row + .registration-progress-row {
-      margin-top: 12px;
-    }
-
-    .registration-progress-number {
-      width: 30px;
-      height: 30px;
-      flex: 0 0 30px;
-      border-radius: 50%;
-      background: #e1e4e2;
-      color: #8b8f8d;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 11px;
-      font-weight: var(--font-heading);
-    }
-
-    .registration-progress-row.complete {
-      color: #222;
-    }
-
-    .registration-progress-row.complete
-    .registration-progress-number {
-      background: var(--miles-blue);
-      color: #fff;
-    }
-
-    /* =====================================================
-       AUTH BUTTON
-    ===================================================== */
-
-    .auth-submit {
-      width: 100%;
-      border: 1px solid var(--miles-blue);
-      background: var(--miles-blue);
-      color: #fff;
-      padding: 14px;
-      font-size: 12px;
-      font-weight: var(--font-light);
-      cursor: pointer;
-      margin-top: 14px;
-      transition: .2s ease;
-    }
-
-    .auth-submit:hover {
-      background: #1199a6;
-      border-color: #1199a6;
-    }
-
-    .auth-submit:disabled {
-      background: #a7dfe4;
-      border-color: #a7dfe4;
-      color: #fff;
-      opacity: 1;
-      cursor: not-allowed;
-    }
-
-    .auth-message {
-      min-height: 18px;
-      margin-top: 12px;
-      font-size: 12px;
-      line-height: 1.5;
-      color: #d34b4b;
-      font-weight: var(--font-light);
-    }
-
-    .auth-message.success {
-      color: #248b63;
-    }
-
-    .forgot-password,
-    .auth-back {
-      display: block;
-      margin-top: 13px;
-      border: 0;
-      background: transparent;
-      padding: 0;
-      color: #777;
-      font-size: 11px;
-      text-decoration: underline;
-      cursor: pointer;
-      font-weight: var(--font-light);
-    }
-
-    .auth-back {
-      margin-bottom: 18px;
-      text-decoration: none;
-    }
-
-    .forgot-password:hover,
-    .auth-back:hover {
-      color: var(--miles-blue);
-    }
-
-    .auth-note {
-      margin-top: 14px;
-      padding: 12px;
-      background: #f5f5f3;
-      border: 1px solid #e3e3df;
-      color: #666;
-      font-size: 11px;
-      line-height: 1.5;
-      font-weight: var(--font-light);
-    }
-
-    /* =====================================================
-       RESPONSIVE
-    ===================================================== */
-
-    @media (max-width: 900px) {
-
-      .home-hero {
-        height: 620px;
-        min-height: 620px;
-      }
-
-      .home-hero-content {
-        left: 30px;
-        right: 30px;
-        bottom: 27px;
-      }
-
-      .home-hero-content h1 {
-        letter-spacing: -2.3px;
-      }
-
-      .home-intro {
-        padding: 55px 0 58px !important;
-      }
-
-      .intro-card {
-        padding: 40px 35px 38px;
-      }
-
-      .intro-card-lead {
-        font-size: 40px;
-        letter-spacing: -1.8px;
-      }
-
-      .intro-card-bottom {
-        margin-top: 38px;
-        padding-top: 30px;
-      }
-
-      .intro-card-text p {
-        font-size: 19px;
-      }
-
-      .about-project-grid {
-        grid-template-columns: 1fr;
-        gap: 30px;
-      }
-
-      .principles {
-        grid-template-columns: 1fr;
-      }
-
-      .founder-layout {
-        grid-template-columns: 1fr;
-      }
-
-      .founder-image {
-        min-height: 500px;
-      }
-
-      .founder-content {
-        padding: 35px;
-      }
-
-      .visual-story-head {
-        grid-template-columns: 1fr;
-        gap: 24px;
-      }
-
-      .visual-story-head p {
-        max-width: 760px;
-      }
-
-      .photo-grid {
-        grid-template-columns: 1fr;
-        grid-template-rows: 500px;
-        gap: 0;
-      }
-
-      .statement {
-        padding: 50px 30px;
-      }
-
-    }
-
-    @media (max-width: 600px) {
-
-      .home-hero {
-        height: 560px;
-        min-height: 560px;
-      }
-
-      .home-hero img {
-        object-position: center center;
-      }
-
-      .home-hero-content {
-        left: 20px;
-        right: 20px;
-        bottom: 18px;
-      }
-
-      .home-hero-content h1 {
-        font-size: 40px;
-        letter-spacing: -1.8px;
-      }
-
-      .home-intro {
-        padding: 38px 0 24px !important;
-      }
-
-      .intro-card {
-        padding: 30px 24px 20px;
-      }
-
-      .intro-card-lead {
-        font-size: 26px;
-        line-height: 1.02;
-        letter-spacing: -1.1px;
-      }
-
-      .intro-card-lead span {
-        font-size: 26px;
-        letter-spacing: -1.1px;
-      }
-
-      .intro-card-bottom {
-        margin-top: 28px;
-        padding-top: 25px;
-      }
-
-      .intro-card-text p {
-        font-size: 16px;
-        line-height: 1.7;
-        margin-bottom: 16px;
-      }
-
-      .story-photo {
-        min-height: 400px;
-      }
-
-      .photo-caption {
-        left: 20px;
-        right: 20px;
-        bottom: 20px;
-      }
-
-      .photo-caption strong {
-        font-size: 26px;
-      }
-
-      .about-project,
-      .founder,
-      .visual-story,
-      .statement {
-        margin-top: 65px;
-      }
-
-      .founder-image {
-        min-height: 430px;
-      }
-
-      .founder-content {
-        padding: 28px 24px;
-      }
-
-      .founder-content h3 {
-        font-size: 32px;
-      }
-
-      .founder-head {
-        align-items: center;
-      }
-
-      .founder-head .badge.lime {
-        min-height: 34px;
-        padding: 0 15px;
-        font-size: 9px;
-        letter-spacing: 1.1px;
-      }
-
-      .visual-story-head {
-        gap: 20px;
-      }
-
-      .visual-story .intro-eyebrow {
-        white-space: normal;
-      }
-
-      .visual-story-head h2 {
-        font-size: 42px;
-        letter-spacing: -2px;
-      }
-
-      .visual-story-head p {
-        font-size: 16px;
-        line-height: 1.65;
-      }
-
-      .photo-grid {
-        grid-template-columns: 1fr;
-        grid-template-rows: 380px;
-        gap: 0;
-      }
-
-      .statement {
-        padding: 42px 24px;
-      }
-
-      .statement-cta {
-        min-height: 66px;
-        margin-top: 28px;
-        padding: 15px 14px;
-        font-size: 14px;
-        letter-spacing: 1.2px;
-        font-weight: var(--font-light);
-        text-align: center;
-      }
-
-      .top-right .user-greeting {
-        display: inline;
-        font-size: 12px;
-      }
-
-      .user-avatar-button {
-        width: 48px;
-        height: 48px;
-        border-width: 2px;
-      }
-
-      .account-menu {
-        top: calc(100% + 10px) !important;
-        right: 0 !important;
-        left: auto !important;
-        width: 260px !important;
-        min-width: 260px !important;
-        max-width: 260px !important;
-      }
-
-      .account-menu-name {
-        font-size: 20px !important;
-      }
-
-      .account-menu-email {
-        font-size: 13px !important;
-      }
-
-      .account-menu a,
-      .account-menu button,
-      .account-menu .profile-menu-button,
-      .account-menu .logout-button {
-        padding: 16px 18px !important;
-        font-size: 16px !important;
-        line-height: 1.3 !important;
-        font-weight: var(--font-light) !important;
-      }
-
-      /* AUTH MOBILE */
-
-      .auth-overlay {
-        align-items: flex-start;
-        padding: 10px;
-      }
-
-      .auth-modal {
-        width: 100%;
-        max-height: calc(100vh - 20px);
-        padding: 30px 18px 24px;
-        border-radius: 16px;
-      }
-
-      .auth-modal h2 {
-        font-size: 28px;
-        padding-right: 30px;
-      }
-
-      .auth-description {
-        font-size: 13px;
-      }
-
-      .registration-intro {
-        padding: 18px 19px;
-        font-size: 13px;
-        line-height: 1.7;
-      }
-
-      .gate-card {
-        padding: 18px;
-        border-radius: 16px;
-      }
-
-      .gate-top {
-        gap: 13px;
-      }
-
-      .gate-icon {
-        width: 46px;
-        height: 46px;
-        flex-basis: 46px;
-        border-radius: 13px;
-      }
-
-      .gate-icon svg {
-        width: 23px;
-        height: 23px;
-      }
-
-      .gate-copy h3 {
-        font-size: 19px;
-      }
-
-      .gate-copy p {
-        font-size: 12px;
-      }
-
-      .instagram-handle {
-        font-size: 15px;
-      }
-
-      .instagram-open {
-        min-height: 56px;
-        border-radius: 15px;
-      }
-
-      .custom-check {
-        width: 40px;
-        height: 40px;
-        flex-basis: 40px;
-      }
-
-      .gate-check input:checked + .custom-check::after {
-        left: 13px;
-        top: 7px;
-      }
-
-      .gate-check-text strong {
-        font-size: 14px;
-      }
-
-      .invite-card {
-        min-height: 260px;
-        padding: 25px 20px 23px;
-        border-radius: 15px;
-      }
-
-      .invite-brand {
-        font-size: 9px;
-        letter-spacing: 5px;
-      }
-
-      .invite-title {
-        margin-top: 27px;
-        font-size: 40px;
-        letter-spacing: -2.2px;
-      }
-
-      .invite-subtitle {
-        margin-top: 23px;
-        font-size: 12px;
-      }
-
-      .invite-footer {
-        margin-top: 29px;
-        font-size: 8px;
-        letter-spacing: 3px;
-      }
-
-      .share-buttons {
-        grid-template-columns: 1fr;
-        gap: 10px;
-      }
-
-      .share-button {
-        min-height: 58px;
-        border-radius: 14px;
-      }
-
-      .registration-progress {
-        padding: 17px 18px;
-      }
-
-      .registration-status {
-        font-size: 11px;
-      }
-
-    }
-
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Miles Apart — Miles Apart Running Club</title>
+
+<link rel="stylesheet" href="style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<style>
+:root{
+  --miles-blue:#18b8c7;
+  --miles-dark:#111b1d;
+  --miles-green:#28b963;
+  --miles-pink:#cf348e;
+  --miles-orange:#f4a23a;
+}
+
+body,body *{font-family:var(--font-main)}
+button,input,textarea,select{font-family:var(--font-main)}
+p,li,span,a,button,input,textarea,select{font-weight:var(--font-light)}
+h1,h2,h3,h4,h5,h6,strong,b,.kpi,.label,.principle-number,
+.founder-kicker,.home-hero-eyebrow,.statement-label,
+.user-avatar-button{font-weight:var(--font-heading)}
+
+.lime{
+  background:var(--miles-blue)!important;
+  border-color:var(--miles-blue)!important;
+  color:#fff!important;
+}
+.lime:hover{
+  background:#1199a6!important;
+  border-color:#1199a6!important;
+}
+.label,.intro-eyebrow,.founder-kicker,.principle-number{color:var(--miles-blue)}
+.progress i,.mini-progress i,.bar i{background:var(--miles-blue)}
+.badge.lime{
+  background:var(--miles-blue)!important;
+  border-color:var(--miles-blue)!important;
+  color:#fff!important;
+}
+
+/* =====================================================
+   INTRO
+===================================================== */
+
+.home-intro{
+  margin:0!important;
+  padding:72px 0 62px!important;
+  background:#fff;
+  box-sizing:border-box;
+}
+.intro-card{
+  width:100%;
+  box-sizing:border-box;
+  padding:52px 55px 50px;
+}
+.intro-card-lead{
+  max-width:1050px;
+  margin:0;
+  color:#222;
+  font-size:clamp(36px,4.2vw,60px);
+  line-height:.98;
+  letter-spacing:-2.5px;
+  font-weight:var(--font-heading);
+}
+.intro-card-lead span{
+  display:block;
+  color:var(--miles-blue);
+  font-weight:var(--font-heading);
+}
+.intro-card-bottom{
+  display:block;
+  margin-top:48px;
+  padding-top:34px;
+  border-top:1px solid #dcdcd8;
+}
+.intro-card-text{max-width:850px}
+.intro-card-text p{
+  margin:0 0 22px;
+  color:#666;
+  font-size:20px;
+  line-height:1.72;
+}
+.intro-card-text strong{color:#222}
+
+/* =====================================================
+   HERO
+===================================================== */
+
+.home-hero{
+  position:relative;
+  width:100%;
+  height:min(72vh,760px);
+  min-height:560px;
+  overflow:hidden;
+  background:#111;
+}
+.home-hero img{
+  width:100%;
+  height:100%;
+  display:block;
+  object-fit:cover;
+  object-position:center 45%;
+}
+.home-hero-overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    to top,
+    rgba(0,0,0,.78) 0%,
+    rgba(0,0,0,.25) 48%,
+    rgba(0,0,0,.05) 100%
+  );
+}
+.home-hero-content{
+  position:absolute;
+  left:50px;
+  right:50px;
+  bottom:28px;
+  z-index:2;
+  color:#fff;
+}
+.home-hero-content h1{
+  max-width:1000px;
+  margin:0;
+  font-size:clamp(42px,6.3vw,82px);
+  line-height:.94;
+  letter-spacing:-2.7px;
+}
+.home-hero-content h1 span{color:var(--miles-blue)}
+.home-hero-content p{
+  margin:22px 0 0;
+  font-size:12px;
+  line-height:1.5;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  color:rgba(255,255,255,.72);
+}
+
+/* =====================================================
+   STORY PHOTO
+===================================================== */
+
+.story-photo{
+  position:relative;
+  height:min(62vw,620px);
+  min-height:420px;
+  overflow:hidden;
+  background:#111;
+}
+.story-photo img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center 38%;
+  display:block;
+}
+.story-photo:after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    to top,
+    rgba(0,0,0,.72) 0%,
+    rgba(0,0,0,.08) 50%,
+    rgba(0,0,0,.02) 100%
+  );
+  pointer-events:none;
+}
+.photo-caption{
+  position:absolute;
+  z-index:2;
+  left:30px;
+  right:30px;
+  bottom:26px;
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:20px;
+  color:#fff;
+}
+.photo-caption strong{
+  font-size:clamp(25px,3vw,42px);
+  line-height:1;
+  letter-spacing:-1.5px;
+}
+.photo-caption span{
+  font-size:11px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  color:#bbb;
+  text-align:right;
+}
+
+/* =====================================================
+   ABOUT
+===================================================== */
+
+.about-project{margin-top:100px}
+.about-project .intro-eyebrow{margin-bottom:24px}
+.about-project-grid{
+  display:grid;
+  grid-template-columns:1fr 1.45fr;
+  gap:70px;
+  align-items:start;
+}
+.about-project h2{
+  font-size:clamp(34px,4vw,56px);
+  line-height:.98;
+  letter-spacing:-2px;
+  margin:0;
+}
+.about-project-text{
+  font-size:18px;
+  line-height:1.75;
+  color:#777;
+  max-width:760px;
+}
+.about-project-text p{margin:0 0 22px}
+.about-project-text strong{color:#222}
+.about-project-nowrap{white-space:nowrap}
+
+.principles{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+  margin-top:45px;
+}
+.principle{
+  padding:28px;
+  min-height:190px;
+  background:#f7f7f5;
+  border:1px solid #e4e4e0;
+  position:relative;
+}
+.principle-number{
+  font-size:11px;
+  letter-spacing:2px;
+}
+.principle-icon{
+  position:absolute;
+  top:25px;
+  right:27px;
+  width:30px;
+  height:30px;
+  color:var(--miles-blue);
+}
+.principle-icon svg{
+  width:30px;
+  height:30px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.7;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.principle h3{
+  font-size:22px;
+  margin:38px 0 9px;
+}
+.principle p{
+  margin:0;
+  color:#777;
+  line-height:1.55;
+  font-size:14px;
+}
+
+/* =====================================================
+   FOUNDER
+===================================================== */
+
+.founder{margin-top:100px}
+.founder-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:25px;
+  margin-bottom:28px;
+}
+.founder-kicker{
+  font-size:14px;
+  letter-spacing:2.5px;
+  text-transform:uppercase;
+  margin-bottom:12px;
+}
+.founder-head h2{
+  font-size:clamp(40px,5vw,68px);
+  line-height:.95;
+  letter-spacing:-3px;
+  margin:0;
+}
+.founder-head .badge.lime{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:38px;
+  padding:0 20px;
+  border-radius:999px;
+  font-size:10px;
+  letter-spacing:1.4px;
+}
+.founder-layout{
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  min-height:590px;
+  background:#f5f5f3;
+  border:1px solid #e2e2de;
+}
+.founder-image{min-height:590px;overflow:hidden}
+.founder-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center 28%;
+  display:block;
+}
+.founder-content{
+  padding:48px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
+.founder-content h3{
+  font-size:40px;
+  letter-spacing:-1.5px;
+  margin:0 0 20px;
+}
+.founder-content p{
+  color:#777;
+  font-size:16px;
+  line-height:1.7;
+  margin:0 0 20px;
+}
+.founder-content p strong{color:#222}
+.founder-tags{
+  display:flex;
+  gap:7px;
+  flex-wrap:wrap;
+  margin-top:10px;
+}
+.founder-tag{
+  border:1px solid #d7d7d3;
+  padding:8px 11px;
+  font-size:10px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:#666;
+}
+
+/* =====================================================
+   VISUAL STORY
+===================================================== */
+
+.visual-story{margin-top:100px}
+.visual-story-head{
+  display:grid;
+  grid-template-columns:minmax(330px,.9fr) minmax(0,1.1fr);
+  align-items:end;
+  gap:65px;
+  margin-bottom:32px;
+}
+.visual-story .intro-eyebrow{
+  display:block;
+  margin-bottom:20px;
+}
+.visual-story-head h2{
+  margin:0;
+  font-size:clamp(42px,4.8vw,64px);
+  letter-spacing:-2.8px;
+  line-height:.92;
+}
+.visual-story-head p{
+  max-width:560px;
+  margin:0 0 4px;
+  color:#777;
+  line-height:1.55;
+  font-size:20px;
+}
+.photo-grid{
+  display:grid;
+  grid-template-columns:1fr;
+  grid-template-rows:580px;
+}
+.photo-grid-item{
+  width:100%;
+  height:100%;
+  overflow:hidden;
+  background:#111;
+}
+.photo-grid-item img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+  transition:transform .5s ease;
+}
+.photo-grid-item:hover img{transform:scale(1.03)}
+
+/* =====================================================
+   STATEMENT
+===================================================== */
+
+.statement{
+  margin-top:100px;
+  padding:70px 50px;
+  background:var(--miles-blue);
+  color:#fff;
+}
+.statement-label{
+  font-size:11px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  margin-bottom:22px;
+}
+.statement h2{
+  max-width:950px;
+  margin:0;
+  font-size:clamp(38px,5.5vw,75px);
+  line-height:.95;
+  letter-spacing:-3px;
+}
+.statement h2 .statement-dark{color:#111}
+.statement p{
+  max-width:680px;
+  margin:28px 0 0;
+  font-size:17px;
+  line-height:1.6;
+}
+.statement-cta{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  box-sizing:border-box;
+  min-height:82px;
+  margin-top:36px;
+  padding:18px 28px;
+  border:1px solid #111;
+  background:#111;
+  color:#fff;
+  text-decoration:none;
+  font-size:18px;
+  letter-spacing:1.5px;
+  text-transform:uppercase;
+  transition:.2s ease;
+}
+.statement-cta:hover{
+  background:#fff;
+  color:#111;
+}
+
+/* =====================================================
+   ACCOUNT
+===================================================== */
+
+.top-right{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.user-area{
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.user-greeting{
+  font-size:13px;
+  color:#666;
+  white-space:nowrap;
+}
+.login-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:38px;
+  padding:0 16px;
+  border:1px solid #d7d7d3;
+  background:#fff;
+  color:#222;
+  font-size:12px;
+  font-weight:700;
+  cursor:pointer;
+}
+.login-button:hover{
+  border-color:var(--miles-blue);
+  color:var(--miles-blue);
+}
+.user-avatar-button{
+  width:58px;
+  height:58px;
+  border-radius:50%;
+  border:3px solid var(--miles-blue);
+  background:#fff;
+  color:var(--miles-blue);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:18px;
+  cursor:pointer;
+  overflow:hidden;
+  padding:0;
+}
+.user-avatar-button img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.account-menu{
+  position:absolute!important;
+  top:calc(100% + 12px)!important;
+  right:0!important;
+  left:auto!important;
+  width:260px!important;
+  min-width:260px!important;
+  box-sizing:border-box!important;
+  padding:0!important;
+  margin:0!important;
+  background:#fff!important;
+  border:1px solid #ddd!important;
+  box-shadow:0 15px 40px rgba(0,0,0,.12);
+  z-index:1000!important;
+  display:none;
+  overflow:hidden!important;
+}
+.account-menu.open{display:block!important}
+.account-menu-name{
+  display:block!important;
+  padding:16px 18px 4px!important;
+  color:#111!important;
+  font-size:20px!important;
+}
+.account-menu-email{
+  display:block!important;
+  padding:0 18px 16px!important;
+  border-bottom:1px solid #e8e8e8!important;
+  color:#888!important;
+  font-size:13px!important;
+  overflow-wrap:anywhere;
+}
+.account-menu a,
+.account-menu button{
+  display:block!important;
+  width:100%!important;
+  box-sizing:border-box!important;
+  margin:0!important;
+  padding:16px 18px!important;
+  border:0!important;
+  border-bottom:1px solid #e8e8e8!important;
+  background:#fff!important;
+  text-align:left!important;
+  text-decoration:none!important;
+  cursor:pointer;
+  color:#222!important;
+  font-size:16px!important;
+}
+.account-menu a:hover,
+.account-menu button:hover{background:#f5f5f3!important}
+.account-menu .logout-button{
+  border-bottom:0!important;
+  color:#888!important;
+}
+
+/* =====================================================
+   PERSONAL MEMBER PAGE
+===================================================== */
+
+.member-page{
+  display:none;
+  padding:0 0 100px;
+}
+.member-page.active{display:block}
+
+.member-page-header{
+  display:grid;
+  grid-template-columns:150px 1fr;
+  gap:35px;
+  align-items:center;
+  padding:55px 50px;
+  background:#f7f7f5;
+  border-bottom:1px solid #e3e3df;
+}
+.member-page-avatar{
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  overflow:hidden;
+  background:var(--miles-blue);
+  color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:48px;
+  border:4px solid #fff;
+  box-shadow:0 8px 30px rgba(0,0,0,.08);
+}
+.member-page-avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.member-page-kicker{
+  color:var(--miles-blue);
+  font-size:11px;
+  letter-spacing:2px;
+  margin-bottom:10px;
+}
+.member-page-name{
+  margin:0;
+  font-size:clamp(42px,6vw,72px);
+  line-height:.95;
+  letter-spacing:-3px;
+}
+.member-page-email{
+  margin-top:14px;
+  color:#888;
+  font-size:13px;
+}
+.member-page-editor{padding:45px 50px}
+.member-back-button{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:44px;
+  padding:0 18px;
+  margin-bottom:25px;
+  border:1px solid #d7d7d3;
+  background:#fff;
+  color:#222;
+  cursor:pointer;
+  font-size:12px;
+}
+.member-back-button:hover{
+  border-color:var(--miles-blue);
+  color:var(--miles-blue);
+}
+.member-page-editor-title{margin-bottom:35px}
+.member-page-editor-title span{
+  display:block;
+  color:var(--miles-blue);
+  font-size:11px;
+  letter-spacing:2px;
+  margin-bottom:10px;
+}
+.member-page-editor-title h2{
+  margin:0;
+  font-size:clamp(32px,4vw,52px);
+  line-height:1;
+  letter-spacing:-2px;
+}
+.member-page-card{
+  margin-bottom:28px;
+  padding:30px;
+  background:#f7f7f5;
+  border:1px solid #e2e2de;
+}
+.member-page-card h3{
+  margin:0 0 20px;
+  font-size:24px;
+}
+.member-page-field{margin-bottom:20px}
+.member-page-field:last-child{margin-bottom:0}
+.member-page-field label{
+  display:block;
+  margin-bottom:8px;
+  color:#333;
+  font-size:11px;
+  letter-spacing:1px;
+  text-transform:uppercase;
+}
+.member-page-field input,
+.member-page-field textarea{
+  width:100%;
+  box-sizing:border-box;
+  border:1px solid #d5d5d1;
+  background:#fff;
+  padding:14px 15px;
+  color:#222;
+  font-size:15px;
+  outline:none;
+}
+.member-page-field textarea{
+  min-height:150px;
+  resize:vertical;
+  line-height:1.65;
+}
+.member-page-field input:focus,
+.member-page-field textarea:focus{
+  border-color:var(--miles-blue);
+}
+.member-image-upload{
+  display:grid;
+  grid-template-columns:220px 1fr;
+  gap:25px;
+  align-items:start;
+}
+.member-image-preview{
+  width:220px;
+  height:160px;
+  background:#e8e8e4;
+  border:1px solid #d8d8d4;
+  overflow:hidden;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#999;
+  font-size:12px;
+  text-align:center;
+}
+.member-image-preview img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+.member-image-controls input[type=file]{
+  width:100%;
+  box-sizing:border-box;
+  padding:13px;
+  background:#fff;
+  border:1px solid #d5d5d1;
+  font-size:12px;
+}
+.member-image-help{
+  margin-top:9px;
+  color:#999;
+  font-size:11px;
+  line-height:1.5;
+}
+.member-save-bar{
+  position:sticky;
+  bottom:20px;
+  z-index:20;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  margin-top:35px;
+  padding:18px 20px;
+  background:rgba(255,255,255,.96);
+  border:1px solid #ddd;
+  box-shadow:0 12px 40px rgba(0,0,0,.10);
+  backdrop-filter:blur(8px);
+}
+.member-save-status{
+  color:#777;
+  font-size:12px;
+}
+.member-save-status.success{color:#248b63}
+.member-save-status.error{color:#c84c4c}
+.member-save-button{
+  border:1px solid var(--miles-blue);
+  background:var(--miles-blue);
+  color:#fff;
+  min-height:48px;
+  padding:0 24px;
+  font-size:12px;
+  cursor:pointer;
+}
+.member-save-button:hover{
+  background:#1199a6;
+  border-color:#1199a6;
+}
+.member-save-button:disabled{
+  opacity:.55;
+  cursor:wait;
+}
+
+/* =====================================================
+   AUTH
+===================================================== */
+
+.auth-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.58);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  z-index:100;
+  overflow-y:auto;
+  backdrop-filter:blur(4px);
+}
+.auth-overlay.open{display:flex}
+.auth-modal{
+  position:relative;
+  width:min(680px,100%);
+  max-height:calc(100vh - 40px);
+  overflow-y:auto;
+  background:#fff;
+  padding:42px;
+  box-shadow:0 30px 100px rgba(0,0,0,.28);
+}
+.auth-close{
+  position:absolute;
+  top:15px;
+  right:17px;
+  width:32px;
+  height:32px;
+  border:0;
+  background:transparent;
+  font-size:25px;
+  cursor:pointer;
+  color:#555;
+}
+.auth-eyebrow{
+  color:var(--miles-blue);
+  font-size:10px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  margin-bottom:10px;
+}
+.auth-modal h2{
+  font-size:32px;
+  line-height:1;
+  letter-spacing:-1px;
+  margin:0 0 10px;
+}
+.auth-description{
+  color:#777;
+  font-size:14px;
+  line-height:1.5;
+  margin:0 0 25px;
+}
+.auth-tabs{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  border-bottom:1px solid #ddd;
+  margin-bottom:25px;
+}
+.auth-tab{
+  padding:12px 8px;
+  border:0;
+  background:transparent;
+  color:#888;
+  font-size:12px;
+  cursor:pointer;
+  border-bottom:2px solid transparent;
+}
+.auth-tab.active{
+  color:var(--miles-blue);
+  border-bottom-color:var(--miles-blue);
+}
+.auth-form{display:none}
+.auth-form.active{display:block}
+.form-group{margin-bottom:16px}
+.form-group label{
+  display:block;
+  font-size:11px;
+  margin-bottom:7px;
+  color:#333;
+}
+.form-group input{
+  width:100%;
+  box-sizing:border-box;
+  padding:13px 14px;
+  border:1px solid #d7d7d3;
+  background:#fafaf8;
+  color:#222;
+  font-size:14px;
+  outline:none;
+}
+.form-group input:focus{
+  border-color:var(--miles-blue);
+  background:#fff;
+}
+.registration-intro{
+  margin:0 0 22px;
+  padding:21px 22px;
+  background:#f2fbfc;
+  border:1px solid #cceef1;
+  color:#52696b;
+  font-size:14px;
+  line-height:1.7;
+}
+.registration-gate{
+  display:flex;
+  flex-direction:column;
+  gap:14px;
+  margin:22px 0 18px;
+}
+.gate-card{
+  background:#fafbf9;
+  border:1px solid #dfe3e0;
+  border-radius:18px;
+  padding:22px;
+}
+.gate-top{
+  display:flex;
+  align-items:flex-start;
+  gap:16px;
+}
+.gate-icon{
+  width:58px;
+  height:58px;
+  flex:0 0 58px;
+  border-radius:16px;
+  background:#fff;
+  border:1px solid #dfe3e0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#222;
+}
+.gate-icon svg{
+  width:27px;
+  height:27px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.8;
+  stroke-linecap:round;
+  stroke-linejoin:round;
+}
+.gate-copy{min-width:0;flex:1}
+.gate-copy h3{
+  margin:2px 0 8px;
+  font-size:21px;
+  line-height:1.15;
+}
+.gate-copy p{
+  margin:0;
+  color:#858b88;
+  font-size:13px;
+  line-height:1.65;
+}
+.instagram-handle{
+  display:block;
+  margin-top:10px;
+  color:#cf348e;
+  font-size:16px;
+}
+.instagram-open{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:100%;
+  min-height:58px;
+  margin-top:20px;
+  padding:14px 16px;
+  border:1px solid #d6dad7;
+  background:#fff;
+  color:#222;
+  text-decoration:none;
+  font-size:13px;
+  border-radius:15px;
+}
+.gate-divider{
+  height:1px;
+  margin:22px 0 18px;
+  background:#e2e5e2;
+}
+.gate-check{
+  display:flex;
+  align-items:flex-start;
+  gap:13px;
+  cursor:pointer;
+}
+.gate-check input{
+  position:absolute;
+  opacity:0;
+  pointer-events:none;
+}
+.custom-check{
+  width:42px;
+  height:42px;
+  flex:0 0 42px;
+  box-sizing:border-box;
+  border:2px solid #cfd5d2;
+  border-radius:12px;
+  background:#fff;
+  position:relative;
+}
+.gate-check input:checked+.custom-check{
+  background:var(--miles-blue);
+  border-color:var(--miles-blue);
+}
+.gate-check input:checked+.custom-check:after{
+  content:"";
+  position:absolute;
+  width:8px;
+  height:15px;
+  left:14px;
+  top:8px;
+  border-right:3px solid #fff;
+  border-bottom:3px solid #fff;
+  transform:rotate(45deg);
+}
+.gate-check-text{
+  color:#8b908e;
+  font-size:13px;
+  line-height:1.5;
+  padding-top:3px;
+}
+.gate-check-text strong{
+  display:block;
+  color:#222;
+  font-size:15px;
+}
+.gate-check-text small{
+  display:block;
+  margin-top:4px;
+  color:#999;
+  font-size:11px;
+}
+.invite-card{
+  background:
+    radial-gradient(circle at 86% 24%,rgba(65,182,198,.28),transparent 34%),
+    radial-gradient(circle at 20% 100%,rgba(38,94,98,.36),transparent 40%),
+    linear-gradient(135deg,#071214 0%,#102324 44%,#173b3d 100%);
+  color:#fff;
+  border-radius:18px;
+  min-height:270px;
+  margin-top:20px;
+  padding:28px 24px 25px;
+  box-sizing:border-box;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+}
+.invite-brand{
+  color:#49c6d4;
+  font-size:10px;
+  letter-spacing:6px;
+}
+.invite-title{
+  margin-top:29px;
+  font-size:clamp(42px,7vw,60px);
+  line-height:.84;
+  letter-spacing:-2.8px;
+}
+.invite-title span{color:#42bfd0}
+.invite-subtitle{
+  max-width:470px;
+  margin-top:25px;
+  color:rgba(255,255,255,.84);
+  font-size:14px;
+  line-height:1.55;
+}
+.invite-footer{
+  margin-top:34px;
+  color:rgba(255,255,255,.58);
+  font-size:9px;
+  letter-spacing:4px;
+  text-transform:uppercase;
+}
+.share-buttons{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:10px;
+  margin-top:14px;
+}
+.share-button{
+  min-height:62px;
+  border:0;
+  border-radius:14px;
+  color:#fff;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:9px;
+  padding:12px 14px;
+  font-size:13px;
+}
+.share-whatsapp{background:#57b95f}
+.share-instagram{
+  background:linear-gradient(100deg,#c32d82,#d74f70 55%,#efa23e);
+}
+.invite-confirmation{
+  margin-top:18px;
+  padding-top:18px;
+  border-top:1px solid #e0e3e0;
+  opacity:.45;
+  pointer-events:none;
+}
+.invite-confirmation.available{
+  opacity:1;
+  pointer-events:auto;
+}
+.registration-status{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-top:16px;
+  padding:14px 16px;
+  background:#f5f6f4;
+  border:1px solid #e1e3df;
+  border-radius:10px;
+  color:#888;
+  font-size:11px;
+}
+.registration-status.ready{
+  color:#248b63;
+  background:#f0faf5;
+  border-color:#cce8da;
+}
+.registration-status-dot{
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  flex:0 0 9px;
+  background:#c8ccca;
+}
+.registration-status.ready .registration-status-dot{
+  background:#248b63;
+}
+.registration-progress{
+  margin-top:18px;
+  padding:18px 20px;
+  border:1px solid #e0e2df;
+  border-radius:16px;
+  background:#f7f7f5;
+}
+.registration-progress-row{
+  display:flex;
+  align-items:center;
+  gap:13px;
+  color:#8a8e8c;
+  font-size:12px;
+}
+.registration-progress-row+.registration-progress-row{margin-top:12px}
+.registration-progress-number{
+  width:30px;
+  height:30px;
+  flex:0 0 30px;
+  border-radius:50%;
+  background:#e1e4e2;
+  color:#8b8f8d;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:11px;
+}
+.registration-progress-row.complete{color:#222}
+.registration-progress-row.complete .registration-progress-number{
+  background:var(--miles-blue);
+  color:#fff;
+}
+.auth-submit{
+  width:100%;
+  border:1px solid var(--miles-blue);
+  background:var(--miles-blue);
+  color:#fff;
+  padding:14px;
+  font-size:12px;
+  cursor:pointer;
+  margin-top:14px;
+}
+.auth-submit:hover{
+  background:#1199a6;
+  border-color:#1199a6;
+}
+.auth-submit:disabled{
+  background:#a7dfe4;
+  border-color:#a7dfe4;
+  cursor:not-allowed;
+}
+.auth-message{
+  min-height:18px;
+  margin-top:12px;
+  font-size:12px;
+  color:#d34b4b;
+}
+.auth-message.success{color:#248b63}
+.forgot-password,.auth-back{
+  display:block;
+  margin-top:13px;
+  border:0;
+  background:transparent;
+  padding:0;
+  color:#777;
+  font-size:11px;
+  text-decoration:underline;
+  cursor:pointer;
+}
+.auth-back{
+  margin-bottom:18px;
+  text-decoration:none;
+}
+.auth-note{
+  margin-top:14px;
+  padding:12px;
+  background:#f5f5f3;
+  border:1px solid #e3e3df;
+  color:#666;
+  font-size:11px;
+  line-height:1.5;
+}
+
+/* =====================================================
+   RESPONSIVE
+===================================================== */
+
+@media(max-width:900px){
+  .home-hero{
+    height:620px;
+    min-height:620px;
+  }
+  .home-hero-content{
+    left:30px;
+    right:30px;
+    bottom:27px;
+  }
+  .intro-card{padding:40px 35px 38px}
+  .about-project-grid,
+  .visual-story-head{
+    grid-template-columns:1fr;
+    gap:30px;
+  }
+  .principles{grid-template-columns:1fr}
+  .founder-layout{grid-template-columns:1fr}
+  .founder-image{min-height:500px}
+  .founder-content{padding:35px}
+  .photo-grid{grid-template-rows:500px}
+  .statement{padding:50px 30px}
+}
+
+@media(max-width:600px){
+  .home-hero{
+    height:560px;
+    min-height:560px;
+  }
+  .home-hero img{object-position:center center}
+  .home-hero-content{
+    left:20px;
+    right:20px;
+    bottom:18px;
+  }
+  .home-hero-content h1{
+    font-size:40px;
+    letter-spacing:-1.8px;
+  }
+  .home-intro{padding:38px 0 24px!important}
+  .intro-card{padding:30px 24px 20px}
+  .intro-card-lead{
+    font-size:26px;
+    letter-spacing:-1.1px;
+  }
+  .intro-card-lead span{font-size:26px}
+  .intro-card-text p{
+    font-size:16px;
+    line-height:1.7;
+  }
+  .story-photo{min-height:400px}
+  .photo-caption{
+    left:20px;
+    right:20px;
+    bottom:20px;
+  }
+  .photo-caption strong{font-size:26px}
+  .about-project,.founder,.visual-story,.statement{margin-top:65px}
+  .founder-image{min-height:430px}
+  .founder-content{padding:28px 24px}
+  .founder-content h3{font-size:32px}
+  .visual-story-head h2{
+    font-size:42px;
+    letter-spacing:-2px;
+  }
+  .visual-story-head p{
+    font-size:16px;
+    line-height:1.65;
+  }
+  .photo-grid{grid-template-rows:380px}
+  .statement{padding:42px 24px}
+  .statement-cta{
+    min-height:66px;
+    margin-top:28px;
+    padding:15px 14px;
+    font-size:14px;
+    text-align:center;
+  }
+  .user-avatar-button{
+    width:48px;
+    height:48px;
+    border-width:2px;
+  }
+  .account-menu{
+    width:260px!important;
+    min-width:260px!important;
+  }
+  .auth-overlay{
+    align-items:flex-start;
+    padding:10px;
+  }
+  .auth-modal{
+    width:100%;
+    max-height:calc(100vh - 20px);
+    padding:30px 18px 24px;
+    border-radius:16px;
+  }
+  .auth-modal h2{
+    font-size:28px;
+    padding-right:30px;
+  }
+  .registration-intro{
+    padding:18px 19px;
+    font-size:13px;
+  }
+  .gate-card{
+    padding:18px;
+    border-radius:16px;
+  }
+  .gate-top{gap:13px}
+  .gate-icon{
+    width:46px;
+    height:46px;
+    flex-basis:46px;
+  }
+  .gate-copy h3{font-size:19px}
+  .gate-copy p{font-size:12px}
+  .share-buttons{grid-template-columns:1fr}
+  .registration-progress{padding:17px 18px}
+
+  .member-page-header{
+    grid-template-columns:1fr;
+    gap:22px;
+    padding:35px 24px;
+  }
+  .member-page-avatar{
+    width:105px;
+    height:105px;
+    font-size:34px;
+  }
+  .member-page-name{
+    font-size:42px;
+    letter-spacing:-2px;
+  }
+  .member-page-editor{padding:35px 24px}
+  .member-page-card{padding:22px}
+  .member-image-upload{grid-template-columns:1fr}
+  .member-image-preview{
+    width:100%;
+    height:210px;
+  }
+  .member-save-bar{
+    align-items:stretch;
+    flex-direction:column;
+  }
+  .member-save-button{width:100%}
+}
+</style>
 </head>
 
 <body>
@@ -1915,59 +1351,26 @@
 
     <div class="brand">
       <a href="index.html">
-        <img
-          src="miles-apart-wordmark.png"
-          alt="Miles Apart Running Club"
-        >
+        <img src="miles-apart-wordmark.png" alt="Miles Apart Running Club">
       </a>
     </div>
 
     <nav class="nav">
-
-      <a class="active" href="index.html">
-        Miles Apart
-      </a>
-
-      <a href="home.html">
-        Home
-      </a>
-
-      <a href="challenges.html">
-        Challenges
-      </a>
-
-      <a href="community.html">
-        Community
-      </a>
-
-      <a href="events.html">
-        Events
-      </a>
-
-      <a href="training.html">
-        Training
-      </a>
-
+      <a class="active" href="index.html">Miles Apart</a>
+      <a href="home.html">Home</a>
+      <a href="challenges.html">Challenges</a>
+      <a href="community.html">Community</a>
+      <a href="events.html">Events</a>
+      <a href="training.html">Training</a>
     </nav>
 
     <div class="side-bottom">
-
-      <small>
-        THIS WEEK
-      </small>
-
-      <strong>
-        23.4 / 30 KM
-      </strong>
-
-      <div class="mini-progress">
-        <i></i>
-      </div>
-
+      <small>THIS WEEK</small>
+      <strong>23.4 / 30 KM</strong>
+      <div class="mini-progress"><i></i></div>
       <p class="small" style="color:#aaa;margin-bottom:0">
         Nur 6.6 km bis zum Wochenziel.
       </p>
-
     </div>
 
   </aside>
@@ -1976,9 +1379,7 @@
 
     <div class="top">
 
-      <div class="crumb">
-        MILES APART / MILES APART
-      </div>
+      <div class="crumb">MILES APART / MILES APART</div>
 
       <div class="top-right">
 
@@ -1997,7 +1398,7 @@
         <div
           id="loggedInArea"
           class="user-area"
-          style="display:none; position:relative;"
+          style="display:none;position:relative;"
         >
 
           <span
@@ -2028,7 +1429,13 @@
 
             <button
               type="button"
-              class="profile-menu-button"
+              id="memberPageButton"
+            >
+              Meine Mitgliedsseite
+            </button>
+
+            <button
+              type="button"
               id="profileButton"
             >
               Mein Profil
@@ -2050,410 +1457,711 @@
 
     </div>
 
-    <!-- HERO -->
 
-    <div class="home-hero">
+    <!-- =====================================================
+         PERSÖNLICHE MITGLIEDSSEITE
+    ====================================================== -->
 
-      <img
-        src="IMG_5745.jpeg"
-        alt="Miles Apart – Running in New York"
-      >
+    <section
+      class="member-page"
+      id="memberPage"
+    >
 
-      <div class="home-hero-overlay"></div>
+      <div class="member-page-header">
 
-      <div class="home-hero-content">
+        <div
+          class="member-page-avatar"
+          id="memberPageAvatar"
+        >
+          M
+        </div>
 
-        <h1>
-          Laufen verbindet.<br>
-          <span>
-            Auch wenn wir miles apart sind.
-          </span>
-        </h1>
+        <div>
 
-        <p>
-          One community.<br>
-          Countless miles.
-        </p>
+          <div class="member-page-kicker">
+            MILES APART / MEMBER
+          </div>
+
+          <h1
+            class="member-page-name"
+            id="memberPageName"
+          >
+            Runner
+          </h1>
+
+          <div
+            class="member-page-email"
+            id="memberPageEmail"
+          ></div>
+
+        </div>
 
       </div>
 
-    </div>
 
-    <!-- INTRO -->
+      <div class="member-page-editor">
 
-    <section class="home-intro">
+        <button
+          type="button"
+          class="member-back-button"
+          id="memberBackButton"
+        >
+          ← Zur öffentlichen Miles-Apart-Seite
+        </button>
 
-      <div class="intro-card">
-
-        <p class="intro-card-lead">
-
-          Miles Apart ist für alle,<br>
-          die laufen wollen.
+        <div class="member-page-editor-title">
 
           <span>
-            Gemeinsam, egal wo.
+            DEINE PERSÖNLICHE SEITE
           </span>
 
-        </p>
+          <h2>
+            Erzähl deine Geschichte.
+          </h2>
 
-        <div class="intro-card-bottom">
+        </div>
 
-          <div class="intro-card-text">
+
+        <!-- ÜBER MICH -->
+
+        <div class="member-page-card">
+
+          <h3>Über mich</h3>
+
+          <div class="member-page-field">
+
+            <label for="memberIntro">
+              Dein Text
+            </label>
+
+            <textarea
+              id="memberIntro"
+              placeholder="Erzähl etwas über dich, dein Training, deine Ziele oder warum du läufst …"
+            ></textarea>
+
+          </div>
+
+        </div>
+
+
+        <!-- BEREICH 1 -->
+
+        <div class="member-page-card">
+
+          <h3>Bereich 01</h3>
+
+          <div class="member-page-field">
+
+            <label for="memberSection1Title">
+              Überschrift
+            </label>
+
+            <input
+              id="memberSection1Title"
+              type="text"
+              placeholder="z. B. Mein Running"
+            >
+
+          </div>
+
+          <div class="member-page-field">
+
+            <label for="memberSection1Text">
+              Text
+            </label>
+
+            <textarea
+              id="memberSection1Text"
+              placeholder="Schreib hier über diesen Teil deiner Geschichte …"
+            ></textarea>
+
+          </div>
+
+          <div class="member-page-field">
+
+            <label>
+              Bild
+            </label>
+
+            <div class="member-image-upload">
+
+              <div
+                class="member-image-preview"
+                id="memberSection1Preview"
+              >
+                Noch kein Bild
+              </div>
+
+              <div class="member-image-controls">
+
+                <input
+                  id="memberSection1Image"
+                  type="file"
+                  accept="image/*"
+                >
+
+                <div class="member-image-help">
+                  JPG, PNG oder WEBP · maximal 10 MB.
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- BEREICH 2 -->
+
+        <div class="member-page-card">
+
+          <h3>Bereich 02</h3>
+
+          <div class="member-page-field">
+
+            <label for="memberSection2Title">
+              Überschrift
+            </label>
+
+            <input
+              id="memberSection2Title"
+              type="text"
+              placeholder="z. B. Meine Ziele"
+            >
+
+          </div>
+
+          <div class="member-page-field">
+
+            <label for="memberSection2Text">
+              Text
+            </label>
+
+            <textarea
+              id="memberSection2Text"
+              placeholder="Schreib hier über deine Ziele, Wettkämpfe oder Pläne …"
+            ></textarea>
+
+          </div>
+
+          <div class="member-page-field">
+
+            <label>
+              Bild
+            </label>
+
+            <div class="member-image-upload">
+
+              <div
+                class="member-image-preview"
+                id="memberSection2Preview"
+              >
+                Noch kein Bild
+              </div>
+
+              <div class="member-image-controls">
+
+                <input
+                  id="memberSection2Image"
+                  type="file"
+                  accept="image/*"
+                >
+
+                <div class="member-image-help">
+                  JPG, PNG oder WEBP · maximal 10 MB.
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- BEREICH 3 -->
+
+        <div class="member-page-card">
+
+          <h3>Bereich 03</h3>
+
+          <div class="member-page-field">
+
+            <label for="memberSection3Title">
+              Überschrift
+            </label>
+
+            <input
+              id="memberSection3Title"
+              type="text"
+              placeholder="z. B. Mehr als Laufen"
+            >
+
+          </div>
+
+          <div class="member-page-field">
+
+            <label for="memberSection3Text">
+              Text
+            </label>
+
+            <textarea
+              id="memberSection3Text"
+              placeholder="Was gehört sonst noch zu dir?"
+            ></textarea>
+
+          </div>
+
+          <div class="member-page-field">
+
+            <label>
+              Bild
+            </label>
+
+            <div class="member-image-upload">
+
+              <div
+                class="member-image-preview"
+                id="memberSection3Preview"
+              >
+                Noch kein Bild
+              </div>
+
+              <div class="member-image-controls">
+
+                <input
+                  id="memberSection3Image"
+                  type="file"
+                  accept="image/*"
+                >
+
+                <div class="member-image-help">
+                  JPG, PNG oder WEBP · maximal 10 MB.
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="member-save-bar">
+
+          <div
+            class="member-save-status"
+            id="memberSaveStatus"
+          >
+            Deine Änderungen werden hier gespeichert.
+          </div>
+
+          <button
+            type="button"
+            class="member-save-button"
+            id="memberSaveButton"
+          >
+            Änderungen speichern →
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         ÖFFENTLICHE MILES-APART-SEITE
+    ====================================================== -->
+
+    <div id="publicSite">
+
+      <div class="home-hero">
+
+        <img
+          src="IMG_5745.jpeg"
+          alt="Miles Apart – Running in New York"
+        >
+
+        <div class="home-hero-overlay"></div>
+
+        <div class="home-hero-content">
+
+          <h1>
+            Laufen verbindet.<br>
+            <span>Auch wenn wir miles apart sind.</span>
+          </h1>
+
+          <p>
+            One community.<br>
+            Countless miles.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <section class="home-intro">
+
+        <div class="intro-card">
+
+          <p class="intro-card-lead">
+            Miles Apart ist für alle,<br>
+            die laufen wollen.
+            <span>Gemeinsam, egal wo.</span>
+          </p>
+
+          <div class="intro-card-bottom">
+
+            <div class="intro-card-text">
+
+              <p>
+                Miles Apart ist die virtuelle Running-Community
+                für alle, die laufen, trainieren und gemeinsam
+                besser werden wollen.
+                <strong>Egal, wo du gerade bist.</strong>
+              </p>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <div class="story-photo">
+
+        <img
+          src="IMG_1978.jpeg"
+          alt="Läufer beim Munich Backyard"
+        >
+
+        <div class="photo-caption">
+
+          <div>
+            <strong>
+              ONE COMMUNITY.<br>
+              COUNTLESS MILES.
+            </strong>
+          </div>
+
+          <span>
+            Run together<br>
+            from anywhere
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <section class="about-project">
+
+        <div class="about-project-grid">
+
+          <div>
+
+            <div class="intro-eyebrow">
+              WAS IST MILES APART?
+            </div>
+
+            <h2>
+              Ein Run Club.<br>
+              Nur ohne Grenzen.
+            </h2>
+
+          </div>
+
+          <div class="about-project-text">
 
             <p>
-              Miles Apart ist die virtuelle Running-Community
-              für alle, die laufen, trainieren und gemeinsam
-              besser werden wollen.
-              <strong>Egal, wo du gerade bist.</strong>
+              Überall entstehen neue
+              <strong>Run Clubs.</strong>
+              Menschen treffen sich nach Feierabend,
+              laufen gemeinsam durch ihre Stadt und
+              motivieren sich gegenseitig.
+            </p>
+
+            <p>
+              Wir glauben:
+              Dieses Gefühl sollte nicht davon abhängen,
+              <strong>wo du gerade wohnst.</strong>
+            </p>
+
+            <p>
+              Miles Apart verbindet Läuferinnen und Läufer
+              über Städte und Länder hinweg. Hier kannst du
+              dich mit anderen austauschen, an Challenges
+              teilnehmen, deine Läufe teilen, Fragen stellen,
+              neue Trainingspartner finden und dich gegenseitig pushen.
+            </p>
+
+            <p>
+              Du läufst alleine los.
+              <strong class="about-project-nowrap">
+                Aber du musst nicht alleine laufen.
+              </strong>
             </p>
 
           </div>
 
         </div>
 
-      </div>
 
-    </section>
+        <div class="principles">
 
-    <!-- STORY PHOTO -->
+          <div class="principle">
 
-    <div class="story-photo">
+            <div class="principle-number">
+              01 / CONNECT
+            </div>
 
-      <img
-        src="IMG_1978.jpeg"
-        alt="Läufer beim Munich Backyard"
-      >
+            <div class="principle-icon">
 
-      <div class="photo-caption">
+              <svg viewBox="0 0 32 32">
+                <circle cx="11" cy="10" r="3.5"></circle>
+                <circle cx="21" cy="10" r="3.5"></circle>
+                <path d="M4.5 24c.7-4.1 3-6.2 6.5-6.2s5.8 2.1 6.5 6.2"></path>
+                <path d="M14.5 24c.7-4.1 3-6.2 6.5-6.2s5.8 2.1 6.5 6.2"></path>
+                <path d="M14 10h4"></path>
+              </svg>
 
-        <div>
+            </div>
 
-          <strong>
-            ONE COMMUNITY.<br>
-            COUNTLESS MILES.
-          </strong>
+            <h3>Menschen verbinden</h3>
 
-        </div>
-
-        <span>
-          Run together<br>
-          from anywhere
-        </span>
-
-      </div>
-
-    </div>
-
-    <!-- ABOUT -->
-
-    <section class="about-project">
-
-      <div class="about-project-grid">
-
-        <div>
-
-          <div class="intro-eyebrow">
-            WAS IST MILES APART?
-          </div>
-
-          <h2>
-            Ein Run Club.<br>
-            Nur ohne Grenzen.
-          </h2>
-
-        </div>
-
-        <div class="about-project-text">
-
-          <p>
-            Überall entstehen neue
-            <strong>Run Clubs.</strong>
-            Menschen treffen sich nach Feierabend,
-            laufen gemeinsam durch ihre Stadt und
-            motivieren sich gegenseitig.
-          </p>
-
-          <p>
-            Wir glauben:
-            Dieses Gefühl sollte nicht davon abhängen,
-            <strong>wo du gerade wohnst.</strong>
-          </p>
-
-          <p>
-            Miles Apart verbindet Läuferinnen und Läufer
-            über Städte und Länder hinweg. Hier kannst du
-            dich mit anderen austauschen, an Challenges
-            teilnehmen, deine Läufe teilen, Fragen stellen,
-            neue Trainingspartner finden und dich gegenseitig pushen.
-          </p>
-
-          <p>
-            Du läufst alleine los.
-            <strong class="about-project-nowrap">
-              Aber du musst nicht alleine laufen.
-            </strong>
-          </p>
-
-        </div>
-
-      </div>
-
-      <div class="principles">
-
-        <div class="principle">
-
-          <div class="principle-number">
-            01 / CONNECT
-          </div>
-
-          <div class="principle-icon" aria-hidden="true">
-
-            <svg viewBox="0 0 32 32">
-              <circle cx="11" cy="10" r="3.5"></circle>
-              <circle cx="21" cy="10" r="3.5"></circle>
-              <path d="M4.5 24c.7-4.1 3-6.2 6.5-6.2s5.8 2.1 6.5 6.2"></path>
-              <path d="M14.5 24c.7-4.1 3-6.2 6.5-6.2s5.8 2.1 6.5 6.2"></path>
-              <path d="M14 10h4"></path>
-            </svg>
+            <p>
+              Finde andere Runner, tausche dich aus und werde Teil
+              einer Community, die deine Leidenschaft versteht.
+            </p>
 
           </div>
 
-          <h3>
-            Menschen verbinden
-          </h3>
 
-          <p>
-            Finde andere Runner, tausche dich aus und werde Teil
-            einer Community, die deine Leidenschaft versteht.
-          </p>
+          <div class="principle">
 
-        </div>
+            <div class="principle-number">
+              02 / CHALLENGE
+            </div>
 
-        <div class="principle">
+            <div class="principle-icon">
 
-          <div class="principle-number">
-            02 / CHALLENGE
-          </div>
+              <svg viewBox="0 0 32 32">
+                <path d="M4 11h19"></path>
+                <path d="M18 6l5 5-5 5"></path>
+                <path d="M28 21H9"></path>
+                <path d="M14 16l-5 5 5 5"></path>
+              </svg>
 
-          <div class="principle-icon" aria-hidden="true">
+            </div>
 
-            <svg viewBox="0 0 32 32">
-              <path d="M4 11h19"></path>
-              <path d="M18 6l5 5-5 5"></path>
-              <path d="M28 21H9"></path>
-              <path d="M14 16l-5 5 5 5"></path>
-            </svg>
+            <h3>Gemeinsam herausfordern</h3>
 
-          </div>
-
-          <h3>
-            Gemeinsam herausfordern
-          </h3>
-
-          <p>
-            Challenges machen aus einzelnen Läufen gemeinsame Ziele.
-            Jeder Kilometer zählt.
-          </p>
-
-        </div>
-
-        <div class="principle">
-
-          <div class="principle-number">
-            03 / SUPPORT
-          </div>
-
-          <div class="principle-icon" aria-hidden="true">
-
-            <svg viewBox="0 0 32 32">
-              <path d="M16 26s-9-5.7-9-12.1C7 10.7 9.2 8 12.2 8c1.8 0 3.2.9 3.8 2.2C16.6 8.9 18 8 19.8 8c3 0 5.2 2.7 5.2 5.9C25 20.3 16 26 16 26Z"></path>
-              <path d="M7.5 17.5H5.8c-1.1 0-1.8-.9-1.4-1.9l2.1-5.1c.3-.7.9-1.1-1.7-1.1h2.1"></path>
-              <path d="M24.5 17.5h1.7c1.1 0 1.8-.9 1.4-1.9l-2.1-5.1c-.3-.7-.9-1.1-1.7-1.1h-2.1"></path>
-            </svg>
+            <p>
+              Challenges machen aus einzelnen Läufen gemeinsame Ziele.
+              Jeder Kilometer zählt.
+            </p>
 
           </div>
 
-          <h3>
-            Gegenseitig pushen
-          </h3>
 
-          <p>
-            Gute Läufe feiern. Schlechte Tage teilen.
-            Dranbleiben, auch wenn die Motivation mal fehlt.
-          </p>
+          <div class="principle">
 
-        </div>
+            <div class="principle-number">
+              03 / SUPPORT
+            </div>
 
-      </div>
+            <div class="principle-icon">
 
-    </section>
+              <svg viewBox="0 0 32 32">
+                <path d="M16 26s-9-5.7-9-12.1C7 10.7 9.2 8 12.2 8c1.8 0 3.2.9 3.8 2.2C16.6 8.9 18 8 19.8 8c3 0 5.2 2.7 5.2 5.9C25 20.3 16 26 16 26Z"></path>
+                <path d="M7.5 17.5H5.8c-1.1 0-1.8-.9-1.4-1.9l2.1-5.1c.3-.7.9-1.1-1.7-1.1h2.1"></path>
+                <path d="M24.5 17.5h1.7c1.1 0 1.8-.9 1.4-1.9l-2.1-5.1c-.3-.7-.9-1.1-1.7-1.1h-2.1"></path>
+              </svg>
 
-    <!-- FOUNDER -->
+            </div>
 
-    <section class="founder">
+            <h3>Gegenseitig pushen</h3>
 
-      <div class="founder-head">
-
-        <div>
-
-          <div class="founder-kicker">
-            WER STECKT DAHINTER?
-          </div>
-
-          <h2>
-            Meet Tano.
-          </h2>
-
-        </div>
-
-        <span class="badge lime">
-          FOUNDER / ATHLETE
-        </span>
-
-      </div>
-
-      <div class="founder-layout">
-
-        <div class="founder-image">
-
-          <img
-            src="IMG_9227.jpeg"
-            alt="Tano Loew beim Training"
-          >
-
-        </div>
-
-        <div class="founder-content">
-
-          <h3>
-            Tano Loew
-          </h3>
-
-          <p>
-            Ich bin Tano –
-            <strong>
-              Läufer, Athlet und Gründer von Miles Apart.
-            </strong>
-          </p>
-
-          <p>
-            Ich liebe es zu laufen, ins Gym zu gehen und
-            meinen Körper immer wieder vor neue Herausforderungen
-            zu stellen. Von klassischen Running-Events
-            (10km, Halb-Marathon, Marathon) über
-            Trail-Running & Ultra-Running bis hin zu
-            Hybrid Training und Hyrox races.
-          </p>
-
-          <p>
-            Dabei habe ich gemerkt, wie stark Sport Menschen
-            zusammenbringen kann. Gleichzeitig fehlte mir ein Ort,
-            an dem diese Verbindung auch dann funktioniert,
-            wenn man gerade nicht am selben Ort ist.
-          </p>
-
-          <p>
-            Genau daraus ist Miles Apart entstanden:
-            <strong>
-              eine Community, die Menschen überall auf der Welt
-              miteinander verbindet.
-            </strong>
-          </p>
-
-          <div class="founder-tags">
-
-            <span class="founder-tag">Running</span>
-            <span class="founder-tag">Ultra Running</span>
-            <span class="founder-tag">Hyrox</span>
-            <span class="founder-tag">Hybrid Athlete</span>
-            <span class="founder-tag">Strength</span>
+            <p>
+              Gute Läufe feiern. Schlechte Tage teilen.
+              Dranbleiben, auch wenn die Motivation mal fehlt.
+            </p>
 
           </div>
 
         </div>
 
-      </div>
+      </section>
 
-    </section>
 
-    <!-- VISUAL STORY -->
+      <section class="founder">
 
-    <section class="visual-story">
+        <div class="founder-head">
 
-      <div class="visual-story-head">
+          <div>
 
-        <div class="visual-story-title">
+            <div class="founder-kicker">
+              WER STECKT DAHINTER?
+            </div>
 
-          <div class="intro-eyebrow">
-            THE ATHLETE LIFE
+            <h2>Meet Tano.</h2>
+
           </div>
 
-          <h2>
-            Mehr als nur<br>
-            Kilometer.
-          </h2>
+          <span class="badge lime">
+            FOUNDER / ATHLETE
+          </span>
 
         </div>
+
+
+        <div class="founder-layout">
+
+          <div class="founder-image">
+
+            <img
+              src="IMG_9227.jpeg"
+              alt="Tano Loew beim Training"
+            >
+
+          </div>
+
+          <div class="founder-content">
+
+            <h3>Tano Loew</h3>
+
+            <p>
+              Ich bin Tano –
+              <strong>
+                Läufer, Athlet und Gründer von Miles Apart.
+              </strong>
+            </p>
+
+            <p>
+              Ich liebe es zu laufen, ins Gym zu gehen und
+              meinen Körper immer wieder vor neue Herausforderungen
+              zu stellen. Von klassischen Running-Events
+              (10km, Halb-Marathon, Marathon) über
+              Trail-Running & Ultra-Running bis hin zu
+              Hybrid Training und Hyrox races.
+            </p>
+
+            <p>
+              Dabei habe ich gemerkt, wie stark Sport Menschen
+              zusammenbringen kann. Gleichzeitig fehlte mir ein Ort,
+              an dem diese Verbindung auch dann funktioniert,
+              wenn man gerade nicht am selben Ort ist.
+            </p>
+
+            <p>
+              Genau daraus ist Miles Apart entstanden:
+              <strong>
+                eine Community, die Menschen überall auf der Welt
+                miteinander verbindet.
+              </strong>
+            </p>
+
+            <div class="founder-tags">
+              <span class="founder-tag">Running</span>
+              <span class="founder-tag">Ultra Running</span>
+              <span class="founder-tag">Hyrox</span>
+              <span class="founder-tag">Hybrid Athlete</span>
+              <span class="founder-tag">Strength</span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <section class="visual-story">
+
+        <div class="visual-story-head">
+
+          <div>
+
+            <div class="intro-eyebrow">
+              THE ATHLETE LIFE
+            </div>
+
+            <h2>
+              Mehr als nur<br>
+              Kilometer.
+            </h2>
+
+          </div>
+
+          <p>
+            Laufen ist ein Teil des Ganzen.
+            Training, Wettkämpfe, harte Tage, gute Tage –
+            und die Menschen, mit denen man sie erlebt.
+          </p>
+
+        </div>
+
+        <div class="photo-grid">
+
+          <div class="photo-grid-item">
+
+            <img
+              src="IMG_3021.jpeg"
+              alt="Tano Loew bei einem Laufwettkampf"
+            >
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <section class="statement">
+
+        <div class="statement-label">
+          THE IDEA
+        </div>
+
+        <h2>
+
+          <span class="statement-dark">
+            Du bist vielleicht alleine
+            losgelaufen.
+          </span>
+
+          Aber du bist
+          nicht allein unterwegs.
+
+        </h2>
 
         <p>
-          Laufen ist ein Teil des Ganzen.
-          Training, Wettkämpfe, harte Tage, gute Tage –
-          und die Menschen, mit denen man sie erlebt.
+          Miles Apart soll der virtuelle Ort für Läufer sein,
+          die mehr wollen als nur ihre Kilometer aufzeichnen.
+          Eine Community, in der wir uns gegenseitig motivieren,
+          unterstützen und gemeinsam neue Ziele erreichen.
         </p>
 
-      </div>
+        <a
+          class="statement-cta"
+          id="statementCta"
+          href="home.html"
+        >
+          JETZT MITGLIED WERDEN →
+        </a>
 
-      <div class="photo-grid">
+      </section>
 
-        <div class="photo-grid-item">
-
-          <img
-            src="IMG_3021.jpeg"
-            alt="Tano Loew bei einem Laufwettkampf"
-          >
-
-        </div>
-
-      </div>
-
-    </section>
-
-    <!-- THE IDEA -->
-
-    <section class="statement">
-
-      <div class="statement-label">
-        THE IDEA
-      </div>
-
-      <h2>
-
-        <span class="statement-dark">
-          Du bist vielleicht alleine
-          losgelaufen.
-        </span>
-
-        Aber du bist
-        nicht allein unterwegs.
-
-      </h2>
-
-      <p>
-        Miles Apart soll der virtuelle Ort für Läufer sein,
-        die mehr wollen als nur ihre Kilometer aufzeichnen.
-        Eine Community, in der wir uns gegenseitig motivieren,
-        unterstützen und gemeinsam neue Ziele erreichen.
-      </p>
-
-      <a
-        class="statement-cta"
-        id="statementCta"
-        href="home.html"
-      >
-        JETZT MITGLIED WERDEN →
-      </a>
-
-    </section>
+    </div>
 
   </main>
 
@@ -2464,16 +2172,12 @@
      AUTH OVERLAY
 ===================================================== -->
 
-<div
-  class="auth-overlay"
-  id="authOverlay"
->
+<div class="auth-overlay" id="authOverlay">
 
   <div
     class="auth-modal"
     role="dialog"
     aria-modal="true"
-    aria-labelledby="authTitle"
   >
 
     <button
@@ -2500,10 +2204,7 @@
       Melde dich an und werde Teil der Community.
     </p>
 
-    <div
-      class="auth-tabs"
-      id="authTabs"
-    >
+    <div class="auth-tabs" id="authTabs">
 
       <button
         class="auth-tab active"
@@ -2524,14 +2225,9 @@
     </div>
 
 
-    <!-- =================================================
-         LOGIN
-    ================================================= -->
+    <!-- LOGIN -->
 
-    <form
-      class="auth-form active"
-      id="loginForm"
-    >
+    <form class="auth-form active" id="loginForm">
 
       <div class="form-group">
 
@@ -2589,16 +2285,9 @@
     </form>
 
 
-    <!-- =================================================
-         REGISTRATION
-    ================================================= -->
+    <!-- REGISTRIERUNG -->
 
-    <form
-      class="auth-form"
-      id="registerForm"
-    >
-
-      <!-- INTRO WIE AUF DER HOMESEITE -->
+    <form class="auth-form" id="registerForm">
 
       <div class="registration-intro">
 
@@ -2610,8 +2299,6 @@
 
       </div>
 
-
-      <!-- NAME -->
 
       <div class="form-group">
 
@@ -2630,8 +2317,6 @@
       </div>
 
 
-      <!-- EMAIL -->
-
       <div class="form-group">
 
         <label for="registerEmail">
@@ -2648,8 +2333,6 @@
 
       </div>
 
-
-      <!-- PASSWORD -->
 
       <div class="form-group">
 
@@ -2669,16 +2352,10 @@
       </div>
 
 
-      <!-- =================================================
-           REGISTRATION REQUIREMENTS
-      ================================================= -->
-
       <div class="registration-gate">
 
 
-        <!-- =================================================
-             SCHRITT 1
-        ================================================= -->
+        <!-- INSTAGRAM -->
 
         <div class="gate-card">
 
@@ -2687,6 +2364,7 @@
             <div class="gate-icon">
 
               <svg viewBox="0 0 32 32">
+
                 <rect
                   x="6"
                   y="6"
@@ -2771,9 +2449,7 @@
         </div>
 
 
-        <!-- =================================================
-             SCHRITT 2
-        ================================================= -->
+        <!-- FREUND EINLADEN -->
 
         <div class="gate-card">
 
@@ -2827,10 +2503,6 @@
           </div>
 
 
-          <!-- =================================================
-               RUN TOGETHER VISUAL
-          ================================================= -->
-
           <div class="invite-card">
 
             <div class="invite-brand">
@@ -2853,10 +2525,6 @@
           </div>
 
 
-          <!-- =================================================
-               SHARE BUTTONS
-          ================================================= -->
-
           <div class="share-buttons">
 
             <button
@@ -2864,64 +2532,19 @@
               class="share-button share-whatsapp"
               id="shareWhatsapp"
             >
-
-              <svg viewBox="0 0 32 32">
-
-                <path
-                  d="M25.5 6.5A13.2 13.2 0 0 0 4.7 22.1L3 28.2l6.3-1.6A13.2 13.2 0 1 0 25.5 6.5Z"
-                ></path>
-
-                <path
-                  d="M11.3 10.7c.3-.4.7-.4 1-.1l1.5 2c.2.3.2.6 0 .9l-.8 1c1 2 2.5 3.5 4.5 4.5l1-.8c.3-.2.6-.2.9 0l2 1.5c.3.3.3.7-.1 1-1 .9-2.2 1.2-3.5.8-4.5-1.4-7.9-4.8-9.3-9.3-.4-1.3-.1-2.5.8-3.5Z"
-                ></path>
-
-              </svg>
-
               Über WhatsApp teilen
-
             </button>
-
 
             <button
               type="button"
               class="share-button share-instagram"
               id="shareInstagram"
             >
-
-              <svg viewBox="0 0 32 32">
-
-                <rect
-                  x="6"
-                  y="6"
-                  width="20"
-                  height="20"
-                  rx="6"
-                ></rect>
-
-                <circle
-                  cx="16"
-                  cy="16"
-                  r="5"
-                ></circle>
-
-                <circle
-                  cx="22.5"
-                  cy="9.5"
-                  r="1"
-                ></circle>
-
-              </svg>
-
               Über Instagram teilen
-
             </button>
 
           </div>
 
-
-          <!-- =================================================
-               INVITE CONFIRMATION
-          ================================================= -->
 
           <div
             class="invite-confirmation"
@@ -2958,10 +2581,6 @@
       </div>
 
 
-      <!-- =================================================
-           PROGRESS
-      ================================================= -->
-
       <div class="registration-progress">
 
         <div
@@ -2978,7 +2597,6 @@
           </span>
 
         </div>
-
 
         <div
           class="registration-progress-row"
@@ -2998,10 +2616,6 @@
       </div>
 
 
-      <!-- =================================================
-           STATUS
-      ================================================= -->
-
       <div
         class="registration-status"
         id="registrationStatus"
@@ -3016,10 +2630,6 @@
 
       </div>
 
-
-      <!-- =================================================
-           REGISTER BUTTON
-      ================================================= -->
 
       <button
         class="auth-submit"
@@ -3039,14 +2649,9 @@
     </form>
 
 
-    <!-- =================================================
-         FORGOT PASSWORD
-    ================================================= -->
+    <!-- PASSWORT VERGESSEN -->
 
-    <form
-      class="auth-form"
-      id="forgotForm"
-    >
+    <form class="auth-form" id="forgotForm">
 
       <button
         class="auth-back"
@@ -3086,23 +2691,16 @@
       ></div>
 
       <div class="auth-note">
-
         Wir senden dir einen Link per E-Mail.
         Über diesen Link kannst du ein neues Passwort festlegen.
-
       </div>
 
     </form>
 
 
-    <!-- =================================================
-         RECOVERY
-    ================================================= -->
+    <!-- RECOVERY -->
 
-    <form
-      class="auth-form"
-      id="recoveryForm"
-    >
+    <form class="auth-form" id="recoveryForm">
 
       <div class="form-group">
 
@@ -3160,1801 +2758,2303 @@
 
 <script>
 
-  /* =====================================================
-     SUPABASE
-  ===================================================== */
+/* =====================================================
+   SUPABASE
+===================================================== */
 
-  const SUPABASE_URL =
-    "https://orbrkdrsihsacsnprewf.supabase.co";
+const SUPABASE_URL =
+  "https://orbrkdrsihsacsnprewf.supabase.co";
 
-  const SUPABASE_PUBLISHABLE_KEY =
-    "sb_publishable_wc3w2fSuj8ItwiF6XBoQgw_HeW5_rNW";
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_wc3w2fSuj8ItwiF6XBoQgw_HeW5_rNW";
+
+const {
+  createClient
+} = window.supabase;
+
+const supabaseClient =
+  createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+
+
+/* =====================================================
+   ELEMENTS
+===================================================== */
+
+const publicSite =
+  document.getElementById("publicSite");
+
+const memberPage =
+  document.getElementById("memberPage");
+
+const guestArea =
+  document.getElementById("guestArea");
+
+const loggedInArea =
+  document.getElementById("loggedInArea");
+
+const userGreeting =
+  document.getElementById("userGreeting");
+
+const avatarButton =
+  document.getElementById("avatarButton");
+
+const accountMenu =
+  document.getElementById("accountMenu");
+
+const accountMenuName =
+  document.getElementById("accountMenuName");
+
+const accountMenuEmail =
+  document.getElementById("accountMenuEmail");
+
+const memberPageButton =
+  document.getElementById("memberPageButton");
+
+const profileButton =
+  document.getElementById("profileButton");
+
+const logoutButton =
+  document.getElementById("logoutButton");
+
+const openLoginButton =
+  document.getElementById("openLoginButton");
+
+const statementCta =
+  document.getElementById("statementCta");
+
+const authOverlay =
+  document.getElementById("authOverlay");
+
+const closeAuthButton =
+  document.getElementById("closeAuthButton");
+
+const authTabs =
+  document.getElementById("authTabs");
+
+const loginTab =
+  document.getElementById("loginTab");
+
+const registerTab =
+  document.getElementById("registerTab");
+
+const loginForm =
+  document.getElementById("loginForm");
+
+const registerForm =
+  document.getElementById("registerForm");
+
+const forgotForm =
+  document.getElementById("forgotForm");
+
+const recoveryForm =
+  document.getElementById("recoveryForm");
+
+const authTitle =
+  document.getElementById("authTitle");
+
+const authDescription =
+  document.getElementById("authDescription");
+
+const loginMessage =
+  document.getElementById("loginMessage");
+
+const registerMessage =
+  document.getElementById("registerMessage");
+
+const forgotMessage =
+  document.getElementById("forgotMessage");
+
+const recoveryMessage =
+  document.getElementById("recoveryMessage");
+
+const forgotPasswordButton =
+  document.getElementById("forgotPasswordButton");
+
+const backToLoginButton =
+  document.getElementById("backToLoginButton");
+
+const loginSubmit =
+  document.getElementById("loginSubmit");
+
+const registerSubmit =
+  document.getElementById("registerSubmit");
+
+const forgotSubmit =
+  document.getElementById("forgotSubmit");
+
+const recoverySubmit =
+  document.getElementById("recoverySubmit");
+
+const followConfirmation =
+  document.getElementById("followConfirmation");
+
+const inviteConfirmation =
+  document.getElementById("inviteConfirmation");
+
+const inviteConfirmationArea =
+  document.getElementById("inviteConfirmationArea");
+
+const registrationStatus =
+  document.getElementById("registrationStatus");
+
+const registrationStatusText =
+  document.getElementById("registrationStatusText");
+
+const progressInstagram =
+  document.getElementById("progressInstagram");
+
+const progressInvite =
+  document.getElementById("progressInvite");
+
+const shareWhatsapp =
+  document.getElementById("shareWhatsapp");
+
+const shareInstagram =
+  document.getElementById("shareInstagram");
+
+
+/* MEMBER PAGE ELEMENTS */
+
+const memberPageAvatar =
+  document.getElementById("memberPageAvatar");
+
+const memberPageName =
+  document.getElementById("memberPageName");
+
+const memberPageEmail =
+  document.getElementById("memberPageEmail");
+
+const memberIntro =
+  document.getElementById("memberIntro");
+
+const memberSection1Title =
+  document.getElementById("memberSection1Title");
+
+const memberSection1Text =
+  document.getElementById("memberSection1Text");
+
+const memberSection1Image =
+  document.getElementById("memberSection1Image");
+
+const memberSection1Preview =
+  document.getElementById("memberSection1Preview");
+
+const memberSection2Title =
+  document.getElementById("memberSection2Title");
+
+const memberSection2Text =
+  document.getElementById("memberSection2Text");
+
+const memberSection2Image =
+  document.getElementById("memberSection2Image");
+
+const memberSection2Preview =
+  document.getElementById("memberSection2Preview");
+
+const memberSection3Title =
+  document.getElementById("memberSection3Title");
+
+const memberSection3Text =
+  document.getElementById("memberSection3Text");
+
+const memberSection3Image =
+  document.getElementById("memberSection3Image");
+
+const memberSection3Preview =
+  document.getElementById("memberSection3Preview");
+
+const memberSaveButton =
+  document.getElementById("memberSaveButton");
+
+const memberSaveStatus =
+  document.getElementById("memberSaveStatus");
+
+const memberBackButton =
+  document.getElementById("memberBackButton");
+
+
+/* =====================================================
+   STATE
+===================================================== */
+
+let currentUser = null;
+let currentProfile = null;
+let currentMemberPage = null;
+
+let inviteActionCompleted = false;
+
+let pendingMemberImages = {
+  section1:null,
+  section2:null,
+  section3:null
+};
+
+
+/* =====================================================
+   USER HELPERS
+===================================================== */
+
+function getInitials(name){
+
+  if(!name) return "M";
+
+  const parts =
+    name.trim()
+      .split(/\s+/)
+      .filter(Boolean);
+
+  if(parts.length === 1){
+    return parts[0]
+      .substring(0,1)
+      .toUpperCase();
+  }
+
+  return (
+    parts[0].substring(0,1) +
+    parts[parts.length-1].substring(0,1)
+  ).toUpperCase();
+}
+
+
+function getFirstName(name){
+
+  if(!name) return "Runner";
+
+  return (
+    name.trim()
+      .split(/\s+/)[0] ||
+    "Runner"
+  );
+}
+
+
+function getUserDisplayName(user,profile){
+
+  if(
+    profile &&
+    profile.display_name &&
+    String(profile.display_name).trim()
+  ){
+    return String(
+      profile.display_name
+    ).trim();
+  }
+
+  if(
+    user &&
+    user.user_metadata &&
+    user.user_metadata.display_name &&
+    String(user.user_metadata.display_name).trim()
+  ){
+    return String(
+      user.user_metadata.display_name
+    ).trim();
+  }
+
+  if(
+    user &&
+    user.user_metadata &&
+    user.user_metadata.name &&
+    String(user.user_metadata.name).trim()
+  ){
+    return String(
+      user.user_metadata.name
+    ).trim();
+  }
+
+  if(user && user.email){
+    return user.email
+      .split("@")[0]
+      .trim();
+  }
+
+  return "Runner";
+}
+
+
+/* =====================================================
+   MESSAGES
+===================================================== */
+
+function setMessage(element,text,success=false){
+
+  element.textContent =
+    text;
+
+  element.classList.toggle(
+    "success",
+    success
+  );
+}
+
+
+function clearMessages(){
+
+  setMessage(loginMessage,"");
+  setMessage(registerMessage,"");
+  setMessage(forgotMessage,"");
+  setMessage(recoveryMessage,"");
+}
+
+
+/* =====================================================
+   BUTTON LOADING
+===================================================== */
+
+function setButtonLoading(
+  button,
+  loading,
+  normalText
+){
+
+  button.disabled =
+    loading;
+
+  button.textContent =
+    loading
+      ? "Bitte warten …"
+      : normalText;
+}
+
+
+/* =====================================================
+   PROFILE
+===================================================== */
+
+async function loadProfile(user){
+
+  if(!user){
+
+    currentProfile = null;
+
+    return null;
+  }
 
   const {
-    createClient
-  } = window.supabase;
+    data,
+    error
+  } =
+    await supabaseClient
+      .from("profiles")
+      .select(
+        "display_name, username, avatar_url, bio, location"
+      )
+      .eq(
+        "id",
+        user.id
+      )
+      .maybeSingle();
 
-  const supabaseClient =
-    createClient(
-      SUPABASE_URL,
-      SUPABASE_PUBLISHABLE_KEY
+  if(error){
+
+    console.error(
+      "Profil konnte nicht geladen werden:",
+      error
     );
 
+    currentProfile = null;
 
-  /* =====================================================
-     ELEMENTS
-  ===================================================== */
-
-  const guestArea =
-    document.getElementById("guestArea");
-
-  const loggedInArea =
-    document.getElementById("loggedInArea");
-
-  const userGreeting =
-    document.getElementById("userGreeting");
-
-  const avatarButton =
-    document.getElementById("avatarButton");
-
-  const accountMenu =
-    document.getElementById("accountMenu");
-
-  const accountMenuName =
-    document.getElementById("accountMenuName");
-
-  const accountMenuEmail =
-    document.getElementById("accountMenuEmail");
-
-  const profileButton =
-    document.getElementById("profileButton");
-
-  const logoutButton =
-    document.getElementById("logoutButton");
-
-  const openLoginButton =
-    document.getElementById("openLoginButton");
-
-  const statementCta =
-    document.getElementById("statementCta");
-
-  const authOverlay =
-    document.getElementById("authOverlay");
-
-  const closeAuthButton =
-    document.getElementById("closeAuthButton");
-
-  const authTabs =
-    document.getElementById("authTabs");
-
-  const loginTab =
-    document.getElementById("loginTab");
-
-  const registerTab =
-    document.getElementById("registerTab");
-
-  const loginForm =
-    document.getElementById("loginForm");
-
-  const registerForm =
-    document.getElementById("registerForm");
-
-  const forgotForm =
-    document.getElementById("forgotForm");
-
-  const recoveryForm =
-    document.getElementById("recoveryForm");
-
-  const authTitle =
-    document.getElementById("authTitle");
-
-  const authDescription =
-    document.getElementById("authDescription");
-
-  const loginMessage =
-    document.getElementById("loginMessage");
-
-  const registerMessage =
-    document.getElementById("registerMessage");
-
-  const forgotMessage =
-    document.getElementById("forgotMessage");
-
-  const recoveryMessage =
-    document.getElementById("recoveryMessage");
-
-  const forgotPasswordButton =
-    document.getElementById("forgotPasswordButton");
-
-  const backToLoginButton =
-    document.getElementById("backToLoginButton");
-
-  const loginSubmit =
-    document.getElementById("loginSubmit");
-
-  const registerSubmit =
-    document.getElementById("registerSubmit");
-
-  const forgotSubmit =
-    document.getElementById("forgotSubmit");
-
-  const recoverySubmit =
-    document.getElementById("recoverySubmit");
-
-  const followConfirmation =
-    document.getElementById("followConfirmation");
-
-  const inviteConfirmation =
-    document.getElementById("inviteConfirmation");
-
-  const inviteConfirmationArea =
-    document.getElementById("inviteConfirmationArea");
-
-  const registrationStatus =
-    document.getElementById("registrationStatus");
-
-  const registrationStatusText =
-    document.getElementById("registrationStatusText");
-
-  const progressInstagram =
-    document.getElementById("progressInstagram");
-
-  const progressInvite =
-    document.getElementById("progressInvite");
-
-  const shareWhatsapp =
-    document.getElementById("shareWhatsapp");
-
-  const shareInstagram =
-    document.getElementById("shareInstagram");
-
-
-  /* =====================================================
-     STATE
-  ===================================================== */
-
-  let currentUser = null;
-  let currentProfile = null;
-
-  let inviteActionCompleted = false;
-
-
-  /* =====================================================
-     USER HELPERS
-  ===================================================== */
-
-  function getInitials(name) {
-
-    if (!name) {
-      return "M";
-    }
-
-    const parts =
-      name
-        .trim()
-        .split(/\s+/)
-        .filter(Boolean);
-
-    if (parts.length === 1) {
-
-      return parts[0]
-        .substring(0, 1)
-        .toUpperCase();
-
-    }
-
-    return (
-      parts[0].substring(0, 1) +
-      parts[parts.length - 1].substring(0, 1)
-    ).toUpperCase();
-
+    return null;
   }
 
+  currentProfile =
+    data || null;
 
-  function getFirstName(name) {
+  return currentProfile;
+}
 
-    if (!name) {
-      return "Runner";
-    }
 
-    return (
-      name
-        .trim()
-        .split(/\s+/)[0] ||
-      "Runner"
+/* =====================================================
+   PUBLIC / MEMBER VIEW
+===================================================== */
+
+function showPublicSite(){
+
+  memberPage.classList.remove("active");
+  publicSite.style.display = "";
+
+}
+
+
+function showMemberPage(){
+
+  publicSite.style.display = "none";
+
+  memberPage.classList.add("active");
+
+  window.scrollTo({
+    top:0,
+    behavior:"instant"
+  });
+}
+
+
+/* =====================================================
+   USER INTERFACE
+===================================================== */
+
+function updateUserInterface(){
+
+  if(!currentUser){
+
+    guestArea.style.display =
+      "flex";
+
+    loggedInArea.style.display =
+      "none";
+
+    userGreeting.textContent =
+      "Hallo";
+
+    accountMenu.classList.remove(
+      "open"
     );
 
+    statementCta.textContent =
+      "JETZT MITGLIED WERDEN →";
+
+    statementCta.href =
+      "home.html";
+
+    statementCta.onclick =
+      null;
+
+    return;
   }
 
-
-  function getUserDisplayName(
-    user,
-    profile
-  ) {
-
-    if (
-      profile &&
-      profile.display_name &&
-      String(profile.display_name).trim()
-    ) {
-
-      return String(
-        profile.display_name
-      ).trim();
-
-    }
-
-    if (
-      user &&
-      user.user_metadata &&
-      user.user_metadata.display_name &&
-      String(
-        user.user_metadata.display_name
-      ).trim()
-    ) {
-
-      return String(
-        user.user_metadata.display_name
-      ).trim();
-
-    }
-
-    if (
-      user &&
-      user.user_metadata &&
-      user.user_metadata.name &&
-      String(
-        user.user_metadata.name
-      ).trim()
-    ) {
-
-      return String(
-        user.user_metadata.name
-      ).trim();
-
-    }
-
-    if (
-      user &&
-      user.email
-    ) {
-
-      return user.email
-        .split("@")[0]
-        .trim();
-
-    }
-
-    return "Runner";
-
-  }
-
-
-  /* =====================================================
-     MESSAGES
-  ===================================================== */
-
-  function setMessage(
-    element,
-    text,
-    success = false
-  ) {
-
-    element.textContent =
-      text;
-
-    element.classList.toggle(
-      "success",
-      success
+  const displayName =
+    getUserDisplayName(
+      currentUser,
+      currentProfile
     );
 
+  const firstName =
+    getFirstName(displayName);
+
+  const initials =
+    getInitials(displayName);
+
+  guestArea.style.display =
+    "none";
+
+  loggedInArea.style.display =
+    "flex";
+
+  userGreeting.textContent =
+    "Hallo " + firstName;
+
+  avatarButton.innerHTML =
+    "";
+
+  if(
+    currentProfile &&
+    currentProfile.avatar_url
+  ){
+
+    const image =
+      document.createElement("img");
+
+    image.src =
+      currentProfile.avatar_url;
+
+    image.alt =
+      displayName;
+
+    avatarButton.appendChild(
+      image
+    );
+
+  }else{
+
+    avatarButton.textContent =
+      initials;
+  }
+
+  accountMenuName.textContent =
+    displayName;
+
+  accountMenuEmail.textContent =
+    currentUser.email || "";
+
+  statementCta.textContent =
+    "ZU MEINER MITGLIEDSSEITE →";
+
+  statementCta.href =
+    "#";
+
+  statementCta.onclick =
+    function(event){
+
+      event.preventDefault();
+
+      loadMemberPage();
+
+    };
+}
+
+
+/* =====================================================
+   MEMBER PAGE
+===================================================== */
+
+function setMemberSaveStatus(
+  text,
+  type=""
+){
+
+  memberSaveStatus.textContent =
+    text;
+
+  memberSaveStatus.className =
+    "member-save-status";
+
+  if(type){
+    memberSaveStatus.classList.add(
+      type
+    );
+  }
+}
+
+
+function renderMemberImage(
+  previewElement,
+  imageUrl
+){
+
+  previewElement.innerHTML =
+    "";
+
+  if(!imageUrl){
+
+    previewElement.textContent =
+      "Noch kein Bild";
+
+    return;
+  }
+
+  const image =
+    document.createElement("img");
+
+  image.src =
+    imageUrl;
+
+  image.alt =
+    "";
+
+  image.loading =
+    "lazy";
+
+  previewElement.appendChild(
+    image
+  );
+}
+
+
+function resetMemberImageState(){
+
+  pendingMemberImages = {
+    section1:null,
+    section2:null,
+    section3:null
+  };
+
+  memberSection1Image.value =
+    "";
+
+  memberSection2Image.value =
+    "";
+
+  memberSection3Image.value =
+    "";
+}
+
+
+function renderMemberPage(){
+
+  if(!currentUser) return;
+
+  const displayName =
+    getUserDisplayName(
+      currentUser,
+      currentProfile
+    );
+
+  const initials =
+    getInitials(displayName);
+
+  memberPageName.textContent =
+    displayName;
+
+  memberPageEmail.textContent =
+    currentUser.email || "";
+
+  memberPageAvatar.innerHTML =
+    "";
+
+  if(
+    currentProfile &&
+    currentProfile.avatar_url
+  ){
+
+    const image =
+      document.createElement("img");
+
+    image.src =
+      currentProfile.avatar_url;
+
+    image.alt =
+      displayName;
+
+    memberPageAvatar.appendChild(
+      image
+    );
+
+  }else{
+
+    memberPageAvatar.textContent =
+      initials;
   }
 
 
-  function clearMessages() {
+  memberIntro.value =
+    currentMemberPage?.intro_text || "";
 
-    setMessage(
-      loginMessage,
+  memberSection1Title.value =
+    currentMemberPage?.section1_title || "";
+
+  memberSection1Text.value =
+    currentMemberPage?.section1_text || "";
+
+  memberSection2Title.value =
+    currentMemberPage?.section2_title || "";
+
+  memberSection2Text.value =
+    currentMemberPage?.section2_text || "";
+
+  memberSection3Title.value =
+    currentMemberPage?.section3_title || "";
+
+  memberSection3Text.value =
+    currentMemberPage?.section3_text || "";
+
+
+  renderMemberImage(
+    memberSection1Preview,
+    currentMemberPage?.section1_image
+  );
+
+  renderMemberImage(
+    memberSection2Preview,
+    currentMemberPage?.section2_image
+  );
+
+  renderMemberImage(
+    memberSection3Preview,
+    currentMemberPage?.section3_image
+  );
+
+  resetMemberImageState();
+
+  setMemberSaveStatus(
+    "Deine persönliche Seite ist bereit."
+  );
+}
+
+
+async function loadMemberPage(){
+
+  if(!currentUser){
+
+    showPublicSite();
+
+    return;
+  }
+
+  setMemberSaveStatus(
+    "Persönliche Seite wird geladen …"
+  );
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient
+      .from("member_pages")
+      .select(
+        "user_id,intro_text,section1_title,section1_text,section1_image,section2_title,section2_text,section2_image,section3_title,section3_text,section3_image,is_public"
+      )
+      .eq(
+        "user_id",
+        currentUser.id
+      )
+      .maybeSingle();
+
+  if(error){
+
+    console.error(
+      "Mitgliedsseite konnte nicht geladen werden:",
+      error
+    );
+
+    setMemberSaveStatus(
+      "Die persönliche Seite konnte nicht geladen werden.",
+      "error"
+    );
+
+    showMemberPage();
+
+    return;
+  }
+
+  currentMemberPage =
+    data || null;
+
+
+  /*
+    Falls noch keine Seite existiert,
+    wird sie automatisch angelegt.
+  */
+
+  if(!currentMemberPage){
+
+    const {
+      data:newPage,
+      error:createError
+    } =
+      await supabaseClient
+        .from("member_pages")
+        .insert({
+
+          user_id:
+            currentUser.id,
+
+          intro_text:
+            "",
+
+          section1_title:
+            "",
+
+          section1_text:
+            "",
+
+          section1_image:
+            null,
+
+          section2_title:
+            "",
+
+          section2_text:
+            "",
+
+          section2_image:
+            null,
+
+          section3_title:
+            "",
+
+          section3_text:
+            "",
+
+          section3_image:
+            null,
+
+          is_public:
+            true
+
+        })
+        .select(
+          "user_id,intro_text,section1_title,section1_text,section1_image,section2_title,section2_text,section2_image,section3_title,section3_text,section3_image,is_public"
+        )
+        .single();
+
+    if(createError){
+
+      console.error(
+        "Mitgliedsseite konnte nicht erstellt werden:",
+        createError
+      );
+
+      setMemberSaveStatus(
+        "Die persönliche Seite konnte nicht angelegt werden.",
+        "error"
+      );
+
+      showMemberPage();
+
+      return;
+    }
+
+    currentMemberPage =
+      newPage;
+  }
+
+  renderMemberPage();
+
+  showMemberPage();
+}
+
+
+/* =====================================================
+   MEMBER IMAGE UPLOAD
+===================================================== */
+
+async function uploadMemberImage(
+  file,
+  section
+){
+
+  if(!file) return null;
+
+  if(
+    !file.type ||
+    !file.type.startsWith("image/")
+  ){
+
+    throw new Error(
+      "Bitte wähle eine Bilddatei aus."
+    );
+  }
+
+  const maxSize =
+    10 * 1024 * 1024;
+
+  if(file.size > maxSize){
+
+    throw new Error(
+      "Das Bild darf maximal 10 MB groß sein."
+    );
+  }
+
+  const extension =
+    (
+      file.name
+        .split(".")
+        .pop() ||
+      "jpg"
+    )
+    .toLowerCase()
+    .replace(
+      /[^a-z0-9]/g,
       ""
+    ) || "jpg";
+
+  const filePath =
+    currentUser.id +
+    "/" +
+    section +
+    "-" +
+    Date.now() +
+    "." +
+    extension;
+
+  const {
+    error
+  } =
+    await supabaseClient.storage
+      .from("member-pages")
+      .upload(
+        filePath,
+        file,
+        {
+          cacheControl:"3600",
+          upsert:false,
+          contentType:file.type
+        }
+      );
+
+  if(error){
+
+    console.error(
+      "Member-Bild Upload:",
+      error
     );
 
-    setMessage(
-      registerMessage,
-      ""
+    throw new Error(
+      "Bild konnte nicht hochgeladen werden: " +
+      error.message
     );
-
-    setMessage(
-      forgotMessage,
-      ""
-    );
-
-    setMessage(
-      recoveryMessage,
-      ""
-    );
-
   }
 
+  const {
+    data
+  } =
+    supabaseClient.storage
+      .from("member-pages")
+      .getPublicUrl(
+        filePath
+      );
 
-  /* =====================================================
-     BUTTON LOADING
-  ===================================================== */
+  return data.publicUrl;
+}
 
-  function setButtonLoading(
-    button,
-    loading,
-    normalText
-  ) {
 
-    button.disabled =
-      loading;
+/* =====================================================
+   SAVE MEMBER PAGE
+===================================================== */
 
-    button.textContent =
-      loading
-        ? "Bitte warten …"
-        : normalText;
+async function saveMemberPage(){
 
+  if(!currentUser){
+
+    setMemberSaveStatus(
+      "Du musst angemeldet sein.",
+      "error"
+    );
+
+    return;
   }
 
+  memberSaveButton.disabled =
+    true;
 
-  /* =====================================================
-     PROFILE
-  ===================================================== */
+  setMemberSaveStatus(
+    "Änderungen werden gespeichert …"
+  );
 
-  async function loadProfile(user) {
+  try{
 
-    if (!user) {
+    let section1Image =
+      currentMemberPage?.section1_image || null;
 
-      currentProfile =
-        null;
+    let section2Image =
+      currentMemberPage?.section2_image || null;
 
-      return null;
+    let section3Image =
+      currentMemberPage?.section3_image || null;
 
+
+    if(
+      pendingMemberImages.section1
+    ){
+
+      section1Image =
+        await uploadMemberImage(
+          pendingMemberImages.section1,
+          "section1"
+        );
     }
+
+    if(
+      pendingMemberImages.section2
+    ){
+
+      section2Image =
+        await uploadMemberImage(
+          pendingMemberImages.section2,
+          "section2"
+        );
+    }
+
+    if(
+      pendingMemberImages.section3
+    ){
+
+      section3Image =
+        await uploadMemberImage(
+          pendingMemberImages.section3,
+          "section3"
+        );
+    }
+
+
+    const payload = {
+
+      user_id:
+        currentUser.id,
+
+      intro_text:
+        memberIntro.value.trim(),
+
+      section1_title:
+        memberSection1Title.value.trim(),
+
+      section1_text:
+        memberSection1Text.value.trim(),
+
+      section1_image:
+        section1Image,
+
+      section2_title:
+        memberSection2Title.value.trim(),
+
+      section2_text:
+        memberSection2Text.value.trim(),
+
+      section2_image:
+        section2Image,
+
+      section3_title:
+        memberSection3Title.value.trim(),
+
+      section3_text:
+        memberSection3Text.value.trim(),
+
+      section3_image:
+        section3Image,
+
+      is_public:
+        true,
+
+      updated_at:
+        new Date().toISOString()
+
+    };
+
 
     const {
       data,
       error
     } =
       await supabaseClient
-        .from("profiles")
+        .from("member_pages")
+        .upsert(
+          payload,
+          {
+            onConflict:"user_id"
+          }
+        )
         .select(
-          "display_name, username, avatar_url, bio, location"
+          "user_id,intro_text,section1_title,section1_text,section1_image,section2_title,section2_text,section2_image,section3_title,section3_text,section3_image,is_public"
         )
-        .eq(
-          "id",
-          user.id
-        )
-        .maybeSingle();
+        .single();
 
-    if (error) {
-
-      console.error(
-        "Profil konnte nicht geladen werden:",
-        error
-      );
-
-      currentProfile =
-        null;
-
-      return null;
-
+    if(error){
+      throw error;
     }
 
-    currentProfile =
-      data || null;
+    currentMemberPage =
+      data;
 
-    return currentProfile;
+    resetMemberImageState();
 
+    renderMemberImage(
+      memberSection1Preview,
+      currentMemberPage.section1_image
+    );
+
+    renderMemberImage(
+      memberSection2Preview,
+      currentMemberPage.section2_image
+    );
+
+    renderMemberImage(
+      memberSection3Preview,
+      currentMemberPage.section3_image
+    );
+
+    setMemberSaveStatus(
+      "Gespeichert ✓",
+      "success"
+    );
+
+  }catch(error){
+
+    console.error(
+      "Mitgliedsseite speichern:",
+      error
+    );
+
+    setMemberSaveStatus(
+      error.message ||
+      "Die Änderungen konnten nicht gespeichert werden.",
+      "error"
+    );
+
+  }finally{
+
+    memberSaveButton.disabled =
+      false;
   }
+}
 
 
-  /* =====================================================
-     USER INTERFACE
-  ===================================================== */
+/* =====================================================
+   MEMBER PAGE EVENTS
+===================================================== */
 
-  function updateUserInterface() {
+memberSaveButton.addEventListener(
+  "click",
+  saveMemberPage
+);
 
-    if (!currentUser) {
 
-      guestArea.style.display =
-        "flex";
+memberBackButton.addEventListener(
+  "click",
+  function(){
 
-      loggedInArea.style.display =
-        "none";
+    showPublicSite();
 
-      userGreeting.textContent =
-        "Hallo";
-
-      userGreeting.style.display =
-        "none";
-
-      accountMenu.classList.remove(
-        "open"
-      );
-
-      statementCta.textContent =
-        "JETZT MITGLIED WERDEN →";
-
-      statementCta.href =
-        "home.html";
-
-      return;
-
-    }
-
-    const displayName =
-      getUserDisplayName(
-        currentUser,
-        currentProfile
-      );
-
-    const firstName =
-      getFirstName(
-        displayName
-      );
-
-    const initials =
-      getInitials(
-        displayName
-      );
-
-    guestArea.style.display =
-      "none";
-
-    loggedInArea.style.display =
-      "flex";
-
-    userGreeting.style.display =
-      "inline";
-
-    userGreeting.textContent =
-      "Hallo " + firstName;
-
-    avatarButton.innerHTML =
-      "";
-
-    if (
-      currentProfile &&
-      currentProfile.avatar_url
-    ) {
-
-      const image =
-        document.createElement("img");
-
-      image.src =
-        currentProfile.avatar_url;
-
-      image.alt =
-        displayName;
-
-      avatarButton.appendChild(
-        image
-      );
-
-    } else {
-
-      avatarButton.textContent =
-        initials;
-
-    }
-
-    accountMenuName.textContent =
-      displayName;
-
-    accountMenuEmail.textContent =
-      currentUser.email || "";
-
-    statementCta.textContent =
-      "ZUM MITGLIEDSBEREICH →";
-
-    statementCta.href =
-      "home.html";
-
+    window.scrollTo({
+      top:0,
+      behavior:"smooth"
+    });
   }
+);
 
 
-  /* =====================================================
-     AUTH OPEN / CLOSE
-  ===================================================== */
+memberPageButton.addEventListener(
+  "click",
+  async function(event){
 
-  function openAuth() {
+    event.preventDefault();
+    event.stopPropagation();
 
-    authOverlay.classList.add(
+    accountMenu.classList.remove(
       "open"
     );
 
-    document.body.style.overflow =
-      "hidden";
+    await loadMemberPage();
+  }
+);
 
-    if (
-      recoveryForm.classList.contains(
-        "active"
-      )
-    ) {
 
-      return;
+memberSection1Image.addEventListener(
+  "change",
+  function(){
 
+    const file =
+      this.files &&
+      this.files[0]
+        ? this.files[0]
+        : null;
+
+    pendingMemberImages.section1 =
+      file;
+
+    if(file){
+
+      const url =
+        URL.createObjectURL(file);
+
+      renderMemberImage(
+        memberSection1Preview,
+        url
+      );
+
+    }else{
+
+      renderMemberImage(
+        memberSection1Preview,
+        currentMemberPage?.section1_image
+      );
     }
+  }
+);
 
-    showLogin();
 
+memberSection2Image.addEventListener(
+  "change",
+  function(){
+
+    const file =
+      this.files &&
+      this.files[0]
+        ? this.files[0]
+        : null;
+
+    pendingMemberImages.section2 =
+      file;
+
+    if(file){
+
+      const url =
+        URL.createObjectURL(file);
+
+      renderMemberImage(
+        memberSection2Preview,
+        url
+      );
+
+    }else{
+
+      renderMemberImage(
+        memberSection2Preview,
+        currentMemberPage?.section2_image
+      );
+    }
+  }
+);
+
+
+memberSection3Image.addEventListener(
+  "change",
+  function(){
+
+    const file =
+      this.files &&
+      this.files[0]
+        ? this.files[0]
+        : null;
+
+    pendingMemberImages.section3 =
+      file;
+
+    if(file){
+
+      const url =
+        URL.createObjectURL(file);
+
+      renderMemberImage(
+        memberSection3Preview,
+        url
+      );
+
+    }else{
+
+      renderMemberImage(
+        memberSection3Preview,
+        currentMemberPage?.section3_image
+      );
+    }
+  }
+);
+
+
+/* =====================================================
+   AUTH OPEN / CLOSE
+===================================================== */
+
+function openAuth(){
+
+  authOverlay.classList.add(
+    "open"
+  );
+
+  document.body.style.overflow =
+    "hidden";
+
+  if(
+    recoveryForm.classList.contains(
+      "active"
+    )
+  ){
+
+    return;
   }
 
+  showLogin();
+}
 
-  function closeAuth() {
 
-    authOverlay.classList.remove(
+function closeAuth(){
+
+  authOverlay.classList.remove(
+    "open"
+  );
+
+  document.body.style.overflow =
+    "";
+
+  clearMessages();
+}
+
+
+openLoginButton.addEventListener(
+  "click",
+  openAuth
+);
+
+
+closeAuthButton.addEventListener(
+  "click",
+  closeAuth
+);
+
+
+authOverlay.addEventListener(
+  "click",
+  function(event){
+
+    if(
+      event.target === authOverlay
+    ){
+
+      closeAuth();
+    }
+  }
+);
+
+
+document.addEventListener(
+  "keydown",
+  function(event){
+
+    if(
+      event.key === "Escape" &&
+      authOverlay.classList.contains("open")
+    ){
+
+      closeAuth();
+    }
+  }
+);
+
+
+/* =====================================================
+   FORMS
+===================================================== */
+
+function hideAllForms(){
+
+  loginForm.classList.remove("active");
+  registerForm.classList.remove("active");
+  forgotForm.classList.remove("active");
+  recoveryForm.classList.remove("active");
+}
+
+
+function showLogin(){
+
+  hideAllForms();
+
+  clearMessages();
+
+  loginForm.classList.add("active");
+
+  authTabs.style.display =
+    "grid";
+
+  loginTab.classList.add("active");
+  registerTab.classList.remove("active");
+
+  authTitle.textContent =
+    "Willkommen zurück.";
+
+  authDescription.textContent =
+    "Melde dich an und werde Teil der Community.";
+}
+
+
+function showRegister(){
+
+  hideAllForms();
+
+  clearMessages();
+
+  registerForm.classList.add("active");
+
+  authTabs.style.display =
+    "grid";
+
+  registerTab.classList.add("active");
+  loginTab.classList.remove("active");
+
+  authTitle.textContent =
+    "Werde Teil der Community.";
+
+  authDescription.textContent =
+    "Erstelle dein Konto und starte deine Miles-Apart-Reise.";
+
+  updateRegistrationGate();
+}
+
+
+function showForgotPassword(){
+
+  hideAllForms();
+
+  clearMessages();
+
+  forgotForm.classList.add("active");
+
+  authTabs.style.display =
+    "none";
+
+  authTitle.textContent =
+    "Passwort zurücksetzen.";
+
+  authDescription.textContent =
+    "Wir schicken dir einen Link, mit dem du ein neues Passwort festlegen kannst.";
+}
+
+
+function showRecovery(){
+
+  hideAllForms();
+
+  clearMessages();
+
+  recoveryForm.classList.add("active");
+
+  authTabs.style.display =
+    "none";
+
+  authTitle.textContent =
+    "Neues Passwort festlegen.";
+
+  authDescription.textContent =
+    "Wähle ein neues Passwort für dein Miles-Apart-Konto.";
+}
+
+
+loginTab.addEventListener(
+  "click",
+  showLogin
+);
+
+
+registerTab.addEventListener(
+  "click",
+  showRegister
+);
+
+
+forgotPasswordButton.addEventListener(
+  "click",
+  showForgotPassword
+);
+
+
+backToLoginButton.addEventListener(
+  "click",
+  showLogin
+);
+
+
+/* =====================================================
+   PROFILE BUTTON
+===================================================== */
+
+profileButton.addEventListener(
+  "click",
+  function(event){
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    accountMenu.classList.remove(
       "open"
     );
 
-    document.body.style.overflow =
-      "";
-
-    clearMessages();
-
+    window.location.href =
+      "profile.html";
   }
+);
 
 
-  openLoginButton.addEventListener(
-    "click",
-    openAuth
+/* =====================================================
+   REGISTRATION GATE
+===================================================== */
+
+function updateRegistrationGate(){
+
+  const follows =
+    followConfirmation.checked;
+
+  const invited =
+    inviteConfirmation.checked;
+
+  const ready =
+    follows &&
+    invited;
+
+  registerSubmit.disabled =
+    !ready;
+
+  progressInstagram.classList.toggle(
+    "complete",
+    follows
+  );
+
+  progressInvite.classList.toggle(
+    "complete",
+    invited
+  );
+
+  registrationStatus.classList.toggle(
+    "ready",
+    ready
   );
 
 
-  closeAuthButton.addEventListener(
-    "click",
-    closeAuth
-  );
+  if(ready){
+
+    registrationStatusText.textContent =
+      "Alles bereit. Du kannst jetzt dein Miles-Apart-Konto erstellen.";
+
+    registerSubmit.textContent =
+      "Konto erstellen →";
+
+  }else if(!follows && !invited){
+
+    registrationStatusText.textContent =
+      "Bestätige das Instagram-Follow und lade anschließend einen Freund ein.";
+
+    registerSubmit.textContent =
+      "Erst Voraussetzungen erfüllen";
+
+  }else if(!follows){
+
+    registrationStatusText.textContent =
+      "Noch ein Schritt: Bestätige, dass du Tano auf Instagram folgst.";
+
+    registerSubmit.textContent =
+      "Erst Voraussetzungen erfüllen";
+
+  }else{
+
+    registrationStatusText.textContent =
+      "Noch ein Schritt: Lade einen Freund zu Miles Apart ein.";
+
+    registerSubmit.textContent =
+      "Erst Voraussetzungen erfüllen";
+  }
+}
 
 
-  authOverlay.addEventListener(
-    "click",
-    function(event) {
+followConfirmation.addEventListener(
+  "change",
+  updateRegistrationGate
+);
 
-      if (
-        event.target === authOverlay
-      ) {
 
-        closeAuth();
+inviteConfirmation.addEventListener(
+  "change",
+  function(){
 
-      }
+    if(!inviteActionCompleted){
 
+      inviteConfirmation.checked =
+        false;
+
+      return;
     }
-  );
-
-
-  document.addEventListener(
-    "keydown",
-    function(event) {
-
-      if (
-        event.key === "Escape" &&
-        authOverlay.classList.contains(
-          "open"
-        )
-      ) {
-
-        closeAuth();
-
-      }
-
-    }
-  );
-
-
-  /* =====================================================
-     FORMS / TABS
-  ===================================================== */
-
-  function hideAllForms() {
-
-    loginForm.classList.remove(
-      "active"
-    );
-
-    registerForm.classList.remove(
-      "active"
-    );
-
-    forgotForm.classList.remove(
-      "active"
-    );
-
-    recoveryForm.classList.remove(
-      "active"
-    );
-
-  }
-
-
-  function showLogin() {
-
-    hideAllForms();
-
-    clearMessages();
-
-    loginForm.classList.add(
-      "active"
-    );
-
-    authTabs.style.display =
-      "grid";
-
-    loginTab.classList.add(
-      "active"
-    );
-
-    registerTab.classList.remove(
-      "active"
-    );
-
-    authTitle.textContent =
-      "Willkommen zurück.";
-
-    authDescription.textContent =
-      "Melde dich an und werde Teil der Community.";
-
-  }
-
-
-  function showRegister() {
-
-    hideAllForms();
-
-    clearMessages();
-
-    registerForm.classList.add(
-      "active"
-    );
-
-    authTabs.style.display =
-      "grid";
-
-    registerTab.classList.add(
-      "active"
-    );
-
-    loginTab.classList.remove(
-      "active"
-    );
-
-    authTitle.textContent =
-      "Werde Teil der Community.";
-
-    authDescription.textContent =
-      "Erstelle dein Konto und starte deine Miles-Apart-Reise.";
 
     updateRegistrationGate();
-
   }
+);
 
 
-  function showForgotPassword() {
+/* =====================================================
+   INVITATION
+===================================================== */
 
-    hideAllForms();
+function getInviteUrl(){
 
-    clearMessages();
-
-    forgotForm.classList.add(
-      "active"
-    );
-
-    authTabs.style.display =
-      "none";
-
-    authTitle.textContent =
-      "Passwort zurücksetzen.";
-
-    authDescription.textContent =
-      "Wir schicken dir einen Link, mit dem du ein neues Passwort festlegen kannst.";
-
-  }
+  return (
+    window.location.origin +
+    window.location.pathname
+  );
+}
 
 
-  function showRecovery() {
+function getInviteMessage(){
 
-    hideAllForms();
-
-    clearMessages();
-
-    recoveryForm.classList.add(
-      "active"
-    );
-
-    authTabs.style.display =
-      "none";
-
-    authTitle.textContent =
-      "Neues Passwort festlegen.";
-
-    authDescription.textContent =
-      "Wähle ein neues Passwort für dein Miles-Apart-Konto.";
-
-  }
+  return (
+    "Komm mit zu Miles Apart! 🏃‍♂️\n\n" +
+    "Eine Running-Community für alle, die gemeinsam laufen, " +
+    "trainieren und sich gegenseitig pushen wollen – egal, wo sie sind.\n\n" +
+    getInviteUrl()
+  );
+}
 
 
-  loginTab.addEventListener(
-    "click",
-    showLogin
+function markInviteActionStarted(){
+
+  inviteActionCompleted =
+    true;
+
+  inviteConfirmationArea.classList.add(
+    "available"
   );
 
-
-  registerTab.addEventListener(
-    "click",
-    showRegister
-  );
+  updateRegistrationGate();
+}
 
 
-  forgotPasswordButton.addEventListener(
-    "click",
-    showForgotPassword
-  );
+shareWhatsapp.addEventListener(
+  "click",
+  function(){
 
-
-  backToLoginButton.addEventListener(
-    "click",
-    showLogin
-  );
-
-
-  /* =====================================================
-     PROFILE BUTTON
-  ===================================================== */
-
-  profileButton.addEventListener(
-    "click",
-    function(event) {
-
-      event.preventDefault();
-      event.stopPropagation();
-
-      accountMenu.classList.remove(
-        "open"
+    const whatsappUrl =
+      "https://wa.me/?text=" +
+      encodeURIComponent(
+        getInviteMessage()
       );
 
-      window.location.href =
-        "profile.html";
+    markInviteActionStarted();
 
-    }
-  );
-
-
-  /* =====================================================
-     REGISTRATION GATE
-  ===================================================== */
-
-  function updateRegistrationGate() {
-
-    const follows =
-      followConfirmation.checked;
-
-    const invited =
-      inviteConfirmation.checked;
-
-    const ready =
-      follows &&
-      invited;
-
-    registerSubmit.disabled =
-      !ready;
-
-
-    /* Instagram progress */
-
-    progressInstagram.classList.toggle(
-      "complete",
-      follows
+    window.open(
+      whatsappUrl,
+      "_blank",
+      "noopener,noreferrer"
     );
-
-
-    /* Invitation progress */
-
-    progressInvite.classList.toggle(
-      "complete",
-      invited
-    );
-
-
-    /* Status */
-
-    registrationStatus.classList.toggle(
-      "ready",
-      ready
-    );
-
-
-    if (ready) {
-
-      registrationStatusText.textContent =
-        "Alles bereit. Du kannst jetzt dein Miles-Apart-Konto erstellen.";
-
-      registerSubmit.textContent =
-        "Konto erstellen →";
-
-    } else if (
-      !follows &&
-      !invited
-    ) {
-
-      registrationStatusText.textContent =
-        "Bestätige das Instagram-Follow und lade anschließend einen Freund ein.";
-
-      registerSubmit.textContent =
-        "Erst Voraussetzungen erfüllen";
-
-    } else if (!follows) {
-
-      registrationStatusText.textContent =
-        "Noch ein Schritt: Bestätige, dass du Tano auf Instagram folgst.";
-
-      registerSubmit.textContent =
-        "Erst Voraussetzungen erfüllen";
-
-    } else {
-
-      registrationStatusText.textContent =
-        "Noch ein Schritt: Lade einen Freund zu Miles Apart ein.";
-
-      registerSubmit.textContent =
-        "Erst Voraussetzungen erfüllen";
-
-    }
-
   }
+);
 
 
-  followConfirmation.addEventListener(
-    "change",
-    updateRegistrationGate
-  );
+shareInstagram.addEventListener(
+  "click",
+  async function(){
 
+    const message =
+      getInviteMessage();
 
-  inviteConfirmation.addEventListener(
-    "change",
-    function() {
+    if(navigator.share){
 
-      /*
-        Die Checkbox darf erst benutzt werden,
-        nachdem WhatsApp oder Instagram geöffnet
-        bzw. der Share-Vorgang gestartet wurde.
-      */
+      try{
 
-      if (
-        !inviteActionCompleted
-      ) {
+        await navigator.share({
 
-        inviteConfirmation.checked =
-          false;
+          title:
+            "Miles Apart Running Club",
+
+          text:
+            message,
+
+          url:
+            getInviteUrl()
+
+        });
+
+        markInviteActionStarted();
 
         return;
 
+      }catch(error){
+
+        if(
+          error &&
+          error.name === "AbortError"
+        ){
+
+          return;
+        }
       }
+    }
+
+    try{
+
+      await navigator.clipboard.writeText(
+        message
+      );
+
+    }catch(error){
+
+      console.error(
+        "Einladungsnachricht konnte nicht kopiert werden:",
+        error
+      );
+    }
+
+    markInviteActionStarted();
+
+    window.open(
+      "https://www.instagram.com/",
+      "_blank",
+      "noopener,noreferrer"
+    );
+  }
+);
+
+
+/* =====================================================
+   REGISTRATION
+===================================================== */
+
+registerForm.addEventListener(
+  "submit",
+  async function(event){
+
+    event.preventDefault();
+
+    clearMessages();
+
+    if(
+      !followConfirmation.checked ||
+      !inviteConfirmation.checked
+    ){
 
       updateRegistrationGate();
 
+      setMessage(
+        registerMessage,
+        "Bitte erfülle zuerst beide Voraussetzungen."
+      );
+
+      return;
     }
-  );
 
 
-  /* =====================================================
-     INVITATION
-  ===================================================== */
+    const name =
+      document
+        .getElementById("registerName")
+        .value
+        .trim();
 
-  function getInviteUrl() {
+    const email =
+      document
+        .getElementById("registerEmail")
+        .value
+        .trim()
+        .toLowerCase();
 
-    return (
-      window.location.origin +
-      window.location.pathname
+    const password =
+      document
+        .getElementById("registerPassword")
+        .value;
+
+
+    if(name.length < 2){
+
+      setMessage(
+        registerMessage,
+        "Bitte gib deinen Namen ein."
+      );
+
+      return;
+    }
+
+
+    if(password.length < 6){
+
+      setMessage(
+        registerMessage,
+        "Das Passwort muss mindestens 6 Zeichen haben."
+      );
+
+      return;
+    }
+
+
+    setButtonLoading(
+      registerSubmit,
+      true,
+      "Konto erstellen →"
     );
 
-  }
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient.auth.signUp({
+
+        email:email,
+
+        password:password,
+
+        options:{
+          data:{
+            display_name:name
+          },
+
+          emailRedirectTo:
+            window.location.href.split("#")[0]
+        }
+      });
 
 
-  function getInviteMessage() {
-
-    return (
-      "Komm mit zu Miles Apart! 🏃‍♂️\n\n" +
-      "Eine Running-Community für alle, die gemeinsam laufen, " +
-      "trainieren und sich gegenseitig pushen wollen – egal, wo sie sind.\n\n" +
-      getInviteUrl()
+    setButtonLoading(
+      registerSubmit,
+      false,
+      "Konto erstellen →"
     );
 
-  }
+
+    if(
+      data &&
+      data.user &&
+      Array.isArray(data.user.identities) &&
+      data.user.identities.length === 0
+    ){
+
+      setMessage(
+        registerMessage,
+        "Du hast dich mit dieser Mail bereits registriert. Melde dich stattdessen an."
+      );
+
+      return;
+    }
 
 
-  function markInviteActionStarted() {
+    if(error){
+
+      console.error(
+        "Registrierung:",
+        error
+      );
+
+      const errorText =
+        String(
+          error.message || ""
+        ).toLowerCase();
+
+
+      if(
+        errorText.includes("already registered") ||
+        errorText.includes("already exists") ||
+        errorText.includes("email already") ||
+        errorText.includes("user already") ||
+        errorText.includes("email_exists") ||
+        errorText.includes("user_already_exists")
+      ){
+
+        setMessage(
+          registerMessage,
+          "Du hast dich mit dieser Mail bereits registriert. Melde dich stattdessen an."
+        );
+
+        return;
+      }
+
+
+      setMessage(
+        registerMessage,
+        translateAuthError(error)
+      );
+
+      return;
+    }
+
+
+    registerForm.reset();
 
     inviteActionCompleted =
-      true;
+      false;
 
-    inviteConfirmationArea.classList.add(
+    inviteConfirmationArea.classList.remove(
       "available"
     );
 
     updateRegistrationGate();
 
-  }
 
-
-  /* =====================================================
-     WHATSAPP
-  ===================================================== */
-
-  shareWhatsapp.addEventListener(
-    "click",
-    function() {
-
-      const whatsappUrl =
-        "https://wa.me/?text=" +
-        encodeURIComponent(
-          getInviteMessage()
-        );
-
-      markInviteActionStarted();
-
-      window.open(
-        whatsappUrl,
-        "_blank",
-        "noopener,noreferrer"
-      );
-
-    }
-  );
-
-
-  /* =====================================================
-     INSTAGRAM SHARE
-  ===================================================== */
-
-  shareInstagram.addEventListener(
-    "click",
-    async function() {
-
-      const message =
-        getInviteMessage();
-
-      /*
-        Wenn das Gerät den nativen Share-Dialog
-        unterstützt, wird dieser verwendet.
-        Auf Smartphones kann der Nutzer dort
-        anschließend Instagram auswählen.
-      */
-
-      if (
-        navigator.share
-      ) {
-
-        try {
-
-          await navigator.share({
-
-            title:
-              "Miles Apart Running Club",
-
-            text:
-              message,
-
-            url:
-              getInviteUrl()
-
-          });
-
-          markInviteActionStarted();
-
-          return;
-
-        } catch (error) {
-
-          if (
-            error &&
-            error.name === "AbortError"
-          ) {
-
-            return;
-
-          }
-
-        }
-
-      }
-
-
-      /*
-        Fallback:
-        Nachricht kopieren und Instagram öffnen.
-      */
-
-      try {
-
-        await navigator.clipboard.writeText(
-          message
-        );
-
-      } catch (error) {
-
-        console.error(
-          "Einladungsnachricht konnte nicht kopiert werden:",
-          error
-        );
-
-      }
-
-      markInviteActionStarted();
-
-      window.open(
-        "https://www.instagram.com/",
-        "_blank",
-        "noopener,noreferrer"
-      );
-
-    }
-  );
-
-
-  /* =====================================================
-     REGISTRATION
-  ===================================================== */
-
-  registerForm.addEventListener(
-    "submit",
-    async function(event) {
-
-      event.preventDefault();
-
-      clearMessages();
-
-
-      /*
-        Sicherheitsprüfung im Browser:
-        Beide Voraussetzungen müssen erfüllt sein.
-      */
-
-      if (
-        !followConfirmation.checked ||
-        !inviteConfirmation.checked
-      ) {
-
-        updateRegistrationGate();
-
-        setMessage(
-          registerMessage,
-          "Bitte erfülle zuerst beide Voraussetzungen."
-        );
-
-        return;
-
-      }
-
-
-      const name =
-        document
-          .getElementById("registerName")
-          .value
-          .trim();
-
-
-      const email =
-        document
-          .getElementById("registerEmail")
-          .value
-          .trim()
-          .toLowerCase();
-
-
-      const password =
-        document
-          .getElementById("registerPassword")
-          .value;
-
-
-      if (
-        name.length < 2
-      ) {
-
-        setMessage(
-          registerMessage,
-          "Bitte gib deinen Namen ein."
-        );
-
-        return;
-
-      }
-
-
-      if (
-        password.length < 6
-      ) {
-
-        setMessage(
-          registerMessage,
-          "Das Passwort muss mindestens 6 Zeichen haben."
-        );
-
-        return;
-
-      }
-
-
-      setButtonLoading(
-        registerSubmit,
-        true,
-        "Konto erstellen →"
-      );
-
-
-      const {
-        data,
-        error
-      } =
-        await supabaseClient.auth.signUp({
-
-          email:
-            email,
-
-          password:
-            password,
-
-          options: {
-
-            data: {
-
-              display_name:
-                name
-
-            },
-
-            emailRedirectTo:
-              window.location.href.split("#")[0]
-
-          }
-
-        });
-
-
-      setButtonLoading(
-        registerSubmit,
-        false,
-        "Konto erstellen →"
-      );
-
-
-      /*
-        Bereits registrierte E-Mail.
-      */
-
-      if (
-        data &&
-        data.user &&
-        Array.isArray(
-          data.user.identities
-        ) &&
-        data.user.identities.length === 0
-      ) {
-
-        setMessage(
-          registerMessage,
-          "Du hast dich mit dieser Mail bereits registriert. Melde dich stattdessen an."
-        );
-
-        return;
-
-      }
-
-
-      if (error) {
-
-        console.error(
-          "Registrierung:",
-          error
-        );
-
-
-        const errorText =
-          String(
-            error.message || ""
-          ).toLowerCase();
-
-
-        if (
-          errorText.includes(
-            "already registered"
-          ) ||
-          errorText.includes(
-            "already exists"
-          ) ||
-          errorText.includes(
-            "email already"
-          ) ||
-          errorText.includes(
-            "user already"
-          ) ||
-          errorText.includes(
-            "email_exists"
-          ) ||
-          errorText.includes(
-            "user_already_exists"
-          )
-        ) {
-
-          setMessage(
-            registerMessage,
-            "Du hast dich mit dieser Mail bereits registriert. Melde dich stattdessen an."
-          );
-
-          return;
-
-        }
-
-
-        setMessage(
-          registerMessage,
-          translateAuthError(error)
-        );
-
-        return;
-
-      }
-
-
-      registerForm.reset();
-
-      /*
-        Nach Reset soll der Gate wieder
-        zurückgesetzt werden.
-      */
-
-      inviteActionCompleted =
-        false;
-
-      inviteConfirmationArea.classList.remove(
-        "available"
-      );
-
-      updateRegistrationGate();
-
-
-      if (
-        data &&
-        data.session
-      ) {
-
-        setMessage(
-          registerMessage,
-          "Konto erfolgreich erstellt. Du bist jetzt angemeldet.",
-          true
-        );
-
-        setTimeout(
-          closeAuth,
-          900
-        );
-
-      } else {
-
-        setMessage(
-          registerMessage,
-          "Fast geschafft! Bitte bestätige deine E-Mail-Adresse. Danach kannst du dich anmelden.",
-          true
-        );
-
-      }
-
-    }
-  );
-
-
-  /* =====================================================
-     LOGIN
-  ===================================================== */
-
-  loginForm.addEventListener(
-    "submit",
-    async function(event) {
-
-      event.preventDefault();
-
-      clearMessages();
-
-
-      const email =
-        document
-          .getElementById("loginEmail")
-          .value
-          .trim()
-          .toLowerCase();
-
-
-      const password =
-        document
-          .getElementById("loginPassword")
-          .value;
-
-
-      const {
-        data: sessionData,
-        error: sessionError
-      } =
-        await supabaseClient.auth.getSession();
-
-
-      if (sessionError) {
-
-        console.error(
-          "Session konnte nicht geprüft werden:",
-          sessionError
-        );
-
-      }
-
-
-      const currentSession =
-        sessionData &&
-        sessionData.session
-          ? sessionData.session
-          : null;
-
-
-      const currentSessionUser =
-        currentSession
-          ? currentSession.user
-          : null;
-
-
-      if (
-        currentSessionUser &&
-        currentSessionUser.email &&
-        currentSessionUser.email
-          .trim()
-          .toLowerCase() === email
-      ) {
-
-        setMessage(
-          loginMessage,
-          "Du hast dich mit dieser Mail bereits registriert. Melde dich stattdessen an."
-        );
-
-        return;
-
-      }
-
-
-      setButtonLoading(
-        loginSubmit,
-        true,
-        "Anmelden →"
-      );
-
-
-      const {
-        data,
-        error
-      } =
-        await supabaseClient.auth
-          .signInWithPassword({
-
-            email:
-              email,
-
-            password:
-              password
-
-          });
-
-
-      setButtonLoading(
-        loginSubmit,
-        false,
-        "Anmelden →"
-      );
-
-
-      if (error) {
-
-        console.error(
-          "Login:",
-          error
-        );
-
-        setMessage(
-          loginMessage,
-          translateAuthError(error)
-        );
-
-        return;
-
-      }
-
-
-      loginForm.reset();
-
-      currentUser =
-        data.user;
-
-      await loadProfile(
-        currentUser
-      );
-
-      updateUserInterface();
-
-      closeAuth();
-
-    }
-  );
-
-
-  /* =====================================================
-     PASSWORT VERGESSEN
-  ===================================================== */
-
-  forgotForm.addEventListener(
-    "submit",
-    async function(event) {
-
-      event.preventDefault();
-
-      clearMessages();
-
-
-      const email =
-        document
-          .getElementById("forgotEmail")
-          .value
-          .trim()
-          .toLowerCase();
-
-
-      setButtonLoading(
-        forgotSubmit,
-        true,
-        "Reset-Link senden →"
-      );
-
-
-      const redirectUrl =
-        window.location.href.split("#")[0];
-
-
-      const {
-        error
-      } =
-        await supabaseClient.auth
-          .resetPasswordForEmail(
-            email,
-            {
-              redirectTo:
-                redirectUrl
-            }
-          );
-
-
-      setButtonLoading(
-        forgotSubmit,
-        false,
-        "Reset-Link senden →"
-      );
-
-
-      if (error) {
-
-        console.error(
-          "Passwort-Reset:",
-          error
-        );
-
-        setMessage(
-          forgotMessage,
-          translateAuthError(error)
-        );
-
-        return;
-
-      }
-
+    if(
+      data &&
+      data.session
+    ){
 
       setMessage(
-        forgotMessage,
-        "Wenn ein Konto mit dieser E-Mail existiert, wurde ein Reset-Link versendet.",
+        registerMessage,
+        "Konto erfolgreich erstellt. Du bist jetzt angemeldet.",
         true
       );
-
-    }
-  );
-
-
-  /* =====================================================
-     PASSWORT RECOVERY
-  ===================================================== */
-
-  recoveryForm.addEventListener(
-    "submit",
-    async function(event) {
-
-      event.preventDefault();
-
-      clearMessages();
-
-
-      const password =
-        document
-          .getElementById("newPassword")
-          .value;
-
-
-      const passwordConfirm =
-        document
-          .getElementById("newPasswordConfirm")
-          .value;
-
-
-      if (
-        password.length < 6
-      ) {
-
-        setMessage(
-          recoveryMessage,
-          "Das Passwort muss mindestens 6 Zeichen haben."
-        );
-
-        return;
-
-      }
-
-
-      if (
-        password !== passwordConfirm
-      ) {
-
-        setMessage(
-          recoveryMessage,
-          "Die beiden Passwörter stimmen nicht überein."
-        );
-
-        return;
-
-      }
-
-
-      setButtonLoading(
-        recoverySubmit,
-        true,
-        "Neues Passwort speichern →"
-      );
-
-
-      const {
-        error
-      } =
-        await supabaseClient.auth
-          .updateUser({
-
-            password:
-              password
-
-          });
-
-
-      setButtonLoading(
-        recoverySubmit,
-        false,
-        "Neues Passwort speichern →"
-      );
-
-
-      if (error) {
-
-        console.error(
-          "Passwort aktualisieren:",
-          error
-        );
-
-        setMessage(
-          recoveryMessage,
-          translateAuthError(error)
-        );
-
-        return;
-
-      }
-
-
-      recoveryForm.reset();
-
-
-      setMessage(
-        recoveryMessage,
-        "Dein Passwort wurde erfolgreich geändert.",
-        true
-      );
-
 
       setTimeout(
-        closeAuth,
-        1200
+        async function(){
+
+          closeAuth();
+
+          currentUser =
+            data.user;
+
+          await loadProfile(
+            currentUser
+          );
+
+          updateUserInterface();
+
+          await loadMemberPage();
+
+        },
+        900
       );
 
-    }
-  );
+    }else{
 
-
-  /* =====================================================
-     ACCOUNT MENU
-  ===================================================== */
-
-  avatarButton.addEventListener(
-    "click",
-    function(event) {
-
-      event.preventDefault();
-      event.stopPropagation();
-
-      accountMenu.classList.toggle(
-        "open"
+      setMessage(
+        registerMessage,
+        "Fast geschafft! Bitte bestätige deine E-Mail-Adresse. Danach kannst du dich anmelden.",
+        true
       );
-
     }
-  );
+  }
+);
 
 
-  document.addEventListener(
-    "click",
-    function(event) {
+/* =====================================================
+   LOGIN
+===================================================== */
 
-      if (
-        !loggedInArea.contains(
-          event.target
-        )
-      ) {
+loginForm.addEventListener(
+  "submit",
+  async function(event){
 
-        accountMenu.classList.remove(
-          "open"
-        );
+    event.preventDefault();
 
-      }
-
-    }
-  );
+    clearMessages();
 
 
-  logoutButton.addEventListener(
-    "click",
-    async function() {
+    const email =
+      document
+        .getElementById("loginEmail")
+        .value
+        .trim()
+        .toLowerCase();
 
-      const {
-        error
-      } =
-        await supabaseClient.auth
-          .signOut();
-
-
-      if (error) {
-
-        console.error(
-          "Logout:",
-          error
-        );
-
-        return;
-
-      }
+    const password =
+      document
+        .getElementById("loginPassword")
+        .value;
 
 
-      accountMenu.classList.remove(
-        "open"
-      );
+    setButtonLoading(
+      loginSubmit,
+      true,
+      "Anmelden →"
+    );
 
-    }
-  );
-
-
-  /* =====================================================
-     AUTH STATE
-  ===================================================== */
-
-  supabaseClient.auth.onAuthStateChange(
-    async function(
-      event,
-      session
-    ) {
-
-      if (
-        event ===
-        "PASSWORD_RECOVERY"
-      ) {
-
-        currentUser =
-          session
-            ? session.user
-            : null;
-
-        updateUserInterface();
-
-        openAuth();
-
-        showRecovery();
-
-        return;
-
-      }
-
-
-      if (
-        session &&
-        session.user
-      ) {
-
-        currentUser =
-          session.user;
-
-        await loadProfile(
-          currentUser
-        );
-
-      } else {
-
-        currentUser =
-          null;
-
-        currentProfile =
-          null;
-
-      }
-
-
-      updateUserInterface();
-
-    }
-  );
-
-
-  /* =====================================================
-     INITIALIZE AUTH
-  ===================================================== */
-
-  async function initializeAuth() {
 
     const {
       data,
       error
     } =
       await supabaseClient.auth
-        .getSession();
+        .signInWithPassword({
+
+          email:email,
+
+          password:password
+        });
 
 
-    if (error) {
+    setButtonLoading(
+      loginSubmit,
+      false,
+      "Anmelden →"
+    );
+
+
+    if(error){
 
       console.error(
-        "Session konnte nicht geladen werden:",
+        "Login:",
         error
       );
 
-      currentUser =
-        null;
-
-      currentProfile =
-        null;
-
-      updateUserInterface();
+      setMessage(
+        loginMessage,
+        translateAuthError(error)
+      );
 
       return;
-
     }
 
 
-    if (
-      data &&
-      data.session &&
-      data.session.user
-    ) {
+    loginForm.reset();
+
+    currentUser =
+      data.user;
+
+    await loadProfile(
+      currentUser
+    );
+
+    updateUserInterface();
+
+    closeAuth();
+
+    await loadMemberPage();
+  }
+);
+
+
+/* =====================================================
+   PASSWORD RESET
+===================================================== */
+
+forgotForm.addEventListener(
+  "submit",
+  async function(event){
+
+    event.preventDefault();
+
+    clearMessages();
+
+
+    const email =
+      document
+        .getElementById("forgotEmail")
+        .value
+        .trim()
+        .toLowerCase();
+
+
+    setButtonLoading(
+      forgotSubmit,
+      true,
+      "Reset-Link senden →"
+    );
+
+
+    const {
+      error
+    } =
+      await supabaseClient.auth
+        .resetPasswordForEmail(
+          email,
+          {
+            redirectTo:
+              window.location.href.split("#")[0]
+          }
+        );
+
+
+    setButtonLoading(
+      forgotSubmit,
+      false,
+      "Reset-Link senden →"
+    );
+
+
+    if(error){
+
+      console.error(
+        "Passwort-Reset:",
+        error
+      );
+
+      setMessage(
+        forgotMessage,
+        translateAuthError(error)
+      );
+
+      return;
+    }
+
+
+    setMessage(
+      forgotMessage,
+      "Wenn ein Konto mit dieser E-Mail existiert, wurde ein Reset-Link versendet.",
+      true
+    );
+  }
+);
+
+
+/* =====================================================
+   PASSWORD RECOVERY
+===================================================== */
+
+recoveryForm.addEventListener(
+  "submit",
+  async function(event){
+
+    event.preventDefault();
+
+    clearMessages();
+
+
+    const password =
+      document
+        .getElementById("newPassword")
+        .value;
+
+    const passwordConfirm =
+      document
+        .getElementById("newPasswordConfirm")
+        .value;
+
+
+    if(password.length < 6){
+
+      setMessage(
+        recoveryMessage,
+        "Das Passwort muss mindestens 6 Zeichen haben."
+      );
+
+      return;
+    }
+
+
+    if(password !== passwordConfirm){
+
+      setMessage(
+        recoveryMessage,
+        "Die beiden Passwörter stimmen nicht überein."
+      );
+
+      return;
+    }
+
+
+    setButtonLoading(
+      recoverySubmit,
+      true,
+      "Neues Passwort speichern →"
+    );
+
+
+    const {
+      error
+    } =
+      await supabaseClient.auth
+        .updateUser({
+          password:password
+        });
+
+
+    setButtonLoading(
+      recoverySubmit,
+      false,
+      "Neues Passwort speichern →"
+    );
+
+
+    if(error){
+
+      console.error(
+        "Passwort aktualisieren:",
+        error
+      );
+
+      setMessage(
+        recoveryMessage,
+        translateAuthError(error)
+      );
+
+      return;
+    }
+
+
+    recoveryForm.reset();
+
+
+    setMessage(
+      recoveryMessage,
+      "Dein Passwort wurde erfolgreich geändert.",
+      true
+    );
+
+
+    setTimeout(
+      closeAuth,
+      1200
+    );
+  }
+);
+
+
+/* =====================================================
+   ACCOUNT MENU
+===================================================== */
+
+avatarButton.addEventListener(
+  "click",
+  function(event){
+
+    event.preventDefault();
+    event.stopPropagation();
+
+    accountMenu.classList.toggle(
+      "open"
+    );
+  }
+);
+
+
+document.addEventListener(
+  "click",
+  function(event){
+
+    if(
+      !loggedInArea.contains(
+        event.target
+      )
+    ){
+
+      accountMenu.classList.remove(
+        "open"
+      );
+    }
+  }
+);
+
+
+/* =====================================================
+   LOGOUT
+===================================================== */
+
+logoutButton.addEventListener(
+  "click",
+  async function(){
+
+    const {
+      error
+    } =
+      await supabaseClient.auth
+        .signOut();
+
+    if(error){
+
+      console.error(
+        "Logout:",
+        error
+      );
+
+      return;
+    }
+
+    accountMenu.classList.remove(
+      "open"
+    );
+
+    currentUser =
+      null;
+
+    currentProfile =
+      null;
+
+    currentMemberPage =
+      null;
+
+    showPublicSite();
+
+    updateUserInterface();
+  }
+);
+
+
+/* =====================================================
+   AUTH STATE
+===================================================== */
+
+supabaseClient.auth.onAuthStateChange(
+  async function(
+    event,
+    session
+  ){
+
+    if(
+      event === "PASSWORD_RECOVERY"
+    ){
 
       currentUser =
-        data.session.user;
+        session
+          ? session.user
+          : null;
+
+      updateUserInterface();
+
+      openAuth();
+
+      showRecovery();
+
+      return;
+    }
+
+
+    if(
+      session &&
+      session.user
+    ){
+
+      currentUser =
+        session.user;
 
       await loadProfile(
         currentUser
       );
 
-    } else {
+      updateUserInterface();
+
+      await loadMemberPage();
+
+    }else{
 
       currentUser =
         null;
@@ -4962,115 +5062,168 @@
       currentProfile =
         null;
 
-    }
+      currentMemberPage =
+        null;
 
+      showPublicSite();
+
+      updateUserInterface();
+    }
+  }
+);
+
+
+/* =====================================================
+   INITIALIZE AUTH
+===================================================== */
+
+async function initializeAuth(){
+
+  const {
+    data,
+    error
+  } =
+    await supabaseClient.auth
+      .getSession();
+
+
+  if(error){
+
+    console.error(
+      "Session konnte nicht geladen werden:",
+      error
+    );
+
+    currentUser =
+      null;
+
+    currentProfile =
+      null;
+
+    showPublicSite();
 
     updateUserInterface();
 
+    return;
   }
 
 
-  /* =====================================================
-     AUTH ERROR TRANSLATION
-  ===================================================== */
+  if(
+    data &&
+    data.session &&
+    data.session.user
+  ){
 
-  function translateAuthError(error) {
+    currentUser =
+      data.session.user;
 
-    if (!error) {
-
-      return (
-        "Es ist ein unbekannter Fehler aufgetreten."
-      );
-
-    }
-
-
-    const message =
-      String(
-        error.message || ""
-      ).toLowerCase();
-
-
-    if (
-      message.includes(
-        "invalid login credentials"
-      )
-    ) {
-
-      return (
-        "E-Mail oder Passwort ist nicht korrekt."
-      );
-
-    }
-
-
-    if (
-      message.includes(
-        "email not confirmed"
-      )
-    ) {
-
-      return (
-        "Bitte bestätige zuerst deine E-Mail-Adresse."
-      );
-
-    }
-
-
-    if (
-      message.includes(
-        "password should be at least"
-      )
-    ) {
-
-      return (
-        "Das Passwort ist zu kurz."
-      );
-
-    }
-
-
-    if (
-      message.includes(
-        "rate limit"
-      )
-    ) {
-
-      return (
-        "Zu viele Versuche. Bitte warte kurz und versuche es erneut."
-      );
-
-    }
-
-
-    if (
-      message.includes(
-        "user already registered"
-      )
-    ) {
-
-      return (
-        "Du hast dich mit dieser Mail bereits registriert. Melde dich stattdessen an."
-      );
-
-    }
-
-
-    return (
-      error.message ||
-      "Es ist ein Fehler aufgetreten. Bitte versuche es erneut."
+    await loadProfile(
+      currentUser
     );
 
+    updateUserInterface();
+
+    await loadMemberPage();
+
+  }else{
+
+    currentUser =
+      null;
+
+    currentProfile =
+      null;
+
+    showPublicSite();
+
+    updateUserInterface();
+  }
+}
+
+
+/* =====================================================
+   AUTH ERROR TRANSLATION
+===================================================== */
+
+function translateAuthError(error){
+
+  if(!error){
+
+    return "Es ist ein unbekannter Fehler aufgetreten.";
   }
 
 
-  /* =====================================================
-     INITIAL START
-  ===================================================== */
+  const message =
+    String(
+      error.message || ""
+    ).toLowerCase();
 
-  updateRegistrationGate();
 
-  initializeAuth();
+  if(
+    message.includes(
+      "invalid login credentials"
+    )
+  ){
+
+    return "E-Mail oder Passwort ist nicht korrekt.";
+  }
+
+
+  if(
+    message.includes(
+      "email not confirmed"
+    )
+  ){
+
+    return "Bitte bestätige zuerst deine E-Mail-Adresse.";
+  }
+
+
+  if(
+    message.includes(
+      "password should be at least"
+    )
+  ){
+
+    return "Das Passwort ist zu kurz.";
+  }
+
+
+  if(
+    message.includes(
+      "rate limit"
+    )
+  ){
+
+    return "Zu viele Versuche. Bitte warte kurz und versuche es erneut.";
+  }
+
+
+  if(
+    message.includes(
+      "user already registered"
+    )
+  ){
+
+    return "Du hast dich mit dieser Mail bereits registriert. Melde dich stattdessen an.";
+  }
+
+
+  return (
+    error.message ||
+    "Es ist ein Fehler aufgetreten. Bitte versuche es erneut."
+  );
+}
+
+
+/* =====================================================
+   INITIAL START
+===================================================== */
+
+updateRegistrationGate();
+
+showPublicSite();
+
+initializeAuth();
 
 </script>
 
