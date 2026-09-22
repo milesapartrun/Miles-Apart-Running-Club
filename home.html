@@ -387,7 +387,11 @@ button,input,textarea,select{font-family:inherit}
   text-transform:uppercase
 }
 
-/* WICHTIG: Pace + längere 100+-Anzeige */
+/* =========================================================
+   BESTZEITEN
+   Gesamtzeit groß, Pace kleiner daneben
+========================================================= */
+
 .best-time-value{
   margin-top:15px;
   color:#fff;
@@ -397,11 +401,23 @@ button,input,textarea,select{font-family:inherit}
   font-weight:900;
   overflow-wrap:anywhere
 }
+
 .best-time-value.empty{
   color:#68716e;
   font-size:16px;
   letter-spacing:-.2px
 }
+
+/* Die Pace ist bewusst kleiner und zurückhaltender */
+.best-time-pace{
+  font-size:14px;
+  line-height:1;
+  font-weight:600;
+  letter-spacing:-.2px;
+  color:#8f9a97;
+  white-space:nowrap
+}
+
 .best-time-date{
   margin-top:9px;
   color:#89928f;
@@ -1441,6 +1457,10 @@ button,input,textarea,select{font-family:inherit}
   .import-button{
     width:100%;
     margin-top:12px
+  }
+
+  .best-time-pace{
+    font-size:13px
   }
 }
 @media(max-width:600px){
@@ -2717,10 +2737,6 @@ function formatDuration(seconds){
     String(secs).padStart(2,"0");
 }
 
-/* =========================================================
-   NEU: PACE PRO KM
-========================================================= */
-
 function formatPace(seconds,distanceKm){
 
   const duration=Number(seconds);
@@ -2738,7 +2754,6 @@ function formatPace(seconds,distanceKm){
   const secondsPerKm=duration/distance;
 
   let minutes=Math.floor(secondsPerKm/60);
-
   let secondsRest=Math.round(secondsPerKm%60);
 
   if(secondsRest===60){
@@ -4283,7 +4298,8 @@ function findBestRunByCategory(runs,category){
 }
 
 /* =========================================================
-   NEU: BESTZEIT DARSTELLUNG MIT PACE
+   BESTZEIT DARSTELLUNG
+   Gesamtzeit groß + Pace kleiner
 ========================================================= */
 
 function renderBestTime(key,run){
@@ -4312,11 +4328,11 @@ function renderBestTime(key,run){
   );
 
   /*
-   * Bei 100+ km wird die tatsächlich gelaufene
-   * Distanz angezeigt.
+   * 100+ km:
    *
-   * Beispiel:
    * 160,0 km · 18:42:15
+   *
+   * Die Pace steht kleiner darunter.
    */
   if(key==="100plus"){
 
@@ -4330,8 +4346,10 @@ function renderBestTime(key,run){
     elements.date.textContent=
       formatDate(run.run_date);
 
-    elements.note.textContent=
+    elements.note.innerHTML=
+      '<span class="best-time-pace">'+
       pace+
+      "</span>"+
       (run.note?" · "+run.note:"");
 
     return;
@@ -4341,11 +4359,15 @@ function renderBestTime(key,run){
    * Normale PB:
    *
    * 18:30 · 03:42 min/km
+   *
+   * Gesamtzeit groß,
+   * Pace kleiner daneben.
    */
-  elements.value.textContent=
+  elements.value.innerHTML=
     duration+
-    " · "+
-    pace;
+    ' <span class="best-time-pace">· '+
+    pace+
+    "</span>";
 
   elements.value.classList.remove("empty");
 
