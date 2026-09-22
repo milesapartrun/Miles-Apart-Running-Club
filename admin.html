@@ -621,6 +621,7 @@ textarea{
 }
 
 @media(max-width:900px){
+
   .admin-stats{
     grid-template-columns:repeat(2,1fr);
   }
@@ -636,6 +637,7 @@ textarea{
 }
 
 @media(max-width:600px){
+
   .admin-top{
     padding:0 15px;
   }
@@ -826,7 +828,7 @@ Alle registrierten Mitglieder deines Running Clubs.
   class="admin-search"
   id="memberSearch"
   type="search"
-  placeholder="Name oder E-Mail suchen …"
+  placeholder="Name oder Benutzername suchen …"
 >
 
 <button
@@ -972,7 +974,7 @@ Abbrechen
   id="confirmActionButton"
   type="button"
 >
-Ja, löschen
+Ja, ausführen
 </button>
 
 </div>
@@ -983,14 +985,16 @@ Ja, löschen
 
 <script>
 
-const SUPABASE_URL="https://orbrkdrsihsacsnprewf.supabase.co";
+const SUPABASE_URL=
+  "https://orbrkdrsihsacsnprewf.supabase.co";
 
 const SUPABASE_PUBLISHABLE_KEY=
   "sb_publishable_wc3w2fSuj8ItwiF6XBoQgw_HeW5_rNW";
 
 const{
   createClient
-}=window.supabase;
+}=
+  window.supabase;
 
 const supabaseClient=
   createClient(
@@ -998,7 +1002,9 @@ const supabaseClient=
     SUPABASE_PUBLISHABLE_KEY
   );
 
-const RUN_PHOTO_BUCKET="run-photos";
+const RUN_PHOTO_BUCKET=
+  "run-photos";
+
 
 const adminStatus=
   document.getElementById(
@@ -1105,11 +1111,16 @@ const logoutButton=
     "logoutButton"
   );
 
+
 let currentUser=null;
 let members=[];
 let selectedMember=null;
-
 let pendingAction=null;
+
+
+/* =========================
+   HILFSFUNKTIONEN
+========================= */
 
 function showMessage(
   text,
@@ -1130,6 +1141,7 @@ function showMessage(
   );
 }
 
+
 function clearMessage(){
 
   showMessage(
@@ -1138,29 +1150,39 @@ function clearMessage(){
   );
 }
 
+
 function formatNumber(value){
 
-  return Number(value||0)
-    .toLocaleString(
-      "de-DE",
-      {
-        minimumFractionDigits:1,
-        maximumFractionDigits:1
-      }
-    );
+  return Number(
+    value||0
+  ).toLocaleString(
+    "de-DE",
+    {
+      minimumFractionDigits:1,
+      maximumFractionDigits:1
+    }
+  );
 }
 
-function formatDate(dateString){
+
+function formatDate(
+  dateString
+){
 
   if(!dateString)
     return"—";
 
   const date=
     new Date(
-      dateString+"T12:00:00"
+      dateString+
+      "T12:00:00"
     );
 
-  if(Number.isNaN(date.getTime()))
+  if(
+    Number.isNaN(
+      date.getTime()
+    )
+  )
     return"—";
 
   return date.toLocaleDateString(
@@ -1173,7 +1195,10 @@ function formatDate(dateString){
   );
 }
 
-function formatDuration(seconds){
+
+function formatDuration(
+  seconds
+){
 
   if(
     seconds===null||
@@ -1187,7 +1212,9 @@ function formatDuration(seconds){
       Number(seconds)
     );
 
-  if(!Number.isFinite(total))
+  if(
+    !Number.isFinite(total)
+  )
     return"—";
 
   const hours=
@@ -1206,57 +1233,30 @@ function formatDuration(seconds){
   if(hours>0){
 
     return(
-      String(hours).padStart(2,"0")+
+      String(hours)
+        .padStart(2,"0")+
       ":"+
-      String(minutes).padStart(2,"0")+
+      String(minutes)
+        .padStart(2,"0")+
       ":"+
-      String(secs).padStart(2,"0")
+      String(secs)
+        .padStart(2,"0")
     );
   }
 
   return(
-    String(minutes).padStart(2,"0")+
+    String(minutes)
+      .padStart(2,"0")+
     ":"+
-    String(secs).padStart(2,"0")
+    String(secs)
+      .padStart(2,"0")
   );
 }
 
-function getMemberName(profile,user){
 
-  if(
-    profile&&
-    profile.display_name
-  )
-    return String(
-      profile.display_name
-    ).trim();
-
-  if(
-    user&&
-    user.user_metadata&&
-    user.user_metadata.display_name
-  )
-    return String(
-      user.user_metadata.display_name
-    ).trim();
-
-  if(
-    user&&
-    user.user_metadata&&
-    user.user_metadata.name
-  )
-    return String(
-      user.user_metadata.name
-    ).trim();
-
-  if(user&&user.email)
-    return user.email
-      .split("@")[0];
-
-  return"Runner";
-}
-
-function getBestCategoryLabel(category){
+function getBestCategoryLabel(
+  category
+){
 
   const labels={
     "5k":"5 km",
@@ -1270,6 +1270,11 @@ function getBestCategoryLabel(category){
 
   return labels[category]||"";
 }
+
+
+/* =========================
+   AUTH / ADMIN
+========================= */
 
 async function checkAdmin(){
 
@@ -1317,6 +1322,7 @@ async function checkAdmin(){
   return !!adminRow;
 }
 
+
 async function getCurrentSession(){
 
   const{
@@ -1336,6 +1342,11 @@ async function getCurrentSession(){
       :null;
 }
 
+
+/* =========================
+   DATEN LADEN
+========================= */
+
 async function loadProfiles(){
 
   const{
@@ -1353,6 +1364,7 @@ async function loadProfiles(){
 
   return data||[];
 }
+
 
 async function loadAllRuns(){
 
@@ -1388,13 +1400,16 @@ async function loadAllRuns(){
         )
         .range(
           from,
-          from+PAGE_SIZE-1
+          from+
+          PAGE_SIZE-
+          1
         );
 
     if(error)
       throw error;
 
-    const page=data||[];
+    const page=
+      data||[];
 
     all.push(
       ...page
@@ -1406,11 +1421,13 @@ async function loadAllRuns(){
     )
       break;
 
-    from+=PAGE_SIZE;
+    from+=
+      PAGE_SIZE;
   }
 
   return all;
 }
+
 
 async function loadMembers(){
 
@@ -1434,88 +1451,127 @@ async function loadMembers(){
 
   const runStats={};
 
-  runs.forEach(run=>{
+  runs.forEach(
+    run=>{
 
-    if(!runStats[run.user_id]){
+      if(
+        !runStats[
+          run.user_id
+        ]
+      ){
 
-      runStats[run.user_id]={
-        count:0,
-        km:0
-      };
+        runStats[
+          run.user_id
+        ]={
+          count:0,
+          km:0
+        };
+      }
+
+      runStats[
+        run.user_id
+      ].count++;
+
+      runStats[
+        run.user_id
+      ].km+=
+        Number(
+          run.distance_km||
+          0
+        );
     }
+  );
 
-    runStats[run.user_id].count++;
-
-    runStats[run.user_id].km+=
-      Number(
-        run.distance_km||0
-      );
-  });
 
   members=
-    profiles.map(profile=>({
+    profiles.map(
+      profile=>({
 
-      id:profile.id,
+        id:
+          profile.id,
 
-      name:
-        profile.display_name||
-        profile.username||
-        "Runner",
+        name:
+          profile.display_name||
+          profile.username||
+          "Runner",
 
-      username:
-        profile.username||"",
+        username:
+          profile.username||
+          "",
 
-      is_blocked:
-        !!profile.is_blocked,
+        is_blocked:
+          !!profile.is_blocked,
 
-      blocked_at:
-        profile.blocked_at||null,
+        blocked_at:
+          profile.blocked_at||
+          null,
 
-      blocked_reason:
-        profile.blocked_reason||null,
+        blocked_reason:
+          profile.blocked_reason||
+          null,
 
-      run_count:
-        runStats[profile.id]
-          ?runStats[profile.id].count
-          :0,
+        run_count:
+          runStats[
+            profile.id
+          ]
+            ?runStats[
+              profile.id
+            ].count
+            :0,
 
-      km:
-        runStats[profile.id]
-          ?runStats[profile.id].km
-          :0
-    }));
+        km:
+          runStats[
+            profile.id
+          ]
+            ?runStats[
+              profile.id
+            ].km
+            :0
+      })
+    );
+
 
   const totalKm=
     runs.reduce(
-      (sum,run)=>
+      (
+        sum,
+        run
+      )=>
         sum+
         Number(
-          run.distance_km||0
+          run.distance_km||
+          0
         ),
       0
     );
 
+
   memberCount.textContent=
-    members.length.toLocaleString(
-      "de-DE"
-    );
+    members.length
+      .toLocaleString(
+        "de-DE"
+      );
 
   blockedCount.textContent=
     members.filter(
-      member=>member.is_blocked
-    ).length.toLocaleString(
-      "de-DE"
-    );
+      member=>
+        member.is_blocked
+    ).length
+      .toLocaleString(
+        "de-DE"
+      );
 
   runCount.textContent=
-    runs.length.toLocaleString(
-      "de-DE"
-    );
+    runs.length
+      .toLocaleString(
+        "de-DE"
+      );
 
   kmCount.textContent=
     formatNumber(
       totalKm
     );
+
 
   renderMembers();
 
@@ -1525,6 +1581,11 @@ async function loadMembers(){
   };
 }
 
+
+/* =========================
+   MITGLIEDER TABELLE
+========================= */
+
 function renderMembers(){
 
   const search=
@@ -1533,31 +1594,40 @@ function renderMembers(){
       .toLowerCase();
 
   const filtered=
-    members.filter(member=>{
+    members.filter(
+      member=>{
 
-      if(!search)
-        return true;
+        if(!search)
+          return true;
 
-      return(
-        String(
-          member.name||""
-        )
-          .toLowerCase()
-          .includes(search)||
-        String(
-          member.username||""
-        )
-          .toLowerCase()
-          .includes(search)||
-        String(
-          member.id||""
-        )
-          .toLowerCase()
-          .includes(search)
-      );
-    });
+        return(
+          String(
+            member.name||
+            ""
+          )
+            .toLowerCase()
+            .includes(search)
+          ||
+          String(
+            member.username||
+            ""
+          )
+            .toLowerCase()
+            .includes(search)
+          ||
+          String(
+            member.id||
+            ""
+          )
+            .toLowerCase()
+            .includes(search)
+        );
+      }
+    );
+
 
   membersTableBody.innerHTML="";
+
 
   if(!filtered.length){
 
@@ -1573,6 +1643,7 @@ function renderMembers(){
     return;
   }
 
+
   filtered.forEach(
     member=>{
 
@@ -1581,10 +1652,12 @@ function renderMembers(){
           "tr"
         );
 
+
       const memberCell=
         document.createElement(
           "td"
         );
+
 
       const name=
         document.createElement(
@@ -1597,6 +1670,7 @@ function renderMembers(){
       name.textContent=
         member.name;
 
+
       const username=
         document.createElement(
           "div"
@@ -1607,8 +1681,10 @@ function renderMembers(){
 
       username.textContent=
         member.username
-          ?"@"+member.username
+          ?"@"+
+           member.username
           :"";
+
 
       const id=
         document.createElement(
@@ -1621,18 +1697,24 @@ function renderMembers(){
       id.textContent=
         member.id;
 
+
       memberCell.appendChild(
         name
       );
 
-      if(member.username)
+      if(
+        member.username
+      ){
+
         memberCell.appendChild(
           username
         );
+      }
 
       memberCell.appendChild(
         id
       );
+
 
       const joinedCell=
         document.createElement(
@@ -1642,6 +1724,7 @@ function renderMembers(){
       joinedCell.textContent=
         "—";
 
+
       const runsCell=
         document.createElement(
           "td"
@@ -1649,6 +1732,7 @@ function renderMembers(){
 
       runsCell.textContent=
         member.run_count;
+
 
       const kmCell=
         document.createElement(
@@ -1661,10 +1745,12 @@ function renderMembers(){
         )+
         " km";
 
+
       const statusCell=
         document.createElement(
           "td"
         );
+
 
       const status=
         document.createElement(
@@ -1684,14 +1770,17 @@ function renderMembers(){
           ?"Gesperrt"
           :"Aktiv";
 
+
       statusCell.appendChild(
         status
       );
+
 
       const actionsCell=
         document.createElement(
           "td"
         );
+
 
       const actions=
         document.createElement(
@@ -1701,12 +1790,14 @@ function renderMembers(){
       actions.className=
         "member-actions";
 
+
       const runsButton=
         document.createElement(
           "button"
         );
 
-      runsButton.type="button";
+      runsButton.type=
+        "button";
 
       runsButton.className=
         "member-button";
@@ -1716,19 +1807,23 @@ function renderMembers(){
 
       runsButton.addEventListener(
         "click",
-        ()=>openMemberRuns(member)
+        ()=>openMemberRuns(
+          member
+        )
       );
 
       actions.appendChild(
         runsButton
       );
 
+
       const blockButton=
         document.createElement(
           "button"
         );
 
-      blockButton.type="button";
+      blockButton.type=
+        "button";
 
       blockButton.className=
         "member-button "+
@@ -1743,11 +1838,15 @@ function renderMembers(){
           ?"Entsperren"
           :"Sperren";
 
+
       blockButton.addEventListener(
         "click",
         ()=>{
 
-          if(member.is_blocked)
+          if(
+            member.is_blocked
+          ){
+
             openConfirm(
               "Mitglied entsperren?",
               member.name+
@@ -1755,33 +1854,40 @@ function renderMembers(){
               "unblock",
               member
             );
-          else
+
+          }else{
+
             openConfirm(
               "Mitglied sperren?",
               member.name+
-              " wird als gesperrt markiert.",
+              " wird für den Login gesperrt.",
               "block",
               member
             );
+          }
         }
       );
+
 
       actions.appendChild(
         blockButton
       );
+
 
       const deleteButton=
         document.createElement(
           "button"
         );
 
-      deleteButton.type="button";
+      deleteButton.type=
+        "button";
 
       deleteButton.className=
         "member-button delete";
 
       deleteButton.textContent=
         "Löschen";
+
 
       deleteButton.addEventListener(
         "click",
@@ -1794,13 +1900,16 @@ function renderMembers(){
         )
       );
 
+
       actions.appendChild(
         deleteButton
       );
 
+
       actionsCell.appendChild(
         actions
       );
+
 
       row.appendChild(
         memberCell
@@ -1826,6 +1935,7 @@ function renderMembers(){
         actionsCell
       );
 
+
       membersTableBody.appendChild(
         row
       );
@@ -1833,12 +1943,22 @@ function renderMembers(){
   );
 }
 
-async function openMemberRuns(member){
 
-  selectedMember=member;
+/* =========================
+   LÄUFE EINES MITGLIEDS
+========================= */
+
+async function openMemberRuns(
+  member
+){
+
+  selectedMember=
+    member;
+
 
   selectedMemberName.textContent=
     member.name;
+
 
   selectedMemberMeta.textContent=
     member.run_count+
@@ -1853,6 +1973,7 @@ async function openMemberRuns(member){
     )+
     " km";
 
+
   memberRunsTableBody.innerHTML=
     `<tr>
       <td colspan="7">
@@ -1862,9 +1983,11 @@ async function openMemberRuns(member){
       </td>
     </tr>`;
 
+
   runsCard.classList.add(
     "open"
   );
+
 
   try{
 
@@ -1881,6 +2004,14 @@ async function openMemberRuns(member){
           "user_id",
           member.id
         )
+        .gte(
+          "run_date",
+          "2026-01-01"
+        )
+        .lte(
+          "run_date",
+          "2026-12-31"
+        )
         .order(
           "run_date",
           {
@@ -1888,17 +2019,22 @@ async function openMemberRuns(member){
           }
         );
 
+
     if(error)
       throw error;
 
+
     renderMemberRuns(
-      data||[]
+      data||
+      []
     );
+
 
     runsCard.scrollIntoView({
       behavior:"smooth",
       block:"start"
     });
+
 
   }catch(error){
 
@@ -1906,6 +2042,7 @@ async function openMemberRuns(member){
       "Member Runs:",
       error
     );
+
 
     memberRunsTableBody.innerHTML=
       `<tr>
@@ -1918,9 +2055,13 @@ async function openMemberRuns(member){
   }
 }
 
-function renderMemberRuns(runs){
+
+function renderMemberRuns(
+  runs
+){
 
   memberRunsTableBody.innerHTML="";
+
 
   if(!runs.length){
 
@@ -1928,7 +2069,7 @@ function renderMemberRuns(runs){
       `<tr>
         <td colspan="7">
           <div class="empty-state">
-            Dieses Mitglied hat noch keine Läufe.
+            Dieses Mitglied hat 2026 noch keine Läufe.
           </div>
         </td>
       </tr>`;
@@ -1936,154 +2077,175 @@ function renderMemberRuns(runs){
     return;
   }
 
-  runs.forEach(run=>{
 
-    const row=
-      document.createElement(
-        "tr"
-      );
+  runs.forEach(
+    run=>{
 
-    const date=
-      document.createElement(
-        "td"
-      );
+      const row=
+        document.createElement(
+          "tr"
+        );
 
-    date.textContent=
-      formatDate(
-        run.run_date
-      );
 
-    const distance=
-      document.createElement(
-        "td"
-      );
+      const date=
+        document.createElement(
+          "td"
+        );
 
-    distance.textContent=
-      formatNumber(
-        run.distance_km
-      )+
-      " km";
-
-    const duration=
-      document.createElement(
-        "td"
-      );
-
-    duration.textContent=
-      formatDuration(
-        run.duration_seconds
-      );
-
-    const type=
-      document.createElement(
-        "td"
-      );
-
-    type.textContent=
-      run.run_type||
-      "normal";
-
-    const photo=
-      document.createElement(
-        "td"
-      );
-
-    photo.className=
-      "run-photo";
-
-    photo.textContent=
-      run.photo_path
-        ?"📷 Foto"
-        :"Kein Foto";
-
-    const pb=
-      document.createElement(
-        "td"
-      );
-
-    pb.className=
-      "run-pb";
-
-    pb.textContent=
-      run.best_time_category
-        ?"✓ "+
-         getBestCategoryLabel(
-           run.best_time_category
-         )
-        :"—";
-
-    const action=
-      document.createElement(
-        "td"
-      );
-
-    const deleteButton=
-      document.createElement(
-        "button"
-      );
-
-    deleteButton.type="button";
-
-    deleteButton.className=
-      "delete-run-button";
-
-    deleteButton.textContent=
-      "Löschen";
-
-    deleteButton.addEventListener(
-      "click",
-      ()=>openConfirm(
-        "Lauf löschen?",
+      date.textContent=
         formatDate(
           run.run_date
-        )+
-        " · "+
+        );
+
+
+      const distance=
+        document.createElement(
+          "td"
+        );
+
+      distance.textContent=
         formatNumber(
           run.distance_km
         )+
-        " km wird dauerhaft gelöscht.",
-        "deleteRun",
-        run
-      )
-    );
+        " km";
 
-    action.appendChild(
-      deleteButton
-    );
 
-    row.appendChild(
-      date
-    );
+      const duration=
+        document.createElement(
+          "td"
+        );
 
-    row.appendChild(
-      distance
-    );
+      duration.textContent=
+        formatDuration(
+          run.duration_seconds
+        );
 
-    row.appendChild(
-      duration
-    );
 
-    row.appendChild(
-      type
-    );
+      const type=
+        document.createElement(
+          "td"
+        );
 
-    row.appendChild(
-      photo
-    );
+      type.textContent=
+        run.run_type||
+        "normal";
 
-    row.appendChild(
-      pb
-    );
 
-    row.appendChild(
-      action
-    );
+      const photo=
+        document.createElement(
+          "td"
+        );
 
-    memberRunsTableBody.appendChild(
-      row
-    );
-  });
+      photo.className=
+        "run-photo";
+
+      photo.textContent=
+        run.photo_path
+          ?"📷 Foto"
+          :"Kein Foto";
+
+
+      const pb=
+        document.createElement(
+          "td"
+        );
+
+      pb.className=
+        "run-pb";
+
+      pb.textContent=
+        run.best_time_category
+          ?"✓ "+
+           getBestCategoryLabel(
+             run.best_time_category
+           )
+          :"—";
+
+
+      const action=
+        document.createElement(
+          "td"
+        );
+
+
+      const deleteButton=
+        document.createElement(
+          "button"
+        );
+
+      deleteButton.type=
+        "button";
+
+      deleteButton.className=
+        "delete-run-button";
+
+      deleteButton.textContent=
+        "Löschen";
+
+
+      deleteButton.addEventListener(
+        "click",
+        ()=>openConfirm(
+          "Lauf löschen?",
+          formatDate(
+            run.run_date
+          )+
+          " · "+
+          formatNumber(
+            run.distance_km
+          )+
+          " km wird dauerhaft gelöscht.",
+          "deleteRun",
+          run
+        )
+      );
+
+
+      action.appendChild(
+        deleteButton
+      );
+
+
+      row.appendChild(
+        date
+      );
+
+      row.appendChild(
+        distance
+      );
+
+      row.appendChild(
+        duration
+      );
+
+      row.appendChild(
+        type
+      );
+
+      row.appendChild(
+        photo
+      );
+
+      row.appendChild(
+        pb
+      );
+
+      row.appendChild(
+        action
+      );
+
+
+      memberRunsTableBody.appendChild(
+        row
+      );
+    }
+  );
 }
+
+
+/* =========================
+   BESTÄTIGUNGSDIALOG
+========================= */
 
 function openConfirm(
   title,
@@ -2097,11 +2259,48 @@ function openConfirm(
     item
   };
 
+
   confirmTitle.textContent=
     title;
 
   confirmText.textContent=
     text;
+
+
+  if(
+    action==="block"
+  ){
+
+    confirmActionButton.textContent=
+      "Ja, sperren";
+
+  }else if(
+    action==="unblock"
+  ){
+
+    confirmActionButton.textContent=
+      "Ja, entsperren";
+
+  }else if(
+    action==="deleteRun"
+  ){
+
+    confirmActionButton.textContent=
+      "Ja, löschen";
+
+  }else if(
+    action==="deleteUser"
+  ){
+
+    confirmActionButton.textContent=
+      "Ja, löschen";
+
+  }else{
+
+    confirmActionButton.textContent=
+      "Ja, ausführen";
+  }
+
 
   confirmOverlay.classList.add(
     "open"
@@ -2111,21 +2310,314 @@ function openConfirm(
     "hidden";
 }
 
+
 function closeConfirm(){
 
   confirmOverlay.classList.remove(
     "open"
   );
 
-  pendingAction=null;
+  pendingAction=
+    null;
 
-  document.body.style.overflow="";
+  document.body.style.overflow=
+    "";
 }
+
+
+/* =========================
+   EDGE FUNCTION
+========================= */
+
+async function callAdminAction(
+  payload
+){
+
+  const{
+    data:{
+      session
+    },
+    error:sessionError
+  }=
+    await supabaseClient
+      .auth
+      .getSession();
+
+
+  if(sessionError)
+    throw sessionError;
+
+
+  if(!session)
+    throw new Error(
+      "Du bist nicht mehr angemeldet."
+    );
+
+
+  const response=
+    await fetch(
+      SUPABASE_URL+
+      "/functions/v1/admin-actions",
+      {
+        method:"POST",
+
+        headers:{
+          "Content-Type":
+            "application/json",
+
+          "Authorization":
+            "Bearer "+
+            session.access_token,
+
+          "apikey":
+            SUPABASE_PUBLISHABLE_KEY
+        },
+
+        body:
+          JSON.stringify(
+            payload
+          )
+      }
+    );
+
+
+  let result=null;
+
+
+  try{
+
+    result=
+      await response.json();
+
+  }catch{
+
+    result=null;
+  }
+
+
+  if(
+    !response.ok
+  ){
+
+    throw new Error(
+      result&&
+      result.error
+        ?result.error
+        :"Die Admin-Aktion konnte nicht durchgeführt werden."
+    );
+  }
+
+
+  return result;
+}
+
+
+/* =========================
+   SPERREN / ENTSPERREN
+========================= */
+
+async function updateBlockStatus(
+  member,
+  blocked
+){
+
+  if(
+    currentUser&&
+    member.id===
+    currentUser.id&&
+    blocked
+  ){
+
+    throw new Error(
+      "Du kannst deinen eigenen Admin-Account nicht sperren."
+    );
+  }
+
+
+  await callAdminAction({
+
+    action:
+      blocked
+        ?"block_user"
+        :"unblock_user",
+
+    user_id:
+      member.id
+  });
+
+
+  await loadMembers();
+
+
+  if(
+    selectedMember&&
+    selectedMember.id===
+    member.id
+  ){
+
+    selectedMember=
+      members.find(
+        item=>
+          item.id===
+          member.id
+      )||
+      null;
+  }
+
+
+  showMessage(
+    blocked
+      ?"Mitglied wurde gesperrt."
+      :"Mitglied wurde entsperrt."
+  );
+
+
+  setTimeout(
+    clearMessage,
+    2200
+  );
+}
+
+
+/* =========================
+   LAUF LÖSCHEN
+========================= */
+
+async function deleteMemberRun(
+  run
+){
+
+  await callAdminAction({
+
+    action:
+      "delete_run",
+
+    run_id:
+      run.id
+  });
+
+
+  await loadMembers();
+
+
+  if(
+    selectedMember
+  ){
+
+    const updatedMember=
+      members.find(
+        member=>
+          member.id===
+          selectedMember.id
+      );
+
+
+    if(updatedMember){
+
+      selectedMember=
+        updatedMember;
+
+      await openMemberRuns(
+        updatedMember
+      );
+
+    }else{
+
+      runsCard.classList.remove(
+        "open"
+      );
+
+      selectedMember=
+        null;
+    }
+
+  }else{
+
+    await loadMembers();
+  }
+
+
+  showMessage(
+    "Der Lauf wurde gelöscht."
+  );
+
+
+  setTimeout(
+    clearMessage,
+    2200
+  );
+}
+
+
+/* =========================
+   MITGLIED LÖSCHEN
+========================= */
+
+async function deleteMember(
+  member
+){
+
+  if(
+    currentUser&&
+    member.id===
+    currentUser.id
+  ){
+
+    throw new Error(
+      "Du kannst deinen eigenen Admin-Account nicht löschen."
+    );
+  }
+
+
+  await callAdminAction({
+
+    action:
+      "delete_user",
+
+    user_id:
+      member.id
+  });
+
+
+  if(
+    selectedMember&&
+    selectedMember.id===
+    member.id
+  ){
+
+    selectedMember=
+      null;
+
+    runsCard.classList.remove(
+      "open"
+    );
+  }
+
+
+  await loadMembers();
+
+
+  showMessage(
+    "Das Mitglied wurde vollständig gelöscht."
+  );
+
+
+  setTimeout(
+    clearMessage,
+    2200
+  );
+}
+
+
+/* =========================
+   BESTÄTIGTE AKTION AUSFÜHREN
+========================= */
 
 async function executePendingAction(){
 
   if(!pendingAction)
     return;
+
 
   const{
     action,
@@ -2133,38 +2625,63 @@ async function executePendingAction(){
   }=
     pendingAction;
 
-  confirmActionButton.disabled=true;
 
-  confirmCancelButton.disabled=true;
+  confirmActionButton.disabled=
+    true;
+
+  confirmCancelButton.disabled=
+    true;
 
   confirmActionButton.textContent=
     "Bitte warten …";
 
+
   try{
 
-    if(action==="block")
+    if(
+      action==="block"
+    ){
+
       await updateBlockStatus(
         item,
         true
       );
+    }
 
-    if(action==="unblock")
+
+    if(
+      action==="unblock"
+    ){
+
       await updateBlockStatus(
         item,
         false
       );
+    }
 
-    if(action==="deleteRun")
+
+    if(
+      action==="deleteRun"
+    ){
+
       await deleteMemberRun(
         item
       );
+    }
 
-    if(action==="deleteUser")
+
+    if(
+      action==="deleteUser"
+    ){
+
       await deleteMember(
         item
       );
+    }
+
 
     closeConfirm();
+
 
   }catch(error){
 
@@ -2173,54 +2690,42 @@ async function executePendingAction(){
       error
     );
 
+
     closeConfirm();
 
+
     showMessage(
-      error&&error.message
+      error&&
+      error.message
         ?error.message
         :"Die Aktion konnte nicht durchgeführt werden.",
       true
     );
 
+
   }finally{
 
-    confirmActionButton.disabled=false;
+    confirmActionButton.disabled=
+      false;
 
-    confirmCancelButton.disabled=false;
+    confirmCancelButton.disabled=
+      false;
 
     confirmActionButton.textContent=
-      "Ja, löschen";
+      "Ja, ausführen";
   }
 }
 
-async function updateBlockStatus(
-  member,
-  blocked
-){
 
-  throw new Error(
-    "Die Sperrfunktion wird im nächsten Schritt sicher aktiviert."
-  );
-}
-
-async function deleteMemberRun(run){
-
-  throw new Error(
-    "Das Admin-Löschen von Läufen wird im nächsten Schritt sicher aktiviert."
-  );
-}
-
-async function deleteMember(member){
-
-  throw new Error(
-    "Das vollständige Löschen eines Mitglieds wird im nächsten Schritt sicher aktiviert."
-  );
-}
+/* =========================
+   EVENTS
+========================= */
 
 memberSearch.addEventListener(
   "input",
   renderMembers
 );
+
 
 refreshButton.addEventListener(
   "click",
@@ -2228,23 +2733,28 @@ refreshButton.addEventListener(
 
     clearMessage();
 
-    refreshButton.disabled=true;
+    refreshButton.disabled=
+      true;
 
     refreshButton.textContent=
       "Lädt …";
+
 
     try{
 
       await loadMembers();
 
+
       showMessage(
         "Daten wurden aktualisiert."
       );
+
 
       setTimeout(
         clearMessage,
         1800
       );
+
 
     }catch(error){
 
@@ -2253,20 +2763,24 @@ refreshButton.addEventListener(
         error
       );
 
+
       showMessage(
         "Die Daten konnten nicht aktualisiert werden.",
         true
       );
 
+
     }finally{
 
-      refreshButton.disabled=false;
+      refreshButton.disabled=
+        false;
 
       refreshButton.textContent=
         "↻ Aktualisieren";
     }
   }
 );
+
 
 closeRunsButton.addEventListener(
   "click",
@@ -2276,19 +2790,23 @@ closeRunsButton.addEventListener(
       "open"
     );
 
-    selectedMember=null;
+    selectedMember=
+      null;
   }
 );
+
 
 confirmCancelButton.addEventListener(
   "click",
   closeConfirm
 );
 
+
 confirmActionButton.addEventListener(
   "click",
   executePendingAction
 );
+
 
 confirmOverlay.addEventListener(
   "click",
@@ -2297,10 +2815,13 @@ confirmOverlay.addEventListener(
     if(
       event.target===
       confirmOverlay
-    )
+    ){
+
       closeConfirm();
+    }
   }
 );
+
 
 homeButton.addEventListener(
   "click",
@@ -2311,16 +2832,20 @@ homeButton.addEventListener(
   }
 );
 
+
 logoutButton.addEventListener(
   "click",
   async function(){
 
-    await supabaseClient.auth.signOut();
+    await supabaseClient
+      .auth
+      .signOut();
 
     window.location.href=
       "home.html";
   }
 );
+
 
 document.addEventListener(
   "keydown",
@@ -2331,19 +2856,28 @@ document.addEventListener(
       confirmOverlay.classList.contains(
         "open"
       )
-    )
+    ){
+
       closeConfirm();
+    }
   }
 );
+
+
+/* =========================
+   INITIALISIERUNG
+========================= */
 
 async function initialize(){
 
   adminStatus.textContent=
     "Prüfe …";
 
+
   try{
 
     await getCurrentSession();
+
 
     if(!currentUser){
 
@@ -2353,18 +2887,22 @@ async function initialize(){
       return;
     }
 
+
     const isAdmin=
       await checkAdmin();
+
 
     if(!isAdmin){
 
       adminStatus.textContent=
         "Kein Zugriff";
 
+
       showMessage(
         "Du bist nicht als Administrator freigeschaltet.",
         true
       );
+
 
       setTimeout(
         function(){
@@ -2376,13 +2914,17 @@ async function initialize(){
         1600
       );
 
+
       return;
     }
+
 
     adminStatus.textContent=
       "Administrator";
 
+
     await loadMembers();
+
 
   }catch(error){
 
@@ -2391,8 +2933,10 @@ async function initialize(){
       error
     );
 
+
     adminStatus.textContent=
       "Fehler";
+
 
     showMessage(
       "Die Admin-Seite konnte nicht geladen werden.",
@@ -2401,8 +2945,12 @@ async function initialize(){
   }
 }
 
+
 supabaseClient.auth.onAuthStateChange(
-  function(event,session){
+  function(
+    event,
+    session
+  ){
 
     if(
       event==="SIGNED_OUT"||
@@ -2414,6 +2962,7 @@ supabaseClient.auth.onAuthStateChange(
     }
   }
 );
+
 
 initialize();
 
