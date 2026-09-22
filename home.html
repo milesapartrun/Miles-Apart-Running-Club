@@ -1061,6 +1061,29 @@
       color: var(--miles-blue-dark);
     }
 
+    .import-options {
+      margin-top: 14px;
+      padding: 13px 15px;
+      background: #f2f8f7;
+      border: 1px solid #dce8e5;
+    }
+
+    .import-check {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      cursor: pointer;
+      color: #4e5956;
+      font-size: 11px;
+      line-height: 1.45;
+      font-weight: 700;
+    }
+
+    .import-check input {
+      margin-top: 2px;
+      accent-color: var(--miles-blue);
+    }
+
     .import-preview {
       display: none;
       margin-top: 18px;
@@ -1135,6 +1158,21 @@
     }
 
     .import-error-box.show {
+      display: block;
+    }
+
+    .import-info-box {
+      display: none;
+      margin: 15px;
+      padding: 13px 15px;
+      background: #f1fbfc;
+      border: 1px solid #ccecef;
+      color: #4d696c;
+      font-size: 11px;
+      line-height: 1.55;
+    }
+
+    .import-info-box.show {
       display: block;
     }
 
@@ -2445,178 +2483,52 @@
           <div class="best-times-grid">
 
             <div class="best-time-row">
-
-              <div class="best-time-distance">
-                5 Kilometer
-              </div>
-
-              <div
-                class="best-time-value"
-                id="best5k"
-              >
-                Noch kein Lauf
-              </div>
-
-              <div
-                class="best-time-date"
-                id="best5kDate"
-              ></div>
-
-              <div
-                class="best-time-note"
-                id="best5kNote"
-              ></div>
-
+              <div class="best-time-distance">5 Kilometer</div>
+              <div class="best-time-value" id="best5k">Noch kein Lauf</div>
+              <div class="best-time-date" id="best5kDate"></div>
+              <div class="best-time-note" id="best5kNote"></div>
             </div>
 
             <div class="best-time-row">
-
-              <div class="best-time-distance">
-                10 Kilometer
-              </div>
-
-              <div
-                class="best-time-value"
-                id="best10k"
-              >
-                Noch kein Lauf
-              </div>
-
-              <div
-                class="best-time-date"
-                id="best10kDate"
-              ></div>
-
-              <div
-                class="best-time-note"
-                id="best10kNote"
-              ></div>
-
+              <div class="best-time-distance">10 Kilometer</div>
+              <div class="best-time-value" id="best10k">Noch kein Lauf</div>
+              <div class="best-time-date" id="best10kDate"></div>
+              <div class="best-time-note" id="best10kNote"></div>
             </div>
 
             <div class="best-time-row">
-
-              <div class="best-time-distance">
-                Halbmarathon
-              </div>
-
-              <div
-                class="best-time-value"
-                id="bestHalf"
-              >
-                Noch kein Lauf
-              </div>
-
-              <div
-                class="best-time-date"
-                id="bestHalfDate"
-              ></div>
-
-              <div
-                class="best-time-note"
-                id="bestHalfNote"
-              ></div>
-
+              <div class="best-time-distance">Halbmarathon</div>
+              <div class="best-time-value" id="bestHalf">Noch kein Lauf</div>
+              <div class="best-time-date" id="bestHalfDate"></div>
+              <div class="best-time-note" id="bestHalfNote"></div>
             </div>
 
             <div class="best-time-row">
-
-              <div class="best-time-distance">
-                Marathon
-              </div>
-
-              <div
-                class="best-time-value"
-                id="bestMarathon"
-              >
-                Noch kein Lauf
-              </div>
-
-              <div
-                class="best-time-date"
-                id="bestMarathonDate"
-              ></div>
-
-              <div
-                class="best-time-note"
-                id="bestMarathonNote"
-              ></div>
-
+              <div class="best-time-distance">Marathon</div>
+              <div class="best-time-value" id="bestMarathon">Noch kein Lauf</div>
+              <div class="best-time-date" id="bestMarathonDate"></div>
+              <div class="best-time-note" id="bestMarathonNote"></div>
             </div>
 
             <div class="best-time-row">
-
-              <div class="best-time-distance">
-                50 Kilometer
-              </div>
-
-              <div
-                class="best-time-value"
-                id="best50k"
-              >
-                Noch kein Lauf
-              </div>
-
-              <div
-                class="best-time-date"
-                id="best50kDate"
-              ></div>
-
-              <div
-                class="best-time-note"
-                id="best50kNote"
-              ></div>
-
+              <div class="best-time-distance">50 Kilometer</div>
+              <div class="best-time-value" id="best50k">Noch kein Lauf</div>
+              <div class="best-time-date" id="best50kDate"></div>
+              <div class="best-time-note" id="best50kNote"></div>
             </div>
 
             <div class="best-time-row">
-
-              <div class="best-time-distance">
-                100 Kilometer
-              </div>
-
-              <div
-                class="best-time-value"
-                id="best100k"
-              >
-                Noch kein Lauf
-              </div>
-
-              <div
-                class="best-time-date"
-                id="best100kDate"
-              ></div>
-
-              <div
-                class="best-time-note"
-                id="best100kNote"
-              ></div>
-
+              <div class="best-time-distance">100 Kilometer</div>
+              <div class="best-time-value" id="best100k">Noch kein Lauf</div>
+              <div class="best-time-date" id="best100kDate"></div>
+              <div class="best-time-note" id="best100kNote"></div>
             </div>
 
             <div class="best-time-row">
-
-              <div class="best-time-distance">
-                100+ Kilometer
-              </div>
-
-              <div
-                class="best-time-value"
-                id="best100plus"
-              >
-                Noch kein Lauf
-              </div>
-
-              <div
-                class="best-time-date"
-                id="best100plusDate"
-              ></div>
-
-              <div
-                class="best-time-note"
-                id="best100plusNote"
-              ></div>
-
+              <div class="best-time-distance">100+ Kilometer</div>
+              <div class="best-time-value" id="best100plus">Noch kein Lauf</div>
+              <div class="best-time-date" id="best100plusDate"></div>
+              <div class="best-time-note" id="best100plusNote"></div>
             </div>
 
             <div class="best-time-row longest-run">
@@ -2710,114 +2622,42 @@
           >
 
             <div class="run-form-group">
+              <label for="runDate">Laufdatum</label>
+              <input id="runDate" type="date" required>
+            </div>
 
-              <label for="runDate">
-                Laufdatum
-              </label>
-
-              <input
-                id="runDate"
-                type="date"
-                required
-              >
-
+            <div class="run-form-group">
+              <label for="runDistance">Distanz</label>
+              <input id="runDistance" type="number" min="0.1" step="0.01" placeholder="z. B. 10" required>
             </div>
 
             <div class="run-form-group">
 
-              <label for="runDistance">
-                Distanz
-              </label>
-
-              <input
-                id="runDistance"
-                type="number"
-                min="0.1"
-                step="0.01"
-                placeholder="z. B. 10"
-                required
-              >
-
-            </div>
-
-            <div class="run-form-group">
-
-              <label for="runType">
-                Laufart
-              </label>
+              <label for="runType">Laufart</label>
 
               <select id="runType">
-
-                <option value="normal">
-                  Normaler Lauf
-                </option>
-
-                <option value="race">
-                  Wettkampf
-                </option>
-
-                <option value="trail">
-                  Trail
-                </option>
-
-                <option value="ultra">
-                  Ultra
-                </option>
-
-                <option value="backyard">
-                  Backyard Ultra
-                </option>
-
+                <option value="normal">Normaler Lauf</option>
+                <option value="race">Wettkampf</option>
+                <option value="trail">Trail</option>
+                <option value="ultra">Ultra</option>
+                <option value="backyard">Backyard Ultra</option>
               </select>
 
             </div>
 
             <div class="run-form-group">
-
-              <label for="runHours">
-                Stunden
-              </label>
-
-              <input
-                id="runHours"
-                type="number"
-                min="0"
-                max="99"
-                placeholder="00"
-              >
-
+              <label for="runHours">Stunden</label>
+              <input id="runHours" type="number" min="0" max="99" placeholder="00">
             </div>
 
             <div class="run-form-group">
-
-              <label for="runMinutes">
-                Minuten
-              </label>
-
-              <input
-                id="runMinutes"
-                type="number"
-                min="0"
-                max="59"
-                placeholder="00"
-              >
-
+              <label for="runMinutes">Minuten</label>
+              <input id="runMinutes" type="number" min="0" max="59" placeholder="00">
             </div>
 
             <div class="run-form-group">
-
-              <label for="runSeconds">
-                Sekunden
-              </label>
-
-              <input
-                id="runSeconds"
-                type="number"
-                min="0"
-                max="59"
-                placeholder="00"
-              >
-
+              <label for="runSeconds">Sekunden</label>
+              <input id="runSeconds" type="number" min="0" max="59" placeholder="00">
             </div>
 
             <div class="best-time-control">
@@ -2863,33 +2703,13 @@
                     Bitte Distanz auswählen
                   </option>
 
-                  <option value="5k">
-                    5 Kilometer
-                  </option>
-
-                  <option value="10k">
-                    10 Kilometer
-                  </option>
-
-                  <option value="half">
-                    Halbmarathon
-                  </option>
-
-                  <option value="marathon">
-                    Marathon
-                  </option>
-
-                  <option value="50k">
-                    50 Kilometer
-                  </option>
-
-                  <option value="100k">
-                    100 Kilometer
-                  </option>
-
-                  <option value="100plus">
-                    100+ Kilometer
-                  </option>
+                  <option value="5k">5 Kilometer</option>
+                  <option value="10k">10 Kilometer</option>
+                  <option value="half">Halbmarathon</option>
+                  <option value="marathon">Marathon</option>
+                  <option value="50k">50 Kilometer</option>
+                  <option value="100k">100 Kilometer</option>
+                  <option value="100plus">100+ Kilometer</option>
 
                 </select>
 
@@ -2904,9 +2724,7 @@
 
             <div class="run-form-group full">
 
-              <label for="runNote">
-                Notiz
-              </label>
+              <label for="runNote">Notiz</label>
 
               <textarea
                 id="runNote"
@@ -2986,10 +2804,6 @@
 
       </section>
 
-      <!-- =====================================================
-           CSV LAUFHISTORIE
-      ====================================================== -->
-
       <section class="dashboard-section">
 
         <div class="dashboard-section-header">
@@ -3027,8 +2841,9 @@
 
               <p>
                 Für den Import werden Datum und Distanz benötigt.
-                Laufzeit, Laufart und Notiz werden übernommen, wenn
-                diese Spalten in deiner Datei vorhanden sind.
+                Bei Strava werden automatisch nur Aktivitäten der
+                Art „Lauf“ übernommen. Andere Aktivitäten werden
+                übersprungen.
               </p>
 
             </div>
@@ -3061,9 +2876,10 @@
 
             <p class="import-help">
               Unterstützt werden Komma- und Semikolon-CSV.
-              Erkannte Spalten sind z. B. Datum, Distanz, Dauer,
-              Laufart und Notiz. Die Datei wird zunächst nur geprüft
-              und noch nicht gespeichert.
+              Strava-Dateien mit deutschen Spalten wie
+              „Aktivitätsdatum“, „Aktivitätsart“, „Distanz“,
+              „Verstrichene Zeit“ und „Name der Aktivität“
+              werden automatisch erkannt.
             </p>
 
             <button
@@ -3073,6 +2889,24 @@
             >
               CSV-Vorlage herunterladen
             </button>
+
+          </div>
+
+          <div class="import-options">
+
+            <label class="import-check">
+
+              <input
+                id="skipDuplicateRuns"
+                type="checkbox"
+                checked
+              >
+
+              <span>
+                Bereits vorhandene Läufe möglichst überspringen
+              </span>
+
+            </label>
 
           </div>
 
@@ -3146,6 +2980,11 @@
             </div>
 
             <div
+              class="import-info-box"
+              id="importInfoBox"
+            ></div>
+
+            <div
               class="import-error-box"
               id="importErrorBox"
             ></div>
@@ -3161,25 +3000,11 @@
 
                   <tr>
 
-                    <th>
-                      Datum
-                    </th>
-
-                    <th>
-                      Distanz
-                    </th>
-
-                    <th>
-                      Zeit
-                    </th>
-
-                    <th>
-                      Laufart
-                    </th>
-
-                    <th>
-                      Notiz
-                    </th>
+                    <th>Datum</th>
+                    <th>Distanz</th>
+                    <th>Zeit</th>
+                    <th>Laufart</th>
+                    <th>Notiz</th>
 
                   </tr>
 
@@ -3227,10 +3052,6 @@
         </div>
 
       </section>
-
-      <!-- =====================================================
-           RUN HISTORY
-      ====================================================== -->
 
       <section
         class="dashboard-section"
@@ -3719,10 +3540,8 @@
       ></div>
 
       <div class="auth-note">
-
         Wir senden dir einen Link per E-Mail.
         Über diesen Link kannst du ein neues Passwort festlegen.
-
       </div>
 
     </form>
@@ -3820,306 +3639,128 @@
      ELEMENTE
   ========================================================= */
 
-  const guestArea =
-    document.getElementById("guestArea");
+  const guestArea = document.getElementById("guestArea");
+  const loggedInArea = document.getElementById("loggedInArea");
+  const userGreeting = document.getElementById("userGreeting");
+  const avatarButton = document.getElementById("avatarButton");
+  const accountMenu = document.getElementById("accountMenu");
+  const accountMenuName = document.getElementById("accountMenuName");
+  const accountMenuEmail = document.getElementById("accountMenuEmail");
+  const profileButton = document.getElementById("profileButton");
+  const logoutButton = document.getElementById("logoutButton");
+  const openLoginButton = document.getElementById("openLoginButton");
+  const previewNotice = document.getElementById("previewNotice");
 
-  const loggedInArea =
-    document.getElementById("loggedInArea");
-
-  const userGreeting =
-    document.getElementById("userGreeting");
-
-  const avatarButton =
-    document.getElementById("avatarButton");
-
-  const accountMenu =
-    document.getElementById("accountMenu");
-
-  const accountMenuName =
-    document.getElementById("accountMenuName");
-
-  const accountMenuEmail =
-    document.getElementById("accountMenuEmail");
-
-  const profileButton =
-    document.getElementById("profileButton");
-
-  const logoutButton =
-    document.getElementById("logoutButton");
-
-  const openLoginButton =
-    document.getElementById("openLoginButton");
-
-  const previewNotice =
-    document.getElementById("previewNotice");
-
-  const authOverlay =
-    document.getElementById("authOverlay");
-
-  const closeAuthButton =
-    document.getElementById("closeAuthButton");
-
-  const authTabs =
-    document.getElementById("authTabs");
-
-  const loginTab =
-    document.getElementById("loginTab");
-
-  const registerTab =
-    document.getElementById("registerTab");
-
-  const loginForm =
-    document.getElementById("loginForm");
-
-  const registerForm =
-    document.getElementById("registerForm");
-
-  const forgotForm =
-    document.getElementById("forgotForm");
-
-  const recoveryForm =
-    document.getElementById("recoveryForm");
-
-  const authTitle =
-    document.getElementById("authTitle");
-
-  const authDescription =
-    document.getElementById("authDescription");
-
-  const loginMessage =
-    document.getElementById("loginMessage");
-
-  const registerMessage =
-    document.getElementById("registerMessage");
-
-  const forgotMessage =
-    document.getElementById("forgotMessage");
-
-  const recoveryMessage =
-    document.getElementById("recoveryMessage");
-
-  const forgotPasswordButton =
-    document.getElementById("forgotPasswordButton");
-
-  const backToLoginButton =
-    document.getElementById("backToLoginButton");
-
-  const loginSubmit =
-    document.getElementById("loginSubmit");
-
-  const registerSubmit =
-    document.getElementById("registerSubmit");
-
-  const forgotSubmit =
-    document.getElementById("forgotSubmit");
-
-  const recoverySubmit =
-    document.getElementById("recoverySubmit");
+  const authOverlay = document.getElementById("authOverlay");
+  const closeAuthButton = document.getElementById("closeAuthButton");
+  const authTabs = document.getElementById("authTabs");
+  const loginTab = document.getElementById("loginTab");
+  const registerTab = document.getElementById("registerTab");
+  const loginForm = document.getElementById("loginForm");
+  const registerForm = document.getElementById("registerForm");
+  const forgotForm = document.getElementById("forgotForm");
+  const recoveryForm = document.getElementById("recoveryForm");
+  const authTitle = document.getElementById("authTitle");
+  const authDescription = document.getElementById("authDescription");
+  const loginMessage = document.getElementById("loginMessage");
+  const registerMessage = document.getElementById("registerMessage");
+  const forgotMessage = document.getElementById("forgotMessage");
+  const recoveryMessage = document.getElementById("recoveryMessage");
+  const forgotPasswordButton = document.getElementById("forgotPasswordButton");
+  const backToLoginButton = document.getElementById("backToLoginButton");
+  const loginSubmit = document.getElementById("loginSubmit");
+  const registerSubmit = document.getElementById("registerSubmit");
+  const forgotSubmit = document.getElementById("forgotSubmit");
+  const recoverySubmit = document.getElementById("recoverySubmit");
 
   /* =========================================================
      REGISTRATION
   ========================================================= */
 
-  const followCheckbox =
-    document.getElementById("followCheckbox");
-
-  const inviteCheckbox =
-    document.getElementById("inviteCheckbox");
-
-  const openInstagramButton =
-    document.getElementById("openInstagramButton");
-
-  const whatsappShareButton =
-    document.getElementById("whatsappShareButton");
-
-  const instagramShareButton =
-    document.getElementById("instagramShareButton");
-
-  const shareStatus =
-    document.getElementById("shareStatus");
-
-  const followRequirement =
-    document.getElementById("followRequirement");
-
-  const inviteRequirement =
-    document.getElementById("inviteRequirement");
-
-  const inviteCheckLabel =
-    document.getElementById("inviteCheckLabel");
-
-  const followStatus =
-    document.getElementById("followStatus");
-
-  const inviteStatus =
-    document.getElementById("inviteStatus");
+  const followCheckbox = document.getElementById("followCheckbox");
+  const inviteCheckbox = document.getElementById("inviteCheckbox");
+  const openInstagramButton = document.getElementById("openInstagramButton");
+  const whatsappShareButton = document.getElementById("whatsappShareButton");
+  const instagramShareButton = document.getElementById("instagramShareButton");
+  const shareStatus = document.getElementById("shareStatus");
+  const followRequirement = document.getElementById("followRequirement");
+  const inviteRequirement = document.getElementById("inviteRequirement");
+  const inviteCheckLabel = document.getElementById("inviteCheckLabel");
+  const followStatus = document.getElementById("followStatus");
+  const inviteStatus = document.getElementById("inviteStatus");
 
   /* =========================================================
      RUN ELEMENTE
   ========================================================= */
 
-  const dashboardDate =
-    document.getElementById("dashboardDate");
+  const dashboardDate = document.getElementById("dashboardDate");
+  const currentDayBadge = document.getElementById("currentDayBadge");
+  const dailyChart = document.getElementById("dailyChart");
+  const weekBar = document.getElementById("weekBar");
+  const monthBar = document.getElementById("monthBar");
+  const yearBar = document.getElementById("yearBar");
+  const weekTotal = document.getElementById("weekTotal");
+  const monthTotal = document.getElementById("monthTotal");
+  const yearTotal = document.getElementById("yearTotal");
+  const sidebarWeekKm = document.getElementById("sidebarWeekKm");
+  const sidebarWeekProgress = document.getElementById("sidebarWeekProgress");
+  const sidebarWeekText = document.getElementById("sidebarWeekText");
 
-  const currentDayBadge =
-    document.getElementById("currentDayBadge");
-
-  const dailyChart =
-    document.getElementById("dailyChart");
-
-  const weekBar =
-    document.getElementById("weekBar");
-
-  const monthBar =
-    document.getElementById("monthBar");
-
-  const yearBar =
-    document.getElementById("yearBar");
-
-  const weekTotal =
-    document.getElementById("weekTotal");
-
-  const monthTotal =
-    document.getElementById("monthTotal");
-
-  const yearTotal =
-    document.getElementById("yearTotal");
-
-  const sidebarWeekKm =
-    document.getElementById("sidebarWeekKm");
-
-  const sidebarWeekProgress =
-    document.getElementById("sidebarWeekProgress");
-
-  const sidebarWeekText =
-    document.getElementById("sidebarWeekText");
-
-  const runForm =
-    document.getElementById("runForm");
-
-  const runDate =
-    document.getElementById("runDate");
-
-  const runDistance =
-    document.getElementById("runDistance");
-
-  const runType =
-    document.getElementById("runType");
-
-  const runHours =
-    document.getElementById("runHours");
-
-  const runMinutes =
-    document.getElementById("runMinutes");
-
-  const runSeconds =
-    document.getElementById("runSeconds");
-
-  const runIsBestTime =
-    document.getElementById("runIsBestTime");
-
-  const bestTimeCategoryWrap =
-    document.getElementById("bestTimeCategoryWrap");
-
-  const runBestCategory =
-    document.getElementById("runBestCategory");
-
-  const bestTimeSuggestion =
-    document.getElementById("bestTimeSuggestion");
-
-  const runNote =
-    document.getElementById("runNote");
-
-  const runPhoto =
-    document.getElementById("runPhoto");
-
-  const runPhotoPreview =
-    document.getElementById("runPhotoPreview");
-
-  const runPhotoPreviewImage =
-    document.getElementById("runPhotoPreviewImage");
-
-  const runPhotoName =
-    document.getElementById("runPhotoName");
-
-  const runPhotoRemove =
-    document.getElementById("runPhotoRemove");
-
-  const saveRunButton =
-    document.getElementById("saveRunButton");
-
-  const runFormMessage =
-    document.getElementById("runFormMessage");
-
-  const runLoginLabel =
-    document.getElementById("runLoginLabel");
-
-  const runsList =
-    document.getElementById("runsList");
+  const runForm = document.getElementById("runForm");
+  const runDate = document.getElementById("runDate");
+  const runDistance = document.getElementById("runDistance");
+  const runType = document.getElementById("runType");
+  const runHours = document.getElementById("runHours");
+  const runMinutes = document.getElementById("runMinutes");
+  const runSeconds = document.getElementById("runSeconds");
+  const runIsBestTime = document.getElementById("runIsBestTime");
+  const bestTimeCategoryWrap = document.getElementById("bestTimeCategoryWrap");
+  const runBestCategory = document.getElementById("runBestCategory");
+  const bestTimeSuggestion = document.getElementById("bestTimeSuggestion");
+  const runNote = document.getElementById("runNote");
+  const runPhoto = document.getElementById("runPhoto");
+  const runPhotoPreview = document.getElementById("runPhotoPreview");
+  const runPhotoPreviewImage = document.getElementById("runPhotoPreviewImage");
+  const runPhotoName = document.getElementById("runPhotoName");
+  const runPhotoRemove = document.getElementById("runPhotoRemove");
+  const saveRunButton = document.getElementById("saveRunButton");
+  const runFormMessage = document.getElementById("runFormMessage");
+  const runLoginLabel = document.getElementById("runLoginLabel");
+  const runsList = document.getElementById("runsList");
 
   /* =========================================================
      CSV IMPORT ELEMENTE
   ========================================================= */
 
-  const csvImportFile =
-    document.getElementById("csvImportFile");
-
+  const csvImportFile = document.getElementById("csvImportFile");
   const downloadCsvTemplateButton =
-    document.getElementById(
-      "downloadCsvTemplateButton"
-    );
-
+    document.getElementById("downloadCsvTemplateButton");
   const importLoginLabel =
-    document.getElementById(
-      "importLoginLabel"
-    );
-
+    document.getElementById("importLoginLabel");
   const importPreview =
-    document.getElementById(
-      "importPreview"
-    );
-
+    document.getElementById("importPreview");
   const importPreviewStatus =
-    document.getElementById(
-      "importPreviewStatus"
-    );
-
+    document.getElementById("importPreviewStatus");
   const importRunCount =
-    document.getElementById(
-      "importRunCount"
-    );
-
+    document.getElementById("importRunCount");
   const importKmTotal =
-    document.getElementById(
-      "importKmTotal"
-    );
-
+    document.getElementById("importKmTotal");
   const importDateRange =
-    document.getElementById(
-      "importDateRange"
-    );
-
+    document.getElementById("importDateRange");
+  const importInfoBox =
+    document.getElementById("importInfoBox");
   const importErrorBox =
-    document.getElementById(
-      "importErrorBox"
-    );
-
+    document.getElementById("importErrorBox");
   const importPreviewTableBody =
-    document.getElementById(
-      "importPreviewTableBody"
-    );
-
+    document.getElementById("importPreviewTableBody");
   const importMessage =
-    document.getElementById(
-      "importMessage"
-    );
-
+    document.getElementById("importMessage");
   const importRunsButton =
-    document.getElementById(
-      "importRunsButton"
-    );
+    document.getElementById("importRunsButton");
+  const skipDuplicateRuns =
+    document.getElementById("skipDuplicateRuns");
 
-  let parsedImportRuns =
-    [];
+  let parsedImportRuns = [];
 
   /* =========================================================
      BESTZEITEN
@@ -4174,23 +3815,12 @@
   const INSTAGRAM_URL =
     "https://www.instagram.com/tano.loew/";
 
-  let currentUser =
-    null;
-
-  let currentProfile =
-    null;
-
-  let currentRuns =
-    [];
-
-  let inviteActionStarted =
-    false;
-
-  let selectedRunPhoto =
-    null;
-
-  let runPhotoPreviewUrl =
-    null;
+  let currentUser = null;
+  let currentProfile = null;
+  let currentRuns = [];
+  let inviteActionStarted = false;
+  let selectedRunPhoto = null;
+  let runPhotoPreviewUrl = null;
 
   /* =========================================================
      BESTZEIT KATEGORIEN
@@ -4379,17 +4009,10 @@
     }
 
     const parts =
-      name
-        .trim()
-        .split(/\s+/)
-        .filter(Boolean);
+      name.trim().split(/\s+/).filter(Boolean);
 
     if (parts.length === 1) {
-
-      return parts[0]
-        .substring(0, 1)
-        .toUpperCase();
-
+      return parts[0].substring(0, 1).toUpperCase();
     }
 
     return (
@@ -4406,84 +4029,51 @@
     }
 
     return (
-      name
-        .trim()
-        .split(/\s+/)[0] ||
+      name.trim().split(/\s+/)[0] ||
       "Runner"
     );
 
   }
 
-  function getUserDisplayName(
-    user,
-    profile
-  ) {
+  function getUserDisplayName(user, profile) {
 
     if (
       profile &&
       profile.display_name &&
       String(profile.display_name).trim()
     ) {
-
-      return String(
-        profile.display_name
-      ).trim();
-
+      return String(profile.display_name).trim();
     }
 
     if (
       user &&
       user.user_metadata &&
       user.user_metadata.display_name &&
-      String(
-        user.user_metadata.display_name
-      ).trim()
+      String(user.user_metadata.display_name).trim()
     ) {
-
-      return String(
-        user.user_metadata.display_name
-      ).trim();
-
+      return String(user.user_metadata.display_name).trim();
     }
 
     if (
       user &&
       user.user_metadata &&
       user.user_metadata.name &&
-      String(
-        user.user_metadata.name
-      ).trim()
+      String(user.user_metadata.name).trim()
     ) {
-
-      return String(
-        user.user_metadata.name
-      ).trim();
-
+      return String(user.user_metadata.name).trim();
     }
 
-    if (
-      user &&
-      user.email
-    ) {
-
-      return user.email
-        .split("@")[0]
-        .trim();
-
+    if (user && user.email) {
+      return user.email.split("@")[0].trim();
     }
 
     return "Runner";
 
   }
 
-  function setMessage(
-    element,
-    text,
-    success = false
-  ) {
+  function setMessage(element, text, success = false) {
 
-    element.textContent =
-      text;
+    element.textContent = text;
 
     element.classList.toggle(
       "success",
@@ -4502,14 +4092,9 @@
 
   }
 
-  function setButtonLoading(
-    button,
-    loading,
-    normalText
-  ) {
+  function setButtonLoading(button, loading, normalText) {
 
-    button.disabled =
-      loading;
+    button.disabled = loading;
 
     button.textContent =
       loading
@@ -4531,9 +4116,7 @@
 
   }
 
-  function formatDate(
-    dateString
-  ) {
+  function formatDate(dateString) {
 
     if (!dateString) {
       return "";
@@ -4541,8 +4124,7 @@
 
     const date =
       new Date(
-        dateString +
-        "T12:00:00"
+        dateString + "T12:00:00"
       );
 
     return date.toLocaleDateString(
@@ -4556,9 +4138,7 @@
 
   }
 
-  function formatLongDate(
-    date
-  ) {
+  function formatLongDate(date) {
 
     return date.toLocaleDateString(
       "de-DE",
@@ -4572,18 +4152,14 @@
 
   }
 
-  function formatDuration(
-    seconds
-  ) {
+  function formatDuration(seconds) {
 
     if (
       seconds === null ||
       seconds === undefined ||
       seconds === ""
     ) {
-
       return "—";
-
     }
 
     const total =
@@ -4596,9 +4172,7 @@
     }
 
     const hours =
-      Math.floor(
-        total / 3600
-      );
+      Math.floor(total / 3600);
 
     const minutes =
       Math.floor(
@@ -4631,28 +4205,20 @@
   function parseDuration() {
 
     const hours =
-      Number(
-        runHours.value || 0
-      );
+      Number(runHours.value || 0);
 
     const minutes =
-      Number(
-        runMinutes.value || 0
-      );
+      Number(runMinutes.value || 0);
 
     const seconds =
-      Number(
-        runSeconds.value || 0
-      );
+      Number(runSeconds.value || 0);
 
     if (
       hours === 0 &&
       minutes === 0 &&
       seconds === 0
     ) {
-
       return null;
-
     }
 
     if (
@@ -4662,9 +4228,7 @@
       minutes > 59 ||
       seconds > 59
     ) {
-
       return NaN;
-
     }
 
     return (
@@ -4677,8 +4241,7 @@
 
   function getTodayDateString() {
 
-    const date =
-      new Date();
+    const date = new Date();
 
     const year =
       date.getFullYear();
@@ -4697,9 +4260,7 @@
 
   }
 
-  function startOfWeek(
-    date
-  ) {
+  function startOfWeek(date) {
 
     const result =
       new Date(date);
@@ -4713,8 +4274,7 @@
         : 1 - day;
 
     result.setDate(
-      result.getDate() +
-      difference
+      result.getDate() + difference
     );
 
     result.setHours(
@@ -4728,13 +4288,10 @@
 
   }
 
-  function dateFromRun(
-    run
-  ) {
+  function dateFromRun(run) {
 
     return new Date(
-      run.run_date +
-      "T12:00:00"
+      run.run_date + "T12:00:00"
     );
 
   }
@@ -4743,9 +4300,7 @@
      BESTZEIT LOGIK
   ========================================================= */
 
-  function getSuggestedBestCategory(
-    distance
-  ) {
+  function getSuggestedBestCategory(distance) {
 
     const km =
       Number(distance);
@@ -4754,20 +4309,16 @@
       !Number.isFinite(km) ||
       km <= 0
     ) {
-
       return null;
-
     }
 
     const candidates =
-      Object.entries(
-        BEST_TIME_CATEGORIES
-      )
-      .filter(
-        ([key, category]) =>
-          km >= category.min &&
-          km <= category.max
-      );
+      Object.entries(BEST_TIME_CATEGORIES)
+        .filter(
+          ([key, category]) =>
+            km >= category.min &&
+            km <= category.max
+        );
 
     if (!candidates.length) {
       return null;
@@ -4804,15 +4355,10 @@
 
   }
 
-  function isDistanceValidForCategory(
-    distance,
-    categoryKey
-  ) {
+  function isDistanceValidForCategory(distance, categoryKey) {
 
     const category =
-      BEST_TIME_CATEGORIES[
-        categoryKey
-      ];
+      BEST_TIME_CATEGORIES[categoryKey];
 
     if (!category) {
       return false;
@@ -4844,11 +4390,9 @@
 
     if (!checked) {
 
-      runBestCategory.value =
-        "";
+      runBestCategory.value = "";
 
-      bestTimeSuggestion.textContent =
-        "";
+      bestTimeSuggestion.textContent = "";
 
       bestTimeSuggestion.classList.remove(
         "warning"
@@ -4859,14 +4403,10 @@
     }
 
     const distance =
-      Number(
-        runDistance.value
-      );
+      Number(runDistance.value);
 
     const suggested =
-      getSuggestedBestCategory(
-        distance
-      );
+      getSuggestedBestCategory(distance);
 
     if (suggested) {
 
@@ -4934,21 +4474,15 @@
 
   function resetBestTimeControls() {
 
-    runIsBestTime.checked =
-      false;
-
-    runBestCategory.value =
-      "";
-
-    runBestCategory.disabled =
-      true;
+    runIsBestTime.checked = false;
+    runBestCategory.value = "";
+    runBestCategory.disabled = true;
 
     bestTimeCategoryWrap.classList.remove(
       "show"
     );
 
-    bestTimeSuggestion.textContent =
-      "";
+    bestTimeSuggestion.textContent = "";
 
     bestTimeSuggestion.classList.remove(
       "warning"
@@ -4960,12 +4494,8 @@
     "input",
     function() {
 
-      if (
-        runIsBestTime.checked
-      ) {
-
+      if (runIsBestTime.checked) {
         updateBestTimeControls();
-
       }
 
     }
@@ -4980,24 +4510,19 @@
     "change",
     function() {
 
-      if (
-        !runIsBestTime.checked
-      ) {
+      if (!runIsBestTime.checked) {
         return;
       }
 
       const distance =
-        Number(
-          runDistance.value
-        );
+        Number(runDistance.value);
 
       const category =
         runBestCategory.value;
 
       if (!category) {
 
-        bestTimeSuggestion.textContent =
-          "";
+        bestTimeSuggestion.textContent = "";
 
         return;
 
@@ -5045,30 +4570,26 @@
     "change",
     function() {
 
-      if (
-        runIsBestTime.checked
-      ) {
+      if (!runIsBestTime.checked) {
+        return;
+      }
 
-        if (
-          runType.value === "race"
-        ) {
+      if (runType.value === "race") {
 
-          bestTimeSuggestion.classList.remove(
-            "warning"
-          );
+        bestTimeSuggestion.classList.remove(
+          "warning"
+        );
 
-          updateBestTimeControls();
+        updateBestTimeControls();
 
-        } else {
+      } else {
 
-          bestTimeSuggestion.classList.add(
-            "warning"
-          );
+        bestTimeSuggestion.classList.add(
+          "warning"
+        );
 
-          bestTimeSuggestion.textContent =
-            "Für eine persönliche Bestzeit muss die Laufart „Wettkampf“ sein.";
-
-        }
+        bestTimeSuggestion.textContent =
+          "Für eine persönliche Bestzeit muss die Laufart „Wettkampf“ sein.";
 
       }
 
@@ -5079,9 +4600,7 @@
      FOTO
   ========================================================= */
 
-  function getFileExtension(
-    file
-  ) {
+  function getFileExtension(file) {
 
     const fileName =
       String(
@@ -5093,9 +4612,7 @@
     const parts =
       fileName.split(".");
 
-    if (
-      parts.length > 1
-    ) {
+    if (parts.length > 1) {
 
       const extension =
         parts
@@ -5112,17 +4629,11 @@
 
     }
 
-    if (
-      file &&
-      file.type === "image/png"
-    ) {
+    if (file && file.type === "image/png") {
       return "png";
     }
 
-    if (
-      file &&
-      file.type === "image/webp"
-    ) {
+    if (file && file.type === "image/webp") {
       return "webp";
     }
 
@@ -5132,11 +4643,9 @@
 
   function resetRunPhoto() {
 
-    selectedRunPhoto =
-      null;
+    selectedRunPhoto = null;
 
-    runPhoto.value =
-      "";
+    runPhoto.value = "";
 
     if (runPhotoPreviewUrl) {
 
@@ -5144,8 +4653,7 @@
         runPhotoPreviewUrl
       );
 
-      runPhotoPreviewUrl =
-        null;
+      runPhotoPreviewUrl = null;
 
     }
 
@@ -5153,11 +4661,8 @@
       "show"
     );
 
-    runPhotoPreviewImage.src =
-      "";
-
-    runPhotoName.textContent =
-      "";
+    runPhotoPreviewImage.src = "";
+    runPhotoName.textContent = "";
 
     runPhotoRemove.classList.remove(
       "show"
@@ -5197,10 +4702,7 @@
 
     }
 
-    if (
-      file.size >
-      MAX_RUN_PHOTO_SIZE
-    ) {
+    if (file.size > MAX_RUN_PHOTO_SIZE) {
 
       resetRunPhoto();
 
@@ -5214,20 +4716,15 @@
     }
 
     if (runPhotoPreviewUrl) {
-
       URL.revokeObjectURL(
         runPhotoPreviewUrl
       );
-
     }
 
-    selectedRunPhoto =
-      file;
+    selectedRunPhoto = file;
 
     runPhotoPreviewUrl =
-      URL.createObjectURL(
-        file
-      );
+      URL.createObjectURL(file);
 
     runPhotoPreviewImage.src =
       runPhotoPreviewUrl;
@@ -5251,9 +4748,7 @@
 
   }
 
-  async function uploadRunPhoto(
-    file
-  ) {
+  async function uploadRunPhoto(file) {
 
     if (!file) {
       throw new Error(
@@ -5267,33 +4762,26 @@
       );
     }
 
-    if (
-      file.size >
-      MAX_RUN_PHOTO_SIZE
-    ) {
-
+    if (file.size > MAX_RUN_PHOTO_SIZE) {
       throw new Error(
         "Das Foto ist zu groß. Maximal 10 MB sind erlaubt."
       );
-
     }
 
     const extension =
-      getFileExtension(
-        file
-      );
+      getFileExtension(file);
 
     const uniqueId =
       typeof crypto !== "undefined" &&
       typeof crypto.randomUUID === "function"
         ? crypto.randomUUID()
         : (
-            Date.now() +
-            "-" +
-            Math.random()
-              .toString(36)
-              .substring(2)
-          );
+          Date.now() +
+          "-" +
+          Math.random()
+            .toString(36)
+            .substring(2)
+        );
 
     const path =
       currentUser.id +
@@ -5338,9 +4826,7 @@
 
   }
 
-  async function deleteRunPhoto(
-    path
-  ) {
+  async function deleteRunPhoto(path) {
 
     if (!path) {
       return;
@@ -5352,17 +4838,13 @@
       await supabaseClient
         .storage
         .from(RUN_PHOTO_BUCKET)
-        .remove([
-          path
-        ]);
+        .remove([path]);
 
     if (error) {
-
       console.error(
         "Lauf-Foto konnte nicht gelöscht werden:",
         error
       );
-
     }
 
   }
@@ -5396,17 +4878,10 @@
      CSV IMPORT
   ========================================================= */
 
-  function normalizeCsvHeader(
-    value
-  ) {
+  function normalizeCsvHeader(value) {
 
-    return String(
-      value || ""
-    )
-      .replace(
-        /^\uFEFF/,
-        ""
-      )
+    return String(value || "")
+      .replace(/^\uFEFF/, "")
       .trim()
       .toLowerCase()
       .normalize("NFD")
@@ -5421,36 +4896,23 @@
 
   }
 
-  function detectCsvDelimiter(
-    text
-  ) {
+  function detectCsvDelimiter(text) {
 
     const firstLines =
       text
         .split(/\r?\n/)
         .filter(
-          line =>
-            line.trim()
+          line => line.trim()
         )
-        .slice(
-          0,
-          5
-        );
+        .slice(0, 5);
 
     const sample =
       firstLines.join("\n");
 
-    let commaCount =
-      0;
-
-    let semicolonCount =
-      0;
-
-    let tabCount =
-      0;
-
-    let insideQuotes =
-      false;
+    let commaCount = 0;
+    let semicolonCount = 0;
+    let tabCount = 0;
+    let insideQuotes = false;
 
     for (
       let i = 0;
@@ -5458,8 +4920,7 @@
       i++
     ) {
 
-      const char =
-        sample[i];
+      const char = sample[i];
 
       if (char === '"') {
 
@@ -5474,8 +4935,7 @@
 
         }
 
-        insideQuotes =
-          !insideQuotes;
+        insideQuotes = !insideQuotes;
 
         continue;
 
@@ -5512,19 +4972,13 @@
 
   }
 
-  function parseCsvText(
-    text,
-    delimiter
-  ) {
+  function parseCsvText(text, delimiter) {
 
     const rows = [];
 
     let row = [];
-
     let cell = "";
-
-    let insideQuotes =
-      false;
+    let insideQuotes = false;
 
     for (
       let i = 0;
@@ -5532,11 +4986,8 @@
       i++
     ) {
 
-      const char =
-        text[i];
-
-      const next =
-        text[i + 1];
+      const char = text[i];
+      const next = text[i + 1];
 
       if (char === '"') {
 
@@ -5546,13 +4997,11 @@
         ) {
 
           cell += '"';
-
           i++;
 
         } else {
 
-          insideQuotes =
-            !insideQuotes;
+          insideQuotes = !insideQuotes;
 
         }
 
@@ -5565,12 +5014,8 @@
         !insideQuotes
       ) {
 
-        row.push(
-          cell
-        );
-
-        cell =
-          "";
+        row.push(cell);
+        cell = "";
 
         continue;
 
@@ -5588,41 +5033,28 @@
           char === "\r" &&
           next === "\n"
         ) {
-
           i++;
-
         }
 
-        row.push(
-          cell
-        );
-
-        cell =
-          "";
+        row.push(cell);
+        cell = "";
 
         if (
           row.some(
             value =>
-              String(value)
-                .trim() !== ""
+              String(value).trim() !== ""
           )
         ) {
-
-          rows.push(
-            row
-          );
-
+          rows.push(row);
         }
 
-        row =
-          [];
+        row = [];
 
         continue;
 
       }
 
-      cell +=
-        char;
+      cell += char;
 
     }
 
@@ -5631,22 +5063,15 @@
       row.length
     ) {
 
-      row.push(
-        cell
-      );
+      row.push(cell);
 
       if (
         row.some(
           value =>
-            String(value)
-              .trim() !== ""
+            String(value).trim() !== ""
         )
       ) {
-
-        rows.push(
-          row
-        );
-
+        rows.push(row);
       }
 
     }
@@ -5655,10 +5080,7 @@
 
   }
 
-  function findCsvColumn(
-    headers,
-    aliases
-  ) {
+  function findCsvColumn(headers, aliases) {
 
     const normalized =
       headers.map(
@@ -5675,9 +5097,7 @@
     ) {
 
       const index =
-        normalized.indexOf(
-          alias
-        );
+        normalized.indexOf(alias);
 
       if (index !== -1) {
         return index;
@@ -5701,9 +5121,7 @@
             alias.includes(header)
         )
       ) {
-
         return index;
-
       }
 
     }
@@ -5712,19 +5130,38 @@
 
   }
 
-  function parseCsvNumber(
-    value
-  ) {
+  /*
+   * Robuster Zahlenparser:
+   * 130,01
+   * 130.01
+   * "130,01"
+   * 1.234,56
+   * 1,234.56
+   * 130,01 km
+   */
+  function parseCsvNumber(value) {
 
     let text =
-      String(
-        value ?? ""
-      )
+      String(value ?? "")
         .trim()
+        .replace(
+          /^["']|["']$/g,
+          ""
+        )
         .replace(
           /\s/g,
           ""
         );
+
+    if (!text) {
+      return NaN;
+    }
+
+    text =
+      text.replace(
+        /[^0-9,.\-+]/g,
+        ""
+      );
 
     if (!text) {
       return NaN;
@@ -5742,22 +5179,13 @@
 
         text =
           text
-            .replace(
-              /\./g,
-              ""
-            )
-            .replace(
-              ",",
-              "."
-            );
+            .replace(/\./g, "")
+            .replace(",", ".");
 
       } else {
 
         text =
-          text.replace(
-            /,/g,
-            ""
-          );
+          text.replace(/,/g, "");
 
       }
 
@@ -5765,76 +5193,84 @@
       text.includes(",")
     ) {
 
-      text =
-        text.replace(
-          ",",
-          "."
-        );
-
-    }
-
-    text =
-      text.replace(
-        /[^0-9.+-]/g,
-        ""
-      );
-
-    return Number(
-      text
-    );
-
-  }
-
-  function parseCsvDate(
-    value
-  ) {
-
-    const raw =
-      String(
-        value ?? ""
-      )
-        .trim();
-
-    if (!raw) {
-      return null;
-    }
-
-    let match =
-      raw.match(
-        /^(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})/
-      );
-
-    if (match) {
-
-      const year =
-        Number(match[1]);
-
-      const month =
-        Number(match[2]);
-
-      const day =
-        Number(match[3]);
+      const commaParts =
+        text.split(",");
 
       if (
-        month >= 1 &&
-        month <= 12 &&
-        day >= 1 &&
-        day <= 31
+        commaParts.length === 2 &&
+        commaParts[1].length <= 3
       ) {
 
-        return (
-          String(year).padStart(4, "0") +
-          "-" +
-          String(month).padStart(2, "0") +
-          "-" +
-          String(day).padStart(2, "0")
-        );
+        text =
+          text.replace(",", ".");
+
+      } else {
+
+        text =
+          text.replace(/,/g, "");
 
       }
 
     }
 
-    match =
+    return Number(text);
+
+  }
+
+  function parseCsvDistance(value, header) {
+
+    const numeric =
+      parseCsvNumber(value);
+
+    if (
+      !Number.isFinite(numeric) ||
+      numeric <= 0
+    ) {
+      return NaN;
+    }
+
+    const normalizedHeader =
+      normalizeCsvHeader(header);
+
+    if (
+      normalizedHeader.includes("meter") ||
+      normalizedHeader === "m" ||
+      normalizedHeader.includes("distance(m)")
+    ) {
+      return numeric / 1000;
+    }
+
+    if (
+      normalizedHeader.includes("mile") ||
+      normalizedHeader === "mi" ||
+      normalizedHeader.includes("distancemi")
+    ) {
+      return numeric * 1.609344;
+    }
+
+    return numeric;
+
+  }
+
+  function parseCsvDate(value) {
+
+    const raw =
+      String(value ?? "")
+        .trim()
+        .replace(
+          /^["']|["']$/g,
+          ""
+        );
+
+    if (!raw) {
+      return null;
+    }
+
+    /*
+     * Strava:
+     * 12.09.2026, 08:00:04
+     */
+    let match =
       raw.match(
         /^(\d{1,2})[.\/-](\d{1,2})[.\/-](\d{4})/
       );
@@ -5869,16 +5305,50 @@
 
     }
 
-    const parsed =
-      new Date(
-        raw
+    /*
+     * ISO:
+     * 2026-09-12
+     * 2026-09-12T08:00:04
+     */
+    match =
+      raw.match(
+        /^(\d{4})[-/.](\d{1,2})[-/.](\d{1,2})/
       );
 
-    if (
-      !Number.isNaN(
-        parsed.getTime()
-      )
-    ) {
+    if (match) {
+
+      const year =
+        Number(match[1]);
+
+      const month =
+        Number(match[2]);
+
+      const day =
+        Number(match[3]);
+
+      if (
+        month >= 1 &&
+        month <= 12 &&
+        day >= 1 &&
+        day <= 31
+      ) {
+
+        return (
+          String(year).padStart(4, "0") +
+          "-" +
+          String(month).padStart(2, "0") +
+          "-" +
+          String(day).padStart(2, "0")
+        );
+
+      }
+
+    }
+
+    const parsed =
+      new Date(raw);
+
+    if (!Number.isNaN(parsed.getTime())) {
 
       const year =
         parsed.getFullYear();
@@ -5893,9 +5363,7 @@
           parsed.getDate()
         ).padStart(2, "0");
 
-      return (
-        `${year}-${month}-${day}`
-      );
+      return `${year}-${month}-${day}`;
 
     }
 
@@ -5903,23 +5371,21 @@
 
   }
 
-  function parseCsvDuration(
-    value
-  ) {
+  function parseCsvDuration(value) {
 
     const raw =
-      String(
-        value ?? ""
-      )
-        .trim();
+      String(value ?? "")
+        .trim()
+        .replace(
+          /^["']|["']$/g,
+          ""
+        );
 
     if (!raw) {
       return null;
     }
 
-    if (
-      raw.includes(":")
-    ) {
+    if (raw.includes(":")) {
 
       const parts =
         raw
@@ -5927,10 +5393,7 @@
           .map(
             part =>
               Number(
-                part.replace(
-                  ",",
-                  "."
-                )
+                part.replace(",", ".")
               )
           );
 
@@ -5940,9 +5403,7 @@
             !Number.isFinite(part)
         )
       ) {
-
         return null;
-
       }
 
       if (parts.length === 3) {
@@ -5969,38 +5430,48 @@
     }
 
     const numeric =
-      parseCsvNumber(
-        raw
-      );
+      parseCsvNumber(raw);
 
     if (
       !Number.isFinite(numeric) ||
       numeric <= 0
     ) {
-
       return null;
-
     }
 
-    return Math.round(
-      numeric
-    );
+    return Math.round(numeric);
 
   }
 
-  function normalizeImportedRunType(
-    value
-  ) {
+  function normalizeImportedRunType(value) {
 
     const raw =
-      String(
-        value ?? ""
-      )
+      String(value ?? "")
         .trim()
         .toLowerCase();
 
     if (!raw) {
       return "normal";
+    }
+
+    if (
+      raw.includes("backyard")
+    ) {
+      return "backyard";
+    }
+
+    if (
+      raw.includes("ultra") ||
+      raw.includes("100k") ||
+      raw.includes("50k")
+    ) {
+      return "ultra";
+    }
+
+    if (
+      raw.includes("trail")
+    ) {
+      return "trail";
     }
 
     if (
@@ -6012,66 +5483,28 @@
       raw.includes("halbmarathon") ||
       raw.includes("half marathon")
     ) {
-
       return "race";
-
-    }
-
-    if (
-      raw.includes("backyard")
-    ) {
-
-      return "backyard";
-
-    }
-
-    if (
-      raw.includes("ultra") ||
-      raw.includes("100k") ||
-      raw.includes("50k")
-    ) {
-
-      return "ultra";
-
-    }
-
-    if (
-      raw.includes("trail")
-    ) {
-
-      return "trail";
-
     }
 
     return "normal";
 
   }
 
-  function getImportedRunTypeLabel(
-    type
-  ) {
+  function getImportedRunTypeLabel(type) {
 
-    if (
-      type === "race"
-    ) {
+    if (type === "race") {
       return "Wettkampf";
     }
 
-    if (
-      type === "trail"
-    ) {
+    if (type === "trail") {
       return "Trail";
     }
 
-    if (
-      type === "ultra"
-    ) {
+    if (type === "ultra") {
       return "Ultra";
     }
 
-    if (
-      type === "backyard"
-    ) {
+    if (type === "backyard") {
       return "Backyard";
     }
 
@@ -6081,32 +5514,24 @@
 
   function clearImportPreview() {
 
-    parsedImportRuns =
-      [];
+    parsedImportRuns = [];
 
     importPreview.classList.remove(
       "show"
     );
 
-    importPreviewTableBody.innerHTML =
-      "";
+    importPreviewTableBody.innerHTML = "";
 
-    importErrorBox.textContent =
-      "";
+    importErrorBox.textContent = "";
+    importErrorBox.classList.remove("show");
 
-    importErrorBox.classList.remove(
-      "show"
-    );
+    importInfoBox.textContent = "";
+    importInfoBox.classList.remove("show");
 
-    importMessage.textContent =
-      "";
+    importMessage.textContent = "";
+    importMessage.classList.remove("success");
 
-    importMessage.classList.remove(
-      "success"
-    );
-
-    importRunsButton.disabled =
-      true;
+    importRunsButton.disabled = true;
 
     importPreviewStatus.textContent =
       "Bereit";
@@ -6122,9 +5547,7 @@
 
   }
 
-  function showImportError(
-    message
-  ) {
+  function showImportError(message) {
 
     importErrorBox.textContent =
       message;
@@ -6135,26 +5558,29 @@
 
   }
 
-  function renderImportPreview(
-    runs
-  ) {
+  function showImportInfo(message) {
 
-    parsedImportRuns =
-      runs;
+    importInfoBox.textContent =
+      message;
+
+    importInfoBox.classList.add(
+      "show"
+    );
+
+  }
+
+  function renderImportPreview(runs) {
+
+    parsedImportRuns = runs;
 
     importPreview.classList.add(
       "show"
     );
 
-    importErrorBox.textContent =
-      "";
+    importErrorBox.textContent = "";
+    importErrorBox.classList.remove("show");
 
-    importErrorBox.classList.remove(
-      "show"
-    );
-
-    importPreviewTableBody.innerHTML =
-      "";
+    importPreviewTableBody.innerHTML = "";
 
     const totalKm =
       runs.reduce(
@@ -6184,19 +5610,13 @@
       );
 
     importKmTotal.textContent =
-      formatNumber(
-        totalKm
-      ) +
+      formatNumber(totalKm) +
       " km";
 
-    if (
-      dates.length
-    ) {
+    if (dates.length) {
 
       importDateRange.textContent =
-        formatDate(
-          dates[0]
-        ) +
+        formatDate(dates[0]) +
         " – " +
         formatDate(
           dates[dates.length - 1]
@@ -6218,32 +5638,21 @@
       );
 
     runs
-      .slice(
-        0,
-        10
-      )
+      .slice(0, 10)
       .forEach(
         run => {
 
           const tr =
-            document.createElement(
-              "tr"
-            );
+            document.createElement("tr");
 
           const date =
-            document.createElement(
-              "td"
-            );
+            document.createElement("td");
 
           date.textContent =
-            formatDate(
-              run.run_date
-            );
+            formatDate(run.run_date);
 
           const distance =
-            document.createElement(
-              "td"
-            );
+            document.createElement("td");
 
           distance.textContent =
             formatNumber(
@@ -6252,9 +5661,7 @@
             " km";
 
           const duration =
-            document.createElement(
-              "td"
-            );
+            document.createElement("td");
 
           duration.textContent =
             formatDuration(
@@ -6262,9 +5669,7 @@
             );
 
           const type =
-            document.createElement(
-              "td"
-            );
+            document.createElement("td");
 
           type.textContent =
             getImportedRunTypeLabel(
@@ -6272,13 +5677,10 @@
             );
 
           const note =
-            document.createElement(
-              "td"
-            );
+            document.createElement("td");
 
           note.textContent =
-            run.note ||
-            "—";
+            run.note || "—";
 
           tr.appendChild(date);
           tr.appendChild(distance);
@@ -6286,47 +5688,32 @@
           tr.appendChild(type);
           tr.appendChild(note);
 
-          importPreviewTableBody.appendChild(
-            tr
-          );
+          importPreviewTableBody.appendChild(tr);
 
         }
       );
 
-    if (
-      runs.length > 10
-    ) {
+    if (runs.length > 10) {
 
       const tr =
-        document.createElement(
-          "tr"
-        );
+        document.createElement("tr");
 
       const td =
-        document.createElement(
-          "td"
-        );
+        document.createElement("td");
 
-      td.colSpan =
-        5;
+      td.colSpan = 5;
 
       td.textContent =
         "… und " +
-        (
-          runs.length - 10
-        ) +
+        (runs.length - 10) +
         " weitere Läufe.";
 
       td.style.color =
         "#7d8582";
 
-      tr.appendChild(
-        td
-      );
+      tr.appendChild(td);
 
-      importPreviewTableBody.appendChild(
-        tr
-      );
+      importPreviewTableBody.appendChild(tr);
 
     }
 
@@ -6336,22 +5723,58 @@
 
   }
 
-  function parseImportedCsv(
-    text
-  ) {
+  /*
+   * Eindeutiger Schlüssel für Duplikaterkennung.
+   */
+  function getRunImportKey(run) {
+
+    const date =
+      String(
+        run.run_date || ""
+      ).trim();
+
+    const distance =
+      Number(
+        run.distance_km || 0
+      ).toFixed(3);
+
+    const duration =
+      Number(
+        run.duration_seconds || 0
+      );
+
+    const type =
+      String(
+        run.run_type || "normal"
+      ).trim().toLowerCase();
+
+    const note =
+      String(
+        run.note || ""
+      )
+        .trim()
+        .toLowerCase();
+
+    return [
+      date,
+      distance,
+      duration,
+      type,
+      note
+    ].join("|");
+
+  }
+
+  function parseImportedCsv(text) {
 
     const cleanedText =
-      String(
-        text || ""
-      )
+      String(text || "")
         .replace(
           /^\uFEFF/,
           ""
         );
 
-    if (
-      !cleanedText.trim()
-    ) {
+    if (!cleanedText.trim()) {
 
       throw new Error(
         "Die CSV-Datei ist leer."
@@ -6370,9 +5793,7 @@
         delimiter
       );
 
-    if (
-      rows.length < 2
-    ) {
+    if (rows.length < 2) {
 
       throw new Error(
         "Die CSV-Datei enthält keine Datenzeilen."
@@ -6382,6 +5803,26 @@
 
     const headers =
       rows[0];
+
+    /*
+     * Deutsche Strava-Spalten:
+     *
+     * Aktivitätsdatum
+     * Aktivitätsart
+     * Distanz
+     * Verstrichene Zeit
+     * Bewegungszeit
+     * Name der Aktivität
+     *
+     * Englische Varianten:
+     *
+     * Activity Date
+     * Activity Type
+     * Distance
+     * Elapsed Time
+     * Moving Time
+     * Activity Name
+     */
 
     const dateIndex =
       findCsvColumn(
@@ -6393,7 +5834,13 @@
           "start_date",
           "activity_date",
           "activitydate",
-          "startdate"
+          "startdate",
+          "aktivitätsdatum",
+          "aktivitaetsdatum",
+          "laufdatum",
+          "startzeit",
+          "datetime",
+          "timestamp"
         ]
       );
 
@@ -6407,25 +5854,55 @@
           "distance km",
           "km",
           "kilometer",
+          "kilometers",
           "distance(km)",
-          "distanz(km)"
+          "distanz(km)",
+          "distance m",
+          "distance(m)",
+          "meter",
+          "meters",
+          "distance mi",
+          "distance(mi)",
+          "mile",
+          "miles"
         ]
       );
 
-    const durationIndex =
+    /*
+     * Für Strava verwenden wir bevorzugt
+     * Bewegungszeit, wenn vorhanden.
+     * Falls diese nicht existiert, wird
+     * Verstrichene Zeit verwendet.
+     */
+    let durationIndex =
       findCsvColumn(
         headers,
         [
-          "duration",
-          "dauer",
-          "zeit",
-          "time",
-          "elapsed_time",
-          "elapsedtime",
           "moving_time",
-          "movingtime"
+          "movingtime",
+          "bewegungszeit",
+          "moving time"
         ]
       );
+
+    if (durationIndex === -1) {
+
+      durationIndex =
+        findCsvColumn(
+          headers,
+          [
+            "duration",
+            "dauer",
+            "zeit",
+            "time",
+            "elapsed_time",
+            "elapsedtime",
+            "verstrichenezeit",
+            "verstrichene zeit"
+          ]
+        );
+
+    }
 
     const typeIndex =
       findCsvColumn(
@@ -6437,7 +5914,11 @@
           "sport",
           "activity_type",
           "activitytype",
-          "activity"
+          "activity",
+          "aktivitätsart",
+          "aktivitaetsart",
+          "laufart",
+          "sportart"
         ]
       );
 
@@ -6450,25 +5931,24 @@
           "name",
           "activity_name",
           "activityname",
+          "activity name",
           "title",
           "beschreibung",
-          "description"
+          "description",
+          "name der aktivität",
+          "name der aktivitaet"
         ]
       );
 
-    if (
-      dateIndex === -1
-    ) {
+    if (dateIndex === -1) {
 
       throw new Error(
-        "Keine Datumsspalte erkannt. Erwartet wird z. B. „Datum“, „Date“ oder „run_date“."
+        "Keine Datumsspalte erkannt. Erwartet wird z. B. „Aktivitätsdatum“, „Datum“, „Activity Date“ oder „run_date“."
       );
 
     }
 
-    if (
-      distanceIndex === -1
-    ) {
+    if (distanceIndex === -1) {
 
       throw new Error(
         "Keine Distanzspalte erkannt. Erwartet wird z. B. „Distanz“, „Distance“, „km“ oder „distance_km“."
@@ -6476,11 +5956,12 @@
 
     }
 
-    const importedRuns =
-      [];
+    const importedRuns = [];
+    const errors = [];
 
-    const errors =
-      [];
+    let skippedNonRuns = 0;
+    let skippedZeroDistance = 0;
+    let skippedInvalid = 0;
 
     for (
       let rowIndex = 1;
@@ -6495,12 +5976,55 @@
         !row ||
         !row.some(
           value =>
-            String(value)
-              .trim() !== ""
+            String(value).trim() !== ""
         )
       ) {
-
         continue;
+      }
+
+      /*
+       * WICHTIG:
+       * Bei Strava zuerst die Aktivitätsart prüfen.
+       *
+       * Dadurch werden z. B.
+       * Gewichtstraining = 0 km
+       * Training = 0 km
+       * Spaziergang
+       * Radfahrt
+       * Ski
+       *
+       * gar nicht erst als fehlerhafte Läufe behandelt.
+       */
+      if (typeIndex !== -1) {
+
+        const rawActivityType =
+          String(
+            row[typeIndex] || ""
+          )
+            .trim()
+            .toLowerCase();
+
+        const normalizedActivityType =
+          rawActivityType
+            .normalize("NFD")
+            .replace(
+              /[\u0300-\u036f]/g,
+              ""
+            );
+
+        const isRun =
+          normalizedActivityType === "lauf" ||
+          normalizedActivityType === "run" ||
+          normalizedActivityType === "running" ||
+          normalizedActivityType.includes("lauf");
+
+        if (!isRun) {
+
+          skippedNonRuns++;
+
+          continue;
+
+        }
 
       }
 
@@ -6511,14 +6035,7 @@
         row[distanceIndex];
 
       const parsedDate =
-        parseCsvDate(
-          rawDate
-        );
-
-      const parsedDistance =
-        parseCsvNumber(
-          rawDistance
-        );
+        parseCsvDate(rawDate);
 
       if (!parsedDate) {
 
@@ -6530,35 +6047,38 @@
           "“)."
         );
 
+        skippedInvalid++;
+
         continue;
 
       }
 
+      const parsedDistance =
+        parseCsvDistance(
+          rawDistance,
+          headers[distanceIndex]
+        );
+
+      /*
+       * 0 km ist bei Strava bei Nicht-Laufaktivitäten
+       * normal. Diese werden bereits oben herausgefiltert.
+       * Falls ein echter Lauf trotzdem 0 km hat, wird er
+       * übersprungen.
+       */
       if (
-        !Number.isFinite(
-          parsedDistance
-        ) ||
+        !Number.isFinite(parsedDistance) ||
         parsedDistance <= 0
       ) {
 
-        errors.push(
-          "Zeile " +
-          (rowIndex + 1) +
-          ": ungültige Distanz („" +
-          String(rawDistance || "") +
-          "“)."
-        );
+        skippedZeroDistance++;
 
         continue;
 
       }
 
-      let duration =
-        null;
+      let duration = null;
 
-      if (
-        durationIndex !== -1
-      ) {
+      if (durationIndex !== -1) {
 
         duration =
           parseCsvDuration(
@@ -6588,8 +6108,7 @@
 
         distance_km:
           Math.round(
-            parsedDistance *
-            1000
+            parsedDistance * 1000
           ) / 1000,
 
         duration_seconds:
@@ -6597,10 +6116,7 @@
 
         note:
           note
-            ? note.substring(
-                0,
-                500
-              )
+            ? note.substring(0, 500)
             : null,
 
         run_type:
@@ -6616,20 +6132,49 @@
 
     }
 
-    if (
-      !importedRuns.length
-    ) {
+    if (!importedRuns.length) {
 
       throw new Error(
-        "Es konnte kein gültiger Lauf importiert werden."
+        "Es konnte kein gültiger Lauf gefunden werden. Bitte prüfe, ob deine CSV tatsächlich Laufaktivitäten enthält."
       );
 
     }
 
     return {
+
       runs:
         importedRuns,
-      errors
+
+      errors,
+
+      skippedNonRuns,
+
+      skippedZeroDistance,
+
+      skippedInvalid,
+
+      totalDataRows:
+        rows.length - 1,
+
+      detectedTypeColumn:
+        typeIndex !== -1,
+
+      detectedDateColumn:
+        headers[dateIndex],
+
+      detectedDistanceColumn:
+        headers[distanceIndex],
+
+      detectedDurationColumn:
+        durationIndex !== -1
+          ? headers[durationIndex]
+          : null,
+
+      detectedNoteColumn:
+        noteIndex !== -1
+          ? headers[noteIndex]
+          : null
+
     };
 
   }
@@ -6656,9 +6201,7 @@
           "Bitte melde dich zuerst an, um deine Laufhistorie zu importieren."
         );
 
-        importPreview.classList.add(
-          "show"
-        );
+        importPreview.classList.add("show");
 
         return;
 
@@ -6666,9 +6209,7 @@
 
       try {
 
-        importPreview.classList.add(
-          "show"
-        );
+        importPreview.classList.add("show");
 
         importPreviewStatus.textContent =
           "CSV wird geprüft …";
@@ -6677,31 +6218,91 @@
           await file.text();
 
         const result =
-          parseImportedCsv(
-            text
-          );
+          parseImportedCsv(text);
 
         renderImportPreview(
           result.runs
         );
 
+        /*
+         * Für deine Strava-Datei:
+         * 570 Datenzeilen
+         * 373 Läufe
+         * 197 Nicht-Läufe
+         */
         if (
-          result.errors.length
+          result.skippedNonRuns > 0
         ) {
+
+          showImportInfo(
+            result.skippedNonRuns +
+            (
+              result.skippedNonRuns === 1
+                ? " andere Aktivität wurde"
+                : " andere Aktivitäten wurden"
+            ) +
+            " automatisch übersprungen. Es werden nur Laufaktivitäten importiert."
+          );
+
+        }
+
+        const details = [];
+
+        if (result.detectedDateColumn) {
+          details.push(
+            "Datum: " +
+            result.detectedDateColumn
+          );
+        }
+
+        if (result.detectedDistanceColumn) {
+          details.push(
+            "Distanz: " +
+            result.detectedDistanceColumn
+          );
+        }
+
+        if (result.detectedDurationColumn) {
+          details.push(
+            "Zeit: " +
+            result.detectedDurationColumn
+          );
+        }
+
+        if (result.detectedTypeColumn) {
+          details.push(
+            "Aktivitätsart erkannt"
+          );
+        }
+
+        if (details.length) {
+
+          showImportInfo(
+            (
+              result.skippedNonRuns > 0
+                ? (
+                  result.skippedNonRuns +
+                  " andere Aktivitäten wurden übersprungen. "
+                )
+                : ""
+            ) +
+            details.join(" · ")
+          );
+
+        }
+
+        if (result.errors.length) {
 
           showImportError(
             result.errors
-              .slice(
-                0,
-                8
-              )
+              .slice(0, 8)
               .join(" ")
-              +
-              (
-                result.errors.length > 8
-                  ? " Weitere fehlerhafte Zeilen wurden ebenfalls übersprungen."
-                  : ""
-              )
+            +
+            (
+              result.errors.length > 8
+                ? " Weitere fehlerhafte Zeilen wurden ebenfalls übersprungen."
+                : ""
+            )
           );
 
         }
@@ -6717,9 +6318,7 @@
           error
         );
 
-        importPreview.classList.add(
-          "show"
-        );
+        importPreview.classList.add("show");
 
         importPreviewStatus.textContent =
           "Prüfung fehlgeschlagen";
@@ -6739,9 +6338,7 @@
     }
   );
 
-  async function importRunsInBatches(
-    runs
-  ) {
+  async function importRunsInBatches(runs) {
 
     if (!currentUser) {
 
@@ -6762,50 +6359,16 @@
 
     }
 
-    let importedCount =
-      0;
+    /*
+     * Bestehende Läufe holen, damit derselbe Strava-Export
+     * nicht versehentlich zweimal importiert wird.
+     */
+    let existingRuns =
+      Array.isArray(currentRuns)
+        ? currentRuns
+        : [];
 
-    for (
-      let start = 0;
-      start < runs.length;
-      start += IMPORT_BATCH_SIZE
-    ) {
-
-      const batch =
-        runs.slice(
-          start,
-          start +
-          IMPORT_BATCH_SIZE
-        )
-        .map(
-          run => ({
-
-            user_id:
-              currentUser.id,
-
-            run_date:
-              run.run_date,
-
-            distance_km:
-              run.distance_km,
-
-            duration_seconds:
-              run.duration_seconds,
-
-            note:
-              run.note || null,
-
-            run_type:
-              run.run_type || "normal",
-
-            photo_path:
-              null,
-
-            best_time_category:
-              null
-
-          })
-        );
+    if (!existingRuns.length) {
 
       const {
         data,
@@ -6813,9 +6376,125 @@
       } =
         await supabaseClient
           .from("runs")
-          .insert(
-            batch
+          .select(
+            "id, run_date, distance_km, duration_seconds, note, run_type, best_time_category"
           )
+          .eq(
+            "user_id",
+            currentUser.id
+          )
+          .limit(10000);
+
+      if (error) {
+
+        console.error(
+          "Bestehende Läufe für Duplikatprüfung:",
+          error
+        );
+
+      } else {
+
+        existingRuns =
+          data || [];
+
+      }
+
+    }
+
+    const seenKeys =
+      new Set(
+        existingRuns.map(
+          getRunImportKey
+        )
+      );
+
+    const runsToImport = [];
+    let skippedDuplicates = 0;
+
+    for (
+      const run of runs
+    ) {
+
+      const key =
+        getRunImportKey(run);
+
+      if (
+        skipDuplicateRuns.checked &&
+        seenKeys.has(key)
+      ) {
+
+        skippedDuplicates++;
+
+        continue;
+
+      }
+
+      seenKeys.add(key);
+
+      runsToImport.push(run);
+
+    }
+
+    if (!runsToImport.length) {
+
+      return {
+        imported: 0,
+        skippedDuplicates
+      };
+
+    }
+
+    let importedCount = 0;
+
+    for (
+      let start = 0;
+      start < runsToImport.length;
+      start += IMPORT_BATCH_SIZE
+    ) {
+
+      const batch =
+        runsToImport
+          .slice(
+            start,
+            start + IMPORT_BATCH_SIZE
+          )
+          .map(
+            run => ({
+
+              user_id:
+                currentUser.id,
+
+              run_date:
+                run.run_date,
+
+              distance_km:
+                run.distance_km,
+
+              duration_seconds:
+                run.duration_seconds,
+
+              note:
+                run.note || null,
+
+              run_type:
+                run.run_type || "normal",
+
+              photo_path:
+                null,
+
+              best_time_category:
+                null
+
+            })
+          );
+
+      const {
+        data,
+        error
+      } =
+        await supabaseClient
+          .from("runs")
+          .insert(batch)
           .select();
 
       if (error) {
@@ -6845,12 +6524,15 @@
       importPreviewStatus.textContent =
         importedCount +
         " / " +
-        runs.length +
+        runsToImport.length +
         " Läufe importiert …";
 
     }
 
-    return importedCount;
+    return {
+      imported: importedCount,
+      skippedDuplicates
+    };
 
   }
 
@@ -6858,9 +6540,7 @@
     "click",
     async function() {
 
-      if (
-        !currentUser
-      ) {
+      if (!currentUser) {
 
         setMessage(
           importMessage,
@@ -6871,9 +6551,7 @@
 
       }
 
-      if (
-        !parsedImportRuns.length
-      ) {
+      if (!parsedImportRuns.length) {
 
         setMessage(
           importMessage,
@@ -6884,11 +6562,8 @@
 
       }
 
-      importRunsButton.disabled =
-        true;
-
-      csvImportFile.disabled =
-        true;
+      importRunsButton.disabled = true;
+      csvImportFile.disabled = true;
 
       setMessage(
         importMessage,
@@ -6898,36 +6573,57 @@
 
       try {
 
-        const count =
+        const result =
           await importRunsInBatches(
             parsedImportRuns
           );
 
-        setMessage(
-          importMessage,
-          count +
+        const imported =
+          result.imported;
+
+        const skipped =
+          result.skippedDuplicates;
+
+        let message =
+          imported +
           (
-            count === 1
+            imported === 1
               ? " Lauf wurde"
               : " Läufe wurden"
           ) +
-          " erfolgreich importiert.",
+          " erfolgreich importiert.";
+
+        if (skipped > 0) {
+
+          message +=
+            " " +
+            skipped +
+            (
+              skipped === 1
+                ? " bereits vorhandener Lauf wurde"
+                : " bereits vorhandene Läufe wurden"
+            ) +
+            " übersprungen.";
+
+        }
+
+        setMessage(
+          importMessage,
+          message,
           true
         );
 
         importPreviewStatus.textContent =
           "Import abgeschlossen";
 
-        currentRuns =
-          [];
+        currentRuns = [];
 
         await loadRuns();
 
-        csvImportFile.value =
-          "";
+        csvImportFile.value = "";
+        parsedImportRuns = [];
 
-        parsedImportRuns =
-          [];
+        importRunsButton.disabled = true;
 
       } catch (error) {
 
@@ -6949,8 +6645,12 @@
         csvImportFile.disabled =
           !currentUser;
 
-        importRunsButton.disabled =
-          !parsedImportRuns.length;
+        if (
+          parsedImportRuns.length &&
+          currentUser
+        ) {
+          importRunsButton.disabled = false;
+        }
 
       }
 
@@ -7002,32 +6702,23 @@
         );
 
       const url =
-        URL.createObjectURL(
-          blob
-        );
+        URL.createObjectURL(blob);
 
       const link =
-        document.createElement(
-          "a"
-        );
+        document.createElement("a");
 
-      link.href =
-        url;
+      link.href = url;
 
       link.download =
         "miles-apart-laufhistorie-vorlage.csv";
 
-      document.body.appendChild(
-        link
-      );
+      document.body.appendChild(link);
 
       link.click();
 
       link.remove();
 
-      URL.revokeObjectURL(
-        url
-      );
+      URL.revokeObjectURL(url);
 
     }
   );
@@ -7061,13 +6752,10 @@
     ) {
 
       const date =
-        new Date(
-          weekStart
-        );
+        new Date(weekStart);
 
       date.setDate(
-        date.getDate() +
-        index
+        date.getDate() + index
       );
 
       const year =
@@ -7093,8 +6781,7 @@
 
         duration_seconds:
           Math.round(
-            DEMO_DAILY_KM[index] *
-            330
+            DEMO_DAILY_KM[index] * 330
           ),
 
         note:
@@ -7147,9 +6834,7 @@
      KILOMETER
   ========================================================= */
 
-  function calculateTotals(
-    runs
-  ) {
+  function calculateTotals(runs) {
 
     const now =
       new Date();
@@ -7171,14 +6856,9 @@
         1
       );
 
-    let week =
-      0;
-
-    let month =
-      0;
-
-    let year =
-      0;
+    let week = 0;
+    let month = 0;
+    let year = 0;
 
     const daily = [
       0, 0, 0, 0, 0, 0, 0
@@ -7232,12 +6912,9 @@
 
   }
 
-  function renderDailyChart(
-    daily
-  ) {
+  function renderDailyChart(daily) {
 
-    dailyChart.innerHTML =
-      "";
+    dailyChart.innerHTML = "";
 
     const labels = [
       "Mo",
@@ -7270,39 +6947,21 @@
       (value, index) => {
 
         const column =
-          document.createElement(
-            "div"
-          );
+          document.createElement("div");
 
         column.className =
           "daily-column";
 
-        if (
-          index ===
-          todayIndex
-        ) {
-
-          column.classList.add(
-            "today"
-          );
-
+        if (index === todayIndex) {
+          column.classList.add("today");
         }
 
-        if (
-          index >
-          todayIndex
-        ) {
-
-          column.classList.add(
-            "future"
-          );
-
+        if (index > todayIndex) {
+          column.classList.add("future");
         }
 
         const valueElement =
-          document.createElement(
-            "div"
-          );
+          document.createElement("div");
 
         valueElement.className =
           "daily-value";
@@ -7313,17 +6972,13 @@
             : "—";
 
         const barArea =
-          document.createElement(
-            "div"
-          );
+          document.createElement("div");
 
         barArea.className =
           "daily-bar-area";
 
         const bar =
-          document.createElement(
-            "div"
-          );
+          document.createElement("div");
 
         bar.className =
           "daily-bar";
@@ -7339,14 +6994,10 @@
         bar.style.height =
           height + "%";
 
-        barArea.appendChild(
-          bar
-        );
+        barArea.appendChild(bar);
 
         const label =
-          document.createElement(
-            "div"
-          );
+          document.createElement("div");
 
         label.className =
           "daily-label";
@@ -7354,47 +7005,29 @@
         label.textContent =
           labels[index];
 
-        column.appendChild(
-          valueElement
-        );
+        column.appendChild(valueElement);
+        column.appendChild(barArea);
+        column.appendChild(label);
 
-        column.appendChild(
-          barArea
-        );
-
-        column.appendChild(
-          label
-        );
-
-        dailyChart.appendChild(
-          column
-        );
+        dailyChart.appendChild(column);
 
       }
     );
 
   }
 
-  function renderTotals(
-    totals
-  ) {
+  function renderTotals(totals) {
 
     weekTotal.textContent =
-      formatNumber(
-        totals.week
-      ) +
+      formatNumber(totals.week) +
       " km";
 
     monthTotal.textContent =
-      formatNumber(
-        totals.month
-      ) +
+      formatNumber(totals.month) +
       " km";
 
     yearTotal.textContent =
-      formatNumber(
-        totals.year
-      ) +
+      formatNumber(totals.year) +
       " km";
 
     const largest =
@@ -7436,9 +7069,7 @@
       );
 
     sidebarWeekKm.textContent =
-      formatNumber(
-        totals.week
-      ) +
+      formatNumber(totals.week) +
       " / 30 KM";
 
     sidebarWeekProgress.style.width =
@@ -7460,10 +7091,7 @@
      BESTZEITEN
   ========================================================= */
 
-  function findBestRunByCategory(
-    runs,
-    category
-  ) {
+  function findBestRunByCategory(runs, category) {
 
     const eligible =
       runs.filter(
@@ -7475,8 +7103,7 @@
             );
 
           return (
-            run.best_time_category ===
-            category &&
+            run.best_time_category === category &&
             duration > 0
           );
 
@@ -7488,26 +7115,16 @@
     }
 
     eligible.sort(
-      (
-        a,
-        b
-      ) =>
-        Number(
-          a.duration_seconds
-        ) -
-        Number(
-          b.duration_seconds
-        )
+      (a, b) =>
+        Number(a.duration_seconds) -
+        Number(b.duration_seconds)
     );
 
     return eligible[0];
 
   }
 
-  function renderBestTime(
-    key,
-    run
-  ) {
+  function renderBestTime(key, run) {
 
     const elements =
       bestElements[key];
@@ -7525,11 +7142,8 @@
         "empty"
       );
 
-      elements.date.textContent =
-        "";
-
-      elements.note.textContent =
-        "";
+      elements.date.textContent = "";
+      elements.note.textContent = "";
 
       return;
 
@@ -7545,74 +7159,48 @@
     );
 
     elements.date.textContent =
-      formatDate(
-        run.run_date
-      );
+      formatDate(run.run_date);
 
     elements.note.textContent =
-      run.note ||
-      "";
+      run.note || "";
 
   }
 
-  function renderBestTimes(
-    runs
-  ) {
+  function renderBestTimes(runs) {
 
     renderBestTime(
       "5k",
-      findBestRunByCategory(
-        runs,
-        "5k"
-      )
+      findBestRunByCategory(runs, "5k")
     );
 
     renderBestTime(
       "10k",
-      findBestRunByCategory(
-        runs,
-        "10k"
-      )
+      findBestRunByCategory(runs, "10k")
     );
 
     renderBestTime(
       "half",
-      findBestRunByCategory(
-        runs,
-        "half"
-      )
+      findBestRunByCategory(runs, "half")
     );
 
     renderBestTime(
       "marathon",
-      findBestRunByCategory(
-        runs,
-        "marathon"
-      )
+      findBestRunByCategory(runs, "marathon")
     );
 
     renderBestTime(
       "50k",
-      findBestRunByCategory(
-        runs,
-        "50k"
-      )
+      findBestRunByCategory(runs, "50k")
     );
 
     renderBestTime(
       "100k",
-      findBestRunByCategory(
-        runs,
-        "100k"
-      )
+      findBestRunByCategory(runs, "100k")
     );
 
     renderBestTime(
       "100plus",
-      findBestRunByCategory(
-        runs,
-        "100plus"
-      )
+      findBestRunByCategory(runs, "100plus")
     );
 
     const longest =
@@ -7624,16 +7212,10 @@
 
           if (
             !longestRun ||
-            Number(
-              run.distance_km
-            ) >
-            Number(
-              longestRun.distance_km
-            )
+            Number(run.distance_km) >
+            Number(longestRun.distance_km)
           ) {
-
             return run;
-
           }
 
           return longestRun;
@@ -7643,34 +7225,23 @@
       );
 
     const longestElement =
-      document.getElementById(
-        "longestRun"
-      );
+      document.getElementById("longestRun");
 
     const longestDate =
-      document.getElementById(
-        "longestRunDate"
-      );
+      document.getElementById("longestRunDate");
 
     const longestNote =
-      document.getElementById(
-        "longestRunNote"
-      );
+      document.getElementById("longestRunNote");
 
     if (!longest) {
 
       longestElement.textContent =
         "Noch kein Lauf";
 
-      longestElement.classList.add(
-        "empty"
-      );
+      longestElement.classList.add("empty");
 
-      longestDate.textContent =
-        "";
-
-      longestNote.textContent =
-        "";
+      longestDate.textContent = "";
+      longestNote.textContent = "";
 
     } else {
 
@@ -7680,14 +7251,10 @@
         ) +
         " km";
 
-      longestElement.classList.remove(
-        "empty"
-      );
+      longestElement.classList.remove("empty");
 
       longestDate.textContent =
-        formatDate(
-          longest.run_date
-        );
+        formatDate(longest.run_date);
 
       longestNote.textContent =
         longest.note ||
@@ -7702,40 +7269,27 @@
      RUN HISTORY
   ========================================================= */
 
-  function getBestCategoryLabel(
-    category
-  ) {
+  function getBestCategoryLabel(category) {
 
     if (
       !category ||
-      !BEST_TIME_CATEGORIES[
-        category
-      ]
+      !BEST_TIME_CATEGORIES[category]
     ) {
-
       return "";
-
     }
 
-    return BEST_TIME_CATEGORIES[
-      category
-    ].label;
+    return BEST_TIME_CATEGORIES[category].label;
 
   }
 
-  function renderRunsList(
-    runs
-  ) {
+  function renderRunsList(runs) {
 
-    runsList.innerHTML =
-      "";
+    runsList.innerHTML = "";
 
     if (!runs.length) {
 
       const empty =
-        document.createElement(
-          "div"
-        );
+        document.createElement("div");
 
       empty.className =
         "empty-runs";
@@ -7743,9 +7297,7 @@
       empty.textContent =
         "Noch keine Läufe gespeichert. Dein erster Lauf kann hier beginnen.";
 
-      runsList.appendChild(
-        empty
-      );
+      runsList.appendChild(empty);
 
       return;
 
@@ -7754,50 +7306,32 @@
     const sorted =
       [...runs]
         .sort(
-          (
-            a,
-            b
-          ) =>
-            new Date(
-              b.run_date
-            ) -
-            new Date(
-              a.run_date
-            )
+          (a, b) =>
+            new Date(b.run_date) -
+            new Date(a.run_date)
         )
-        .slice(
-          0,
-          10
-        );
+        .slice(0, 10);
 
     sorted.forEach(
       run => {
 
         const row =
-          document.createElement(
-            "div"
-          );
+          document.createElement("div");
 
         row.className =
           "run-list-row";
 
         const date =
-          document.createElement(
-            "div"
-          );
+          document.createElement("div");
 
         date.className =
           "run-list-date";
 
         date.textContent =
-          formatDate(
-            run.run_date
-          );
+          formatDate(run.run_date);
 
         const distance =
-          document.createElement(
-            "div"
-          );
+          document.createElement("div");
 
         distance.className =
           "run-list-distance";
@@ -7809,27 +7343,20 @@
           " km";
 
         const note =
-          document.createElement(
-            "div"
-          );
+          document.createElement("div");
 
         note.className =
           "run-list-note";
 
         note.textContent =
-          run.note ||
-          "";
+          run.note || "";
 
-        distance.appendChild(
-          note
-        );
+        distance.appendChild(note);
 
         if (run.photo_path) {
 
           const photoBadge =
-            document.createElement(
-              "div"
-            );
+            document.createElement("div");
 
           photoBadge.className =
             "run-photo-badge";
@@ -7837,20 +7364,14 @@
           photoBadge.textContent =
             "📷 Foto hinterlegt";
 
-          distance.appendChild(
-            photoBadge
-          );
+          distance.appendChild(photoBadge);
 
         }
 
-        if (
-          run.best_time_category
-        ) {
+        if (run.best_time_category) {
 
           const pbBadge =
-            document.createElement(
-              "div"
-            );
+            document.createElement("div");
 
           pbBadge.className =
             "run-pb-badge";
@@ -7861,16 +7382,12 @@
               run.best_time_category
             );
 
-          distance.appendChild(
-            pbBadge
-          );
+          distance.appendChild(pbBadge);
 
         }
 
         const time =
-          document.createElement(
-            "div"
-          );
+          document.createElement("div");
 
         time.className =
           "run-list-time";
@@ -7881,9 +7398,7 @@
           );
 
         const kind =
-          document.createElement(
-            "div"
-          );
+          document.createElement("div");
 
         kind.className =
           "run-list-kind";
@@ -7893,61 +7408,33 @@
             run.run_type
           );
 
-        row.appendChild(
-          date
-        );
+        row.appendChild(date);
+        row.appendChild(distance);
+        row.appendChild(time);
+        row.appendChild(kind);
 
-        row.appendChild(
-          distance
-        );
-
-        row.appendChild(
-          time
-        );
-
-        row.appendChild(
-          kind
-        );
-
-        runsList.appendChild(
-          row
-        );
+        runsList.appendChild(row);
 
       }
     );
 
   }
 
-  function renderRunDashboard(
-    runs
-  ) {
+  function renderRunDashboard(runs) {
 
     const totals =
-      calculateTotals(
-        runs
-      );
+      calculateTotals(runs);
 
-    renderDailyChart(
-      totals.daily
-    );
-
-    renderTotals(
-      totals
-    );
-
-    renderBestTimes(
-      runs
-    );
-
-    renderRunsList(
-      runs
-    );
+    renderDailyChart(totals.daily);
+    renderTotals(totals);
+    renderBestTimes(runs);
+    renderRunsList(runs);
 
   }
 
   /* =========================================================
      RUNS LADEN
-  ========================================================= */
+     ========================================================= */
 
   async function loadRuns() {
 
@@ -7964,51 +7451,80 @@
 
     }
 
-    const {
-      data,
-      error
-    } =
-      await supabaseClient
-        .from("runs")
-        .select(
-          "id, run_date, distance_km, duration_seconds, note, run_type, photo_path, best_time_category, created_at"
-        )
-        .eq(
-          "user_id",
-          currentUser.id
-        )
-        .order(
-          "run_date",
-          {
-            ascending: false
-          }
+    /*
+     * Supabase liefert bei großen Tabellen nicht zuverlässig
+     * alle Datensätze in einer einzigen Anfrage.
+     *
+     * Deshalb laden wir in Seiten zu je 1000 Läufen.
+     */
+    const PAGE_SIZE = 1000;
+
+    let allRuns = [];
+    let from = 0;
+
+    while (true) {
+
+      const {
+        data,
+        error
+      } =
+        await supabaseClient
+          .from("runs")
+          .select(
+            "id, run_date, distance_km, duration_seconds, note, run_type, photo_path, best_time_category, created_at"
+          )
+          .eq(
+            "user_id",
+            currentUser.id
+          )
+          .order(
+            "run_date",
+            {
+              ascending: false
+            }
+          )
+          .range(
+            from,
+            from + PAGE_SIZE - 1
+          );
+
+      if (error) {
+
+        console.error(
+          "Läufe konnten nicht geladen werden:",
+          error
         );
 
-    if (error) {
+        currentRuns = [];
 
-      console.error(
-        "Läufe konnten nicht geladen werden:",
-        error
-      );
+        renderRunDashboard([]);
 
-      currentRuns =
-        [];
+        setMessage(
+          runFormMessage,
+          "Die Läufe konnten gerade nicht geladen werden."
+        );
 
-      renderRunDashboard(
-        []
-      );
+        return;
 
-      setMessage(
-        runFormMessage,
-        "Die Läufe konnten gerade nicht geladen werden."
-      );
+      }
 
-      return;
+      const page =
+        data || [];
+
+      allRuns.push(...page);
+
+      if (
+        page.length < PAGE_SIZE
+      ) {
+        break;
+      }
+
+      from += PAGE_SIZE;
 
     }
 
     currentRuns =
-      data || [];
+      allRuns;
 
     renderRunDashboard(
       currentRuns
@@ -8040,9 +7556,7 @@
         runDate.value;
 
       const distance =
-        Number(
-          runDistance.value
-        );
+        Number(runDistance.value);
 
       const duration =
         parseDuration();
@@ -8072,10 +7586,7 @@
 
       }
 
-      if (
-        !distance ||
-        distance <= 0
-      ) {
+      if (!distance || distance <= 0) {
 
         setMessage(
           runFormMessage,
@@ -8086,9 +7597,7 @@
 
       }
 
-      if (
-        Number.isNaN(duration)
-      ) {
+      if (Number.isNaN(duration)) {
 
         setMessage(
           runFormMessage,
@@ -8112,9 +7621,7 @@
 
       if (isBestTime) {
 
-        if (
-          runType.value !== "race"
-        ) {
+        if (runType.value !== "race") {
 
           setMessage(
             runFormMessage,
@@ -8125,9 +7632,7 @@
 
         }
 
-        if (
-          !bestTimeCategory
-        ) {
+        if (!bestTimeCategory) {
 
           setMessage(
             runFormMessage,
@@ -8169,10 +7674,7 @@
 
       }
 
-      if (
-        photo.size >
-        MAX_RUN_PHOTO_SIZE
-      ) {
+      if (photo.size > MAX_RUN_PHOTO_SIZE) {
 
         setMessage(
           runFormMessage,
@@ -8189,8 +7691,7 @@
         "Lauf speichern →"
       );
 
-      let uploadedPhotoPath =
-        null;
+      let uploadedPhotoPath = null;
 
       try {
 
@@ -8201,9 +7702,7 @@
         );
 
         uploadedPhotoPath =
-          await uploadRunPhoto(
-            photo
-          );
+          await uploadRunPhoto(photo);
 
         setMessage(
           runFormMessage,
@@ -8245,17 +7744,13 @@
         } =
           await supabaseClient
             .from("runs")
-            .insert(
-              runPayload
-            )
+            .insert(runPayload)
             .select()
             .single();
 
         if (error) {
 
-          if (
-            uploadedPhotoPath
-          ) {
+          if (uploadedPhotoPath) {
 
             await deleteRunPhoto(
               uploadedPhotoPath
@@ -8275,9 +7770,7 @@
 
         }
 
-        currentRuns.unshift(
-          data
-        );
+        currentRuns.unshift(data);
 
         runForm.reset();
 
@@ -8285,7 +7778,6 @@
           getTodayDateString();
 
         resetRunPhoto();
-
         resetBestTimeControls();
 
         setMessage(
@@ -8340,9 +7832,7 @@
 
   function openAuth() {
 
-    authOverlay.classList.add(
-      "open"
-    );
+    authOverlay.classList.add("open");
 
     document.body.style.overflow =
       "hidden";
@@ -8353,9 +7843,7 @@
 
   function closeAuth() {
 
-    authOverlay.classList.remove(
-      "open"
-    );
+    authOverlay.classList.remove("open");
 
     document.body.style.overflow =
       "";
@@ -8382,9 +7870,7 @@
         event.target ===
         authOverlay
       ) {
-
         closeAuth();
-
       }
 
     }
@@ -8396,13 +7882,9 @@
 
       if (
         event.key === "Escape" &&
-        authOverlay.classList.contains(
-          "open"
-        )
+        authOverlay.classList.contains("open")
       ) {
-
         closeAuth();
-
       }
 
     }
@@ -8410,21 +7892,10 @@
 
   function hideAllForms() {
 
-    loginForm.classList.remove(
-      "active"
-    );
-
-    registerForm.classList.remove(
-      "active"
-    );
-
-    forgotForm.classList.remove(
-      "active"
-    );
-
-    recoveryForm.classList.remove(
-      "active"
-    );
+    loginForm.classList.remove("active");
+    registerForm.classList.remove("active");
+    forgotForm.classList.remove("active");
+    recoveryForm.classList.remove("active");
 
   }
 
@@ -8433,20 +7904,13 @@
     hideAllForms();
     clearMessages();
 
-    loginForm.classList.add(
-      "active"
-    );
+    loginForm.classList.add("active");
 
     authTabs.style.display =
       "grid";
 
-    loginTab.classList.add(
-      "active"
-    );
-
-    registerTab.classList.remove(
-      "active"
-    );
+    loginTab.classList.add("active");
+    registerTab.classList.remove("active");
 
     authTitle.textContent =
       "Willkommen zurück.";
@@ -8461,20 +7925,13 @@
     hideAllForms();
     clearMessages();
 
-    registerForm.classList.add(
-      "active"
-    );
+    registerForm.classList.add("active");
 
     authTabs.style.display =
       "grid";
 
-    registerTab.classList.add(
-      "active"
-    );
-
-    loginTab.classList.remove(
-      "active"
-    );
+    registerTab.classList.add("active");
+    loginTab.classList.remove("active");
 
     authTitle.textContent =
       "Werde Teil der Community.";
@@ -8491,9 +7948,7 @@
     hideAllForms();
     clearMessages();
 
-    forgotForm.classList.add(
-      "active"
-    );
+    forgotForm.classList.add("active");
 
     authTabs.style.display =
       "none";
@@ -8511,9 +7966,7 @@
     hideAllForms();
     clearMessages();
 
-    recoveryForm.classList.add(
-      "active"
-    );
+    recoveryForm.classList.add("active");
 
     authTabs.style.display =
       "none";
@@ -8612,24 +8065,16 @@
 
   function resetRegistrationGate() {
 
-    followCheckbox.checked =
-      false;
-
-    inviteCheckbox.checked =
-      false;
-
-    inviteCheckbox.disabled =
-      true;
-
-    inviteActionStarted =
-      false;
+    followCheckbox.checked = false;
+    inviteCheckbox.checked = false;
+    inviteCheckbox.disabled = true;
+    inviteActionStarted = false;
 
     inviteCheckLabel.classList.remove(
       "ready"
     );
 
-    shareStatus.textContent =
-      "";
+    shareStatus.textContent = "";
 
     updateRegistrationGate();
 
@@ -8638,8 +8083,7 @@
   function getInviteUrl() {
 
     return (
-      window.location.href
-        .split("#")[0]
+      window.location.href.split("#")[0]
     );
 
   }
@@ -8655,15 +8099,11 @@
 
   }
 
-  function markInviteActionStarted(
-    source
-  ) {
+  function markInviteActionStarted(source) {
 
-    inviteActionStarted =
-      true;
+    inviteActionStarted = true;
 
-    inviteCheckbox.disabled =
-      false;
+    inviteCheckbox.disabled = false;
 
     inviteCheckLabel.classList.add(
       "ready"
@@ -8726,9 +8166,7 @@
       const message =
         getInviteText();
 
-      if (
-        navigator.share
-      ) {
+      if (navigator.share) {
 
         try {
 
@@ -8757,9 +8195,7 @@
             error &&
             error.name === "AbortError"
           ) {
-
             return;
-
           }
 
         }
@@ -8814,9 +8250,7 @@
 
       updateRegistrationGate();
 
-      if (
-        inviteCheckbox.checked
-      ) {
+      if (inviteCheckbox.checked) {
 
         shareStatus.textContent =
           "Einladung bestätigt ✓";
@@ -8838,9 +8272,7 @@
 
       clearMessages();
 
-      if (
-        !followCheckbox.checked
-      ) {
+      if (!followCheckbox.checked) {
 
         setMessage(
           registerMessage,
@@ -8883,9 +8315,7 @@
           .getElementById("registerPassword")
           .value;
 
-      if (
-        name.length < 2
-      ) {
+      if (name.length < 2) {
 
         setMessage(
           registerMessage,
@@ -8896,9 +8326,7 @@
 
       }
 
-      if (
-        password.length < 6
-      ) {
+      if (password.length < 6) {
 
         setMessage(
           registerMessage,
@@ -8967,18 +8395,10 @@
           ).toLowerCase();
 
         if (
-          errorText.includes(
-            "already registered"
-          ) ||
-          errorText.includes(
-            "already exists"
-          ) ||
-          errorText.includes(
-            "email already"
-          ) ||
-          errorText.includes(
-            "user already"
-          )
+          errorText.includes("already registered") ||
+          errorText.includes("already exists") ||
+          errorText.includes("email already") ||
+          errorText.includes("user already")
         ) {
 
           setMessage(
@@ -9002,9 +8422,7 @@
       if (
         data &&
         data.user &&
-        Array.isArray(
-          data.user.identities
-        ) &&
+        Array.isArray(data.user.identities) &&
         data.user.identities.length === 0
       ) {
 
@@ -9231,9 +8649,7 @@
           .getElementById("newPasswordConfirm")
           .value;
 
-      if (
-        password.length < 6
-      ) {
+      if (password.length < 6) {
 
         setMessage(
           recoveryMessage,
@@ -9244,10 +8660,7 @@
 
       }
 
-      if (
-        password !==
-        passwordConfirm
-      ) {
+      if (password !== passwordConfirm) {
 
         setMessage(
           recoveryMessage,
@@ -9309,14 +8722,11 @@
      PROFILE
   ========================================================= */
 
-  async function loadProfile(
-    user
-  ) {
+  async function loadProfile(user) {
 
     if (!user) {
 
-      currentProfile =
-        null;
+      currentProfile = null;
 
       return null;
 
@@ -9344,8 +8754,7 @@
         error
       );
 
-      currentProfile =
-        null;
+      currentProfile = null;
 
       return null;
 
@@ -9378,9 +8787,7 @@
       userGreeting.style.display =
         "none";
 
-      accountMenu.classList.remove(
-        "open"
-      );
+      accountMenu.classList.remove("open");
 
       previewNotice.style.display =
         "block";
@@ -9422,14 +8829,10 @@
       );
 
     const firstName =
-      getFirstName(
-        displayName
-      );
+      getFirstName(displayName);
 
     const initials =
-      getInitials(
-        displayName
-      );
+      getInitials(displayName);
 
     guestArea.style.display =
       "none";
@@ -9469,8 +8872,7 @@
       "Hallo " +
       firstName;
 
-    avatarButton.innerHTML =
-      "";
+    avatarButton.innerHTML = "";
 
     if (
       currentProfile &&
@@ -9478,9 +8880,7 @@
     ) {
 
       const image =
-        document.createElement(
-          "img"
-        );
+        document.createElement("img");
 
       image.src =
         currentProfile.avatar_url;
@@ -9488,9 +8888,7 @@
       image.alt =
         displayName;
 
-      avatarButton.appendChild(
-        image
-      );
+      avatarButton.appendChild(image);
 
     } else {
 
@@ -9587,23 +8985,15 @@
 
     }
 
-    currentUser =
-      null;
-
-    currentProfile =
-      null;
-
-    currentRuns =
-      [];
+    currentUser = null;
+    currentProfile = null;
+    currentRuns = [];
 
     resetRunPhoto();
-
     resetBestTimeControls();
-
     clearImportPreview();
 
-    csvImportFile.value =
-      "";
+    csvImportFile.value = "";
 
     accountMenu.classList.remove(
       "open"
@@ -9673,11 +9063,8 @@
 
         } else {
 
-          currentUser =
-            null;
-
-          currentProfile =
-            null;
+          currentUser = null;
+          currentProfile = null;
 
         }
 
@@ -9692,9 +9079,7 @@
      AUTH FEHLER
   ========================================================= */
 
-  function translateAuthError(
-    error
-  ) {
+  function translateAuthError(error) {
 
     if (!error) {
 
@@ -9748,18 +9133,10 @@
     }
 
     if (
-      message.includes(
-        "already registered"
-      ) ||
-      message.includes(
-        "already exists"
-      ) ||
-      message.includes(
-        "email already"
-      ) ||
-      message.includes(
-        "user already"
-      )
+      message.includes("already registered") ||
+      message.includes("already exists") ||
+      message.includes("email already") ||
+      message.includes("user already")
     ) {
 
       return "Du hast dich mit dieser Mail bereits registriert. Melde dich stattdessen an.";
@@ -9802,8 +9179,7 @@
         error
       );
 
-      currentUser =
-        null;
+      currentUser = null;
 
       updateUserInterface();
 
@@ -9828,11 +9204,8 @@
 
     } else {
 
-      currentUser =
-        null;
-
-      currentProfile =
-        null;
+      currentUser = null;
+      currentProfile = null;
 
     }
 
