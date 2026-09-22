@@ -787,12 +787,12 @@ Prüfe Admin-Rechte …
 </div>
 
 <div class="admin-stat">
-<div class="admin-stat-label">Läufe</div>
+<div class="admin-stat-label">Läufe 2026</div>
 <div class="admin-stat-value" id="runCount">0</div>
 </div>
 
 <div class="admin-stat">
-<div class="admin-stat-label">Kilometer</div>
+<div class="admin-stat-label">Kilometer 2026</div>
 <div class="admin-stat-value" id="kmCount">0,0</div>
 </div>
 
@@ -1282,16 +1282,6 @@ async function checkAdmin(){
         "is_admin"
       );
 
-  /*
-   * Die öffentliche Funktion kann in Schritt 1
-   * je nach Supabase-Konfiguration noch nicht
-   * erreichbar sein.
-   *
-   * Wir versuchen deshalb zusätzlich direkt,
-   * den aktuellen Benutzer gegen admin_users
-   * zu prüfen.
-   */
-
   if(
     !error&&
     data===true
@@ -1348,11 +1338,6 @@ async function getCurrentSession(){
 
 async function loadProfiles(){
 
-  /*
-   * Wir laden die öffentlichen Profildaten.
-   * Die User-IDs kommen über die profiles-Tabelle.
-   */
-
   const{
     data,
     error
@@ -1386,6 +1371,14 @@ async function loadAllRuns(){
         .from("runs")
         .select(
           "id, user_id, run_date, distance_km, duration_seconds, note, run_type, photo_path, best_time_category, created_at"
+        )
+        .gte(
+          "run_date",
+          "2026-01-01"
+        )
+        .lte(
+          "run_date",
+          "2026-12-31"
         )
         .order(
           "run_date",
@@ -1439,17 +1432,6 @@ async function loadMembers(){
       loadAllRuns()
     ]);
 
-  /*
-   * profiles enthält keine E-Mail.
-   * Diese kommt normalerweise aus auth.users.
-   *
-   * Aus Sicherheitsgründen kann die normale
-   * Browser-Schnittstelle auth.users nicht lesen.
-   *
-   * Deshalb zeigen wir zunächst die Profile
-   * und die User-ID.
-   */
-
   const runStats={};
 
   runs.forEach(run=>{
@@ -1502,10 +1484,6 @@ async function loadMembers(){
           ?runStats[profile.id].km
           :0
     }));
-
-  /*
-   * Gesamtstatistiken
-   */
 
   const totalKm=
     runs.reduce(
@@ -2220,16 +2198,6 @@ async function updateBlockStatus(
   blocked
 ){
 
-  /*
-   * WICHTIG:
-   * Dieser Teil funktioniert erst,
-   * wenn wir in Schritt 4 die Admin-RLS
-   * und sichere Server-Funktion ergänzt haben.
-   *
-   * Wir machen deshalb hier bewusst noch
-   * keinen unsicheren direkten Datenbankzugriff.
-   */
-
   throw new Error(
     "Die Sperrfunktion wird im nächsten Schritt sicher aktiviert."
   );
@@ -2237,27 +2205,12 @@ async function updateBlockStatus(
 
 async function deleteMemberRun(run){
 
-  /*
-   * Auch das Löschen über Admin-Rechte
-   * wird im nächsten Schritt über eine
-   * sichere Edge Function ausgeführt.
-   */
-
   throw new Error(
     "Das Admin-Löschen von Läufen wird im nächsten Schritt sicher aktiviert."
   );
 }
 
 async function deleteMember(member){
-
-  /*
-   * Ein kompletter Auth-User darf niemals
-   * mit einem Service-Role-Key im Browser
-   * gelöscht werden.
-   *
-   * Das kommt im nächsten Schritt über
-   * eine Supabase Edge Function.
-   */
 
   throw new Error(
     "Das vollständige Löschen eines Mitglieds wird im nächsten Schritt sicher aktiviert."
