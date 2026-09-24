@@ -633,19 +633,10 @@ h1,h2,h3,h4,h5,h6,strong,b,.kpi,.label,.principle-number,
   letter-spacing:-5px;
 }
 .member-story-lead{
-  max-width:560px;
-  margin:35px 0 0;
-  color:#555;
-  font-size:23px;
-  line-height:1.55;
-  white-space:pre-line;
+  display:none;
 }
 .member-story-location{
-  margin-top:35px;
-  color:#999;
-  font-size:11px;
-  letter-spacing:1.5px;
-  text-transform:uppercase;
+  display:none;
 }
 
 .member-story-body{
@@ -675,25 +666,32 @@ h1,h2,h3,h4,h5,h6,strong,b,.kpi,.label,.principle-number,
 }
 
 .member-story-section{
-  display:grid;
-  grid-template-columns:1.1fr .9fr;
-  min-height:600px;
+  display:flex;
+  flex-direction:column;
+  min-height:0;
   margin-bottom:110px;
-  align-items:center;
-  gap:90px;
   padding-top:100px;
 }
 .member-story-section.reverse{
-  grid-template-columns:.9fr 1.1fr;
+  display:flex;
+  flex-direction:column;
 }
-.member-story-section.reverse .member-story-image{order:2}
-.member-story-section.reverse .member-story-copy{order:1}
-.member-story-section.is-empty{display:none}
+.member-story-section.reverse .member-story-image{
+  order:2;
+}
+.member-story-section.reverse .member-story-copy{
+  order:1;
+}
+.member-story-section.is-empty{
+  display:none;
+}
+
 .member-story-image{
   width:100%;
   height:600px;
   overflow:hidden;
   background:#f1f1ee;
+  order:2;
 }
 .member-story-image img{
   width:100%;
@@ -701,25 +699,26 @@ h1,h2,h3,h4,h5,h6,strong,b,.kpi,.label,.principle-number,
   display:block;
   object-fit:cover;
 }
-.member-story-copy{max-width:540px}
-.member-story-number{
-  margin-bottom:24px;
-  color:var(--miles-blue);
-  font-size:11px;
-  letter-spacing:2px;
+
+.member-story-copy{
+  max-width:none;
+  order:1;
+  padding-bottom:24px;
 }
+
+.member-story-number{
+  display:none;
+}
+
 .member-story-copy h2{
-  margin:0 0 28px;
+  margin:0 0 22px;
   font-size:clamp(40px,5vw,70px);
   line-height:.94;
   letter-spacing:-3px;
 }
+
 .member-story-copy p{
-  margin:0;
-  color:#666;
-  font-size:19px;
-  line-height:1.75;
-  white-space:pre-line;
+  display:none;
 }
 
 .member-story-ending{
@@ -1472,8 +1471,9 @@ h1,h2,h3,h4,h5,h6,strong,b,.kpi,.label,.principle-number,
 
   .member-story-section,
   .member-story-section.reverse{
-    grid-template-columns:1fr;
-    gap:35px;
+    display:flex;
+    flex-direction:column;
+    gap:0;
     margin-bottom:80px;
   }
 
@@ -1681,11 +1681,6 @@ h1,h2,h3,h4,h5,h6,strong,b,.kpi,.label,.principle-number,
     letter-spacing:-3px;
   }
 
-  .member-story-lead{
-    font-size:18px;
-    margin-top:25px;
-  }
-
   .member-story-introduction{
     padding:60px 0;
   }
@@ -1707,11 +1702,6 @@ h1,h2,h3,h4,h5,h6,strong,b,.kpi,.label,.principle-number,
   .member-story-copy h2{
     font-size:43px;
     letter-spacing:-2px;
-  }
-
-  .member-story-copy p{
-    font-size:17px;
-    line-height:1.7;
   }
 
   .member-story-ending{
@@ -1935,7 +1925,7 @@ h1,h2,h3,h4,h5,h6,strong,b,.kpi,.label,.principle-number,
           <div class="member-story-hero-content">
 
             <div class="member-story-kicker">
-              MILES APART / MEMBER
+              THE STORY
             </div>
 
             <h1
@@ -1944,16 +1934,6 @@ h1,h2,h3,h4,h5,h6,strong,b,.kpi,.label,.principle-number,
             >
               Runner
             </h1>
-
-            <p
-              class="member-story-lead"
-              id="memberStoryLead"
-            ></p>
-
-            <div
-              class="member-story-location"
-              id="memberStoryLocation"
-            ></div>
 
           </div>
 
@@ -1981,22 +1961,16 @@ h1,h2,h3,h4,h5,h6,strong,b,.kpi,.label,.principle-number,
             id="memberStorySection1"
           >
 
+            <div class="member-story-copy">
+
+              <h2 id="memberStoryTitle1"></h2>
+
+            </div>
+
             <div
               class="member-story-image"
               id="memberStoryImage1"
             ></div>
-
-            <div class="member-story-copy">
-
-              <div class="member-story-number">
-                01
-              </div>
-
-              <h2 id="memberStoryTitle1"></h2>
-
-              <p id="memberStoryText1"></p>
-
-            </div>
 
           </article>
 
@@ -2006,22 +1980,16 @@ h1,h2,h3,h4,h5,h6,strong,b,.kpi,.label,.principle-number,
             id="memberStorySection2"
           >
 
+            <div class="member-story-copy">
+
+              <h2 id="memberStoryTitle2"></h2>
+
+            </div>
+
             <div
               class="member-story-image"
               id="memberStoryImage2"
             ></div>
-
-            <div class="member-story-copy">
-
-              <div class="member-story-number">
-                02
-              </div>
-
-              <h2 id="memberStoryTitle2"></h2>
-
-              <p id="memberStoryText2"></p>
-
-            </div>
 
           </article>
 
@@ -2031,22 +1999,16 @@ h1,h2,h3,h4,h5,h6,strong,b,.kpi,.label,.principle-number,
             id="memberStorySection3"
           >
 
+            <div class="member-story-copy">
+
+              <h2 id="memberStoryTitle3"></h2>
+
+            </div>
+
             <div
               class="member-story-image"
               id="memberStoryImage3"
             ></div>
-
-            <div class="member-story-copy">
-
-              <div class="member-story-number">
-                03
-              </div>
-
-              <h2 id="memberStoryTitle3"></h2>
-
-              <p id="memberStoryText3"></p>
-
-            </div>
 
           </article>
 
@@ -4198,33 +4160,12 @@ function renderMemberStory(){
   const intro =
     currentMemberPage?.intro_text || "";
 
-  memberStoryLead.textContent =
-    intro;
-
   memberStoryIntroText.textContent =
     intro;
 
 
-  if(
-    currentProfile &&
-    currentProfile.location
-  ){
-
-    memberStoryLocation.textContent =
-      currentProfile.location;
-
-  }else{
-
-    memberStoryLocation.textContent =
-      "";
-  }
-
-
   memberStoryTitle1.textContent =
     currentMemberPage?.section1_title || "";
-
-  memberStoryText1.textContent =
-    currentMemberPage?.section1_text || "";
 
   renderStoryImage(
     memberStoryImage1,
@@ -4235,9 +4176,6 @@ function renderMemberStory(){
   memberStoryTitle2.textContent =
     currentMemberPage?.section2_title || "";
 
-  memberStoryText2.textContent =
-    currentMemberPage?.section2_text || "";
-
   renderStoryImage(
     memberStoryImage2,
     currentMemberPage?.section2_image
@@ -4246,9 +4184,6 @@ function renderMemberStory(){
 
   memberStoryTitle3.textContent =
     currentMemberPage?.section3_title || "";
-
-  memberStoryText3.textContent =
-    currentMemberPage?.section3_text || "";
 
   renderStoryImage(
     memberStoryImage3,
@@ -5391,7 +5326,7 @@ function updateRegistrationGate(){
   if(ready){
 
     registrationStatusText.textContent =
-      "Alles bereit. Du kannst jetzt dein Miles-Apart-Konto erstellen.";
+      "Alles bereit. Du kannst jetzt dein Miles-apart-Konto erstellen.";
 
     registerSubmit.textContent =
       "Konto erstellen →";
