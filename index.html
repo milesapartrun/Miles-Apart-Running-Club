@@ -718,7 +718,13 @@ h1,h2,h3,h4,h5,h6,strong,b,.kpi,.label,.principle-number,
 }
 
 .member-story-copy p{
-  display:none;
+  display:block;
+  margin:0;
+  max-width:820px;
+  color:#666;
+  font-size:18px;
+  line-height:1.7;
+  white-space:pre-line;
 }
 
 .member-story-ending{
@@ -1704,6 +1710,11 @@ h1,h2,h3,h4,h5,h6,strong,b,.kpi,.label,.principle-number,
     letter-spacing:-2px;
   }
 
+  .member-story-copy p{
+    font-size:16px;
+    line-height:1.7;
+  }
+
   .member-story-ending{
     margin-bottom:60px;
     padding:45px 25px;
@@ -1924,10 +1935,6 @@ h1,h2,h3,h4,h5,h6,strong,b,.kpi,.label,.principle-number,
 
           <div class="member-story-hero-content">
 
-            <div class="member-story-kicker">
-              THE STORY
-            </div>
-
             <h1
               class="member-story-name"
               id="memberStoryName"
@@ -1965,6 +1972,8 @@ h1,h2,h3,h4,h5,h6,strong,b,.kpi,.label,.principle-number,
 
               <h2 id="memberStoryTitle1"></h2>
 
+              <p id="memberStoryText1"></p>
+
             </div>
 
             <div
@@ -1984,6 +1993,8 @@ h1,h2,h3,h4,h5,h6,strong,b,.kpi,.label,.principle-number,
 
               <h2 id="memberStoryTitle2"></h2>
 
+              <p id="memberStoryText2"></p>
+
             </div>
 
             <div
@@ -2002,6 +2013,8 @@ h1,h2,h3,h4,h5,h6,strong,b,.kpi,.label,.principle-number,
             <div class="member-story-copy">
 
               <h2 id="memberStoryTitle3"></h2>
+
+              <p id="memberStoryText3"></p>
 
             </div>
 
@@ -4167,6 +4180,9 @@ function renderMemberStory(){
   memberStoryTitle1.textContent =
     currentMemberPage?.section1_title || "";
 
+  memberStoryText1.textContent =
+    currentMemberPage?.section1_text || "";
+
   renderStoryImage(
     memberStoryImage1,
     currentMemberPage?.section1_image
@@ -4176,6 +4192,9 @@ function renderMemberStory(){
   memberStoryTitle2.textContent =
     currentMemberPage?.section2_title || "";
 
+  memberStoryText2.textContent =
+    currentMemberPage?.section2_text || "";
+
   renderStoryImage(
     memberStoryImage2,
     currentMemberPage?.section2_image
@@ -4184,6 +4203,9 @@ function renderMemberStory(){
 
   memberStoryTitle3.textContent =
     currentMemberPage?.section3_title || "";
+
+  memberStoryText3.textContent =
+    currentMemberPage?.section3_text || "";
 
   renderStoryImage(
     memberStoryImage3,
