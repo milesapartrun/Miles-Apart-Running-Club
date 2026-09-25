@@ -42,6 +42,12 @@
       text-transform: uppercase;
     }
 
+    .challenge-time {
+      margin-top: 14px;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
     .challenge-total {
       margin-top: 24px;
       padding-top: 20px;
@@ -127,6 +133,41 @@
       margin-top: 10px;
       color: #777;
       font-size: 14px;
+    }
+
+    /* =====================================================
+       EARLY BIRD — HELL / TAG
+       ===================================================== */
+
+    .card.early-bird {
+      background: #fff;
+      color: #111;
+      border: 1px solid rgba(0,0,0,.08);
+    }
+
+    .card.early-bird .muted {
+      color: #666;
+    }
+
+    .card.early-bird .small {
+      color: #666;
+    }
+
+    /* =====================================================
+       NIGHT OWLS — DUNKEL / NACHT
+       ===================================================== */
+
+    .card.night-owls {
+      background: #050708;
+      color: #fff;
+    }
+
+    .card.night-owls .muted {
+      color: #aaa;
+    }
+
+    .card.night-owls .small {
+      color: #aaa;
     }
 
   </style>
@@ -262,20 +303,22 @@
 
 
     <!-- =====================================================
-         EARLY BIRD / NIGHT OWLS
+         CHALLENGES
          ===================================================== -->
 
     <div class="grid g2">
 
 
-      <!-- EARLY BIRD CLUB -->
+      <!-- ===================================================
+           EARLY BIRD CLUB
+           =================================================== -->
 
-      <div class="card dark">
+      <div class="card early-bird">
 
         <div class="row">
 
           <span class="badge lime">
-            MORGEN
+            EARLY BIRD
           </span>
 
           <span class="small">
@@ -285,13 +328,17 @@
         </div>
 
         <h2 style="font-size:32px">
-          EARLY BIRD CLUB
+          Early Bird Club
         </h2>
 
-        <p style="color:#bbb">
+        <p class="muted">
           Für alle, die ihre Kilometer sammeln,
           bevor der Tag richtig beginnt.
         </p>
+
+        <div class="challenge-time">
+          04:00 – 09:00 Uhr
+        </div>
 
         <div class="challenge-month">
           Jeden Kalendermonat neu
@@ -350,30 +397,36 @@
       </div>
 
 
-      <!-- NIGHT OWLS CLUB -->
+      <!-- ===================================================
+           NIGHT OWLS CLUB
+           =================================================== -->
 
-      <div class="card">
+      <div class="card night-owls">
 
         <div class="row">
 
           <span class="badge">
-            ABEND
+            NIGHT OWL
           </span>
 
-          <span class="small muted">
+          <span class="small">
             MONATLICH
           </span>
 
         </div>
 
         <h2 style="font-size:32px">
-          NIGHT OWLS CLUB
+          Night Owls Club
         </h2>
 
         <p class="muted">
           Für alle, die ihre Kilometer sammeln,
           wenn der Tag langsam zur Ruhe kommt.
         </p>
+
+        <div class="challenge-time">
+          17:00 – 00:00 Uhr
+        </div>
 
         <div class="challenge-month">
           Jeden Kalendermonat neu
@@ -397,7 +450,7 @@
 
 
         <a
-          class="btn ghost challenge-btn"
+          class="btn challenge-btn"
           style="margin-top:22px;width:100%"
           href="#"
           data-challenge-id="night-owls-club"
@@ -414,7 +467,7 @@
               Leaderboard
             </h3>
 
-            <span class="small muted">
+            <span class="small">
               Dieser Monat
             </span>
 
@@ -460,9 +513,10 @@
         </p>
 
         <p class="small muted">
+          Early Bird zählt Läufe von 04:00 bis 09:00 Uhr.
+          Night Owls zählt Läufe von 17:00 bis 00:00 Uhr.
           Am ersten Tag des nächsten Monats beginnt die
           Kilometerwertung automatisch wieder bei null.
-          Es gibt kein Kilometerziel.
         </p>
 
       </div>
@@ -642,12 +696,14 @@
         );
 
     if (error) {
+
       console.error(
         "Profile konnten nicht geladen werden:",
         error
       );
 
       return {};
+
     }
 
     const names = {};
@@ -669,7 +725,7 @@
 
 
   /* =========================================================
-     MITGLIEDER EINER CHALLENGE
+     CHALLENGE-MITGLIEDER
      ========================================================= */
 
   async function getChallengeMembers(
@@ -700,7 +756,7 @@
 
 
   /* =========================================================
-     RUNS LADEN
+     RUNS
      ========================================================= */
 
   async function getRuns() {
@@ -736,6 +792,7 @@
         row || {}
       );
 
+
     for (
       const name of names
     ) {
@@ -751,6 +808,7 @@
       }
 
     }
+
 
     for (
       const name of names
@@ -771,6 +829,7 @@
       }
 
     }
+
 
     return null;
 
@@ -818,14 +877,90 @@
       row,
       [
         "started_at",
+        "Started_at",
         "start_time",
+        "Start_time",
         "run_date",
+        "Run_date",
         "date",
+        "Date",
         "performed_at",
+        "Performed_at",
         "created_at",
         "Created_at"
       ]
     );
+
+  }
+
+
+  /* =========================================================
+     ZEITFENSTER DER CHALLENGES
+     ========================================================= */
+
+  function isWithinChallengeTime(
+    date,
+    challengeId
+  ) {
+
+    const hour =
+      date.getHours();
+
+    const minute =
+      date.getMinutes();
+
+    const timeInMinutes =
+      hour * 60 +
+      minute;
+
+
+    /* Early Bird:
+       04:00 bis 09:00
+    */
+
+    if (
+      challengeId ===
+      "early-bird-club"
+    ) {
+
+      const start =
+        4 * 60;
+
+      const end =
+        9 * 60;
+
+      return (
+        timeInMinutes >= start &&
+        timeInMinutes < end
+      );
+
+    }
+
+
+    /* Night Owls:
+       17:00 bis 00:00
+    */
+
+    if (
+      challengeId ===
+      "night-owls-club"
+    ) {
+
+      const start =
+        17 * 60;
+
+      const end =
+        24 * 60;
+
+      return (
+        timeInMinutes >= start &&
+        timeInMinutes < end
+      );
+
+    }
+
+
+    return false;
 
   }
 
@@ -849,6 +984,7 @@
       document.getElementById(
         leaderboardId
       );
+
 
     try {
 
@@ -941,7 +1077,7 @@
       ) {
 
         throw new Error(
-          "Die runs-Tabelle enthält nicht die erwarteten Angaben für Benutzer, Kilometer und Datum."
+          "Die runs-Tabelle enthält nicht die benötigten Angaben für Benutzer, Kilometer und Laufzeit."
         );
 
       }
@@ -979,6 +1115,7 @@
           const userId =
             run[userColumn];
 
+
           if (
             !userSet.has(
               userId
@@ -1003,9 +1140,23 @@
           }
 
 
+          /* Nur aktueller Kalendermonat */
+
           if (
             runDate < start ||
             runDate >= end
+          ) {
+            return;
+          }
+
+
+          /* Nur passendes Zeitfenster */
+
+          if (
+            !isWithinChallengeTime(
+              runDate,
+              challengeId
+            )
           ) {
             return;
           }
@@ -1085,6 +1236,7 @@
                 ] ||
                 "Runner";
 
+
               return `
                 <div class="leaderboard-row">
 
@@ -1136,7 +1288,7 @@
 
 
   /* =========================================================
-     PRÜFEN, OB USER SCHON DABEI IST
+     TEILNAHMESTATUS
      ========================================================= */
 
   async function updateJoinButton(
