@@ -34,6 +34,101 @@
       opacity: .75;
     }
 
+    .challenge-month {
+      margin-top: 6px;
+      color: #777;
+      font-size: 14px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .challenge-total {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(0,0,0,.08);
+    }
+
+    .dark .challenge-total {
+      border-top-color: rgba(255,255,255,.12);
+    }
+
+    .challenge-total-label {
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      opacity: .65;
+    }
+
+    .challenge-total-value {
+      margin-top: 6px;
+      font-size: 32px;
+      font-weight: 800;
+      line-height: 1.1;
+    }
+
+    .leaderboard {
+      margin-top: 26px;
+    }
+
+    .leaderboard-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .leaderboard-title h3 {
+      margin: 0;
+      font-size: 19px;
+    }
+
+    .leaderboard-row {
+      display: grid;
+      grid-template-columns: 34px minmax(0,1fr) auto;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 0;
+      border-top: 1px solid rgba(0,0,0,.08);
+    }
+
+    .dark .leaderboard-row {
+      border-top-color: rgba(255,255,255,.12);
+    }
+
+    .leaderboard-position {
+      font-weight: 800;
+      opacity: .55;
+    }
+
+    .leaderboard-name {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .leaderboard-km {
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .leaderboard-empty {
+      padding: 14px 0 2px;
+      font-size: 14px;
+      opacity: .6;
+    }
+
+    .loading {
+      opacity: .55;
+    }
+
+    .month-label {
+      margin-top: 10px;
+      color: #777;
+      font-size: 14px;
+    }
+
   </style>
 
 </head>
@@ -44,7 +139,9 @@
 <div class="shell">
 
 
-  <!-- SIDEBAR -->
+  <!-- =======================================================
+       SIDEBAR
+       ======================================================= -->
 
   <aside class="sidebar">
 
@@ -120,7 +217,9 @@
   </aside>
 
 
-  <!-- MAIN -->
+  <!-- =======================================================
+       MAIN
+       ======================================================= -->
 
   <main class="main">
 
@@ -150,202 +249,203 @@
           Gemeinsam laufen. Über sich hinauswachsen. Sich messen.
         </p>
 
+        <p
+          id="currentMonth"
+          class="month-label"
+        >
+          Aktueller Monat
+        </p>
+
       </div>
 
     </div>
 
 
-    <!-- CHALLENGES -->
+    <!-- =====================================================
+         EARLY BIRD / NIGHT OWLS
+         ===================================================== -->
 
-    <div class="grid g3">
+    <div class="grid g2">
 
 
-      <!-- COMMUNITY 10K -->
+      <!-- EARLY BIRD CLUB -->
 
       <div class="card dark">
 
         <div class="row">
 
           <span class="badge lime">
-            HOT
+            MORGEN
           </span>
 
           <span class="small">
-            6,740 Teilnehmer
+            MONATLICH
           </span>
 
         </div>
 
-        <h2 style="font-size:28px">
-          THE COMMUNITY 10K
+        <h2 style="font-size:32px">
+          EARLY BIRD CLUB
         </h2>
 
         <p style="color:#bbb">
-          10 km · 19. September · überall
+          Für alle, die ihre Kilometer sammeln,
+          bevor der Tag richtig beginnt.
         </p>
 
-        <div class="progress">
-          <i style="width:67%"></i>
+        <div class="challenge-month">
+          Jeden Kalendermonat neu
         </div>
 
-        <div
-          class="row small"
-          style="margin-top:8px"
-        >
 
-          <span>
-            67% voll
-          </span>
+        <div class="challenge-total">
 
-          <b>
-            3 Tage
-          </b>
+          <div class="challenge-total-label">
+            Gesamtkilometer diesen Monat
+          </div>
+
+          <div
+            id="earlyBirdTotal"
+            class="challenge-total-value"
+          >
+            0 km
+          </div>
 
         </div>
+
 
         <a
           class="btn lime challenge-btn"
-          style="margin-top:18px;width:100%"
+          style="margin-top:22px;width:100%"
           href="#"
-          data-challenge-id="community-10k"
+          data-challenge-id="early-bird-club"
         >
-          Teilnehmen
+          Beitreten
         </a>
+
+
+        <div class="leaderboard">
+
+          <div class="leaderboard-title">
+
+            <h3>
+              Leaderboard
+            </h3>
+
+            <span class="small">
+              Dieser Monat
+            </span>
+
+          </div>
+
+          <div
+            id="earlyBirdLeaderboard"
+            class="loading"
+          >
+            Wird geladen …
+          </div>
+
+        </div>
 
       </div>
 
 
-      <!-- RUN GERMANY -->
+      <!-- NIGHT OWLS CLUB -->
 
       <div class="card">
 
         <div class="row">
 
           <span class="badge">
-            TEAM
+            ABEND
           </span>
 
           <span class="small muted">
-            2,310 km / 5,000
+            MONATLICH
           </span>
 
         </div>
 
-        <h2>
-          Run Germany
+        <h2 style="font-size:32px">
+          NIGHT OWLS CLUB
         </h2>
 
         <p class="muted">
-          Als Community einmal quer durch Deutschland laufen.
+          Für alle, die ihre Kilometer sammeln,
+          wenn der Tag langsam zur Ruhe kommt.
         </p>
 
-        <div class="progress">
-          <i style="width:46%"></i>
+        <div class="challenge-month">
+          Jeden Kalendermonat neu
         </div>
+
+
+        <div class="challenge-total">
+
+          <div class="challenge-total-label">
+            Gesamtkilometer diesen Monat
+          </div>
+
+          <div
+            id="nightOwlsTotal"
+            class="challenge-total-value"
+          >
+            0 km
+          </div>
+
+        </div>
+
 
         <a
           class="btn ghost challenge-btn"
-          style="margin-top:18px;width:100%"
+          style="margin-top:22px;width:100%"
           href="#"
-          data-challenge-id="run-germany"
+          data-challenge-id="night-owls-club"
         >
           Beitreten
         </a>
 
-      </div>
 
+        <div class="leaderboard">
 
-      <!-- FIRST 20K -->
+          <div class="leaderboard-title">
 
-      <div class="card lime">
+            <h3>
+              Leaderboard
+            </h3>
 
-        <div class="label">
-          BEGINNER
-        </div>
+            <span class="small muted">
+              Dieser Monat
+            </span>
 
-        <h2>
-          First 20K
-        </h2>
+          </div>
 
-        <p>
-          Vier Wochen. Vier Läufe. 20 Kilometer.
-          Perfekt, wenn du gerade anfängst.
-        </p>
-
-        <div class="row">
-
-          <b>
-            4 Wochen
-          </b>
-
-          <span>
-            1,840 Runner
-          </span>
+          <div
+            id="nightOwlsLeaderboard"
+            class="loading"
+          >
+            Wird geladen …
+          </div>
 
         </div>
-
-        <a
-          class="btn challenge-btn"
-          style="margin-top:18px;width:100%"
-          href="#"
-          data-challenge-id="first-20k"
-        >
-          Starten
-        </a>
 
       </div>
 
     </div>
 
 
-    <!-- PROGRESS -->
+    <!-- =====================================================
+         INFO
+         ===================================================== -->
 
-    <div class="section grid g2">
-
-
-      <!-- DEIN FORTSCHRITT -->
-
-      <div class="card">
-
-        <div class="section-head">
-
-          <h2>
-            Dein Fortschritt
-          </h2>
-
-          <span class="badge">
-            September
-          </span>
-
-        </div>
-
-        <div class="kpi">
-          42.7 km
-        </div>
-
-        <p class="muted">
-          über alle Challenges
-        </p>
-
-        <div class="progress">
-          <i style="width:71%"></i>
-        </div>
-
-        <p class="small muted">
-          Noch 17.3 km bis zum Monatsziel.
-        </p>
-
-      </div>
-
-
-      <!-- COMMUNITY MILESTONES -->
+    <div class="section">
 
       <div class="card">
 
         <div class="section-head">
 
           <h2>
-            Community-Milestones
+            Monatliche Challenges
           </h2>
 
           <span class="badge lime">
@@ -354,80 +454,16 @@
 
         </div>
 
+        <p class="muted">
+          Die Kilometer werden immer für den aktuellen
+          Kalendermonat gezählt.
+        </p>
 
-        <div class="rank">
-
-          <span>
-            🌍
-          </span>
-
-          <div>
-
-            <b>
-              Deutschland
-            </b>
-
-            <div class="small muted">
-              100,000 km im September
-            </div>
-
-          </div>
-
-          <b>
-            84%
-          </b>
-
-        </div>
-
-
-        <div class="rank">
-
-          <span>
-            🌅
-          </span>
-
-          <div>
-
-            <b>
-              Early Bird Club
-            </b>
-
-            <div class="small muted">
-              10,000 Morgen-Kilometer
-            </div>
-
-          </div>
-
-          <b>
-            91%
-          </b>
-
-        </div>
-
-
-        <div class="rank">
-
-          <span>
-            🌙
-          </span>
-
-          <div>
-
-            <b>
-              Nachteulen
-            </b>
-
-            <div class="small muted">
-              5,000 Abend-Kilometer
-            </div>
-
-          </div>
-
-          <b>
-            62%
-          </b>
-
-        </div>
+        <p class="small muted">
+          Am ersten Tag des nächsten Monats beginnt die
+          Kilometerwertung automatisch wieder bei null.
+          Es gibt kein Kilometerziel.
+        </p>
 
       </div>
 
@@ -438,8 +474,6 @@
 </div>
 
 
-<!-- SUPABASE -->
-
 <script>
 
   const SUPABASE_URL =
@@ -448,6 +482,7 @@
   const SUPABASE_KEY =
     "sb_publishable_wc3w2fSuj8ItwiF6XBoQgw_HeW5_rNW";
 
+
   const supabaseClient =
     window.supabase.createClient(
       SUPABASE_URL,
@@ -455,7 +490,731 @@
     );
 
 
-  async function joinChallenge(button) {
+  /* =========================================================
+     AKTUELLER MONAT
+     ========================================================= */
+
+  function getCurrentMonthRange() {
+
+    const now = new Date();
+
+    const start =
+      new Date(
+        now.getFullYear(),
+        now.getMonth(),
+        1,
+        0,
+        0,
+        0,
+        0
+      );
+
+    const end =
+      new Date(
+        now.getFullYear(),
+        now.getMonth() + 1,
+        1,
+        0,
+        0,
+        0,
+        0
+      );
+
+    return {
+      start,
+      end
+    };
+
+  }
+
+
+  function getMonthLabel() {
+
+    return new Intl.DateTimeFormat(
+      "de-DE",
+      {
+        month: "long",
+        year: "numeric"
+      }
+    ).format(
+      new Date()
+    );
+
+  }
+
+
+  document
+    .getElementById("currentMonth")
+    .textContent =
+      getMonthLabel();
+
+
+  /* =========================================================
+     FORMATIERUNG
+     ========================================================= */
+
+  function formatKm(value) {
+
+    return (
+      Math.round(
+        value * 10
+      ) / 10
+    ).toLocaleString(
+      "de-DE"
+    ) + " km";
+
+  }
+
+
+  function escapeHtml(value) {
+
+    return String(value)
+      .replace(
+        /&/g,
+        "&amp;"
+      )
+      .replace(
+        /</g,
+        "&lt;"
+      )
+      .replace(
+        />/g,
+        "&gt;"
+      )
+      .replace(
+        /"/g,
+        "&quot;"
+      )
+      .replace(
+        /'/g,
+        "&#039;"
+      );
+
+  }
+
+
+  function numberValue(value) {
+
+    if (
+      value === null ||
+      value === undefined
+    ) {
+      return 0;
+    }
+
+    const number =
+      Number(
+        String(value)
+          .replace(",", ".")
+      );
+
+    return Number.isFinite(number)
+      ? number
+      : 0;
+
+  }
+
+
+  /* =========================================================
+     PROFILNAMEN
+     ========================================================= */
+
+  async function getProfileNames(
+    userIds
+  ) {
+
+    if (!userIds.length) {
+      return {};
+    }
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from("profiles")
+        .select(
+          "id, display_name, username"
+        )
+        .in(
+          "id",
+          userIds
+        );
+
+    if (error) {
+      console.error(
+        "Profile konnten nicht geladen werden:",
+        error
+      );
+
+      return {};
+    }
+
+    const names = {};
+
+    (data || []).forEach(
+      profile => {
+
+        names[profile.id] =
+          profile.display_name ||
+          profile.username ||
+          "Runner";
+
+      }
+    );
+
+    return names;
+
+  }
+
+
+  /* =========================================================
+     MITGLIEDER EINER CHALLENGE
+     ========================================================= */
+
+  async function getChallengeMembers(
+    challengeId
+  ) {
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from("Challenge_members")
+        .select(
+          "User_id"
+        )
+        .eq(
+          "Challenge_id",
+          challengeId
+        );
+
+    if (error) {
+      throw error;
+    }
+
+    return data || [];
+
+  }
+
+
+  /* =========================================================
+     RUNS LADEN
+     ========================================================= */
+
+  async function getRuns() {
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from("runs")
+        .select("*");
+
+    if (error) {
+      throw error;
+    }
+
+    return data || [];
+
+  }
+
+
+  /* =========================================================
+     SPALTEN ERKENNEN
+     ========================================================= */
+
+  function findColumn(
+    row,
+    names
+  ) {
+
+    const keys =
+      Object.keys(
+        row || {}
+      );
+
+    for (
+      const name of names
+    ) {
+
+      const exact =
+        keys.find(
+          key =>
+            key === name
+        );
+
+      if (exact) {
+        return exact;
+      }
+
+    }
+
+    for (
+      const name of names
+    ) {
+
+      const lower =
+        name.toLowerCase();
+
+      const found =
+        keys.find(
+          key =>
+            key.toLowerCase() ===
+            lower
+        );
+
+      if (found) {
+        return found;
+      }
+
+    }
+
+    return null;
+
+  }
+
+
+  function findUserColumn(row) {
+
+    return findColumn(
+      row,
+      [
+        "user_id",
+        "User_id",
+        "userid",
+        "userId"
+      ]
+    );
+
+  }
+
+
+  function findDistanceColumn(row) {
+
+    return findColumn(
+      row,
+      [
+        "distance_km",
+        "Distance_km",
+        "distance",
+        "Distance",
+        "km",
+        "Km",
+        "kilometers",
+        "kilometres",
+        "total_km"
+      ]
+    );
+
+  }
+
+
+  function findDateColumn(row) {
+
+    return findColumn(
+      row,
+      [
+        "started_at",
+        "start_time",
+        "run_date",
+        "date",
+        "performed_at",
+        "created_at",
+        "Created_at"
+      ]
+    );
+
+  }
+
+
+  /* =========================================================
+     LEADERBOARD
+     ========================================================= */
+
+  async function loadLeaderboard(
+    challengeId,
+    totalId,
+    leaderboardId
+  ) {
+
+    const totalElement =
+      document.getElementById(
+        totalId
+      );
+
+    const leaderboardElement =
+      document.getElementById(
+        leaderboardId
+      );
+
+    try {
+
+      const members =
+        await getChallengeMembers(
+          challengeId
+        );
+
+
+      const userIds =
+        [
+          ...new Set(
+            members
+              .map(
+                member =>
+                  member.User_id ||
+                  member.user_id
+              )
+              .filter(Boolean)
+          )
+        ];
+
+
+      if (!userIds.length) {
+
+        totalElement.textContent =
+          "0 km";
+
+        leaderboardElement.classList.remove(
+          "loading"
+        );
+
+        leaderboardElement.innerHTML =
+          '<div class="leaderboard-empty">' +
+          'Noch keine Teilnehmer.' +
+          '</div>';
+
+        return;
+
+      }
+
+
+      const runs =
+        await getRuns();
+
+
+      if (!runs.length) {
+
+        totalElement.textContent =
+          "0 km";
+
+        leaderboardElement.classList.remove(
+          "loading"
+        );
+
+        leaderboardElement.innerHTML =
+          '<div class="leaderboard-empty">' +
+          'Noch keine Kilometer in diesem Monat.' +
+          '</div>';
+
+        return;
+
+      }
+
+
+      const firstRun =
+        runs[0];
+
+
+      const userColumn =
+        findUserColumn(
+          firstRun
+        );
+
+      const distanceColumn =
+        findDistanceColumn(
+          firstRun
+        );
+
+      const dateColumn =
+        findDateColumn(
+          firstRun
+        );
+
+
+      if (
+        !userColumn ||
+        !distanceColumn ||
+        !dateColumn
+      ) {
+
+        throw new Error(
+          "Die runs-Tabelle enthält nicht die erwarteten Angaben für Benutzer, Kilometer und Datum."
+        );
+
+      }
+
+
+      const {
+        start,
+        end
+      } =
+        getCurrentMonthRange();
+
+
+      const userSet =
+        new Set(
+          userIds
+        );
+
+
+      const totals = {};
+
+
+      userIds.forEach(
+        userId => {
+
+          totals[userId] =
+            0;
+
+        }
+      );
+
+
+      runs.forEach(
+        run => {
+
+          const userId =
+            run[userColumn];
+
+          if (
+            !userSet.has(
+              userId
+            )
+          ) {
+            return;
+          }
+
+
+          const runDate =
+            new Date(
+              run[dateColumn]
+            );
+
+
+          if (
+            Number.isNaN(
+              runDate.getTime()
+            )
+          ) {
+            return;
+          }
+
+
+          if (
+            runDate < start ||
+            runDate >= end
+          ) {
+            return;
+          }
+
+
+          totals[userId] +=
+            numberValue(
+              run[distanceColumn]
+            );
+
+        }
+      );
+
+
+      const leaderboard =
+        Object.entries(
+          totals
+        )
+          .map(
+            (
+              [userId, kilometers]
+            ) => ({
+              userId,
+              kilometers
+            })
+          )
+          .sort(
+            (
+              a,
+              b
+            ) =>
+              b.kilometers -
+              a.kilometers
+          );
+
+
+      const totalKm =
+        leaderboard.reduce(
+          (
+            total,
+            runner
+          ) =>
+            total +
+            runner.kilometers,
+          0
+        );
+
+
+      totalElement.textContent =
+        formatKm(
+          totalKm
+        );
+
+
+      const names =
+        await getProfileNames(
+          userIds
+        );
+
+
+      leaderboardElement.classList.remove(
+        "loading"
+      );
+
+
+      leaderboardElement.innerHTML =
+        leaderboard
+          .map(
+            (
+              runner,
+              index
+            ) => {
+
+              const name =
+                names[
+                  runner.userId
+                ] ||
+                "Runner";
+
+              return `
+                <div class="leaderboard-row">
+
+                  <div class="leaderboard-position">
+                    ${index + 1}
+                  </div>
+
+                  <div class="leaderboard-name">
+                    ${escapeHtml(name)}
+                  </div>
+
+                  <div class="leaderboard-km">
+                    ${formatKm(runner.kilometers)}
+                  </div>
+
+                </div>
+              `;
+
+            }
+          )
+          .join("");
+
+
+    } catch (error) {
+
+      console.error(
+        "Leaderboard-Fehler:",
+        error
+      );
+
+
+      totalElement.textContent =
+        "0 km";
+
+
+      leaderboardElement.classList.remove(
+        "loading"
+      );
+
+
+      leaderboardElement.innerHTML =
+        '<div class="leaderboard-empty">' +
+        'Die Kilometer konnten gerade nicht geladen werden.' +
+        '</div>';
+
+    }
+
+  }
+
+
+  /* =========================================================
+     PRÜFEN, OB USER SCHON DABEI IST
+     ========================================================= */
+
+  async function updateJoinButton(
+    button
+  ) {
+
+    try {
+
+      const {
+        data: {
+          user
+        }
+      } =
+        await supabaseClient.auth.getUser();
+
+
+      if (!user) {
+        return;
+      }
+
+
+      const challengeId =
+        button.dataset.challengeId;
+
+
+      const {
+        data,
+        error
+      } =
+        await supabaseClient
+          .from("Challenge_members")
+          .select("id")
+          .eq(
+            "User_id",
+            user.id
+          )
+          .eq(
+            "Challenge_id",
+            challengeId
+          )
+          .maybeSingle();
+
+
+      if (error) {
+        return;
+      }
+
+
+      if (data) {
+
+        button.textContent =
+          "Bereits dabei ✓";
+
+        button.classList.add(
+          "is-joined"
+        );
+
+      }
+
+    } catch (error) {
+
+      console.error(
+        "Teilnahmestatus konnte nicht geprüft werden:",
+        error
+      );
+
+    }
+
+  }
+
+
+  /* =========================================================
+     CHALLENGE BEITRETEN
+     ========================================================= */
+
+  async function joinChallenge(
+    button
+  ) {
 
     const challengeId =
       button.dataset.challengeId;
@@ -488,34 +1247,30 @@
       }
 
 
-      /*
-       * Die Spalten heißen exakt:
-       *
-       * User_id
-       * Challenge_id
-       * Joined_at
-       */
-
       const {
-        data: existingMembership,
+        data: existing,
         error: existingError
       } =
         await supabaseClient
           .from("Challenge_members")
           .select("id")
-          .eq("User_id", user.id)
-          .eq("Challenge_id", challengeId)
+          .eq(
+            "User_id",
+            user.id
+          )
+          .eq(
+            "Challenge_id",
+            challengeId
+          )
           .maybeSingle();
 
 
       if (existingError) {
-
         throw existingError;
-
       }
 
 
-      if (existingMembership) {
+      if (existing) {
 
         button.textContent =
           "Bereits dabei ✓";
@@ -530,7 +1285,7 @@
 
 
       const {
-        error: insertError
+        error
       } =
         await supabaseClient
           .from("Challenge_members")
@@ -548,10 +1303,8 @@
           });
 
 
-      if (insertError) {
-
-        throw insertError;
-
+      if (error) {
+        throw error;
       }
 
 
@@ -565,6 +1318,17 @@
 
       alert(
         "Du bist jetzt bei dieser Challenge dabei."
+      );
+
+
+      await loadLeaderboard(
+        challengeId,
+        challengeId === "early-bird-club"
+          ? "earlyBirdTotal"
+          : "nightOwlsTotal",
+        challengeId === "early-bird-club"
+          ? "earlyBirdLeaderboard"
+          : "nightOwlsLeaderboard"
       );
 
 
@@ -596,22 +1360,64 @@
   }
 
 
+  /* =========================================================
+     BUTTONS
+     ========================================================= */
+
   document
-    .querySelectorAll(".challenge-btn")
-    .forEach(button => {
+    .querySelectorAll(
+      ".challenge-btn"
+    )
+    .forEach(
+      button => {
 
-      button.addEventListener(
-        "click",
-        event => {
+        button.addEventListener(
+          "click",
+          event => {
 
-          event.preventDefault();
+            event.preventDefault();
 
-          joinChallenge(button);
+            joinChallenge(
+              button
+            );
 
-        }
-      );
+          }
+        );
 
-    });
+        updateJoinButton(
+          button
+        );
+
+      }
+    );
+
+
+  /* =========================================================
+     SEITE STARTEN
+     ========================================================= */
+
+  async function initializePage() {
+
+    await Promise.all([
+
+      loadLeaderboard(
+        "early-bird-club",
+        "earlyBirdTotal",
+        "earlyBirdLeaderboard"
+      ),
+
+      loadLeaderboard(
+        "night-owls-club",
+        "nightOwlsTotal",
+        "nightOwlsLeaderboard"
+      )
+
+    ]);
+
+  }
+
+
+  initializePage();
 
 </script>
 
