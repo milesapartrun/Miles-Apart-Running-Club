@@ -9,430 +9,419 @@
   <link rel="stylesheet" href="style.css" />
 
   <style>
-    :root{
-      --miles-blue:#18b8c7;
-      --miles-blue-dark:#1199a6;
-      --text:#111111;
-      --muted:#6f7779;
-      --line:#dddddd;
-      --soft:#f5f7f7;
-      --white:#ffffff;
+    :root {
+      --ma-cyan: #18b8c7;
+      --ma-cyan-dark: #1199a6;
+      --ma-black: #111;
+      --ma-gray: #777;
+      --ma-light: #f4f4f4;
+      --ma-border: #e7e7e7;
+      --ma-white: #fff;
     }
 
-    *{
-      box-sizing:border-box;
+    * {
+      box-sizing: border-box;
     }
 
-    body{
-      margin:0;
-      font-family:Arial,Helvetica,sans-serif;
-      background:#fff;
-      color:var(--text);
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #fff;
+      color: var(--ma-black);
     }
 
-    .topbar{
-      position:sticky;
-      top:0;
-      z-index:20;
-      height:78px;
-      background:#fff;
-      border-bottom:1px solid var(--line);
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      padding:0 28px;
+    a {
+      color: inherit;
     }
 
-    .brand{
-      text-decoration:none;
-      color:#111;
-      font-weight:800;
-      letter-spacing:-.4px;
-      font-size:20px;
+    .main {
+      min-height: 100vh;
+      padding-bottom: 60px;
     }
 
-    .back-link{
-      color:#111;
-      text-decoration:none;
-      font-size:14px;
-      font-weight:700;
+    .user-page {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 36px 24px 60px;
     }
 
-    .back-link:hover{
-      color:var(--miles-blue-dark);
+    /* ---------------------------------
+       BACK LINK
+    --------------------------------- */
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 24px;
+      color: #666;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 700;
+      transition: color 0.2s ease;
     }
 
-    main{
-      width:min(1100px,calc(100% - 32px));
-      margin:34px auto 70px;
+    .back-link:hover {
+      color: var(--ma-cyan);
     }
 
-    .loading,
-    .error{
-      border:1px solid var(--line);
-      border-radius:18px;
-      padding:35px;
-      text-align:center;
-      background:#fff;
+    /* ---------------------------------
+       PROFILE HEADER
+    --------------------------------- */
+
+    .profile-header {
+      background: #fff;
+      border: 1px solid var(--ma-border);
+      border-radius: 18px;
+      padding: 28px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      margin-bottom: 24px;
     }
 
-    .error h2{
-      margin:0 0 8px;
+    .profile-avatar {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      background: #eee;
+      border: 4px solid #fff;
+      box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+      flex-shrink: 0;
     }
 
-    .error p{
-      color:var(--muted);
-      margin:0;
+    .profile-avatar-placeholder {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: #eee;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+      font-size: 38px;
+      font-weight: 700;
+      flex-shrink: 0;
     }
 
-    .profile-header{
-      display:grid;
-      grid-template-columns:130px 1fr auto;
-      gap:26px;
-      align-items:center;
-      padding:28px;
-      border:1px solid var(--line);
-      border-radius:22px;
-      background:#fff;
+    .profile-header-content {
+      min-width: 0;
+      flex: 1;
     }
 
-    .avatar{
-      width:130px;
-      height:130px;
-      border-radius:50%;
-      object-fit:cover;
-      background:var(--soft);
-      border:1px solid var(--line);
-      display:block;
+    .profile-name {
+      margin: 0 0 4px;
+      font-size: 32px;
+      line-height: 1.1;
+      font-weight: 800;
     }
 
-    .avatar-placeholder{
-      width:130px;
-      height:130px;
-      border-radius:50%;
-      background:var(--soft);
-      border:1px solid var(--line);
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      font-size:44px;
-      font-weight:800;
-      color:var(--miles-blue-dark);
+    .profile-username {
+      color: var(--ma-cyan);
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 10px;
     }
 
-    .profile-name{
-      margin:0;
-      font-size:34px;
-      line-height:1.05;
-      letter-spacing:-1px;
+    .profile-location {
+      color: #666;
+      font-size: 14px;
+      margin-bottom: 12px;
     }
 
-    .username{
-      margin-top:7px;
-      color:var(--miles-blue-dark);
-      font-weight:700;
-      font-size:15px;
+    .profile-bio {
+      margin: 0;
+      color: #555;
+      line-height: 1.55;
+      max-width: 720px;
     }
 
-    .bio{
-      margin:15px 0 0;
-      line-height:1.55;
-      max-width:650px;
-      color:#333;
+    /* ---------------------------------
+       STATS
+    --------------------------------- */
+
+    .section-title {
+      font-size: 21px;
+      font-weight: 800;
+      margin: 32px 0 14px;
     }
 
-    .location{
-      margin-top:10px;
-      color:var(--muted);
-      font-size:14px;
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
     }
 
-    .profile-total{
-      text-align:right;
-      min-width:150px;
+    .stat-card {
+      border: 1px solid var(--ma-border);
+      border-radius: 16px;
+      padding: 20px;
+      background: #fff;
+      min-height: 115px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
-    .profile-total .number{
-      font-size:40px;
-      font-weight:900;
-      line-height:1;
-      letter-spacing:-1.5px;
+    .stat-label {
+      color: #777;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
     }
 
-    .profile-total .label{
-      margin-top:6px;
-      color:var(--muted);
-      font-size:13px;
+    .stat-value {
+      font-size: 28px;
+      line-height: 1.1;
+      font-weight: 800;
+      color: var(--ma-black);
     }
 
-    .section{
-      margin-top:22px;
-      border:1px solid var(--line);
-      border-radius:22px;
-      padding:24px;
-      background:#fff;
+    .stat-sub {
+      margin-top: 6px;
+      color: #888;
+      font-size: 13px;
     }
 
-    .section-title{
-      margin:0 0 18px;
-      font-size:20px;
-      letter-spacing:-.3px;
+    /* ---------------------------------
+       LEVEL
+    --------------------------------- */
+
+    .level-card {
+      border: 1px solid var(--ma-border);
+      border-radius: 16px;
+      padding: 22px;
+      margin-top: 14px;
+      background: #fff;
     }
 
-    .level-box{
-      background:var(--soft);
-      border-radius:16px;
-      padding:20px;
+    .level-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 14px;
     }
 
-    .level-top{
-      display:flex;
-      justify-content:space-between;
-      gap:20px;
-      align-items:flex-end;
-      margin-bottom:12px;
+    .level-title {
+      font-size: 18px;
+      font-weight: 800;
     }
 
-    .level-name{
-      font-size:25px;
-      font-weight:900;
+    .level-km {
+      color: #666;
+      font-size: 14px;
+      white-space: nowrap;
     }
 
-    .level-km{
-      color:var(--muted);
-      font-size:14px;
-      text-align:right;
+    .progress-track {
+      width: 100%;
+      height: 12px;
+      border-radius: 999px;
+      background: #eee;
+      overflow: hidden;
     }
 
-    .progress{
-      height:12px;
-      background:#ddd;
-      border-radius:99px;
-      overflow:hidden;
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: var(--ma-cyan);
+      border-radius: 999px;
+      transition: width 0.4s ease;
     }
 
-    .progress-bar{
-      height:100%;
-      width:0;
-      background:var(--miles-blue);
-      border-radius:99px;
-      transition:width .3s ease;
+    .level-bottom {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-top: 8px;
+      color: #888;
+      font-size: 12px;
     }
 
-    .level-info{
-      display:flex;
-      justify-content:space-between;
-      gap:15px;
-      margin-top:10px;
-      color:var(--muted);
-      font-size:13px;
+    /* ---------------------------------
+       PERSONAL BESTS
+    --------------------------------- */
+
+    .pb-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
     }
 
-    .stats-grid{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:12px;
+    .pb-card {
+      border: 1px solid var(--ma-border);
+      border-radius: 16px;
+      padding: 18px;
+      background: #fff;
     }
 
-    .stat{
-      background:var(--soft);
-      border-radius:15px;
-      padding:18px;
+    .pb-distance {
+      color: #777;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 7px;
     }
 
-    .stat-value{
-      font-size:26px;
-      font-weight:900;
-      line-height:1.1;
+    .pb-time {
+      font-size: 25px;
+      font-weight: 800;
+      margin-bottom: 5px;
     }
 
-    .stat-label{
-      margin-top:7px;
-      font-size:12px;
-      color:var(--muted);
+    .pb-detail {
+      color: #888;
+      font-size: 13px;
     }
 
-    .pb-grid{
-      display:grid;
-      grid-template-columns:repeat(4,1fr);
-      gap:12px;
+    .pb-empty {
+      color: #aaa;
+      font-size: 15px;
     }
 
-    .pb-card{
-      background:var(--soft);
-      border-radius:15px;
-      padding:17px;
+    /* ---------------------------------
+       RUN HISTORY
+    --------------------------------- */
+
+    .runs-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
     }
 
-    .pb-title{
-      font-weight:800;
-      font-size:14px;
+    .run-row {
+      border: 1px solid var(--ma-border);
+      border-radius: 15px;
+      padding: 17px 18px;
+      background: #fff;
+      display: grid;
+      grid-template-columns: 1.3fr 1fr 1fr 1fr;
+      gap: 16px;
+      align-items: center;
     }
 
-    .pb-time{
-      margin-top:8px;
-      font-size:23px;
-      font-weight:900;
+    .run-date {
+      font-weight: 800;
+      font-size: 15px;
     }
 
-    .pb-empty{
-      margin-top:8px;
-      color:var(--muted);
-      font-size:13px;
+    .run-type {
+      margin-top: 4px;
+      color: #888;
+      font-size: 13px;
     }
 
-    .chart-wrap{
-      width:100%;
-      overflow-x:auto;
+    .run-metric-label {
+      color: #888;
+      font-size: 11px;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 3px;
     }
 
-    .chart{
-      min-width:650px;
-      display:flex;
-      align-items:flex-end;
-      gap:12px;
-      height:210px;
-      padding:10px 5px 0;
-      border-bottom:1px solid var(--line);
+    .run-metric-value {
+      font-size: 16px;
+      font-weight: 800;
     }
 
-    .bar-column{
-      flex:1;
-      min-width:60px;
-      height:100%;
-      display:flex;
-      flex-direction:column;
-      justify-content:flex-end;
-      align-items:center;
+    .run-note {
+      margin-top: 8px;
+      color: #666;
+      font-size: 13px;
+      line-height: 1.4;
     }
 
-    .bar-value{
-      font-size:11px;
-      color:var(--muted);
-      margin-bottom:5px;
+    .run-photo {
+      width: 100%;
+      max-width: 170px;
+      height: 110px;
+      object-fit: cover;
+      border-radius: 10px;
+      display: block;
     }
 
-    .bar{
-      width:100%;
-      max-width:54px;
-      min-height:3px;
-      background:var(--miles-blue);
-      border-radius:7px 7px 0 0;
+    /* ---------------------------------
+       EMPTY / ERROR
+    --------------------------------- */
+
+    .message-card {
+      border: 1px solid var(--ma-border);
+      border-radius: 16px;
+      padding: 28px;
+      background: #fff;
+      color: #666;
+      text-align: center;
     }
 
-    .bar-label{
-      margin-top:8px;
-      font-size:11px;
-      color:var(--muted);
+    .loading {
+      padding: 60px 20px;
+      text-align: center;
+      color: #888;
     }
 
-    .runs{
-      display:flex;
-      flex-direction:column;
-      gap:10px;
+    .error-message {
+      color: #b00020;
     }
 
-    .run{
-      border:1px solid var(--line);
-      border-radius:15px;
-      padding:17px;
-      display:grid;
-      grid-template-columns:1fr auto;
-      gap:15px;
-      align-items:center;
-    }
+    /* ---------------------------------
+       MOBILE
+    --------------------------------- */
 
-    .run-date{
-      font-size:13px;
-      color:var(--muted);
-    }
-
-    .run-distance{
-      font-size:22px;
-      font-weight:900;
-      margin-top:4px;
-    }
-
-    .run-note{
-      margin-top:6px;
-      color:#444;
-      font-size:14px;
-    }
-
-    .run-meta{
-      text-align:right;
-      color:var(--muted);
-      font-size:13px;
-      line-height:1.7;
-    }
-
-    .empty{
-      color:var(--muted);
-      text-align:center;
-      padding:20px;
-    }
-
-    @media(max-width:850px){
-      .profile-header{
-        grid-template-columns:90px 1fr;
+    @media (max-width: 850px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
-      .avatar,
-      .avatar-placeholder{
-        width:90px;
-        height:90px;
+      .pb-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
-      .profile-total{
-        grid-column:1/-1;
-        text-align:left;
-      }
-
-      .stats-grid{
-        grid-template-columns:repeat(2,1fr);
-      }
-
-      .pb-grid{
-        grid-template-columns:repeat(2,1fr);
+      .run-row {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
     }
 
-    @media(max-width:550px){
-      .topbar{
-        padding:0 16px;
+    @media (max-width: 650px) {
+      .user-page {
+        padding: 22px 15px 45px;
       }
 
-      main{
-        width:min(100% - 20px,1100px);
-        margin-top:20px;
+      .profile-header {
+        padding: 20px;
+        flex-direction: column;
+        align-items: flex-start;
       }
 
-      .profile-header,
-      .section{
-        padding:18px;
-        border-radius:17px;
+      .profile-avatar,
+      .profile-avatar-placeholder {
+        width: 90px;
+        height: 90px;
       }
 
-      .profile-name{
-        font-size:27px;
+      .profile-name {
+        font-size: 27px;
       }
 
-      .level-top{
-        align-items:flex-start;
-        flex-direction:column;
-        gap:5px;
+      .stats-grid,
+      .pb-grid {
+        grid-template-columns: 1fr;
       }
 
-      .level-km{
-        text-align:left;
+      .run-row {
+        grid-template-columns: 1fr 1fr;
       }
 
-      .run{
-        grid-template-columns:1fr;
+      .run-photo {
+        max-width: 100%;
       }
 
-      .run-meta{
-        text-align:left;
+      .level-top {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 7px;
       }
     }
   </style>
@@ -440,1247 +429,1427 @@
 
 <body>
 
-<header class="topbar">
-  <a href="home.html" class="brand">MILES APART</a>
-  <a href="community.html" class="back-link">← Community</a>
-</header>
+  <main class="main">
+    <div class="user-page">
 
-<main>
+      <a href="community.html" class="back-link">
+        ← Zur Community
+      </a>
 
-  <div id="loading" class="loading">
-    Profil wird geladen …
-  </div>
-
-  <div id="error" class="error" style="display:none;">
-    <h2>Profil nicht gefunden</h2>
-    <p id="errorText">
-      Dieses Profil existiert nicht oder konnte nicht geladen werden.
-    </p>
-  </div>
-
-  <div id="profileContent" style="display:none;">
-
-    <!-- PROFILE HEADER -->
-    <section class="profile-header">
-
-      <div id="avatarContainer"></div>
-
-      <div>
-        <h1 id="displayName" class="profile-name"></h1>
-        <div id="username" class="username"></div>
-        <p id="bio" class="bio"></p>
-        <div id="location" class="location"></div>
+      <div id="loadingState" class="loading">
+        Profil wird geladen …
       </div>
 
-      <div class="profile-total">
-        <div id="totalKm" class="number">0</div>
-        <div class="label">Kilometer insgesamt</div>
-      </div>
+      <div id="profileContent" style="display:none;">
 
-    </section>
+        <!-- PROFIL -->
+        <section class="profile-header">
+
+          <div id="avatarContainer"></div>
+
+          <div class="profile-header-content">
+            <h1 id="profileName" class="profile-name"></h1>
+            <div id="profileUsername" class="profile-username"></div>
+            <div id="profileLocation" class="profile-location"></div>
+            <p id="profileBio" class="profile-bio"></p>
+          </div>
+
+        </section>
 
 
-    <!-- LEVEL -->
-    <section class="section">
+        <!-- 2026 STATISTIKEN -->
+        <h2 class="section-title">Laufstatistik 2026</h2>
 
-      <h2 class="section-title">Level</h2>
+        <section class="stats-grid">
 
-      <div class="level-box">
+          <div class="stat-card">
+            <div class="stat-label">Gelaufene Kilometer</div>
+            <div id="totalKm" class="stat-value">0 km</div>
+            <div class="stat-sub">nur Läufe aus 2026</div>
+          </div>
 
-        <div class="level-top">
+          <div class="stat-card">
+            <div class="stat-label">Läufe</div>
+            <div id="runCount" class="stat-value">0</div>
+            <div class="stat-sub">Läufe in 2026</div>
+          </div>
 
-          <div>
-            <div id="levelName" class="level-name">
+          <div class="stat-card">
+            <div class="stat-label">Aktuelles Level</div>
+            <div id="currentLevel" class="stat-value">Level 0</div>
+            <div id="currentLevelSub" class="stat-sub">Noch kein Level erreicht</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-label">5 km</div>
+            <div id="pb5k" class="stat-value">–</div>
+            <div id="pb5kSub" class="stat-sub"></div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-label">10 km</div>
+            <div id="pb10k" class="stat-value">–</div>
+            <div id="pb10kSub" class="stat-sub"></div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-label">Halbmarathon</div>
+            <div id="pbHalf" class="stat-value">–</div>
+            <div id="pbHalfSub" class="stat-sub"></div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-label">Marathon</div>
+            <div id="pbMarathon" class="stat-value">–</div>
+            <div id="pbMarathonSub" class="stat-sub"></div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-label">100 km+</div>
+            <div id="run100Plus" class="stat-value">–</div>
+            <div id="run100PlusSub" class="stat-sub"></div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-label">Längster Lauf</div>
+            <div id="longestRun" class="stat-value">–</div>
+            <div id="longestRunSub" class="stat-sub"></div>
+          </div>
+
+        </section>
+
+
+        <!-- LEVEL FORTSCHRITT -->
+        <h2 class="section-title">Level-Fortschritt</h2>
+
+        <section class="level-card">
+
+          <div class="level-top">
+            <div id="levelTitle" class="level-title">
               Level 0
+            </div>
+
+            <div id="levelKm" class="level-km">
+              0 km
             </div>
           </div>
 
-          <div id="levelKm" class="level-km">
-            0 km
+          <div class="progress-track">
+            <div id="levelProgress" class="progress-bar"></div>
           </div>
 
-        </div>
+          <div class="level-bottom">
+            <span id="levelStart">0 km</span>
+            <span id="levelNext">Nächstes Level: 500 km</span>
+          </div>
 
-        <div class="progress">
-          <div id="progressBar" class="progress-bar"></div>
-        </div>
-
-        <div class="level-info">
-          <span id="levelStart">0 km</span>
-          <span id="levelNext">500 km</span>
-        </div>
-
-      </div>
-
-    </section>
+        </section>
 
 
-    <!-- STATS -->
-    <section class="section">
+        <!-- LAUFHISTORIE -->
+        <h2 class="section-title">Laufhistorie 2026</h2>
 
-      <h2 class="section-title">Statistiken</h2>
-
-      <div class="stats-grid">
-
-        <div class="stat">
-          <div id="weekKm" class="stat-value">0 km</div>
-          <div class="stat-label">Diese Woche</div>
-        </div>
-
-        <div class="stat">
-          <div id="monthKm" class="stat-value">0 km</div>
-          <div class="stat-label">Dieser Monat</div>
-        </div>
-
-        <div class="stat">
-          <div id="runCount" class="stat-value">0</div>
-          <div class="stat-label">Läufe</div>
-        </div>
-
-        <div class="stat">
-          <div id="avgDistance" class="stat-value">0 km</div>
-          <div class="stat-label">Ø pro Lauf</div>
-        </div>
+        <section id="runsList" class="runs-list"></section>
 
       </div>
 
-    </section>
+      <div id="errorState" class="message-card" style="display:none;"></div>
 
+    </div>
+  </main>
 
-    <!-- PERSONAL BESTS -->
-    <section class="section">
 
-      <h2 class="section-title">Personal Bests</h2>
+  <!-- SUPABASE -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-      <div id="pbGrid" class="pb-grid"></div>
+  <script>
+    const SUPABASE_URL = "https://orbrkdrsihsacsnprewf.supabase.co";
 
-    </section>
+    const SUPABASE_PUBLISHABLE_KEY =
+      "sb_publishable_wc3w2fSuj8ItwiF6XBoQgw_HeW5_rNW";
 
-
-    <!-- WEEK CHART -->
-    <section class="section">
-
-      <h2 class="section-title">Diese Woche</h2>
-
-      <div class="chart-wrap">
-        <div id="weekChart" class="chart"></div>
-      </div>
-
-    </section>
-
-
-    <!-- RUN HISTORY -->
-    <section class="section">
-
-      <h2 class="section-title">Laufhistorie</h2>
-
-      <div id="runs" class="runs"></div>
-
-    </section>
-
-  </div>
-
-</main>
-
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script>
-
-  const SUPABASE_URL =
-    "https://orbrkdrsihsacsnprewf.supabase.co";
-
-  const SUPABASE_PUBLISHABLE_KEY =
-    "sb_publishable_wc3w2fSuj8ItwiF6XBoQgw_HeW5_rNW";
-
-  const { createClient } =
-    supabase;
-
-  const db = createClient(
-    SUPABASE_URL,
-    SUPABASE_PUBLISHABLE_KEY
-  );
-
-
-  /*
-   * ---------------------------------------------------------
-   * LEVEL SYSTEM
-   * ---------------------------------------------------------
-   *
-   * Level 0   = 0–499 km
-   * Level 500 = 500–999 km
-   * Level 1000 = 1000–1499 km
-   * ...
-   * Level 10000 = 10000+ km
-   */
-
-  function getCurrentLevel(totalKm){
-
-    const total =
-      Math.max(0, Number(totalKm) || 0);
-
-    if(total < 500){
-      return 0;
-    }
-
-    return Math.min(
-      10000,
-      Math.floor(total / 500) * 500
-    );
-  }
-
-
-  function getNextLevel(totalKm){
-
-    const total =
-      Math.max(0, Number(totalKm) || 0);
-
-    const next =
-      Math.ceil((total + 0.000001) / 500) * 500;
-
-    if(next > 10000){
-      return null;
-    }
-
-    return next;
-  }
-
-
-  function formatKm(value){
-
-    return Number(value || 0)
-      .toLocaleString("de-DE", {
-        minimumFractionDigits: 0,
-        maximumFractionDigits: 1
-      });
-  }
-
-
-  function formatDate(date){
-
-    if(!date){
-      return "";
-    }
-
-    return new Date(date)
-      .toLocaleDateString("de-DE", {
-        day:"2-digit",
-        month:"2-digit",
-        year:"numeric"
-      });
-  }
-
-
-  function formatDuration(seconds){
-
-    const total =
-      Math.round(Number(seconds) || 0);
-
-    if(!total){
-      return "—";
-    }
-
-    const hours =
-      Math.floor(total / 3600);
-
-    const minutes =
-      Math.floor((total % 3600) / 60);
-
-    const secs =
-      total % 60;
-
-    if(hours > 0){
-      return `${hours}h ${String(minutes).padStart(2,"0")}m`;
-    }
-
-    if(minutes > 0){
-      return `${minutes}m ${String(secs).padStart(2,"0")}s`;
-    }
-
-    return `${secs}s`;
-  }
-
-
-  function formatPace(seconds, distance){
-
-    const sec =
-      Number(seconds) || 0;
-
-    const km =
-      Number(distance) || 0;
-
-    if(!sec || !km){
-      return "—";
-    }
-
-    const pace =
-      sec / km;
-
-    const minutes =
-      Math.floor(pace / 60);
-
-    const remaining =
-      Math.round(pace % 60);
-
-    return `${minutes}:${String(
-      remaining
-    ).padStart(2,"0")} min/km`;
-  }
-
-
-  function escapeHtml(value){
-
-    return String(value || "")
-      .replaceAll("&","&amp;")
-      .replaceAll("<","&lt;")
-      .replaceAll(">","&gt;")
-      .replaceAll('"',"&quot;")
-      .replaceAll("'","&#039;");
-  }
-
-
-  /*
-   * ---------------------------------------------------------
-   * DATE HELPERS
-   * ---------------------------------------------------------
-   */
-
-  function startOfWeek(date){
-
-    const d = new Date(date);
-
-    const day = d.getDay();
-
-    const diff =
-      day === 0 ? -6 : 1 - day;
-
-    d.setDate(d.getDate() + diff);
-
-    d.setHours(0,0,0,0);
-
-    return d;
-  }
-
-
-  function startOfMonth(date){
-
-    const d = new Date(date);
-
-    d.setDate(1);
-
-    d.setHours(0,0,0,0);
-
-    return d;
-  }
-
-
-  /*
-   * ---------------------------------------------------------
-   * PB DEFINITIONS
-   * ---------------------------------------------------------
-   */
-
-  const PB_CATEGORIES = [
-    {
-      key:"5K",
-      label:"5K"
-    },
-    {
-      key:"10K",
-      label:"10K"
-    },
-    {
-      key:"HALF",
-      label:"Halbmarathon"
-    },
-    {
-      key:"MARATHON",
-      label:"Marathon"
-    },
-    {
-      key:"50K",
-      label:"50K"
-    },
-    {
-      key:"100K",
-      label:"100K"
-    },
-    {
-      key:"100+",
-      label:"100+ KM"
-    }
-  ];
-
-
-  /*
-   * ---------------------------------------------------------
-   * LOAD PROFILE
-   * ---------------------------------------------------------
-   */
-
-  async function loadProfile(){
-
-    const params =
-      new URLSearchParams(
-        window.location.search
-      );
-
-    const requestedUsername =
-      params.get("username");
-
-    if(!requestedUsername){
-
-      showError(
-        "Kein Benutzername in der URL angegeben."
-      );
-
-      return;
-    }
-
-
-    /*
-     * PROFILE
-     */
-
-    const {
-      data: profile,
-      error: profileError
-    } = await db
-      .from("profiles")
-      .select(`
-        id,
-        display_name,
-        username,
-        avatar_url,
-        bio,
-        location
-      `)
-      .ilike(
-        "username",
-        requestedUsername
-      )
-      .maybeSingle();
-
-
-    if(profileError){
-
-      console.error(profileError);
-
-      showError(
-        "Das Profil konnte nicht geladen werden."
-      );
-
-      return;
-    }
-
-
-    if(!profile){
-
-      showError(
-        "Dieses Profil existiert nicht."
-      );
-
-      return;
-    }
-
-
-    /*
-     * RUNS
-     */
-
-    const {
-      data: runs,
-      error: runsError
-    } = await db
-      .from("runs")
-      .select(`
-        id,
-        run_date,
-        distance_km,
-        duration_seconds,
-        note,
-        run_type,
-        best_time_category,
-        start_time,
-        end_time
-      `)
-      .eq(
-        "user_id",
-        profile.id
-      )
-      .order(
-        "run_date",
-        {
-          ascending:false
-        }
-      );
-
-
-    if(runsError){
-
-      console.error(runsError);
-
-      showError(
-        "Die Läufe konnten nicht geladen werden."
-      );
-
-      return;
-    }
-
-
-    const safeRuns =
-      runs || [];
-
-
-    renderProfile(
-      profile,
-      safeRuns
+    const supabaseClient = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_PUBLISHABLE_KEY
     );
 
-  }
-
-
-  /*
-   * ---------------------------------------------------------
-   * RENDER PROFILE
-   * ---------------------------------------------------------
-   */
-
-  function renderProfile(
-    profile,
-    runs
-  ){
-
-    document.title =
-      `${profile.display_name || profile.username} – Miles Apart`;
-
 
     /*
-     * HEADER
+     * ============================================
+     * LEVELSYSTEM
+     * ============================================
+     *
+     * Alle 500 km ein neues Level.
+     * Maximal Level 10000.
+     *
+     * WICHTIG:
+     * totalKm kommt weiter unten ausschließlich
+     * aus den Läufen des Jahres 2026.
      */
 
-    const displayName =
-      profile.display_name ||
-      profile.username ||
-      "Runner";
+    const LEVEL_MILESTONES = Array.from(
+      { length: 20 },
+      (_, index) => (index + 1) * 500
+    );
 
 
-    document
-      .getElementById("displayName")
-      .textContent =
-      displayName;
+    function getCurrentLevel(totalKm) {
+      const total = Math.max(0, Number(totalKm) || 0);
+
+      if (total < 500) {
+        return 0;
+      }
+
+      return Math.min(
+        10000,
+        Math.floor(total / 500) * 500
+      );
+    }
 
 
-    document
-      .getElementById("username")
-      .textContent =
-      profile.username
-        ? `@${profile.username}`
-        : "";
+    function getNextLevel(totalKm) {
+      const total = Math.max(0, Number(totalKm) || 0);
+
+      return (
+        LEVEL_MILESTONES.find(
+          milestone => milestone > total
+        ) || null
+      );
+    }
 
 
-    document
-      .getElementById("bio")
-      .textContent =
-      profile.bio || "";
+    function getLevelProgress(totalKm) {
+      const total = Math.max(0, Number(totalKm) || 0);
 
+      const currentLevel = getCurrentLevel(totalKm);
+      const nextLevel = getNextLevel(totalKm);
 
-    if(profile.location){
+      if (!nextLevel) {
+        return 100;
+      }
 
-      document
-        .getElementById("location")
-        .textContent =
-        `📍 ${profile.location}`;
+      const levelStart = currentLevel;
+      const levelDistance = nextLevel - levelStart;
 
-    }else{
+      if (levelDistance <= 0) {
+        return 100;
+      }
 
-      document
-        .getElementById("location")
-        .textContent =
-        "";
+      const progress =
+        ((total - levelStart) / levelDistance) * 100;
 
+      return Math.max(
+        0,
+        Math.min(100, progress)
+      );
     }
 
 
     /*
-     * AVATAR
+     * ============================================
+     * HILFSFUNKTIONEN
+     * ============================================
      */
 
-    const avatarContainer =
-      document.getElementById(
-        "avatarContainer"
+    function escapeHtml(value) {
+      return String(value ?? "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+
+    function formatNumber(value, decimals = 1) {
+      const number = Number(value);
+
+      if (!Number.isFinite(number)) {
+        return "0";
+      }
+
+      return number.toLocaleString("de-DE", {
+        minimumFractionDigits: decimals,
+        maximumFractionDigits: decimals
+      });
+    }
+
+
+    function formatDate(dateString) {
+      if (!dateString) {
+        return "–";
+      }
+
+      const date = new Date(dateString);
+
+      if (Number.isNaN(date.getTime())) {
+        return dateString;
+      }
+
+      return date.toLocaleDateString("de-DE", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric"
+      });
+    }
+
+
+    function formatDuration(totalSeconds) {
+      const seconds = Number(totalSeconds);
+
+      if (!Number.isFinite(seconds) || seconds <= 0) {
+        return "–";
+      }
+
+      const totalMinutes = Math.round(seconds / 60);
+
+      const hours = Math.floor(totalMinutes / 60);
+      const minutes = totalMinutes % 60;
+
+      if (hours > 0) {
+        return `${hours} h ${String(minutes).padStart(2, "0")} min`;
+      }
+
+      return `${minutes} min`;
+    }
+
+
+    function formatDurationShort(totalSeconds) {
+      const seconds = Number(totalSeconds);
+
+      if (!Number.isFinite(seconds) || seconds <= 0) {
+        return "–";
+      }
+
+      const totalMinutes = Math.round(seconds / 60);
+
+      const hours = Math.floor(totalMinutes / 60);
+      const minutes = totalMinutes % 60;
+
+      if (hours > 0) {
+        return `${hours}:${String(minutes).padStart(2, "0")} h`;
+      }
+
+      return `${minutes} min`;
+    }
+
+
+    function formatPace(distanceKm, durationSeconds) {
+      const distance = Number(distanceKm);
+      const seconds = Number(durationSeconds);
+
+      if (
+        !Number.isFinite(distance) ||
+        !Number.isFinite(seconds) ||
+        distance <= 0 ||
+        seconds <= 0
+      ) {
+        return "–";
+      }
+
+      const paceSeconds = seconds / distance;
+
+      const minutes = Math.floor(paceSeconds / 60);
+      const remainingSeconds = Math.round(
+        paceSeconds % 60
       );
 
+      return `${minutes}:${String(
+        remainingSeconds
+      ).padStart(2, "0")} min/km`;
+    }
 
-    if(profile.avatar_url){
 
-      avatarContainer.innerHTML = `
-        <img
-          class="avatar"
-          src="${escapeHtml(profile.avatar_url)}"
-          alt="${escapeHtml(displayName)}"
-        />
-      `;
+    function getRunTypeLabel(runType) {
+      if (!runType) {
+        return "Lauf";
+      }
 
-    }else{
+      const labels = {
+        easy: "Easy Run",
+        long: "Long Run",
+        interval: "Intervalle",
+        intervals: "Intervalle",
+        tempo: "Tempo Run",
+        race: "Wettkampf",
+        trail: "Trail",
+        recovery: "Recovery Run",
+        other: "Lauf"
+      };
 
-      const firstLetter =
-        displayName
-          .charAt(0)
-          .toUpperCase();
+      return labels[runType] || runType;
+    }
 
-      avatarContainer.innerHTML = `
-        <div class="avatar-placeholder">
-          ${escapeHtml(firstLetter)}
-        </div>
-      `;
 
+    function getAvatarUrl(path) {
+      if (!path) {
+        return null;
+      }
+
+      /*
+       * Falls bereits eine vollständige URL gespeichert ist.
+       */
+      if (
+        path.startsWith("http://") ||
+        path.startsWith("https://")
+      ) {
+        return path;
+      }
+
+      /*
+       * Supabase Storage Bucket: avatars
+       */
+      const {
+        data
+      } = supabaseClient.storage
+        .from("avatars")
+        .getPublicUrl(path);
+
+      return data?.publicUrl || null;
+    }
+
+
+    function getRunPhotoUrl(path) {
+      if (!path) {
+        return null;
+      }
+
+      if (
+        path.startsWith("http://") ||
+        path.startsWith("https://")
+      ) {
+        return path;
+      }
+
+      const {
+        data
+      } = supabaseClient.storage
+        .from("run-photos")
+        .getPublicUrl(path);
+
+      return data?.publicUrl || null;
     }
 
 
     /*
-     * TOTAL KM
+     * ============================================
+     * PROFIL LADEN
+     * ============================================
      */
 
-    const totalKm =
-      runs.reduce(
-        (sum, run) =>
-          sum +
-          (Number(run.distance_km) || 0),
+    async function loadProfile(username) {
+
+      const {
+        data,
+        error
+      } = await supabaseClient
+        .from("profiles")
+        .select(`
+          id,
+          display_name,
+          username,
+          avatar_url,
+          bio,
+          location
+        `)
+        .eq("username", username)
+        .maybeSingle();
+
+
+      if (error) {
+        throw error;
+      }
+
+
+      if (!data) {
+        throw new Error(
+          "Dieses Profil wurde nicht gefunden."
+        );
+      }
+
+
+      return data;
+    }
+
+
+    /*
+     * ============================================
+     * NUR 2026 LAUFDATEN LADEN
+     * ============================================
+     *
+     * Das ist der entscheidende Teil:
+     *
+     * Es werden ausschließlich Runs geladen,
+     * deren run_date im Jahr 2026 liegt.
+     *
+     * Dadurch werden Kilometer aus 2025 oder
+     * anderen Jahren NICHT mehr in die Statistik
+     * eingerechnet.
+     */
+
+    async function loadRunsFor2026(userId) {
+
+      const {
+        data,
+        error
+      } = await supabaseClient
+        .from("runs")
+        .select(`
+          id,
+          user_id,
+          run_date,
+          distance_km,
+          duration_seconds,
+          note,
+          run_type,
+          photo_path,
+          best_time_category,
+          start_time,
+          end_time,
+          created_at
+        `)
+        .eq("user_id", userId)
+        .gte("run_date", "2026-01-01")
+        .lt("run_date", "2027-01-01")
+        .order("run_date", {
+          ascending: false
+        });
+
+
+      if (error) {
+        throw error;
+      }
+
+
+      return data || [];
+    }
+
+
+    /*
+     * ============================================
+     * STATISTIKEN BERECHNEN
+     * ============================================
+     */
+
+    function calculateStatistics(runs) {
+
+      /*
+       * WICHTIG:
+       * Wir summieren hier ausschließlich die
+       * Runs, die loadRunsFor2026() geliefert hat.
+       */
+
+      const totalKm = runs.reduce(
+        (sum, run) => {
+          const distance = Number(
+            run.distance_km
+          );
+
+          if (!Number.isFinite(distance)) {
+            return sum;
+          }
+
+          return sum + distance;
+        },
         0
       );
 
 
-    document
-      .getElementById("totalKm")
-      .textContent =
-      formatKm(totalKm);
+      /*
+       * Längster Lauf
+       */
 
+      let longestRun = null;
 
-    /*
-     * LEVEL
-     */
-
-    renderLevel(totalKm);
-
-
-    /*
-     * STATS
-     */
-
-    renderStats(runs);
-
-
-    /*
-     * PBs
-     */
-
-    renderPBs(runs);
-
-
-    /*
-     * WEEK CHART
-     */
-
-    renderWeekChart(runs);
-
-
-    /*
-     * RUN HISTORY
-     */
-
-    renderRuns(runs);
-
-
-    /*
-     * SHOW PAGE
-     */
-
-    document
-      .getElementById("loading")
-      .style.display =
-      "none";
-
-    document
-      .getElementById("profileContent")
-      .style.display =
-      "block";
-
-  }
-
-
-  /*
-   * ---------------------------------------------------------
-   * LEVEL
-   * ---------------------------------------------------------
-   */
-
-  function renderLevel(totalKm){
-
-    const current =
-      getCurrentLevel(totalKm);
-
-    const next =
-      getNextLevel(totalKm);
-
-
-    let progress = 0;
-
-    if(current >= 10000){
-
-      progress = 100;
-
-    }else{
-
-      progress =
-        ((totalKm - current) / 500) * 100;
-
-      progress =
-        Math.max(
-          0,
-          Math.min(100, progress)
+      for (const run of runs) {
+        const distance = Number(
+          run.distance_km
         );
 
-    }
-
-
-    document
-      .getElementById("levelName")
-      .textContent =
-      `Level ${current.toLocaleString("de-DE")}`;
-
-
-    document
-      .getElementById("levelKm")
-      .textContent =
-      `${formatKm(totalKm)} km`;
-
-
-    document
-      .getElementById("progressBar")
-      .style.width =
-      `${progress}%`;
-
-
-    document
-      .getElementById("levelStart")
-      .textContent =
-      `${formatKm(current)} km`;
-
-
-    document
-      .getElementById("levelNext")
-      .textContent =
-      next
-        ? `${formatKm(next)} km`
-        : "MAX LEVEL";
-
-  }
-
-
-  /*
-   * ---------------------------------------------------------
-   * STATS
-   * ---------------------------------------------------------
-   */
-
-  function renderStats(runs){
-
-    const now =
-      new Date();
-
-
-    const weekStart =
-      startOfWeek(now);
-
-
-    const monthStart =
-      startOfMonth(now);
-
-
-    let weekKm = 0;
-
-    let monthKm = 0;
-
-
-    runs.forEach(run => {
-
-      const date =
-        new Date(run.run_date);
-
-
-      const distance =
-        Number(run.distance_km) || 0;
-
-
-      if(date >= weekStart){
-
-        weekKm += distance;
-
-      }
-
-
-      if(date >= monthStart){
-
-        monthKm += distance;
-
-      }
-
-    });
-
-
-    const avg =
-      runs.length
-        ? runs.reduce(
-            (sum, run) =>
-              sum +
-              (Number(run.distance_km) || 0),
-            0
-          ) / runs.length
-        : 0;
-
-
-    document
-      .getElementById("weekKm")
-      .textContent =
-      `${formatKm(weekKm)} km`;
-
-
-    document
-      .getElementById("monthKm")
-      .textContent =
-      `${formatKm(monthKm)} km`;
-
-
-    document
-      .getElementById("runCount")
-      .textContent =
-      runs.length;
-
-
-    document
-      .getElementById("avgDistance")
-      .textContent =
-      `${formatKm(avg)} km`;
-
-  }
-
-
-  /*
-   * ---------------------------------------------------------
-   * PERSONAL BESTS
-   * ---------------------------------------------------------
-   */
-
-  function renderPBs(runs){
-
-    const container =
-      document.getElementById("pbGrid");
-
-
-    container.innerHTML = "";
-
-
-    PB_CATEGORIES.forEach(category => {
-
-      const matchingRuns =
-        runs.filter(
-          run =>
-            String(
-              run.best_time_category || ""
-            ).toUpperCase() ===
-            category.key
-        );
-
-
-      let bestRun = null;
-
-
-      matchingRuns.forEach(run => {
-
-        const duration =
-          Number(
-            run.duration_seconds
-          ) || 0;
-
-
-        if(!duration){
-          return;
+        if (
+          !Number.isFinite(distance) ||
+          distance <= 0
+        ) {
+          continue;
         }
 
-
-        if(
-          !bestRun ||
-          duration <
-          Number(bestRun.duration_seconds)
-        ){
-
-          bestRun = run;
-
+        if (
+          !longestRun ||
+          distance >
+            Number(longestRun.distance_km)
+        ) {
+          longestRun = run;
         }
-
-      });
-
-
-      const card =
-        document.createElement("div");
-
-
-      card.className =
-        "pb-card";
-
-
-      if(bestRun){
-
-        card.innerHTML = `
-          <div class="pb-title">
-            ${escapeHtml(category.label)}
-          </div>
-
-          <div class="pb-time">
-            ${formatDuration(
-              bestRun.duration_seconds
-            )}
-          </div>
-        `;
-
-      }else{
-
-        card.innerHTML = `
-          <div class="pb-title">
-            ${escapeHtml(category.label)}
-          </div>
-
-          <div class="pb-empty">
-            Noch kein Eintrag
-          </div>
-        `;
-
       }
 
 
-      container.appendChild(card);
+      /*
+       * 100 km+
+       *
+       * Hier wird NICHT nach einem bestimmten
+       * best_time_category-Wert gesucht.
+       *
+       * Stattdessen wird direkt die tatsächliche
+       * Distanz des Laufs verwendet.
+       *
+       * Sobald ein Lauf mindestens 100 km hat,
+       * zählt er als 100-km+-Lauf.
+       *
+       * Gibt es mehrere, zeigen wir den längsten.
+       */
 
-    });
-
-  }
-
-
-  /*
-   * ---------------------------------------------------------
-   * WEEK CHART
-   * ---------------------------------------------------------
-   */
-
-  function renderWeekChart(runs){
-
-    const chart =
-      document.getElementById(
-        "weekChart"
-      );
-
-
-    chart.innerHTML = "";
-
-
-    const today =
-      new Date();
-
-
-    const monday =
-      startOfWeek(today);
-
-
-    const days = [];
-
-
-    for(let i = 0; i < 7; i++){
-
-      const day =
-        new Date(monday);
-
-      day.setDate(
-        monday.getDate() + i
-      );
-
-      days.push(day);
-
-    }
-
-
-    const values =
-      days.map(day => {
-
-        const next =
-          new Date(day);
-
-        next.setDate(
-          day.getDate() + 1
-        );
-
-
-        return runs
-          .filter(run => {
-
-            const date =
-              new Date(run.run_date);
-
-            return (
-              date >= day &&
-              date < next
-            );
-
-          })
-          .reduce(
-            (sum, run) =>
-              sum +
-              (Number(run.distance_km) || 0),
-            0
+      const runs100Plus = runs
+        .filter(run => {
+          const distance = Number(
+            run.distance_km
           );
 
-      });
-
-
-    const max =
-      Math.max(
-        ...values,
-        1
-      );
-
-
-    const labels = [
-      "Mo",
-      "Di",
-      "Mi",
-      "Do",
-      "Fr",
-      "Sa",
-      "So"
-    ];
-
-
-    values.forEach(
-      (value, index) => {
-
-        const column =
-          document.createElement("div");
-
-
-        column.className =
-          "bar-column";
-
-
-        const valueLabel =
-          document.createElement("div");
-
-        valueLabel.className =
-          "bar-value";
-
-        valueLabel.textContent =
-          value > 0
-            ? `${formatKm(value)} km`
-            : "";
-
-
-        const bar =
-          document.createElement("div");
-
-        bar.className =
-          "bar";
-
-
-        bar.style.height =
-          `${Math.max(
-            value > 0 ? 5 : 2,
-            (value / max) * 150
-          )}px`;
-
-
-        const label =
-          document.createElement("div");
-
-        label.className =
-          "bar-label";
-
-        label.textContent =
-          labels[index];
-
-
-        column.appendChild(
-          valueLabel
-        );
-
-        column.appendChild(
-          bar
-        );
-
-        column.appendChild(
-          label
+          return (
+            Number.isFinite(distance) &&
+            distance >= 100
+          );
+        })
+        .sort(
+          (a, b) =>
+            Number(b.distance_km) -
+            Number(a.distance_km)
         );
 
 
-        chart.appendChild(
-          column
+      const run100Plus =
+        runs100Plus.length > 0
+          ? runs100Plus[0]
+          : null;
+
+
+      /*
+       * Persönliche Bestzeiten
+       *
+       * Wir versuchen zuerst best_time_category
+       * zu verwenden.
+       *
+       * Zusätzlich wird anhand der Distanz eine
+       * passende Kategorie erkannt.
+       */
+
+      const bestTimes = {
+        "5k": null,
+        "10k": null,
+        "half": null,
+        "marathon": null
+      };
+
+
+      for (const run of runs) {
+
+        const distance = Number(
+          run.distance_km
         );
 
+        const duration = Number(
+          run.duration_seconds
+        );
+
+        if (
+          !Number.isFinite(distance) ||
+          !Number.isFinite(duration) ||
+          duration <= 0
+        ) {
+          continue;
+        }
+
+
+        let category =
+          String(
+            run.best_time_category || ""
+          ).toLowerCase();
+
+
+        /*
+         * Falls keine Kategorie gesetzt wurde,
+         * wird sie anhand der Laufdistanz erkannt.
+         */
+
+        if (!category) {
+
+          if (
+            distance >= 4.9 &&
+            distance <= 5.3
+          ) {
+            category = "5k";
+          }
+
+          else if (
+            distance >= 9.8 &&
+            distance <= 10.5
+          ) {
+            category = "10k";
+          }
+
+          else if (
+            distance >= 20.5 &&
+            distance <= 22.0
+          ) {
+            category = "half";
+          }
+
+          else if (
+            distance >= 40.0 &&
+            distance <= 43.5
+          ) {
+            category = "marathon";
+          }
+        }
+
+
+        /*
+         * Unterschiedliche mögliche Schreibweisen
+         * vereinheitlichen.
+         */
+
+        if (
+          category === "5 km" ||
+          category === "5km" ||
+          category === "5-km"
+        ) {
+          category = "5k";
+        }
+
+        if (
+          category === "10 km" ||
+          category === "10km" ||
+          category === "10-km"
+        ) {
+          category = "10k";
+        }
+
+        if (
+          category === "halbmarathon" ||
+          category === "halfmarathon" ||
+          category === "21k" ||
+          category === "21.1k"
+        ) {
+          category = "half";
+        }
+
+        if (
+          category === "marathon" ||
+          category === "42k" ||
+          category === "42.2k"
+        ) {
+          category = "marathon";
+        }
+
+
+        if (
+          !Object.prototype.hasOwnProperty.call(
+            bestTimes,
+            category
+          )
+        ) {
+          continue;
+        }
+
+
+        if (
+          !bestTimes[category] ||
+          duration <
+            Number(
+              bestTimes[category]
+                .duration_seconds
+            )
+        ) {
+          bestTimes[category] = run;
+        }
       }
-    );
-
-  }
 
 
-  /*
-   * ---------------------------------------------------------
-   * RUN HISTORY
-   * ---------------------------------------------------------
-   */
-
-  function renderRuns(runs){
-
-    const container =
-      document.getElementById("runs");
-
-
-    container.innerHTML = "";
-
-
-    if(!runs.length){
-
-      container.innerHTML = `
-        <div class="empty">
-          Noch keine öffentlichen Läufe vorhanden.
-        </div>
-      `;
-
-      return;
+      return {
+        totalKm,
+        runCount: runs.length,
+        longestRun,
+        run100Plus,
+        bestTimes
+      };
     }
 
 
-    runs.forEach(run => {
+    /*
+     * ============================================
+     * PROFIL DARSTELLEN
+     * ============================================
+     */
 
-      const item =
-        document.createElement("div");
+    function renderProfile(profile) {
 
-
-      item.className =
-      "run";
-
-
-      const distance =
-        Number(run.distance_km) || 0;
-
-
-      const left =
-        document.createElement("div");
+      const avatarContainer =
+        document.getElementById(
+          "avatarContainer"
+        );
 
 
-      left.innerHTML = `
-        <div class="run-date">
-          ${escapeHtml(
-            formatDate(run.run_date)
-          )}
-        </div>
-
-        <div class="run-distance">
-          ${formatKm(distance)} km
-        </div>
-
-        ${
-          run.note
-            ? `
-              <div class="run-note">
-                ${escapeHtml(run.note)}
-              </div>
-            `
-            : ""
-        }
-      `;
+      const avatarUrl =
+        getAvatarUrl(profile.avatar_url);
 
 
-      const right =
-        document.createElement("div");
+      if (avatarUrl) {
+
+        avatarContainer.innerHTML = `
+          <img
+            src="${escapeHtml(avatarUrl)}"
+            alt="Profilbild von ${escapeHtml(
+              profile.display_name ||
+              profile.username ||
+              "Nutzer"
+            )}"
+            class="profile-avatar"
+          />
+        `;
+
+      } else {
+
+        const initial = (
+          profile.display_name ||
+          profile.username ||
+          "?"
+        )
+          .trim()
+          .charAt(0)
+          .toUpperCase();
 
 
-      right.className =
-        "run-meta";
+        avatarContainer.innerHTML = `
+          <div class="profile-avatar-placeholder">
+            ${escapeHtml(initial)}
+          </div>
+        `;
+      }
 
 
-      right.innerHTML = `
-        <div>
-          ${formatDuration(
-            run.duration_seconds
-          )}
-        </div>
+      document.getElementById(
+        "profileName"
+      ).textContent =
+        profile.display_name ||
+        profile.username ||
+        "Läufer";
 
-        <div>
-          ${formatPace(
-            run.duration_seconds,
-            distance
-          )}
-        </div>
 
-        ${
-          run.run_type
-            ? `
+      document.getElementById(
+        "profileUsername"
+      ).textContent =
+        profile.username
+          ? `@${profile.username}`
+          : "";
+
+
+      const locationElement =
+        document.getElementById(
+          "profileLocation"
+        );
+
+
+      if (profile.location) {
+
+        locationElement.textContent =
+          `📍 ${profile.location}`;
+
+        locationElement.style.display =
+          "block";
+
+      } else {
+
+        locationElement.style.display =
+          "none";
+      }
+
+
+      const bioElement =
+        document.getElementById(
+          "profileBio"
+        );
+
+
+      if (profile.bio) {
+
+        bioElement.textContent =
+          profile.bio;
+
+        bioElement.style.display =
+          "block";
+
+      } else {
+
+        bioElement.style.display =
+          "none";
+      }
+    }
+
+
+    /*
+     * ============================================
+     * STATISTIKEN DARSTELLEN
+     * ============================================
+     */
+
+    function renderStatistics(stats) {
+
+      const totalKm =
+        stats.totalKm;
+
+
+      /*
+       * Gesamt-Kilometer
+       */
+
+      document.getElementById(
+        "totalKm"
+      ).textContent =
+        `${formatNumber(totalKm, 1)} km`;
+
+
+      /*
+       * Anzahl Läufe
+       */
+
+      document.getElementById(
+        "runCount"
+      ).textContent =
+        stats.runCount;
+
+
+      /*
+       * Level
+       */
+
+      const currentLevel =
+        getCurrentLevel(totalKm);
+
+      const nextLevel =
+        getNextLevel(totalKm);
+
+      const progress =
+        getLevelProgress(totalKm);
+
+
+      document.getElementById(
+        "currentLevel"
+      ).textContent =
+        `Level ${currentLevel}`;
+
+
+      document.getElementById(
+        "levelTitle"
+      ).textContent =
+        `Level ${currentLevel}`;
+
+
+      document.getElementById(
+        "levelKm"
+      ).textContent =
+        `${formatNumber(totalKm, 1)} km`;
+
+
+      document.getElementById(
+        "levelProgress"
+      ).style.width =
+        `${progress}%`;
+
+
+      document.getElementById(
+        "levelStart"
+      ).textContent =
+        `${formatNumber(currentLevel, 0)} km`;
+
+
+      if (nextLevel) {
+
+        document.getElementById(
+          "currentLevelSub"
+        ).textContent =
+          `Nächstes Level bei ${formatNumber(
+            nextLevel,
+            0
+          )} km`;
+
+
+        document.getElementById(
+          "levelNext"
+        ).textContent =
+          `Nächstes Level: ${formatNumber(
+            nextLevel,
+            0
+          )} km`;
+
+      } else {
+
+        document.getElementById(
+          "currentLevelSub"
+        ).textContent =
+          "Maximales Level erreicht";
+
+
+        document.getElementById(
+          "levelNext"
+        ).textContent =
+          "Maximales Level erreicht";
+      }
+
+
+      /*
+       * 100 km+
+       */
+
+      const run100Plus =
+        stats.run100Plus;
+
+
+      if (run100Plus) {
+
+        document.getElementById(
+          "run100Plus"
+        ).textContent =
+          `${formatNumber(
+            run100Plus.distance_km,
+            1
+          )} km`;
+
+
+        document.getElementById(
+          "run100PlusSub"
+        ).textContent =
+          `${formatDate(
+            run100Plus.run_date
+          )} · ${formatDuration(
+            run100Plus.duration_seconds
+          )}`;
+
+      } else {
+
+        document.getElementById(
+          "run100Plus"
+        ).textContent =
+          "–";
+
+
+        document.getElementById(
+          "run100PlusSub"
+        ).textContent =
+          "Noch kein Lauf über 100 km";
+      }
+
+
+      /*
+       * LÄNGSTER LAUF
+       */
+
+      const longestRun =
+        stats.longestRun;
+
+
+      if (longestRun) {
+
+        document.getElementById(
+          "longestRun"
+        ).textContent =
+          `${formatNumber(
+            longestRun.distance_km,
+            1
+          )} km`;
+
+
+        document.getElementById(
+          "longestRunSub"
+        ).textContent =
+          `${formatDate(
+            longestRun.run_date
+          )} · ${formatDuration(
+            longestRun.duration_seconds
+          )}`;
+
+      } else {
+
+        document.getElementById(
+          "longestRun"
+        ).textContent =
+          "–";
+
+
+        document.getElementById(
+          "longestRunSub"
+        ).textContent =
+          "Noch kein Lauf vorhanden";
+      }
+
+
+      /*
+       * Persönliche Bestzeiten
+       */
+
+      renderPersonalBest(
+        "pb5k",
+        "pb5kSub",
+        stats.bestTimes["5k"]
+      );
+
+
+      renderPersonalBest(
+        "pb10k",
+        "pb10kSub",
+        stats.bestTimes["10k"]
+      );
+
+
+      renderPersonalBest(
+        "pbHalf",
+        "pbHalfSub",
+        stats.bestTimes["half"]
+      );
+
+
+      renderPersonalBest(
+        "pbMarathon",
+        "pbMarathonSub",
+        stats.bestTimes["marathon"]
+      );
+    }
+
+
+    function renderPersonalBest(
+      valueId,
+      subId,
+      run
+    ) {
+
+      const valueElement =
+        document.getElementById(
+          valueId
+        );
+
+      const subElement =
+        document.getElementById(
+          subId
+        );
+
+
+      if (!run) {
+
+        valueElement.textContent =
+          "–";
+
+        subElement.textContent =
+          "Noch kein Lauf";
+
+        return;
+      }
+
+
+      valueElement.textContent =
+        formatDurationShort(
+          run.duration_seconds
+        );
+
+
+      subElement.textContent =
+        `${formatDate(
+          run.run_date
+        )} · ${formatNumber(
+          run.distance_km,
+          1
+        )} km`;
+    }
+
+
+    /*
+     * ============================================
+     * LAUFHISTORIE
+     * ============================================
+     */
+
+    function renderRuns(runs) {
+
+      const container =
+        document.getElementById(
+          "runsList"
+        );
+
+
+      if (!runs.length) {
+
+        container.innerHTML = `
+          <div class="message-card">
+            Für 2026 wurden noch keine Läufe gefunden.
+          </div>
+        `;
+
+        return;
+      }
+
+
+      container.innerHTML =
+        runs.map(run => {
+
+          const distance =
+            Number(run.distance_km);
+
+
+          const duration =
+            Number(run.duration_seconds);
+
+
+          const photoUrl =
+            getRunPhotoUrl(
+              run.photo_path
+            );
+
+
+          const noteHtml =
+            run.note
+              ? `
+                <div class="run-note">
+                  ${escapeHtml(run.note)}
+                </div>
+              `
+              : "";
+
+
+          const photoHtml =
+            photoUrl
+              ? `
+                <div>
+                  <img
+                    src="${escapeHtml(photoUrl)}"
+                    alt="Lauffoto"
+                    class="run-photo"
+                  />
+                </div>
+              `
+              : "";
+
+
+          return `
+            <article class="run-row">
+
               <div>
-                ${escapeHtml(
-                  run.run_type
-                )}
+                <div class="run-date">
+                  ${formatDate(
+                    run.run_date
+                  )}
+                </div>
+
+                <div class="run-type">
+                  ${escapeHtml(
+                    getRunTypeLabel(
+                      run.run_type
+                    )
+                  )}
+                </div>
+
+                ${noteHtml}
               </div>
-            `
-            : ""
+
+
+              <div>
+                <div class="run-metric-label">
+                  Distanz
+                </div>
+
+                <div class="run-metric-value">
+                  ${
+                    Number.isFinite(distance)
+                      ? `${formatNumber(
+                          distance,
+                          2
+                        )} km`
+                      : "–"
+                  }
+                </div>
+              </div>
+
+
+              <div>
+                <div class="run-metric-label">
+                  Zeit
+                </div>
+
+                <div class="run-metric-value">
+                  ${formatDuration(
+                    duration
+                  )}
+                </div>
+              </div>
+
+
+              <div>
+                ${
+                  photoHtml ||
+                  `
+                    <div class="run-metric-label">
+                      Pace
+                    </div>
+
+                    <div class="run-metric-value">
+                      ${formatPace(
+                        distance,
+                        duration
+                      )}
+                    </div>
+                  `
+                }
+              </div>
+
+            </article>
+          `;
+
+        }).join("");
+    }
+
+
+    /*
+     * ============================================
+     * INITIALISIERUNG
+     * ============================================
+     */
+
+    async function initializePage() {
+
+      const loadingState =
+        document.getElementById(
+          "loadingState"
+        );
+
+      const profileContent =
+        document.getElementById(
+          "profileContent"
+        );
+
+      const errorState =
+        document.getElementById(
+          "errorState"
+        );
+
+
+      try {
+
+        /*
+         * Username aus der URL:
+         *
+         * user.html?username=max
+         */
+
+        const params =
+          new URLSearchParams(
+            window.location.search
+          );
+
+
+        const username =
+          params.get("username");
+
+
+        if (!username) {
+
+          throw new Error(
+            "Kein Benutzername angegeben."
+          );
         }
-      `;
 
 
-      item.appendChild(left);
-      item.appendChild(right);
+        /*
+         * Profil laden
+         */
+
+        const profile =
+          await loadProfile(
+            username
+          );
 
 
-      container.appendChild(item);
+        /*
+         * 2026-Läufe laden
+         */
 
-    });
-
-  }
-
-
-  /*
-   * ---------------------------------------------------------
-   * ERROR
-   * ---------------------------------------------------------
-   */
-
-  function showError(message){
-
-    document
-      .getElementById("loading")
-      .style.display =
-      "none";
+        const runs =
+          await loadRunsFor2026(
+            profile.id
+          );
 
 
-    document
-      .getElementById("error")
-      .style.display =
-      "block";
+        /*
+         * Statistik berechnen
+         */
+
+        const statistics =
+          calculateStatistics(
+            runs
+          );
 
 
-    document
-      .getElementById("errorText")
-      .textContent =
-      message;
+        /*
+         * Alles darstellen
+         */
 
-  }
+        renderProfile(
+          profile
+        );
 
 
-  /*
-   * ---------------------------------------------------------
-   * START
-   * ---------------------------------------------------------
-   */
+        renderStatistics(
+          statistics
+        );
 
-  loadProfile();
 
-</script>
+        renderRuns(
+          runs
+        );
+
+
+        /*
+         * Sichtbar machen
+         */
+
+        loadingState.style.display =
+          "none";
+
+        profileContent.style.display =
+          "block";
+
+      }
+
+      catch (error) {
+
+        console.error(
+          "Fehler beim Laden des Profils:",
+          error
+        );
+
+
+        loadingState.style.display =
+          "none";
+
+
+        errorState.style.display =
+          "block";
+
+
+        errorState.innerHTML = `
+          <strong>Profil konnte nicht geladen werden.</strong>
+          <br><br>
+          ${escapeHtml(
+            error?.message ||
+            "Unbekannter Fehler."
+          )}
+        `;
+      }
+    }
+
+
+    /*
+     * START
+     */
+
+    initializePage();
+
+  </script>
 
 </body>
 </html>
