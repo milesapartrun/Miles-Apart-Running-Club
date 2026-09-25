@@ -357,6 +357,13 @@
     }
 
 
+    .ma-message-button {
+      color: #18b8c7 !important;
+      font-size: 17px !important;
+      padding-right: 0 !important;
+    }
+
+
     .ma-delete {
       color: #b44 !important;
       font-size: 17px !important;
@@ -590,6 +597,135 @@
 
 
     /* =====================================================
+       PRIVATE MESSAGE MODAL
+    ===================================================== */
+
+    .ma-message-overlay {
+      position: fixed !important;
+      inset: 0 !important;
+      z-index: 9999 !important;
+      display: none;
+      align-items: center !important;
+      justify-content: center !important;
+      padding: 20px !important;
+      background: rgba(0,0,0,.45) !important;
+      box-sizing: border-box !important;
+    }
+
+
+    .ma-message-overlay.open {
+      display: flex !important;
+    }
+
+
+    .ma-message-modal {
+      width: 100% !important;
+      max-width: 520px !important;
+      background: #fff !important;
+      border-radius: 18px !important;
+      padding: 26px !important;
+      box-sizing: border-box !important;
+      box-shadow: 0 20px 60px rgba(0,0,0,.22) !important;
+    }
+
+
+    .ma-message-modal-head {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      gap: 15px !important;
+      margin-bottom: 18px !important;
+    }
+
+
+    .ma-message-modal-title {
+      margin: 0 !important;
+      color: #111 !important;
+      font-size: 24px !important;
+      line-height: 1.2 !important;
+      font-weight: 800 !important;
+    }
+
+
+    .ma-message-modal-recipient {
+      margin: 4px 0 0 0 !important;
+      color: #777 !important;
+      font-size: 15px !important;
+    }
+
+
+    .ma-message-close {
+      width: 40px !important;
+      height: 40px !important;
+      flex: 0 0 40px !important;
+      border: 0 !important;
+      border-radius: 50% !important;
+      background: #f2f2f2 !important;
+      color: #111 !important;
+      font-size: 24px !important;
+      line-height: 1 !important;
+      cursor: pointer !important;
+    }
+
+
+    .ma-message-textarea {
+      width: 100% !important;
+      min-height: 140px !important;
+      padding: 14px !important;
+      border: 1px solid #d8d8d8 !important;
+      outline: none !important;
+      background: #fff !important;
+      color: #111 !important;
+      font: inherit !important;
+      font-size: 16px !important;
+      line-height: 1.45 !important;
+      resize: vertical !important;
+      box-sizing: border-box !important;
+    }
+
+
+    .ma-message-textarea:focus {
+      border-color: #18b8c7 !important;
+    }
+
+
+    .ma-message-actions {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: flex-end !important;
+      gap: 8px !important;
+      margin-top: 12px !important;
+    }
+
+
+    .ma-message-status {
+      flex: 1 1 auto !important;
+      min-width: 0 !important;
+      color: #18b8c7 !important;
+      font-size: 14px !important;
+      font-weight: 700 !important;
+    }
+
+
+    .ma-message-send {
+      min-width: 120px !important;
+      height: 48px !important;
+      border: 0 !important;
+      background: #111 !important;
+      color: #fff !important;
+      padding: 0 18px !important;
+      font-size: 16px !important;
+      font-weight: 800 !important;
+      cursor: pointer !important;
+    }
+
+
+    .ma-message-send:hover {
+      background: #18b8c7 !important;
+    }
+
+
+    /* =====================================================
        EMPTY
     ===================================================== */
 
@@ -776,6 +912,40 @@
       .ma-comment-submit {
         width: 100% !important;
         height: 54px !important;
+      }
+
+
+      .ma-message-overlay {
+        align-items: flex-end !important;
+        padding: 10px !important;
+      }
+
+
+      .ma-message-modal {
+        max-width: none !important;
+        border-radius: 18px 18px 12px 12px !important;
+        padding: 22px !important;
+      }
+
+
+      .ma-message-modal-title {
+        font-size: 22px !important;
+      }
+
+
+      .ma-message-actions {
+        flex-direction: column !important;
+        align-items: stretch !important;
+      }
+
+
+      .ma-message-status {
+        width: 100% !important;
+      }
+
+
+      .ma-message-send {
+        width: 100% !important;
       }
 
     }
@@ -1116,6 +1286,87 @@
 </div>
 
 
+<!-- =====================================================
+     PRIVATE MESSAGE MODAL
+====================================================== -->
+
+<div
+  id="messageOverlay"
+  class="ma-message-overlay"
+>
+
+  <div
+    class="ma-message-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="messageModalTitle"
+  >
+
+    <div class="ma-message-modal-head">
+
+      <div>
+
+        <h2
+          id="messageModalTitle"
+          class="ma-message-modal-title"
+        >
+          Private Nachricht
+        </h2>
+
+
+        <p
+          id="messageRecipient"
+          class="ma-message-modal-recipient"
+        >
+          —
+        </p>
+
+      </div>
+
+
+      <button
+        id="closeMessageButton"
+        class="ma-message-close"
+        type="button"
+        aria-label="Nachricht schließen"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <textarea
+      id="privateMessageContent"
+      class="ma-message-textarea"
+      maxlength="2000"
+      placeholder="Schreib eine private Nachricht …"
+    ></textarea>
+
+
+    <div class="ma-message-actions">
+
+      <div
+        id="privateMessageStatus"
+        class="ma-message-status"
+      ></div>
+
+
+      <button
+        id="sendPrivateMessageButton"
+        class="ma-message-send"
+        type="button"
+      >
+        Senden
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+
 <script>
 
 
@@ -1231,6 +1482,42 @@
     );
 
 
+  const messageOverlay =
+    document.getElementById(
+      "messageOverlay"
+    );
+
+
+  const closeMessageButton =
+    document.getElementById(
+      "closeMessageButton"
+    );
+
+
+  const messageRecipient =
+    document.getElementById(
+      "messageRecipient"
+    );
+
+
+  const privateMessageContent =
+    document.getElementById(
+      "privateMessageContent"
+    );
+
+
+  const privateMessageStatus =
+    document.getElementById(
+      "privateMessageStatus"
+    );
+
+
+  const sendPrivateMessageButton =
+    document.getElementById(
+      "sendPrivateMessageButton"
+    );
+
+
   /* =====================================================
      STATE
   ===================================================== */
@@ -1238,6 +1525,10 @@
   let currentUser = null;
 
   let currentProfile = null;
+
+  let messageReceiverId = null;
+
+  let messageReceiverName = "";
 
 
   /* =====================================================
@@ -1375,6 +1666,260 @@
       "none";
 
   }
+
+
+  /* =====================================================
+     PRIVATE MESSAGE MODAL
+  ===================================================== */
+
+  function openMessageModal(
+    receiverId,
+    receiverName
+  ) {
+
+    if (!currentUser) {
+
+      window.location.href =
+        "home.html";
+
+      return;
+
+    }
+
+
+    if (
+      !receiverId ||
+      receiverId === currentUser.id
+    ) {
+
+      return;
+
+    }
+
+
+    messageReceiverId =
+      receiverId;
+
+
+    messageReceiverName =
+      receiverName ||
+      "Miles Apart Member";
+
+
+    messageRecipient.textContent =
+      `An ${messageReceiverName}`;
+
+
+    privateMessageContent.value =
+      "";
+
+
+    privateMessageStatus.textContent =
+      "";
+
+
+    sendPrivateMessageButton.disabled =
+      false;
+
+
+    sendPrivateMessageButton.textContent =
+      "Senden";
+
+
+    messageOverlay.classList.add(
+      "open"
+    );
+
+
+    setTimeout(
+      () => {
+
+        privateMessageContent.focus();
+
+      },
+      50
+    );
+
+  }
+
+
+  function closeMessageModal() {
+
+    messageOverlay.classList.remove(
+      "open"
+    );
+
+
+    messageReceiverId =
+      null;
+
+
+    messageReceiverName =
+      "";
+
+  }
+
+
+  async function sendPrivateMessage() {
+
+    if (!currentUser) {
+
+      window.location.href =
+        "home.html";
+
+      return;
+
+    }
+
+
+    if (!messageReceiverId) {
+      return;
+    }
+
+
+    const content =
+      privateMessageContent.value.trim();
+
+
+    if (!content) {
+
+      privateMessageStatus.textContent =
+        "Bitte schreibe zuerst eine Nachricht.";
+
+      return;
+
+    }
+
+
+    sendPrivateMessageButton.disabled =
+      true;
+
+
+    sendPrivateMessageButton.textContent =
+      "Wird gesendet …";
+
+
+    privateMessageStatus.textContent =
+      "";
+
+
+    try {
+
+      const {
+        error
+      } =
+        await supabaseClient
+          .from("private_messages")
+          .insert({
+
+            sender_id:
+              currentUser.id,
+
+            receiver_id:
+              messageReceiverId,
+
+            content:
+              content
+
+          });
+
+
+      if (error) {
+        throw error;
+      }
+
+
+      privateMessageStatus.textContent =
+        "Nachricht wurde gesendet ✓";
+
+
+      privateMessageContent.value =
+        "";
+
+
+      setTimeout(
+        () => {
+
+          closeMessageModal();
+
+        },
+        900
+      );
+
+
+    } catch (error) {
+
+      console.error(
+        "Private message error:",
+        error
+      );
+
+
+      privateMessageStatus.textContent =
+        error.message ||
+        "Die Nachricht konnte nicht gesendet werden.";
+
+
+    } finally {
+
+      sendPrivateMessageButton.disabled =
+        false;
+
+
+      sendPrivateMessageButton.textContent =
+        "Senden";
+
+    }
+
+  }
+
+
+  closeMessageButton.addEventListener(
+    "click",
+    closeMessageModal
+  );
+
+
+  sendPrivateMessageButton.addEventListener(
+    "click",
+    sendPrivateMessage
+  );
+
+
+  messageOverlay.addEventListener(
+    "click",
+    event => {
+
+      if (
+        event.target ===
+        messageOverlay
+      ) {
+
+        closeMessageModal();
+
+      }
+
+    }
+  );
+
+
+  document.addEventListener(
+    "keydown",
+    event => {
+
+      if (
+        event.key === "Escape" &&
+        messageOverlay.classList.contains(
+          "open"
+        )
+      ) {
+
+        closeMessageModal();
+
+      }
+
+    }
+  );
 
 
   /* =====================================================
@@ -1906,6 +2451,29 @@
 
           </button>
 
+
+          ${
+            currentUser &&
+            !isOwner
+              ? `
+
+                <button
+                  class="ma-post-action ma-message-button"
+                  type="button"
+                  data-action="message"
+                  data-post-id="${post.id}"
+                  data-author-id="${post.author_id}"
+                  data-author-name="${escapeHtml(
+                    authorName
+                  )}"
+                >
+                  Nachricht
+                </button>
+
+              `
+              : ""
+          }
+
         </div>
 
 
@@ -2391,6 +2959,20 @@
 
         await deletePost(
           postId
+        );
+
+        return;
+
+      }
+
+
+      if (
+        action === "message"
+      ) {
+
+        openMessageModal(
+          button.dataset.authorId,
+          button.dataset.authorName
         );
 
         return;
