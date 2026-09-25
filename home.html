@@ -156,6 +156,170 @@ button,input,textarea,select{font-family:inherit}
   box-shadow:0 6px 20px rgba(24,184,199,.18)
 }
 
+/* =========================================================
+   LAUFLEVEL
+   ========================================================= */
+
+.running-levels{
+  width:100%;
+  margin:0 0 12px;
+  padding:0;
+}
+
+.running-levels-track{
+  display:flex;
+  align-items:flex-end;
+  gap:7px;
+  width:100%;
+  overflow-x:auto;
+  overflow-y:hidden;
+  padding:3px 1px 8px;
+  scrollbar-width:thin;
+  scrollbar-color:#d7dfdd transparent;
+  -webkit-overflow-scrolling:touch;
+}
+
+.running-level{
+  position:relative;
+  flex:0 0 auto;
+  width:43px;
+  text-align:center;
+  opacity:.22;
+  filter:grayscale(1);
+  transition:
+    opacity .25s ease,
+    filter .25s ease,
+    transform .25s ease;
+}
+
+.running-level.reached{
+  opacity:1;
+  filter:grayscale(0);
+}
+
+.running-level.current{
+  transform:translateY(-3px);
+}
+
+.running-level-emoji{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:38px;
+  height:38px;
+  margin:0 auto 4px;
+  font-size:25px;
+  line-height:1;
+  filter:grayscale(1);
+}
+
+.running-level.reached .running-level-emoji{
+  filter:grayscale(0);
+}
+
+.running-level.current .running-level-emoji{
+  transform:scale(1.12);
+}
+
+.running-level-km{
+  display:block;
+  color:#7d8582;
+  font-size:7px;
+  line-height:1;
+  font-weight:900;
+  letter-spacing:.2px;
+  white-space:nowrap;
+}
+
+.running-level.reached .running-level-km{
+  color:var(--miles-blue-dark);
+}
+
+.running-level.current .running-level-km{
+  color:#111;
+}
+
+.running-level-tooltip{
+  display:none;
+}
+
+.running-levels-meta{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  margin-top:1px;
+}
+
+.running-level-progress{
+  color:#8a918f;
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.5px;
+  text-transform:uppercase;
+}
+
+.running-level-progress strong{
+  color:#111;
+  font-weight:900;
+}
+
+.running-level-next{
+  color:var(--miles-blue-dark);
+  font-size:9px;
+  font-weight:900;
+  text-align:right;
+  white-space:nowrap;
+}
+
+.running-level-next.completed{
+  color:var(--home-green);
+}
+
+@media(max-width:700px){
+  .running-levels{
+    margin-bottom:10px;
+  }
+
+  .running-levels-track{
+    gap:5px;
+  }
+
+  .running-level{
+    width:39px;
+  }
+
+  .running-level-emoji{
+    width:34px;
+    height:34px;
+    font-size:22px;
+  }
+
+  .running-level-km{
+    font-size:6px;
+  }
+
+  .running-levels-meta{
+    align-items:flex-start;
+  }
+
+  .running-level-progress,
+  .running-level-next{
+    font-size:8px;
+  }
+}
+
+@media(max-width:500px){
+  .running-levels-meta{
+    display:block;
+  }
+
+  .running-level-next{
+    margin-top:4px;
+    text-align:left;
+  }
+}
+
 .preview-notice{
   display:none;
   position:relative;
@@ -2199,8 +2363,33 @@ kannst du hier hinzufügen.
 
 </div>
 
+<!-- LAUFLEVEL: direkt über dem Datum -->
+
+<div>
+
+<div class="running-levels">
+
+<div class="running-levels-track" id="runningLevelsTrack"></div>
+
+<div class="running-levels-meta">
+
+<div class="running-level-progress">
+Jahreskilometer:
+<strong id="runningLevelYearKm">0,0 km</strong>
+</div>
+
+<div class="running-level-next" id="runningLevelNext">
+Nächstes Level: 100 km
+</div>
+
+</div>
+
+</div>
+
 <div class="dashboard-date" id="dashboardDate">
 Montag, 21. September 2026
+</div>
+
 </div>
 
 </section>
@@ -3345,6 +3534,9 @@ const followStatus=document.getElementById("followStatus");
 const inviteStatus=document.getElementById("inviteStatus");
 
 const dashboardDate=document.getElementById("dashboardDate");
+const runningLevelsTrack=document.getElementById("runningLevelsTrack");
+const runningLevelYearKm=document.getElementById("runningLevelYearKm");
+const runningLevelNext=document.getElementById("runningLevelNext");
 const currentDayBadge=document.getElementById("currentDayBadge");
 const dailyChart=document.getElementById("dailyChart");
 const weekBar=document.getElementById("weekBar");
@@ -3487,6 +3679,123 @@ const BEST_TIME_CATEGORIES={
   "100k":{label:"100 Kilometer",min:98.00,max:106.00},
   "100plus":{label:"100+ Kilometer",min:106.000001,max:Infinity}
 };
+
+/* =========================================================
+   LAUFLEVEL
+   100–1.000 km in 100er-Schritten,
+   danach 1.500–10.000 km in 500er-Schritten.
+   ========================================================= */
+
+const RUN_LEVELS=[
+  {km:100,emoji:"🌱"},
+  {km:200,emoji:"👟"},
+  {km:300,emoji:"🏃"},
+  {km:400,emoji:"💨"},
+  {km:500,emoji:"🔥"},
+  {km:600,emoji:"⚡"},
+  {km:700,emoji:"💪"},
+  {km:800,emoji:"🚀"},
+  {km:900,emoji:"🏅"},
+  {km:1000,emoji:"🏆"},
+  {km:1500,emoji:"🥇"},
+  {km:2000,emoji:"👑"},
+  {km:2500,emoji:"🌟"},
+  {km:3000,emoji:"💎"},
+  {km:3500,emoji:"🔥"},
+  {km:4000,emoji:"⚡"},
+  {km:4500,emoji:"🚀"},
+  {km:5000,emoji:"🏆"},
+  {km:5500,emoji:"🥇"},
+  {km:6000,emoji:"👑"},
+  {km:6500,emoji:"🌟"},
+  {km:7000,emoji:"💎"},
+  {km:7500,emoji:"🔥"},
+  {km:8000,emoji:"⚡"},
+  {km:8500,emoji:"🚀"},
+  {km:9000,emoji:"🏆"},
+  {km:9500,emoji:"🥇"},
+  {km:10000,emoji:"👑"}
+];
+
+function renderRunningLevels(yearKm){
+  const totalKm=Math.max(0,Number(yearKm)||0);
+
+  runningLevelsTrack.innerHTML="";
+
+  let reachedCount=0;
+  let nextLevel=null;
+
+  RUN_LEVELS.forEach(level=>{
+    const reached=totalKm>=level.km;
+
+    if(reached)
+      reachedCount++;
+
+    if(!reached&&!nextLevel)
+      nextLevel=level;
+
+    const levelElement=document.createElement("div");
+    levelElement.className="running-level";
+
+    if(reached)
+      levelElement.classList.add("reached");
+
+    if(
+      reached &&
+      (!nextLevel||level.km<nextLevel.km)
+    )
+      levelElement.classList.add("current");
+
+    const emoji=document.createElement("div");
+    emoji.className="running-level-emoji";
+    emoji.textContent=level.emoji;
+
+    const km=document.createElement("span");
+    km.className="running-level-km";
+    km.textContent=
+      level.km.toLocaleString("de-DE")+" km";
+
+    levelElement.appendChild(emoji);
+    levelElement.appendChild(km);
+
+    runningLevelsTrack.appendChild(levelElement);
+  });
+
+  runningLevelYearKm.textContent=
+    formatNumber(totalKm)+" km";
+
+  if(nextLevel){
+    runningLevelNext.classList.remove("completed");
+    runningLevelNext.textContent=
+      "Nächstes Level: "+
+      nextLevel.km.toLocaleString("de-DE")+
+      " km";
+  }else{
+    runningLevelNext.classList.add("completed");
+    runningLevelNext.textContent=
+      "🏁 Alle Lauflevel bis 10.000 km erreicht";
+  }
+
+  /*
+   * Falls noch kein Level erreicht wurde, bleibt alles grau.
+   * Sobald z. B. 500 km erreicht wurden, werden alle Level
+   * bis einschließlich 500 km hell dargestellt.
+   */
+  if(reachedCount>0){
+    const reachedLevels=[
+      ...runningLevelsTrack.querySelectorAll(".running-level.reached")
+    ];
+
+    reachedLevels.forEach(element=>{
+      element.classList.remove("current");
+    });
+
+    const lastReached=reachedLevels[reachedLevels.length-1];
+
+    if(lastReached)
+      lastReached.classList.add("current");
+  }
+}
 
 const DEMO_DAILY_KM=[6.2,7.4,5.8,8.1,6.5,10.2,7.0];
 
@@ -5096,6 +5405,9 @@ function renderTotals(totals){
       :"🎯 "+
        formatNumber(30-totals.week)+
        " km bis zum Wochenziel.";
+
+  /* Lauflevel basieren ausschließlich auf dem Kalenderjahr. */
+  renderRunningLevels(totals.year);
 }
 
 function findBestRunByCategory(runs,category){
@@ -6750,5 +7062,3 @@ initialize();
 
 </body>
 </html>
-
-Schick mir den gesamten Code zum Austauschen zu und denk bitte auch daran, dass du Level 1500, 2000, 2500 und so weiter bis zu Level 10.000 erstellst und einfügst.
