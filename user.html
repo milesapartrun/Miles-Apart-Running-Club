@@ -493,15 +493,12 @@
     ========================================================= */
 
     @media (max-width: 980px) {
-
       .main-stats {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
-
     }
 
     @media (max-width: 720px) {
-
       .user-page {
         width: min(100% - 22px, 620px);
         padding-top: 22px;
@@ -566,7 +563,6 @@
     }
 
     @media (max-width: 500px) {
-
       .main-stats {
         grid-template-columns: 1fr 1fr;
       }
@@ -593,7 +589,6 @@
     }
 
     @media (max-width: 370px) {
-
       .main-stats {
         grid-template-columns: 1fr;
       }
@@ -622,7 +617,6 @@
         ← Zur Community
       </a>
 
-
       <!-- =====================================================
            LOADING
       ====================================================== -->
@@ -633,7 +627,6 @@
       >
         Profil wird geladen …
       </div>
-
 
       <!-- =====================================================
            PROFIL
@@ -685,7 +678,6 @@
 
         </section>
 
-
         <!-- =====================================================
              STATISTIK
         ====================================================== -->
@@ -698,7 +690,6 @@
           </div>
 
         </div>
-
 
         <section class="main-stats">
 
@@ -721,7 +712,6 @@
 
           </div>
 
-
           <div class="main-stat">
 
             <div class="stat-label">
@@ -741,7 +731,6 @@
 
           </div>
 
-
           <div class="main-stat">
 
             <div class="stat-label">
@@ -755,7 +744,7 @@
               <span
                 id="currentLevelEmoji"
                 class="level-stat-emoji"
-              >🏃</span>
+              >–</span>
 
               <span>
                 Level 0
@@ -770,7 +759,6 @@
             </div>
 
           </div>
-
 
           <div class="main-stat">
 
@@ -796,7 +784,6 @@
 
         </section>
 
-
         <!-- =====================================================
              PERSÖNLICHE BESTZEITEN
         ====================================================== -->
@@ -805,11 +792,10 @@
 
           <div>
             <h2>Persönliche Bestzeiten</h2>
-            <p>Die schnellsten eingetragenen Läufe aus 2026.</p>
+            <p>Die schnellsten eingetragenen Läufe aus dem Home-Bestzeiten-System.</p>
           </div>
 
         </div>
-
 
         <section class="highlights-grid">
 
@@ -844,7 +830,6 @@
 
           </div>
 
-
           <!-- 10 KM -->
           <div class="highlight-card">
 
@@ -875,7 +860,6 @@
             </div>
 
           </div>
-
 
           <!-- HALBMARATHON -->
           <div class="highlight-card">
@@ -908,7 +892,6 @@
 
           </div>
 
-
           <!-- MARATHON -->
           <div class="highlight-card">
 
@@ -940,7 +923,6 @@
 
           </div>
 
-
           <!-- 100 KM -->
           <div class="highlight-card">
 
@@ -971,7 +953,6 @@
             </div>
 
           </div>
-
 
           <!-- 100 KM+ -->
           <div class="highlight-card">
@@ -1006,7 +987,6 @@
 
         </section>
 
-
         <!-- =====================================================
              LAUFHISTORIE
         ====================================================== -->
@@ -1020,14 +1000,12 @@
 
         </div>
 
-
         <section
           id="runsList"
           class="runs-list"
         ></section>
 
       </div>
-
 
       <!-- =====================================================
            ERROR
@@ -1043,13 +1021,11 @@
 
   </main>
 
-
   <!-- =========================================================
        SUPABASE
   ========================================================== -->
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
 
   <script>
 
@@ -1068,162 +1044,398 @@
 
 
     /* =========================================================
-       LEVELSYSTEM
+       HOME-LEVELSYSTEM
+       
+       EXAKT AUS DER HOME-SEITE
     ========================================================== */
 
-    const LEVEL_MILESTONES =
-      Array.from(
-        { length: 20 },
-        (_, index) =>
-          (index + 1) * 500
-      );
+    const RUN_LEVELS = [
+      { km: 100, emoji: "🌱" },
+      { km: 200, emoji: "👟" },
+      { km: 300, emoji: "🏃" },
+      { km: 400, emoji: "💨" },
+      { km: 500, emoji: "🔥" },
+      { km: 600, emoji: "⚡" },
+      { km: 700, emoji: "💪" },
+      { km: 800, emoji: "🚀" },
+      { km: 900, emoji: "🏅" },
+      { km: 1000, emoji: "🏆" },
+      { km: 1500, emoji: "🥇" },
+      { km: 2000, emoji: "👑" },
+      { km: 2500, emoji: "🌟" },
+      { km: 3000, emoji: "💎" },
+      { km: 3500, emoji: "🔥" },
+      { km: 4000, emoji: "⚡" },
+      { km: 4500, emoji: "🚀" },
+      { km: 5000, emoji: "🏆" },
+      { km: 5500, emoji: "🥇" },
+      { km: 6000, emoji: "👑" },
+      { km: 6500, emoji: "🌟" },
+      { km: 7000, emoji: "💎" },
+      { km: 7500, emoji: "🔥" },
+      { km: 8000, emoji: "⚡" },
+      { km: 8500, emoji: "🚀" },
+      { km: 9000, emoji: "🏆" },
+      { km: 9500, emoji: "🥇" },
+      { km: 10000, emoji: "👑" }
+    ];
 
 
-    function getCurrentLevel(totalKm) {
+    function getCurrentRunningLevel(
+      yearKm
+    ) {
 
-      const total =
+      const totalKm =
         Math.max(
           0,
-          Number(totalKm) || 0
+          Number(yearKm) || 0
         );
 
 
-      if (total < 500) {
-        return 0;
-      }
+      let currentLevel =
+        null;
 
 
-      return Math.min(
-        10000,
-        Math.floor(total / 500) * 500
+      RUN_LEVELS.forEach(
+        level => {
+
+          if (
+            totalKm >= level.km
+          ) {
+            currentLevel =
+              level;
+          }
+        }
       );
+
+
+      return currentLevel;
     }
 
 
-    function getNextLevel(totalKm) {
+    function getNextRunningLevel(
+      yearKm
+    ) {
 
-      const total =
+      const totalKm =
         Math.max(
           0,
-          Number(totalKm) || 0
+          Number(yearKm) || 0
         );
 
 
       return (
-        LEVEL_MILESTONES.find(
-          milestone =>
-            milestone > total
+        RUN_LEVELS.find(
+          level =>
+            totalKm < level.km
         ) || null
       );
     }
 
 
-    function getLevelProgress(totalKm) {
+    /* =========================================================
+       HOME-BESTZEITEN
+       
+       EXAKT AUS DER HOME-SEITE
+    ========================================================== */
 
-      const total =
-        Math.max(
-          0,
-          Number(totalKm) || 0
+    const BEST_TIME_CATEGORIES = {
+
+      "5k": {
+        label: "5 Kilometer",
+        min: 4.90,
+        max: 5.50
+      },
+
+      "10k": {
+        label: "10 Kilometer",
+        min: 9.80,
+        max: 11.00
+      },
+
+      "half": {
+        label: "Halbmarathon",
+        min: 20.90,
+        max: 22.50
+      },
+
+      "marathon": {
+        label: "Marathon",
+        min: 41.90,
+        max: 44.00
+      },
+
+      "50k": {
+        label: "50 Kilometer",
+        min: 49.00,
+        max: 53.00
+      },
+
+      "100k": {
+        label: "100 Kilometer",
+        min: 98.00,
+        max: 106.00
+      },
+
+      "100plus": {
+        label: "100+ Kilometer",
+        min: 106.000001,
+        max: Infinity
+      }
+    };
+
+
+    function findBestRunByCategory(
+      runs,
+      category
+    ) {
+
+      const eligible =
+        runs.filter(
+          run => {
+
+            const duration =
+              Number(
+                run.duration_seconds
+              );
+
+
+            return (
+              run.best_time_category ===
+                category &&
+              duration > 0
+            );
+          }
         );
 
 
-      const currentLevel =
-        getCurrentLevel(totalKm);
-
-
-      const nextLevel =
-        getNextLevel(totalKm);
-
-
-      if (!nextLevel) {
-        return 100;
+      if (
+        !eligible.length
+      ) {
+        return null;
       }
 
 
-      const distance =
-        nextLevel - currentLevel;
+      eligible.sort(
+        (a, b) =>
+          Number(
+            a.duration_seconds
+          ) -
+          Number(
+            b.duration_seconds
+          )
+      );
 
 
-      if (distance <= 0) {
-        return 100;
+      return eligible[0];
+    }
+
+
+    /* =========================================================
+       HOME FORMATIERUNG
+       
+       EXAKT WIE HOME
+    ========================================================== */
+
+    function formatNumber(
+      value
+    ) {
+
+      return Number(
+        value
+      ).toLocaleString(
+        "de-DE",
+        {
+          minimumFractionDigits: 1,
+          maximumFractionDigits: 1
+        }
+      );
+    }
+
+
+    function formatDate(
+      dateString
+    ) {
+
+      if (!dateString) {
+        return "";
       }
 
 
-      const progress =
-        ((total - currentLevel) /
-          distance) *
-        100;
+      const date =
+        new Date(
+          `${dateString}T00:00:00`
+        );
 
 
-      return Math.max(
-        0,
-        Math.min(
-          100,
-          progress
+      if (
+        Number.isNaN(
+          date.getTime()
+        )
+      ) {
+        return dateString;
+      }
+
+
+      return date.toLocaleDateString(
+        "de-DE"
+      );
+    }
+
+
+    function formatDuration(
+      seconds
+    ) {
+
+      if (
+        seconds === null ||
+        seconds === undefined ||
+        seconds === ""
+      ) {
+        return "—";
+      }
+
+
+      const total =
+        Math.round(
+          Number(seconds)
+        );
+
+
+      if (
+        !Number.isFinite(
+          total
+        )
+      ) {
+        return "—";
+      }
+
+
+      const hours =
+        Math.floor(
+          total / 3600
+        );
+
+
+      const minutes =
+        Math.floor(
+          (total % 3600) / 60
+        );
+
+
+      const secs =
+        total % 60;
+
+
+      if (
+        hours > 0
+      ) {
+
+        return (
+          String(hours).padStart(
+            2,
+            "0"
+          ) +
+          ":" +
+          String(minutes).padStart(
+            2,
+            "0"
+          ) +
+          ":" +
+          String(secs).padStart(
+            2,
+            "0"
+          )
+        );
+      }
+
+
+      return (
+        String(minutes).padStart(
+          2,
+          "0"
+        ) +
+        ":" +
+        String(secs).padStart(
+          2,
+          "0"
         )
       );
     }
 
 
-    /* =========================================================
-       LEVEL-EMOJIS
-       
-       Zentrale Zuordnung für das aktuelle Level.
-    ========================================================== */
-
-    const LEVEL_EMOJIS = {
-
-      0: "🏃",
-
-      500: "🏃",
-
-      1000: "🔥",
-
-      1500: "⚡",
-
-      2000: "💪",
-
-      2500: "🏅",
-
-      3000: "🥇",
-
-      3500: "🏆",
-
-      4000: "🚀",
-
-      4500: "🌟",
-
-      5000: "👑",
-
-      5500: "💎",
-
-      6000: "🔥",
-
-      6500: "⚡",
-
-      7000: "🏅",
-
-      7500: "🥇",
-
-      8000: "🏆",
-
-      8500: "🚀",
-
-      9000: "🌟",
-
-      9500: "👑",
-
-      10000: "💎"
-    };
-
-
-    function getLevelEmoji(
-      level
+    function formatPace(
+      seconds,
+      distanceKm
     ) {
 
+      const duration =
+        Number(seconds);
+
+      const distance =
+        Number(distanceKm);
+
+
+      if (
+        !Number.isFinite(
+          duration
+        ) ||
+        !Number.isFinite(
+          distance
+        ) ||
+        duration <= 0 ||
+        distance <= 0
+      ) {
+        return "—";
+      }
+
+
+      const secondsPerKm =
+        duration / distance;
+
+
+      let minutes =
+        Math.floor(
+          secondsPerKm / 60
+        );
+
+
+      let secondsRest =
+        Math.round(
+          secondsPerKm % 60
+        );
+
+
+      if (
+        secondsRest === 60
+      ) {
+
+        minutes += 1;
+        secondsRest = 0;
+      }
+
+
       return (
-        LEVEL_EMOJIS[level] ||
-        "🏃"
+        String(minutes).padStart(
+          2,
+          "0"
+        ) +
+        ":" +
+        String(secondsRest).padStart(
+          2,
+          "0"
+        ) +
+        " min/km"
+      );
+    }
+
+
+    function formatDurationShort(
+      seconds
+    ) {
+
+      return formatDuration(
+        seconds
       );
     }
 
@@ -1232,7 +1444,9 @@
        HILFSFUNKTIONEN
     ========================================================== */
 
-    function escapeHtml(value) {
+    function escapeHtml(
+      value
+    ) {
 
       return String(
         value ?? ""
@@ -1257,198 +1471,6 @@
           /'/g,
           "&#039;"
         );
-    }
-
-
-    function formatNumber(
-      value,
-      decimals = 1
-    ) {
-
-      const number =
-        Number(value);
-
-
-      if (!Number.isFinite(number)) {
-        return "0";
-      }
-
-
-      return number.toLocaleString(
-        "de-DE",
-        {
-          minimumFractionDigits:
-            decimals,
-
-          maximumFractionDigits:
-            decimals
-        }
-      );
-    }
-
-
-    function formatDate(
-      dateString
-    ) {
-
-      if (!dateString) {
-        return "–";
-      }
-
-
-      const date =
-        new Date(dateString);
-
-
-      if (
-        Number.isNaN(
-          date.getTime()
-        )
-      ) {
-        return dateString;
-      }
-
-
-      return date.toLocaleDateString(
-        "de-DE",
-        {
-          day: "2-digit",
-          month: "2-digit",
-          year: "numeric"
-        }
-      );
-    }
-
-
-    function formatDuration(
-      totalSeconds
-    ) {
-
-      const seconds =
-        Number(totalSeconds);
-
-
-      if (
-        !Number.isFinite(seconds) ||
-        seconds <= 0
-      ) {
-        return "–";
-      }
-
-
-      const totalMinutes =
-        Math.round(
-          seconds / 60
-        );
-
-
-      const hours =
-        Math.floor(
-          totalMinutes / 60
-        );
-
-
-      const minutes =
-        totalMinutes % 60;
-
-
-      if (hours > 0) {
-
-        return `${hours} h ${String(
-          minutes
-        ).padStart(2, "0")} min`;
-      }
-
-
-      return `${minutes} min`;
-    }
-
-
-    function formatDurationShort(
-      totalSeconds
-    ) {
-
-      const seconds =
-        Number(totalSeconds);
-
-
-      if (
-        !Number.isFinite(seconds) ||
-        seconds <= 0
-      ) {
-        return "–";
-      }
-
-
-      const totalMinutes =
-        Math.round(
-          seconds / 60
-        );
-
-
-      const hours =
-        Math.floor(
-          totalMinutes / 60
-        );
-
-
-      const minutes =
-        totalMinutes % 60;
-
-
-      if (hours > 0) {
-
-        return `${hours}:${String(
-          minutes
-        ).padStart(2, "0")} h`;
-      }
-
-
-      return `${minutes} min`;
-    }
-
-
-    function formatPace(
-      distanceKm,
-      durationSeconds
-    ) {
-
-      const distance =
-        Number(distanceKm);
-
-      const seconds =
-        Number(durationSeconds);
-
-
-      if (
-        !Number.isFinite(distance) ||
-        !Number.isFinite(seconds) ||
-        distance <= 0 ||
-        seconds <= 0
-      ) {
-        return "–";
-      }
-
-
-      const paceSeconds =
-        seconds / distance;
-
-
-      const minutes =
-        Math.floor(
-          paceSeconds / 60
-        );
-
-
-      const remainingSeconds =
-        Math.round(
-          paceSeconds % 60
-        );
-
-
-      return `${minutes}:${String(
-        remainingSeconds
-      ).padStart(2, "0")} min/km`;
     }
 
 
@@ -1537,58 +1559,124 @@
 
 
     /* =========================================================
-       2026 LÄUFE
+       ALLE LÄUFE DES USERS
+       
+       WICHTIG:
+       Wie auf HOME werden für die PBs ALLE Läufe geladen.
     ========================================================== */
 
-    async function loadRunsFor2026(
+    async function loadAllRuns(
       userId
     ) {
 
-      const {
-        data,
-        error
-      } =
-        await supabaseClient
-          .from("runs")
-          .select(`
-            id,
-            user_id,
-            run_date,
-            distance_km,
-            duration_seconds,
-            note,
-            run_type,
-            best_time_category,
-            start_time,
-            end_time,
-            created_at
-          `)
-          .eq(
-            "user_id",
-            userId
-          )
-          .gte(
-            "run_date",
-            "2026-01-01"
-          )
-          .lt(
-            "run_date",
-            "2027-01-01"
-          )
-          .order(
-            "run_date",
-            {
-              ascending: false
-            }
-          );
+      const PAGE_SIZE =
+        1000;
 
 
-      if (error) {
-        throw error;
+      let allRuns = [];
+
+      let from = 0;
+
+
+      while (true) {
+
+        const {
+          data,
+          error
+        } =
+          await supabaseClient
+            .from("runs")
+            .select(
+              `
+                id,
+                user_id,
+                run_date,
+                distance_km,
+                duration_seconds,
+                note,
+                run_type,
+                best_time_category,
+                start_time,
+                end_time,
+                created_at
+              `
+            )
+            .eq(
+              "user_id",
+              userId
+            )
+            .order(
+              "run_date",
+              {
+                ascending: false
+              }
+            )
+            .range(
+              from,
+              from +
+                PAGE_SIZE -
+                1
+            );
+
+
+        if (error) {
+          throw error;
+        }
+
+
+        const page =
+          data || [];
+
+
+        allRuns.push(
+          ...page
+        );
+
+
+        if (
+          page.length <
+          PAGE_SIZE
+        ) {
+          break;
+        }
+
+
+        from += PAGE_SIZE;
       }
 
 
-      return data || [];
+      return allRuns;
+    }
+
+
+    /* =========================================================
+       2026 FILTER
+       
+       Nur Jahresstatistik + Historie
+    ========================================================== */
+
+    function getRunsFor2026(
+      runs
+    ) {
+
+      return runs.filter(
+        run => {
+
+          if (
+            !run.run_date
+          ) {
+            return false;
+          }
+
+
+          return (
+            run.run_date >=
+              "2026-01-01" &&
+            run.run_date <
+              "2027-01-01"
+          );
+        }
+      );
     }
 
 
@@ -1630,10 +1718,6 @@
         );
 
 
-      /* =====================================================
-         LÄNGSTER LAUF
-      ====================================================== */
-
       let longestRun =
         null;
 
@@ -1672,224 +1756,6 @@
       }
 
 
-      /* =====================================================
-         BESTZEITEN
-      ====================================================== */
-
-      const bestTimes = {
-
-        "5k": null,
-
-        "10k": null,
-
-        "half": null,
-
-        "marathon": null,
-
-        "100k": null,
-
-        "100plus": null
-      };
-
-
-      for (
-        const run of runs
-      ) {
-
-        const distance =
-          Number(
-            run.distance_km
-          );
-
-
-        const duration =
-          Number(
-            run.duration_seconds
-          );
-
-
-        if (
-          !Number.isFinite(
-            distance
-          ) ||
-          !Number.isFinite(
-            duration
-          ) ||
-          duration <= 0
-        ) {
-          continue;
-        }
-
-
-        let category =
-          String(
-            run.best_time_category ||
-            ""
-          )
-            .trim()
-            .toLowerCase();
-
-
-        /* ===================================================
-           KATEGORIE NORMALISIEREN
-        ==================================================== */
-
-        if (
-          category === "5 km" ||
-          category === "5km" ||
-          category === "5-km"
-        ) {
-          category = "5k";
-        }
-
-
-        if (
-          category === "10 km" ||
-          category === "10km" ||
-          category === "10-km"
-        ) {
-          category = "10k";
-        }
-
-
-        if (
-          category === "halbmarathon" ||
-          category === "halfmarathon" ||
-          category === "21k" ||
-          category === "21.1k"
-        ) {
-          category = "half";
-        }
-
-
-        if (
-          category === "42k" ||
-          category === "42.2k"
-        ) {
-          category =
-            "marathon";
-        }
-
-
-        if (
-          category === "100 km" ||
-          category === "100km" ||
-          category === "100-km" ||
-          category === "100k" ||
-          category === "100 k"
-        ) {
-          category =
-            "100k";
-        }
-
-
-        if (
-          category === "100km+" ||
-          category === "100 km+" ||
-          category === "100k+" ||
-          category === "100 k+" ||
-          category === "100-km+" ||
-          category === "ultra" ||
-          category === "ultra100"
-        ) {
-          category =
-            "100plus";
-        }
-
-
-        /* ===================================================
-           FALLBACK ÜBER DISTANZ
-        ==================================================== */
-
-        if (!category) {
-
-          if (
-            distance >= 4.9 &&
-            distance <= 5.3
-          ) {
-
-            category =
-              "5k";
-
-          } else if (
-            distance >= 9.8 &&
-            distance <= 10.5
-          ) {
-
-            category =
-              "10k";
-
-          } else if (
-            distance >= 20.5 &&
-            distance <= 22.0
-          ) {
-
-            category =
-              "half";
-
-          } else if (
-            distance >= 40.0 &&
-            distance <= 43.5
-          ) {
-
-            category =
-              "marathon";
-
-          } else if (
-            distance >= 99 &&
-            distance < 101
-          ) {
-
-            category =
-              "100k";
-
-          } else if (
-            distance > 100
-          ) {
-
-            category =
-              "100plus";
-          }
-        }
-
-
-        if (
-          !Object.prototype.hasOwnProperty.call(
-            bestTimes,
-            category
-          )
-        ) {
-          continue;
-        }
-
-
-        if (
-          !bestTimes[category] ||
-          duration <
-            Number(
-              bestTimes[
-                category
-              ].duration_seconds
-            )
-        ) {
-
-          bestTimes[
-            category
-          ] = run;
-        }
-      }
-
-
-      /* =====================================================
-         DURCHSCHNITT
-      ====================================================== */
-
-      const averageRun =
-        runs.length > 0
-          ? totalKm / runs.length
-          : 0;
-
-
       return {
 
         totalKm,
@@ -1897,11 +1763,7 @@
         runCount:
           runs.length,
 
-        longestRun,
-
-        averageRun,
-
-        bestTimes
+        longestRun
       };
     }
 
@@ -2086,25 +1948,21 @@
     ========================================================== */
 
     function renderStatistics(
-      stats
+      stats,
+      allRuns
     ) {
 
       const totalKm =
         stats.totalKm;
 
 
-      /* Gesamt-KM */
-
       document.getElementById(
         "totalKm"
       ).textContent =
         `${formatNumber(
-          totalKm,
-          1
+          totalKm
         )} km`;
 
-
-      /* Anzahl Läufe */
 
       document.getElementById(
         "runCount"
@@ -2113,17 +1971,19 @@
 
 
       /* =====================================================
-         AKTUELLES LEVEL
+         AKTUELLES LAUFLEVEL
+         
+         EXAKT DIE RUN_LEVELS DER HOME
       ====================================================== */
 
       const currentLevel =
-        getCurrentLevel(
+        getCurrentRunningLevel(
           totalKm
         );
 
 
       const nextLevel =
-        getNextLevel(
+        getNextRunningLevel(
           totalKm
         );
 
@@ -2134,24 +1994,40 @@
         );
 
 
-      const currentLevelText =
-        document.querySelector(
-          "#currentLevel .level-stat-text"
+      const currentLevelElement =
+        document.getElementById(
+          "currentLevel"
         );
 
 
-      currentLevelEmoji.textContent =
-        getLevelEmoji(
-          currentLevel
-        );
+      if (
+        currentLevel
+      ) {
+
+        currentLevelEmoji.textContent =
+          currentLevel.emoji;
 
 
-      document.getElementById(
-        "currentLevel"
-      ).querySelector(
-        "span:last-child"
-      ).textContent =
-        `Level ${currentLevel}`;
+        currentLevelElement
+          .querySelector(
+            "span:last-child"
+          )
+          .textContent =
+          `Level ${currentLevel.km}`;
+
+      } else {
+
+        currentLevelEmoji.textContent =
+          "–";
+
+
+        currentLevelElement
+          .querySelector(
+            "span:last-child"
+          )
+          .textContent =
+          "Level 0";
+      }
 
 
       if (
@@ -2161,9 +2037,8 @@
         document.getElementById(
           "currentLevelSub"
         ).textContent =
-          `Nächstes Level bei ${formatNumber(
-            nextLevel,
-            0
+          `Nächstes Level bei ${nextLevel.km.toLocaleString(
+            "de-DE"
           )} km`;
 
       } else {
@@ -2171,12 +2046,14 @@
         document.getElementById(
           "currentLevelSub"
         ).textContent =
-          "Maximales Level erreicht";
+          "🏁 Alle Lauflevel bis 10.000 km erreicht";
       }
 
 
       /* =====================================================
          LÄNGSTER LAUF
+         
+         Weiterhin nur 2026, wie die Jahresstatistik.
       ====================================================== */
 
       const longestRun =
@@ -2197,17 +2074,16 @@
           "longestRun"
         ).textContent =
           `${formatNumber(
-            distance,
-            1
+            distance
           )} km`;
 
 
         document.getElementById(
           "longestRunSub"
         ).textContent =
-          `${formatDate(
+          formatDate(
             longestRun.run_date
-          )}`;
+          );
 
       } else {
 
@@ -2225,54 +2101,80 @@
 
 
       /* =====================================================
-         PERSÖNLICHE BESTZEITEN
+         PBs
+         
+         EXAKT WIE HOME:
+         best_time_category + kürzeste Zeit.
+         
+         WICHTIG:
+         allRuns statt nur 2026.
       ====================================================== */
 
       renderPersonalBest(
         "pb5k",
         "pb5kSub",
-        stats.bestTimes["5k"]
+        findBestRunByCategory(
+          allRuns,
+          "5k"
+        )
       );
 
 
       renderPersonalBest(
         "pb10k",
         "pb10kSub",
-        stats.bestTimes["10k"]
+        findBestRunByCategory(
+          allRuns,
+          "10k"
+        )
       );
 
 
       renderPersonalBest(
         "pbHalf",
         "pbHalfSub",
-        stats.bestTimes["half"]
+        findBestRunByCategory(
+          allRuns,
+          "half"
+        )
       );
 
 
       renderPersonalBest(
         "pbMarathon",
         "pbMarathonSub",
-        stats.bestTimes["marathon"]
+        findBestRunByCategory(
+          allRuns,
+          "marathon"
+        )
       );
 
 
       renderPersonalBest(
         "pb100k",
         "pb100kSub",
-        stats.bestTimes["100k"]
+        findBestRunByCategory(
+          allRuns,
+          "100k"
+        )
       );
 
 
       renderPersonalBest(
         "pb100Plus",
         "pb100PlusSub",
-        stats.bestTimes["100plus"]
+        findBestRunByCategory(
+          allRuns,
+          "100plus"
+        )
       );
     }
 
 
     /* =========================================================
        BESTZEIT RENDERN
+       
+       Darstellung an die Home-Logik angelehnt.
     ========================================================== */
 
     function renderPersonalBest(
@@ -2296,11 +2198,55 @@
       if (!run) {
 
         valueElement.textContent =
-          "–";
+          "Noch kein Lauf";
+
+
+        valueElement.classList.add(
+          "empty"
+        );
 
 
         subElement.textContent =
-          "Noch kein Lauf";
+          "";
+
+
+        return;
+      }
+
+
+      const duration =
+        formatDuration(
+          run.duration_seconds
+        );
+
+
+      const pace =
+        formatPace(
+          run.duration_seconds,
+          run.distance_km
+        );
+
+
+      if (
+        run.best_time_category ===
+        "100plus"
+      ) {
+
+        valueElement.textContent =
+          `${formatNumber(
+            run.distance_km
+          )} km · ${duration}`;
+
+
+        valueElement.classList.remove(
+          "empty"
+        );
+
+
+        subElement.textContent =
+          `${formatDate(
+            run.run_date
+          )} · ${pace}`;
 
 
         return;
@@ -2308,17 +2254,19 @@
 
 
       valueElement.textContent =
-        formatDurationShort(
-          run.duration_seconds
-        );
+        `${duration} · ${pace}`;
+
+
+      valueElement.classList.remove(
+        "empty"
+      );
 
 
       subElement.textContent =
         `${formatDate(
           run.run_date
         )} · ${formatNumber(
-          run.distance_km,
-          1
+          run.distance_km
         )} km`;
     }
 
@@ -2326,8 +2274,7 @@
     /* =========================================================
        LAUFHISTORIE
        
-       WICHTIG:
-       Keine Fotos mehr.
+       Nur 2026.
     ========================================================== */
 
     function renderRuns(
@@ -2375,9 +2322,10 @@
 
 
               const is100Plus =
-                statsRunIs100Plus(
-                  run
-                );
+                Number.isFinite(
+                  distance
+                ) &&
+                distance > 100;
 
 
               return `
@@ -2423,7 +2371,6 @@
 
                   </div>
 
-
                   <div class="run-card-right">
 
                     <div class="run-distance">
@@ -2432,8 +2379,7 @@
                           distance
                         )
                           ? `${formatNumber(
-                              distance,
-                              1
+                              distance
                             )} km`
                           : "–"
                       }
@@ -2447,8 +2393,8 @@
 
                     <div class="run-pace">
                       ${formatPace(
-                        distance,
-                        duration
+                        duration,
+                        distance
                       )}
                     </div>
 
@@ -2459,68 +2405,6 @@
             }
           )
           .join("");
-    }
-
-
-    /* =========================================================
-       ERKENNUNG 100-KM+-LAUF
-    ========================================================== */
-
-    function statsRunIs100Plus(
-      run
-    ) {
-
-      const category =
-        String(
-          run.best_time_category ||
-          ""
-        )
-          .trim()
-          .toLowerCase()
-          .replace(
-            /\s+/g,
-            " "
-          );
-
-
-      const values = [
-        "100km",
-        "100 km",
-        "100k",
-        "100 k",
-        "100km+",
-        "100 km+",
-        "100k+",
-        "100 k+",
-        "ultra",
-        "ultra100",
-        "100-km",
-        "100-km+"
-      ];
-
-
-      if (
-        values.includes(
-          category
-        )
-      ) {
-        return true;
-      }
-
-
-      return (
-        category.includes(
-          "100"
-        ) &&
-        (
-          category.includes(
-            "km"
-          ) ||
-          category.includes(
-            "k"
-          )
-        )
-      );
     }
 
 
@@ -2550,12 +2434,6 @@
 
       try {
 
-        /*
-         * Username aus:
-         *
-         * user.html?username=max
-         */
-
         const params =
           new URLSearchParams(
             window.location.search
@@ -2578,7 +2456,9 @@
         }
 
 
-        /* Profil */
+        /* =====================================================
+           PROFIL
+        ====================================================== */
 
         const profile =
           await loadProfile(
@@ -2586,23 +2466,43 @@
           );
 
 
-        /* Nur 2026 */
+        /* =====================================================
+           ALLE LÄUFE
+           
+           Wichtig für die PBs wie auf Home.
+        ====================================================== */
 
-        const runs =
-          await loadRunsFor2026(
+        const allRuns =
+          await loadAllRuns(
             profile.id
           );
 
 
-        /* Statistik */
+        /* =====================================================
+           NUR 2026
+           
+           Wichtig für Jahresstatistik + Historie.
+        ====================================================== */
 
-        const statistics =
-          calculateStatistics(
-            runs
+        const runs2026 =
+          getRunsFor2026(
+            allRuns
           );
 
 
-        /* Rendern */
+        /* =====================================================
+           STATISTIK
+        ====================================================== */
+
+        const statistics =
+          calculateStatistics(
+            runs2026
+          );
+
+
+        /* =====================================================
+           RENDERN
+        ====================================================== */
 
         renderProfile(
           profile
@@ -2610,16 +2510,19 @@
 
 
         renderStatistics(
-          statistics
+          statistics,
+          allRuns
         );
 
 
         renderRuns(
-          runs
+          runs2026
         );
 
 
-        /* Anzeigen */
+        /* =====================================================
+           ANZEIGEN
+        ====================================================== */
 
         loadingState.style.display =
           "none";
