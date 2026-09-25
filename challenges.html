@@ -117,11 +117,34 @@
       line-height: 1;
     }
 
-    .leaderboard-name {
+    /*
+     * Usernamen im Leaderboard
+     * sind jetzt klickbare Profile.
+     */
+
+    .leaderboard-profile-link {
       min-width: 0;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+
+      color: inherit;
+      text-decoration: none;
+      font-weight: 700;
+
+      transition:
+        color .18s ease,
+        opacity .18s ease;
+    }
+
+    .leaderboard-profile-link:hover {
+      color: #18b8c7;
+      text-decoration: underline;
+    }
+
+    .night-owls .leaderboard-profile-link:hover,
+    .distance .leaderboard-profile-link:hover {
+      color: #18b8c7;
     }
 
     .leaderboard-km {
@@ -913,6 +936,37 @@
   }
 
 
+  /*
+   * ==========================================================
+   * PROFIL-URL
+   * ==========================================================
+   *
+   * Aus dem Username wird:
+   *
+   * user.html?username=...
+   *
+   * Damit öffnet sich die bereits vorhandene
+   * öffentliche User-Seite.
+   */
+
+  function getProfileUrl(
+    username
+  ) {
+
+    if (!username) {
+      return "#";
+    }
+
+    return (
+      "user.html?username=" +
+      encodeURIComponent(
+        username
+      )
+    );
+
+  }
+
+
   async function getProfileNames(
     userIds
   ) {
@@ -946,20 +1000,28 @@
 
     }
 
-    const names = {};
+    const profiles = {};
 
     (data || []).forEach(
       profile => {
 
-        names[profile.id] =
-          profile.display_name ||
-          profile.username ||
-          "Runner";
+        profiles[profile.id] = {
+
+          displayName:
+            profile.display_name ||
+            profile.username ||
+            "Runner",
+
+          username:
+            profile.username ||
+            null
+
+        };
 
       }
     );
 
-    return names;
+    return profiles;
 
   }
 
@@ -1328,6 +1390,12 @@
   }
 
 
+  /*
+   * ==========================================================
+   * KM LEADERBOARD
+   * ==========================================================
+   */
+
   async function loadKmLeaderboard(
     challengeId,
     totalId,
@@ -1568,7 +1636,14 @@
         );
 
 
-      const names =
+      /*
+       * Profile statt nur Namen laden.
+       *
+       * Wir brauchen hier jetzt auch
+       * den username für den Link.
+       */
+
+      const profiles =
         await getProfileNames(
           userIds
         );
@@ -1612,11 +1687,61 @@
               }
 
 
-              const name =
-                names[
+              const profile =
+                profiles[
                   runner.userId
-                ] ||
+                ];
+
+
+              const name =
+                profile?.displayName ||
                 "Runner";
+
+
+              /*
+               * Wenn ein Username vorhanden ist,
+               * wird der Name klickbar.
+               *
+               * Ohne Username bleibt der Name
+               * normaler Text.
+               */
+
+              let nameHtml;
+
+
+              if (
+                profile?.username
+              ) {
+
+                nameHtml = `
+                  <a
+                    class="leaderboard-profile-link"
+                    href="${escapeHtml(
+                      getProfileUrl(
+                        profile.username
+                      )
+                    )}"
+                    title="Profil von ${escapeHtml(
+                      name
+                    )} öffnen"
+                  >
+                    ${escapeHtml(
+                      name
+                    )}
+                  </a>
+                `;
+
+              } else {
+
+                nameHtml = `
+                  <span class="leaderboard-profile-link">
+                    ${escapeHtml(
+                      name
+                    )}
+                  </span>
+                `;
+
+              }
 
 
               return `
@@ -1627,11 +1752,13 @@
                   </div>
 
                   <div class="leaderboard-name">
-                    ${escapeHtml(name)}
+                    ${nameHtml}
                   </div>
 
                   <div class="leaderboard-km">
-                    ${formatKm(runner.kilometers)}
+                    ${formatKm(
+                      runner.kilometers
+                    )}
                   </div>
 
                 </div>
@@ -1668,6 +1795,12 @@
 
   }
 
+
+  /*
+   * ==========================================================
+   * STREAK LEADERBOARD
+   * ==========================================================
+   */
 
   async function loadStreakLeaderboard() {
 
@@ -1798,8 +1931,11 @@
 
 
           leaderboard.push({
+
             userId,
+
             streak
+
           });
 
         }
@@ -1816,7 +1952,11 @@
       );
 
 
-      const names =
+      /*
+       * Profile inklusive Username laden.
+       */
+
+      const profiles =
         await getProfileNames(
           userIds
         );
@@ -1893,11 +2033,53 @@
               }
 
 
-              const name =
-                names[
+              const profile =
+                profiles[
                   runner.userId
-                ] ||
+                ];
+
+
+              const name =
+                profile?.displayName ||
                 "Runner";
+
+
+              let nameHtml;
+
+
+              if (
+                profile?.username
+              ) {
+
+                nameHtml = `
+                  <a
+                    class="leaderboard-profile-link"
+                    href="${escapeHtml(
+                      getProfileUrl(
+                        profile.username
+                      )
+                    )}"
+                    title="Profil von ${escapeHtml(
+                      name
+                    )} öffnen"
+                  >
+                    ${escapeHtml(
+                      name
+                    )}
+                  </a>
+                `;
+
+              } else {
+
+                nameHtml = `
+                  <span class="leaderboard-profile-link">
+                    ${escapeHtml(
+                      name
+                    )}
+                  </span>
+                `;
+
+              }
 
 
               return `
@@ -1908,11 +2090,13 @@
                   </div>
 
                   <div class="leaderboard-name">
-                    ${escapeHtml(name)}
+                    ${nameHtml}
                   </div>
 
                   <div class="leaderboard-km">
-                    ${formatDays(runner.streak)}
+                    ${formatDays(
+                      runner.streak
+                    )}
                   </div>
 
                 </div>
@@ -1949,6 +2133,12 @@
 
   }
 
+
+  /*
+   * ==========================================================
+   * JOIN BUTTONS
+   * ==========================================================
+   */
 
   async function updateJoinButton(
     button
@@ -2229,6 +2419,12 @@
       }
     );
 
+
+  /*
+   * ==========================================================
+   * START
+   * ==========================================================
+   */
 
   async function initializePage() {
 
