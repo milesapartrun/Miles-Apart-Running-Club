@@ -1212,7 +1212,7 @@
     <!-- LOWER AREA -->
 
     <div
-      class="section grid g3"
+      class="section grid g1"
       id="communityLower"
       style="display:none"
     >
@@ -1225,9 +1225,26 @@
 
         <div class="section-head">
 
-          <h2>
-            Run Buddies 🏃
-          </h2>
+          <div>
+
+            <h2>
+              Run Buddies 🏃
+            </h2>
+
+            <p
+              class="small muted"
+              style="margin:4px 0 0 0"
+            >
+              <strong
+                id="memberCount"
+                style="color:#111"
+              >
+                —
+              </strong>
+              angemeldete Mitglieder
+            </p>
+
+          </div>
 
 
           <span class="badge">
@@ -1251,110 +1268,6 @@
           </p>
 
         </div>
-
-
-      </div>
-
-
-      <!-- COMMUNITY PULSE -->
-
-      <div class="card dark">
-
-
-        <div class="label">
-          COMMUNITY PULSE
-        </div>
-
-
-        <div
-          class="kpi"
-          style="font-size:44px"
-          id="memberCount"
-        >
-          —
-        </div>
-
-
-        <p style="color:#aaa">
-          Miles Apart Mitglieder
-        </p>
-
-
-        <div class="row">
-
-          <span>
-            👟 Gemeinsam laufen
-          </span>
-
-          <span>
-            🔥 Gemeinsam wachsen
-          </span>
-
-        </div>
-
-
-      </div>
-
-
-      <!-- QUESTION -->
-
-      <div
-        class="card lime"
-        id="weeklyQuestionCard"
-      >
-
-
-        <div class="label">
-          FRAGE DER WOCHE
-        </div>
-
-
-        <h2>
-          Was motiviert dich am meisten?
-        </h2>
-
-
-        <div class="stack">
-
-
-          <button
-            class="btn white"
-            type="button"
-            data-answer="Gemeinsam laufen"
-          >
-            👥 Gemeinsam laufen
-          </button>
-
-
-          <button
-            class="btn white"
-            type="button"
-            data-answer="Ziele & Challenges"
-          >
-            🎯 Ziele & Challenges
-          </button>
-
-
-          <button
-            class="btn white"
-            type="button"
-            data-answer="Streak halten"
-          >
-            🔥 Streak halten
-          </button>
-
-
-        </div>
-
-
-        <div
-          id="pollMessage"
-          style="
-            margin-top:12px;
-            font-size:13px;
-            font-weight:700;
-          "
-        ></div>
 
 
       </div>
@@ -1480,12 +1393,6 @@
   const memberCount =
     document.getElementById(
       "memberCount"
-    );
-
-
-  const weeklyQuestionCard =
-    document.getElementById(
-      "weeklyQuestionCard"
     );
 
 
@@ -1665,10 +1572,6 @@
         "Anmelden, um einen Post zu erstellen";
 
 
-      weeklyQuestionCard.style.display =
-        "none";
-
-
       return true;
 
     }
@@ -1691,10 +1594,6 @@
         "Anmelden, um einen Post zu erstellen";
 
 
-      weeklyQuestionCard.style.display =
-        "none";
-
-
       return true;
 
     }
@@ -1702,10 +1601,6 @@
 
     currentUser =
       data.user;
-
-
-    weeklyQuestionCard.style.display =
-      "";
 
 
     openPostButton.textContent =
@@ -3046,41 +2941,6 @@
       count ?? 0;
 
   }
-
-
-  /* =====================================================
-     POLL
-  ===================================================== */
-
-  document
-    .querySelectorAll(
-      "[data-answer]"
-    )
-    .forEach(
-      button => {
-
-        button.addEventListener(
-          "click",
-          () => {
-
-            const answer =
-              button.dataset.answer;
-
-
-            const message =
-              document.getElementById(
-                "pollMessage"
-              );
-
-
-            message.textContent =
-              `Deine Antwort: ${answer} ✓`;
-
-          }
-        );
-
-      }
-    );
 
 
   /* =====================================================
