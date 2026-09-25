@@ -1,1860 +1,856 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="de">
-
 <head>
-
-  <meta charset="utf-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width,initial-scale=1"
-  >
-
-  <title>
-    Community — Miles Apart Running Club
-  </title>
-
-  <link
-    rel="stylesheet"
-    href="style.css"
-  >
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Community – Miles Apart Running Club</title>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-
   <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-    /* =====================================================
-       PROFILE / TOP RIGHT
-    ===================================================== */
+    :root {
+      --bg: #f5f5f2;
+      --card: #ffffff;
+      --text: #171717;
+      --muted: #777;
+      --line: #e5e5e5;
+      --accent: #111;
+      --soft: #f0f0ed;
+      --green: #c8ff00;
+    }
 
-    .top-right {
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    button,
+    textarea {
+      font: inherit;
+    }
+
+    .app {
+      min-height: 100vh;
       display: flex;
-      align-items: center;
-      gap: 12px;
-      position: relative;
     }
 
-
-    .login-button {
-      border: 0;
-
-      background: #18b8c7;
-
-      color: #fff;
-
-      padding: 11px 18px;
-
-      font-family: inherit;
-
-      font-size: 15px;
-
-      font-weight: 800;
-
-      cursor: pointer;
-
-      border-radius: 0;
+    .sidebar {
+      width: 250px;
+      background: #fff;
+      border-right: 1px solid var(--line);
+      position: fixed;
+      inset: 0 auto 0 0;
+      padding: 28px 20px;
+      display: flex;
+      flex-direction: column;
+      z-index: 20;
     }
 
+    .brand {
+      margin-bottom: 45px;
+      padding: 0 10px;
+    }
 
-    .login-button:hover {
+    .brand img {
+      width: 155px;
+      height: auto;
+      display: block;
+    }
+
+    .nav {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .nav a {
+      padding: 12px 14px;
+      border-radius: 12px;
+      font-size: 14px;
+      color: #555;
+      transition: .2s;
+    }
+
+    .nav a:hover {
+      background: var(--soft);
+      color: var(--text);
+    }
+
+    .nav a.active {
       background: #111;
+      color: #fff;
     }
 
+    .week-box {
+      margin-top: auto;
+      background: var(--soft);
+      border-radius: 18px;
+      padding: 18px;
+    }
 
-    /* =====================================================
-       MILES APART COMMUNITY
-    ===================================================== */
+    .week-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: #777;
+      margin-bottom: 10px;
+    }
 
-    .ma-community-loading {
-      padding: 70px 20px;
+    .week-distance {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
 
-      text-align: center;
+    .progress {
+      width: 100%;
+      height: 7px;
+      border-radius: 20px;
+      background: #ddd;
+      overflow: hidden;
+      margin-bottom: 9px;
+    }
 
+    .progress span {
+      display: block;
+      width: 78%;
+      height: 100%;
+      background: #111;
+      border-radius: inherit;
+    }
+
+    .week-text {
+      font-size: 12px;
+      line-height: 1.45;
       color: #777;
     }
 
+    .main {
+      margin-left: 250px;
+      width: calc(100% - 250px);
+      min-height: 100vh;
+    }
 
-    .ma-community-error {
-      margin: 25px 0;
+    .topbar {
+      height: 80px;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      padding: 0 45px;
+    }
 
-      padding: 16px 18px;
+    .login-button {
+      border: 1px solid #111;
+      background: #111;
+      color: #fff;
+      border-radius: 999px;
+      padding: 11px 19px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: .2s;
+    }
 
-      border: 1px solid #e2bcbc;
+    .login-button:hover {
+      opacity: .8;
+    }
 
-      background: #fff7f7;
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 30px 45px 70px;
+    }
 
-      color: #b22f2f;
+    .hero {
+      background: #111;
+      color: #fff;
+      border-radius: 28px;
+      padding: 55px;
+      margin-bottom: 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 30px;
+    }
 
+    .eyebrow {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .16em;
+      color: #aaa;
+      margin-bottom: 14px;
       font-weight: 700;
     }
 
-
-    /* =====================================================
-       POST CARD
-    ===================================================== */
-
-    .ma-post {
-      width: 100% !important;
-
-      box-sizing: border-box !important;
-
-      display: block !important;
-
-      margin: 0 0 22px 0 !important;
-
-      padding: 28px !important;
-
-      text-align: left !important;
-
-      overflow: hidden !important;
+    .hero h1 {
+      font-size: clamp(42px, 6vw, 76px);
+      line-height: .95;
+      letter-spacing: -.05em;
+      margin-bottom: 18px;
     }
 
-
-    /* =====================================================
-       POST HEADER
-    ===================================================== */
-
-    .ma-post-header {
-      width: 100% !important;
-
-      display: flex !important;
-
-      align-items: center !important;
-
-      justify-content: flex-start !important;
-
-      margin: 0 !important;
-
-      padding: 0 !important;
-
-      text-align: left !important;
-
-      box-sizing: border-box !important;
+    .hero p {
+      max-width: 520px;
+      color: #cfcfcf;
+      line-height: 1.6;
+      font-size: 16px;
     }
 
-
-    .ma-post-author {
-      width: 100% !important;
-
-      display: flex !important;
-
-      align-items: center !important;
-
-      justify-content: flex-start !important;
-
-      margin: 0 !important;
-
-      padding: 0 !important;
-
-      text-align: left !important;
-
-      box-sizing: border-box !important;
-    }
-
-
-    /* =====================================================
-       POST PROFILE IMAGE
-    ===================================================== */
-
-    .ma-post-avatar {
-      width: 56px !important;
-      height: 56px !important;
-
-      min-width: 56px !important;
-      min-height: 56px !important;
-
-      max-width: 56px !important;
-      max-height: 56px !important;
-
-      flex: 0 0 56px !important;
-
-      display: flex !important;
-
-      align-items: center !important;
-
-      justify-content: center !important;
-
-      overflow: hidden !important;
-
-      border-radius: 50% !important;
-
-      border: 2px solid #63d6e5 !important;
-
-      background: #63d6e5 !important;
-
-      box-sizing: border-box !important;
-
-      padding: 0 !important;
-
-      margin: 0 !important;
-    }
-
-
-    .ma-post-avatar img {
-      display: block !important;
-
-      width: 100% !important;
-      height: 100% !important;
-
-      min-width: 100% !important;
-      min-height: 100% !important;
-
-      max-width: none !important;
-      max-height: none !important;
-
-      object-fit: cover !important;
-
-      border-radius: 50% !important;
-
-      margin: 0 !important;
-      padding: 0 !important;
-    }
-
-
-    .ma-post-avatar-initials {
-      width: 100%;
-      height: 100%;
-
-      display: flex;
-
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 50%;
-
-      background: #eefafa;
-
-      color: #18b8c7;
-
-      font-size: 14px;
-
-      font-weight: 800;
-    }
-
-
-    /* =====================================================
-       AUTHOR INFORMATION
-    ===================================================== */
-
-    .ma-post-author-info {
-      display: block !important;
-
-      margin: 0 0 0 13px !important;
-
-      padding: 0 !important;
-
-      min-width: 0 !important;
-
-      text-align: left !important;
-
-      box-sizing: border-box !important;
-    }
-
-
-    .ma-post-author-name {
-      display: block !important;
-
-      margin: 0 !important;
-
-      padding: 0 !important;
-
-      color: #111 !important;
-
-      font-size: 19px !important;
-
-      line-height: 1.25 !important;
-
-      font-weight: 800 !important;
-
-      text-align: left !important;
-    }
-
-
-    .ma-post-author-meta {
-      display: block !important;
-
-      margin: 3px 0 0 0 !important;
-
-      padding: 0 !important;
-
-      color: #777 !important;
-
-      font-size: 15px !important;
-
-      line-height: 1.35 !important;
-
-      font-weight: 400 !important;
-
-      text-align: left !important;
-    }
-
-
-    /* =====================================================
-       POST TEXT
-    ===================================================== */
-
-    .ma-post-copy {
-      display: block !important;
-
-      width: 100% !important;
-      max-width: 100% !important;
-
-      min-width: 0 !important;
-
-      margin: 25px 0 26px 0 !important;
-
-      padding: 0 !important;
-
-      position: static !important;
-
-      left: auto !important;
-      right: auto !important;
-      top: auto !important;
-      bottom: auto !important;
-
-      transform: none !important;
-
-      float: none !important;
-
-      clear: both !important;
-
-      box-sizing: border-box !important;
-
-      text-align: left !important;
-
-      font-size: 20px !important;
-
-      line-height: 1.45 !important;
-
-      font-weight: 400 !important;
-
-      color: #111 !important;
-
-      white-space: pre-wrap !important;
-
-      overflow-wrap: anywhere !important;
-
-      word-break: normal !important;
-    }
-
-
-    .ma-post-copy * {
-      text-align: left !important;
-    }
-
-
-    /* =====================================================
-       ACTION BAR
-    ===================================================== */
-
-    .ma-post-actions {
-      width: 100% !important;
-
-      display: flex !important;
-
-      align-items: center !important;
-
-      justify-content: space-between !important;
-
-      margin: 0 !important;
-
-      padding: 15px 0 0 0 !important;
-
-      border-top: 1px solid #eee;
-
-      box-sizing: border-box !important;
-
-      text-align: left !important;
-    }
-
-
-    .ma-post-action-left {
-      display: flex !important;
-
-      align-items: center !important;
-
-      justify-content: flex-start !important;
-
-      gap: 8px !important;
-
-      margin: 0 !important;
-
-      padding: 0 !important;
-    }
-
-
-    .ma-post-action {
-      border: 0 !important;
-
-      background: transparent !important;
-
-      padding: 7px 8px !important;
-
-      margin: 0 !important;
-
-      color: #555 !important;
-
-      font: inherit !important;
-
-      font-size: 18px !important;
-
-      font-weight: 700 !important;
-
-      cursor: pointer !important;
-
-      text-align: left !important;
-    }
-
-
-    .ma-post-action.liked {
-      color: #18b8c7 !important;
-    }
-
-
-    .ma-delete {
-      color: #b44 !important;
-
-      font-size: 17px !important;
-
-      padding-right: 0 !important;
-    }
-
-
-    /* =====================================================
-       COMMENTS
-    ===================================================== */
-
-    .ma-comments {
-      width: 100% !important;
-
-      display: block !important;
-
-      margin: 18px 0 0 0 !important;
-
-      padding: 18px 0 0 0 !important;
-
-      border-top: 1px solid #eee;
-
-      box-sizing: border-box !important;
-
-      text-align: left !important;
-    }
-
-
-    .ma-comments-list {
-      width: 100% !important;
-
-      display: flex !important;
-
-      flex-direction: column !important;
-
-      gap: 18px !important;
-
-      margin: 0 !important;
-
-      padding: 0 !important;
-
-      text-align: left !important;
-    }
-
-
-    .ma-comment {
-      width: 100% !important;
-
-      display: flex !important;
-
-      align-items: flex-start !important;
-
-      justify-content: flex-start !important;
-
-      gap: 11px !important;
-
-      margin: 0 !important;
-
-      padding: 0 !important;
-
-      background: transparent !important;
-
-      text-align: left !important;
-
-      box-sizing: border-box !important;
-    }
-
-
-    /* =====================================================
-       COMMENT AVATAR
-    ===================================================== */
-
-    .ma-comment-avatar {
-      width: 46px !important;
-      height: 46px !important;
-
-      min-width: 46px !important;
-      min-height: 46px !important;
-
-      max-width: 46px !important;
-      max-height: 46px !important;
-
-      flex: 0 0 46px !important;
-
-      display: flex !important;
-
-      align-items: center !important;
-
-      justify-content: center !important;
-
-      overflow: hidden !important;
-
-      border-radius: 50% !important;
-
-      border: 2px solid #63d6e5 !important;
-
-      background: #63d6e5 !important;
-
-      box-sizing: border-box !important;
-
-      margin: 0 !important;
-
-      padding: 0 !important;
-    }
-
-
-    .ma-comment-avatar img {
-      display: block !important;
-
-      width: 100% !important;
-
-      height: 100% !important;
-
-      object-fit: cover !important;
-
-      border-radius: 50% !important;
-
-      margin: 0 !important;
-
-      padding: 0 !important;
-    }
-
-
-    .ma-comment-avatar-initials {
-      width: 100%;
-      height: 100%;
-
-      display: flex;
-
-      align-items: center;
-
-      justify-content: center;
-
-      border-radius: 50%;
-
-      background: #eefafa;
-
-      color: #18b8c7;
-
-      font-size: 12px;
-
-      font-weight: 800;
-    }
-
-
-    /* =====================================================
-       COMMENT CONTENT
-    ===================================================== */
-
-    .ma-comment-content {
-      flex: 1 1 auto !important;
-
-      min-width: 0 !important;
-
-      margin: 0 !important;
-
-      padding: 0 !important;
-
-      background: transparent !important;
-
-      text-align: left !important;
-
-      box-sizing: border-box !important;
-    }
-
-
-    .ma-comment-header {
-      display: flex !important;
-
-      align-items: baseline !important;
-
-      justify-content: flex-start !important;
-
-      flex-wrap: wrap !important;
-
-      gap: 8px !important;
-
-      margin: 0 !important;
-
-      padding: 0 !important;
-
-      text-align: left !important;
-    }
-
-
-    .ma-comment-name {
-      margin: 0 !important;
-
-      padding: 0 !important;
-
-      color: #111 !important;
-
-      font-size: 16px !important;
-
-      line-height: 1.3 !important;
-
-      font-weight: 800 !important;
-
-      text-align: left !important;
-    }
-
-
-    .ma-comment-time {
-      margin: 0 !important;
-
-      padding: 0 !important;
-
-      color: #888 !important;
-
-      font-size: 13px !important;
-
-      line-height: 1.3 !important;
-
-      font-weight: 400 !important;
-
-      text-align: left !important;
-    }
-
-
-    /* =====================================================
-       COMMENT TEXT
-    ===================================================== */
-
-    .ma-comment-text {
-      display: block !important;
-
-      width: 100% !important;
-
-      margin: 5px 0 0 0 !important;
-
-      padding: 0 !important;
-
-      position: static !important;
-
-      transform: none !important;
-
-      float: none !important;
-
-      clear: both !important;
-
-      background: transparent !important;
-
-      border: 0 !important;
-
-      box-shadow: none !important;
-
-      color: #111 !important;
-
-      font-size: 18px !important;
-
-      line-height: 1.45 !important;
-
-      font-weight: 400 !important;
-
-      text-align: left !important;
-
-      white-space: pre-wrap !important;
-
-      overflow-wrap: anywhere !important;
-
-      box-sizing: border-box !important;
-    }
-
-
-    /* =====================================================
-       COMMENT FORM
-    ===================================================== */
-
-    .ma-comment-form {
-      width: 100% !important;
-
-      display: flex !important;
-
-      gap: 8px !important;
-
-      margin: 20px 0 0 0 !important;
-
-      padding: 0 !important;
-
-      box-sizing: border-box !important;
-    }
-
-
-    .ma-comment-input {
-      flex: 1 1 auto !important;
-
-      min-width: 0 !important;
-
-      height: 52px !important;
-
-      padding: 0 14px !important;
-
-      border: 1px solid #d8d8d8 !important;
-
-      outline: none !important;
-
-      background: #fff !important;
-
-      color: #111 !important;
-
-      font: inherit !important;
-
-      font-size: 16px !important;
-
-      box-sizing: border-box !important;
-    }
-
-
-    .ma-comment-input:focus {
-      border-color: #18b8c7 !important;
-    }
-
-
-    .ma-comment-submit {
-      min-width: 105px !important;
-
-      height: 52px !important;
-
-      border: 0 !important;
-
-      background: #111 !important;
-
-      color: #fff !important;
-
-      padding: 0 18px !important;
-
-      font-size: 16px !important;
-
-      font-weight: 800 !important;
-
-      cursor: pointer !important;
-    }
-
-
-    .ma-comment-submit:hover {
-      background: #18b8c7 !important;
-    }
-
-
-    /* =====================================================
-       EMPTY
-    ===================================================== */
-
-    .ma-empty {
-      width: 100% !important;
-
-      padding: 55px 20px !important;
-
-      border: 1px dashed #ccc !important;
-
-      box-sizing: border-box !important;
-
-      text-align: center !important;
-
-      color: #777 !important;
-    }
-
-
-    .ma-empty strong {
-      display: block;
-
-      margin-bottom: 8px;
-
+    .hero-button {
+      border: 0;
+      background: var(--green);
       color: #111;
-
-      font-size: 20px;
+      padding: 14px 20px;
+      border-radius: 999px;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
     }
 
+    .hero-button:hover {
+      opacity: .9;
+    }
 
-    /* =====================================================
-       MOBILE
-    ===================================================== */
+    .community-grid {
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 24px;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 25px;
+    }
+
+    .card h2 {
+      font-size: 20px;
+      margin-bottom: 8px;
+    }
+
+    .card-subtitle {
+      color: var(--muted);
+      font-size: 13px;
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .posts {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .post {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      background: #fff;
+    }
+
+    .post-head {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      overflow: hidden;
+      background: #e9e9e6;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 13px;
+      flex-shrink: 0;
+    }
+
+    .avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .post-author {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .post-meta {
+      color: #888;
+      font-size: 11px;
+      margin-top: 3px;
+    }
+
+    .post-content {
+      font-size: 14px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+    }
+
+    .post-actions {
+      display: flex;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .action-button {
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 999px;
+      padding: 7px 11px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .action-button:hover {
+      background: var(--soft);
+    }
+
+    .delete-button {
+      margin-left: auto;
+      color: #888;
+    }
+
+    .comments {
+      margin-top: 15px;
+      padding-top: 15px;
+      border-top: 1px solid var(--line);
+      display: none;
+    }
+
+    .comments.open {
+      display: block;
+    }
+
+    .comment {
+      display: flex;
+      gap: 9px;
+      margin-bottom: 12px;
+    }
+
+    .comment .avatar {
+      width: 30px;
+      height: 30px;
+      font-size: 10px;
+    }
+
+    .comment-content {
+      background: var(--soft);
+      border-radius: 12px;
+      padding: 8px 11px;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .comment-author {
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .comment-form {
+      display: flex;
+      gap: 7px;
+      margin-top: 12px;
+    }
+
+    .comment-form input {
+      flex: 1;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 9px 12px;
+      outline: none;
+      font-size: 12px;
+    }
+
+    .comment-form button {
+      border: 0;
+      background: #111;
+      color: #fff;
+      border-radius: 999px;
+      padding: 9px 13px;
+      cursor: pointer;
+      font-size: 12px;
+    }
+
+    .composer {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .composer textarea {
+      width: 100%;
+      min-height: 95px;
+      border: 1px solid var(--line);
+      border-radius: 15px;
+      padding: 13px;
+      resize: vertical;
+      outline: none;
+    }
+
+    .composer-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 10px;
+    }
+
+    .post-submit {
+      border: 0;
+      background: #111;
+      color: #fff;
+      border-radius: 999px;
+      padding: 11px 17px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .side-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .buddy-list {
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+    }
+
+    .buddy {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .buddy-name {
+      font-size: 13px;
+      font-weight: 700;
+    }
+
+    .buddy-location {
+      font-size: 11px;
+      color: #888;
+      margin-top: 2px;
+    }
+
+    .pulse {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .pulse-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 13px;
+      border-radius: 14px;
+      background: var(--soft);
+      font-size: 13px;
+    }
+
+    .question-buttons {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .question-button {
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 999px;
+      padding: 9px 12px;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .loading {
+      padding: 30px;
+      text-align: center;
+      color: #888;
+      font-size: 13px;
+    }
+
+    .empty {
+      padding: 25px 10px;
+      color: #888;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    @media (max-width: 900px) {
+      .sidebar {
+        width: 210px;
+      }
+
+      .main {
+        margin-left: 210px;
+        width: calc(100% - 210px);
+      }
+
+      .hero {
+        padding: 38px;
+      }
+
+      .community-grid {
+        grid-template-columns: 1fr;
+      }
+    }
 
     @media (max-width: 700px) {
-
-      .top-right {
-        gap: 10px;
+      .app {
+        display: block;
       }
 
-
-      .login-button {
-        padding: 10px 15px;
-
-        font-size: 14px;
+      .sidebar {
+        position: relative;
+        width: 100%;
+        height: auto;
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+        padding: 18px;
       }
 
-
-      #postsContainer {
-        display: block !important;
-
-        width: 100% !important;
+      .brand {
+        margin-bottom: 18px;
       }
 
-
-      #postsContainer .ma-post {
-        width: 100% !important;
-
-        display: block !important;
-
-        margin: 0 0 22px 0 !important;
-
-        padding: 24px !important;
-
-        box-sizing: border-box !important;
+      .nav {
+        flex-direction: row;
+        overflow-x: auto;
       }
 
-
-      .ma-post-avatar {
-        width: 54px !important;
-
-        height: 54px !important;
-
-        min-width: 54px !important;
-
-        min-height: 54px !important;
-
-        max-width: 54px !important;
-
-        max-height: 54px !important;
-
-        flex-basis: 54px !important;
-
-        border-width: 2px !important;
+      .nav a {
+        white-space: nowrap;
       }
 
-
-      .ma-post-author-info {
-        margin-left: 12px !important;
+      .week-box {
+        display: none;
       }
 
-
-      .ma-post-author-name {
-        font-size: 19px !important;
+      .main {
+        margin-left: 0;
+        width: 100%;
       }
 
-
-      .ma-post-author-meta {
-        font-size: 15px !important;
+      .topbar {
+        height: 65px;
+        padding: 0 20px;
       }
 
-
-      .ma-post-copy {
-        width: 100% !important;
-
-        margin: 24px 0 25px 0 !important;
-
-        padding: 0 !important;
-
-        text-align: left !important;
-
-        font-size: 20px !important;
-
-        line-height: 1.45 !important;
+      .page {
+        padding: 15px 20px 50px;
       }
 
-
-      .ma-post-actions {
-        width: 100% !important;
-
-        flex-direction: row !important;
-
-        align-items: center !important;
-
-        justify-content: space-between !important;
+      .hero {
+        padding: 30px;
+        flex-direction: column;
+        align-items: flex-start;
       }
-
-
-      .ma-post-action-left {
-        flex-direction: row !important;
-
-        gap: 6px !important;
-      }
-
-
-      .ma-post-action {
-        font-size: 18px !important;
-
-        padding: 7px 8px !important;
-      }
-
-
-      .ma-comments {
-        width: 100% !important;
-
-        margin-top: 18px !important;
-
-        padding-top: 18px !important;
-      }
-
-
-      .ma-comment {
-        gap: 10px !important;
-      }
-
-
-      .ma-comment-avatar {
-        width: 44px !important;
-
-        height: 44px !important;
-
-        min-width: 44px !important;
-
-        min-height: 44px !important;
-
-        max-width: 44px !important;
-
-        max-height: 44px !important;
-
-        flex-basis: 44px !important;
-
-        border-width: 2px !important;
-      }
-
-
-      .ma-comment-name {
-        font-size: 16px !important;
-      }
-
-
-      .ma-comment-time {
-        font-size: 13px !important;
-      }
-
-
-      .ma-comment-text {
-        font-size: 18px !important;
-
-        margin-top: 5px !important;
-
-        text-align: left !important;
-      }
-
-
-      .ma-comment-form {
-        flex-direction: column !important;
-
-        width: 100% !important;
-
-        gap: 8px !important;
-      }
-
-
-      .ma-comment-input {
-        width: 100% !important;
-
-        height: 54px !important;
-      }
-
-
-      .ma-comment-submit {
-        width: 100% !important;
-
-        height: 54px !important;
-      }
-
     }
-
   </style>
-
 </head>
 
-
 <body>
+  <div class="app">
 
-
-<div class="shell">
-
-
-  <!-- ===================================================
-       SIDEBAR
-  ==================================================== -->
-
-  <aside class="sidebar">
-
-
-    <div class="brand">
-
-      <a href="index.html">
-
-        <img
-          src="miles-apart-wordmark.png"
-          alt="Miles Apart Running Club"
-        >
-
-      </a>
-
-    </div>
-
-
-    <nav class="nav">
-
-      <a href="index.html">
-        Miles Apart
-      </a>
-
-      <a href="home.html">
-        Home
-      </a>
-
-      <a href="challenges.html">
-        Challenges
-      </a>
-
-      <a
-        class="active"
-        href="community.html"
-      >
-        Community
-      </a>
-
-      <a href="events.html">
-        Events
-      </a>
-
-      <a href="training.html">
-        Training
-      </a>
-
-    </nav>
-
-
-    <div class="side-bottom">
-
-      <small>
-        THIS WEEK
-      </small>
-
-      <strong>
-        23.4 / 30 KM
-      </strong>
-
-      <div class="mini-progress">
-        <i></i>
+    <aside class="sidebar">
+      <div class="brand">
+        <a href="index.html">
+          <img src="miles-apart-wordmark.png" alt="Miles Apart Running Club">
+        </a>
       </div>
 
-      <p
-        class="small"
-        style="color:#aaa;margin-bottom:0"
-      >
-        Nur 6.6 km bis zum Wochenziel.
-      </p>
+      <nav class="nav">
+        <a href="index.html">Miles Apart</a>
+        <a href="home.html">Home</a>
+        <a href="challenges.html">Challenges</a>
+        <a href="community.html" class="active">Community</a>
+        <a href="events.html">Events</a>
+        <a href="training.html">Training</a>
+      </nav>
 
-    </div>
-
-  </aside>
-
-
-  <!-- ===================================================
-       MAIN
-  ==================================================== -->
-
-  <main class="main">
-
-
-    <!-- TOP -->
-
-    <div class="top">
-
-
-      <div class="crumb">
-        MILES APART / COMMUNITY
+      <div class="week-box">
+        <div class="week-title">This Week</div>
+        <div class="week-distance">23.4 / 30 KM</div>
+        <div class="progress">
+          <span></span>
+        </div>
+        <div class="week-text">Nur 6.6 km bis zum Wochenziel.</div>
       </div>
+    </aside>
 
+    <main class="main">
 
-      <div class="top-right">
-
+      <div class="topbar">
         <button
           id="loginButton"
           class="login-button"
-          type="button"
-          style="display:none"
-        >
+          style="display:none;"
+          onclick="window.location.href='home.html'">
           Anmelden
         </button>
-
       </div>
 
-    </div>
+      <div class="page">
 
-
-    <!-- HERO -->
-
-    <div class="hero">
-
-
-      <div>
-
-        <h1>
-          Community.
-        </h1>
-
-
-        <p class="lead">
-          Dein virtueller Lauftreff —
-          offen, freundlich, jeder Pace.
-        </p>
-
-      </div>
-
-
-      <button
-        id="openPostButton"
-        class="btn lime"
-        type="button"
-      >
-        + Post erstellen
-      </button>
-
-
-    </div>
-
-
-    <!-- NEW POST -->
-
-    <div
-      id="postFormCard"
-      class="card post-form-card"
-      style="display:none"
-    >
-
-
-      <div class="section-head">
-
-        <h2>
-          Neuer Post
-        </h2>
-
-
-        <span
-          class="small muted"
-          id="postAuthorName"
-        >
-          —
-        </span>
-
-      </div>
-
-
-      <form id="postForm">
-
-
-        <textarea
-          id="postContent"
-          maxlength="2000"
-          placeholder="Was möchtest du mit der Community teilen?"
-          required
-          style="
-            width:100%;
-            min-height:130px;
-            padding:16px;
-            border:1px solid #ddd;
-            box-sizing:border-box;
-            font:inherit;
-            resize:vertical;
-          "
-        ></textarea>
-
-
-        <div
-          class="post-form-actions"
-          style="
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            gap:15px;
-            margin-top:14px;
-          "
-        >
-
-
-          <div
-            id="postFormMessage"
-            class="post-form-message"
-          ></div>
-
-
-          <div
-            style="
-              display:flex;
-              gap:8px;
-            "
-          >
-
-            <button
-              id="cancelPostButton"
-              type="button"
-              class="btn"
-            >
-              Abbrechen
-            </button>
-
-
-            <button
-              id="submitPostButton"
-              type="submit"
-              class="btn lime"
-            >
-              Post veröffentlichen
-            </button>
-
+        <section class="hero">
+          <div>
+            <div class="eyebrow">Miles Apart Community</div>
+            <h1>Community.</h1>
+            <p>
+              Dein virtueller Lauftreff — offen, freundlich, jeder Pace.
+            </p>
           </div>
 
+          <button id="openPostButton" class="hero-button">
+            Post erstellen
+          </button>
+        </section>
 
+        <div class="community-grid">
+
+          <div class="card">
+            <h2>Community Posts</h2>
+            <div class="card-subtitle">
+              Teile deine Läufe, Fortschritte und Gedanken mit der Community.
+            </div>
+
+            <div id="composer" style="display:none;">
+              <div class="composer">
+                <div id="postAuthorAvatar" class="avatar">MA</div>
+
+                <div style="flex:1;">
+                  <textarea
+                    id="postContent"
+                    placeholder="Was möchtest du mit der Community teilen?"></textarea>
+
+                  <div class="composer-actions">
+                    <button id="submitPostButton" class="post-submit">
+                      Posten
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div id="posts" class="posts">
+              <div class="loading">Community wird geladen …</div>
+            </div>
+          </div>
+
+          <div class="side-stack">
+
+            <div class="card">
+              <h2>Run Buddies</h2>
+              <div class="card-subtitle">
+                Läufer:innen aus der Community.
+              </div>
+
+              <div id="runBuddies" class="buddy-list">
+                <div class="loading">Wird geladen …</div>
+              </div>
+            </div>
+
+            <div class="card">
+              <h2>Community Pulse</h2>
+              <div class="card-subtitle">
+                Was gerade in der Community passiert.
+              </div>
+
+              <div class="pulse">
+                <div class="pulse-row">
+                  <span>👟 Läufe geteilt</span>
+                  <strong id="pulsePosts">–</strong>
+                </div>
+
+                <div class="pulse-row">
+                  <span>🔥 Community Aktivität</span>
+                  <strong id="pulseComments">–</strong>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <h2>Frage der Woche</h2>
+              <div class="card-subtitle">
+                Wie läufst du am liebsten?
+              </div>
+
+              <div class="question-buttons">
+                <button class="question-button">👥 Gemeinsam</button>
+                <button class="question-button">🎯 Alleine</button>
+                <button class="question-button">🔥 Wettkampf</button>
+              </div>
+            </div>
+
+          </div>
         </div>
-
-
-      </form>
-
-
-    </div>
-
-
-    <!-- LOADING -->
-
-    <div
-      id="communityLoading"
-      class="ma-community-loading"
-    >
-      Community wird geladen …
-    </div>
-
-
-    <div
-      id="communityError"
-      class="ma-community-error"
-      style="display:none"
-    ></div>
-
-
-    <!-- POSTS -->
-
-    <div
-      id="postsContainer"
-      style="
-        display:block;
-        width:100%;
-      "
-    ></div>
-
-
-    <!-- LOWER AREA -->
-
-    <div
-      class="section grid g3"
-      id="communityLower"
-      style="display:none"
-    >
-
-
-      <!-- RUN BUDDIES -->
-
-      <div class="card">
-
-
-        <div class="section-head">
-
-          <h2>
-            Run Buddies
-          </h2>
-
-
-          <span class="badge">
-            Community
-          </span>
-
-        </div>
-
-
-        <div id="runBuddies">
-
-          <p
-            style="
-              color:#777;
-              line-height:1.5;
-            "
-          >
-            Weitere Mitglieder werden hier
-            angezeigt, sobald sie der Community
-            beitreten.
-          </p>
-
-        </div>
-
 
       </div>
+    </main>
+  </div>
 
+  <script>
+    const SUPABASE_URL = 'https://orbrkdrsihsacsnprewf.supabase.co';
+    const SUPABASE_KEY = 'sb_publishable_wc3w2fSuj8ItwiF6XBoQgw_HeW5_rNW';
 
-      <!-- COMMUNITY PULSE -->
-
-      <div class="card dark">
-
-
-        <div class="label">
-          COMMUNITY PULSE
-        </div>
-
-
-        <div
-          class="kpi"
-          style="font-size:44px"
-          id="memberCount"
-        >
-          —
-        </div>
-
-
-        <p style="color:#aaa">
-          Miles Apart Mitglieder
-        </p>
-
-
-        <div class="row">
-
-          <span>
-            👟 Gemeinsam laufen
-          </span>
-
-          <span>
-            🔥 Gemeinsam wachsen
-          </span>
-
-        </div>
-
-
-      </div>
-
-
-      <!-- QUESTION -->
-
-      <div class="card lime">
-
-
-        <div class="label">
-          FRAGE DER WOCHE
-        </div>
-
-
-        <h2>
-          Was motiviert dich am meisten?
-        </h2>
-
-
-        <div class="stack">
-
-
-          <button
-            class="btn white"
-            type="button"
-            data-answer="Gemeinsam laufen"
-          >
-            👥 Gemeinsam laufen
-          </button>
-
-
-          <button
-            class="btn white"
-            type="button"
-            data-answer="Ziele & Challenges"
-          >
-            🎯 Ziele & Challenges
-          </button>
-
-
-          <button
-            class="btn white"
-            type="button"
-            data-answer="Streak halten"
-          >
-            🔥 Streak halten
-          </button>
-
-
-        </div>
-
-
-        <div
-          id="pollMessage"
-          style="
-            margin-top:12px;
-            font-size:13px;
-            font-weight:700;
-          "
-        ></div>
-
-
-      </div>
-
-
-    </div>
-
-
-  </main>
-
-</div>
-
-
-<script>
-
-
-  /* =====================================================
-     SUPABASE
-  ===================================================== */
-
-  const SUPABASE_URL =
-    "https://orbrkdrsihsacsnprewf.supabase.co";
-
-
-  const SUPABASE_PUBLISHABLE_KEY =
-    "sb_publishable_wc3w2fSuj8ItwiF6XBoQgw_HeW5_rNW";
-
-
-  const {
-    createClient
-  } = window.supabase;
-
-
-  const supabaseClient =
-    createClient(
+    const supabaseClient = window.supabase.createClient(
       SUPABASE_URL,
-      SUPABASE_PUBLISHABLE_KEY
+      SUPABASE_KEY
     );
 
+    let currentUser = null;
+    let currentProfile = null;
 
-  /* =====================================================
-     ELEMENTS
-  ===================================================== */
+    const loginButton = document.getElementById('loginButton');
+    const openPostButton = document.getElementById('openPostButton');
+    const composer = document.getElementById('composer');
+    const postContent = document.getElementById('postContent');
+    const submitPostButton = document.getElementById('submitPostButton');
+    const postsContainer = document.getElementById('posts');
 
-  const loginButton =
-    document.getElementById(
-      "loginButton"
-    );
-
-
-  const openPostButton =
-    document.getElementById(
-      "openPostButton"
-    );
-
-
-  const postFormCard =
-    document.getElementById(
-      "postFormCard"
-    );
-
-
-  const postForm =
-    document.getElementById(
-      "postForm"
-    );
-
-
-  const postContent =
-    document.getElementById(
-      "postContent"
-    );
-
-
-  const postAuthorName =
-    document.getElementById(
-      "postAuthorName"
-    );
-
-
-  const submitPostButton =
-    document.getElementById(
-      "submitPostButton"
-    );
-
-
-  const cancelPostButton =
-    document.getElementById(
-      "cancelPostButton"
-    );
-
-
-  const postFormMessage =
-    document.getElementById(
-      "postFormMessage"
-    );
-
-
-  const communityLoading =
-    document.getElementById(
-      "communityLoading"
-    );
-
-
-  const communityError =
-    document.getElementById(
-      "communityError"
-    );
-
-
-  const postsContainer =
-    document.getElementById(
-      "postsContainer"
-    );
-
-
-  const communityLower =
-    document.getElementById(
-      "communityLower"
-    );
-
-
-  const runBuddies =
-    document.getElementById(
-      "runBuddies"
-    );
-
-
-  const memberCount =
-    document.getElementById(
-      "memberCount"
-    );
-
-
-  /* =====================================================
-     STATE
-  ===================================================== */
-
-  let currentUser = null;
-
-  let currentProfile = null;
-
-
-  /* =====================================================
-     LOGIN
-  ===================================================== */
-
-  loginButton.addEventListener(
-    "click",
-    () => {
-
-      window.location.href =
-        "home.html";
-
-    }
-  );
-
-
-  /* =====================================================
-     HELPERS
-  ===================================================== */
-
-  function getInitials(name) {
-
-    if (!name) {
-      return "M";
+    function redirectToHome() {
+      window.location.href = 'home.html';
     }
 
+    async function loadCurrentUser() {
+      const {
+        data: { session }
+      } = await supabaseClient.auth.getSession();
 
-    const parts =
-      name
-        .trim()
-        .split(/\s+/)
-        .filter(Boolean);
+      currentUser = session?.user || null;
 
+      /*
+       * WICHTIG:
+       * Eingeloggt = oben rechts NICHTS anzeigen.
+       * Ausgeloggt = ausschließlich den Anmelden-Button anzeigen.
+       */
+      if (currentUser) {
+        loginButton.style.display = 'none';
 
-    if (parts.length === 1) {
+        const { data: profile } = await supabaseClient
+          .from('profiles')
+          .select('display_name, username, avatar_url, location')
+          .eq('id', currentUser.id)
+          .maybeSingle();
 
-      return parts[0]
-        .slice(0,2)
-        .toUpperCase();
-
-    }
-
-
-    return (
-      parts[0][0] +
-      parts[parts.length - 1][0]
-    ).toUpperCase();
-
-  }
-
-
-  function escapeHtml(value) {
-
-    if (
-      value === null ||
-      value === undefined
-    ) {
-
-      return "";
-
-    }
-
-
-    return String(value)
-      .replaceAll("&","&amp;")
-      .replaceAll("<","&lt;")
-      .replaceAll(">","&gt;")
-      .replaceAll('"',"&quot;")
-      .replaceAll("'","&#039;");
-
-  }
-
-
-  function formatTime(dateString) {
-
-    const date =
-      new Date(dateString);
-
-
-    const now =
-      new Date();
-
-
-    const diff =
-      Math.floor(
-        (now - date) / 1000
-      );
-
-
-    if (diff < 60) {
-      return "gerade eben";
-    }
-
-
-    if (diff < 3600) {
-
-      const minutes =
-        Math.floor(diff / 60);
-
-      return `vor ${minutes} Min`;
-
-    }
-
-
-    if (diff < 86400) {
-
-      const hours =
-        Math.floor(diff / 3600);
-
-      return `vor ${hours} Std`;
-
-    }
-
-
-    if (diff < 172800) {
-      return "gestern";
-    }
-
-
-    return date.toLocaleDateString(
-      "de-DE",
-      {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric"
+        currentProfile = profile || null;
+        return;
       }
-    );
 
-  }
+      loginButton.style.display = 'block';
 
+      openPostButton.textContent = 'Anmelden';
 
-  function showError(message) {
+      composer.style.display = 'none';
 
-    communityError.textContent =
-      message;
-
-    communityError.style.display =
-      "block";
-
-  }
-
-
-  function clearError() {
-
-    communityError.textContent =
-      "";
-
-    communityError.style.display =
-      "none";
-
-  }
-
-
-  /* =====================================================
-     CURRENT USER
-  ===================================================== */
-
-  async function loadCurrentUser() {
-
-    const {
-      data,
-      error
-    } =
-      await supabaseClient.auth.getSession();
-
-
-    if (error) {
-      throw error;
+      return;
     }
 
+    function getInitials(name) {
+      if (!name) return 'MA';
 
-    if (!data.session) {
-
-      currentUser =
-        null;
-
-      currentProfile =
-        null;
-
-
-      loginButton.style.display =
-        "block";
-
-
-      openPostButton.textContent =
-        "Anmelden";
-
-
-      postAuthorName.textContent =
-        "Anmelden, um einen Post zu erstellen";
-
-
-      return true;
-
+      return name
+        .split(' ')
+        .filter(Boolean)
+        .slice(0, 2)
+        .map(part => part[0])
+        .join('')
+        .toUpperCase();
     }
 
+    function avatarHTML(profile, className = 'avatar') {
+      if (profile?.avatar_url) {
+        return `
+          <div class="${className}">
+            <img src="${profile.avatar_url}" alt="">
+          </div>
+        `;
+      }
 
-    currentUser =
-      data.session.user;
+      const name =
+        profile?.display_name ||
+        profile?.username ||
+        'Miles Apart';
 
-
-    loginButton.style.display =
-      "none";
-
-
-    openPostButton.textContent =
-      "+ Post erstellen";
-
-
-    const {
-      data: profile,
-      error: profileError
-    } =
-      await supabaseClient
-        .from("profiles")
-        .select(
-          "display_name, username, avatar_url, bio, location"
-        )
-        .eq(
-          "id",
-          currentUser.id
-        )
-        .maybeSingle();
-
-
-    if (profileError) {
-      throw profileError;
+      return `
+        <div class="${className}">
+          ${getInitials(name)}
+        </div>
+      `;
     }
 
+    function formatDate(dateString) {
+      const date = new Date(dateString);
+      const now = new Date();
 
-    currentProfile =
-      profile || {
+      const diff = Math.floor((now - date) / 1000);
 
-        display_name:
-          currentUser
-            .user_metadata
-            ?.display_name ||
-          currentUser
-            .user_metadata
-            ?.name ||
-          currentUser
-            .email
-            ?.split("@")[0] ||
-          "Miles Apart Member",
+      if (diff < 60) {
+        return 'gerade eben';
+      }
 
-        username: null,
+      if (diff < 3600) {
+        const minutes = Math.floor(diff / 60);
+        return `vor ${minutes} Min.`;
+      }
 
-        avatar_url: null,
+      if (diff < 86400) {
+        const hours = Math.floor(diff / 3600);
+        return `vor ${hours} Std.`;
+      }
 
-        bio: null,
+      return date.toLocaleDateString('de-DE', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
+      });
+    }
 
-        location: null
-
-      };
-
-
-    const name =
-      String(
-        currentProfile.display_name ||
-        currentUser
-          .user_metadata
-          ?.display_name ||
-        currentUser
-          .user_metadata
-          ?.name ||
-        "Miles Apart Member"
-      ).trim();
-
-
-    postAuthorName.textContent =
-      currentProfile.username
-        ? `@${currentProfile.username}`
-        : name;
-
-
-    return true;
-
-  }
-
-
-  /* =====================================================
-     LOAD POSTS
-  ===================================================== */
-
-  async function loadPosts() {
-
-    const {
-      data: posts,
-      error
-    } =
-      await supabaseClient
-        .from("community_posts")
+    async function loadPosts() {
+      const { data, error } = await supabaseClient
+        .from('community_posts')
         .select(`
           id,
           author_id,
           content,
           created_at,
-          updated_at,
-
           profiles:author_id (
             display_name,
             username,
             avatar_url,
             location
           ),
-
           community_post_likes (
             user_id
           ),
-
           community_post_comments (
             id,
             author_id,
             content,
             created_at,
-
             profiles:author_id (
               display_name,
               username,
@@ -1862,1368 +858,411 @@
             )
           )
         `)
-        .order(
-          "created_at",
-          {
-            ascending: false
-          }
-        );
-
-
-    if (error) {
-      throw error;
-    }
-
-
-    renderPosts(
-      posts || []
-    );
-
-  }
-
-
-  /* =====================================================
-     AVATAR
-  ===================================================== */
-
-  function createPostAvatar(profile) {
-
-    const name =
-      profile?.display_name ||
-      "Miles Apart Member";
-
-
-    if (
-      profile?.avatar_url
-    ) {
-
-      return `
-
-        <div
-          class="ma-post-avatar"
-        >
-
-          <img
-            src="${escapeHtml(
-              profile.avatar_url
-            )}"
-            alt="Profilbild"
-          >
-
-        </div>
-
-      `;
-
-    }
-
-
-    return `
-
-      <div
-        class="ma-post-avatar"
-      >
-
-        <div
-          class="ma-post-avatar-initials"
-        >
-
-          ${escapeHtml(
-            getInitials(name)
-          )}
-
-        </div>
-
-      </div>
-
-    `;
-
-  }
-
-
-  function createCommentAvatar(profile) {
-
-    const name =
-      profile?.display_name ||
-      "Miles Apart Member";
-
-
-    if (
-      profile?.avatar_url
-    ) {
-
-      return `
-
-        <div
-          class="ma-comment-avatar"
-        >
-
-          <img
-            src="${escapeHtml(
-              profile.avatar_url
-            )}"
-            alt="Profilbild"
-          >
-
-        </div>
-
-      `;
-
-    }
-
-
-    return `
-
-      <div
-        class="ma-comment-avatar"
-      >
-
-        <div
-          class="ma-comment-avatar-initials"
-        >
-
-          ${escapeHtml(
-            getInitials(name)
-          )}
-
-        </div>
-
-      </div>
-
-    `;
-
-  }
-
-
-  /* =====================================================
-     RENDER POSTS
-  ===================================================== */
-
-  function renderPosts(posts) {
-
-    postsContainer.innerHTML =
-      "";
-
-
-    if (!posts.length) {
-
-      postsContainer.innerHTML = `
-
-        <div
-          class="ma-empty"
-        >
-
-          <strong>
-            Sei der Erste in der Community.
-          </strong>
-
-          Teile deinen ersten Lauf,
-          ein Ziel oder einfach ein paar Worte
-          mit Miles Apart.
-
-        </div>
-
-      `;
-
-
-      return;
-
-    }
-
-
-    posts.forEach(
-      post => {
-
-        postsContainer.appendChild(
-          createPostElement(post)
-        );
-
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        console.error(error);
+        postsContainer.innerHTML = `
+          <div class="empty">
+            Die Community konnte gerade nicht geladen werden.
+          </div>
+        `;
+        return;
       }
-    );
 
-  }
+      document.getElementById('pulsePosts').textContent = data?.length || 0;
 
-
-  /* =====================================================
-     POST ELEMENT
-  ===================================================== */
-
-  function createPostElement(post) {
-
-    const profile =
-      post.profiles || {};
-
-
-    const authorName =
-      profile.display_name ||
-      "Miles Apart Member";
-
-
-    const likes =
-      post.community_post_likes ||
-      [];
-
-
-    const comments =
-      post.community_post_comments ||
-      [];
-
-
-    const userLiked =
-      currentUser
-        ? likes.some(
-            like =>
-              like.user_id ===
-              currentUser.id
-          )
-        : false;
-
-
-    const isOwner =
-      currentUser
-        ? post.author_id ===
-          currentUser.id
-        : false;
-
-
-    const wrapper =
-      document.createElement(
-        "div"
+      const commentCount = (data || []).reduce(
+        (total, post) =>
+          total + (post.community_post_comments?.length || 0),
+        0
       );
 
+      document.getElementById('pulseComments').textContent = commentCount;
 
-    wrapper.className =
-      "card ma-post";
-
-
-    wrapper.dataset.postId =
-      post.id;
-
-
-    wrapper.innerHTML = `
-
-      <!-- POST HEADER -->
-
-      <div
-        class="ma-post-header"
-      >
-
-        <div
-          class="ma-post-author"
-        >
-
-          ${createPostAvatar(
-            profile
-          )}
-
-
-          <div
-            class="ma-post-author-info"
-          >
-
-            <div
-              class="ma-post-author-name"
-            >
-              ${escapeHtml(
-                authorName
-              )}
-            </div>
-
-
-            <div
-              class="ma-post-author-meta"
-            >
-
-              ${formatTime(
-                post.created_at
-              )}
-
-              ${
-                profile.location
-                  ? ` · ${escapeHtml(
-                      profile.location
-                    )}`
-                  : ""
-              }
-
-            </div>
-
+      if (!data || data.length === 0) {
+        postsContainer.innerHTML = `
+          <div class="empty">
+            Noch keine Posts vorhanden.
           </div>
+        `;
+        return;
+      }
 
+      postsContainer.innerHTML = '';
+
+      data.forEach(post => {
+        postsContainer.appendChild(createPostElement(post));
+      });
+    }
+
+    function createPostElement(post) {
+      const profile = post.profiles || {};
+
+      const displayName =
+        profile.display_name ||
+        profile.username ||
+        'Miles Apart Läufer:in';
+
+      const likes = post.community_post_likes || [];
+      const comments = post.community_post_comments || [];
+
+      const likedByCurrentUser =
+        currentUser &&
+        likes.some(like => like.user_id === currentUser.id);
+
+      const article = document.createElement('article');
+      article.className = 'post';
+
+      article.innerHTML = `
+        <div class="post-head">
+          ${avatarHTML(profile)}
+
+          <div>
+            <div class="post-author">${escapeHTML(displayName)}</div>
+            <div class="post-meta">
+              ${formatDate(post.created_at)}
+              ${profile.location ? ` · ${escapeHTML(profile.location)}` : ''}
+            </div>
+          </div>
         </div>
 
-      </div>
+        <div class="post-content">
+          ${escapeHTML(post.content)}
+        </div>
 
-
-      <!-- POST TEXT -->
-
-      <div
-        class="ma-post-copy"
-      >
-        ${escapeHtml(
-          post.content
-        )}
-      </div>
-
-
-      <!-- ACTIONS -->
-
-      <div
-        class="ma-post-actions"
-      >
-
-        <div
-          class="ma-post-action-left"
-        >
-
-          <button
-            class="ma-post-action ${
-              userLiked
-                ? "liked"
-                : ""
-            }"
-            type="button"
-            data-action="like"
-            data-post-id="${post.id}"
-          >
-
-            ${
-              userLiked
-                ? "❤️"
-                : "♡"
-            }
-
-            ${likes.length}
-
+        <div class="post-actions">
+          <button class="action-button like-button">
+            ${likedByCurrentUser ? '❤️' : '♡'} ${likes.length}
           </button>
 
-
-          <button
-            class="ma-post-action"
-            type="button"
-            data-action="comments"
-            data-post-id="${post.id}"
-          >
-
+          <button class="action-button comment-button">
             💬 ${comments.length}
-
           </button>
-
-        </div>
-
-
-        ${
-          isOwner
-            ? `
-
-              <button
-                class="ma-post-action ma-delete"
-                type="button"
-                data-action="delete"
-                data-post-id="${post.id}"
-              >
-                Löschen
-              </button>
-
-            `
-            : ""
-        }
-
-      </div>
-
-
-      <!-- COMMENTS -->
-
-      <div
-        class="ma-comments"
-        data-comments="${post.id}"
-        style="display:none"
-      >
-
-        <div
-          class="ma-comments-list"
-        >
 
           ${
-            comments
-              .sort(
-                (a,b) =>
-                  new Date(a.created_at) -
-                  new Date(b.created_at)
-              )
-              .map(
-                comment =>
-                  createCommentHtml(
-                    comment
-                  )
-              )
-              .join("")
+            currentUser && currentUser.id === post.author_id
+              ? `
+                <button class="action-button delete-button">
+                  Löschen
+                </button>
+              `
+              : ''
           }
-
         </div>
 
+        <div class="comments">
+          <div class="comment-list"></div>
 
-        <form
-          class="ma-comment-form"
-          data-comment-form="${post.id}"
-        >
-
-          <input
-            class="ma-comment-input"
-            type="text"
-            maxlength="1000"
-            placeholder="Antwort schreiben …"
-            required
-          >
-
-
-          <button
-            class="ma-comment-submit"
-            type="submit"
-          >
-            Senden
-          </button>
-
-        </form>
-
-      </div>
-
-    `;
-
-
-    return wrapper;
-
-  }
-
-
-  /* =====================================================
-     COMMENT HTML
-  ===================================================== */
-
-  function createCommentHtml(comment) {
-
-    const profile =
-      comment.profiles || {};
-
-
-    const name =
-      profile.display_name ||
-      "Miles Apart Member";
-
-
-    return `
-
-      <div
-        class="ma-comment"
-      >
-
-        ${createCommentAvatar(
-          profile
-        )}
-
-
-        <div
-          class="ma-comment-content"
-        >
-
-          <div
-            class="ma-comment-header"
-          >
-
-            <span
-              class="ma-comment-name"
+          <div class="comment-form">
+            <input
+              type="text"
+              placeholder="Kommentar schreiben …"
             >
-              ${escapeHtml(
-                name
-              )}
-            </span>
-
-
-            <span
-              class="ma-comment-time"
-            >
-              ${formatTime(
-                comment.created_at
-              )}
-            </span>
-
+            <button>Posten</button>
           </div>
-
-
-          <div
-            class="ma-comment-text"
-          >
-            ${escapeHtml(
-              comment.content
-            )}
-          </div>
-
         </div>
-
-      </div>
-
-    `;
-
-  }
-
-
-  /* =====================================================
-     LIKE
-  ===================================================== */
-
-  async function toggleLike(
-    postId,
-    button
-  ) {
-
-    if (!currentUser) {
-
-      window.location.href =
-        "home.html";
-
-      return;
-
-    }
-
-
-    button.disabled =
-      true;
-
-
-    try {
-
-      const {
-        data: existingLike,
-        error: findError
-      } =
-        await supabaseClient
-          .from(
-            "community_post_likes"
-          )
-          .select(
-            "post_id, user_id"
-          )
-          .eq(
-            "post_id",
-            postId
-          )
-          .eq(
-            "user_id",
-            currentUser.id
-          )
-          .maybeSingle();
-
-
-      if (findError) {
-        throw findError;
-      }
-
-
-      if (existingLike) {
-
-        const {
-          error
-        } =
-          await supabaseClient
-            .from(
-              "community_post_likes"
-            )
-            .delete()
-            .eq(
-              "post_id",
-              postId
-            )
-            .eq(
-              "user_id",
-              currentUser.id
-            );
-
-
-        if (error) {
-          throw error;
-        }
-
-      } else {
-
-        const {
-          error
-        } =
-          await supabaseClient
-            .from(
-              "community_post_likes"
-            )
-            .insert({
-
-              post_id:
-                postId,
-
-              user_id:
-                currentUser.id
-
-            });
-
-
-        if (error) {
-          throw error;
-        }
-
-      }
-
-
-      await loadPosts();
-
-    } catch (error) {
-
-      console.error(error);
-
-
-      showError(
-        "Kudos konnte nicht gespeichert werden."
-      );
-
-    } finally {
-
-      button.disabled =
-        false;
-
-    }
-
-  }
-
-
-  /* =====================================================
-     DELETE
-  ===================================================== */
-
-  async function deletePost(postId) {
-
-    if (!currentUser) {
-
-      window.location.href =
-        "home.html";
-
-      return;
-
-    }
-
-
-    const confirmed =
-      window.confirm(
-        "Diesen Post wirklich löschen?"
-      );
-
-
-    if (!confirmed) {
-      return;
-    }
-
-
-    const {
-      error
-    } =
-      await supabaseClient
-        .from("community_posts")
-        .delete()
-        .eq(
-          "id",
-          postId
-        )
-        .eq(
-          "author_id",
-          currentUser.id
-        );
-
-
-    if (error) {
-
-      console.error(error);
-
-
-      showError(
-        "Der Post konnte nicht gelöscht werden."
-      );
-
-
-      return;
-    }
-
-
-    await loadPosts();
-
-  }
-
-
-  /* =====================================================
-     COMMENT SUBMIT
-  ===================================================== */
-
-  async function submitComment(
-    postId,
-    input
-  ) {
-
-    if (!currentUser) {
-
-      window.location.href =
-        "home.html";
-
-      return;
-
-    }
-
-
-    const content =
-      input.value.trim();
-
-
-    if (!content) {
-      return;
-    }
-
-
-    input.disabled =
-      true;
-
-
-    const {
-      error
-    } =
-      await supabaseClient
-        .from(
-          "community_post_comments"
-        )
-        .insert({
-
-          post_id:
-            postId,
-
-          author_id:
-            currentUser.id,
-
-          content:
-            content
-
-        });
-
-
-    input.disabled =
-      false;
-
-
-    if (error) {
-
-      console.error(error);
-
-
-      showError(
-        "Die Antwort konnte nicht gespeichert werden."
-      );
-
-
-      return;
-
-    }
-
-
-    await loadPosts();
-
-
-    const postElement =
-      document.querySelector(
-        `[data-post-id="${postId}"]`
-      );
-
-
-    if (postElement) {
-
-      const commentsArea =
-        postElement.querySelector(
-          `[data-comments="${postId}"]`
-        );
-
-
-      if (commentsArea) {
-
-        commentsArea.style.display =
-          "block";
-
-      }
-
-    }
-
-  }
-
-
-  /* =====================================================
-     POST EVENTS
-  ===================================================== */
-
-  postsContainer.addEventListener(
-    "click",
-    async event => {
-
-      const button =
-        event.target.closest(
-          "[data-action]"
-        );
-
-
-      if (!button) {
-        return;
-      }
-
-
-      const action =
-        button.dataset.action;
-
-
-      const postId =
-        button.dataset.postId;
-
-
-      if (
-        action === "like"
-      ) {
-
-        await toggleLike(
-          postId,
-          button
-        );
-
-
-        return;
-      }
-
-
-      if (
-        action === "delete"
-      ) {
-
-        await deletePost(
-          postId
-        );
-
-
-        return;
-      }
-
-
-      if (
-        action === "comments"
-      ) {
-
-        const postElement =
-          button.closest(
-            ".ma-post"
-          );
-
-
-        if (!postElement) {
-          return;
-        }
-
-
-        const commentsArea =
-          postElement.querySelector(
-            `[data-comments="${postId}"]`
-          );
-
-
-        if (!commentsArea) {
-          return;
-        }
-
-
-        commentsArea.style.display =
-          commentsArea.style.display ===
-          "none"
-            ? "block"
-            : "none";
-
-      }
-
-    }
-  );
-
-
-  /* =====================================================
-     COMMENT FORM
-  ===================================================== */
-
-  postsContainer.addEventListener(
-    "submit",
-    async event => {
-
-      const form =
-        event.target.closest(
-          "[data-comment-form]"
-        );
-
-
-      if (!form) {
-        return;
-      }
-
-
-      event.preventDefault();
-
-
-      const postId =
-        form.dataset.commentForm;
-
-
-      const input =
-        form.querySelector(
-          "input"
-        );
-
-
-      await submitComment(
-        postId,
-        input
-      );
-
-    }
-  );
-
-
-  /* =====================================================
-     CREATE POST
-  ===================================================== */
-
-  openPostButton.addEventListener(
-    "click",
-    () => {
-
-      if (!currentUser) {
-
-        window.location.href =
-          "home.html";
-
-        return;
-
-      }
-
-
-      postFormCard.style.display =
-        "block";
-
-
-      postContent.focus();
-
-
-      window.scrollTo({
-
-        top:
-          postFormCard.offsetTop - 90,
-
-        behavior:
-          "smooth"
-
-      });
-
-    }
-  );
-
-
-  cancelPostButton.addEventListener(
-    "click",
-    () => {
-
-      postContent.value =
-        "";
-
-
-      postFormCard.style.display =
-        "none";
-
-
-      postFormMessage.textContent =
-        "";
-
-
-      postFormMessage.className =
-        "post-form-message";
-
-    }
-  );
-
-
-  postForm.addEventListener(
-    "submit",
-    async event => {
-
-      event.preventDefault();
-
-
-      if (!currentUser) {
-
-        window.location.href =
-          "home.html";
-
-        return;
-
-      }
-
-
-      const content =
-        postContent.value.trim();
-
-
-      if (!content) {
-        return;
-      }
-
-
-      submitPostButton.disabled =
-        true;
-
-
-      submitPostButton.textContent =
-        "Wird veröffentlicht …";
-
-
-      postFormMessage.textContent =
-        "";
-
-
-      try {
-
-        const {
-          error
-        } =
-          await supabaseClient
-            .from(
-              "community_posts"
-            )
-            .insert({
-
-              author_id:
-                currentUser.id,
-
-              content:
-                content
-
-            });
-
-
-        if (error) {
-          throw error;
-        }
-
-
-        postContent.value =
-          "";
-
-
-        postFormCard.style.display =
-          "none";
-
-
-        await loadPosts();
-
-      } catch (error) {
-
-        console.error(error);
-
-
-        postFormMessage.textContent =
-          error.message ||
-          "Der Post konnte nicht veröffentlicht werden.";
-
-
-        postFormMessage.className =
-          "post-form-message error";
-
-      } finally {
-
-        submitPostButton.disabled =
-          false;
-
-
-        submitPostButton.textContent =
-          "Post veröffentlichen";
-
-      }
-
-    }
-  );
-
-
-  /* =====================================================
-     RUN BUDDIES
-  ===================================================== */
-
-  async function loadRunBuddies() {
-
-    let query =
-      supabaseClient
-        .from("profiles")
-        .select(
-          "id, display_name, username, avatar_url, location"
-        );
-
-
-    if (currentUser) {
-
-      query =
-        query.neq(
-          "id",
-          currentUser.id
-        );
-
-    }
-
-
-    const {
-      data: profiles,
-      error
-    } =
-      await query
-        .order(
-          "created_at",
-          {
-            ascending: false
-          }
-        )
-        .limit(3);
-
-
-    if (error) {
-      throw error;
-    }
-
-
-    if (!profiles.length) {
-
-      runBuddies.innerHTML = `
-
-        <p
-          style="
-            color:#777;
-            line-height:1.5;
-          "
-        >
-          Du bist aktuell das erste Mitglied
-          mit einem vollständigen Profil.
-        </p>
-
       `;
 
+      const likeButton = article.querySelector('.like-button');
+      const commentButton = article.querySelector('.comment-button');
+      const commentsBox = article.querySelector('.comments');
+      const commentList = article.querySelector('.comment-list');
+      const commentInput = article.querySelector('.comment-form input');
+      const commentSubmit = article.querySelector('.comment-form button');
+      const deleteButton = article.querySelector('.delete-button');
 
-      return;
+      likeButton.addEventListener('click', async () => {
+        if (!currentUser) {
+          redirectToHome();
+          return;
+        }
 
+        await toggleLike(post.id, likedByCurrentUser);
+      });
+
+      commentButton.addEventListener('click', () => {
+        commentsBox.classList.toggle('open');
+
+        if (commentsBox.classList.contains('open')) {
+          renderComments(commentList, comments);
+        }
+      });
+
+      commentSubmit.addEventListener('click', async () => {
+        if (!currentUser) {
+          redirectToHome();
+          return;
+        }
+
+        const content = commentInput.value.trim();
+
+        if (!content) return;
+
+        const { error } = await supabaseClient
+          .from('community_post_comments')
+          .insert({
+            post_id: post.id,
+            author_id: currentUser.id,
+            content
+          });
+
+        if (error) {
+          console.error(error);
+          return;
+        }
+
+        commentInput.value = '';
+        await loadPosts();
+      });
+
+      if (deleteButton) {
+        deleteButton.addEventListener('click', async () => {
+          if (!currentUser) {
+            redirectToHome();
+            return;
+          }
+
+          const confirmed = confirm(
+            'Möchtest du diesen Post wirklich löschen?'
+          );
+
+          if (!confirmed) return;
+
+          const { error } = await supabaseClient
+            .from('community_posts')
+            .delete()
+            .eq('id', post.id)
+            .eq('author_id', currentUser.id);
+
+          if (error) {
+            console.error(error);
+            return;
+          }
+
+          await loadPosts();
+        });
+      }
+
+      return article;
     }
 
+    function renderComments(container, comments) {
+      if (!comments || comments.length === 0) {
+        container.innerHTML = `
+          <div class="empty">
+            Noch keine Kommentare.
+          </div>
+        `;
+        return;
+      }
 
-    runBuddies.innerHTML =
-      profiles
-        .map(
-          profile => `
+      container.innerHTML = comments
+        .map(comment => {
+          const profile = comment.profiles || {};
 
-            <div
-              class="rank"
-              style="
-                margin-bottom:14px;
-              "
-            >
+          const name =
+            profile.display_name ||
+            profile.username ||
+            'Läufer:in';
 
-              ${createPostAvatar(
-                profile
-              )}
+          return `
+            <div class="comment">
+              ${avatarHTML(profile)}
 
-
-              <div>
-
-                <b>
-                  ${escapeHtml(
-                    profile.display_name ||
-                    "Miles Apart Member"
-                  )}
-                </b>
-
-
-                <div class="small muted">
-
-                  ${
-                    profile.location
-                      ? escapeHtml(
-                          profile.location
-                        )
-                      : profile.username
-                        ? `@${escapeHtml(
-                            profile.username
-                          )}`
-                        : "Miles Apart Member"
-                  }
-
+              <div class="comment-content">
+                <div class="comment-author">
+                  ${escapeHTML(name)}
                 </div>
 
+                <div>
+                  ${escapeHTML(comment.content)}
+                </div>
               </div>
-
-
-              <span>
-                →
-              </span>
-
             </div>
-
-          `
-        )
-        .join("");
-
-  }
-
-
-  /* =====================================================
-     MEMBER COUNT
-  ===================================================== */
-
-  async function loadMemberCount() {
-
-    const {
-      count,
-      error
-    } =
-      await supabaseClient
-        .from("profiles")
-        .select(
-          "id",
-          {
-            count: "exact",
-            head: true
-          }
-        );
-
-
-    if (error) {
-      throw error;
+          `;
+        })
+        .join('');
     }
 
-
-    memberCount.textContent =
-      count ?? 0;
-
-  }
-
-
-  /* =====================================================
-     POLL
-  ===================================================== */
-
-  document
-    .querySelectorAll(
-      "[data-answer]"
-    )
-    .forEach(
-      button => {
-
-        button.addEventListener(
-          "click",
-          () => {
-
-            const answer =
-              button.dataset.answer;
-
-
-            const message =
-              document.getElementById(
-                "pollMessage"
-              );
-
-
-            message.textContent =
-              `Deine Antwort: ${answer} ✓`;
-
-          }
-        );
-
+    async function toggleLike(postId, alreadyLiked) {
+      if (!currentUser) {
+        redirectToHome();
+        return;
       }
-    );
 
+      if (alreadyLiked) {
+        const { error } = await supabaseClient
+          .from('community_post_likes')
+          .delete()
+          .eq('post_id', postId)
+          .eq('user_id', currentUser.id);
 
-  /* =====================================================
-     INITIALIZE
-  ===================================================== */
+        if (error) {
+          console.error(error);
+          return;
+        }
+      } else {
+        const { error } = await supabaseClient
+          .from('community_post_likes')
+          .insert({
+            post_id: postId,
+            user_id: currentUser.id
+          });
 
-  async function initializeCommunity() {
+        if (error) {
+          console.error(error);
+          return;
+        }
+      }
 
-    try {
+      await loadPosts();
+    }
 
-      clearError();
+    async function loadRunBuddies() {
+      let query = supabaseClient
+        .from('profiles')
+        .select('id, display_name, username, avatar_url, location')
+        .limit(5);
 
+      if (currentUser) {
+        query = query.neq('id', currentUser.id);
+      }
 
+      const { data, error } = await query;
+
+      const container = document.getElementById('runBuddies');
+
+      if (error || !data || data.length === 0) {
+        container.innerHTML = `
+          <div class="empty">
+            Noch keine Run Buddies vorhanden.
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = data
+        .map(profile => {
+          const name =
+            profile.display_name ||
+            profile.username ||
+            'Läufer:in';
+
+          return `
+            <div class="buddy">
+              ${avatarHTML(profile)}
+
+              <div>
+                <div class="buddy-name">
+                  ${escapeHTML(name)}
+                </div>
+
+                ${
+                  profile.location
+                    ? `
+                      <div class="buddy-location">
+                        ${escapeHTML(profile.location)}
+                      </div>
+                    `
+                    : ''
+                }
+              </div>
+            </div>
+          `;
+        })
+        .join('');
+    }
+
+    async function loadMemberCount() {
+      return;
+    }
+
+    openPostButton.addEventListener('click', () => {
+      if (!currentUser) {
+        redirectToHome();
+        return;
+      }
+
+      composer.style.display =
+        composer.style.display === 'none'
+          ? 'block'
+          : 'none';
+
+      if (composer.style.display === 'block') {
+        postContent.focus();
+      }
+    });
+
+    submitPostButton.addEventListener('click', async () => {
+      if (!currentUser) {
+        redirectToHome();
+        return;
+      }
+
+      const content = postContent.value.trim();
+
+      if (!content) return;
+
+      submitPostButton.disabled = true;
+
+      const { error } = await supabaseClient
+        .from('community_posts')
+        .insert({
+          author_id: currentUser.id,
+          content
+        });
+
+      submitPostButton.disabled = false;
+
+      if (error) {
+        console.error(error);
+        return;
+      }
+
+      postContent.value = '';
+      composer.style.display = 'none';
+
+      await loadPosts();
+    });
+
+    function escapeHTML(value) {
+      return String(value ?? '')
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+    async function initializeCommunity() {
       await loadCurrentUser();
 
-
       await Promise.all([
-
         loadPosts(),
-
         loadRunBuddies(),
-
         loadMemberCount()
-
       ]);
-
-
-      communityLoading.style.display =
-        "none";
-
-
-      communityLower.style.display =
-        "grid";
-
-
-    } catch (error) {
-
-      console.error(
-        "Community error:",
-        error
-      );
-
-
-      communityLoading.style.display =
-        "none";
-
-
-      showError(
-        error.message ||
-        "Die Community konnte nicht geladen werden."
-      );
-
     }
 
-  }
+    supabaseClient.auth.onAuthStateChange((_event, session) => {
+      currentUser = session?.user || null;
 
+      /*
+       * Auch bei einem späteren Login/Logout gilt:
+       * Eingeloggt = nichts oben rechts.
+       * Ausgeloggt = Anmelden-Button.
+       */
+      if (currentUser) {
+        loginButton.style.display = 'none';
+      } else {
+        loginButton.style.display = 'block';
+        openPostButton.textContent = 'Anmelden';
+        composer.style.display = 'none';
+      }
+    });
 
-  /* =====================================================
-     AUTH
-  ===================================================== */
-
-  supabaseClient.auth.onAuthStateChange(
-    (
-      event,
-      session
-    ) => {
-
-      currentUser =
-        session?.user ||
-        null;
-
-    }
-  );
-
-
-  /* =====================================================
-     START
-  ===================================================== */
-
-  initializeCommunity();
-
-
-</script>
-
-
+    initializeCommunity();
+  </script>
 </body>
-
 </html>
