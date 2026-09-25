@@ -19,15 +19,19 @@
     href="style.css"
   >
 
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+  ></script>
 
   <style>
 
-    /* =========================================================
-       HERO LEAD
-    ========================================================= */
-
     .hero .lead {
       color: #18b8c7;
+    }
+
+    .challenge-btn.is-joined {
+      pointer-events: none;
+      opacity: .75;
     }
 
   </style>
@@ -60,21 +64,13 @@
     </div>
 
 
-    <!-- =====================================================
-         NAVIGATION
-         ===================================================== -->
-
     <nav class="nav">
 
-      <a
-        href="index.html"
-      >
+      <a href="index.html">
         Miles Apart
       </a>
 
-      <a
-        href="home.html"
-      >
+      <a href="home.html">
         Home
       </a>
 
@@ -85,30 +81,20 @@
         Challenges
       </a>
 
-      <a
-        href="community.html"
-      >
+      <a href="community.html">
         Community
       </a>
 
-      <a
-        href="events.html"
-      >
+      <a href="events.html">
         Events
       </a>
 
-      <a
-        href="training.html"
-      >
+      <a href="training.html">
         Training
       </a>
 
     </nav>
 
-
-    <!-- =====================================================
-         SIDEBAR BOTTOM
-         ===================================================== -->
 
     <div class="side-bottom">
 
@@ -121,9 +107,7 @@
       </strong>
 
       <div class="mini-progress">
-
         <i></i>
-
       </div>
 
       <p
@@ -145,9 +129,7 @@
   <main class="main">
 
 
-    <!-- =====================================================
-         TOP BAR
-         ===================================================== -->
+    <!-- TOP BAR -->
 
     <div class="top">
 
@@ -158,9 +140,7 @@
     </div>
 
 
-    <!-- =====================================================
-         HERO
-         ===================================================== -->
+    <!-- HERO -->
 
     <div class="hero">
 
@@ -211,9 +191,7 @@
         </p>
 
         <div class="progress">
-
           <i style="width:67%"></i>
-
         </div>
 
         <div
@@ -232,9 +210,10 @@
         </div>
 
         <a
-          class="btn lime"
+          class="btn lime challenge-btn"
           style="margin-top:18px;width:100%"
           href="#"
+          data-challenge-id="community-10k"
         >
           Teilnehmen
         </a>
@@ -267,15 +246,14 @@
         </p>
 
         <div class="progress">
-
           <i style="width:46%"></i>
-
         </div>
 
         <a
-          class="btn ghost"
+          class="btn ghost challenge-btn"
           style="margin-top:18px;width:100%"
           href="#"
+          data-challenge-id="run-germany"
         >
           Beitreten
         </a>
@@ -313,9 +291,10 @@
         </div>
 
         <a
-          class="btn"
+          class="btn challenge-btn"
           style="margin-top:18px;width:100%"
           href="#"
+          data-challenge-id="first-20k"
         >
           Starten
         </a>
@@ -357,9 +336,7 @@
         </p>
 
         <div class="progress">
-
           <i style="width:71%"></i>
-
         </div>
 
         <p class="small muted">
@@ -468,6 +445,165 @@
 
 </div>
 
+
+<!-- =========================================================
+     SUPABASE
+     ========================================================= -->
+
+<script>
+
+  const SUPABASE_URL =
+    "https://orbrkdrsihsacsnprewf.supabase.co";
+
+  const SUPABASE_KEY =
+    "sb_publishable_wc3w2fSuj8ItwiF6XBoQgw_HeW5_rNW";
+
+  const supabaseClient =
+    window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
+
+
+  async function joinChallenge(button) {
+
+    const challengeId =
+      button.dataset.challengeId;
+
+
+    button.style.pointerEvents = "none";
+    button.textContent = "Wird gespeichert …";
+
+
+    try {
+
+      const {
+        data: {
+          user
+        }
+      } =
+        await supabaseClient.auth.getUser();
+
+
+      if (!user) {
+
+        window.location.href =
+          "home.html";
+
+        return;
+
+      }
+
+
+      const {
+        data: existingMembership,
+        error: existingError
+      } =
+        await supabaseClient
+          .from("Challenge_members")
+          .select("id")
+          .eq("User_id", user.id)
+          .eq("challenge_id", challengeId)
+          .maybeSingle();
+
+
+      if (existingError) {
+        throw existingError;
+      }
+
+
+      if (existingMembership) {
+
+        button.textContent =
+          "Bereits dabei ✓";
+
+        button.classList.add(
+          "is-joined"
+        );
+
+        return;
+
+      }
+
+
+      const {
+        error: insertError
+      } =
+        await supabaseClient
+          .from("Challenge_members")
+          .insert({
+
+            User_id: user.id,
+
+            challenge_id:
+              challengeId,
+
+            joined_at:
+              new Date().toISOString()
+
+          });
+
+
+      if (insertError) {
+        throw insertError;
+      }
+
+
+      button.textContent =
+        "Dabei ✓";
+
+      button.classList.add(
+        "is-joined"
+      );
+
+
+      alert(
+        "Du bist jetzt bei dieser Challenge dabei."
+      );
+
+
+    } catch (error) {
+
+      console.error(
+        "Challenge-Anmeldung fehlgeschlagen:",
+        error
+      );
+
+
+      button.style.pointerEvents =
+        "";
+
+      button.textContent =
+        "Erneut versuchen";
+
+
+      alert(
+        "Die Teilnahme konnte gerade nicht gespeichert werden."
+      );
+
+    }
+
+  }
+
+
+  document
+    .querySelectorAll(".challenge-btn")
+    .forEach(button => {
+
+      button.addEventListener(
+        "click",
+        event => {
+
+          event.preventDefault();
+
+          joinChallenge(button);
+
+        }
+      );
+
+    });
+
+</script>
 
 </body>
 
