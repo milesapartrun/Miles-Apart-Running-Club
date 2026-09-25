@@ -36,196 +36,29 @@
     }
 
 
-    .user-area {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      position: relative;
-    }
-
-
-    .user-greeting {
-      font-size: 13px;
-      color: #666;
-      white-space: nowrap;
-    }
-
-
-    .user-avatar-button {
-      width: 58px;
-      height: 58px;
-
-      border-radius: 50%;
-      border: 3px solid #18b8c7;
-
-      background: #fff;
-      color: #18b8c7;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      font-weight: 800;
-      font-size: 18px;
-
-      cursor: pointer;
-
-      overflow: hidden;
-
-      padding: 0;
-
-      position: relative;
-
-      z-index: 2;
-    }
-
-
-    .user-avatar-button img {
-      width: 100%;
-      height: 100%;
-
-      object-fit: cover;
-
-      display: block;
-    }
-
-
-    /* =====================================================
-       PROFILE POPUP
-    ===================================================== */
-
-    .account-menu {
-      position: absolute;
-
-      top: calc(100% + 12px);
-      right: 0;
-
-      width: 300px;
-
-      background: #ffffff;
-
-      border: 1px solid #dddddd;
-
-      box-shadow:
-        0 14px 35px rgba(0,0,0,0.12);
-
-      z-index: 1000;
-
-      display: none;
-
-      overflow: hidden;
-    }
-
-
-    .account-menu.open {
-      display: block;
-    }
-
-
-    .account-menu-user {
-      padding: 22px 24px 20px;
-
-      border-bottom: 1px solid #e8e8e8;
-
-      background: #ffffff;
-    }
-
-
-    .account-menu-name {
-      margin: 0;
-
-      color: #111111;
-
-      font-size: 24px;
-
-      line-height: 1.2;
-
-      font-weight: 800;
-    }
-
-
-    .account-menu-email {
-      margin-top: 7px;
-
-      color: #888888;
-
-      font-size: 16px;
-
-      line-height: 1.35;
-
-      font-weight: 400;
-
-      overflow-wrap: anywhere;
-    }
-
-
-    /*
-      Mein Profil und Abmelden exakt
-      gleich formatiert.
-    */
-
-    .account-menu button {
-      display: block;
-
-      width: 100%;
-
-      height: auto;
-
-      min-height: 0;
-
+    .login-button {
       border: 0;
 
-      border-bottom: 1px solid #e8e8e8;
+      background: #18b8c7;
 
-      border-radius: 0;
+      color: #fff;
 
-      background: transparent;
-
-      padding: 22px 24px;
-
-      margin: 0;
-
-      color: #222222;
-
-      text-align: left;
+      padding: 11px 18px;
 
       font-family: inherit;
 
-      font-size: 20px;
+      font-size: 15px;
 
-      line-height: 1.3;
-
-      font-weight: 400;
-
-      letter-spacing: normal;
-
-      text-transform: none;
-
-      box-shadow: none;
+      font-weight: 800;
 
       cursor: pointer;
+
+      border-radius: 0;
     }
 
 
-    .account-menu button:hover {
-      background: #f7f7f7;
-    }
-
-
-    .account-menu button:last-child {
-      border-bottom: 0;
-    }
-
-
-    .account-menu .logout-button {
-      color: #888888;
-    }
-
-
-    .account-menu .logout-button:hover {
-      color: #555555;
-
-      background: #f7f7f7;
+    .login-button:hover {
+      background: #111;
     }
 
 
@@ -961,52 +794,10 @@
       }
 
 
-      .user-greeting {
-        font-size: 12px;
-      }
+      .login-button {
+        padding: 10px 15px;
 
-
-      .user-avatar-button {
-        width: 48px;
-        height: 48px;
-
-        border-width: 2px;
-      }
-
-
-      .account-menu {
-        position: fixed;
-
-        top: 76px;
-
-        right: 12px;
-
-        left: 12px;
-
-        width: auto;
-
-        max-width: none;
-      }
-
-
-      .account-menu-name {
-        font-size: 23px;
-      }
-
-
-      .account-menu-email {
-        font-size: 16px;
-      }
-
-
-      .account-menu button {
-        padding: 22px 24px;
-
-        font-size: 20px;
-
-        line-height: 1.3;
-
-        font-weight: 400;
+        font-size: 14px;
       }
 
 
@@ -1289,83 +1080,14 @@
 
       <div class="top-right">
 
-
-        <div class="user-area">
-
-
-          <span
-            class="user-greeting"
-            id="userGreeting"
-          >
-            Hallo
-          </span>
-
-
-          <button
-            class="user-avatar-button"
-            id="topAvatar"
-            type="button"
-            aria-label="Mein Profil"
-            aria-expanded="false"
-          >
-            M
-          </button>
-
-
-          <!-- ==========================================
-               ACCOUNT POPUP
-          =========================================== -->
-
-          <div
-            class="account-menu"
-            id="accountMenu"
-          >
-
-
-            <div class="account-menu-user">
-
-
-              <div
-                class="account-menu-name"
-                id="accountMenuName"
-              >
-                —
-              </div>
-
-
-              <div
-                class="account-menu-email"
-                id="accountMenuEmail"
-              >
-                —
-              </div>
-
-
-            </div>
-
-
-            <button
-              type="button"
-              id="myProfileButton"
-            >
-              Mein Profil
-            </button>
-
-
-            <button
-              type="button"
-              id="logoutButton"
-              class="logout-button"
-            >
-              Abmelden
-            </button>
-
-
-          </div>
-
-
-        </div>
-
+        <button
+          id="loginButton"
+          class="login-button"
+          type="button"
+          style="display:none"
+        >
+          Anmelden
+        </button>
 
       </div>
 
@@ -1719,45 +1441,9 @@
      ELEMENTS
   ===================================================== */
 
-  const userGreeting =
+  const loginButton =
     document.getElementById(
-      "userGreeting"
-    );
-
-
-  const topAvatar =
-    document.getElementById(
-      "topAvatar"
-    );
-
-
-  const accountMenu =
-    document.getElementById(
-      "accountMenu"
-    );
-
-
-  const accountMenuName =
-    document.getElementById(
-      "accountMenuName"
-    );
-
-
-  const accountMenuEmail =
-    document.getElementById(
-      "accountMenuEmail"
-    );
-
-
-  const myProfileButton =
-    document.getElementById(
-      "myProfileButton"
-    );
-
-
-  const logoutButton =
-    document.getElementById(
-      "logoutButton"
+      "loginButton"
     );
 
 
@@ -1855,141 +1541,12 @@
 
 
   /* =====================================================
-     PROFILE MENU
+     LOGIN
   ===================================================== */
 
-  function openAccountMenu() {
-
-    accountMenu.classList.add(
-      "open"
-    );
-
-    topAvatar.setAttribute(
-      "aria-expanded",
-      "true"
-    );
-
-  }
-
-
-  function closeAccountMenu() {
-
-    accountMenu.classList.remove(
-      "open"
-    );
-
-    topAvatar.setAttribute(
-      "aria-expanded",
-      "false"
-    );
-
-  }
-
-
-  function toggleAccountMenu() {
-
-    if (
-      accountMenu.classList.contains(
-        "open"
-      )
-    ) {
-
-      closeAccountMenu();
-
-    } else {
-
-      openAccountMenu();
-
-    }
-
-  }
-
-
-  topAvatar.addEventListener(
-    "click",
-    event => {
-
-      event.stopPropagation();
-
-      toggleAccountMenu();
-
-    }
-  );
-
-
-  accountMenu.addEventListener(
-    "click",
-    event => {
-
-      event.stopPropagation();
-
-    }
-  );
-
-
-  document.addEventListener(
-    "click",
-    event => {
-
-      if (
-        !event.target.closest(
-          ".user-area"
-        )
-      ) {
-
-        closeAccountMenu();
-
-      }
-
-    }
-  );
-
-
-  myProfileButton.addEventListener(
+  loginButton.addEventListener(
     "click",
     () => {
-
-      window.location.href =
-        "profile.html";
-
-    }
-  );
-
-
-  logoutButton.addEventListener(
-    "click",
-    async () => {
-
-      logoutButton.disabled =
-        true;
-
-      logoutButton.textContent =
-        "Wird abgemeldet …";
-
-
-      const {
-        error
-      } =
-        await supabaseClient.auth.signOut();
-
-
-      if (error) {
-
-        console.error(
-          error
-        );
-
-
-        logoutButton.disabled =
-          false;
-
-        logoutButton.textContent =
-          "Abmelden";
-
-        return;
-
-      }
-
 
       window.location.href =
         "home.html";
@@ -2155,16 +1712,40 @@
 
     if (!data.session) {
 
-      window.location.href =
-        "home.html";
+      currentUser =
+        null;
 
-      return false;
+      currentProfile =
+        null;
+
+
+      loginButton.style.display =
+        "block";
+
+
+      openPostButton.textContent =
+        "Anmelden";
+
+
+      postAuthorName.textContent =
+        "Anmelden, um einen Post zu erstellen";
+
+
+      return true;
 
     }
 
 
     currentUser =
       data.session.user;
+
+
+    loginButton.style.display =
+      "none";
+
+
+    openPostButton.textContent =
+      "+ Post erstellen";
 
 
     const {
@@ -2225,83 +1806,6 @@
           ?.name ||
         "Miles Apart Member"
       ).trim();
-
-
-    const firstName =
-      name
-        .split(/\s+/)[0] ||
-      "Runner";
-
-
-    /*
-      Darstellung oben rechts:
-      "Hallo [Vorname]" direkt neben dem Profilbild.
-    */
-
-    userGreeting.textContent =
-      `Hallo ${firstName}`;
-
-
-    userGreeting.style.display =
-      "inline";
-
-
-    /* =================================================
-       ACCOUNT MENU DATA
-    ================================================= */
-
-    accountMenuName.textContent =
-      name;
-
-
-    accountMenuEmail.textContent =
-      currentUser.email ||
-      "—";
-
-
-    /* =================================================
-       TOP AVATAR
-    ================================================= */
-
-    topAvatar.innerHTML =
-      "";
-
-
-    if (
-      currentProfile.avatar_url
-    ) {
-
-      const image =
-        document.createElement("img");
-
-
-      image.src =
-        currentProfile.avatar_url;
-
-
-      image.alt =
-        "Mein Profilbild";
-
-
-      image.onerror =
-        () => {
-
-          topAvatar.textContent =
-            getInitials(name);
-
-        };
-
-
-      topAvatar.appendChild(
-        image
-      );
-
-    } else {
-
-      topAvatar.textContent =
-        getInitials(name);
-
-    }
 
 
     postAuthorName.textContent =
@@ -2565,16 +2069,20 @@
 
 
     const userLiked =
-      likes.some(
-        like =>
-          like.user_id ===
-          currentUser.id
-      );
+      currentUser
+        ? likes.some(
+            like =>
+              like.user_id ===
+              currentUser.id
+          )
+        : false;
 
 
     const isOwner =
-      post.author_id ===
-      currentUser.id;
+      currentUser
+        ? post.author_id ===
+          currentUser.id
+        : false;
 
 
     const wrapper =
@@ -2867,6 +2375,16 @@
     button
   ) {
 
+    if (!currentUser) {
+
+      window.location.href =
+        "home.html";
+
+      return;
+
+    }
+
+
     button.disabled =
       true;
 
@@ -2978,6 +2496,16 @@
 
   async function deletePost(postId) {
 
+    if (!currentUser) {
+
+      window.location.href =
+        "home.html";
+
+      return;
+
+    }
+
+
     const confirmed =
       window.confirm(
         "Diesen Post wirklich löschen?"
@@ -3032,6 +2560,16 @@
     postId,
     input
   ) {
+
+    if (!currentUser) {
+
+      window.location.href =
+        "home.html";
+
+      return;
+
+    }
+
 
     const content =
       input.value.trim();
@@ -3256,6 +2794,16 @@
     "click",
     () => {
 
+      if (!currentUser) {
+
+        window.location.href =
+          "home.html";
+
+        return;
+
+      }
+
+
       postFormCard.style.display =
         "block";
 
@@ -3305,6 +2853,16 @@
     async event => {
 
       event.preventDefault();
+
+
+      if (!currentUser) {
+
+        window.location.href =
+          "home.html";
+
+        return;
+
+      }
 
 
       const content =
@@ -3397,19 +2955,30 @@
 
   async function loadRunBuddies() {
 
+    let query =
+      supabaseClient
+        .from("profiles")
+        .select(
+          "id, display_name, username, avatar_url, location"
+        );
+
+
+    if (currentUser) {
+
+      query =
+        query.neq(
+          "id",
+          currentUser.id
+        );
+
+    }
+
+
     const {
       data: profiles,
       error
     } =
-      await supabaseClient
-        .from("profiles")
-        .select(
-          "id, display_name, username, avatar_url, location"
-        )
-        .neq(
-          "id",
-          currentUser.id
-        )
+      await query
         .order(
           "created_at",
           {
@@ -3583,13 +3152,7 @@
       clearError();
 
 
-      const loggedIn =
-        await loadCurrentUser();
-
-
-      if (!loggedIn) {
-        return;
-      }
+      await loadCurrentUser();
 
 
       await Promise.all([
@@ -3643,15 +3206,9 @@
       session
     ) => {
 
-      if (
-        event === "SIGNED_OUT" ||
-        !session
-      ) {
-
-        window.location.href =
-          "home.html";
-
-      }
+      currentUser =
+        session?.user ||
+        null;
 
     }
   );
