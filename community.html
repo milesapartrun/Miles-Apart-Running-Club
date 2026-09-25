@@ -36,37 +36,6 @@
     }
 
 
-    .login-button {
-      border: 0;
-
-      background: #18b8c7;
-
-      color: #fff;
-
-      padding: 11px 18px;
-
-      font-family: inherit;
-
-      font-size: 15px;
-
-      font-weight: 800;
-
-      cursor: pointer;
-
-      border-radius: 0;
-    }
-
-
-    .login-button:hover {
-      background: #111;
-    }
-
-
-    .login-button[hidden] {
-      display: none !important;
-    }
-
-
     /* =====================================================
        MILES APART COMMUNITY
     ===================================================== */
@@ -794,18 +763,6 @@
 
     @media (max-width: 700px) {
 
-      .top-right {
-        gap: 10px;
-      }
-
-
-      .login-button {
-        padding: 10px 15px;
-
-        font-size: 14px;
-      }
-
-
       #postsContainer {
         display: block !important;
 
@@ -1083,18 +1040,8 @@
       </div>
 
 
-      <div class="top-right">
+      <div class="top-right"></div>
 
-        <button
-          id="loginButton"
-          class="login-button"
-          type="button"
-          hidden
-        >
-          Anmelden
-        </button>
-
-      </div>
 
     </div>
 
@@ -1446,12 +1393,6 @@
      ELEMENTS
   ===================================================== */
 
-  const loginButton =
-    document.getElementById(
-      "loginButton"
-    );
-
-
   const openPostButton =
     document.getElementById(
       "openPostButton"
@@ -1543,21 +1484,6 @@
   let currentUser = null;
 
   let currentProfile = null;
-
-
-  /* =====================================================
-     LOGIN
-  ===================================================== */
-
-  loginButton.addEventListener(
-    "click",
-    () => {
-
-      window.location.href =
-        "home.html";
-
-    }
-  );
 
 
   /* =====================================================
@@ -1718,14 +1644,14 @@
       currentProfile =
         null;
 
-      loginButton.hidden =
-        false;
 
       openPostButton.textContent =
         "Anmelden";
 
+
       postAuthorName.textContent =
         "Anmelden, um einen Post zu erstellen";
+
 
       return true;
 
@@ -1739,12 +1665,6 @@
 
       currentProfile =
         null;
-
-
-      /* AUSGELOGGT: ANMELDEN ANZEIGEN */
-
-      loginButton.hidden =
-        false;
 
 
       openPostButton.textContent =
@@ -1762,12 +1682,6 @@
 
     currentUser =
       data.user;
-
-
-    /* EINGELOGGT: OBEN RECHTS KOMPLETT LEER */
-
-    loginButton.hidden =
-      true;
 
 
     openPostButton.textContent =
@@ -2494,10 +2408,6 @@
       console.error(error);
 
 
-      showError(
-        "Kudos konnte nicht gespeichert werden."
-      );
-
     } finally {
 
       button.disabled =
@@ -2554,11 +2464,6 @@
     if (error) {
 
       console.error(error);
-
-
-      showError(
-        "Der Post konnte nicht gelöscht werden."
-      );
 
 
       return;
@@ -2630,11 +2535,6 @@
     if (error) {
 
       console.error(error);
-
-
-      showError(
-        "Die Antwort konnte nicht gespeichert werden."
-      );
 
 
       return;
@@ -3204,6 +3104,23 @@
         "none";
 
 
+      /*
+       * Wenn niemand angemeldet ist, wird
+       * KEINE rote Fehlermeldung angezeigt.
+       */
+
+      if (!currentUser) {
+
+        clearError();
+
+        communityLower.style.display =
+          "grid";
+
+        return;
+
+      }
+
+
       showError(
         error.message ||
         "Die Community konnte nicht geladen werden."
@@ -3227,23 +3144,6 @@
       currentUser =
         session?.user ||
         null;
-
-
-      if (currentUser) {
-
-        /* EINGELOGGT → NICHTS */
-
-        loginButton.hidden =
-          true;
-
-      } else {
-
-        /* NICHT EINGELOGGT → ANMELDEN */
-
-        loginButton.hidden =
-          false;
-
-      }
 
     }
   );
