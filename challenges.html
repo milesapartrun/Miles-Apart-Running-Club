@@ -489,8 +489,11 @@
 
 
       /*
-       * WICHTIG:
-       * Die Spalte heißt in Supabase "User_id".
+       * Die Spalten heißen exakt:
+       *
+       * User_id
+       * Challenge_id
+       * Joined_at
        */
 
       const {
@@ -526,15 +529,6 @@
       }
 
 
-      /*
-       * Teilnahme speichern.
-       *
-       * Die Spalten heißen:
-       * User_id
-       * Challenge_id
-       * joined_at
-       */
-
       const {
         error: insertError
       } =
@@ -548,7 +542,7 @@
             Challenge_id:
               challengeId,
 
-            joined_at:
+            Joined_at:
               new Date().toISOString()
 
           });
