@@ -1,245 +1,1686 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Miles Apart – User</title>
+  <title>Profil – Miles Apart Running Club</title>
 
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    :root{
+      --miles-blue:#18b8c7;
+      --miles-blue-dark:#1199a6;
+      --text:#111111;
+      --muted:#6f7779;
+      --line:#dddddd;
+      --soft:#f5f7f7;
+      --white:#ffffff;
+    }
+
+    *{
+      box-sizing:border-box;
+    }
+
+    body{
+      margin:0;
+      font-family:Arial,Helvetica,sans-serif;
+      background:#fff;
+      color:var(--text);
+    }
+
+    .topbar{
+      position:sticky;
+      top:0;
+      z-index:20;
+      height:78px;
+      background:#fff;
+      border-bottom:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:0 28px;
+    }
+
+    .brand{
+      text-decoration:none;
+      color:#111;
+      font-weight:800;
+      letter-spacing:-.4px;
+      font-size:20px;
+    }
+
+    .back-link{
+      color:#111;
+      text-decoration:none;
+      font-size:14px;
+      font-weight:700;
+    }
+
+    .back-link:hover{
+      color:var(--miles-blue-dark);
+    }
+
+    main{
+      width:min(1100px,calc(100% - 32px));
+      margin:34px auto 70px;
+    }
+
+    .loading,
+    .error{
+      border:1px solid var(--line);
+      border-radius:18px;
+      padding:35px;
+      text-align:center;
+      background:#fff;
+    }
+
+    .error h2{
+      margin:0 0 8px;
+    }
+
+    .error p{
+      color:var(--muted);
+      margin:0;
+    }
+
+    .profile-header{
+      display:grid;
+      grid-template-columns:130px 1fr auto;
+      gap:26px;
+      align-items:center;
+      padding:28px;
+      border:1px solid var(--line);
+      border-radius:22px;
+      background:#fff;
+    }
+
+    .avatar{
+      width:130px;
+      height:130px;
+      border-radius:50%;
+      object-fit:cover;
+      background:var(--soft);
+      border:1px solid var(--line);
+      display:block;
+    }
+
+    .avatar-placeholder{
+      width:130px;
+      height:130px;
+      border-radius:50%;
+      background:var(--soft);
+      border:1px solid var(--line);
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:44px;
+      font-weight:800;
+      color:var(--miles-blue-dark);
+    }
+
+    .profile-name{
+      margin:0;
+      font-size:34px;
+      line-height:1.05;
+      letter-spacing:-1px;
+    }
+
+    .username{
+      margin-top:7px;
+      color:var(--miles-blue-dark);
+      font-weight:700;
+      font-size:15px;
+    }
+
+    .bio{
+      margin:15px 0 0;
+      line-height:1.55;
+      max-width:650px;
+      color:#333;
+    }
+
+    .location{
+      margin-top:10px;
+      color:var(--muted);
+      font-size:14px;
+    }
+
+    .profile-total{
+      text-align:right;
+      min-width:150px;
+    }
+
+    .profile-total .number{
+      font-size:40px;
+      font-weight:900;
+      line-height:1;
+      letter-spacing:-1.5px;
+    }
+
+    .profile-total .label{
+      margin-top:6px;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .section{
+      margin-top:22px;
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:24px;
+      background:#fff;
+    }
+
+    .section-title{
+      margin:0 0 18px;
+      font-size:20px;
+      letter-spacing:-.3px;
+    }
+
+    .level-box{
+      background:var(--soft);
+      border-radius:16px;
+      padding:20px;
+    }
+
+    .level-top{
+      display:flex;
+      justify-content:space-between;
+      gap:20px;
+      align-items:flex-end;
+      margin-bottom:12px;
+    }
+
+    .level-name{
+      font-size:25px;
+      font-weight:900;
+    }
+
+    .level-km{
+      color:var(--muted);
+      font-size:14px;
+      text-align:right;
+    }
+
+    .progress{
+      height:12px;
+      background:#ddd;
+      border-radius:99px;
+      overflow:hidden;
+    }
+
+    .progress-bar{
+      height:100%;
+      width:0;
+      background:var(--miles-blue);
+      border-radius:99px;
+      transition:width .3s ease;
+    }
+
+    .level-info{
+      display:flex;
+      justify-content:space-between;
+      gap:15px;
+      margin-top:10px;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .stats-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+    }
+
+    .stat{
+      background:var(--soft);
+      border-radius:15px;
+      padding:18px;
+    }
+
+    .stat-value{
+      font-size:26px;
+      font-weight:900;
+      line-height:1.1;
+    }
+
+    .stat-label{
+      margin-top:7px;
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    .pb-grid{
+      display:grid;
+      grid-template-columns:repeat(4,1fr);
+      gap:12px;
+    }
+
+    .pb-card{
+      background:var(--soft);
+      border-radius:15px;
+      padding:17px;
+    }
+
+    .pb-title{
+      font-weight:800;
+      font-size:14px;
+    }
+
+    .pb-time{
+      margin-top:8px;
+      font-size:23px;
+      font-weight:900;
+    }
+
+    .pb-empty{
+      margin-top:8px;
+      color:var(--muted);
+      font-size:13px;
+    }
+
+    .chart-wrap{
+      width:100%;
+      overflow-x:auto;
+    }
+
+    .chart{
+      min-width:650px;
+      display:flex;
+      align-items:flex-end;
+      gap:12px;
+      height:210px;
+      padding:10px 5px 0;
+      border-bottom:1px solid var(--line);
+    }
+
+    .bar-column{
+      flex:1;
+      min-width:60px;
+      height:100%;
+      display:flex;
+      flex-direction:column;
+      justify-content:flex-end;
+      align-items:center;
+    }
+
+    .bar-value{
+      font-size:11px;
+      color:var(--muted);
+      margin-bottom:5px;
+    }
+
+    .bar{
+      width:100%;
+      max-width:54px;
+      min-height:3px;
+      background:var(--miles-blue);
+      border-radius:7px 7px 0 0;
+    }
+
+    .bar-label{
+      margin-top:8px;
+      font-size:11px;
+      color:var(--muted);
+    }
+
+    .runs{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+    }
+
+    .run{
+      border:1px solid var(--line);
+      border-radius:15px;
+      padding:17px;
+      display:grid;
+      grid-template-columns:1fr auto;
+      gap:15px;
+      align-items:center;
+    }
+
+    .run-date{
+      font-size:13px;
+      color:var(--muted);
+    }
+
+    .run-distance{
+      font-size:22px;
+      font-weight:900;
+      margin-top:4px;
+    }
+
+    .run-note{
+      margin-top:6px;
+      color:#444;
+      font-size:14px;
+    }
+
+    .run-meta{
+      text-align:right;
+      color:var(--muted);
+      font-size:13px;
+      line-height:1.7;
+    }
+
+    .empty{
+      color:var(--muted);
+      text-align:center;
+      padding:20px;
+    }
+
+    @media(max-width:850px){
+      .profile-header{
+        grid-template-columns:90px 1fr;
+      }
+
+      .avatar,
+      .avatar-placeholder{
+        width:90px;
+        height:90px;
+      }
+
+      .profile-total{
+        grid-column:1/-1;
+        text-align:left;
+      }
+
+      .stats-grid{
+        grid-template-columns:repeat(2,1fr);
+      }
+
+      .pb-grid{
+        grid-template-columns:repeat(2,1fr);
+      }
+    }
+
+    @media(max-width:550px){
+      .topbar{
+        padding:0 16px;
+      }
+
+      main{
+        width:min(100% - 20px,1100px);
+        margin-top:20px;
+      }
+
+      .profile-header,
+      .section{
+        padding:18px;
+        border-radius:17px;
+      }
+
+      .profile-name{
+        font-size:27px;
+      }
+
+      .level-top{
+        align-items:flex-start;
+        flex-direction:column;
+        gap:5px;
+      }
+
+      .level-km{
+        text-align:left;
+      }
+
+      .run{
+        grid-template-columns:1fr;
+      }
+
+      .run-meta{
+        text-align:left;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-  <main style="max-width:900px;margin:60px auto;padding:20px;">
+<header class="topbar">
+  <a href="home.html" class="brand">MILES APART</a>
+  <a href="community.html" class="back-link">← Community</a>
+</header>
 
-    <h1 id="name">Profil wird geladen …</h1>
+<main>
 
-    <p id="username"></p>
+  <div id="loading" class="loading">
+    Profil wird geladen …
+  </div>
 
-    <p id="bio"></p>
-
-    <p id="location"></p>
-
-    <hr>
-
-    <h2>Laufdaten</h2>
-
-    <p>
-      Gesamt:
-      <strong id="totalKm">0</strong> km
+  <div id="error" class="error" style="display:none;">
+    <h2>Profil nicht gefunden</h2>
+    <p id="errorText">
+      Dieses Profil existiert nicht oder konnte nicht geladen werden.
     </p>
+  </div>
 
-    <div id="runs"></div>
+  <div id="profileContent" style="display:none;">
 
-  </main>
+    <!-- PROFILE HEADER -->
+    <section class="profile-header">
+
+      <div id="avatarContainer"></div>
+
+      <div>
+        <h1 id="displayName" class="profile-name"></h1>
+        <div id="username" class="username"></div>
+        <p id="bio" class="bio"></p>
+        <div id="location" class="location"></div>
+      </div>
+
+      <div class="profile-total">
+        <div id="totalKm" class="number">0</div>
+        <div class="label">Kilometer insgesamt</div>
+      </div>
+
+    </section>
 
 
-  <script>
+    <!-- LEVEL -->
+    <section class="section">
 
-    const SUPABASE_URL =
-      "https://orbrkdrsihsacsnprewf.supabase.co";
+      <h2 class="section-title">Level</h2>
 
-    const SUPABASE_KEY =
-      "sb_publishable_wc3w2fSuj8ItwiF6XBoQgw_HeW5_rNW";
+      <div class="level-box">
 
-    const supabaseClient =
-      window.supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_KEY
+        <div class="level-top">
+
+          <div>
+            <div id="levelName" class="level-name">
+              Level 0
+            </div>
+          </div>
+
+          <div id="levelKm" class="level-km">
+            0 km
+          </div>
+
+        </div>
+
+        <div class="progress">
+          <div id="progressBar" class="progress-bar"></div>
+        </div>
+
+        <div class="level-info">
+          <span id="levelStart">0 km</span>
+          <span id="levelNext">500 km</span>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- STATS -->
+    <section class="section">
+
+      <h2 class="section-title">Statistiken</h2>
+
+      <div class="stats-grid">
+
+        <div class="stat">
+          <div id="weekKm" class="stat-value">0 km</div>
+          <div class="stat-label">Diese Woche</div>
+        </div>
+
+        <div class="stat">
+          <div id="monthKm" class="stat-value">0 km</div>
+          <div class="stat-label">Dieser Monat</div>
+        </div>
+
+        <div class="stat">
+          <div id="runCount" class="stat-value">0</div>
+          <div class="stat-label">Läufe</div>
+        </div>
+
+        <div class="stat">
+          <div id="avgDistance" class="stat-value">0 km</div>
+          <div class="stat-label">Ø pro Lauf</div>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- PERSONAL BESTS -->
+    <section class="section">
+
+      <h2 class="section-title">Personal Bests</h2>
+
+      <div id="pbGrid" class="pb-grid"></div>
+
+    </section>
+
+
+    <!-- WEEK CHART -->
+    <section class="section">
+
+      <h2 class="section-title">Diese Woche</h2>
+
+      <div class="chart-wrap">
+        <div id="weekChart" class="chart"></div>
+      </div>
+
+    </section>
+
+
+    <!-- RUN HISTORY -->
+    <section class="section">
+
+      <h2 class="section-title">Laufhistorie</h2>
+
+      <div id="runs" class="runs"></div>
+
+    </section>
+
+  </div>
+
+</main>
+
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script>
+
+  const SUPABASE_URL =
+    "https://orbrkdrsihsacsnprewf.supabase.co";
+
+  const SUPABASE_PUBLISHABLE_KEY =
+    "sb_publishable_wc3w2fSuj8ItwiF6XBoQgw_HeW5_rNW";
+
+  const { createClient } =
+    supabase;
+
+  const db = createClient(
+    SUPABASE_URL,
+    SUPABASE_PUBLISHABLE_KEY
+  );
+
+
+  /*
+   * ---------------------------------------------------------
+   * LEVEL SYSTEM
+   * ---------------------------------------------------------
+   *
+   * Level 0   = 0–499 km
+   * Level 500 = 500–999 km
+   * Level 1000 = 1000–1499 km
+   * ...
+   * Level 10000 = 10000+ km
+   */
+
+  function getCurrentLevel(totalKm){
+
+    const total =
+      Math.max(0, Number(totalKm) || 0);
+
+    if(total < 500){
+      return 0;
+    }
+
+    return Math.min(
+      10000,
+      Math.floor(total / 500) * 500
+    );
+  }
+
+
+  function getNextLevel(totalKm){
+
+    const total =
+      Math.max(0, Number(totalKm) || 0);
+
+    const next =
+      Math.ceil((total + 0.000001) / 500) * 500;
+
+    if(next > 10000){
+      return null;
+    }
+
+    return next;
+  }
+
+
+  function formatKm(value){
+
+    return Number(value || 0)
+      .toLocaleString("de-DE", {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 1
+      });
+  }
+
+
+  function formatDate(date){
+
+    if(!date){
+      return "";
+    }
+
+    return new Date(date)
+      .toLocaleDateString("de-DE", {
+        day:"2-digit",
+        month:"2-digit",
+        year:"numeric"
+      });
+  }
+
+
+  function formatDuration(seconds){
+
+    const total =
+      Math.round(Number(seconds) || 0);
+
+    if(!total){
+      return "—";
+    }
+
+    const hours =
+      Math.floor(total / 3600);
+
+    const minutes =
+      Math.floor((total % 3600) / 60);
+
+    const secs =
+      total % 60;
+
+    if(hours > 0){
+      return `${hours}h ${String(minutes).padStart(2,"0")}m`;
+    }
+
+    if(minutes > 0){
+      return `${minutes}m ${String(secs).padStart(2,"0")}s`;
+    }
+
+    return `${secs}s`;
+  }
+
+
+  function formatPace(seconds, distance){
+
+    const sec =
+      Number(seconds) || 0;
+
+    const km =
+      Number(distance) || 0;
+
+    if(!sec || !km){
+      return "—";
+    }
+
+    const pace =
+      sec / km;
+
+    const minutes =
+      Math.floor(pace / 60);
+
+    const remaining =
+      Math.round(pace % 60);
+
+    return `${minutes}:${String(
+      remaining
+    ).padStart(2,"0")} min/km`;
+  }
+
+
+  function escapeHtml(value){
+
+    return String(value || "")
+      .replaceAll("&","&amp;")
+      .replaceAll("<","&lt;")
+      .replaceAll(">","&gt;")
+      .replaceAll('"',"&quot;")
+      .replaceAll("'","&#039;");
+  }
+
+
+  /*
+   * ---------------------------------------------------------
+   * DATE HELPERS
+   * ---------------------------------------------------------
+   */
+
+  function startOfWeek(date){
+
+    const d = new Date(date);
+
+    const day = d.getDay();
+
+    const diff =
+      day === 0 ? -6 : 1 - day;
+
+    d.setDate(d.getDate() + diff);
+
+    d.setHours(0,0,0,0);
+
+    return d;
+  }
+
+
+  function startOfMonth(date){
+
+    const d = new Date(date);
+
+    d.setDate(1);
+
+    d.setHours(0,0,0,0);
+
+    return d;
+  }
+
+
+  /*
+   * ---------------------------------------------------------
+   * PB DEFINITIONS
+   * ---------------------------------------------------------
+   */
+
+  const PB_CATEGORIES = [
+    {
+      key:"5K",
+      label:"5K"
+    },
+    {
+      key:"10K",
+      label:"10K"
+    },
+    {
+      key:"HALF",
+      label:"Halbmarathon"
+    },
+    {
+      key:"MARATHON",
+      label:"Marathon"
+    },
+    {
+      key:"50K",
+      label:"50K"
+    },
+    {
+      key:"100K",
+      label:"100K"
+    },
+    {
+      key:"100+",
+      label:"100+ KM"
+    }
+  ];
+
+
+  /*
+   * ---------------------------------------------------------
+   * LOAD PROFILE
+   * ---------------------------------------------------------
+   */
+
+  async function loadProfile(){
+
+    const params =
+      new URLSearchParams(
+        window.location.search
       );
 
+    const requestedUsername =
+      params.get("username");
 
-    async function loadUser(){
+    if(!requestedUsername){
 
-      const params =
-        new URLSearchParams(
-          window.location.search
-        );
+      showError(
+        "Kein Benutzername in der URL angegeben."
+      );
 
-      const username =
-        params.get("username");
-
-
-      if(!username){
-
-        document.getElementById("name")
-          .textContent =
-          "Kein Username angegeben.";
-
-        return;
-
-      }
+      return;
+    }
 
 
-      const {
-        data: profile,
-        error
-      } =
-        await supabaseClient
-          .from("profiles")
-          .select(
-            "id,display_name,username,avatar_url,bio,location"
-          )
-          .ilike(
-            "username",
-            username
-          )
-          .maybeSingle();
+    /*
+     * PROFILE
+     */
+
+    const {
+      data: profile,
+      error: profileError
+    } = await db
+      .from("profiles")
+      .select(`
+        id,
+        display_name,
+        username,
+        avatar_url,
+        bio,
+        location
+      `)
+      .ilike(
+        "username",
+        requestedUsername
+      )
+      .maybeSingle();
 
 
-      if(error){
+    if(profileError){
 
-        console.error(error);
+      console.error(profileError);
 
-        document.getElementById("name")
-          .textContent =
-          "Fehler beim Laden.";
+      showError(
+        "Das Profil konnte nicht geladen werden."
+      );
 
-        return;
-
-      }
-
-
-      if(!profile){
-
-        document.getElementById("name")
-          .textContent =
-          "User nicht gefunden.";
-
-        return;
-
-      }
+      return;
+    }
 
 
-      document.getElementById("name")
-        .textContent =
-        profile.display_name ||
-        profile.username ||
-        "Miles Apart User";
+    if(!profile){
+
+      showError(
+        "Dieses Profil existiert nicht."
+      );
+
+      return;
+    }
 
 
-      document.getElementById("username")
-        .textContent =
-        profile.username
-          ? "@" + profile.username
-          : "";
+    /*
+     * RUNS
+     */
 
-
-      document.getElementById("bio")
-        .textContent =
-        profile.bio || "";
-
-
-      document.getElementById("location")
-        .textContent =
-        profile.location
-          ? "📍 " + profile.location
-          : "";
-
-
-      const {
-        data: runs,
-        error: runsError
-      } =
-        await supabaseClient
-          .from("runs")
-          .select(
-            "id,run_date,distance_km,duration_seconds,note,run_type,best_time_category"
-          )
-          .eq(
-            "user_id",
-            profile.id
-          )
-          .order(
-            "run_date",
-            {
-              ascending:false
-            }
-          );
-
-
-      if(runsError){
-
-        console.error(runsError);
-
-        return;
-
-      }
-
-
-      const total =
-        (runs || []).reduce(
-          (sum,run) =>
-            sum +
-            (
-              Number(
-                run.distance_km
-              ) || 0
-            ),
-          0
-        );
-
-
-      document.getElementById("totalKm")
-        .textContent =
-        total.toLocaleString(
-          "de-DE",
-          {
-            maximumFractionDigits:2
-          }
-        );
-
-
-      const runsContainer =
-        document.getElementById(
-          "runs"
-        );
-
-
-      runsContainer.innerHTML =
-        "";
-
-
-      (runs || []).forEach(
-        run => {
-
-          const item =
-            document.createElement(
-              "div"
-            );
-
-
-          item.style.padding =
-            "15px 0";
-
-          item.style.borderBottom =
-            "1px solid #ddd";
-
-
-          item.textContent =
-            `${run.run_date} · ${
-              run.distance_km
-            } km · ${
-              run.run_type || "Run"
-            }`;
-
-
-          runsContainer.appendChild(
-            item
-          );
-
+    const {
+      data: runs,
+      error: runsError
+    } = await db
+      .from("runs")
+      .select(`
+        id,
+        run_date,
+        distance_km,
+        duration_seconds,
+        note,
+        run_type,
+        best_time_category,
+        start_time,
+        end_time
+      `)
+      .eq(
+        "user_id",
+        profile.id
+      )
+      .order(
+        "run_date",
+        {
+          ascending:false
         }
       );
+
+
+    if(runsError){
+
+      console.error(runsError);
+
+      showError(
+        "Die Läufe konnten nicht geladen werden."
+      );
+
+      return;
+    }
+
+
+    const safeRuns =
+      runs || [];
+
+
+    renderProfile(
+      profile,
+      safeRuns
+    );
+
+  }
+
+
+  /*
+   * ---------------------------------------------------------
+   * RENDER PROFILE
+   * ---------------------------------------------------------
+   */
+
+  function renderProfile(
+    profile,
+    runs
+  ){
+
+    document.title =
+      `${profile.display_name || profile.username} – Miles Apart`;
+
+
+    /*
+     * HEADER
+     */
+
+    const displayName =
+      profile.display_name ||
+      profile.username ||
+      "Runner";
+
+
+    document
+      .getElementById("displayName")
+      .textContent =
+      displayName;
+
+
+    document
+      .getElementById("username")
+      .textContent =
+      profile.username
+        ? `@${profile.username}`
+        : "";
+
+
+    document
+      .getElementById("bio")
+      .textContent =
+      profile.bio || "";
+
+
+    if(profile.location){
+
+      document
+        .getElementById("location")
+        .textContent =
+        `📍 ${profile.location}`;
+
+    }else{
+
+      document
+        .getElementById("location")
+        .textContent =
+        "";
 
     }
 
 
-    loadUser();
+    /*
+     * AVATAR
+     */
 
-  </script>
+    const avatarContainer =
+      document.getElementById(
+        "avatarContainer"
+      );
+
+
+    if(profile.avatar_url){
+
+      avatarContainer.innerHTML = `
+        <img
+          class="avatar"
+          src="${escapeHtml(profile.avatar_url)}"
+          alt="${escapeHtml(displayName)}"
+        />
+      `;
+
+    }else{
+
+      const firstLetter =
+        displayName
+          .charAt(0)
+          .toUpperCase();
+
+      avatarContainer.innerHTML = `
+        <div class="avatar-placeholder">
+          ${escapeHtml(firstLetter)}
+        </div>
+      `;
+
+    }
+
+
+    /*
+     * TOTAL KM
+     */
+
+    const totalKm =
+      runs.reduce(
+        (sum, run) =>
+          sum +
+          (Number(run.distance_km) || 0),
+        0
+      );
+
+
+    document
+      .getElementById("totalKm")
+      .textContent =
+      formatKm(totalKm);
+
+
+    /*
+     * LEVEL
+     */
+
+    renderLevel(totalKm);
+
+
+    /*
+     * STATS
+     */
+
+    renderStats(runs);
+
+
+    /*
+     * PBs
+     */
+
+    renderPBs(runs);
+
+
+    /*
+     * WEEK CHART
+     */
+
+    renderWeekChart(runs);
+
+
+    /*
+     * RUN HISTORY
+     */
+
+    renderRuns(runs);
+
+
+    /*
+     * SHOW PAGE
+     */
+
+    document
+      .getElementById("loading")
+      .style.display =
+      "none";
+
+    document
+      .getElementById("profileContent")
+      .style.display =
+      "block";
+
+  }
+
+
+  /*
+   * ---------------------------------------------------------
+   * LEVEL
+   * ---------------------------------------------------------
+   */
+
+  function renderLevel(totalKm){
+
+    const current =
+      getCurrentLevel(totalKm);
+
+    const next =
+      getNextLevel(totalKm);
+
+
+    let progress = 0;
+
+    if(current >= 10000){
+
+      progress = 100;
+
+    }else{
+
+      progress =
+        ((totalKm - current) / 500) * 100;
+
+      progress =
+        Math.max(
+          0,
+          Math.min(100, progress)
+        );
+
+    }
+
+
+    document
+      .getElementById("levelName")
+      .textContent =
+      `Level ${current.toLocaleString("de-DE")}`;
+
+
+    document
+      .getElementById("levelKm")
+      .textContent =
+      `${formatKm(totalKm)} km`;
+
+
+    document
+      .getElementById("progressBar")
+      .style.width =
+      `${progress}%`;
+
+
+    document
+      .getElementById("levelStart")
+      .textContent =
+      `${formatKm(current)} km`;
+
+
+    document
+      .getElementById("levelNext")
+      .textContent =
+      next
+        ? `${formatKm(next)} km`
+        : "MAX LEVEL";
+
+  }
+
+
+  /*
+   * ---------------------------------------------------------
+   * STATS
+   * ---------------------------------------------------------
+   */
+
+  function renderStats(runs){
+
+    const now =
+      new Date();
+
+
+    const weekStart =
+      startOfWeek(now);
+
+
+    const monthStart =
+      startOfMonth(now);
+
+
+    let weekKm = 0;
+
+    let monthKm = 0;
+
+
+    runs.forEach(run => {
+
+      const date =
+        new Date(run.run_date);
+
+
+      const distance =
+        Number(run.distance_km) || 0;
+
+
+      if(date >= weekStart){
+
+        weekKm += distance;
+
+      }
+
+
+      if(date >= monthStart){
+
+        monthKm += distance;
+
+      }
+
+    });
+
+
+    const avg =
+      runs.length
+        ? runs.reduce(
+            (sum, run) =>
+              sum +
+              (Number(run.distance_km) || 0),
+            0
+          ) / runs.length
+        : 0;
+
+
+    document
+      .getElementById("weekKm")
+      .textContent =
+      `${formatKm(weekKm)} km`;
+
+
+    document
+      .getElementById("monthKm")
+      .textContent =
+      `${formatKm(monthKm)} km`;
+
+
+    document
+      .getElementById("runCount")
+      .textContent =
+      runs.length;
+
+
+    document
+      .getElementById("avgDistance")
+      .textContent =
+      `${formatKm(avg)} km`;
+
+  }
+
+
+  /*
+   * ---------------------------------------------------------
+   * PERSONAL BESTS
+   * ---------------------------------------------------------
+   */
+
+  function renderPBs(runs){
+
+    const container =
+      document.getElementById("pbGrid");
+
+
+    container.innerHTML = "";
+
+
+    PB_CATEGORIES.forEach(category => {
+
+      const matchingRuns =
+        runs.filter(
+          run =>
+            String(
+              run.best_time_category || ""
+            ).toUpperCase() ===
+            category.key
+        );
+
+
+      let bestRun = null;
+
+
+      matchingRuns.forEach(run => {
+
+        const duration =
+          Number(
+            run.duration_seconds
+          ) || 0;
+
+
+        if(!duration){
+          return;
+        }
+
+
+        if(
+          !bestRun ||
+          duration <
+          Number(bestRun.duration_seconds)
+        ){
+
+          bestRun = run;
+
+        }
+
+      });
+
+
+      const card =
+        document.createElement("div");
+
+
+      card.className =
+        "pb-card";
+
+
+      if(bestRun){
+
+        card.innerHTML = `
+          <div class="pb-title">
+            ${escapeHtml(category.label)}
+          </div>
+
+          <div class="pb-time">
+            ${formatDuration(
+              bestRun.duration_seconds
+            )}
+          </div>
+        `;
+
+      }else{
+
+        card.innerHTML = `
+          <div class="pb-title">
+            ${escapeHtml(category.label)}
+          </div>
+
+          <div class="pb-empty">
+            Noch kein Eintrag
+          </div>
+        `;
+
+      }
+
+
+      container.appendChild(card);
+
+    });
+
+  }
+
+
+  /*
+   * ---------------------------------------------------------
+   * WEEK CHART
+   * ---------------------------------------------------------
+   */
+
+  function renderWeekChart(runs){
+
+    const chart =
+      document.getElementById(
+        "weekChart"
+      );
+
+
+    chart.innerHTML = "";
+
+
+    const today =
+      new Date();
+
+
+    const monday =
+      startOfWeek(today);
+
+
+    const days = [];
+
+
+    for(let i = 0; i < 7; i++){
+
+      const day =
+        new Date(monday);
+
+      day.setDate(
+        monday.getDate() + i
+      );
+
+      days.push(day);
+
+    }
+
+
+    const values =
+      days.map(day => {
+
+        const next =
+          new Date(day);
+
+        next.setDate(
+          day.getDate() + 1
+        );
+
+
+        return runs
+          .filter(run => {
+
+            const date =
+              new Date(run.run_date);
+
+            return (
+              date >= day &&
+              date < next
+            );
+
+          })
+          .reduce(
+            (sum, run) =>
+              sum +
+              (Number(run.distance_km) || 0),
+            0
+          );
+
+      });
+
+
+    const max =
+      Math.max(
+        ...values,
+        1
+      );
+
+
+    const labels = [
+      "Mo",
+      "Di",
+      "Mi",
+      "Do",
+      "Fr",
+      "Sa",
+      "So"
+    ];
+
+
+    values.forEach(
+      (value, index) => {
+
+        const column =
+          document.createElement("div");
+
+
+        column.className =
+          "bar-column";
+
+
+        const valueLabel =
+          document.createElement("div");
+
+        valueLabel.className =
+          "bar-value";
+
+        valueLabel.textContent =
+          value > 0
+            ? `${formatKm(value)} km`
+            : "";
+
+
+        const bar =
+          document.createElement("div");
+
+        bar.className =
+          "bar";
+
+
+        bar.style.height =
+          `${Math.max(
+            value > 0 ? 5 : 2,
+            (value / max) * 150
+          )}px`;
+
+
+        const label =
+          document.createElement("div");
+
+        label.className =
+          "bar-label";
+
+        label.textContent =
+          labels[index];
+
+
+        column.appendChild(
+          valueLabel
+        );
+
+        column.appendChild(
+          bar
+        );
+
+        column.appendChild(
+          label
+        );
+
+
+        chart.appendChild(
+          column
+        );
+
+      }
+    );
+
+  }
+
+
+  /*
+   * ---------------------------------------------------------
+   * RUN HISTORY
+   * ---------------------------------------------------------
+   */
+
+  function renderRuns(runs){
+
+    const container =
+      document.getElementById("runs");
+
+
+    container.innerHTML = "";
+
+
+    if(!runs.length){
+
+      container.innerHTML = `
+        <div class="empty">
+          Noch keine öffentlichen Läufe vorhanden.
+        </div>
+      `;
+
+      return;
+    }
+
+
+    runs.forEach(run => {
+
+      const item =
+        document.createElement("div");
+
+
+      item.className =
+      "run";
+
+
+      const distance =
+        Number(run.distance_km) || 0;
+
+
+      const left =
+        document.createElement("div");
+
+
+      left.innerHTML = `
+        <div class="run-date">
+          ${escapeHtml(
+            formatDate(run.run_date)
+          )}
+        </div>
+
+        <div class="run-distance">
+          ${formatKm(distance)} km
+        </div>
+
+        ${
+          run.note
+            ? `
+              <div class="run-note">
+                ${escapeHtml(run.note)}
+              </div>
+            `
+            : ""
+        }
+      `;
+
+
+      const right =
+        document.createElement("div");
+
+
+      right.className =
+        "run-meta";
+
+
+      right.innerHTML = `
+        <div>
+          ${formatDuration(
+            run.duration_seconds
+          )}
+        </div>
+
+        <div>
+          ${formatPace(
+            run.duration_seconds,
+            distance
+          )}
+        </div>
+
+        ${
+          run.run_type
+            ? `
+              <div>
+                ${escapeHtml(
+                  run.run_type
+                )}
+              </div>
+            `
+            : ""
+        }
+      `;
+
+
+      item.appendChild(left);
+      item.appendChild(right);
+
+
+      container.appendChild(item);
+
+    });
+
+  }
+
+
+  /*
+   * ---------------------------------------------------------
+   * ERROR
+   * ---------------------------------------------------------
+   */
+
+  function showError(message){
+
+    document
+      .getElementById("loading")
+      .style.display =
+      "none";
+
+
+    document
+      .getElementById("error")
+      .style.display =
+      "block";
+
+
+    document
+      .getElementById("errorText")
+      .textContent =
+      message;
+
+  }
+
+
+  /*
+   * ---------------------------------------------------------
+   * START
+   * ---------------------------------------------------------
+   */
+
+  loadProfile();
+
+</script>
 
 </body>
 </html>
