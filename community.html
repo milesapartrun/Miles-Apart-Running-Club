@@ -62,6 +62,11 @@
     }
 
 
+    .login-button[hidden] {
+      display: none !important;
+    }
+
+
     /* =====================================================
        MILES APART COMMUNITY
     ===================================================== */
@@ -1084,7 +1089,7 @@
           id="loginButton"
           class="login-button"
           type="button"
-          style="display:none"
+          hidden
         >
           Anmelden
         </button>
@@ -1702,15 +1707,32 @@
       data,
       error
     } =
-      await supabaseClient.auth.getSession();
+      await supabaseClient.auth.getUser();
 
 
     if (error) {
-      throw error;
+
+      currentUser =
+        null;
+
+      currentProfile =
+        null;
+
+      loginButton.hidden =
+        false;
+
+      openPostButton.textContent =
+        "Anmelden";
+
+      postAuthorName.textContent =
+        "Anmelden, um einen Post zu erstellen";
+
+      return true;
+
     }
 
 
-    if (!data.session) {
+    if (!data.user) {
 
       currentUser =
         null;
@@ -1719,8 +1741,10 @@
         null;
 
 
-      loginButton.style.display =
-        "block";
+      /* AUSGELOGGT: ANMELDEN ANZEIGEN */
+
+      loginButton.hidden =
+        false;
 
 
       openPostButton.textContent =
@@ -1737,13 +1761,13 @@
 
 
     currentUser =
-      data.session.user;
+      data.user;
 
 
-    /* EINGELOGGT: OBEN RECHTS NICHTS */
+    /* EINGELOGGT: OBEN RECHTS KOMPLETT LEER */
 
-    loginButton.style.display =
-      "none";
+    loginButton.hidden =
+      true;
 
 
     openPostButton.textContent =
@@ -2103,8 +2127,6 @@
 
     wrapper.innerHTML = `
 
-      <!-- POST HEADER -->
-
       <div
         class="ma-post-header"
       >
@@ -2156,8 +2178,6 @@
       </div>
 
 
-      <!-- POST TEXT -->
-
       <div
         class="ma-post-copy"
       >
@@ -2166,8 +2186,6 @@
         )}
       </div>
 
-
-      <!-- ACTIONS -->
 
       <div
         class="ma-post-actions"
@@ -2232,8 +2250,6 @@
 
       </div>
 
-
-      <!-- COMMENTS -->
 
       <div
         class="ma-comments"
@@ -3213,21 +3229,19 @@
         null;
 
 
-      /*
-       * NUR die Anzeige oben rechts aktualisieren.
-       * Eingeloggt = nichts.
-       * Ausgeloggt = Anmelden.
-       */
-
       if (currentUser) {
 
-        loginButton.style.display =
-          "none";
+        /* EINGELOGGT → NICHTS */
+
+        loginButton.hidden =
+          true;
 
       } else {
 
-        loginButton.style.display =
-          "block";
+        /* NICHT EINGELOGGT → ANMELDEN */
+
+        loginButton.hidden =
+          false;
 
       }
 
