@@ -98,13 +98,21 @@
       border-top: 1px solid rgba(0,0,0,.08);
     }
 
-    .dark .leaderboard-row {
+    .night-owls .leaderboard-row {
       border-top-color: rgba(255,255,255,.12);
     }
 
     .leaderboard-position {
       font-weight: 800;
       opacity: .55;
+      font-size: 18px;
+      text-align: center;
+    }
+
+    .leaderboard-medal {
+      opacity: 1;
+      font-size: 22px;
+      line-height: 1;
     }
 
     .leaderboard-name {
@@ -135,8 +143,16 @@
       font-size: 14px;
     }
 
+    .monthly-info {
+      margin-bottom: 28px;
+    }
+
+    .monthly-info p {
+      margin-bottom: 8px;
+    }
+
     /* =====================================================
-       EARLY BIRD — HELL / TAG
+       EARLY BIRD — HELL
        ===================================================== */
 
     .card.early-bird {
@@ -154,7 +170,7 @@
     }
 
     /* =====================================================
-       NIGHT OWLS — DUNKEL / NACHT
+       NIGHT OWLS — DUNKEL
        ===================================================== */
 
     .card.night-owls {
@@ -168,6 +184,16 @@
 
     .card.night-owls .small {
       color: #aaa;
+    }
+
+    /* Lesbare dunkle Schrift für Badge und Button auf Night Owls */
+
+    .card.night-owls .badge {
+      color: #111;
+    }
+
+    .card.night-owls .btn {
+      color: #111;
     }
 
   </style>
@@ -243,7 +269,9 @@
       </strong>
 
       <div class="mini-progress">
+
         <i></i>
+
       </div>
 
       <p
@@ -294,7 +322,43 @@
           id="currentMonth"
           class="month-label"
         >
-          Aktueller Monat
+          September 2026
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         MONATLICHE CHALLENGES
+         ===================================================== -->
+
+    <div class="section monthly-info">
+
+      <div class="card">
+
+        <div class="section-head">
+
+          <h2>
+            Monatliche Challenges
+          </h2>
+
+          <span class="badge lime">
+            LIVE
+          </span>
+
+        </div>
+
+        <p class="muted">
+          Die Kilometer werden immer für den aktuellen
+          Kalendermonat gezählt.
+        </p>
+
+        <p class="small muted">
+          Am ersten Tag des nächsten Monats beginnt die
+          Kilometerwertung automatisch wieder bei null.
+          Es gibt kein Kilometerziel.
         </p>
 
       </div>
@@ -481,43 +545,6 @@
           </div>
 
         </div>
-
-      </div>
-
-    </div>
-
-
-    <!-- =====================================================
-         INFO
-         ===================================================== -->
-
-    <div class="section">
-
-      <div class="card">
-
-        <div class="section-head">
-
-          <h2>
-            Monatliche Challenges
-          </h2>
-
-          <span class="badge lime">
-            LIVE
-          </span>
-
-        </div>
-
-        <p class="muted">
-          Die Kilometer werden immer für den aktuellen
-          Kalendermonat gezählt.
-        </p>
-
-        <p class="small muted">
-          Early Bird zählt Läufe von 04:00 bis 09:00 Uhr.
-          Night Owls zählt Läufe von 17:00 bis 00:00 Uhr.
-          Am ersten Tag des nächsten Monats beginnt die
-          Kilometerwertung automatisch wieder bei null.
-        </p>
 
       </div>
 
@@ -895,7 +922,7 @@
 
 
   /* =========================================================
-     ZEITFENSTER DER CHALLENGES
+     ZEITFENSTER
      ========================================================= */
 
   function isWithinChallengeTime(
@@ -913,10 +940,6 @@
       hour * 60 +
       minute;
 
-
-    /* Early Bird:
-       04:00 bis 09:00
-    */
 
     if (
       challengeId ===
@@ -936,10 +959,6 @@
 
     }
 
-
-    /* Night Owls:
-       17:00 bis 00:00
-    */
 
     if (
       challengeId ===
@@ -1140,8 +1159,6 @@
           }
 
 
-          /* Nur aktueller Kalendermonat */
-
           if (
             runDate < start ||
             runDate >= end
@@ -1149,8 +1166,6 @@
             return;
           }
 
-
-          /* Nur passendes Zeitfenster */
 
           if (
             !isWithinChallengeTime(
@@ -1230,6 +1245,23 @@
               index
             ) => {
 
+              let position;
+
+              if (index === 0) {
+                position =
+                  '<span class="leaderboard-medal">🥇</span>';
+              } else if (index === 1) {
+                position =
+                  '<span class="leaderboard-medal">🥈</span>';
+              } else if (index === 2) {
+                position =
+                  '<span class="leaderboard-medal">🥉</span>';
+              } else {
+                position =
+                  index + 1;
+              }
+
+
               const name =
                 names[
                   runner.userId
@@ -1241,7 +1273,7 @@
                 <div class="leaderboard-row">
 
                   <div class="leaderboard-position">
-                    ${index + 1}
+                    ${position}
                   </div>
 
                   <div class="leaderboard-name">
