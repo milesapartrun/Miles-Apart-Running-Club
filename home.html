@@ -292,7 +292,7 @@ button,input,textarea,select{font-family:inherit}
   .running-level-emoji{
     width:34px;
     height:34px;
-    font-size:22px;
+    font-size:23px;
   }
 
   .running-level-km{
@@ -301,11 +301,12 @@ button,input,textarea,select{font-family:inherit}
 
   .running-levels-meta{
     align-items:flex-start;
+    margin-top:3px;
   }
 
   .running-level-progress,
   .running-level-next{
-    font-size:8px;
+    font-size:9px;
   }
 }
 
@@ -3776,11 +3777,6 @@ function renderRunningLevels(yearKm){
       "🏁 Alle Lauflevel bis 10.000 km erreicht";
   }
 
-  /*
-   * Falls noch kein Level erreicht wurde, bleibt alles grau.
-   * Sobald z. B. 500 km erreicht wurden, werden alle Level
-   * bis einschließlich 500 km hell dargestellt.
-   */
   if(reachedCount>0){
     const reachedLevels=[
       ...runningLevelsTrack.querySelectorAll(".running-level.reached")
