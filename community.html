@@ -312,6 +312,85 @@
 
 
     /* =====================================================
+       POST IMAGE
+    ===================================================== */
+
+    .ma-post-image {
+      display: block !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      max-height: 650px !important;
+      margin: 0 0 25px 0 !important;
+      border-radius: 14px !important;
+      object-fit: cover !important;
+      box-sizing: border-box !important;
+    }
+
+
+    /* =====================================================
+       IMAGE UPLOAD
+    ===================================================== */
+
+    .ma-image-upload {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+
+    .ma-image-upload-label {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: fit-content;
+      min-height: 44px;
+      padding: 0 16px;
+      border: 1px solid #d8d8d8;
+      background: #fff;
+      color: #111;
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      box-sizing: border-box;
+    }
+
+
+    .ma-image-upload-label:hover {
+      border-color: #18b8c7;
+      color: #18b8c7;
+    }
+
+
+    .ma-image-upload-input {
+      display: none;
+    }
+
+
+    .ma-image-preview {
+      display: none;
+      width: 100%;
+      max-width: 420px;
+      max-height: 320px;
+      object-fit: cover;
+      border-radius: 14px;
+      border: 1px solid #eee;
+    }
+
+
+    .ma-image-preview.visible {
+      display: block;
+    }
+
+
+    .ma-image-upload-name {
+      color: #777;
+      font-size: 14px;
+      line-height: 1.4;
+    }
+
+
+    /* =====================================================
        ACTION BAR
     ===================================================== */
 
@@ -593,6 +672,277 @@
 
     .ma-comment-submit:hover {
       background: #18b8c7 !important;
+    }
+
+
+    /* =====================================================
+       COMMUNITY RUNS
+    ===================================================== */
+
+    .ma-community-runs {
+      width: 100% !important;
+      margin: 0 0 28px 0 !important;
+      padding: 28px !important;
+      box-sizing: border-box !important;
+    }
+
+
+    .ma-community-runs-head {
+      display: flex !important;
+      align-items: flex-start !important;
+      justify-content: space-between !important;
+      gap: 20px !important;
+      margin: 0 0 22px 0 !important;
+    }
+
+
+    .ma-community-runs-title {
+      margin: 0 !important;
+      color: #111 !important;
+      font-size: 28px !important;
+      line-height: 1.2 !important;
+      font-weight: 800 !important;
+    }
+
+
+    .ma-community-runs-subtitle {
+      margin: 7px 0 0 0 !important;
+      color: #777 !important;
+      font-size: 15px !important;
+      line-height: 1.45 !important;
+    }
+
+
+    .ma-run-create-button {
+      flex: 0 0 auto !important;
+    }
+
+
+    .ma-run-list {
+      width: 100% !important;
+      display: grid !important;
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      gap: 18px !important;
+    }
+
+
+    .ma-run-card {
+      width: 100% !important;
+      padding: 22px !important;
+      border: 1px solid #e8e8e8 !important;
+      box-sizing: border-box !important;
+      background: #fff !important;
+    }
+
+
+    .ma-run-card-top {
+      display: flex !important;
+      align-items: flex-start !important;
+      justify-content: space-between !important;
+      gap: 15px !important;
+      margin-bottom: 16px !important;
+    }
+
+
+    .ma-run-card-title {
+      margin: 0 !important;
+      color: #111 !important;
+      font-size: 22px !important;
+      line-height: 1.25 !important;
+      font-weight: 800 !important;
+    }
+
+
+    .ma-run-card-author {
+      margin: 5px 0 0 0 !important;
+      color: #777 !important;
+      font-size: 14px !important;
+    }
+
+
+    .ma-run-card-icon {
+      font-size: 28px !important;
+      line-height: 1 !important;
+    }
+
+
+    .ma-run-details {
+      display: grid !important;
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      gap: 12px !important;
+      margin-bottom: 18px !important;
+    }
+
+
+    .ma-run-detail {
+      padding: 12px !important;
+      background: #f7fafa !important;
+      box-sizing: border-box !important;
+    }
+
+
+    .ma-run-detail-label {
+      display: block !important;
+      margin-bottom: 4px !important;
+      color: #888 !important;
+      font-size: 12px !important;
+      text-transform: uppercase !important;
+      letter-spacing: .05em !important;
+      font-weight: 700 !important;
+    }
+
+
+    .ma-run-detail-value {
+      display: block !important;
+      color: #111 !important;
+      font-size: 15px !important;
+      line-height: 1.3 !important;
+      font-weight: 800 !important;
+      overflow-wrap: anywhere !important;
+    }
+
+
+    .ma-run-participants {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      gap: 12px !important;
+      padding-top: 15px !important;
+      border-top: 1px solid #eee !important;
+    }
+
+
+    .ma-run-participant-count {
+      color: #555 !important;
+      font-size: 14px !important;
+      font-weight: 700 !important;
+    }
+
+
+    .ma-run-actions {
+      display: flex !important;
+      align-items: center !important;
+      gap: 8px !important;
+    }
+
+
+    .ma-run-join {
+      min-height: 42px !important;
+      border: 0 !important;
+      background: #18b8c7 !important;
+      color: #fff !important;
+      padding: 0 16px !important;
+      font-size: 14px !important;
+      font-weight: 800 !important;
+      cursor: pointer !important;
+    }
+
+
+    .ma-run-join.joined {
+      background: #111 !important;
+    }
+
+
+    .ma-run-delete {
+      min-height: 42px !important;
+      border: 0 !important;
+      background: transparent !important;
+      color: #b44 !important;
+      padding: 0 8px !important;
+      font-size: 14px !important;
+      font-weight: 800 !important;
+      cursor: pointer !important;
+    }
+
+
+    .ma-run-empty {
+      width: 100% !important;
+      padding: 28px 0 !important;
+      color: #777 !important;
+      font-size: 16px !important;
+      text-align: center !important;
+      box-sizing: border-box !important;
+    }
+
+
+    /* =====================================================
+       RUN FORM
+    ===================================================== */
+
+    .ma-run-form {
+      display: none;
+      width: 100%;
+      margin-bottom: 22px;
+      padding: 22px;
+      border: 1px solid #e5e5e5;
+      background: #fafafa;
+      box-sizing: border-box;
+    }
+
+
+    .ma-run-form.open {
+      display: block;
+    }
+
+
+    .ma-run-form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+
+    .ma-run-form-field {
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+
+
+    .ma-run-form-field.full {
+      grid-column: 1 / -1;
+    }
+
+
+    .ma-run-form-label {
+      color: #111;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+
+    .ma-run-form-input {
+      width: 100%;
+      height: 50px;
+      padding: 0 13px;
+      border: 1px solid #d8d8d8;
+      outline: none;
+      background: #fff;
+      color: #111;
+      font: inherit;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+
+    .ma-run-form-input:focus {
+      border-color: #18b8c7;
+    }
+
+
+    .ma-run-form-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+
+    .ma-run-form-message {
+      color: #18b8c7;
+      font-size: 14px;
+      font-weight: 700;
     }
 
 
@@ -915,6 +1265,74 @@
       }
 
 
+      .ma-community-runs {
+        padding: 24px !important;
+        margin-bottom: 22px !important;
+      }
+
+
+      .ma-community-runs-head {
+        flex-direction: column !important;
+      }
+
+
+      .ma-run-create-button {
+        width: 100% !important;
+      }
+
+
+      .ma-run-list {
+        grid-template-columns: 1fr !important;
+      }
+
+
+      .ma-run-form {
+        padding: 18px !important;
+      }
+
+
+      .ma-run-form-grid {
+        grid-template-columns: 1fr !important;
+      }
+
+
+      .ma-run-form-field.full {
+        grid-column: auto !important;
+      }
+
+
+      .ma-run-form-actions {
+        flex-direction: column !important;
+        align-items: stretch !important;
+      }
+
+
+      .ma-run-form-actions .btn {
+        width: 100% !important;
+      }
+
+
+      .ma-run-details {
+        grid-template-columns: 1fr !important;
+      }
+
+
+      .ma-run-participants {
+        align-items: flex-start !important;
+        flex-direction: column !important;
+      }
+
+
+      .ma-run-actions {
+        width: 100% !important;
+      }
+
+
+      .ma-run-join {
+        flex: 1 1 auto !important;
+      }
+
+
       .ma-message-overlay {
         align-items: flex-end !important;
         padding: 10px !important;
@@ -1144,6 +1562,39 @@
         ></textarea>
 
 
+        <div class="ma-image-upload">
+
+          <label
+            class="ma-image-upload-label"
+            for="postImage"
+          >
+            📸 Bild hinzufügen
+          </label>
+
+
+          <input
+            id="postImage"
+            class="ma-image-upload-input"
+            type="file"
+            accept="image/*"
+          >
+
+
+          <img
+            id="postImagePreview"
+            class="ma-image-preview"
+            alt="Bildvorschau"
+          >
+
+
+          <div
+            id="postImageName"
+            class="ma-image-upload-name"
+          ></div>
+
+        </div>
+
+
         <div
           class="post-form-actions"
           style="
@@ -1268,6 +1719,226 @@
       </div>
 
     </div>
+
+
+    <!-- =================================================
+         COMMUNITY RUNS
+    ================================================== -->
+
+    <section
+      id="communityRunsSection"
+      class="card ma-community-runs"
+      style="display:none"
+    >
+
+      <div class="ma-community-runs-head">
+
+        <div>
+
+          <h2 class="ma-community-runs-title">
+            Gemeinsame Läufe 🏃‍♂️
+          </h2>
+
+          <p class="ma-community-runs-subtitle">
+            Erstelle einen Lauf und finde andere
+            Miles Apart Mitglieder zum Mitlaufen.
+          </p>
+
+        </div>
+
+
+        <button
+          id="openRunButton"
+          class="btn lime ma-run-create-button"
+          type="button"
+        >
+          + Lauf erstellen
+        </button>
+
+      </div>
+
+
+      <div
+        id="runForm"
+        class="ma-run-form"
+      >
+
+        <form id="communityRunForm">
+
+          <div class="ma-run-form-grid">
+
+            <div class="ma-run-form-field full">
+
+              <label
+                class="ma-run-form-label"
+                for="runTitle"
+              >
+                Titel
+              </label>
+
+              <input
+                id="runTitle"
+                class="ma-run-form-input"
+                type="text"
+                maxlength="120"
+                placeholder="z. B. 10 km Feierabendlauf"
+                required
+              >
+
+            </div>
+
+
+            <div class="ma-run-form-field">
+
+              <label
+                class="ma-run-form-label"
+                for="runLocation"
+              >
+                📍 Ort
+              </label>
+
+              <input
+                id="runLocation"
+                class="ma-run-form-input"
+                type="text"
+                maxlength="120"
+                placeholder="z. B. Mainz"
+                required
+              >
+
+            </div>
+
+
+            <div class="ma-run-form-field">
+
+              <label
+                class="ma-run-form-label"
+                for="runDate"
+              >
+                📅 Datum
+              </label>
+
+              <input
+                id="runDate"
+                class="ma-run-form-input"
+                type="date"
+                required
+              >
+
+            </div>
+
+
+            <div class="ma-run-form-field">
+
+              <label
+                class="ma-run-form-label"
+                for="runTime"
+              >
+                🕐 Uhrzeit
+              </label>
+
+              <input
+                id="runTime"
+                class="ma-run-form-input"
+                type="time"
+                required
+              >
+
+            </div>
+
+
+            <div class="ma-run-form-field">
+
+              <label
+                class="ma-run-form-label"
+                for="runPace"
+              >
+                ⚡ Pace
+              </label>
+
+              <input
+                id="runPace"
+                class="ma-run-form-input"
+                type="text"
+                maxlength="30"
+                placeholder="z. B. 5:30–6:00 min/km"
+                required
+              >
+
+            </div>
+
+
+            <div class="ma-run-form-field">
+
+              <label
+                class="ma-run-form-label"
+                for="runMaxParticipants"
+              >
+                👥 Teilnehmer
+              </label>
+
+              <input
+                id="runMaxParticipants"
+                class="ma-run-form-input"
+                type="number"
+                min="2"
+                max="100"
+                value="8"
+                required
+              >
+
+            </div>
+
+          </div>
+
+
+          <div class="ma-run-form-actions">
+
+            <div
+              id="runFormMessage"
+              class="ma-run-form-message"
+            ></div>
+
+
+            <div
+              style="
+                display:flex;
+                gap:8px;
+              "
+            >
+
+              <button
+                id="cancelRunButton"
+                class="btn"
+                type="button"
+              >
+                Abbrechen
+              </button>
+
+
+              <button
+                id="submitRunButton"
+                class="btn lime"
+                type="submit"
+              >
+                Lauf erstellen
+              </button>
+
+            </div>
+
+          </div>
+
+        </form>
+
+      </div>
+
+
+      <div
+        id="runList"
+        class="ma-run-list"
+      ></div>
+
+    </section>
 
 
     <!-- POSTS -->
@@ -1428,6 +2099,24 @@
     );
 
 
+  const postImage =
+    document.getElementById(
+      "postImage"
+    );
+
+
+  const postImagePreview =
+    document.getElementById(
+      "postImagePreview"
+    );
+
+
+  const postImageName =
+    document.getElementById(
+      "postImageName"
+    );
+
+
   const submitPostButton =
     document.getElementById(
       "submitPostButton"
@@ -1479,6 +2168,90 @@
   const memberCount =
     document.getElementById(
       "memberCount"
+    );
+
+
+  const communityRunsSection =
+    document.getElementById(
+      "communityRunsSection"
+    );
+
+
+  const openRunButton =
+    document.getElementById(
+      "openRunButton"
+    );
+
+
+  const runForm =
+    document.getElementById(
+      "runForm"
+    );
+
+
+  const communityRunForm =
+    document.getElementById(
+      "communityRunForm"
+    );
+
+
+  const runTitle =
+    document.getElementById(
+      "runTitle"
+    );
+
+
+  const runLocation =
+    document.getElementById(
+      "runLocation"
+    );
+
+
+  const runDate =
+    document.getElementById(
+      "runDate"
+    );
+
+
+  const runTime =
+    document.getElementById(
+      "runTime"
+    );
+
+
+  const runPace =
+    document.getElementById(
+      "runPace"
+    );
+
+
+  const runMaxParticipants =
+    document.getElementById(
+      "runMaxParticipants"
+    );
+
+
+  const cancelRunButton =
+    document.getElementById(
+      "cancelRunButton"
+    );
+
+
+  const submitRunButton =
+    document.getElementById(
+      "submitRunButton"
+    );
+
+
+  const runFormMessage =
+    document.getElementById(
+      "runFormMessage"
+    );
+
+
+  const runList =
+    document.getElementById(
+      "runList"
     );
 
 
@@ -1646,6 +2419,32 @@
   }
 
 
+  function formatRunDate(dateString) {
+
+    if (!dateString) {
+      return "—";
+    }
+
+
+    const date =
+      new Date(
+        `${dateString}T12:00:00`
+      );
+
+
+    return date.toLocaleDateString(
+      "de-DE",
+      {
+        weekday: "short",
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric"
+      }
+    );
+
+  }
+
+
   function showError(message) {
 
     communityError.textContent =
@@ -1666,6 +2465,109 @@
       "none";
 
   }
+
+
+  /* =====================================================
+     IMAGE PREVIEW
+  ===================================================== */
+
+  postImage.addEventListener(
+    "change",
+    () => {
+
+      const file =
+        postImage.files?.[0];
+
+
+      if (!file) {
+
+        postImagePreview.src =
+          "";
+
+        postImagePreview.classList.remove(
+          "visible"
+        );
+
+        postImageName.textContent =
+          "";
+
+        return;
+
+      }
+
+
+      if (
+        !file.type.startsWith(
+          "image/"
+        )
+      ) {
+
+        postImage.value =
+          "";
+
+        postImagePreview.src =
+          "";
+
+        postImagePreview.classList.remove(
+          "visible"
+        );
+
+        postImageName.textContent =
+          "Bitte eine Bilddatei auswählen.";
+
+        return;
+
+      }
+
+
+      if (
+        file.size >
+        8 * 1024 * 1024
+      ) {
+
+        postImage.value =
+          "";
+
+        postImagePreview.src =
+          "";
+
+        postImagePreview.classList.remove(
+          "visible"
+        );
+
+        postImageName.textContent =
+          "Das Bild darf maximal 8 MB groß sein.";
+
+        return;
+
+      }
+
+
+      postImageName.textContent =
+        file.name;
+
+
+      const reader =
+        new FileReader();
+
+
+      reader.onload =
+        event => {
+
+          postImagePreview.src =
+            event.target.result;
+
+          postImagePreview.classList.add(
+            "visible"
+          );
+
+        };
+
+
+      reader.readAsDataURL(file);
+
+    }
+  );
 
 
   /* =====================================================
@@ -2074,6 +2976,7 @@
           id,
           author_id,
           content,
+          image_url,
           created_at,
           updated_at,
 
@@ -2408,6 +3311,24 @@
       >${escapeHtml(
         post.content
       )}</div>
+
+
+      ${
+        post.image_url
+          ? `
+
+            <img
+              class="ma-post-image"
+              src="${escapeHtml(
+                post.image_url
+              )}"
+              alt="Bild zum Community-Post"
+              loading="lazy"
+            >
+
+          `
+          : ""
+      }
 
 
       <div
@@ -3106,6 +4027,23 @@
         "";
 
 
+      postImage.value =
+        "";
+
+
+      postImagePreview.src =
+        "";
+
+
+      postImagePreview.classList.remove(
+        "visible"
+      );
+
+
+      postImageName.textContent =
+        "";
+
+
       postFormCard.style.display =
         "none";
 
@@ -3119,6 +4057,69 @@
 
     }
   );
+
+
+  /* =====================================================
+     UPLOAD POST IMAGE
+  ===================================================== */
+
+  async function uploadPostImage(file) {
+
+    if (!file) {
+      return null;
+    }
+
+
+    const extension =
+      file.name
+        .split(".")
+        .pop()
+        .toLowerCase()
+        .replace(/[^a-z0-9]/g,"");
+
+
+    const filePath =
+      `${currentUser.id}/${Date.now()}-${crypto.randomUUID()}.${extension}`;
+
+
+    const {
+      error
+    } =
+      await supabaseClient
+        .storage
+        .from("community-images")
+        .upload(
+          filePath,
+          file,
+          {
+            cacheControl:
+              "3600",
+
+            upsert:
+              false
+          }
+        );
+
+
+    if (error) {
+      throw error;
+    }
+
+
+    const {
+      data
+    } =
+      supabaseClient
+        .storage
+        .from("community-images")
+        .getPublicUrl(
+          filePath
+        );
+
+
+    return data.publicUrl;
+
+  }
 
 
   postForm.addEventListener(
@@ -3147,12 +4148,36 @@
       }
 
 
+      const selectedImage =
+        postImage.files?.[0] ||
+        null;
+
+
+      if (
+        selectedImage &&
+        selectedImage.size >
+        8 * 1024 * 1024
+      ) {
+
+        postFormMessage.textContent =
+          "Das Bild darf maximal 8 MB groß sein.";
+
+        postFormMessage.className =
+          "post-form-message error";
+
+        return;
+
+      }
+
+
       submitPostButton.disabled =
         true;
 
 
       submitPostButton.textContent =
-        "Wird veröffentlicht …";
+        selectedImage
+          ? "Bild wird hochgeladen …"
+          : "Wird veröffentlicht …";
 
 
       postFormMessage.textContent =
@@ -3160,6 +4185,24 @@
 
 
       try {
+
+        let imageUrl =
+          null;
+
+
+        if (selectedImage) {
+
+          imageUrl =
+            await uploadPostImage(
+              selectedImage
+            );
+
+        }
+
+
+        submitPostButton.textContent =
+          "Post wird veröffentlicht …";
+
 
         const {
           error
@@ -3174,7 +4217,10 @@
                 currentUser.id,
 
               content:
-                content
+                content,
+
+              image_url:
+                imageUrl
 
             });
 
@@ -3185,6 +4231,23 @@
 
 
         postContent.value =
+          "";
+
+
+        postImage.value =
+          "";
+
+
+        postImagePreview.src =
+          "";
+
+
+        postImagePreview.classList.remove(
+          "visible"
+        );
+
+
+        postImageName.textContent =
           "";
 
 
@@ -3215,6 +4278,956 @@
 
         submitPostButton.textContent =
           "Post veröffentlichen";
+
+      }
+
+    }
+  );
+
+
+  /* =====================================================
+     RUN FORM
+  ===================================================== */
+
+  openRunButton.addEventListener(
+    "click",
+    () => {
+
+      if (!currentUser) {
+
+        window.location.href =
+          "home.html";
+
+        return;
+
+      }
+
+
+      runForm.classList.toggle(
+        "open"
+      );
+
+
+      if (
+        runForm.classList.contains(
+          "open"
+        )
+      ) {
+
+        runTitle.focus();
+
+        window.scrollTo({
+
+          top:
+            runForm.offsetTop - 90,
+
+          behavior:
+            "smooth"
+
+        });
+
+      }
+
+    }
+  );
+
+
+  cancelRunButton.addEventListener(
+    "click",
+    () => {
+
+      communityRunForm.reset();
+
+
+      runMaxParticipants.value =
+        "8";
+
+
+      runFormMessage.textContent =
+        "";
+
+
+      runForm.classList.remove(
+        "open"
+      );
+
+    }
+  );
+
+
+  function resetRunForm() {
+
+    communityRunForm.reset();
+
+    runMaxParticipants.value =
+      "8";
+
+    runFormMessage.textContent =
+      "";
+
+  }
+
+
+  /* =====================================================
+     LOAD COMMUNITY RUNS
+  ===================================================== */
+
+  async function loadCommunityRuns() {
+
+    const {
+      data: runs,
+      error
+    } =
+      await supabaseClient
+        .from("community_runs")
+        .select(`
+          id,
+          creator_id,
+          title,
+          location,
+          run_date,
+          run_time,
+          pace,
+          max_participants,
+          created_at,
+
+          profiles:creator_id (
+            display_name,
+            username,
+            avatar_url
+          ),
+
+          community_run_participants (
+            user_id,
+
+            profiles:user_id (
+              display_name,
+              username,
+              avatar_url
+            )
+          )
+        `)
+        .gte(
+          "run_date",
+          new Date()
+            .toISOString()
+            .slice(0,10)
+        )
+        .order(
+          "run_date",
+          {
+            ascending: true
+          }
+        )
+        .order(
+          "run_time",
+          {
+            ascending: true
+          }
+        );
+
+
+    if (error) {
+      throw error;
+    }
+
+
+    renderCommunityRuns(
+      runs || []
+    );
+
+  }
+
+
+  /* =====================================================
+     RENDER COMMUNITY RUNS
+  ===================================================== */
+
+  function renderCommunityRuns(runs) {
+
+    runList.innerHTML =
+      "";
+
+
+    if (!runs.length) {
+
+      runList.innerHTML = `
+
+        <div
+          class="ma-run-empty"
+          style="grid-column:1/-1"
+        >
+
+          Noch keine gemeinsamen Läufe geplant.
+          Erstelle den ersten und finde deine
+          Run Buddies.
+
+        </div>
+
+      `;
+
+
+      return;
+
+    }
+
+
+    runs.forEach(
+      run => {
+
+        runList.appendChild(
+          createRunElement(run)
+        );
+
+      }
+    );
+
+  }
+
+
+  /* =====================================================
+     RUN ELEMENT
+  ===================================================== */
+
+  function createRunElement(run) {
+
+    const participants =
+      run.community_run_participants ||
+      [];
+
+
+    const participantCount =
+      participants.length;
+
+
+    const maxParticipants =
+      Number(
+        run.max_participants ||
+        0
+      );
+
+
+    const isParticipant =
+      currentUser
+        ? participants.some(
+            participant =>
+              participant.user_id ===
+              currentUser.id
+          )
+        : false;
+
+
+    const isCreator =
+      currentUser &&
+      run.creator_id ===
+      currentUser.id;
+
+
+    const creator =
+      run.profiles || {};
+
+
+    const creatorName =
+      creator.display_name ||
+      "Miles Apart Member";
+
+
+    const wrapper =
+      document.createElement(
+        "div"
+      );
+
+
+    wrapper.className =
+      "ma-run-card";
+
+
+    wrapper.dataset.runId =
+      run.id;
+
+
+    wrapper.innerHTML = `
+
+      <div
+        class="ma-run-card-top"
+      >
+
+        <div>
+
+          <h3 class="ma-run-card-title">
+            ${escapeHtml(
+              run.title
+            )}
+          </h3>
+
+
+          <div
+            class="ma-run-card-author"
+          >
+            von ${escapeHtml(
+              creatorName
+            )}
+          </div>
+
+        </div>
+
+
+        <div
+          class="ma-run-card-icon"
+        >
+          🏃
+        </div>
+
+      </div>
+
+
+      <div
+        class="ma-run-details"
+      >
+
+        <div class="ma-run-detail">
+
+          <span
+            class="ma-run-detail-label"
+          >
+            Ort
+          </span>
+
+          <span
+            class="ma-run-detail-value"
+          >
+            📍 ${escapeHtml(
+              run.location
+            )}
+          </span>
+
+        </div>
+
+
+        <div class="ma-run-detail">
+
+          <span
+            class="ma-run-detail-label"
+          >
+            Datum
+          </span>
+
+          <span
+            class="ma-run-detail-value"
+          >
+            📅 ${escapeHtml(
+              formatRunDate(
+                run.run_date
+              )
+            )}
+          </span>
+
+        </div>
+
+
+        <div class="ma-run-detail">
+
+          <span
+            class="ma-run-detail-label"
+          >
+            Uhrzeit
+          </span>
+
+          <span
+            class="ma-run-detail-value"
+          >
+            🕐 ${escapeHtml(
+              String(
+                run.run_time ||
+                ""
+              ).slice(0,5)
+            )} Uhr
+          </span>
+
+        </div>
+
+
+        <div class="ma-run-detail">
+
+          <span
+            class="ma-run-detail-label"
+          >
+            Pace
+          </span>
+
+          <span
+            class="ma-run-detail-value"
+          >
+            ⚡ ${escapeHtml(
+              run.pace
+            )}
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div
+        class="ma-run-participants"
+      >
+
+        <div
+          class="ma-run-participant-count"
+        >
+          👥 ${participantCount} / ${maxParticipants}
+          Teilnehmer
+        </div>
+
+
+        <div
+          class="ma-run-actions"
+        >
+
+          ${
+            isCreator
+              ? `
+
+                <button
+                  class="ma-run-delete"
+                  type="button"
+                  data-run-action="delete"
+                  data-run-id="${run.id}"
+                >
+                  Löschen
+                </button>
+
+              `
+              : `
+                <button
+                  class="ma-run-join ${
+                    isParticipant
+                      ? "joined"
+                      : ""
+                  }"
+                  type="button"
+                  data-run-action="join"
+                  data-run-id="${run.id}"
+                  ${
+                    !isParticipant &&
+                    participantCount >=
+                    maxParticipants
+                      ? "disabled"
+                      : ""
+                  }
+                >
+                  ${
+                    isParticipant
+                      ? "✓ Ich bin dabei"
+                      : participantCount >=
+                        maxParticipants
+                        ? "Voll"
+                        : "Ich bin dabei"
+                  }
+                </button>
+              `
+          }
+
+        </div>
+
+      </div>
+
+    `;
+
+
+    return wrapper;
+
+  }
+
+
+  /* =====================================================
+     JOIN / LEAVE RUN
+  ===================================================== */
+
+  async function toggleRunParticipation(
+    runId,
+    button
+  ) {
+
+    if (!currentUser) {
+
+      window.location.href =
+        "home.html";
+
+      return;
+
+    }
+
+
+    button.disabled =
+      true;
+
+
+    try {
+
+      const {
+        data: existing,
+        error: findError
+      } =
+        await supabaseClient
+          .from(
+            "community_run_participants"
+          )
+          .select(
+            "run_id, user_id"
+          )
+          .eq(
+            "run_id",
+            runId
+          )
+          .eq(
+            "user_id",
+            currentUser.id
+          )
+          .maybeSingle();
+
+
+      if (findError) {
+        throw findError;
+      }
+
+
+      if (existing) {
+
+        const {
+          error
+        } =
+          await supabaseClient
+            .from(
+              "community_run_participants"
+            )
+            .delete()
+            .eq(
+              "run_id",
+              runId
+            )
+            .eq(
+              "user_id",
+              currentUser.id
+            );
+
+
+        if (error) {
+          throw error;
+        }
+
+      } else {
+
+        const {
+          data: run,
+          error: runError
+        } =
+          await supabaseClient
+            .from(
+              "community_runs"
+            )
+            .select(
+              "max_participants"
+            )
+            .eq(
+              "id",
+              runId
+            )
+            .single();
+
+
+        if (runError) {
+          throw runError;
+        }
+
+
+        const {
+          count,
+          error: countError
+        } =
+          await supabaseClient
+            .from(
+              "community_run_participants"
+            )
+            .select(
+              "user_id",
+              {
+                count:
+                  "exact",
+                head:
+                  true
+              }
+            )
+            .eq(
+              "run_id",
+              runId
+            );
+
+
+        if (countError) {
+          throw countError;
+        }
+
+
+        if (
+          Number(count || 0) >=
+          Number(
+            run.max_participants
+          )
+        ) {
+
+          throw new Error(
+            "Dieser Lauf ist bereits voll."
+          );
+
+        }
+
+
+        const {
+          error
+        } =
+          await supabaseClient
+            .from(
+              "community_run_participants"
+            )
+            .insert({
+
+              run_id:
+                runId,
+
+              user_id:
+                currentUser.id
+
+            });
+
+
+        if (error) {
+          throw error;
+        }
+
+      }
+
+
+      await loadCommunityRuns();
+
+    } catch (error) {
+
+      console.error(
+        "Run participation error:",
+        error
+      );
+
+
+      window.alert(
+        error.message ||
+        "Die Teilnahme konnte nicht geändert werden."
+      );
+
+    } finally {
+
+      button.disabled =
+        false;
+
+    }
+
+  }
+
+
+  /* =====================================================
+     DELETE COMMUNITY RUN
+  ===================================================== */
+
+  async function deleteCommunityRun(
+    runId
+  ) {
+
+    if (!currentUser) {
+
+      window.location.href =
+        "home.html";
+
+      return;
+
+    }
+
+
+    const confirmed =
+      window.confirm(
+        "Diesen gemeinsamen Lauf wirklich löschen?"
+      );
+
+
+    if (!confirmed) {
+      return;
+    }
+
+
+    const {
+      error
+    } =
+      await supabaseClient
+        .from(
+          "community_runs"
+        )
+        .delete()
+        .eq(
+          "id",
+          runId
+        )
+        .eq(
+          "creator_id",
+          currentUser.id
+        );
+
+
+    if (error) {
+
+      console.error(error);
+
+      window.alert(
+        error.message ||
+        "Der Lauf konnte nicht gelöscht werden."
+      );
+
+      return;
+
+    }
+
+
+    await loadCommunityRuns();
+
+  }
+
+
+  /* =====================================================
+     RUN EVENTS
+  ===================================================== */
+
+  runList.addEventListener(
+    "click",
+    async event => {
+
+      const button =
+        event.target.closest(
+          "[data-run-action]"
+        );
+
+
+      if (!button) {
+        return;
+      }
+
+
+      const action =
+        button.dataset.runAction;
+
+
+      const runId =
+        button.dataset.runId;
+
+
+      if (
+        action === "join"
+      ) {
+
+        await toggleRunParticipation(
+          runId,
+          button
+        );
+
+        return;
+
+      }
+
+
+      if (
+        action === "delete"
+      ) {
+
+        await deleteCommunityRun(
+          runId
+        );
+
+      }
+
+    }
+  );
+
+
+  /* =====================================================
+     CREATE COMMUNITY RUN
+  ===================================================== */
+
+  communityRunForm.addEventListener(
+    "submit",
+    async event => {
+
+      event.preventDefault();
+
+
+      if (!currentUser) {
+
+        window.location.href =
+          "home.html";
+
+        return;
+
+      }
+
+
+      const title =
+        runTitle.value.trim();
+
+
+      const location =
+        runLocation.value.trim();
+
+
+      const date =
+        runDate.value;
+
+
+      const time =
+        runTime.value;
+
+
+      const pace =
+        runPace.value.trim();
+
+
+      const maxParticipants =
+        Number(
+          runMaxParticipants.value
+        );
+
+
+      if (
+        !title ||
+        !location ||
+        !date ||
+        !time ||
+        !pace ||
+        !maxParticipants
+      ) {
+
+        runFormMessage.textContent =
+          "Bitte fülle alle Felder aus.";
+
+        return;
+
+      }
+
+
+      submitRunButton.disabled =
+        true;
+
+
+      submitRunButton.textContent =
+        "Wird erstellt …";
+
+
+      runFormMessage.textContent =
+        "";
+
+
+      try {
+
+        const {
+          data: createdRun,
+          error
+        } =
+          await supabaseClient
+            .from(
+              "community_runs"
+            )
+            .insert({
+
+              creator_id:
+                currentUser.id,
+
+              title:
+                title,
+
+              location:
+                location,
+
+              run_date:
+                date,
+
+              run_time:
+                time,
+
+              pace:
+                pace,
+
+              max_participants:
+                maxParticipants
+
+            })
+            .select(
+              "id"
+            )
+            .single();
+
+
+        if (error) {
+          throw error;
+        }
+
+
+        const {
+          error: participantError
+        } =
+          await supabaseClient
+            .from(
+              "community_run_participants"
+            )
+            .insert({
+
+              run_id:
+                createdRun.id,
+
+              user_id:
+                currentUser.id
+
+            });
+
+
+        if (participantError) {
+          throw participantError;
+        }
+
+
+        resetRunForm();
+
+
+        runForm.classList.remove(
+          "open"
+        );
+
+
+        await loadCommunityRuns();
+
+      } catch (error) {
+
+        console.error(
+          "Create run error:",
+          error
+        );
+
+
+        runFormMessage.textContent =
+          error.message ||
+          "Der Lauf konnte nicht erstellt werden.";
+
+      } finally {
+
+        submitRunButton.disabled =
+          false;
+
+
+        submitRunButton.textContent =
+          "Lauf erstellen";
 
       }
 
@@ -3412,6 +5425,39 @@
         "block";
 
 
+      communityRunsSection.style.display =
+        "block";
+
+
+      try {
+
+        await loadCommunityRuns();
+
+      } catch (runError) {
+
+        console.error(
+          "Community runs error:",
+          runError
+        );
+
+
+        runList.innerHTML = `
+
+          <div
+            class="ma-run-empty"
+            style="grid-column:1/-1"
+          >
+
+            Gemeinsame Läufe sind noch nicht
+            eingerichtet.
+
+          </div>
+
+        `;
+
+      }
+
+
     } catch (error) {
 
       console.error(
@@ -3429,6 +5475,9 @@
         clearError();
 
         communityLower.style.display =
+          "block";
+
+        communityRunsSection.style.display =
           "block";
 
         return;
