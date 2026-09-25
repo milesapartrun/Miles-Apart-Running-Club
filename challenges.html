@@ -117,21 +117,14 @@
       line-height: 1;
     }
 
-    /*
-     * Usernamen im Leaderboard
-     * sind jetzt klickbare Profile.
-     */
-
     .leaderboard-profile-link {
       min-width: 0;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
-
       color: inherit;
       text-decoration: none;
       font-weight: 700;
-
       transition:
         color .18s ease,
         opacity .18s ease;
@@ -444,6 +437,10 @@
     <div class="grid g2">
 
 
+      <!-- =====================================================
+           EARLY BIRD
+           ===================================================== -->
+
       <div class="card early-bird">
 
         <div class="row">
@@ -528,6 +525,10 @@
       </div>
 
 
+      <!-- =====================================================
+           NIGHT OWLS
+           ===================================================== -->
+
       <div class="card night-owls">
 
         <div class="row">
@@ -611,6 +612,10 @@
 
       </div>
 
+
+      <!-- =====================================================
+           STREAK
+           ===================================================== -->
 
       <div class="card streak">
 
@@ -697,6 +702,10 @@
 
       </div>
 
+
+      <!-- =====================================================
+           DISTANCE
+           ===================================================== -->
 
       <div class="card distance">
 
@@ -791,6 +800,10 @@
 
 <script>
 
+  /* ==========================================================
+     SUPABASE
+     ========================================================== */
+
   const SUPABASE_URL =
     "https://orbrkdrsihsacsnprewf.supabase.co";
 
@@ -805,9 +818,15 @@
     );
 
 
+  /* ==========================================================
+     MONAT
+     ========================================================== */
+
   function getCurrentMonthRange() {
 
-    const now = new Date();
+    const now =
+      new Date();
+
 
     const start =
       new Date(
@@ -820,6 +839,7 @@
         0
       );
 
+
     const end =
       new Date(
         now.getFullYear(),
@@ -830,6 +850,7 @@
         0,
         0
       );
+
 
     return {
       start,
@@ -860,25 +881,38 @@
       getMonthLabel();
 
 
+  /* ==========================================================
+     FORMATIERUNG
+     ========================================================== */
+
   function formatKm(value) {
 
-    return (
+    const km =
       Math.round(
-        value * 10
-      ) / 10
-    ).toLocaleString(
-      "de-DE"
-    ) + " km";
+        Number(value || 0) * 10
+      ) / 10;
+
+
+    return (
+      km.toLocaleString(
+        "de-DE"
+      ) +
+      " km"
+    );
 
   }
 
 
   function formatDays(value) {
 
+    const days =
+      Number(value || 0);
+
+
     return (
-      value +
+      days +
       (
-        value === 1
+        days === 1
           ? " Tag"
           : " Tage"
       )
@@ -887,9 +921,38 @@
   }
 
 
+  function numberValue(value) {
+
+    if (
+      value === null ||
+      value === undefined ||
+      value === ""
+    ) {
+      return 0;
+    }
+
+
+    const number =
+      Number(
+        String(value)
+          .replace(",", ".")
+      );
+
+
+    return Number.isFinite(
+      number
+    )
+      ? number
+      : 0;
+
+  }
+
+
   function escapeHtml(value) {
 
-    return String(value)
+    return String(
+      value ?? ""
+    )
       .replace(
         /&/g,
         "&amp;"
@@ -914,40 +977,9 @@
   }
 
 
-  function numberValue(value) {
-
-    if (
-      value === null ||
-      value === undefined
-    ) {
-      return 0;
-    }
-
-    const number =
-      Number(
-        String(value)
-          .replace(",", ".")
-      );
-
-    return Number.isFinite(number)
-      ? number
-      : 0;
-
-  }
-
-
-  /*
-   * ==========================================================
-   * PROFIL-URL
-   * ==========================================================
-   *
-   * Aus dem Username wird:
-   *
-   * user.html?username=...
-   *
-   * Damit öffnet sich die bereits vorhandene
-   * öffentliche User-Seite.
-   */
+  /* ==========================================================
+     PROFILE
+     ========================================================== */
 
   function getProfileUrl(
     username
@@ -956,6 +988,7 @@
     if (!username) {
       return "#";
     }
+
 
     return (
       "user.html?username=" +
@@ -975,6 +1008,7 @@
       return {};
     }
 
+
     const {
       data,
       error
@@ -989,6 +1023,7 @@
           userIds
         );
 
+
     if (error) {
 
       console.error(
@@ -1000,12 +1035,16 @@
 
     }
 
+
     const profiles = {};
+
 
     (data || []).forEach(
       profile => {
 
-        profiles[profile.id] = {
+        profiles[
+          profile.id
+        ] = {
 
           displayName:
             profile.display_name ||
@@ -1021,10 +1060,15 @@
       }
     );
 
+
     return profiles;
 
   }
 
+
+  /* ==========================================================
+     CHALLENGE MEMBERS
+     ========================================================== */
 
   async function getChallengeMembers(
     challengeId
@@ -1044,14 +1088,25 @@
           challengeId
         );
 
+
     if (error) {
       throw error;
     }
+
 
     return data || [];
 
   }
 
+
+  /* ==========================================================
+     LAUFDATEN VON DER HOMEPAGE
+     ==========================================================
+     
+     Die Challenges greifen direkt auf dieselbe
+     runs-Tabelle zu, in die home.html die Läufe
+     speichert.
+     ========================================================== */
 
   async function getRuns() {
 
@@ -1063,14 +1118,20 @@
         .from("runs")
         .select("*");
 
+
     if (error) {
       throw error;
     }
+
 
     return data || [];
 
   }
 
+
+  /* ==========================================================
+     SPALTEN ERKENNEN
+     ========================================================== */
 
   function findColumn(
     row,
@@ -1093,6 +1154,7 @@
             key === name
         );
 
+
       if (exact) {
         return exact;
       }
@@ -1107,12 +1169,14 @@
       const lower =
         name.toLowerCase();
 
+
       const found =
         keys.find(
           key =>
             key.toLowerCase() ===
             lower
         );
+
 
       if (found) {
         return found;
@@ -1126,7 +1190,9 @@
   }
 
 
-  function findUserColumn(row) {
+  function findUserColumn(
+    row
+  ) {
 
     return findColumn(
       row,
@@ -1141,7 +1207,9 @@
   }
 
 
-  function findDistanceColumn(row) {
+  function findDistanceColumn(
+    row
+  ) {
 
     return findColumn(
       row,
@@ -1161,15 +1229,32 @@
   }
 
 
-  function findDateColumn(row) {
+  function findStartTimeColumn(
+    row
+  ) {
 
     return findColumn(
       row,
       [
-        "started_at",
-        "Started_at",
         "start_time",
         "Start_time",
+        "started_at",
+        "Started_at",
+        "start",
+        "Start"
+      ]
+    );
+
+  }
+
+
+  function findDateColumn(
+    row
+  ) {
+
+    return findColumn(
+      row,
+      [
         "run_date",
         "Run_date",
         "date",
@@ -1184,21 +1269,111 @@
   }
 
 
+  /* ==========================================================
+     LAUFDATUM
+     ========================================================== */
+
+  function getRunDate(
+    run,
+    startTimeColumn,
+    dateColumn
+  ) {
+
+    /*
+     * Die Startzeit von home.html hat Priorität.
+     */
+
+    if (
+      startTimeColumn &&
+      run[startTimeColumn]
+    ) {
+
+      const date =
+        new Date(
+          run[startTimeColumn]
+        );
+
+
+      if (
+        !Number.isNaN(
+          date.getTime()
+        )
+      ) {
+
+        return date;
+
+      }
+
+    }
+
+
+    /*
+     * Fallback.
+     */
+
+    if (
+      dateColumn &&
+      run[dateColumn]
+    ) {
+
+      const date =
+        new Date(
+          run[dateColumn]
+        );
+
+
+      if (
+        !Number.isNaN(
+          date.getTime()
+        )
+      ) {
+
+        return date;
+
+      }
+
+    }
+
+
+    return null;
+
+  }
+
+
+  /* ==========================================================
+     CHALLENGE-ZEIT
+     ========================================================== */
+
   function isWithinChallengeTime(
     date,
     challengeId
   ) {
 
+    if (!date) {
+      return false;
+    }
+
+
     const hour =
       date.getHours();
 
+
     const minute =
       date.getMinutes();
+
 
     const timeInMinutes =
       hour * 60 +
       minute;
 
+
+    /*
+     * EARLY BIRD
+     *
+     * 04:00 bis 08:59
+     *
+     * 09:00 gehört NICHT mehr dazu.
+     */
 
     if (
       challengeId ===
@@ -1212,6 +1387,12 @@
 
     }
 
+
+    /*
+     * NIGHT OWLS
+     *
+     * 17:00 bis 23:59
+     */
 
     if (
       challengeId ===
@@ -1231,170 +1412,108 @@
   }
 
 
-  function getDateKey(date) {
+  /* ==========================================================
+     PROFILE RENDERN
+     ========================================================== */
 
-    return [
-      date.getFullYear(),
-      String(
-        date.getMonth() + 1
-      ).padStart(2, "0"),
-      String(
-        date.getDate()
-      ).padStart(2, "0")
-    ].join("-");
-
-  }
-
-
-  function getStreakForUser(
-    userId,
-    runs,
-    userColumn,
-    dateColumn,
-    start,
-    end
+  function renderProfileName(
+    profile
   ) {
 
-    const runDays =
-      new Set();
-
-
-    runs.forEach(
-      run => {
-
-        if (
-          run[userColumn] !==
-          userId
-        ) {
-          return;
-        }
-
-
-        const runDate =
-          new Date(
-            run[dateColumn]
-          );
-
-
-        if (
-          Number.isNaN(
-            runDate.getTime()
-          )
-        ) {
-          return;
-        }
-
-
-        if (
-          runDate < start ||
-          runDate >= end
-        ) {
-          return;
-        }
-
-
-        runDays.add(
-          getDateKey(
-            runDate
-          )
-        );
-
-      }
-    );
-
-
-    if (!runDays.size) {
-      return 0;
-    }
-
-
-    const today =
-      new Date();
-
-    const todayKey =
-      getDateKey(
-        today
-      );
-
-
-    const yesterday =
-      new Date(
-        today
-      );
-
-    yesterday.setDate(
-      yesterday.getDate() - 1
-    );
-
-    const yesterdayKey =
-      getDateKey(
-        yesterday
-      );
+    const name =
+      profile?.displayName ||
+      "Runner";
 
 
     if (
-      !runDays.has(todayKey) &&
-      !runDays.has(yesterdayKey)
-    ) {
-      return 0;
-    }
-
-
-    const cursor =
-      new Date(
-        today
-      );
-
-
-    if (
-      !runDays.has(todayKey)
+      profile?.username
     ) {
 
-      cursor.setDate(
-        cursor.getDate() - 1
-      );
+      return `
+        <a
+          class="leaderboard-profile-link"
+          href="${escapeHtml(
+            getProfileUrl(
+              profile.username
+            )
+          )}"
+          title="Profil von ${escapeHtml(
+            name
+          )} öffnen"
+        >
+          ${escapeHtml(
+            name
+          )}
+        </a>
+      `;
 
     }
 
 
-    let streak = 0;
-
-
-    while (true) {
-
-      const key =
-        getDateKey(
-          cursor
-        );
-
-
-      if (
-        !runDays.has(key)
-      ) {
-        break;
-      }
-
-
-      streak++;
-
-
-      cursor.setDate(
-        cursor.getDate() - 1
-      );
-
-    }
-
-
-    return streak;
+    return `
+      <span class="leaderboard-profile-link">
+        ${escapeHtml(
+          name
+        )}
+      </span>
+    `;
 
   }
 
 
-  /*
-   * ==========================================================
-   * KM LEADERBOARD
-   * ==========================================================
-   */
+  /* ==========================================================
+     POSITION
+     ========================================================== */
+
+  function renderPosition(
+    index
+  ) {
+
+    if (index === 0) {
+
+      return `
+        <span class="leaderboard-medal">
+          🥇
+        </span>
+      `;
+
+    }
+
+
+    if (index === 1) {
+
+      return `
+        <span class="leaderboard-medal">
+          🥈
+        </span>
+      `;
+
+    }
+
+
+    if (index === 2) {
+
+      return `
+        <span class="leaderboard-medal">
+          🥉
+        </span>
+      `;
+
+    }
+
+
+    return index + 1;
+
+  }
+
+
+  /* ==========================================================
+     KM LEADERBOARDS
+     ==========================================================
+     
+     Diese Funktion ist die Verbindung zwischen
+     home.html und challenges.html.
+     ========================================================== */
 
   async function loadKmLeaderboard(
     challengeId,
@@ -1408,6 +1527,7 @@
         totalId
       );
 
+
     const leaderboardElement =
       document.getElementById(
         leaderboardId
@@ -1415,6 +1535,10 @@
 
 
     try {
+
+      /*
+       * 1. Teilnehmer der Challenge
+       */
 
       const members =
         await getChallengeMembers(
@@ -1436,42 +1560,60 @@
         ];
 
 
-      if (!userIds.length) {
+      if (
+        !userIds.length
+      ) {
 
         totalElement.textContent =
           "0 km";
+
 
         leaderboardElement.classList.remove(
           "loading"
         );
 
+
         leaderboardElement.innerHTML =
-          '<div class="leaderboard-empty">' +
-          'Noch keine Teilnehmer.' +
-          '</div>';
+          `
+            <div class="leaderboard-empty">
+              Noch keine Teilnehmer.
+            </div>
+          `;
+
 
         return;
 
       }
 
 
+      /*
+       * 2. Alle Läufe aus der Homepage
+       */
+
       const runs =
         await getRuns();
 
 
-      if (!runs.length) {
+      if (
+        !runs.length
+      ) {
 
         totalElement.textContent =
           "0 km";
+
 
         leaderboardElement.classList.remove(
           "loading"
         );
 
+
         leaderboardElement.innerHTML =
-          '<div class="leaderboard-empty">' +
-          'Noch keine Kilometer in diesem Monat.' +
-          '</div>';
+          `
+            <div class="leaderboard-empty">
+              Noch keine Kilometer in diesem Monat.
+            </div>
+          `;
+
 
         return;
 
@@ -1487,10 +1629,18 @@
           firstRun
         );
 
+
       const distanceColumn =
         findDistanceColumn(
           firstRun
         );
+
+
+      const startTimeColumn =
+        findStartTimeColumn(
+          firstRun
+        );
+
 
       const dateColumn =
         findDateColumn(
@@ -1500,16 +1650,32 @@
 
       if (
         !userColumn ||
-        !distanceColumn ||
-        !dateColumn
+        !distanceColumn
       ) {
 
         throw new Error(
-          "Die runs-Tabelle enthält nicht die benötigten Angaben."
+          "Die runs-Tabelle enthält keine User- oder Kilometer-Spalte."
         );
 
       }
 
+
+      if (
+        filterTime &&
+        !startTimeColumn &&
+        !dateColumn
+      ) {
+
+        throw new Error(
+          "Die runs-Tabelle enthält keine Startzeit bzw. kein Laufdatum."
+        );
+
+      }
+
+
+      /*
+       * 3. Aktuellen Monat bestimmen
+       */
 
       const {
         start,
@@ -1537,6 +1703,10 @@
       );
 
 
+      /*
+       * 4. JEDEN Homepage-Lauf auswerten
+       */
+
       runs.forEach(
         run => {
 
@@ -1544,37 +1714,58 @@
             run[userColumn];
 
 
+          /*
+           * Nur User, die in dieser Challenge
+           * Mitglied sind.
+           */
+
           if (
             !userSet.has(
               userId
             )
           ) {
+
             return;
+
           }
 
 
+          /*
+           * Startzeit / Laufdatum holen.
+           */
+
           const runDate =
-            new Date(
-              run[dateColumn]
+            getRunDate(
+              run,
+              startTimeColumn,
+              dateColumn
             );
 
 
-          if (
-            Number.isNaN(
-              runDate.getTime()
-            )
-          ) {
+          if (!runDate) {
+
             return;
+
           }
 
+
+          /*
+           * Nur aktueller Kalendermonat.
+           */
 
           if (
             runDate < start ||
             runDate >= end
           ) {
+
             return;
+
           }
 
+
+          /*
+           * Early Bird / Night Owls
+           */
 
           if (
             filterTime &&
@@ -1583,18 +1774,41 @@
               challengeId
             )
           ) {
+
             return;
+
           }
 
 
-          totals[userId] +=
+          /*
+           * Kilometer aus dem Homepage-Lauf.
+           */
+
+          const kilometers =
             numberValue(
               run[distanceColumn]
             );
 
+
+          if (
+            kilometers <= 0
+          ) {
+
+            return;
+
+          }
+
+
+          totals[userId] +=
+            kilometers;
+
         }
       );
 
+
+      /*
+       * 5. Leaderboard sortieren
+       */
 
       const leaderboard =
         Object.entries(
@@ -1604,8 +1818,11 @@
             (
               [userId, kilometers]
             ) => ({
+
               userId,
+
               kilometers
+
             })
           )
           .sort(
@@ -1617,6 +1834,10 @@
               a.kilometers
           );
 
+
+      /*
+       * 6. Gesamt-Kilometer
+       */
 
       const totalKm =
         leaderboard.reduce(
@@ -1637,10 +1858,7 @@
 
 
       /*
-       * Profile statt nur Namen laden.
-       *
-       * Wir brauchen hier jetzt auch
-       * den username für den Link.
+       * 7. Profile
        */
 
       const profiles =
@@ -1654,6 +1872,36 @@
       );
 
 
+      /*
+       * Noch keine passenden Läufe.
+       */
+
+      const hasKm =
+        leaderboard.some(
+          runner =>
+            runner.kilometers > 0
+        );
+
+
+      if (!hasKm) {
+
+        leaderboardElement.innerHTML =
+          `
+            <div class="leaderboard-empty">
+              Noch keine passenden Kilometer in diesem Monat.
+            </div>
+          `;
+
+
+        return;
+
+      }
+
+
+      /*
+       * 8. Leaderboard ausgeben
+       */
+
       leaderboardElement.innerHTML =
         leaderboard
           .map(
@@ -1662,97 +1910,25 @@
               index
             ) => {
 
-              let position;
-
-              if (index === 0) {
-
-                position =
-                  '<span class="leaderboard-medal">🥇</span>';
-
-              } else if (index === 1) {
-
-                position =
-                  '<span class="leaderboard-medal">🥈</span>';
-
-              } else if (index === 2) {
-
-                position =
-                  '<span class="leaderboard-medal">🥉</span>';
-
-              } else {
-
-                position =
-                  index + 1;
-
-              }
-
-
               const profile =
                 profiles[
                   runner.userId
                 ];
 
 
-              const name =
-                profile?.displayName ||
-                "Runner";
-
-
-              /*
-               * Wenn ein Username vorhanden ist,
-               * wird der Name klickbar.
-               *
-               * Ohne Username bleibt der Name
-               * normaler Text.
-               */
-
-              let nameHtml;
-
-
-              if (
-                profile?.username
-              ) {
-
-                nameHtml = `
-                  <a
-                    class="leaderboard-profile-link"
-                    href="${escapeHtml(
-                      getProfileUrl(
-                        profile.username
-                      )
-                    )}"
-                    title="Profil von ${escapeHtml(
-                      name
-                    )} öffnen"
-                  >
-                    ${escapeHtml(
-                      name
-                    )}
-                  </a>
-                `;
-
-              } else {
-
-                nameHtml = `
-                  <span class="leaderboard-profile-link">
-                    ${escapeHtml(
-                      name
-                    )}
-                  </span>
-                `;
-
-              }
-
-
               return `
                 <div class="leaderboard-row">
 
                   <div class="leaderboard-position">
-                    ${position}
+                    ${renderPosition(
+                      index
+                    )}
                   </div>
 
                   <div class="leaderboard-name">
-                    ${nameHtml}
+                    ${renderProfileName(
+                      profile
+                    )}
                   </div>
 
                   <div class="leaderboard-km">
@@ -1772,7 +1948,7 @@
     } catch (error) {
 
       console.error(
-        "Leaderboard-Fehler:",
+        "Challenge-Kilometer konnten nicht geladen werden:",
         error
       );
 
@@ -1787,20 +1963,226 @@
 
 
       leaderboardElement.innerHTML =
-        '<div class="leaderboard-empty">' +
-        'Die Kilometer konnten gerade nicht geladen werden.' +
-        '</div>';
+        `
+          <div class="leaderboard-empty">
+            Die Kilometer konnten gerade nicht geladen werden.
+          </div>
+        `;
 
     }
 
   }
 
 
-  /*
-   * ==========================================================
-   * STREAK LEADERBOARD
-   * ==========================================================
-   */
+  /* ==========================================================
+     STREAK
+     ========================================================== */
+
+  function getDateKey(
+    date
+  ) {
+
+    return [
+      date.getFullYear(),
+      String(
+        date.getMonth() + 1
+      ).padStart(
+        2,
+        "0"
+      ),
+      String(
+        date.getDate()
+      ).padStart(
+        2,
+        "0"
+      )
+    ].join("-");
+
+  }
+
+
+  function getStreakForUser(
+    userId,
+    runs,
+    userColumn,
+    startTimeColumn,
+    dateColumn,
+    start,
+    end
+  ) {
+
+    const runDays =
+      new Set();
+
+
+    runs.forEach(
+      run => {
+
+        if (
+          run[userColumn] !==
+          userId
+        ) {
+
+          return;
+
+        }
+
+
+        const runDate =
+          getRunDate(
+            run,
+            startTimeColumn,
+            dateColumn
+          );
+
+
+        if (!runDate) {
+
+          return;
+
+        }
+
+
+        if (
+          runDate < start ||
+          runDate >= end
+        ) {
+
+          return;
+
+        }
+
+
+        runDays.add(
+          getDateKey(
+            runDate
+          )
+        );
+
+      }
+    );
+
+
+    if (
+      !runDays.size
+    ) {
+
+      return 0;
+
+    }
+
+
+    const today =
+      new Date();
+
+
+    const todayKey =
+      getDateKey(
+        today
+      );
+
+
+    const yesterday =
+      new Date(
+        today
+      );
+
+
+    yesterday.setDate(
+      yesterday.getDate() - 1
+    );
+
+
+    const yesterdayKey =
+      getDateKey(
+        yesterday
+      );
+
+
+    /*
+     * Wenn heute UND gestern kein Lauf
+     * vorhanden ist, ist die aktuelle
+     * Streak beendet.
+     */
+
+    if (
+      !runDays.has(
+        todayKey
+      ) &&
+      !runDays.has(
+        yesterdayKey
+      )
+    ) {
+
+      return 0;
+
+    }
+
+
+    const cursor =
+      new Date(
+        today
+      );
+
+
+    /*
+     * Wenn heute noch kein Lauf war,
+     * beginnen wir mit gestern.
+     */
+
+    if (
+      !runDays.has(
+        todayKey
+      )
+    ) {
+
+      cursor.setDate(
+        cursor.getDate() - 1
+      );
+
+    }
+
+
+    let streak = 0;
+
+
+    while (true) {
+
+      const key =
+        getDateKey(
+          cursor
+        );
+
+
+      if (
+        !runDays.has(
+          key
+        )
+      ) {
+
+        break;
+
+      }
+
+
+      streak++;
+
+
+      cursor.setDate(
+        cursor.getDate() - 1
+      );
+
+    }
+
+
+    return streak;
+
+  }
+
+
+  /* ==========================================================
+     STREAK LEADERBOARD
+     ========================================================== */
 
   async function loadStreakLeaderboard() {
 
@@ -1809,6 +2191,7 @@
         "streakTotal"
       );
 
+
     const leaderboardElement =
       document.getElementById(
         "streakLeaderboard"
@@ -1816,6 +2199,10 @@
 
 
     try {
+
+      /*
+       * Challenge-Mitglieder
+       */
 
       const members =
         await getChallengeMembers(
@@ -1837,42 +2224,60 @@
         ];
 
 
-      if (!userIds.length) {
+      if (
+        !userIds.length
+      ) {
 
         totalElement.textContent =
           "0 Tage";
+
 
         leaderboardElement.classList.remove(
           "loading"
         );
 
+
         leaderboardElement.innerHTML =
-          '<div class="leaderboard-empty">' +
-          'Noch keine Teilnehmer.' +
-          '</div>';
+          `
+            <div class="leaderboard-empty">
+              Noch keine Teilnehmer.
+            </div>
+          `;
+
 
         return;
 
       }
 
 
+      /*
+       * Homepage-Läufe
+       */
+
       const runs =
         await getRuns();
 
 
-      if (!runs.length) {
+      if (
+        !runs.length
+      ) {
 
         totalElement.textContent =
           "0 Tage";
+
 
         leaderboardElement.classList.remove(
           "loading"
         );
 
+
         leaderboardElement.innerHTML =
-          '<div class="leaderboard-empty">' +
-          'Noch keine Läufe in diesem Monat.' +
-          '</div>';
+          `
+            <div class="leaderboard-empty">
+              Noch keine Läufe in diesem Monat.
+            </div>
+          `;
+
 
         return;
 
@@ -1888,6 +2293,13 @@
           firstRun
         );
 
+
+      const startTimeColumn =
+        findStartTimeColumn(
+          firstRun
+        );
+
+
       const dateColumn =
         findDateColumn(
           firstRun
@@ -1896,11 +2308,14 @@
 
       if (
         !userColumn ||
-        !dateColumn
+        (
+          !startTimeColumn &&
+          !dateColumn
+        )
       ) {
 
         throw new Error(
-          "Die runs-Tabelle enthält nicht die benötigten Angaben."
+          "Die runs-Tabelle enthält keine benötigten Laufdaten."
         );
 
       }
@@ -1924,6 +2339,7 @@
               userId,
               runs,
               userColumn,
+              startTimeColumn,
               dateColumn,
               start,
               end
@@ -1953,7 +2369,7 @@
 
 
       /*
-       * Profile inklusive Username laden.
+       * Profile
        */
 
       const profiles =
@@ -1961,6 +2377,10 @@
           userIds
         );
 
+
+      /*
+       * Aktuellen User
+       */
 
       const {
         data: {
@@ -2000,6 +2420,10 @@
       );
 
 
+      /*
+       * Leaderboard
+       */
+
       leaderboardElement.innerHTML =
         leaderboard
           .map(
@@ -2008,89 +2432,25 @@
               index
             ) => {
 
-              let position;
-
-              if (index === 0) {
-
-                position =
-                  '<span class="leaderboard-medal">🥇</span>';
-
-              } else if (index === 1) {
-
-                position =
-                  '<span class="leaderboard-medal">🥈</span>';
-
-              } else if (index === 2) {
-
-                position =
-                  '<span class="leaderboard-medal">🥉</span>';
-
-              } else {
-
-                position =
-                  index + 1;
-
-              }
-
-
               const profile =
                 profiles[
                   runner.userId
                 ];
 
 
-              const name =
-                profile?.displayName ||
-                "Runner";
-
-
-              let nameHtml;
-
-
-              if (
-                profile?.username
-              ) {
-
-                nameHtml = `
-                  <a
-                    class="leaderboard-profile-link"
-                    href="${escapeHtml(
-                      getProfileUrl(
-                        profile.username
-                      )
-                    )}"
-                    title="Profil von ${escapeHtml(
-                      name
-                    )} öffnen"
-                  >
-                    ${escapeHtml(
-                      name
-                    )}
-                  </a>
-                `;
-
-              } else {
-
-                nameHtml = `
-                  <span class="leaderboard-profile-link">
-                    ${escapeHtml(
-                      name
-                    )}
-                  </span>
-                `;
-
-              }
-
-
               return `
                 <div class="leaderboard-row">
 
                   <div class="leaderboard-position">
-                    ${position}
+                    ${renderPosition(
+                      index
+                    )}
                   </div>
 
                   <div class="leaderboard-name">
-                    ${nameHtml}
+                    ${renderProfileName(
+                      profile
+                    )}
                   </div>
 
                   <div class="leaderboard-km">
@@ -2125,20 +2485,20 @@
 
 
       leaderboardElement.innerHTML =
-        '<div class="leaderboard-empty">' +
-        'Die Streak konnte gerade nicht geladen werden.' +
-        '</div>';
+        `
+          <div class="leaderboard-empty">
+            Die Streak konnte gerade nicht geladen werden.
+          </div>
+        `;
 
     }
 
   }
 
 
-  /*
-   * ==========================================================
-   * JOIN BUTTONS
-   * ==========================================================
-   */
+  /* ==========================================================
+     JOIN BUTTON
+     ========================================================== */
 
   async function updateJoinButton(
     button
@@ -2191,6 +2551,7 @@
         button.textContent =
           "Bereits dabei ✓";
 
+
         button.classList.add(
           "is-joined"
         );
@@ -2220,6 +2581,7 @@
     button.style.pointerEvents =
       "none";
 
+
     button.textContent =
       "Wird gespeichert …";
 
@@ -2243,6 +2605,10 @@
 
       }
 
+
+      /*
+       * Prüfen, ob bereits Mitglied
+       */
 
       const {
         data: existing,
@@ -2272,14 +2638,20 @@
         button.textContent =
           "Bereits dabei ✓";
 
+
         button.classList.add(
           "is-joined"
         );
+
 
         return;
 
       }
 
+
+      /*
+       * Challenge-Mitgliedschaft speichern
+       */
 
       const {
         error
@@ -2308,6 +2680,7 @@
       button.textContent =
         "Dabei ✓";
 
+
       button.classList.add(
         "is-joined"
       );
@@ -2317,6 +2690,10 @@
         "Du bist jetzt bei dieser Challenge dabei."
       );
 
+
+      /*
+       * Nach dem Beitritt sofort neu laden.
+       */
 
       if (
         challengeId ===
@@ -2330,7 +2707,10 @@
           true
         );
 
-      } else if (
+      }
+
+
+      else if (
         challengeId ===
         "night-owls-club"
       ) {
@@ -2342,14 +2722,20 @@
           true
         );
 
-      } else if (
+      }
+
+
+      else if (
         challengeId ===
         "streak-club"
       ) {
 
         await loadStreakLeaderboard();
 
-      } else if (
+      }
+
+
+      else if (
         challengeId ===
         "distance-club"
       ) {
@@ -2363,7 +2749,6 @@
 
       }
 
-
     } catch (error) {
 
       console.error(
@@ -2374,6 +2759,7 @@
 
       button.style.pointerEvents =
         "";
+
 
       button.textContent =
         "Erneut versuchen";
@@ -2391,6 +2777,10 @@
 
   }
 
+
+  /* ==========================================================
+     BUTTONS
+     ========================================================== */
 
   document
     .querySelectorAll(
@@ -2412,6 +2802,7 @@
           }
         );
 
+
         updateJoinButton(
           button
         );
@@ -2420,15 +2811,20 @@
     );
 
 
-  /*
-   * ==========================================================
-   * START
-   * ==========================================================
-   */
+  /* ==========================================================
+     SEITE STARTEN
+     ========================================================== */
 
   async function initializePage() {
 
     await Promise.all([
+
+      /*
+       * EARLY BIRD
+       *
+       * Nimmt automatisch die Homepage-Läufe
+       * zwischen 04:00 und 08:59.
+       */
 
       loadKmLeaderboard(
         "early-bird-club",
@@ -2437,6 +2833,14 @@
         true
       ),
 
+
+      /*
+       * NIGHT OWLS
+       *
+       * Nimmt automatisch die Homepage-Läufe
+       * zwischen 17:00 und 23:59.
+       */
+
       loadKmLeaderboard(
         "night-owls-club",
         "nightOwlsTotal",
@@ -2444,7 +2848,21 @@
         true
       ),
 
+
+      /*
+       * STREAK
+       *
+       * Verwendet die Lauftage aus der Homepage.
+       */
+
       loadStreakLeaderboard(),
+
+
+      /*
+       * DISTANCE
+       *
+       * Nimmt ALLE Homepage-Läufe des aktuellen Monats.
+       */
 
       loadKmLeaderboard(
         "distance-club",
