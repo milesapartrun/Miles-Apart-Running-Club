@@ -1,278 +1,258 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Challenges – Miles Apart Running Club</title>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<head>
+
+  <meta charset="utf-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
+  <title>
+    Challenges — Miles Apart Running Club
+  </title>
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+  ></script>
 
   <style>
-    :root {
-      --bg: #f4f1ea;
-      --card: #ffffff;
-      --text: #171717;
-      --muted: #77736c;
-      --line: #e6e1d8;
-      --accent: #b8f35a;
-      --accent-dark: #8fcb32;
-      --dark-card: #222222;
-      --dark-text: #ffffff;
-      --dark-muted: #b8b8b8;
-      --shadow: 0 18px 45px rgba(0,0,0,.07);
-      --radius: 28px;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      margin: 0;
-      font-family: Arial, Helvetica, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-
-    .layout {
-      min-height: 100vh;
-      display: flex;
-    }
-
-    .sidebar {
-      width: 250px;
-      background: #111111;
-      color: white;
-      padding: 28px 22px;
-      position: fixed;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      display: flex;
-      flex-direction: column;
-      z-index: 20;
-    }
-
-    .logo-wrap {
-      padding: 4px 8px 34px;
-    }
-
-    .logo {
-      width: 170px;
-      height: auto;
-      display: block;
-    }
-
-    .nav {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .nav a {
-      padding: 13px 15px;
-      border-radius: 14px;
-      color: #bdbdbd;
-      font-size: 15px;
-      font-weight: 700;
-      transition: .2s ease;
-    }
-
-    .nav a:hover,
-    .nav a.active {
-      background: #222222;
-      color: white;
-    }
-
-    .main {
-      width: calc(100% - 250px);
-      margin-left: 250px;
-      padding: 42px 46px 70px;
-    }
-
-    .container {
-      max-width: 1180px;
-      margin: 0 auto;
-    }
-
-    .hero {
-      margin-bottom: 36px;
-    }
-
-    .hero h1 {
-      margin: 0 0 14px;
-      font-size: clamp(42px, 6vw, 72px);
-      line-height: .95;
-      letter-spacing: -0.055em;
-    }
 
     .hero .lead {
-      max-width: 700px;
-      font-size: 19px;
-      line-height: 1.5;
+      color: #18b8c7;
       font-weight: 600;
-      color: #393733;
-      margin: 0 0 22px;
     }
 
-    .month-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 10px 15px;
-      background: #111111;
-      color: white;
-      border-radius: 999px;
+    .challenge-btn.is-joined {
+      pointer-events: none;
+      opacity: .75;
+    }
+
+    .challenge-month {
+      margin-top: 6px;
+      color: #777;
       font-size: 14px;
+      letter-spacing: .04em;
+      text-transform: uppercase;
+    }
+
+    .challenge-time {
+      margin-top: 14px;
+      font-size: 16px;
+      font-weight: 700;
+    }
+
+    .challenge-total {
+      margin-top: 24px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(0,0,0,.08);
+    }
+
+    .dark .challenge-total {
+      border-top-color: rgba(255,255,255,.12);
+    }
+
+    .challenge-total-label {
+      font-size: 12px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      opacity: .65;
+    }
+
+    .challenge-total-value {
+      margin-top: 6px;
+      font-size: 32px;
       font-weight: 800;
+      line-height: 1.1;
     }
 
-    .info-card {
-      background: white;
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      padding: 26px 28px;
-      margin-bottom: 28px;
-      box-shadow: var(--shadow);
+    .leaderboard {
+      margin-top: 26px;
     }
 
-    .info-card h2 {
-      margin: 0 0 12px;
-      font-size: 25px;
-      letter-spacing: -.03em;
-    }
-
-    .info-card p {
-      margin: 7px 0;
-      color: #625f59;
-      line-height: 1.5;
-      font-size: 15px;
-    }
-
-    .challenge-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 24px;
-    }
-
-    .challenge-card {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: var(--radius);
-      overflow: hidden;
-      box-shadow: var(--shadow);
-    }
-
-    .challenge-top {
-      padding: 26px 26px 20px;
-    }
-
-    .challenge-card.dark {
-      background: var(--dark-card);
-      color: var(--dark-text);
-      border-color: #2d2d2d;
-    }
-
-    .challenge-card.dark .challenge-description {
-      color: var(--dark-muted);
-    }
-
-    .challenge-card.dark .challenge-meta {
-      color: #dddddd;
-    }
-
-    .challenge-card.dark .challenge-meta strong {
-      color: white;
-    }
-
-    .challenge-card.dark .leaderboard {
-      background: #181818;
-      border-color: #303030;
-    }
-
-    .challenge-card.dark .leaderboard-title {
-      color: white;
-    }
-
-    .challenge-card.dark .leaderboard-subtitle {
-      color: #999999;
-    }
-
-    .challenge-card.dark .leaderboard-row {
-      border-color: #303030;
-    }
-
-    .challenge-card.dark .leaderboard-name {
-      color: white;
-    }
-
-    .challenge-card.dark .leaderboard-value {
-      color: #d0d0d0;
-    }
-
-    .challenge-card.dark .leaderboard-empty {
-      color: #999999;
-    }
-
-    .challenge-card.dark .join-btn {
-      background: var(--accent);
-      color: #111111;
-    }
-
-    .challenge-card.dark .join-btn:hover {
-      background: #c8ff76;
-    }
-
-    .badge-row {
+    .leaderboard-title {
       display: flex;
       align-items: center;
       justify-content: space-between;
       gap: 12px;
-      margin-bottom: 22px;
+      margin-bottom: 10px;
     }
 
-    .badge {
-      display: inline-flex;
+    .leaderboard-title h3 {
+      margin: 0;
+      font-size: 19px;
+    }
+
+    .leaderboard-row {
+      display: grid;
+      grid-template-columns: 34px minmax(0,1fr) auto;
       align-items: center;
-      padding: 7px 11px;
-      border-radius: 999px;
-      background: #111111;
-      color: white;
-      font-size: 11px;
-      font-weight: 900;
-      letter-spacing: .08em;
+      gap: 10px;
+      padding: 11px 0;
+      border-top: 1px solid rgba(0,0,0,.08);
     }
 
-    .badge.lime {
-      background: var(--accent);
-      color: #111111;
+    .night-owls .leaderboard-row,
+    .distance .leaderboard-row {
+      border-top-color: rgba(255,255,255,.12);
     }
 
-    .challenge-small {
-      color: #88847d;
-      font-size: 11px;
+    .leaderboard-position {
       font-weight: 800;
-      letter-spacing: .08em;
+      opacity: .55;
+      font-size: 18px;
+      text-align: center;
     }
 
-    .challenge-card.dark .challenge-small {
-      color: #a7a7a7;
-    }
-
-    .challenge-card h2 {
-      margin: 0 0 10px;
-      font-size: 31px;
+    .leaderboard-medal {
+      opacity: 1;
+      font-size: 22px;
       line-height: 1;
-      letter-spacing: -.04em;
+    }
+
+    .leaderboard-name {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .leaderboard-km {
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .leaderboard-empty {
+      padding: 14px 0 2px;
+      font-size: 14px;
+      opacity: .6;
+    }
+
+    .loading {
+      opacity: .55;
+    }
+
+    .month-label {
+      margin-top: 10px;
+      color: #777;
+      font-size: 14px;
+    }
+
+    .monthly-info {
+      margin-bottom: 28px;
+    }
+
+    .monthly-info p {
+      margin-bottom: 8px;
+    }
+
+    .card.early-bird {
+      background: #fff;
+      color: #111;
+      border: 1px solid rgba(0,0,0,.08);
+    }
+
+    .card.early-bird .muted {
+      color: #666;
+    }
+
+    .card.early-bird .small {
+      color: #666;
+    }
+
+    .card.night-owls {
+      background: #050708;
+      color: #fff;
+    }
+
+    .card.night-owls .muted {
+      color: #d0d0d0;
+    }
+
+    .card.night-owls .small {
+      color: #d0d0d0;
+    }
+
+    .card.night-owls .challenge-month {
+      color: #bdbdbd;
+    }
+
+    .card.night-owls .challenge-time {
+      color: #fff;
+    }
+
+    .card.night-owls .challenge-total-label {
+      color: #fff;
+    }
+
+    .card.night-owls .badge {
+      color: #111;
+      background: #fff;
+    }
+
+    .card.night-owls .btn {
+      color: #111;
+      background: #fff;
+    }
+
+    .card.streak {
+      background: #fff;
+      color: #111;
+      border: 1px solid rgba(0,0,0,.08);
+    }
+
+    .card.streak .muted {
+      color: #666;
+    }
+
+    .card.streak .small {
+      color: #666;
+    }
+
+    .card.distance {
+      background: #050708;
+      color: #fff;
+    }
+
+    .card.distance .muted {
+      color: #d0d0d0;
+    }
+
+    .card.distance .small {
+      color: #d0d0d0;
+    }
+
+    .card.distance .challenge-month {
+      color: #bdbdbd;
+    }
+
+    .card.distance .challenge-time {
+      color: #fff;
+    }
+
+    .card.distance .challenge-total-label {
+      color: #fff;
+    }
+
+    .card.distance .challenge-total-value {
+      color: #fff;
+    }
+
+    .card.distance .badge {
+      color: #111;
+      background: #fff;
+    }
+
+    .card.distance .btn {
+      color: #111;
+      background: #fff;
     }
 
     .night-owls h2 {
@@ -280,447 +260,534 @@
     }
 
     .distance h2 {
-      font-size: 28px !important;
+      font-size: 29px !important;
       white-space: nowrap;
     }
 
-    .challenge-description {
-      color: #6f6b65;
-      font-size: 15px;
-      line-height: 1.55;
-      margin: 0 0 22px;
-      min-height: 72px;
-    }
-
-    .night-phrase {
-      white-space: nowrap;
-    }
-
-    .challenge-meta {
-      display: flex;
-      flex-direction: column;
-      gap: 9px;
-      padding-top: 17px;
-      border-top: 1px solid var(--line);
-      color: #6e6a64;
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .challenge-card.dark .challenge-meta {
-      border-color: #343434;
-    }
-
-    .challenge-meta strong {
-      color: #222222;
-      font-size: 14px;
-    }
-
-    .challenge-footer {
-      padding: 18px 26px 24px;
-    }
-
-    .join-btn {
-      width: 100%;
-      border: 0;
-      background: #111111;
-      color: white;
-      border-radius: 15px;
-      padding: 13px 16px;
-      font-size: 14px;
-      font-weight: 900;
-      cursor: pointer;
-      transition: .2s ease;
-    }
-
-    .join-btn:hover {
-      transform: translateY(-1px);
-      background: #2a2a2a;
-    }
-
-    .join-btn.joined {
-      background: #e8e5df;
-      color: #77736c;
-      cursor: default;
-    }
-
-    .leaderboard {
-      margin-top: 17px;
-      border: 1px solid var(--line);
-      border-radius: 18px;
-      background: #faf9f6;
-      padding: 15px;
-    }
-
-    .leaderboard-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 9px;
-    }
-
-    .leaderboard-title {
-      font-size: 13px;
-      font-weight: 900;
-    }
-
-    .leaderboard-subtitle {
-      font-size: 11px;
-      color: #8a867f;
-      font-weight: 700;
-    }
-
-    .leaderboard-row {
-      display: grid;
-      grid-template-columns: 28px 1fr auto;
-      align-items: center;
-      gap: 8px;
-      padding: 9px 0;
-      border-top: 1px solid var(--line);
-    }
-
-    .leaderboard-row:first-child {
-      border-top: 0;
-    }
-
-    .leaderboard-position {
-      font-size: 17px;
-      text-align: center;
-    }
-
-    .leaderboard-name {
-      font-size: 13px;
-      font-weight: 800;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .leaderboard-value {
-      font-size: 12px;
-      font-weight: 800;
-      color: #77736c;
-    }
-
-    .leaderboard-empty {
-      padding: 9px 0 2px;
-      color: #8a867f;
-      font-size: 12px;
-      line-height: 1.4;
-    }
-
-    .loading {
-      opacity: .65;
-      pointer-events: none;
-    }
-
-    @media (max-width: 950px) {
-      .sidebar {
-        width: 210px;
-      }
-
-      .main {
-        width: calc(100% - 210px);
-        margin-left: 210px;
-        padding-left: 28px;
-        padding-right: 28px;
-      }
-
-      .challenge-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 720px) {
-      .layout {
-        display: block;
-      }
-
-      .sidebar {
-        position: static;
-        width: 100%;
-        min-height: auto;
-        padding: 18px;
-      }
-
-      .logo-wrap {
-        padding: 2px 4px 18px;
-      }
-
-      .logo {
-        width: 150px;
-      }
-
-      .nav {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: 6px;
-      }
-
-      .nav a {
-        padding: 10px 8px;
-        text-align: center;
-        font-size: 12px;
-      }
-
-      .main {
-        width: 100%;
-        margin-left: 0;
-        padding: 28px 16px 50px;
-      }
-
-      .hero h1 {
-        font-size: 48px;
-      }
-
-      .hero .lead {
-        font-size: 17px;
-      }
-
-      .info-card {
-        padding: 22px;
-      }
-
-      .challenge-top {
-        padding: 23px 21px 19px;
-      }
-
-      .challenge-footer {
-        padding: 17px 21px 21px;
-      }
-
-      .distance h2 {
-        font-size: 26px !important;
-      }
-    }
-
-    @media (max-width: 390px) {
-      .distance h2 {
-        font-size: 24px !important;
-      }
-    }
   </style>
+
 </head>
 
+
 <body>
-  <div class="layout">
 
-    <aside class="sidebar">
-      <div class="logo-wrap">
-        <img src="miles-apart-wordmark.png" alt="Miles Apart Running Club" class="logo">
+<div class="shell">
+
+
+  <aside class="sidebar">
+
+    <div class="brand">
+
+      <a href="index.html">
+
+        <img
+          src="miles-apart-wordmark.png"
+          alt="Miles Apart Running Club"
+        >
+
+      </a>
+
+    </div>
+
+
+    <nav class="nav">
+
+      <a href="index.html">
+        Miles Apart
+      </a>
+
+      <a href="home.html">
+        Home
+      </a>
+
+      <a
+        class="active"
+        href="challenges.html"
+      >
+        Challenges
+      </a>
+
+      <a href="community.html">
+        Community
+      </a>
+
+      <a href="events.html">
+        Events
+      </a>
+
+      <a href="training.html">
+        Training
+      </a>
+
+    </nav>
+
+
+    <div class="side-bottom">
+
+      <small>
+        THIS WEEK
+      </small>
+
+      <strong>
+        23.4 / 30 KM
+      </strong>
+
+      <div class="mini-progress">
+
+        <i></i>
+
       </div>
 
-      <nav class="nav">
-        <a href="index.html">Miles Apart</a>
-        <a href="home.html">Home</a>
-        <a href="challenges.html" class="active">Challenges</a>
-        <a href="#">Community</a>
-        <a href="#">Events</a>
-        <a href="#">Training</a>
-      </nav>
-    </aside>
+      <p
+        class="small"
+        style="color:#aaa;margin-bottom:0"
+      >
+        Nur 6.6 km bis zum Wochenziel.
+      </p>
 
-    <main class="main">
-      <div class="container">
+    </div>
 
-        <section class="hero">
-          <h1>Challenges. 🏆</h1>
-          <p class="lead">
-            Gemeinsam laufen. Über sich hinauswachsen. Sich messen.
-          </p>
-          <div class="month-pill" id="monthLabel">September 2026 📅</div>
-        </section>
+  </aside>
 
-        <section class="info-card">
-          <h2>Monatliche Challenges</h2>
-          <p>
-            Jeden Monat gibt es neue Herausforderungen. Deine Aktivitäten werden automatisch für den jeweiligen Kalendermonat gezählt. 📊
-          </p>
-          <p>
-            Mit Beginn eines neuen Monats startet jede Challenge wieder bei null.
-          </p>
-        </section>
 
-        <section class="challenge-grid">
+  <main class="main">
 
-          <!-- EARLY BIRD -->
-          <article class="challenge-card">
-            <div class="challenge-top">
-              <div class="badge-row">
-                <span class="badge">EARLY BIRD</span>
-                <span class="challenge-small">MONATLICH 📆</span>
-              </div>
 
-              <h2>Early Bird Club 🐦</h2>
+    <div class="top">
 
-              <p class="challenge-description">
-                Für alle, die den Tag mit einem Lauf beginnen und schon früh ihre Kilometer sammeln. 🌄
-              </p>
-
-              <div class="challenge-meta">
-                <div><strong>04:00 – 09:00 Uhr</strong></div>
-                <div>Jeden Kalendermonat neu</div>
-                <div>Gesamtkilometer diesen Monat 🏃‍♂️</div>
-              </div>
-            </div>
-
-            <div class="challenge-footer">
-              <button class="join-btn" data-challenge="early-bird">
-                Beitreten 🏁
-              </button>
-
-              <div class="leaderboard">
-                <div class="leaderboard-header">
-                  <span class="leaderboard-title">Leaderboard 🏆</span>
-                  <span class="leaderboard-subtitle">Dieser Monat 📅</span>
-                </div>
-                <div class="leaderboard-content" id="leaderboard-early-bird">
-                  <div class="leaderboard-empty">Leaderboard wird geladen …</div>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <!-- NIGHT OWL -->
-          <article class="challenge-card dark night-owls">
-            <div class="challenge-top">
-              <div class="badge-row">
-                <span class="badge lime">NIGHT OWL</span>
-                <span class="challenge-small">MONATLICH 📆</span>
-              </div>
-
-              <h2>Night Owls Club 🦉</h2>
-
-              <p class="challenge-description">
-                Für alle, die ihre Kilometer sammeln, wenn der Tag <span class="night-phrase">langsam zur Ruhe kommt. 🌃</span>
-              </p>
-
-              <div class="challenge-meta">
-                <div><strong>17:00 – 00:00 Uhr 🌙</strong></div>
-                <div>Jeden Kalendermonat neu</div>
-                <div>Gesamtkilometer diesen Monat 🏃‍♂️</div>
-              </div>
-            </div>
-
-            <div class="challenge-footer">
-              <button class="join-btn" data-challenge="night-owls">
-                Beitreten 🏁
-              </button>
-
-              <div class="leaderboard">
-                <div class="leaderboard-header">
-                  <span class="leaderboard-title">Leaderboard 🏆</span>
-                  <span class="leaderboard-subtitle">Dieser Monat 📅</span>
-                </div>
-                <div class="leaderboard-content" id="leaderboard-night-owls">
-                  <div class="leaderboard-empty">Leaderboard wird geladen …</div>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <!-- STREAK -->
-          <article class="challenge-card">
-            <div class="challenge-top">
-              <div class="badge-row">
-                <span class="badge">STREAK</span>
-                <span class="challenge-small">MONATLICH 📆</span>
-              </div>
-
-              <h2>Streak Challenge 🔥</h2>
-
-              <p class="challenge-description">
-                Laufe an aufeinanderfolgenden Kalendertagen. Wer am längsten durchhält, baut die größte Serie auf. 💪
-              </p>
-
-              <div class="challenge-meta">
-                <div><strong>Jeder Kalendertag zählt</strong></div>
-                <div>Längste aktuelle Serie</div>
-                <div>Aktuelle Streak</div>
-              </div>
-            </div>
-
-            <div class="challenge-footer">
-              <button class="join-btn" data-challenge="streak">
-                Beitreten 🏁
-              </button>
-
-              <div class="leaderboard">
-                <div class="leaderboard-header">
-                  <span class="leaderboard-title">Leaderboard 🏆</span>
-                  <span class="leaderboard-subtitle">Dieser Monat 📅</span>
-                </div>
-                <div class="leaderboard-content" id="leaderboard-streak">
-                  <div class="leaderboard-empty">Leaderboard wird geladen …</div>
-                </div>
-              </div>
-            </div>
-          </article>
-
-          <!-- DISTANCE -->
-          <article class="challenge-card dark distance">
-            <div class="challenge-top">
-              <div class="badge-row">
-                <span class="badge lime">DISTANCE</span>
-                <span class="challenge-small">MONATLICH 📆</span>
-              </div>
-
-              <h2>Distance Challenge 🏃‍♀️</h2>
-
-              <p class="challenge-description">
-                Sammle so viele Kilometer wie möglich. Gezählt werden alle gelaufenen Kilometer des aktuellen Monats – unabhängig von der Uhrzeit. 🌍
-              </p>
-
-              <div class="challenge-meta">
-                <div><strong>00:00 – 24:00 Uhr</strong></div>
-                <div>Alle Kilometer des Monats</div>
-                <div>Gesamtkilometer diesen Monat 🏃‍♀️</div>
-              </div>
-            </div>
-
-            <div class="challenge-footer">
-              <button class="join-btn" data-challenge="distance">
-                Beitreten 🏁
-              </button>
-
-              <div class="leaderboard">
-                <div class="leaderboard-header">
-                  <span class="leaderboard-title">Leaderboard 🏆</span>
-                  <span class="leaderboard-subtitle">Dieser Monat 📅</span>
-                </div>
-                <div class="leaderboard-content" id="leaderboard-distance">
-                  <div class="leaderboard-empty">Leaderboard wird geladen …</div>
-                </div>
-              </div>
-            </div>
-          </article>
-
-        </section>
+      <div class="crumb">
+        MILES APART / CHALLENGES
       </div>
-    </main>
-  </div>
 
-  <script>
-    const SUPABASE_URL = "https://orbrkdrsihsacsnprewf.supabase.co";
-    const SUPABASE_KEY = "sb_publishable_wc3w2fSuj8ItwiF6XBoQgw_HeW5_rNW";
+    </div>
 
-    const supabaseClient = window.supabase.createClient(
+
+    <div class="hero">
+
+      <div>
+
+        <h1>
+          Challenges. 🏆
+        </h1>
+
+        <p class="lead">
+          Gemeinsam laufen. Über sich hinauswachsen. Sich messen.
+        </p>
+
+        <p
+          id="currentMonth"
+          class="month-label"
+        >
+          September 2026
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="section monthly-info">
+
+      <div class="card">
+
+        <div class="section-head">
+
+          <h2>
+            Monatliche Challenges
+          </h2>
+
+          <span class="badge lime">
+            LIVE
+          </span>
+
+        </div>
+
+        <p class="muted">
+          Die Kilometer werden immer für den aktuellen
+          Kalendermonat gezählt.
+        </p>
+
+        <p class="small muted">
+          Am ersten Tag des nächsten Monats beginnt die
+          Kilometerwertung automatisch wieder bei null.
+          Es gibt kein Kilometerziel.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="grid g2">
+
+
+      <div class="card early-bird">
+
+        <div class="row">
+
+          <span class="badge lime">
+            EARLY BIRD
+          </span>
+
+          <span class="small">
+            MONATLICH 📆
+          </span>
+
+        </div>
+
+        <h2 style="font-size:32px">
+          Early Bird Club 🐦
+        </h2>
+
+        <p class="muted">
+          Für alle, die ihre Kilometer sammeln,
+          bevor der Tag richtig beginnt.
+        </p>
+
+        <div class="challenge-time">
+          04:00 – 09:00 Uhr
+        </div>
+
+        <div class="challenge-month">
+          Jeden Kalendermonat neu
+        </div>
+
+
+        <div class="challenge-total">
+
+          <div class="challenge-total-label">
+            Gesamtkilometer diesen Monat 🏃‍♂️
+          </div>
+
+          <div
+            id="earlyBirdTotal"
+            class="challenge-total-value"
+          >
+            0 km
+          </div>
+
+        </div>
+
+
+        <a
+          class="btn lime challenge-btn"
+          style="margin-top:22px;width:100%"
+          href="#"
+          data-challenge-id="early-bird-club"
+        >
+          Beitreten 🏁
+        </a>
+
+
+        <div class="leaderboard">
+
+          <div class="leaderboard-title">
+
+            <h3>
+              Leaderboard 🏆
+            </h3>
+
+            <span class="small">
+              Dieser Monat 📅
+            </span>
+
+          </div>
+
+          <div
+            id="earlyBirdLeaderboard"
+            class="loading"
+          >
+            Wird geladen …
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="card night-owls">
+
+        <div class="row">
+
+          <span class="badge">
+            NIGHT OWL
+          </span>
+
+          <span class="small">
+            MONATLICH 📆
+          </span>
+
+        </div>
+
+        <h2 style="font-size:32px">
+          Night Owls Club 🦉
+        </h2>
+
+        <p class="muted">
+          Für alle, die ihre Kilometer sammeln,
+          wenn der Tag langsam zur Ruhe kommt. 🌃
+        </p>
+
+        <div class="challenge-time">
+          17:00 – 00:00 Uhr
+        </div>
+
+        <div class="challenge-month">
+          Jeden Kalendermonat neu
+        </div>
+
+
+        <div class="challenge-total">
+
+          <div class="challenge-total-label">
+            Gesamtkilometer diesen Monat 🏃‍♂️
+          </div>
+
+          <div
+            id="nightOwlsTotal"
+            class="challenge-total-value"
+          >
+            0 km
+          </div>
+
+        </div>
+
+
+        <a
+          class="btn challenge-btn"
+          style="margin-top:22px;width:100%"
+          href="#"
+          data-challenge-id="night-owls-club"
+        >
+          Beitreten 🏁
+        </a>
+
+
+        <div class="leaderboard">
+
+          <div class="leaderboard-title">
+
+            <h3>
+              Leaderboard 🏆
+            </h3>
+
+            <span class="small">
+              Dieser Monat 📅
+            </span>
+
+          </div>
+
+          <div
+            id="nightOwlsLeaderboard"
+            class="loading"
+          >
+            Wird geladen …
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="card streak">
+
+        <div class="row">
+
+          <span class="badge lime">
+            STREAK
+          </span>
+
+          <span class="small">
+            MONATLICH 📆
+          </span>
+
+        </div>
+
+        <h2 style="font-size:32px">
+          Streak Challenge
+        </h2>
+
+        <p class="muted">
+          Wie konstant läufst du?
+          Jeder Lauftag verlängert deine Serie.
+          Wenn ein kompletter Tag ohne Lauf vergeht,
+          beginnt deine Streak wieder bei eins.
+        </p>
+
+        <div class="challenge-time">
+          Jeder Kalendertag zählt
+        </div>
+
+        <div class="challenge-month">
+          Längste aktuelle Serie
+        </div>
+
+
+        <div class="challenge-total">
+
+          <div class="challenge-total-label">
+            Aktuelle Streak
+          </div>
+
+          <div
+            id="streakTotal"
+            class="challenge-total-value"
+          >
+            0 Tage
+          </div>
+
+        </div>
+
+
+        <a
+          class="btn lime challenge-btn"
+          style="margin-top:22px;width:100%"
+          href="#"
+          data-challenge-id="streak-club"
+        >
+          Beitreten 🏁
+        </a>
+
+
+        <div class="leaderboard">
+
+          <div class="leaderboard-title">
+
+            <h3>
+              Leaderboard 🏆
+            </h3>
+
+            <span class="small">
+              Dieser Monat 📅
+            </span>
+
+          </div>
+
+          <div
+            id="streakLeaderboard"
+            class="loading"
+          >
+            Wird geladen …
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="card distance">
+
+        <div class="row">
+
+          <span class="badge">
+            DISTANCE
+          </span>
+
+          <span class="small">
+            MONATLICH 📆
+          </span>
+
+        </div>
+
+        <h2 style="font-size:29px">
+          Distance Challenge 🏃‍♀️
+        </h2>
+
+        <p class="muted">
+          Wie viele Kilometer bist du diesen Monat
+          insgesamt schon gelaufen?
+          Jeder Lauf zählt – unabhängig von der Uhrzeit.
+        </p>
+
+        <div class="challenge-time">
+          00:00 – 24:00 Uhr
+        </div>
+
+        <div class="challenge-month">
+          Alle Kilometer des Monats
+        </div>
+
+
+        <div class="challenge-total">
+
+          <div class="challenge-total-label">
+            Gesamtkilometer diesen Monat 🏃‍♀️
+          </div>
+
+          <div
+            id="distanceTotal"
+            class="challenge-total-value"
+          >
+            0 km
+          </div>
+
+        </div>
+
+
+        <a
+          class="btn challenge-btn"
+          style="margin-top:22px;width:100%"
+          href="#"
+          data-challenge-id="distance-club"
+        >
+          Beitreten 🏁
+        </a>
+
+
+        <div class="leaderboard">
+
+          <div class="leaderboard-title">
+
+            <h3>
+              Leaderboard 🏆
+            </h3>
+
+            <span class="small">
+              Dieser Monat 📅
+            </span>
+
+          </div>
+
+          <div
+            id="distanceLeaderboard"
+            class="loading"
+          >
+            Wird geladen …
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+</div>
+
+
+<script>
+
+  const SUPABASE_URL =
+    "https://orbrkdrsihsacsnprewf.supabase.co";
+
+  const SUPABASE_KEY =
+    "sb_publishable_wc3w2fSuj8ItwiF6XBoQgw_HeW5_rNW";
+
+
+  const supabaseClient =
+    window.supabase.createClient(
       SUPABASE_URL,
       SUPABASE_KEY
     );
 
-    const CHALLENGE_IDS = {
-      "early-bird": 1,
-      "night-owls": 2,
-      "streak": 3,
-      "distance": 4
-    };
 
-    function getCurrentMonthRange() {
-      const now = new Date();
+  function getCurrentMonthRange() {
 
-      const start = new Date(
+    const now = new Date();
+
+    const start =
+      new Date(
         now.getFullYear(),
         now.getMonth(),
         1,
@@ -730,7 +797,8 @@
         0
       );
 
-      const end = new Date(
+    const end =
+      new Date(
         now.getFullYear(),
         now.getMonth() + 1,
         1,
@@ -740,530 +808,1464 @@
         0
       );
 
-      return { start, end };
-    }
+    return {
+      start,
+      end
+    };
 
-    function getMonthLabel() {
-      const now = new Date();
+  }
 
-      return now.toLocaleDateString("de-DE", {
+
+  function getMonthLabel() {
+
+    return new Intl.DateTimeFormat(
+      "de-DE",
+      {
         month: "long",
         year: "numeric"
-      });
-    }
-
-    function formatKm(value) {
-      const km = Number(value || 0);
-
-      return `${km.toFixed(1).replace(".", ",")} km`;
-    }
-
-    function formatDays(value) {
-      const days = Number(value || 0);
-
-      return `${days} ${days === 1 ? "Tag" : "Tage"}`;
-    }
-
-    function escapeHtml(value) {
-      return String(value ?? "")
-        .replace(/&/g, "&amp;")
-        .replace(/</g, "&lt;")
-        .replace(/>/g, "&gt;")
-        .replace(/"/g, "&quot;")
-        .replace(/'/g, "&#039;");
-    }
-
-    function numberValue(value) {
-      const number = Number(value);
-
-      return Number.isFinite(number) ? number : 0;
-    }
-
-    async function getProfileNames(userIds) {
-      if (!userIds.length) {
-        return {};
       }
+    ).format(
+      new Date()
+    );
 
-      const { data, error } = await supabaseClient
+  }
+
+
+  document
+    .getElementById("currentMonth")
+    .textContent =
+      getMonthLabel();
+
+
+  function formatKm(value) {
+
+    return (
+      Math.round(
+        value * 10
+      ) / 10
+    ).toLocaleString(
+      "de-DE"
+    ) + " km";
+
+  }
+
+
+  function formatDays(value) {
+
+    return (
+      value +
+      (
+        value === 1
+          ? " Tag"
+          : " Tage"
+      )
+    );
+
+  }
+
+
+  function escapeHtml(value) {
+
+    return String(value)
+      .replace(
+        /&/g,
+        "&amp;"
+      )
+      .replace(
+        /</g,
+        "&lt;"
+      )
+      .replace(
+        />/g,
+        "&gt;"
+      )
+      .replace(
+        /"/g,
+        "&quot;"
+      )
+      .replace(
+        /'/g,
+        "&#039;"
+      );
+
+  }
+
+
+  function numberValue(value) {
+
+    if (
+      value === null ||
+      value === undefined
+    ) {
+      return 0;
+    }
+
+    const number =
+      Number(
+        String(value)
+          .replace(",", ".")
+      );
+
+    return Number.isFinite(number)
+      ? number
+      : 0;
+
+  }
+
+
+  async function getProfileNames(
+    userIds
+  ) {
+
+    if (!userIds.length) {
+      return {};
+    }
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
         .from("profiles")
-        .select("id, first_name, last_name")
-        .in("id", userIds);
-
-      if (error) {
-        console.error("Profile error:", error);
-        return {};
-      }
-
-      const result = {};
-
-      (data || []).forEach(profile => {
-        const fullName = [
-          profile.first_name,
-          profile.last_name
-        ]
-          .filter(Boolean)
-          .join(" ")
-          .trim();
-
-        result[profile.id] = fullName || "Runner";
-      });
-
-      return result;
-    }
-
-    async function getChallengeMembers(challengeId) {
-      const { data, error } = await supabaseClient
-        .from("challenge_members")
-        .select("User_id, Challenge_id, Joined_at")
-        .eq("Challenge_id", challengeId);
-
-      if (error) {
-        console.error("Challenge member error:", error);
-        return [];
-      }
-
-      return data || [];
-    }
-
-    async function getRuns() {
-      const possibleTables = [
-        "runs",
-        "Runs",
-        "activities",
-        "Activities"
-      ];
-
-      for (const table of possibleTables) {
-        const { data, error } = await supabaseClient
-          .from(table)
-          .select("*")
-          .limit(5000);
-
-        if (!error && Array.isArray(data)) {
-          return data;
-        }
-      }
-
-      return [];
-    }
-
-    function findColumn(row, candidates) {
-      const keys = Object.keys(row || {});
-
-      for (const candidate of candidates) {
-        const exact = keys.find(
-          key => key.toLowerCase() === candidate.toLowerCase()
+        .select(
+          "id, display_name, username"
+        )
+        .in(
+          "id",
+          userIds
         );
 
-        if (exact) {
-          return exact;
-        }
-      }
+    if (error) {
 
-      return null;
+      console.error(
+        "Profile konnten nicht geladen werden:",
+        error
+      );
+
+      return {};
+
     }
 
-    function findUserColumn(row) {
-      return findColumn(row, [
+    const names = {};
+
+    (data || []).forEach(
+      profile => {
+
+        names[profile.id] =
+          profile.display_name ||
+          profile.username ||
+          "Runner";
+
+      }
+    );
+
+    return names;
+
+  }
+
+
+  async function getChallengeMembers(
+    challengeId
+  ) {
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from("Challenge_members")
+        .select(
+          "User_id"
+        )
+        .eq(
+          "Challenge_id",
+          challengeId
+        );
+
+    if (error) {
+      throw error;
+    }
+
+    return data || [];
+
+  }
+
+
+  async function getRuns() {
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from("runs")
+        .select("*");
+
+    if (error) {
+      throw error;
+    }
+
+    return data || [];
+
+  }
+
+
+  function findColumn(
+    row,
+    names
+  ) {
+
+    const keys =
+      Object.keys(
+        row || {}
+      );
+
+
+    for (
+      const name of names
+    ) {
+
+      const exact =
+        keys.find(
+          key =>
+            key === name
+        );
+
+      if (exact) {
+        return exact;
+      }
+
+    }
+
+
+    for (
+      const name of names
+    ) {
+
+      const lower =
+        name.toLowerCase();
+
+      const found =
+        keys.find(
+          key =>
+            key.toLowerCase() ===
+            lower
+        );
+
+      if (found) {
+        return found;
+      }
+
+    }
+
+
+    return null;
+
+  }
+
+
+  function findUserColumn(row) {
+
+    return findColumn(
+      row,
+      [
         "user_id",
         "User_id",
         "userid",
-        "userId",
-        "UserId"
-      ]);
-    }
+        "userId"
+      ]
+    );
 
-    function findDistanceColumn(row) {
-      return findColumn(row, [
+  }
+
+
+  function findDistanceColumn(row) {
+
+    return findColumn(
+      row,
+      [
+        "distance_km",
+        "Distance_km",
         "distance",
         "Distance",
-        "distance_km",
-        "distanceKm",
+        "km",
+        "Km",
         "kilometers",
-        "km"
-      ]);
-    }
+        "kilometres",
+        "total_km"
+      ]
+    );
 
-    function findDateColumn(row) {
-      return findColumn(row, [
+  }
+
+
+  function findDateColumn(row) {
+
+    return findColumn(
+      row,
+      [
+        "started_at",
+        "Started_at",
+        "start_time",
+        "Start_time",
+        "run_date",
+        "Run_date",
         "date",
         "Date",
+        "performed_at",
+        "Performed_at",
         "created_at",
-        "Created_at",
-        "started_at",
-        "start_time",
-        "datetime",
-        "timestamp"
-      ]);
+        "Created_at"
+      ]
+    );
+
+  }
+
+
+  function isWithinChallengeTime(
+    date,
+    challengeId
+  ) {
+
+    const hour =
+      date.getHours();
+
+    const minute =
+      date.getMinutes();
+
+    const timeInMinutes =
+      hour * 60 +
+      minute;
+
+
+    if (
+      challengeId ===
+      "early-bird-club"
+    ) {
+
+      return (
+        timeInMinutes >= 240 &&
+        timeInMinutes < 540
+      );
+
     }
 
-    function isWithinChallengeTime(date, challenge) {
-      const hour = date.getHours();
-      const minute = date.getMinutes();
-      const time = hour + minute / 60;
 
-      if (challenge === "early-bird") {
-        return time >= 4 && time < 9;
-      }
+    if (
+      challengeId ===
+      "night-owls-club"
+    ) {
 
-      if (challenge === "night-owls") {
-        return time >= 17 || time < 0;
-      }
+      return (
+        timeInMinutes >= 1020 &&
+        timeInMinutes < 1440
+      );
 
-      return true;
     }
 
-    function getDateKey(date) {
-      const year = date.getFullYear();
-      const month = String(date.getMonth() + 1).padStart(2, "0");
-      const day = String(date.getDate()).padStart(2, "0");
 
-      return `${year}-${month}-${day}`;
+    return false;
+
+  }
+
+
+  function getDateKey(date) {
+
+    return [
+      date.getFullYear(),
+      String(
+        date.getMonth() + 1
+      ).padStart(2, "0"),
+      String(
+        date.getDate()
+      ).padStart(2, "0")
+    ].join("-");
+
+  }
+
+
+  function getStreakForUser(
+    userId,
+    runs,
+    userColumn,
+    dateColumn,
+    start,
+    end
+  ) {
+
+    const runDays =
+      new Set();
+
+
+    runs.forEach(
+      run => {
+
+        if (
+          run[userColumn] !==
+          userId
+        ) {
+          return;
+        }
+
+
+        const runDate =
+          new Date(
+            run[dateColumn]
+          );
+
+
+        if (
+          Number.isNaN(
+            runDate.getTime()
+          )
+        ) {
+          return;
+        }
+
+
+        if (
+          runDate < start ||
+          runDate >= end
+        ) {
+          return;
+        }
+
+
+        runDays.add(
+          getDateKey(
+            runDate
+          )
+        );
+
+      }
+    );
+
+
+    if (!runDays.size) {
+      return 0;
     }
 
-    function getStreakForUser(runs, userId) {
-      const { start, end } = getCurrentMonthRange();
 
-      const dates = new Set();
+    const today =
+      new Date();
 
-      runs.forEach(run => {
-        const userColumn = findUserColumn(run);
-        const dateColumn = findDateColumn(run);
+    const todayKey =
+      getDateKey(
+        today
+      );
 
-        if (!userColumn || !dateColumn) {
-          return;
-        }
 
-        if (String(run[userColumn]) !== String(userId)) {
-          return;
-        }
+    const yesterday =
+      new Date(
+        today
+      );
 
-        const date = new Date(run[dateColumn]);
+    yesterday.setDate(
+      yesterday.getDate() - 1
+    );
 
-        if (Number.isNaN(date.getTime())) {
-          return;
-        }
+    const yesterdayKey =
+      getDateKey(
+        yesterday
+      );
 
-        if (date < start || date >= end) {
-          return;
-        }
 
-        dates.add(getDateKey(date));
-      });
-
-      if (!dates.size) {
-        return 0;
-      }
-
-      const sortedDates = Array.from(dates)
-        .map(date => new Date(`${date}T00:00:00`))
-        .sort((a, b) => a - b);
-
-      let current = 1;
-      let longest = 1;
-
-      for (let i = 1; i < sortedDates.length; i++) {
-        const difference =
-          (sortedDates[i] - sortedDates[i - 1]) /
-          (1000 * 60 * 60 * 24);
-
-        if (difference === 1) {
-          current++;
-          longest = Math.max(longest, current);
-        } else {
-          current = 1;
-        }
-      }
-
-      return longest;
+    if (
+      !runDays.has(todayKey) &&
+      !runDays.has(yesterdayKey)
+    ) {
+      return 0;
     }
 
-    async function loadKmLeaderboard(challenge, elementId) {
-      const container = document.getElementById(elementId);
 
-      try {
-        const challengeId = CHALLENGE_IDS[challenge];
+    const cursor =
+      new Date(
+        today
+      );
 
-        const members = await getChallengeMembers(challengeId);
-        const runs = await getRuns();
 
-        if (!members.length) {
-          container.innerHTML =
-            `<div class="leaderboard-empty">Noch keine Teilnehmer.</div>`;
-          return;
+    if (
+      !runDays.has(todayKey)
+    ) {
+
+      cursor.setDate(
+        cursor.getDate() - 1
+      );
+
+    }
+
+
+    let streak = 0;
+
+
+    while (true) {
+
+      const key =
+        getDateKey(
+          cursor
+        );
+
+
+      if (
+        !runDays.has(key)
+      ) {
+        break;
+      }
+
+
+      streak++;
+
+
+      cursor.setDate(
+        cursor.getDate() - 1
+      );
+
+    }
+
+
+    return streak;
+
+  }
+
+
+  async function loadKmLeaderboard(
+    challengeId,
+    totalId,
+    leaderboardId,
+    filterTime
+  ) {
+
+    const totalElement =
+      document.getElementById(
+        totalId
+      );
+
+    const leaderboardElement =
+      document.getElementById(
+        leaderboardId
+      );
+
+
+    try {
+
+      const members =
+        await getChallengeMembers(
+          challengeId
+        );
+
+
+      const userIds =
+        [
+          ...new Set(
+            members
+              .map(
+                member =>
+                  member.User_id ||
+                  member.user_id
+              )
+              .filter(Boolean)
+          )
+        ];
+
+
+      if (!userIds.length) {
+
+        totalElement.textContent =
+          "0 km";
+
+        leaderboardElement.classList.remove(
+          "loading"
+        );
+
+        leaderboardElement.innerHTML =
+          '<div class="leaderboard-empty">' +
+          'Noch keine Teilnehmer.' +
+          '</div>';
+
+        return;
+
+      }
+
+
+      const runs =
+        await getRuns();
+
+
+      if (!runs.length) {
+
+        totalElement.textContent =
+          "0 km";
+
+        leaderboardElement.classList.remove(
+          "loading"
+        );
+
+        leaderboardElement.innerHTML =
+          '<div class="leaderboard-empty">' +
+          'Noch keine Kilometer in diesem Monat.' +
+          '</div>';
+
+        return;
+
+      }
+
+
+      const firstRun =
+        runs[0];
+
+
+      const userColumn =
+        findUserColumn(
+          firstRun
+        );
+
+      const distanceColumn =
+        findDistanceColumn(
+          firstRun
+        );
+
+      const dateColumn =
+        findDateColumn(
+          firstRun
+        );
+
+
+      if (
+        !userColumn ||
+        !distanceColumn ||
+        !dateColumn
+      ) {
+
+        throw new Error(
+          "Die runs-Tabelle enthält nicht die benötigten Angaben."
+        );
+
+      }
+
+
+      const {
+        start,
+        end
+      } =
+        getCurrentMonthRange();
+
+
+      const userSet =
+        new Set(
+          userIds
+        );
+
+
+      const totals = {};
+
+
+      userIds.forEach(
+        userId => {
+
+          totals[userId] =
+            0;
+
         }
+      );
 
-        const memberIds = members.map(member => member.User_id);
-        const names = await getProfileNames(memberIds);
 
-        const { start, end } = getCurrentMonthRange();
+      runs.forEach(
+        run => {
 
-        const totals = {};
+          const userId =
+            run[userColumn];
 
-        memberIds.forEach(id => {
-          totals[id] = 0;
-        });
 
-        runs.forEach(run => {
-          const userColumn = findUserColumn(run);
-          const distanceColumn = findDistanceColumn(run);
-          const dateColumn = findDateColumn(run);
-
-          if (!userColumn || !distanceColumn || !dateColumn) {
+          if (
+            !userSet.has(
+              userId
+            )
+          ) {
             return;
           }
 
-          const userId = run[userColumn];
 
-          if (!memberIds.includes(userId)) {
+          const runDate =
+            new Date(
+              run[dateColumn]
+            );
+
+
+          if (
+            Number.isNaN(
+              runDate.getTime()
+            )
+          ) {
             return;
           }
 
-          const date = new Date(run[dateColumn]);
 
-          if (Number.isNaN(date.getTime())) {
+          if (
+            runDate < start ||
+            runDate >= end
+          ) {
             return;
           }
 
-          if (date < start || date >= end) {
+
+          if (
+            filterTime &&
+            !isWithinChallengeTime(
+              runDate,
+              challengeId
+            )
+          ) {
             return;
           }
 
-          if (!isWithinChallengeTime(date, challenge)) {
-            return;
-          }
 
-          totals[userId] += numberValue(run[distanceColumn]);
-        });
+          totals[userId] +=
+            numberValue(
+              run[distanceColumn]
+            );
 
-        const ranking = memberIds
-          .map(userId => ({
-            userId,
-            name: names[userId] || "Runner",
-            value: totals[userId] || 0
-          }))
-          .sort((a, b) => b.value - a.value);
+        }
+      );
 
-        container.innerHTML = ranking
-          .slice(0, 10)
-          .map((entry, index) => {
-            let position = `${index + 1}`;
 
-            if (index === 0) position = "🥇";
-            if (index === 1) position = "🥈";
-            if (index === 2) position = "🥉";
+      const leaderboard =
+        Object.entries(
+          totals
+        )
+          .map(
+            (
+              [userId, kilometers]
+            ) => ({
+              userId,
+              kilometers
+            })
+          )
+          .sort(
+            (
+              a,
+              b
+            ) =>
+              b.kilometers -
+              a.kilometers
+          );
 
-            return `
-              <div class="leaderboard-row">
-                <div class="leaderboard-position">${position}</div>
-                <div class="leaderboard-name">${escapeHtml(entry.name)}</div>
-                <div class="leaderboard-value">${formatKm(entry.value)}</div>
-              </div>
-            `;
-          })
+
+      const totalKm =
+        leaderboard.reduce(
+          (
+            total,
+            runner
+          ) =>
+            total +
+            runner.kilometers,
+          0
+        );
+
+
+      totalElement.textContent =
+        formatKm(
+          totalKm
+        );
+
+
+      const names =
+        await getProfileNames(
+          userIds
+        );
+
+
+      leaderboardElement.classList.remove(
+        "loading"
+      );
+
+
+      leaderboardElement.innerHTML =
+        leaderboard
+          .map(
+            (
+              runner,
+              index
+            ) => {
+
+              let position;
+
+              if (index === 0) {
+
+                position =
+                  '<span class="leaderboard-medal">🥇</span>';
+
+              } else if (index === 1) {
+
+                position =
+                  '<span class="leaderboard-medal">🥈</span>';
+
+              } else if (index === 2) {
+
+                position =
+                  '<span class="leaderboard-medal">🥉</span>';
+
+              } else {
+
+                position =
+                  index + 1;
+
+              }
+
+
+              const name =
+                names[
+                  runner.userId
+                ] ||
+                "Runner";
+
+
+              return `
+                <div class="leaderboard-row">
+
+                  <div class="leaderboard-position">
+                    ${position}
+                  </div>
+
+                  <div class="leaderboard-name">
+                    ${escapeHtml(name)}
+                  </div>
+
+                  <div class="leaderboard-km">
+                    ${formatKm(runner.kilometers)}
+                  </div>
+
+                </div>
+              `;
+
+            }
+          )
           .join("");
 
-      } catch (error) {
-        console.error("Leaderboard error:", error);
 
-        container.innerHTML =
-          `<div class="leaderboard-empty">Leaderboard konnte nicht geladen werden.</div>`;
-      }
+    } catch (error) {
+
+      console.error(
+        "Leaderboard-Fehler:",
+        error
+      );
+
+
+      totalElement.textContent =
+        "0 km";
+
+
+      leaderboardElement.classList.remove(
+        "loading"
+      );
+
+
+      leaderboardElement.innerHTML =
+        '<div class="leaderboard-empty">' +
+        'Die Kilometer konnten gerade nicht geladen werden.' +
+        '</div>';
+
     }
 
-    async function loadStreakLeaderboard() {
-      const container =
-        document.getElementById("leaderboard-streak");
+  }
 
-      try {
-        const members =
-          await getChallengeMembers(CHALLENGE_IDS.streak);
 
-        const runs = await getRuns();
+  async function loadStreakLeaderboard() {
 
-        if (!members.length) {
-          container.innerHTML =
-            `<div class="leaderboard-empty">Noch keine Teilnehmer.</div>`;
-          return;
-        }
+    const totalElement =
+      document.getElementById(
+        "streakTotal"
+      );
 
-        const memberIds =
-          members.map(member => member.User_id);
+    const leaderboardElement =
+      document.getElementById(
+        "streakLeaderboard"
+      );
 
-        const names =
-          await getProfileNames(memberIds);
 
-        const ranking = memberIds
-          .map(userId => ({
+    try {
+
+      const members =
+        await getChallengeMembers(
+          "streak-club"
+        );
+
+
+      const userIds =
+        [
+          ...new Set(
+            members
+              .map(
+                member =>
+                  member.User_id ||
+                  member.user_id
+              )
+              .filter(Boolean)
+          )
+        ];
+
+
+      if (!userIds.length) {
+
+        totalElement.textContent =
+          "0 Tage";
+
+        leaderboardElement.classList.remove(
+          "loading"
+        );
+
+        leaderboardElement.innerHTML =
+          '<div class="leaderboard-empty">' +
+          'Noch keine Teilnehmer.' +
+          '</div>';
+
+        return;
+
+      }
+
+
+      const runs =
+        await getRuns();
+
+
+      if (!runs.length) {
+
+        totalElement.textContent =
+          "0 Tage";
+
+        leaderboardElement.classList.remove(
+          "loading"
+        );
+
+        leaderboardElement.innerHTML =
+          '<div class="leaderboard-empty">' +
+          'Noch keine Läufe in diesem Monat.' +
+          '</div>';
+
+        return;
+
+      }
+
+
+      const firstRun =
+        runs[0];
+
+
+      const userColumn =
+        findUserColumn(
+          firstRun
+        );
+
+      const dateColumn =
+        findDateColumn(
+          firstRun
+        );
+
+
+      if (
+        !userColumn ||
+        !dateColumn
+      ) {
+
+        throw new Error(
+          "Die runs-Tabelle enthält nicht die benötigten Angaben."
+        );
+
+      }
+
+
+      const {
+        start,
+        end
+      } =
+        getCurrentMonthRange();
+
+
+      const leaderboard = [];
+
+
+      userIds.forEach(
+        userId => {
+
+          const streak =
+            getStreakForUser(
+              userId,
+              runs,
+              userColumn,
+              dateColumn,
+              start,
+              end
+            );
+
+
+          leaderboard.push({
             userId,
-            name: names[userId] || "Runner",
-            value: getStreakForUser(runs, userId)
-          }))
-          .sort((a, b) => b.value - a.value);
+            streak
+          });
 
-        container.innerHTML = ranking
-          .slice(0, 10)
-          .map((entry, index) => {
-            let position = `${index + 1}`;
+        }
+      );
 
-            if (index === 0) position = "🥇";
-            if (index === 1) position = "🥈";
-            if (index === 2) position = "🥉";
 
-            return `
-              <div class="leaderboard-row">
-                <div class="leaderboard-position">${position}</div>
-                <div class="leaderboard-name">${escapeHtml(entry.name)}</div>
-                <div class="leaderboard-value">${formatDays(entry.value)}</div>
-              </div>
-            `;
-          })
+      leaderboard.sort(
+        (
+          a,
+          b
+        ) =>
+          b.streak -
+          a.streak
+      );
+
+
+      const names =
+        await getProfileNames(
+          userIds
+        );
+
+
+      const {
+        data: {
+          user: currentUser
+        }
+      } =
+        await supabaseClient.auth.getUser();
+
+
+      if (currentUser) {
+
+        const currentRunner =
+          leaderboard.find(
+            runner =>
+              runner.userId ===
+              currentUser.id
+          );
+
+
+        totalElement.textContent =
+          formatDays(
+            currentRunner
+              ? currentRunner.streak
+              : 0
+          );
+
+      } else {
+
+        totalElement.textContent =
+          "0 Tage";
+
+      }
+
+
+      leaderboardElement.classList.remove(
+        "loading"
+      );
+
+
+      leaderboardElement.innerHTML =
+        leaderboard
+          .map(
+            (
+              runner,
+              index
+            ) => {
+
+              let position;
+
+              if (index === 0) {
+
+                position =
+                  '<span class="leaderboard-medal">🥇</span>';
+
+              } else if (index === 1) {
+
+                position =
+                  '<span class="leaderboard-medal">🥈</span>';
+
+              } else if (index === 2) {
+
+                position =
+                  '<span class="leaderboard-medal">🥉</span>';
+
+              } else {
+
+                position =
+                  index + 1;
+
+              }
+
+
+              const name =
+                names[
+                  runner.userId
+                ] ||
+                "Runner";
+
+
+              return `
+                <div class="leaderboard-row">
+
+                  <div class="leaderboard-position">
+                    ${position}
+                  </div>
+
+                  <div class="leaderboard-name">
+                    ${escapeHtml(name)}
+                  </div>
+
+                  <div class="leaderboard-km">
+                    ${formatDays(runner.streak)}
+                  </div>
+
+                </div>
+              `;
+
+            }
+          )
           .join("");
 
-      } catch (error) {
-        console.error("Streak leaderboard error:", error);
 
-        container.innerHTML =
-          `<div class="leaderboard-empty">Leaderboard konnte nicht geladen werden.</div>`;
-      }
+    } catch (error) {
+
+      console.error(
+        "Streak-Fehler:",
+        error
+      );
+
+
+      totalElement.textContent =
+        "0 Tage";
+
+
+      leaderboardElement.classList.remove(
+        "loading"
+      );
+
+
+      leaderboardElement.innerHTML =
+        '<div class="leaderboard-empty">' +
+        'Die Streak konnte gerade nicht geladen werden.' +
+        '</div>';
+
     }
 
-    async function updateJoinButton(button) {
-      try {
-        const {
-          data: { user }
-        } = await supabaseClient.auth.getUser();
+  }
 
-        if (!user) {
-          return;
+
+  async function updateJoinButton(
+    button
+  ) {
+
+    try {
+
+      const {
+        data: {
+          user
         }
+      } =
+        await supabaseClient.auth.getUser();
 
-        const challengeKey =
-          button.dataset.challenge;
 
-        const challengeId =
-          CHALLENGE_IDS[challengeKey];
-
-        const { data, error } =
-          await supabaseClient
-            .from("challenge_members")
-            .select("id")
-            .eq("Challenge_id", challengeId)
-            .eq("User_id", user.id)
-            .maybeSingle();
-
-        if (error) {
-          console.error("Join status error:", error);
-          return;
-        }
-
-        if (data) {
-          button.textContent = "Dabei ✓";
-          button.classList.add("joined");
-          button.disabled = true;
-        }
-      } catch (error) {
-        console.error(error);
-      }
-    }
-
-    async function joinChallenge(button) {
-      if (button.classList.contains("joined")) {
+      if (!user) {
         return;
       }
 
-      button.classList.add("loading");
 
-      try {
-        const {
-          data: { user }
-        } = await supabaseClient.auth.getUser();
+      const challengeId =
+        button.dataset.challengeId;
 
-        if (!user) {
-          alert("Bitte zuerst einloggen.");
-          return;
-        }
 
-        const challengeKey =
-          button.dataset.challenge;
+      const {
+        data,
+        error
+      } =
+        await supabaseClient
+          .from("Challenge_members")
+          .select("id")
+          .eq(
+            "User_id",
+            user.id
+          )
+          .eq(
+            "Challenge_id",
+            challengeId
+          )
+          .maybeSingle();
 
-        const challengeId =
-          CHALLENGE_IDS[challengeKey];
 
-        const { error } =
-          await supabaseClient
-            .from("challenge_members")
-            .insert({
-              User_id: user.id,
-              Challenge_id: challengeId,
-              Joined_at: new Date().toISOString()
-            });
-
-        if (error) {
-          if (
-            error.code === "23505" ||
-            error.message?.toLowerCase().includes("duplicate")
-          ) {
-            button.textContent = "Dabei ✓";
-            button.classList.add("joined");
-            button.disabled = true;
-            return;
-          }
-
-          console.error("Join error:", error);
-          alert("Teilnahme konnte nicht gespeichert werden.");
-          return;
-        }
-
-        button.textContent = "Dabei ✓";
-        button.classList.add("joined");
-        button.disabled = true;
-
-        await initializeLeaderboards();
-
-      } finally {
-        button.classList.remove("loading");
+      if (error) {
+        return;
       }
+
+
+      if (data) {
+
+        button.textContent =
+          "Bereits dabei ✓";
+
+        button.classList.add(
+          "is-joined"
+        );
+
+      }
+
+    } catch (error) {
+
+      console.error(
+        "Teilnahmestatus konnte nicht geprüft werden:",
+        error
+      );
+
     }
 
-    async function initializeLeaderboards() {
-      await Promise.all([
-        loadKmLeaderboard(
-          "early-bird",
-          "leaderboard-early-bird"
-        ),
-        loadKmLeaderboard(
-          "night-owls",
-          "leaderboard-night-owls"
-        ),
-        loadStreakLeaderboard(),
-        loadKmLeaderboard(
-          "distance",
-          "leaderboard-distance"
+  }
+
+
+  async function joinChallenge(
+    button
+  ) {
+
+    const challengeId =
+      button.dataset.challengeId;
+
+
+    button.style.pointerEvents =
+      "none";
+
+    button.textContent =
+      "Wird gespeichert …";
+
+
+    try {
+
+      const {
+        data: {
+          user
+        }
+      } =
+        await supabaseClient.auth.getUser();
+
+
+      if (!user) {
+
+        window.location.href =
+          "home.html";
+
+        return;
+
+      }
+
+
+      const {
+        data: existing,
+        error: existingError
+      } =
+        await supabaseClient
+          .from("Challenge_members")
+          .select("id")
+          .eq(
+            "User_id",
+            user.id
+          )
+          .eq(
+            "Challenge_id",
+            challengeId
+          )
+          .maybeSingle();
+
+
+      if (existingError) {
+        throw existingError;
+      }
+
+
+      if (existing) {
+
+        button.textContent =
+          "Bereits dabei ✓";
+
+        button.classList.add(
+          "is-joined"
+        );
+
+        return;
+
+      }
+
+
+      const {
+        error
+      } =
+        await supabaseClient
+          .from("Challenge_members")
+          .insert({
+
+            User_id:
+              user.id,
+
+            Challenge_id:
+              challengeId,
+
+            Joined_at:
+              new Date().toISOString()
+
+          });
+
+
+      if (error) {
+        throw error;
+      }
+
+
+      button.textContent =
+        "Dabei ✓";
+
+      button.classList.add(
+        "is-joined"
+      );
+
+
+      alert(
+        "Du bist jetzt bei dieser Challenge dabei."
+      );
+
+
+      if (
+        challengeId ===
+        "early-bird-club"
+      ) {
+
+        await loadKmLeaderboard(
+          "early-bird-club",
+          "earlyBirdTotal",
+          "earlyBirdLeaderboard",
+          true
+        );
+
+      } else if (
+        challengeId ===
+        "night-owls-club"
+      ) {
+
+        await loadKmLeaderboard(
+          "night-owls-club",
+          "nightOwlsTotal",
+          "nightOwlsLeaderboard",
+          true
+        );
+
+      } else if (
+        challengeId ===
+        "streak-club"
+      ) {
+
+        await loadStreakLeaderboard();
+
+      } else if (
+        challengeId ===
+        "distance-club"
+      ) {
+
+        await loadKmLeaderboard(
+          "distance-club",
+          "distanceTotal",
+          "distanceLeaderboard",
+          false
+        );
+
+      }
+
+
+    } catch (error) {
+
+      console.error(
+        "Challenge-Anmeldung fehlgeschlagen:",
+        error
+      );
+
+
+      button.style.pointerEvents =
+        "";
+
+      button.textContent =
+        "Erneut versuchen";
+
+
+      alert(
+        "Die Teilnahme konnte gerade nicht gespeichert werden.\n\n" +
+        (
+          error?.message ||
+          "Unbekannter Fehler"
         )
-      ]);
+      );
+
     }
 
-    async function initializePage() {
-      document.getElementById("monthLabel").textContent =
-        `${getMonthLabel()} 📅`;
+  }
 
-      const buttons =
-        document.querySelectorAll(".join-btn");
 
-      buttons.forEach(button => {
-        updateJoinButton(button);
+  document
+    .querySelectorAll(
+      ".challenge-btn"
+    )
+    .forEach(
+      button => {
 
         button.addEventListener(
           "click",
-          () => joinChallenge(button)
+          event => {
+
+            event.preventDefault();
+
+            joinChallenge(
+              button
+            );
+
+          }
         );
-      });
 
-      await initializeLeaderboards();
-    }
+        updateJoinButton(
+          button
+        );
 
-    initializePage();
-  </script>
+      }
+    );
+
+
+  async function initializePage() {
+
+    await Promise.all([
+
+      loadKmLeaderboard(
+        "early-bird-club",
+        "earlyBirdTotal",
+        "earlyBirdLeaderboard",
+        true
+      ),
+
+      loadKmLeaderboard(
+        "night-owls-club",
+        "nightOwlsTotal",
+        "nightOwlsLeaderboard",
+        true
+      ),
+
+      loadStreakLeaderboard(),
+
+      loadKmLeaderboard(
+        "distance-club",
+        "distanceTotal",
+        "distanceLeaderboard",
+        false
+      )
+
+    ]);
+
+  }
+
+
+  initializePage();
+
+</script>
+
 </body>
+
 </html>
