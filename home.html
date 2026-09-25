@@ -208,7 +208,7 @@ button,input,textarea,select{font-family:inherit}
   width:38px;
   height:38px;
   margin:0 auto 4px;
-  font-size:25px;
+  font-size:31px;
   line-height:1;
   filter:grayscale(1);
 }
@@ -248,12 +248,12 @@ button,input,textarea,select{font-family:inherit}
   align-items:center;
   justify-content:space-between;
   gap:15px;
-  margin-top:1px;
+  margin-top:10px;
 }
 
 .running-level-progress{
   color:#8a918f;
-  font-size:9px;
+  font-size:11px;
   font-weight:800;
   letter-spacing:.5px;
   text-transform:uppercase;
@@ -266,7 +266,7 @@ button,input,textarea,select{font-family:inherit}
 
 .running-level-next{
   color:var(--miles-blue-dark);
-  font-size:9px;
+  font-size:11px;
   font-weight:900;
   text-align:right;
   white-space:nowrap;
@@ -292,7 +292,7 @@ button,input,textarea,select{font-family:inherit}
   .running-level-emoji{
     width:34px;
     height:34px;
-    font-size:23px;
+    font-size:26px;
   }
 
   .running-level-km{
@@ -301,12 +301,12 @@ button,input,textarea,select{font-family:inherit}
 
   .running-levels-meta{
     align-items:flex-start;
-    margin-top:3px;
+    margin-top:10px;
   }
 
   .running-level-progress,
   .running-level-next{
-    font-size:9px;
+    font-size:10px;
   }
 }
 
@@ -2363,8 +2363,6 @@ kannst du hier hinzufügen.
 </p>
 
 </div>
-
-<!-- LAUFLEVEL: direkt über dem Datum -->
 
 <div>
 
@@ -5402,7 +5400,6 @@ function renderTotals(totals){
        formatNumber(30-totals.week)+
        " km bis zum Wochenziel.";
 
-  /* Lauflevel basieren ausschließlich auf dem Kalenderjahr. */
   renderRunningLevels(totals.year);
 }
 
