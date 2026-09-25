@@ -44,9 +44,7 @@
 <div class="shell">
 
 
-  <!-- =======================================================
-       SIDEBAR
-       ======================================================= -->
+  <!-- SIDEBAR -->
 
   <aside class="sidebar">
 
@@ -122,14 +120,12 @@
   </aside>
 
 
-  <!-- =======================================================
-       MAIN CONTENT
-       ======================================================= -->
+  <!-- MAIN -->
 
   <main class="main">
 
 
-    <!-- TOP BAR -->
+    <!-- TOP -->
 
     <div class="top">
 
@@ -159,9 +155,7 @@
     </div>
 
 
-    <!-- =====================================================
-         CHALLENGES
-         ===================================================== -->
+    <!-- CHALLENGES -->
 
     <div class="grid g3">
 
@@ -304,9 +298,7 @@
     </div>
 
 
-    <!-- =====================================================
-         PROGRESS / MILESTONES
-         ===================================================== -->
+    <!-- PROGRESS -->
 
     <div class="section grid g2">
 
@@ -446,9 +438,7 @@
 </div>
 
 
-<!-- =========================================================
-     SUPABASE
-     ========================================================= -->
+<!-- SUPABASE -->
 
 <script>
 
@@ -471,8 +461,11 @@
       button.dataset.challengeId;
 
 
-    button.style.pointerEvents = "none";
-    button.textContent = "Wird gespeichert …";
+    button.style.pointerEvents =
+      "none";
+
+    button.textContent =
+      "Wird gespeichert …";
 
 
     try {
@@ -495,6 +488,11 @@
       }
 
 
+      /*
+       * WICHTIG:
+       * Die Spalte heißt in Supabase "User_id".
+       */
+
       const {
         data: existingMembership,
         error: existingError
@@ -503,12 +501,14 @@
           .from("Challenge_members")
           .select("id")
           .eq("User_id", user.id)
-          .eq("challenge_id", challengeId)
+          .eq("Challenge_id", challengeId)
           .maybeSingle();
 
 
       if (existingError) {
+
         throw existingError;
+
       }
 
 
@@ -526,6 +526,15 @@
       }
 
 
+      /*
+       * Teilnahme speichern.
+       *
+       * Die Spalten heißen:
+       * User_id
+       * Challenge_id
+       * joined_at
+       */
+
       const {
         error: insertError
       } =
@@ -533,9 +542,10 @@
           .from("Challenge_members")
           .insert({
 
-            User_id: user.id,
+            User_id:
+              user.id,
 
-            challenge_id:
+            Challenge_id:
               challengeId,
 
             joined_at:
@@ -545,7 +555,9 @@
 
 
       if (insertError) {
+
         throw insertError;
+
       }
 
 
@@ -578,7 +590,11 @@
 
 
       alert(
-        "Die Teilnahme konnte gerade nicht gespeichert werden."
+        "Die Teilnahme konnte gerade nicht gespeichert werden.\n\n" +
+        (
+          error?.message ||
+          "Unbekannter Fehler"
+        )
       );
 
     }
