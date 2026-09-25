@@ -65,6 +65,129 @@
 
 
     /* =====================================================
+       RUN BUDDIES
+    ===================================================== */
+
+    .ma-run-buddies {
+      width: 100% !important;
+
+      box-sizing: border-box !important;
+
+      margin: 0 0 28px 0 !important;
+
+      padding: 28px !important;
+
+      text-align: left !important;
+    }
+
+
+    .ma-run-buddies-head {
+      width: 100% !important;
+
+      display: flex !important;
+
+      align-items: flex-start !important;
+
+      justify-content: space-between !important;
+
+      gap: 20px !important;
+
+      margin: 0 !important;
+
+      padding: 0 !important;
+
+      text-align: left !important;
+
+      box-sizing: border-box !important;
+    }
+
+
+    .ma-run-buddies-title {
+      margin: 0 !important;
+
+      padding: 0 !important;
+
+      color: #111 !important;
+
+      font-size: 28px !important;
+
+      line-height: 1.15 !important;
+
+      font-weight: 800 !important;
+
+      text-align: left !important;
+    }
+
+
+    .ma-run-buddies-count {
+      display: block !important;
+
+      margin: 10px 0 0 0 !important;
+
+      padding: 0 !important;
+
+      color: #18b8c7 !important;
+
+      font-size: 58px !important;
+
+      line-height: 0.95 !important;
+
+      font-weight: 900 !important;
+
+      letter-spacing: -2px !important;
+
+      text-align: left !important;
+    }
+
+
+    .ma-run-buddies-label {
+      display: block !important;
+
+      margin: 7px 0 0 0 !important;
+
+      padding: 0 !important;
+
+      color: #777 !important;
+
+      font-size: 16px !important;
+
+      line-height: 1.3 !important;
+
+      font-weight: 500 !important;
+
+      text-align: left !important;
+    }
+
+
+    .ma-run-buddies-list {
+      width: 100% !important;
+
+      margin: 26px 0 0 0 !important;
+
+      padding: 0 !important;
+
+      text-align: left !important;
+    }
+
+
+    .ma-run-buddies-empty {
+      width: 100% !important;
+
+      margin: 0 !important;
+
+      padding: 0 !important;
+
+      color: #777 !important;
+
+      font-size: 17px !important;
+
+      line-height: 1.5 !important;
+
+      text-align: left !important;
+    }
+
+
+    /* =====================================================
        POST CARD
     ===================================================== */
 
@@ -295,6 +418,8 @@
 
       box-sizing: border-box !important;
 
+      align-self: stretch !important;
+
       text-align: left !important;
 
       font-size: 20px !important;
@@ -315,6 +440,10 @@
 
     .ma-post-copy * {
       text-align: left !important;
+
+      margin-left: 0 !important;
+
+      margin-right: 0 !important;
     }
 
 
@@ -542,6 +671,8 @@
 
       min-width: 0 !important;
 
+      width: auto !important;
+
       margin: 0 !important;
 
       padding: 0 !important;
@@ -616,17 +747,24 @@
 
       width: 100% !important;
 
+      max-width: 100% !important;
+
       margin: 5px 0 0 0 !important;
 
       padding: 0 !important;
 
       position: static !important;
 
+      left: auto !important;
+      right: auto !important;
+
       transform: none !important;
 
       float: none !important;
 
       clear: both !important;
+
+      align-self: stretch !important;
 
       background: transparent !important;
 
@@ -652,6 +790,15 @@
     }
 
 
+    .ma-comment-text * {
+      text-align: left !important;
+
+      margin-left: 0 !important;
+
+      margin-right: 0 !important;
+    }
+
+
     /* =====================================================
        COMMENT FORM
     ===================================================== */
@@ -668,6 +815,8 @@
       padding: 0 !important;
 
       box-sizing: border-box !important;
+
+      text-align: left !important;
     }
 
 
@@ -693,6 +842,8 @@
       font-size: 16px !important;
 
       box-sizing: border-box !important;
+
+      text-align: left !important;
     }
 
 
@@ -783,6 +934,35 @@
       }
 
 
+      .ma-run-buddies {
+        padding: 24px !important;
+
+        margin-bottom: 22px !important;
+      }
+
+
+      .ma-run-buddies-head {
+        gap: 12px !important;
+      }
+
+
+      .ma-run-buddies-title {
+        font-size: 25px !important;
+      }
+
+
+      .ma-run-buddies-count {
+        font-size: 54px !important;
+
+        letter-spacing: -2px !important;
+      }
+
+
+      .ma-run-buddies-label {
+        font-size: 15px !important;
+      }
+
+
       .ma-post-avatar {
         width: 54px !important;
 
@@ -819,6 +999,8 @@
 
       .ma-post-copy {
         width: 100% !important;
+
+        max-width: 100% !important;
 
         margin: 24px 0 25px 0 !important;
 
@@ -901,6 +1083,10 @@
 
 
       .ma-comment-text {
+        width: 100% !important;
+
+        max-width: 100% !important;
+
         font-size: 18px !important;
 
         margin-top: 5px !important;
@@ -1198,6 +1384,61 @@
     ></div>
 
 
+    <!-- RUN BUDDIES -->
+
+    <div
+      class="card ma-run-buddies"
+      id="communityLower"
+      style="display:none"
+    >
+
+      <div class="ma-run-buddies-head">
+
+        <div>
+
+          <h2 class="ma-run-buddies-title">
+            Run Buddies 🏃
+          </h2>
+
+
+          <span
+            class="ma-run-buddies-count"
+            id="memberCount"
+          >
+            —
+          </span>
+
+
+          <span class="ma-run-buddies-label">
+            angemeldete Mitglieder
+          </span>
+
+        </div>
+
+
+        <span class="badge">
+          Community
+        </span>
+
+      </div>
+
+
+      <div
+        id="runBuddies"
+        class="ma-run-buddies-list"
+      >
+
+        <p class="ma-run-buddies-empty">
+          Weitere Mitglieder werden hier
+          angezeigt, sobald sie der Community
+          beitreten.
+        </p>
+
+      </div>
+
+    </div>
+
+
     <!-- POSTS -->
 
     <div
@@ -1207,73 +1448,6 @@
         width:100%;
       "
     ></div>
-
-
-    <!-- LOWER AREA -->
-
-    <div
-      class="section grid g1"
-      id="communityLower"
-      style="display:none"
-    >
-
-
-      <!-- RUN BUDDIES -->
-
-      <div class="card">
-
-
-        <div class="section-head">
-
-          <div>
-
-            <h2>
-              Run Buddies 🏃
-            </h2>
-
-            <p
-              class="small muted"
-              style="margin:4px 0 0 0"
-            >
-              <strong
-                id="memberCount"
-                style="color:#111"
-              >
-                —
-              </strong>
-              angemeldete Mitglieder
-            </p>
-
-          </div>
-
-
-          <span class="badge">
-            Community
-          </span>
-
-        </div>
-
-
-        <div id="runBuddies">
-
-          <p
-            style="
-              color:#777;
-              line-height:1.5;
-            "
-          >
-            Weitere Mitglieder werden hier
-            angezeigt, sobald sie der Community
-            beitreten.
-          </p>
-
-        </div>
-
-
-      </div>
-
-
-    </div>
 
 
   </main>
@@ -2834,12 +3008,7 @@
 
       runBuddies.innerHTML = `
 
-        <p
-          style="
-            color:#777;
-            line-height:1.5;
-          "
-        >
+        <p class="ma-run-buddies-empty">
           Du bist aktuell das erste Mitglied
           mit einem vollständigen Profil.
         </p>
@@ -2861,6 +3030,7 @@
               class="rank"
               style="
                 margin-bottom:14px;
+                text-align:left !important;
               "
             >
 
@@ -2938,7 +3108,11 @@
 
 
     memberCount.textContent =
-      count ?? 0;
+      Number(
+        count ?? 0
+      ).toLocaleString(
+        "de-DE"
+      );
 
   }
 
@@ -2973,7 +3147,7 @@
 
 
       communityLower.style.display =
-        "grid";
+        "block";
 
 
     } catch (error) {
@@ -2993,7 +3167,7 @@
         clearError();
 
         communityLower.style.display =
-          "grid";
+          "block";
 
         return;
 
