@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Miles Apart – User</title>
+
+  <link rel="stylesheet" href="style.css">
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+
+  <main style="max-width:900px;margin:60px auto;padding:20px;">
+
+    <h1 id="name">Profil wird geladen …</h1>
+
+    <p id="username"></p>
+
+    <p id="bio"></p>
+
+    <p id="location"></p>
+
+    <hr>
+
+    <h2>Laufdaten</h2>
+
+    <p>
+      Gesamt:
+      <strong id="totalKm">0</strong> km
+    </p>
+
+    <div id="runs"></div>
+
+  </main>
+
+
+  <script>
+
+    const SUPABASE_URL =
+      "https://orbrkdrsihsacsnprewf.supabase.co";
+
+    const SUPABASE_KEY =
+      "sb_publishable_wc3w2fSuj8ItwiF6XBoQgw_HeW5_rNW";
+
+    const supabaseClient =
+      window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+      );
+
+
+    async function loadUser(){
+
+      const params =
+        new URLSearchParams(
+          window.location.search
+        );
+
+      const username =
+        params.get("username");
+
+
+      if(!username){
+
+        document.getElementById("name")
+          .textContent =
+          "Kein Username angegeben.";
+
+        return;
+
+      }
+
+
+      const {
+        data: profile,
+        error
+      } =
+        await supabaseClient
+          .from("profiles")
+          .select(
+            "id,display_name,username,avatar_url,bio,location"
+          )
+          .ilike(
+            "username",
+            username
+          )
+          .maybeSingle();
+
+
+      if(error){
+
+        console.error(error);
+
+        document.getElementById("name")
+          .textContent =
+          "Fehler beim Laden.";
+
+        return;
+
+      }
+
+
+      if(!profile){
+
+        document.getElementById("name")
+          .textContent =
+          "User nicht gefunden.";
+
+        return;
+
+      }
+
+
+      document.getElementById("name")
+        .textContent =
+        profile.display_name ||
+        profile.username ||
+        "Miles Apart User";
+
+
+      document.getElementById("username")
+        .textContent =
+        profile.username
+          ? "@" + profile.username
+          : "";
+
+
+      document.getElementById("bio")
+        .textContent =
+        profile.bio || "";
+
+
+      document.getElementById("location")
+        .textContent =
+        profile.location
+          ? "📍 " + profile.location
+          : "";
+
+
+      const {
+        data: runs,
+        error: runsError
+      } =
+        await supabaseClient
+          .from("runs")
+          .select(
+            "id,run_date,distance_km,duration_seconds,note,run_type,best_time_category"
+          )
+          .eq(
+            "user_id",
+            profile.id
+          )
+          .order(
+            "run_date",
+            {
+              ascending:false
+            }
+          );
+
+
+      if(runsError){
+
+        console.error(runsError);
+
+        return;
+
+      }
+
+
+      const total =
+        (runs || []).reduce(
+          (sum,run) =>
+            sum +
+            (
+              Number(
+                run.distance_km
+              ) || 0
+            ),
+          0
+        );
+
+
+      document.getElementById("totalKm")
+        .textContent =
+        total.toLocaleString(
+          "de-DE",
+          {
+            maximumFractionDigits:2
+          }
+        );
+
+
+      const runsContainer =
+        document.getElementById(
+          "runs"
+        );
+
+
+      runsContainer.innerHTML =
+        "";
+
+
+      (runs || []).forEach(
+        run => {
+
+          const item =
+            document.createElement(
+              "div"
+            );
+
+
+          item.style.padding =
+            "15px 0";
+
+          item.style.borderBottom =
+            "1px solid #ddd";
+
+
+          item.textContent =
+            `${run.run_date} · ${
+              run.distance_km
+            } km · ${
+              run.run_type || "Run"
+            }`;
+
+
+          runsContainer.appendChild(
+            item
+          );
+
+        }
+      );
+
+    }
+
+
+    loadUser();
+
+  </script>
+
+</body>
+</html>
