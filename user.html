@@ -1951,21 +1951,22 @@ function posterFittedText(
 
 
 /* =========================================================
-   POSTER AUSSENRAHMEN
+   POSTER RAHMEN
 ========================================================= */
 
 /*
- * WICHTIG:
+ * AUFBAU DES POSTERS:
  *
- * Der türkise Rahmen liegt jetzt KOMPLETT AUSSEN.
+ * 1. Ganz außen: türkiser Rahmen
  *
- * Der weiße Innenbereich beginnt deutlich weiter innen.
+ * 2. Direkt dahinter: kleine graue Fläche
  *
- * ALLE Inhalte beginnen erst innerhalb dieses weißen
- * Innenbereichs.
+ * 3. Danach: weiße Innenfläche
  *
- * Dadurch kann keine Schrift mehr auf dem türkisen
- * Außenrahmen liegen.
+ * 4. Erst innerhalb der weißen Fläche:
+ *    kompletter Inhalt
+ *
+ * Es gibt KEINEN inneren türkisen Rahmen mehr.
  */
 
 function drawPosterFrame(
@@ -1974,7 +1975,9 @@ function drawPosterFrame(
   H
 ){
 
-  /* kompletter Hintergrund */
+  /* -------------------------------------------------------
+     Grundfläche
+  ------------------------------------------------------- */
 
   ctx.fillStyle="#f2f7f6";
 
@@ -1986,11 +1989,11 @@ function drawPosterFrame(
   );
 
 
-  /*
-   * ÄUSSERER TÜRKISER RAHMEN
-   *
-   * Dieser Bereich gehört ausschließlich dem Rahmen.
-   */
+  /* -------------------------------------------------------
+     1. ÄUSSERER TÜRKISER RAHMEN
+     
+     Dieser ist der EINZIGE türkise Rahmen.
+  ------------------------------------------------------- */
 
   const outerX=24;
   const outerY=24;
@@ -2023,14 +2026,42 @@ function drawPosterFrame(
   ctx.restore();
 
 
-  /*
-   * WEISSE INNENFLÄCHE
-   *
-   * Sehr großer Abstand zum Außenrahmen.
-   *
-   * Der Rahmen ist dadurch wirklich außen
-   * und die Inhalte liegen nicht darauf.
-   */
+  /* -------------------------------------------------------
+     2. KLEINE GRAUE INNENFLÄCHE
+     
+     Diese ersetzt den bisherigen inneren Türkisbereich.
+     
+     Sie ist bewusst nur schmal.
+  ------------------------------------------------------- */
+
+  const greyX=54;
+  const greyY=54;
+  const greyW=W-108;
+  const greyH=H-108;
+  const greyRadius=31;
+
+  posterRoundedRect(
+    ctx,
+    greyX,
+    greyY,
+    greyW,
+    greyH,
+    greyRadius
+  );
+
+  ctx.fillStyle="#edf2f1";
+
+  ctx.fill();
+
+
+  /* -------------------------------------------------------
+     3. WEISSE INNENFLÄCHE
+     
+     Hier beginnt der eigentliche Posterinhalt.
+     
+     Zwischen Türkis und Weiß bleibt nur die kleine graue
+     Fläche.
+  ------------------------------------------------------- */
 
   const innerX=76;
   const innerY=76;
@@ -2052,10 +2083,7 @@ function drawPosterFrame(
   ctx.fill();
 
 
-  /*
-   * Dezente graue Kontur der weißen Fläche.
-   * Kein Türkis.
-   */
+  /* dezente graue Kontur */
 
   posterRoundedRect(
     ctx,
@@ -2202,9 +2230,8 @@ function posterPbBox(
 
 
   /*
-   * Kleiner türkiser Akzent an der Karte.
-   *
-   * NICHT am äußeren Rahmen.
+   * Kleiner türkiser Akzent NUR an den Karten.
+   * Dieser ist kein Rahmen.
    */
 
   ctx.fillStyle="#18b8c7";
@@ -2388,13 +2415,13 @@ function renderRunnerPoster(
 
 
   /*
-   * AB HIER LIEGT ALLES INNERHALB
-   * DER WEISSEN FLÄCHE.
+   * -------------------------------------------------------
+   * AB HIER: NUR NOCH INHALT
    *
-   * Die weiße Fläche beginnt bei x=76.
-   *
-   * Deshalb beginnt auch der Inhalt erst
-   * deutlich weiter innen bei x=100.
+   * Alles befindet sich innerhalb der weißen Fläche.
+   * Der türkise Außenrahmen und die graue Fläche werden
+   * nicht mehr berührt.
+   * -------------------------------------------------------
    */
 
   const contentX=100;
@@ -2406,9 +2433,9 @@ function renderRunnerPoster(
     contentRight-contentX;
 
 
-  /*
-   * NAME
-   */
+  /* -------------------------------------------------------
+     NAME
+  ------------------------------------------------------- */
 
   posterFittedText(
     ctx,
@@ -2423,11 +2450,9 @@ function renderRunnerPoster(
   );
 
 
-  /*
-   * COMMUNITY HINWEIS
-   *
-   * Ebenfalls innerhalb der weißen Fläche.
-   */
+  /* -------------------------------------------------------
+     COMMUNITY HINWEIS
+  ------------------------------------------------------- */
 
   if(!IS_EMBEDDED){
 
@@ -2460,9 +2485,9 @@ function renderRunnerPoster(
   }
 
 
-  /*
-   * MEMBER ZEILE
-   */
+  /* -------------------------------------------------------
+     MEMBER ZEILE
+  ------------------------------------------------------- */
 
   posterText(
     ctx,
@@ -2477,12 +2502,9 @@ function renderRunnerPoster(
   );
 
 
-  /*
-   * Dezente graue Trennlinie.
-   *
-   * Auch diese liegt vollständig
-   * innerhalb des weißen Bereichs.
-   */
+  /* -------------------------------------------------------
+     TRENNLINIE
+  ------------------------------------------------------- */
 
   ctx.fillStyle="#dce7e5";
 
@@ -2494,9 +2516,9 @@ function renderRunnerPoster(
   );
 
 
-  /*
-   * STATISTIKKARTEN
-   */
+  /* -------------------------------------------------------
+     STATISTIKKARTEN
+  ------------------------------------------------------- */
 
   const statGap=20;
 
@@ -2535,9 +2557,9 @@ function renderRunnerPoster(
   );
 
 
-  /*
-   * BESTZEITEN ÜBERSCHRIFT
-   */
+  /* -------------------------------------------------------
+     BESTZEITEN ÜBERSCHRIFT
+  ------------------------------------------------------- */
 
   posterText(
     ctx,
@@ -2552,9 +2574,9 @@ function renderRunnerPoster(
   );
 
 
-  /*
-   * BESTZEITEN
-   */
+  /* -------------------------------------------------------
+     BESTZEITEN
+  ------------------------------------------------------- */
 
   const pbGap=20;
 
