@@ -16,7 +16,7 @@
   width:100%;
   box-sizing:border-box;
   margin:0 0 28px;
-  padding:28px
+  padding:28px;
 }
 
 .ma-section-head{
@@ -24,7 +24,7 @@
   align-items:flex-start;
   justify-content:space-between;
   gap:20px;
-  margin:0 0 22px
+  margin:0 0 22px;
 }
 
 .ma-section-title{
@@ -32,14 +32,14 @@
   color:#111;
   font-size:28px;
   line-height:1.2;
-  font-weight:800
+  font-weight:800;
 }
 
 .ma-section-subtitle{
   margin:7px 0 0;
   color:#777;
   font-size:15px;
-  line-height:1.45
+  line-height:1.45;
 }
 
 /* RUN BUDDY */
@@ -48,7 +48,7 @@
   display:grid;
   grid-template-columns:1fr;
   gap:18px;
-  width:100%
+  width:100%;
 }
 
 .ma-buddy-card{
@@ -57,14 +57,14 @@
   padding:22px;
   border:1px solid #e8e8e8;
   box-sizing:border-box;
-  background:#fff
+  background:#fff;
 }
 
 .ma-buddy-top{
   display:flex;
   align-items:center;
   gap:14px;
-  margin-bottom:18px
+  margin-bottom:18px;
 }
 
 .ma-buddy-avatar{
@@ -78,19 +78,19 @@
   display:flex;
   align-items:center;
   justify-content:center;
-  box-sizing:border-box
+  box-sizing:border-box;
 }
 
 .ma-buddy-avatar img{
   width:100%;
   height:100%;
-  object-fit:cover
+  object-fit:cover;
 }
 
 .ma-buddy-initials{
   color:#18b8c7;
   font-size:15px;
-  font-weight:800
+  font-weight:800;
 }
 
 .ma-buddy-name{
@@ -98,25 +98,25 @@
   color:#111;
   font-size:20px;
   font-weight:800;
-  line-height:1.2
+  line-height:1.2;
 }
 
 .ma-buddy-location{
   margin:4px 0 0;
   color:#777;
-  font-size:14px
+  font-size:14px;
 }
 
 .ma-buddy-details{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
   gap:10px;
-  margin-bottom:16px
+  margin-bottom:16px;
 }
 
 .ma-buddy-detail{
   padding:12px;
-  background:#f7fafa
+  background:#f7fafa;
 }
 
 .ma-buddy-label{
@@ -126,7 +126,7 @@
   font-size:11px;
   text-transform:uppercase;
   letter-spacing:.05em;
-  font-weight:700
+  font-weight:700;
 }
 
 .ma-buddy-value{
@@ -135,7 +135,7 @@
   font-size:15px;
   line-height:1.3;
   font-weight:800;
-  overflow-wrap:anywhere
+  overflow-wrap:anywhere;
 }
 
 .ma-buddy-note{
@@ -143,7 +143,7 @@
   border-top:1px solid #eee;
   color:#333;
   font-size:15px;
-  line-height:1.45
+  line-height:1.45;
 }
 
 .ma-buddy-actions{
@@ -151,15 +151,17 @@
   justify-content:flex-end;
   margin-top:16px;
   padding-top:14px;
-  border-top:1px solid #eee
+  border-top:1px solid #eee;
 }
 
 .ma-buddy-empty{
   padding:28px 0;
   color:#777;
   text-align:center;
-  grid-column:1/-1
+  grid-column:1/-1;
 }
+
+/* RUN BUDDY FORM */
 
 .ma-buddy-form{
   display:none;
@@ -168,29 +170,89 @@
   padding:22px;
   border:1px solid #e5e5e5;
   background:#fafafa;
-  box-sizing:border-box
+  box-sizing:border-box;
 }
 
 .ma-buddy-form.open{
-  display:block
+  display:block;
 }
 
-/* MEHRERE LAUFTAGE */
+.ma-form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+}
+
+.ma-form-field{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+
+.ma-form-field.full{
+  grid-column:1/-1;
+}
+
+.ma-form-label{
+  color:#111;
+  font-size:14px;
+  font-weight:800;
+}
+
+.ma-form-input{
+  width:100%;
+  height:50px;
+  padding:0 13px;
+  border:1px solid #d8d8d8;
+  outline:none;
+  background:#fff;
+  color:#111;
+  font:inherit;
+  font-size:16px;
+  box-sizing:border-box;
+}
+
+textarea.ma-form-input{
+  height:110px;
+  padding:13px;
+  resize:vertical;
+}
+
+.ma-form-input:focus{
+  border-color:#18b8c7;
+}
+
+.ma-form-actions{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-top:16px;
+}
+
+.ma-form-message{
+  color:#18b8c7;
+  font-size:14px;
+  font-weight:700;
+}
+
+/* TAGE */
 
 .ma-buddy-days{
   display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:8px
+  gap:8px;
+  width:100%;
 }
 
 .ma-buddy-day{
-  position:relative
+  position:relative;
 }
 
 .ma-buddy-day input{
   position:absolute;
   opacity:0;
-  pointer-events:none
+  pointer-events:none;
 }
 
 .ma-buddy-day label{
@@ -206,78 +268,18 @@
   font-weight:800;
   cursor:pointer;
   box-sizing:border-box;
-  text-align:center
+  text-align:center;
+  transition:.15s ease;
 }
 
 .ma-buddy-day input:checked + label{
   border-color:#18b8c7;
   background:#eefafa;
-  color:#18b8c7
+  color:#18b8c7;
 }
 
 .ma-buddy-day label:hover{
-  border-color:#18b8c7
-}
-
-/* FORMULARE */
-
-.ma-form-grid{
-  display:grid;
-  grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:14px
-}
-
-.ma-form-field{
-  display:flex;
-  flex-direction:column;
-  gap:7px
-}
-
-.ma-form-field.full{
-  grid-column:1/-1
-}
-
-.ma-form-label{
-  color:#111;
-  font-size:14px;
-  font-weight:800
-}
-
-.ma-form-input{
-  width:100%;
-  height:50px;
-  padding:0 13px;
-  border:1px solid #d8d8d8;
-  outline:none;
-  background:#fff;
-  color:#111;
-  font:inherit;
-  font-size:16px;
-  box-sizing:border-box
-}
-
-textarea.ma-form-input{
-  height:110px;
-  padding:13px;
-  resize:vertical
-}
-
-.ma-form-input:focus{
-  border-color:#18b8c7
-}
-
-.ma-form-actions{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-  margin-top:16px
-}
-
-.ma-form-message{
-  color:#18b8c7;
-  font-size:14px;
-  font-weight:700
+  border-color:#18b8c7;
 }
 
 /* POSTS */
@@ -289,13 +291,13 @@ textarea.ma-form-input{
   margin:0 0 22px;
   padding:28px;
   text-align:left;
-  overflow:hidden
+  overflow:hidden;
 }
 
 .ma-post-header{
   width:100%;
   display:flex;
-  align-items:center
+  align-items:center;
 }
 
 .ma-post-author{
@@ -303,7 +305,7 @@ textarea.ma-form-input{
   display:flex;
   align-items:center;
   text-decoration:none;
-  color:inherit
+  color:inherit;
 }
 
 .ma-post-avatar{
@@ -317,13 +319,13 @@ textarea.ma-form-input{
   display:flex;
   align-items:center;
   justify-content:center;
-  box-sizing:border-box
+  box-sizing:border-box;
 }
 
 .ma-post-avatar img{
   width:100%;
   height:100%;
-  object-fit:cover
+  object-fit:cover;
 }
 
 .ma-post-avatar-initials{
@@ -336,26 +338,26 @@ textarea.ma-form-input{
   background:#eefafa;
   color:#18b8c7;
   font-size:14px;
-  font-weight:800
+  font-weight:800;
 }
 
 .ma-post-author-info{
   margin-left:13px;
-  min-width:0
+  min-width:0;
 }
 
 .ma-post-author-name{
   color:#111;
   font-size:19px;
   line-height:1.25;
-  font-weight:800
+  font-weight:800;
 }
 
 .ma-post-author-meta{
   margin-top:3px;
   color:#777;
   font-size:15px;
-  line-height:1.35
+  line-height:1.35;
 }
 
 .ma-post-copy{
@@ -366,7 +368,7 @@ textarea.ma-form-input{
   font-size:20px;
   line-height:1.45;
   white-space:pre-wrap;
-  overflow-wrap:anywhere
+  overflow-wrap:anywhere;
 }
 
 .ma-post-image{
@@ -375,7 +377,7 @@ textarea.ma-form-input{
   max-height:650px;
   margin:0 0 25px;
   border-radius:14px;
-  object-fit:cover
+  object-fit:cover;
 }
 
 .ma-post-actions{
@@ -385,13 +387,13 @@ textarea.ma-form-input{
   justify-content:space-between;
   padding:15px 0 0;
   border-top:1px solid #eee;
-  box-sizing:border-box
+  box-sizing:border-box;
 }
 
 .ma-post-action-left{
   display:flex;
   align-items:center;
-  gap:8px
+  gap:8px;
 }
 
 .ma-post-action{
@@ -402,16 +404,16 @@ textarea.ma-form-input{
   font:inherit;
   font-size:18px;
   font-weight:700;
-  cursor:pointer
+  cursor:pointer;
 }
 
 .ma-post-action.liked,
 .ma-message-button{
-  color:#18b8c7
+  color:#18b8c7;
 }
 
 .ma-delete{
-  color:#b44
+  color:#b44;
 }
 
 .ma-comments{
@@ -419,18 +421,18 @@ textarea.ma-form-input{
   margin-top:18px;
   padding-top:18px;
   border-top:1px solid #eee;
-  box-sizing:border-box
+  box-sizing:border-box;
 }
 
 .ma-comments-list{
   display:flex;
   flex-direction:column;
-  gap:18px
+  gap:18px;
 }
 
 .ma-comment{
   display:flex;
-  gap:11px
+  gap:11px;
 }
 
 .ma-comment-avatar{
@@ -444,43 +446,43 @@ textarea.ma-form-input{
   display:flex;
   align-items:center;
   justify-content:center;
-  box-sizing:border-box
+  box-sizing:border-box;
 }
 
 .ma-comment-avatar img{
   width:100%;
   height:100%;
-  object-fit:cover
+  object-fit:cover;
 }
 
 .ma-comment-avatar-initials{
   color:#18b8c7;
   font-size:12px;
-  font-weight:800
+  font-weight:800;
 }
 
 .ma-comment-content{
   flex:1;
-  min-width:0
+  min-width:0;
 }
 
 .ma-comment-header{
   display:flex;
   align-items:baseline;
   gap:8px;
-  flex-wrap:wrap
+  flex-wrap:wrap;
 }
 
 .ma-comment-name{
   color:#111;
   font-size:16px;
   font-weight:800;
-  text-decoration:none
+  text-decoration:none;
 }
 
 .ma-comment-time{
   color:#888;
-  font-size:13px
+  font-size:13px;
 }
 
 .ma-comment-text{
@@ -489,13 +491,13 @@ textarea.ma-form-input{
   font-size:18px;
   line-height:1.45;
   white-space:pre-wrap;
-  overflow-wrap:anywhere
+  overflow-wrap:anywhere;
 }
 
 .ma-comment-form{
   display:flex;
   gap:8px;
-  margin-top:20px
+  margin-top:20px;
 }
 
 .ma-comment-input{
@@ -505,7 +507,7 @@ textarea.ma-form-input{
   padding:0 14px;
   border:1px solid #d8d8d8;
   font:inherit;
-  box-sizing:border-box
+  box-sizing:border-box;
 }
 
 .ma-comment-submit,
@@ -517,21 +519,21 @@ textarea.ma-form-input{
   padding:0 18px;
   font-size:16px;
   font-weight:800;
-  cursor:pointer
+  cursor:pointer;
 }
 
 .ma-comment-submit:hover,
 .ma-message-send:hover{
-  background:#18b8c7
+  background:#18b8c7;
 }
 
-/* BILD UPLOAD */
+/* BILD */
 
 .ma-image-upload{
   display:flex;
   flex-direction:column;
   gap:10px;
-  margin-top:14px
+  margin-top:14px;
 }
 
 .ma-image-upload-label{
@@ -546,11 +548,11 @@ textarea.ma-form-input{
   color:#111;
   font-size:15px;
   font-weight:800;
-  cursor:pointer
+  cursor:pointer;
 }
 
 .ma-image-upload-input{
-  display:none
+  display:none;
 }
 
 .ma-image-preview{
@@ -560,16 +562,16 @@ textarea.ma-form-input{
   max-height:320px;
   object-fit:cover;
   border-radius:14px;
-  border:1px solid #eee
+  border:1px solid #eee;
 }
 
 .ma-image-preview.visible{
-  display:block
+  display:block;
 }
 
 .ma-image-upload-name{
   color:#777;
-  font-size:14px
+  font-size:14px;
 }
 
 /* GEMEINSAME LÄUFE */
@@ -578,7 +580,7 @@ textarea.ma-form-input{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
   gap:12px;
-  margin-bottom:18px
+  margin-bottom:18px;
 }
 
 .ma-run-card{
@@ -586,43 +588,43 @@ textarea.ma-form-input{
   padding:22px;
   border:1px solid #e8e8e8;
   background:#fff;
-  box-sizing:border-box
+  box-sizing:border-box;
 }
 
 .ma-run-list{
   width:100%;
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:18px
+  gap:18px;
 }
 
 .ma-run-card-top{
   display:flex;
   justify-content:space-between;
   gap:15px;
-  margin-bottom:16px
+  margin-bottom:16px;
 }
 
 .ma-run-card-title{
   margin:0;
   color:#111;
   font-size:22px;
-  font-weight:800
+  font-weight:800;
 }
 
 .ma-run-card-author{
   margin-top:5px;
   color:#777;
-  font-size:14px
+  font-size:14px;
 }
 
 .ma-run-card-icon{
-  font-size:28px
+  font-size:28px;
 }
 
 .ma-run-detail{
   padding:12px;
-  background:#f7fafa
+  background:#f7fafa;
 }
 
 .ma-run-detail-label{
@@ -632,7 +634,7 @@ textarea.ma-form-input{
   font-size:12px;
   text-transform:uppercase;
   letter-spacing:.05em;
-  font-weight:700
+  font-weight:700;
 }
 
 .ma-run-detail-value{
@@ -640,7 +642,7 @@ textarea.ma-form-input{
   color:#111;
   font-size:15px;
   line-height:1.3;
-  font-weight:800
+  font-weight:800;
 }
 
 .ma-run-participants{
@@ -649,18 +651,18 @@ textarea.ma-form-input{
   justify-content:space-between;
   gap:12px;
   padding-top:15px;
-  border-top:1px solid #eee
+  border-top:1px solid #eee;
 }
 
 .ma-run-participant-count{
   color:#555;
   font-size:14px;
-  font-weight:700
+  font-weight:700;
 }
 
 .ma-run-actions{
   display:flex;
-  gap:8px
+  gap:8px;
 }
 
 .ma-run-join{
@@ -671,11 +673,11 @@ textarea.ma-form-input{
   padding:0 16px;
   font-size:14px;
   font-weight:800;
-  cursor:pointer
+  cursor:pointer;
 }
 
 .ma-run-join.joined{
-  background:#111
+  background:#111;
 }
 
 .ma-run-delete{
@@ -686,7 +688,7 @@ textarea.ma-form-input{
   padding:0 8px;
   font-size:14px;
   font-weight:800;
-  cursor:pointer
+  cursor:pointer;
 }
 
 .ma-run-form{
@@ -696,14 +698,14 @@ textarea.ma-form-input{
   padding:22px;
   border:1px solid #e5e5e5;
   background:#fafafa;
-  box-sizing:border-box
+  box-sizing:border-box;
 }
 
 .ma-run-form.open{
-  display:block
+  display:block;
 }
 
-/* ALLGEMEIN */
+/* EMPTY */
 
 .ma-empty{
   width:100%;
@@ -711,17 +713,17 @@ textarea.ma-form-input{
   border:1px dashed #ccc;
   box-sizing:border-box;
   text-align:center;
-  color:#777
+  color:#777;
 }
 
 .ma-empty strong{
   display:block;
   margin-bottom:8px;
   color:#111;
-  font-size:20px
+  font-size:20px;
 }
 
-/* PRIVATE MESSAGE */
+/* MESSAGE MODAL */
 
 .ma-message-overlay{
   position:fixed;
@@ -732,11 +734,11 @@ textarea.ma-form-input{
   justify-content:center;
   padding:20px;
   background:rgba(0,0,0,.45);
-  box-sizing:border-box
+  box-sizing:border-box;
 }
 
 .ma-message-overlay.open{
-  display:flex
+  display:flex;
 }
 
 .ma-message-modal{
@@ -745,7 +747,7 @@ textarea.ma-form-input{
   background:#fff;
   border-radius:18px;
   padding:26px;
-  box-sizing:border-box
+  box-sizing:border-box;
 }
 
 .ma-message-modal-head{
@@ -753,17 +755,17 @@ textarea.ma-form-input{
   align-items:center;
   justify-content:space-between;
   gap:15px;
-  margin-bottom:18px
+  margin-bottom:18px;
 }
 
 .ma-message-modal-title{
   margin:0;
-  font-size:24px
+  font-size:24px;
 }
 
 .ma-message-modal-recipient{
   margin:4px 0;
-  color:#777
+  color:#777;
 }
 
 .ma-message-close{
@@ -773,7 +775,7 @@ textarea.ma-form-input{
   border-radius:50%;
   background:#f2f2f2;
   font-size:24px;
-  cursor:pointer
+  cursor:pointer;
 }
 
 .ma-message-textarea{
@@ -783,116 +785,118 @@ textarea.ma-form-input{
   border:1px solid #d8d8d8;
   font:inherit;
   box-sizing:border-box;
-  resize:vertical
+  resize:vertical;
 }
 
 .ma-message-actions{
   display:flex;
   align-items:center;
   gap:8px;
-  margin-top:12px
+  margin-top:12px;
 }
 
 .ma-message-status{
   flex:1;
   color:#18b8c7;
   font-size:14px;
-  font-weight:700
+  font-weight:700;
 }
 
 .ma-message-send{
-  min-width:120px
+  min-width:120px;
 }
+
+/* MOBILE */
 
 @media(max-width:700px){
 
   .ma-section{
     padding:24px;
-    margin-bottom:22px
+    margin-bottom:22px;
   }
 
   .ma-section-head{
-    flex-direction:column
+    flex-direction:column;
   }
 
   .ma-section-head .btn{
-    width:100%
+    width:100%;
   }
 
   .ma-buddy-list,
   .ma-run-list{
-    grid-template-columns:1fr
+    grid-template-columns:1fr;
   }
 
   .ma-buddy-days{
-    grid-template-columns:repeat(2,minmax(0,1fr))
+    grid-template-columns:repeat(2,minmax(0,1fr));
   }
 
   .ma-buddy-details,
   .ma-run-details{
-    grid-template-columns:1fr
+    grid-template-columns:1fr;
   }
 
   .ma-form-grid{
-    grid-template-columns:1fr
+    grid-template-columns:1fr;
   }
 
   .ma-form-field.full{
-    grid-column:auto
+    grid-column:auto;
   }
 
   .ma-form-actions{
     flex-direction:column;
-    align-items:stretch
+    align-items:stretch;
   }
 
   .ma-form-actions .btn{
-    width:100%
+    width:100%;
   }
 
   .ma-post{
-    padding:24px
+    padding:24px;
   }
 
   .ma-post-copy{
-    font-size:20px
+    font-size:20px;
   }
 
   .ma-comment-form{
-    flex-direction:column
+    flex-direction:column;
   }
 
   .ma-comment-submit{
-    width:100%
+    width:100%;
   }
 
   .ma-run-participants{
     align-items:flex-start;
-    flex-direction:column
+    flex-direction:column;
   }
 
   .ma-run-actions,
   .ma-run-join{
-    width:100%
+    width:100%;
   }
 
   .ma-message-overlay{
     align-items:flex-end;
-    padding:10px
+    padding:10px;
   }
 
   .ma-message-modal{
     border-radius:18px 18px 12px 12px;
-    padding:22px
+    padding:22px;
   }
 
   .ma-message-actions{
     flex-direction:column;
-    align-items:stretch
+    align-items:stretch;
   }
 
   .ma-message-send{
-    width:100%
+    width:100%;
   }
 }
 </style>
@@ -902,671 +906,700 @@ textarea.ma-form-input{
 
 <div class="shell">
 
-<aside class="sidebar">
+  <aside class="sidebar">
 
-  <div class="brand">
-    <a href="index.html">
-      <img src="miles-apart-wordmark.png" alt="Miles Apart Running Club">
-    </a>
-  </div>
-
-  <nav class="nav">
-    <a href="index.html">Miles Apart</a>
-    <a href="home.html">Home</a>
-    <a href="challenges.html">Challenges</a>
-    <a class="active" href="community.html">Community</a>
-    <a href="events.html">Events</a>
-    <a href="training.html">Training</a>
-  </nav>
-
-  <div class="side-bottom">
-    <small>THIS WEEK</small>
-    <strong>23.4 / 30 KM</strong>
-    <div class="mini-progress"><i></i></div>
-    <p class="small" style="color:#aaa;margin-bottom:0">
-      Nur 6.6 km bis zum Wochenziel.
-    </p>
-  </div>
-
-</aside>
-
-
-<main class="main">
-
-  <div class="top">
-    <div class="crumb">
-      MILES APART / COMMUNITY
+    <div class="brand">
+      <a href="index.html">
+        <img
+          src="miles-apart-wordmark.png"
+          alt="Miles Apart Running Club"
+        >
+      </a>
     </div>
-    <div class="top-right"></div>
-  </div>
 
+    <nav class="nav">
+      <a href="index.html">Miles Apart</a>
+      <a href="home.html">Home</a>
+      <a href="challenges.html">Challenges</a>
+      <a class="active" href="community.html">Community</a>
+      <a href="events.html">Events</a>
+      <a href="training.html">Training</a>
+    </nav>
 
-  <div class="hero">
+    <div class="side-bottom">
+      <small>THIS WEEK</small>
+      <strong>23.4 / 30 KM</strong>
 
-    <div>
-      <h1>Community.</h1>
+      <div class="mini-progress">
+        <i></i>
+      </div>
 
-      <p class="lead" style="color:#18b8c7">
-        Dein virtueller Run Club — gemeinsam laufen, egal wo du bist.
+      <p class="small" style="color:#aaa;margin-bottom:0">
+        Nur 6.6 km bis zum Wochenziel.
       </p>
     </div>
 
-    <button
-      id="openPostButton"
-      class="btn lime"
-      type="button"
-    >
-      + Post erstellen
-    </button>
+  </aside>
 
-  </div>
+  <main class="main">
 
+    <div class="top">
+      <div class="crumb">
+        MILES APART / COMMUNITY
+      </div>
 
-  <!-- POST FORM -->
-
-  <div
-    id="postFormCard"
-    class="card post-form-card"
-    style="display:none"
-  >
-
-    <div class="section-head">
-      <h2>Neuer Post</h2>
-      <span class="small muted" id="postAuthorName">—</span>
+      <div class="top-right"></div>
     </div>
 
-    <form id="postForm">
+    <div class="hero">
 
-      <textarea
-        id="postContent"
-        maxlength="2000"
-        placeholder="Was möchtest du mit der Community teilen?"
-        required
-        style="
-          width:100%;
-          min-height:130px;
-          padding:16px;
-          border:1px solid #ddd;
-          box-sizing:border-box;
-          font:inherit;
-          resize:vertical
-        "
-      ></textarea>
+      <div>
+        <h1>Community.</h1>
 
-
-      <div class="ma-image-upload">
-
-        <label
-          class="ma-image-upload-label"
-          for="postImage"
+        <p
+          class="lead"
+          style="color:#18b8c7"
         >
-          📸 Bild hinzufügen
-        </label>
+          Dein virtueller Run Club —
+          gemeinsam laufen, egal wo du bist.
+        </p>
+      </div>
 
-        <input
-          id="postImage"
-          class="ma-image-upload-input"
-          type="file"
-          accept="image/*"
-        >
+      <button
+        id="openPostButton"
+        class="btn lime"
+        type="button"
+      >
+        + Post erstellen
+      </button>
 
-        <img
-          id="postImagePreview"
-          class="ma-image-preview"
-          alt="Bildvorschau"
+    </div>
+
+    <!-- POST FORMULAR -->
+
+    <div
+      id="postFormCard"
+      class="card post-form-card"
+      style="display:none"
+    >
+
+      <div class="section-head">
+        <h2>Neuer Post</h2>
+
+        <span
+          class="small muted"
+          id="postAuthorName"
         >
+          —
+        </span>
+      </div>
+
+      <form id="postForm">
+
+        <textarea
+          id="postContent"
+          maxlength="2000"
+          placeholder="Was möchtest du mit der Community teilen?"
+          required
+          style="
+            width:100%;
+            min-height:130px;
+            padding:16px;
+            border:1px solid #ddd;
+            box-sizing:border-box;
+            font:inherit;
+            resize:vertical;
+          "
+        ></textarea>
+
+        <div class="ma-image-upload">
+
+          <label
+            class="ma-image-upload-label"
+            for="postImage"
+          >
+            📸 Bild hinzufügen
+          </label>
+
+          <input
+            id="postImage"
+            class="ma-image-upload-input"
+            type="file"
+            accept="image/*"
+          >
+
+          <img
+            id="postImagePreview"
+            class="ma-image-preview"
+            alt="Bildvorschau"
+          >
+
+          <div
+            id="postImageName"
+            class="ma-image-upload-name"
+          ></div>
+
+        </div>
 
         <div
-          id="postImageName"
-          class="ma-image-upload-name"
-        ></div>
+          style="
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            gap:15px;
+            margin-top:14px;
+          "
+        >
+
+          <div
+            id="postFormMessage"
+            class="post-form-message"
+          ></div>
+
+          <div
+            style="
+              display:flex;
+              gap:8px;
+            "
+          >
+
+            <button
+              id="cancelPostButton"
+              type="button"
+              class="btn"
+            >
+              Abbrechen
+            </button>
+
+            <button
+              id="submitPostButton"
+              type="submit"
+              class="btn lime"
+            >
+              Post veröffentlichen
+            </button>
+
+          </div>
+
+        </div>
+
+      </form>
+
+    </div>
+
+    <div
+      id="communityLoading"
+      class="ma-community-loading"
+    >
+      Community wird geladen …
+    </div>
+
+    <div
+      id="communityError"
+      class="ma-community-error"
+      style="display:none"
+    ></div>
+
+
+    <!-- ========================= -->
+    <!-- RUN BUDDY -->
+    <!-- ========================= -->
+
+    <section
+      class="card ma-section"
+      id="communityBuddySection"
+      style="display:none"
+    >
+
+      <div class="ma-section-head">
+
+        <div>
+
+          <h2 class="ma-section-title">
+            Run Buddy finden 🏃
+          </h2>
+
+          <p class="ma-section-subtitle">
+            Finde Läufer mit ähnlichem Rhythmus
+            und verabrede dich zum gemeinsamen Laufen.
+          </p>
+
+        </div>
+
+        <button
+          id="openBuddyButton"
+          class="btn lime"
+          type="button"
+        >
+          + Run Buddy eintragen
+        </button>
+
+      </div>
+
+
+      <!-- RUN BUDDY FORMULAR -->
+
+      <div
+        id="buddyForm"
+        class="ma-buddy-form"
+      >
+
+        <form id="buddyProfileForm">
+
+          <div class="ma-form-grid">
+
+            <div class="ma-form-field">
+
+              <label
+                class="ma-form-label"
+                for="buddyLocation"
+              >
+                📍 Ort
+              </label>
+
+              <input
+                id="buddyLocation"
+                class="ma-form-input"
+                maxlength="120"
+                placeholder="z. B. Mainz"
+                required
+              >
+
+            </div>
+
+
+            <!-- MEHRERE TAGE -->
+
+            <div class="ma-form-field full">
+
+              <span class="ma-form-label">
+                📅 An welchen Tagen läufst du gerne?
+              </span>
+
+              <div
+                id="buddyDays"
+                class="ma-buddy-days"
+              >
+
+                <div class="ma-buddy-day">
+                  <input
+                    id="buddyDayMonday"
+                    type="checkbox"
+                    value="Montag"
+                  >
+                  <label for="buddyDayMonday">
+                    Montag
+                  </label>
+                </div>
+
+                <div class="ma-buddy-day">
+                  <input
+                    id="buddyDayTuesday"
+                    type="checkbox"
+                    value="Dienstag"
+                  >
+                  <label for="buddyDayTuesday">
+                    Dienstag
+                  </label>
+                </div>
+
+                <div class="ma-buddy-day">
+                  <input
+                    id="buddyDayWednesday"
+                    type="checkbox"
+                    value="Mittwoch"
+                  >
+                  <label for="buddyDayWednesday">
+                    Mittwoch
+                  </label>
+                </div>
+
+                <div class="ma-buddy-day">
+                  <input
+                    id="buddyDayThursday"
+                    type="checkbox"
+                    value="Donnerstag"
+                  >
+                  <label for="buddyDayThursday">
+                    Donnerstag
+                  </label>
+                </div>
+
+                <div class="ma-buddy-day">
+                  <input
+                    id="buddyDayFriday"
+                    type="checkbox"
+                    value="Freitag"
+                  >
+                  <label for="buddyDayFriday">
+                    Freitag
+                  </label>
+                </div>
+
+                <div class="ma-buddy-day">
+                  <input
+                    id="buddyDaySaturday"
+                    type="checkbox"
+                    value="Samstag"
+                  >
+                  <label for="buddyDaySaturday">
+                    Samstag
+                  </label>
+                </div>
+
+                <div class="ma-buddy-day">
+                  <input
+                    id="buddyDaySunday"
+                    type="checkbox"
+                    value="Sonntag"
+                  >
+                  <label for="buddyDaySunday">
+                    Sonntag
+                  </label>
+                </div>
+
+              </div>
+
+              <small class="small muted">
+                Du kannst mehrere Tage auswählen.
+              </small>
+
+            </div>
+
+
+            <div class="ma-form-field">
+
+              <label
+                class="ma-form-label"
+                for="buddyTime"
+              >
+                🕐 Uhrzeit
+              </label>
+
+              <input
+                id="buddyTime"
+                class="ma-form-input"
+                type="time"
+                required
+              >
+
+            </div>
+
+
+            <div class="ma-form-field">
+
+              <label
+                class="ma-form-label"
+                for="buddyPace"
+              >
+                ⚡ Pace
+              </label>
+
+              <input
+                id="buddyPace"
+                class="ma-form-input"
+                maxlength="40"
+                placeholder="z. B. 5:30–6:00 min/km"
+                required
+              >
+
+            </div>
+
+
+            <div class="ma-form-field full">
+
+              <label
+                class="ma-form-label"
+                for="buddyNote"
+              >
+                💬 Kurz über deinen Run
+              </label>
+
+              <textarea
+                id="buddyNote"
+                class="ma-form-input"
+                maxlength="500"
+                placeholder="z. B. Ich laufe gerne entspannt 5–10 km und suche jemanden für regelmäßige Feierabendläufe."
+              ></textarea>
+
+            </div>
+
+          </div>
+
+
+          <div class="ma-form-actions">
+
+            <div
+              id="buddyFormMessage"
+              class="ma-form-message"
+            ></div>
+
+            <div
+              style="
+                display:flex;
+                gap:8px;
+              "
+            >
+
+              <button
+                id="cancelBuddyButton"
+                class="btn"
+                type="button"
+              >
+                Abbrechen
+              </button>
+
+              <button
+                id="submitBuddyButton"
+                class="btn lime"
+                type="submit"
+              >
+                Run Buddy-Profil speichern
+              </button>
+
+            </div>
+
+          </div>
+
+        </form>
 
       </div>
 
 
       <div
-        style="
-          display:flex;
-          justify-content:space-between;
-          align-items:center;
-          gap:15px;
-          margin-top:14px
-        "
-      >
+        id="buddyList"
+        class="ma-buddy-list"
+      ></div>
 
-        <div
-          id="postFormMessage"
-          class="post-form-message"
-        ></div>
+    </section>
 
-        <div style="display:flex;gap:8px">
 
-          <button
-            id="cancelPostButton"
-            type="button"
-            class="btn"
-          >
-            Abbrechen
-          </button>
+    <!-- ========================= -->
+    <!-- GEMEINSAME LÄUFE -->
+    <!-- ========================= -->
 
-          <button
-            id="submitPostButton"
-            type="submit"
-            class="btn lime"
-          >
-            Post veröffentlichen
-          </button>
+    <section
+      class="card ma-section"
+      id="communityRunsSection"
+      style="display:none"
+    >
+
+      <div class="ma-section-head">
+
+        <div>
+
+          <h2 class="ma-section-title">
+            Gemeinsame Läufe 🏃‍♂️
+          </h2>
+
+          <p class="ma-section-subtitle">
+            Erstelle einen Lauf und finde andere
+            Miles Apart Mitglieder zum Mitlaufen.
+          </p>
 
         </div>
 
-      </div>
-
-    </form>
-
-  </div>
-
-
-  <div
-    id="communityLoading"
-    class="ma-community-loading"
-  >
-    Community wird geladen …
-  </div>
-
-
-  <div
-    id="communityError"
-    class="ma-community-error"
-    style="display:none"
-  ></div>
-
-
-  <!-- RUN BUDDY -->
-
-  <div
-    class="card ma-section"
-    id="communityBuddySection"
-    style="display:none"
-  >
-
-    <div class="ma-section-head">
-
-      <div>
-
-        <h2 class="ma-section-title">
-          Run Buddy finden 🏃
-        </h2>
-
-        <p class="ma-section-subtitle">
-          Finde Läufer mit ähnlichem Rhythmus und verabrede dich zum gemeinsamen Laufen.
-        </p>
+        <button
+          id="openRunButton"
+          class="btn lime"
+          type="button"
+        >
+          + Lauf erstellen
+        </button>
 
       </div>
 
 
-      <button
-        id="openBuddyButton"
-        class="btn lime"
-        type="button"
+      <div
+        id="runForm"
+        class="ma-run-form"
       >
-        + Run Buddy eintragen
-      </button>
 
-    </div>
+        <form id="communityRunForm">
 
+          <div class="ma-form-grid">
 
-    <!-- RUN BUDDY FORM -->
+            <div class="ma-form-field full">
 
-    <div
-      id="buddyForm"
-      class="ma-buddy-form"
-    >
+              <label
+                class="ma-form-label"
+                for="runTitle"
+              >
+                Titel
+              </label>
 
-      <form id="buddyProfileForm">
-
-        <div class="ma-form-grid">
-
-          <div class="ma-form-field">
-
-            <label
-              class="ma-form-label"
-              for="buddyLocation"
-            >
-              📍 Ort
-            </label>
-
-            <input
-              id="buddyLocation"
-              class="ma-form-input"
-              maxlength="120"
-              placeholder="z. B. Mainz"
-              required
-            >
-
-          </div>
-
-
-          <div class="ma-form-field full">
-
-            <span class="ma-form-label">
-              📅 An welchen Tagen läufst du gerne?
-            </span>
-
-
-            <div
-              id="buddyDays"
-              class="ma-buddy-days"
-            >
-
-              <div class="ma-buddy-day">
-                <input
-                  id="buddyDayMonday"
-                  type="checkbox"
-                  value="Montag"
-                >
-                <label for="buddyDayMonday">
-                  Montag
-                </label>
-              </div>
-
-
-              <div class="ma-buddy-day">
-                <input
-                  id="buddyDayTuesday"
-                  type="checkbox"
-                  value="Dienstag"
-                >
-                <label for="buddyDayTuesday">
-                  Dienstag
-                </label>
-              </div>
-
-
-              <div class="ma-buddy-day">
-                <input
-                  id="buddyDayWednesday"
-                  type="checkbox"
-                  value="Mittwoch"
-                >
-                <label for="buddyDayWednesday">
-                  Mittwoch
-                </label>
-              </div>
-
-
-              <div class="ma-buddy-day">
-                <input
-                  id="buddyDayThursday"
-                  type="checkbox"
-                  value="Donnerstag"
-                >
-                <label for="buddyDayThursday">
-                  Donnerstag
-                </label>
-              </div>
-
-
-              <div class="ma-buddy-day">
-                <input
-                  id="buddyDayFriday"
-                  type="checkbox"
-                  value="Freitag"
-                >
-                <label for="buddyDayFriday">
-                  Freitag
-                </label>
-              </div>
-
-
-              <div class="ma-buddy-day">
-                <input
-                  id="buddyDaySaturday"
-                  type="checkbox"
-                  value="Samstag"
-                >
-                <label for="buddyDaySaturday">
-                  Samstag
-                </label>
-              </div>
-
-
-              <div class="ma-buddy-day">
-                <input
-                  id="buddyDaySunday"
-                  type="checkbox"
-                  value="Sonntag"
-                >
-                <label for="buddyDaySunday">
-                  Sonntag
-                </label>
-              </div>
+              <input
+                id="runTitle"
+                class="ma-form-input"
+                maxlength="120"
+                placeholder="z. B. 10 km Feierabendlauf"
+                required
+              >
 
             </div>
 
 
-            <small class="small muted">
-              Du kannst mehrere Tage auswählen.
-            </small>
+            <div class="ma-form-field">
+
+              <label
+                class="ma-form-label"
+                for="runLocation"
+              >
+                📍 Ort
+              </label>
+
+              <input
+                id="runLocation"
+                class="ma-form-input"
+                maxlength="120"
+                placeholder="z. B. Mainz"
+                required
+              >
+
+            </div>
+
+
+            <div class="ma-form-field">
+
+              <label
+                class="ma-form-label"
+                for="runDate"
+              >
+                📅 Datum
+              </label>
+
+              <input
+                id="runDate"
+                class="ma-form-input"
+                type="date"
+                required
+              >
+
+            </div>
+
+
+            <div class="ma-form-field">
+
+              <label
+                class="ma-form-label"
+                for="runTime"
+              >
+                🕐 Uhrzeit
+              </label>
+
+              <input
+                id="runTime"
+                class="ma-form-input"
+                type="time"
+                required
+              >
+
+            </div>
+
+
+            <div class="ma-form-field">
+
+              <label
+                class="ma-form-label"
+                for="runPace"
+              >
+                ⚡ Pace
+              </label>
+
+              <input
+                id="runPace"
+                class="ma-form-input"
+                maxlength="30"
+                placeholder="z. B. 5:30–6:00 min/km"
+                required
+              >
+
+            </div>
+
+
+            <div class="ma-form-field">
+
+              <label
+                class="ma-form-label"
+                for="runMaxParticipants"
+              >
+                👥 Teilnehmer
+              </label>
+
+              <input
+                id="runMaxParticipants"
+                class="ma-form-input"
+                type="number"
+                min="2"
+                max="100"
+                value="8"
+                required
+              >
+
+            </div>
 
           </div>
 
 
-          <div class="ma-form-field">
+          <div class="ma-form-actions">
 
-            <label
-              class="ma-form-label"
-              for="buddyTime"
-            >
-              🕐 Uhrzeit
-            </label>
+            <div
+              id="runFormMessage"
+              class="ma-form-message"
+            ></div>
 
-            <input
-              id="buddyTime"
-              class="ma-form-input"
-              type="time"
-              required
+            <div
+              style="
+                display:flex;
+                gap:8px;
+              "
             >
+
+              <button
+                id="cancelRunButton"
+                class="btn"
+                type="button"
+              >
+                Abbrechen
+              </button>
+
+              <button
+                id="submitRunButton"
+                class="btn lime"
+                type="submit"
+              >
+                Lauf erstellen
+              </button>
+
+            </div>
 
           </div>
 
-
-          <div class="ma-form-field">
-
-            <label
-              class="ma-form-label"
-              for="buddyPace"
-            >
-              ⚡ Pace
-            </label>
-
-            <input
-              id="buddyPace"
-              class="ma-form-input"
-              maxlength="40"
-              placeholder="z. B. 5:30–6:00 min/km"
-              required
-            >
-
-          </div>
-
-
-          <div class="ma-form-field full">
-
-            <label
-              class="ma-form-label"
-              for="buddyNote"
-            >
-              💬 Kurz über deinen Run
-            </label>
-
-            <textarea
-              id="buddyNote"
-              class="ma-form-input"
-              maxlength="500"
-              placeholder="z. B. Ich laufe gerne entspannt 5–10 km und suche jemanden für regelmäßige Feierabendläufe."
-            ></textarea>
-
-          </div>
-
-        </div>
-
-
-        <div class="ma-form-actions">
-
-          <div
-            id="buddyFormMessage"
-            class="ma-form-message"
-          ></div>
-
-
-          <div style="display:flex;gap:8px">
-
-            <button
-              id="cancelBuddyButton"
-              class="btn"
-              type="button"
-            >
-              Abbrechen
-            </button>
-
-            <button
-              id="submitBuddyButton"
-              class="btn lime"
-              type="submit"
-            >
-              Run Buddy-Profil speichern
-            </button>
-
-          </div>
-
-        </div>
-
-      </form>
-
-    </div>
-
-
-    <div
-      id="buddyList"
-      class="ma-buddy-list"
-    ></div>
-
-  </div>
-
-
-  <!-- GEMEINSAME LÄUFE -->
-
-  <div
-    class="card ma-section"
-    id="communityRunsSection"
-    style="display:none"
-  >
-
-    <div class="ma-section-head">
-
-      <div>
-
-        <h2 class="ma-section-title">
-          Gemeinsame Läufe 🏃‍♂️
-        </h2>
-
-        <p class="ma-section-subtitle">
-          Erstelle einen Lauf und finde andere Miles Apart Mitglieder zum Mitlaufen.
-        </p>
+        </form>
 
       </div>
 
 
-      <button
-        id="openRunButton"
-        class="btn lime"
-        type="button"
-      >
-        + Lauf erstellen
-      </button>
+      <div
+        id="runList"
+        class="ma-run-list"
+      ></div>
 
-    </div>
+    </section>
 
 
-    <div
-      id="runForm"
-      class="ma-run-form"
-    >
-
-      <form id="communityRunForm">
-
-        <div class="ma-form-grid">
-
-          <div class="ma-form-field full">
-
-            <label
-              class="ma-form-label"
-              for="runTitle"
-            >
-              Titel
-            </label>
-
-            <input
-              id="runTitle"
-              class="ma-form-input"
-              maxlength="120"
-              placeholder="z. B. 10 km Feierabendlauf"
-              required
-            >
-
-          </div>
-
-
-          <div class="ma-form-field">
-
-            <label
-              class="ma-form-label"
-              for="runLocation"
-            >
-              📍 Ort
-            </label>
-
-            <input
-              id="runLocation"
-              class="ma-form-input"
-              maxlength="120"
-              placeholder="z. B. Mainz"
-              required
-            >
-
-          </div>
-
-
-          <div class="ma-form-field">
-
-            <label
-              class="ma-form-label"
-              for="runDate"
-            >
-              📅 Datum
-            </label>
-
-            <input
-              id="runDate"
-              class="ma-form-input"
-              type="date"
-              required
-            >
-
-          </div>
-
-
-          <div class="ma-form-field">
-
-            <label
-              class="ma-form-label"
-              for="runTime"
-            >
-              🕐 Uhrzeit
-            </label>
-
-            <input
-              id="runTime"
-              class="ma-form-input"
-              type="time"
-              required
-            >
-
-          </div>
-
-
-          <div class="ma-form-field">
-
-            <label
-              class="ma-form-label"
-              for="runPace"
-            >
-              ⚡ Pace
-            </label>
-
-            <input
-              id="runPace"
-              class="ma-form-input"
-              maxlength="30"
-              placeholder="z. B. 5:30–6:00 min/km"
-              required
-            >
-
-          </div>
-
-
-          <div class="ma-form-field">
-
-            <label
-              class="ma-form-label"
-              for="runMaxParticipants"
-            >
-              👥 Teilnehmer
-            </label>
-
-            <input
-              id="runMaxParticipants"
-              class="ma-form-input"
-              type="number"
-              min="2"
-              max="100"
-              value="8"
-              required
-            >
-
-          </div>
-
-        </div>
-
-
-        <div class="ma-form-actions">
-
-          <div
-            id="runFormMessage"
-            class="ma-form-message"
-          ></div>
-
-          <div style="display:flex;gap:8px">
-
-            <button
-              id="cancelRunButton"
-              class="btn"
-              type="button"
-            >
-              Abbrechen
-            </button>
-
-            <button
-              id="submitRunButton"
-              class="btn lime"
-              type="submit"
-            >
-              Lauf erstellen
-            </button>
-
-          </div>
-
-        </div>
-
-      </form>
-
-    </div>
-
+    <!-- POSTS -->
 
     <div
-      id="runList"
-      class="ma-run-list"
+      id="postsContainer"
+      style="
+        display:block;
+        width:100%;
+      "
     ></div>
 
-  </div>
+  </main>
 
-
-  <div
-    id="postsContainer"
-    style="display:block;width:100%"
-  ></div>
-
-</main>
 </div>
 
 
@@ -1599,7 +1632,6 @@ textarea.ma-form-input{
         </p>
 
       </div>
-
 
       <button
         id="closeMessageButton"
@@ -1650,8 +1682,9 @@ const SUPABASE_URL =
 const SUPABASE_PUBLISHABLE_KEY =
   "sb_publishable_wc3w2fSuj8ItwiF6XBoQgw_HeW5_rNW";
 
-const { createClient } =
-  window.supabase;
+const {
+  createClient
+} = window.supabase;
 
 const supabaseClient =
   createClient(
@@ -1661,14 +1694,26 @@ const supabaseClient =
 
 
 const $ =
-  id => document.getElementById(id);
+  id =>
+    document.getElementById(id);
 
 
-let currentUser = null;
-let currentProfile = null;
-let messageReceiverId = null;
-let messageReceiverName = "";
+let currentUser =
+  null;
 
+let currentProfile =
+  null;
+
+let messageReceiverId =
+  null;
+
+let messageReceiverName =
+  "";
+
+
+/* ========================= */
+/* HILFSFUNKTIONEN */
+/* ========================= */
 
 function escapeHtml(value){
 
@@ -1685,6 +1730,7 @@ function escapeHtml(value){
     .replaceAll(">","&gt;")
     .replaceAll('"',"&quot;")
     .replaceAll("'","&#039;");
+
 }
 
 
@@ -1696,7 +1742,9 @@ function getInitials(name){
       .split(/\s+/)
       .filter(Boolean);
 
-  if(parts.length === 1){
+  if(
+    parts.length === 1
+  ){
     return parts[0]
       .slice(0,2)
       .toUpperCase();
@@ -1706,6 +1754,7 @@ function getInitials(name){
     parts[0][0] +
     parts[parts.length - 1][0]
   ).toUpperCase();
+
 }
 
 
@@ -1716,7 +1765,10 @@ function formatTime(dateString){
 
   const diff =
     Math.floor(
-      (Date.now() - date) / 1000
+      (
+        Date.now() -
+        date
+      ) / 1000
     );
 
   if(diff < 60){
@@ -1743,6 +1795,7 @@ function formatTime(dateString){
       year:"numeric"
     }
   );
+
 }
 
 
@@ -1763,6 +1816,7 @@ function formatRunDate(dateString){
       year:"numeric"
     }
   );
+
 }
 
 
@@ -1778,6 +1832,7 @@ function profileUrl(profile){
   return `user.html?username=${encodeURIComponent(
     profile.username
   )}`;
+
 }
 
 
@@ -1790,18 +1845,25 @@ function avatarHtml(
     profile?.display_name ||
     "Miles Apart Member";
 
-  if(profile?.avatar_url){
+  if(
+    profile?.avatar_url
+  ){
 
     return `
       <div class="${className}">
         <img
-          src="${escapeHtml(profile.avatar_url)}"
+          src="${escapeHtml(
+            profile.avatar_url
+          )}"
           alt="Profilbild"
         >
       </div>
     `;
 
   }
+
+  const initials =
+    getInitials(name);
 
   const initialsClass =
     className.includes("buddy")
@@ -1811,16 +1873,17 @@ function avatarHtml(
   return `
     <div class="${className}">
       <div class="${initialsClass}">
-        ${escapeHtml(
-          getInitials(name)
-        )}
+        ${escapeHtml(initials)}
       </div>
     </div>
   `;
+
 }
 
 
-/* ---------------- CURRENT USER ---------------- */
+/* ========================= */
+/* CURRENT USER */
+/* ========================= */
 
 async function loadCurrentUser(){
 
@@ -1835,8 +1898,11 @@ async function loadCurrentUser(){
     !data.user
   ){
 
-    currentUser = null;
-    currentProfile = null;
+    currentUser =
+      null;
+
+    currentProfile =
+      null;
 
     $("openPostButton").textContent =
       "Anmelden";
@@ -1845,16 +1911,15 @@ async function loadCurrentUser(){
       "Anmelden, um einen Post zu erstellen";
 
     return;
-  }
 
+  }
 
   currentUser =
     data.user;
 
-
   const {
-    data: profile,
-    error: profileError
+    data:profile,
+    error:profileError
   } =
     await supabaseClient
       .from("profiles")
@@ -1867,22 +1932,17 @@ async function loadCurrentUser(){
       )
       .maybeSingle();
 
-
   if(profileError){
     throw profileError;
   }
 
-
   currentProfile =
     profile || {
-
       display_name:
         currentUser.user_metadata?.display_name ||
         currentUser.email?.split("@")[0] ||
         "Miles Apart Member"
-
     };
-
 
   $("postAuthorName").textContent =
     currentProfile.username
@@ -1891,15 +1951,18 @@ async function loadCurrentUser(){
           currentProfile.display_name ||
           "Miles Apart Member"
         );
+
 }
 
 
-/* ---------------- POSTS ---------------- */
+/* ========================= */
+/* POSTS */
+/* ========================= */
 
 async function loadPosts(){
 
   const {
-    data: posts,
+    data,
     error
   } =
     await supabaseClient
@@ -1912,24 +1975,24 @@ async function loadPosts(){
         created_at,
         updated_at,
 
-        profiles:author_id (
+        profiles:author_id(
           display_name,
           username,
           avatar_url,
           location
         ),
 
-        community_post_likes (
+        community_post_likes(
           user_id
         ),
 
-        community_post_comments (
+        community_post_comments(
           id,
           author_id,
           content,
           created_at,
 
-          profiles:author_id (
+          profiles:author_id(
             display_name,
             username,
             avatar_url
@@ -1943,15 +2006,14 @@ async function loadPosts(){
         }
       );
 
-
   if(error){
     throw error;
   }
 
-
   renderPosts(
-    posts || []
+    data || []
   );
+
 }
 
 
@@ -1960,13 +2022,10 @@ function renderPosts(posts){
   $("postsContainer").innerHTML =
     "";
 
-
   if(!posts.length){
 
     $("postsContainer").innerHTML = `
-
       <div class="ma-empty">
-
         <strong>
           Sei der Erste in der Community.
         </strong>
@@ -1974,14 +2033,12 @@ function renderPosts(posts){
         Teile deinen ersten Lauf,
         ein Ziel oder einfach ein paar Worte
         mit Miles Apart.
-
       </div>
-
     `;
 
     return;
-  }
 
+  }
 
   posts.forEach(
     post => {
@@ -1992,6 +2049,7 @@ function renderPosts(posts){
 
     }
   );
+
 }
 
 
@@ -2006,32 +2064,32 @@ function createPostElement(post){
   const comments =
     post.community_post_comments || [];
 
-  const userLiked =
+  const liked =
     !!currentUser &&
     likes.some(
-      like =>
-        like.user_id ===
+      item =>
+        item.user_id ===
         currentUser.id
     );
 
-  const isOwner =
+  const owner =
     currentUser?.id ===
     post.author_id;
 
-  const authorName =
+  const name =
     profile.display_name ||
     "Miles Apart Member";
 
-
   const wrapper =
-    document.createElement("div");
+    document.createElement(
+      "div"
+    );
 
   wrapper.className =
     "card ma-post";
 
   wrapper.dataset.postId =
     post.id;
-
 
   wrapper.innerHTML = `
 
@@ -2050,7 +2108,7 @@ function createPostElement(post){
         <div class="ma-post-author-info">
 
           <div class="ma-post-author-name">
-            ${escapeHtml(authorName)}
+            ${escapeHtml(name)}
           </div>
 
           <div class="ma-post-author-meta">
@@ -2111,42 +2169,36 @@ function createPostElement(post){
 
         <button
           class="ma-post-action ${
-            userLiked ? "liked" : ""
+            liked ? "liked" : ""
           }"
-          type="button"
           data-action="like"
           data-post-id="${post.id}"
+          type="button"
         >
-          ${
-            userLiked
-              ? "❤️"
-              : "♡"
-          }
+          ${liked ? "❤️" : "♡"}
           ${likes.length}
         </button>
 
 
         <button
           class="ma-post-action"
-          type="button"
           data-action="comments"
           data-post-id="${post.id}"
+          type="button"
         >
           💬 ${comments.length}
         </button>
 
 
         ${
-          currentUser && !isOwner
+          currentUser && !owner
             ? `
               <button
                 class="ma-post-action ma-message-button"
-                type="button"
                 data-action="message"
                 data-author-id="${post.author_id}"
-                data-author-name="${escapeHtml(
-                  authorName
-                )}"
+                data-author-name="${escapeHtml(name)}"
+                type="button"
               >
                 Nachricht
               </button>
@@ -2158,13 +2210,13 @@ function createPostElement(post){
 
 
       ${
-        isOwner
+        owner
           ? `
             <button
               class="ma-post-action ma-delete"
-              type="button"
               data-action="delete"
               data-post-id="${post.id}"
+              type="button"
             >
               Löschen
             </button>
@@ -2191,8 +2243,7 @@ function createPostElement(post){
                 new Date(b.created_at)
             )
             .map(
-              comment =>
-                createCommentHtml(comment)
+              createCommentHtml
             )
             .join("")
         }
@@ -2207,7 +2258,6 @@ function createPostElement(post){
 
         <input
           class="ma-comment-input"
-          type="text"
           maxlength="1000"
           placeholder="Antwort schreiben …"
           required
@@ -2226,8 +2276,8 @@ function createPostElement(post){
 
   `;
 
-
   return wrapper;
+
 }
 
 
@@ -2239,7 +2289,6 @@ function createCommentHtml(comment){
   const name =
     profile.display_name ||
     "Miles Apart Member";
-
 
   return `
 
@@ -2288,6 +2337,7 @@ function createCommentHtml(comment){
     </div>
 
   `;
+
 }
 
 
@@ -2304,13 +2354,11 @@ $("postsContainer").addEventListener(
       return;
     }
 
-
     const action =
       button.dataset.action;
 
     const postId =
       button.dataset.postId;
-
 
     if(action === "like"){
 
@@ -2320,8 +2368,8 @@ $("postsContainer").addEventListener(
       );
 
       return;
-    }
 
+    }
 
     if(action === "delete"){
 
@@ -2330,8 +2378,8 @@ $("postsContainer").addEventListener(
       );
 
       return;
-    }
 
+    }
 
     if(action === "message"){
 
@@ -2341,8 +2389,8 @@ $("postsContainer").addEventListener(
       );
 
       return;
-    }
 
+    }
 
     if(action === "comments"){
 
@@ -2355,7 +2403,6 @@ $("postsContainer").addEventListener(
         return;
       }
 
-
       const comments =
         post.querySelector(
           `[data-comments="${postId}"]`
@@ -2364,7 +2411,8 @@ $("postsContainer").addEventListener(
       if(comments){
 
         comments.style.display =
-          comments.style.display === "none"
+          comments.style.display ===
+          "none"
             ? "block"
             : "none";
 
@@ -2389,20 +2437,11 @@ $("postsContainer").addEventListener(
       return;
     }
 
-
     event.preventDefault();
 
-
-    const postId =
-      form.dataset.commentForm;
-
-    const input =
-      form.querySelector("input");
-
-
     await submitComment(
-      postId,
-      input
+      form.dataset.commentForm,
+      form.querySelector("input")
     );
 
   }
@@ -2415,21 +2454,19 @@ async function toggleLike(
 ){
 
   if(!currentUser){
-    window.location.href =
+    location.href =
       "home.html";
     return;
   }
 
-
   button.disabled =
     true;
-
 
   try{
 
     const {
-      data: existing,
-      error: findError
+      data:existing,
+      error
     } =
       await supabaseClient
         .from(
@@ -2448,16 +2485,14 @@ async function toggleLike(
         )
         .maybeSingle();
 
-
-    if(findError){
-      throw findError;
+    if(error){
+      throw error;
     }
-
 
     if(existing){
 
       const {
-        error
+        error:deleteError
       } =
         await supabaseClient
           .from(
@@ -2473,34 +2508,46 @@ async function toggleLike(
             currentUser.id
           );
 
-
-      if(error){
-        throw error;
+      if(deleteError){
+        throw deleteError;
       }
 
     }else{
 
       const {
-        error
+        error:insertError
       } =
         await supabaseClient
           .from(
             "community_post_likes"
           )
           .insert({
-            post_id:postId,
-            user_id:currentUser.id
+            post_id:
+              postId,
+
+            user_id:
+              currentUser.id
           });
 
-
-      if(error){
-        throw error;
+      if(insertError){
+        throw insertError;
       }
 
     }
 
-
     await loadPosts();
+
+  }catch(error){
+
+    console.error(
+      "Like error:",
+      error
+    );
+
+    alert(
+      error.message ||
+      "Like konnte nicht geändert werden."
+    );
 
   }finally{
 
@@ -2508,26 +2555,25 @@ async function toggleLike(
       false;
 
   }
+
 }
 
 
 async function deletePost(postId){
 
   if(!currentUser){
-    window.location.href =
+    location.href =
       "home.html";
     return;
   }
 
-
   if(
-    !window.confirm(
+    !confirm(
       "Diesen Post wirklich löschen?"
     )
   ){
     return;
   }
-
 
   const {
     error
@@ -2546,18 +2592,19 @@ async function deletePost(postId){
         currentUser.id
       );
 
-
   if(error){
 
-    window.alert(
-      error.message
+    alert(
+      error.message ||
+      "Der Post konnte nicht gelöscht werden."
     );
 
     return;
+
   }
 
-
   await loadPosts();
+
 }
 
 
@@ -2567,24 +2614,20 @@ async function submitComment(
 ){
 
   if(!currentUser){
-    window.location.href =
+    location.href =
       "home.html";
     return;
   }
 
-
   const content =
     input.value.trim();
-
 
   if(!content){
     return;
   }
 
-
   input.disabled =
     true;
-
 
   const {
     error
@@ -2594,43 +2637,48 @@ async function submitComment(
         "community_post_comments"
       )
       .insert({
-        post_id:postId,
-        author_id:currentUser.id,
-        content:content
-      });
+        post_id:
+          postId,
 
+        author_id:
+          currentUser.id,
+
+        content:
+          content
+      });
 
   input.disabled =
     false;
 
-
   if(error){
 
-    window.alert(
-      error.message
+    alert(
+      error.message ||
+      "Kommentar konnte nicht gespeichert werden."
     );
 
     return;
+
   }
 
-
   await loadPosts();
-
 
   const comments =
     document.querySelector(
       `[data-post-id="${postId}"] [data-comments="${postId}"]`
     );
 
-
   if(comments){
     comments.style.display =
       "block";
   }
+
 }
 
 
-/* ---------------- PRIVATE MESSAGE ---------------- */
+/* ========================= */
+/* PRIVATE MESSAGES */
+/* ========================= */
 
 function openMessageModal(
   receiverId,
@@ -2638,11 +2686,10 @@ function openMessageModal(
 ){
 
   if(!currentUser){
-    window.location.href =
+    location.href =
       "home.html";
     return;
   }
-
 
   if(
     !receiverId ||
@@ -2651,7 +2698,6 @@ function openMessageModal(
     return;
   }
 
-
   messageReceiverId =
     receiverId;
 
@@ -2659,10 +2705,8 @@ function openMessageModal(
     receiverName ||
     "Miles Apart Member";
 
-
   $("messageRecipient").textContent =
     `An ${messageReceiverName}`;
-
 
   $("privateMessageContent").value =
     "";
@@ -2670,10 +2714,10 @@ function openMessageModal(
   $("privateMessageStatus").textContent =
     "";
 
-
   $("messageOverlay").classList.add(
     "open"
   );
+
 }
 
 
@@ -2688,6 +2732,7 @@ function closeMessageModal(){
 
   messageReceiverName =
     "";
+
 }
 
 
@@ -2702,7 +2747,9 @@ $("messageOverlay").onclick =
       event.target ===
       $("messageOverlay")
     ){
+
       closeMessageModal();
+
     }
 
   };
@@ -2715,29 +2762,26 @@ $("sendPrivateMessageButton").onclick =
       return;
     }
 
-
     const content =
       $("privateMessageContent")
         .value
         .trim();
 
-
     if(!content){
 
-      $("privateMessageStatus").textContent =
+      $("privateMessageStatus")
+        .textContent =
         "Bitte schreibe zuerst eine Nachricht.";
 
       return;
-    }
 
+    }
 
     const button =
       $("sendPrivateMessageButton");
 
-
     button.disabled =
       true;
-
 
     const {
       error
@@ -2757,18 +2801,20 @@ $("sendPrivateMessageButton").onclick =
             content
         });
 
-
     if(error){
 
-      $("privateMessageStatus").textContent =
+      $("privateMessageStatus")
+        .textContent =
         error.message;
 
     }else{
 
-      $("privateMessageStatus").textContent =
+      $("privateMessageStatus")
+        .textContent =
         "Nachricht wurde gesendet ✓";
 
-      $("privateMessageContent").value =
+      $("privateMessageContent")
+        .value =
         "";
 
       setTimeout(
@@ -2778,28 +2824,27 @@ $("sendPrivateMessageButton").onclick =
 
     }
 
-
     button.disabled =
       false;
 
   };
 
 
-/* ---------------- POST FORM ---------------- */
+/* ========================= */
+/* POST ERSTELLEN */
+/* ========================= */
 
 $("openPostButton").onclick =
   () => {
 
     if(!currentUser){
-      window.location.href =
+      location.href =
         "home.html";
       return;
     }
 
-
     $("postFormCard").style.display =
       "block";
-
 
     $("postContent").focus();
 
@@ -2821,6 +2866,9 @@ $("cancelPostButton").onclick =
     $("postImageName").textContent =
       "";
 
+    $("postFormMessage").textContent =
+      "";
+
     $("postFormCard").style.display =
       "none";
 
@@ -2831,29 +2879,12 @@ $("postImage").onchange =
   () => {
 
     const file =
-      $("postImage").files?.[0];
-
+      $("postImage")
+        .files?.[0];
 
     if(!file){
       return;
     }
-
-
-    if(
-      !file.type.startsWith(
-        "image/"
-      )
-    ){
-
-      $("postImage").value =
-        "";
-
-      $("postImageName").textContent =
-        "Bitte eine Bilddatei auswählen.";
-
-      return;
-    }
-
 
     if(
       file.size >
@@ -2867,16 +2898,14 @@ $("postImage").onchange =
         "Das Bild darf maximal 8 MB groß sein.";
 
       return;
-    }
 
+    }
 
     $("postImageName").textContent =
       file.name;
 
-
     const reader =
       new FileReader();
-
 
     reader.onload =
       event => {
@@ -2890,8 +2919,9 @@ $("postImage").onchange =
 
       };
 
-
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(
+      file
+    );
 
   };
 
@@ -2908,10 +2938,8 @@ async function uploadPostImage(file){
         ""
       );
 
-
-  const filePath =
+  const path =
     `${currentUser.id}/${Date.now()}-${crypto.randomUUID()}.${extension}`;
-
 
   const {
     error
@@ -2922,7 +2950,7 @@ async function uploadPostImage(file){
         "community-images"
       )
       .upload(
-        filePath,
+        path,
         file,
         {
           cacheControl:"3600",
@@ -2930,11 +2958,9 @@ async function uploadPostImage(file){
         }
       );
 
-
   if(error){
     throw error;
   }
-
 
   return supabaseClient
     .storage
@@ -2942,10 +2968,11 @@ async function uploadPostImage(file){
       "community-images"
     )
     .getPublicUrl(
-      filePath
+      path
     )
     .data
     .publicUrl;
+
 }
 
 
@@ -2954,29 +2981,24 @@ $("postForm").onsubmit =
 
     event.preventDefault();
 
-
     if(!currentUser){
-      window.location.href =
+      location.href =
         "home.html";
       return;
     }
-
 
     const content =
       $("postContent")
         .value
         .trim();
 
-
     const file =
       $("postImage")
         .files?.[0];
 
-
     if(!content){
       return;
     }
-
 
     if(
       file &&
@@ -2984,20 +3006,22 @@ $("postForm").onsubmit =
       8 * 1024 * 1024
     ){
 
-      $("postFormMessage").textContent =
+      $("postFormMessage")
+        .textContent =
         "Das Bild darf maximal 8 MB groß sein.";
 
       return;
-    }
 
+    }
 
     const button =
       $("submitPostButton");
 
-
     button.disabled =
       true;
 
+    button.textContent =
+      "Wird veröffentlicht …";
 
     try{
 
@@ -3005,7 +3029,6 @@ $("postForm").onsubmit =
         file
           ? await uploadPostImage(file)
           : null;
-
 
       const {
         error
@@ -3015,7 +3038,6 @@ $("postForm").onsubmit =
             "community_posts"
           )
           .insert({
-
             author_id:
               currentUser.id,
 
@@ -3024,23 +3046,25 @@ $("postForm").onsubmit =
 
             image_url:
               imageUrl
-
           });
-
 
       if(error){
         throw error;
       }
 
-
       $("cancelPostButton").click();
-
 
       await loadPosts();
 
     }catch(error){
 
-      $("postFormMessage").textContent =
+      console.error(
+        "Post error:",
+        error
+      );
+
+      $("postFormMessage")
+        .textContent =
         error.message ||
         "Der Post konnte nicht veröffentlicht werden.";
 
@@ -3049,15 +3073,17 @@ $("postForm").onsubmit =
       button.disabled =
         false;
 
+      button.textContent =
+        "Post veröffentlichen";
+
     }
 
   };
 
 
-/* =========================================================
-   RUN BUDDY
-   ========================================================= */
-
+/* ========================= */
+/* RUN BUDDY */
+/* ========================= */
 
 function getBuddyDays(value){
 
@@ -3065,13 +3091,14 @@ function getBuddyDays(value){
     return [];
   }
 
-
   return String(value)
     .split(",")
     .map(
-      day => day.trim()
+      item =>
+        item.trim()
     )
     .filter(Boolean);
+
 }
 
 
@@ -3080,10 +3107,12 @@ function buddyDaysLabel(value){
   const days =
     getBuddyDays(value);
 
+  if(!days.length){
+    return "Flexibel";
+  }
 
-  return days.length
-    ? days.join(" · ")
-    : "Flexibel";
+  return days.join(" · ");
+
 }
 
 
@@ -3092,11 +3121,9 @@ function buddyCard(row){
   const profile =
     row.profiles || {};
 
-
   const name =
     profile.display_name ||
     "Miles Apart Member";
-
 
   return `
 
@@ -3104,7 +3131,9 @@ function buddyCard(row){
 
       <div class="ma-buddy-top">
 
-        ${avatarHtml(profile)}
+        ${avatarHtml(
+          profile
+        )}
 
         <div>
 
@@ -3180,7 +3209,8 @@ function buddyCard(row){
 
           <span class="ma-buddy-value">
             ⚡ ${escapeHtml(
-              row.pace
+              row.pace ||
+              ""
             )}
           </span>
 
@@ -3195,7 +3225,8 @@ function buddyCard(row){
 
           <span class="ma-buddy-value">
             📍 ${escapeHtml(
-              row.location
+              row.location ||
+              ""
             )}
           </span>
 
@@ -3208,7 +3239,9 @@ function buddyCard(row){
         row.note
           ? `
             <div class="ma-buddy-note">
-              ${escapeHtml(row.note)}
+              ${escapeHtml(
+                row.note
+              )}
             </div>
           `
           : ""
@@ -3238,10 +3271,20 @@ function buddyCard(row){
     </article>
 
   `;
+
 }
 
 
 async function loadBuddyProfiles(){
+
+  /*
+   * WICHTIG:
+   * Hier wird NICHT mehr "id" aus
+   * run_buddy_profiles abgefragt.
+   *
+   * Die Tabelle wird über user_id
+   * mit profiles verbunden.
+   */
 
   const {
     data,
@@ -3252,7 +3295,6 @@ async function loadBuddyProfiles(){
         "run_buddy_profiles"
       )
       .select(`
-        id,
         user_id,
         location,
         preferred_day,
@@ -3261,7 +3303,7 @@ async function loadBuddyProfiles(){
         note,
         updated_at,
 
-        profiles:user_id (
+        profiles:user_id(
           display_name,
           username,
           avatar_url,
@@ -3275,30 +3317,24 @@ async function loadBuddyProfiles(){
         }
       );
 
-
   if(error){
     throw error;
   }
 
-
-  const profiles =
-    data || [];
-
-
-  const visibleProfiles =
-    profiles.filter(
-      profile =>
-        profile.user_id !==
-        currentUser?.id
-    );
+  const list =
+    (data || [])
+      .filter(
+        item =>
+          item.user_id !==
+          currentUser?.id
+      );
 
 
   $("buddyList").innerHTML =
-    visibleProfiles.length
-      ? visibleProfiles
+    list.length
+      ? list
           .map(
-            buddy =>
-              buddyCard(buddy)
+            buddyCard
           )
           .join("")
       : `
@@ -3311,45 +3347,43 @@ async function loadBuddyProfiles(){
       `;
 
 
+  /*
+   * Eigenes Profil in das Formular laden.
+   */
+
   if(currentUser){
 
-    const ownProfile =
-      profiles.find(
-        profile =>
-          profile.user_id ===
+    const mine =
+      (data || []).find(
+        item =>
+          item.user_id ===
           currentUser.id
       );
 
-
-    if(ownProfile){
+    if(mine){
 
       $("buddyLocation").value =
-        ownProfile.location ||
+        mine.location ||
         "";
 
-
       setBuddyDays(
-        ownProfile.preferred_day ||
+        mine.preferred_day ||
         ""
       );
 
-
       $("buddyTime").value =
         String(
-          ownProfile.preferred_time ||
+          mine.preferred_time ||
           ""
         ).slice(0,5);
 
-
       $("buddyPace").value =
-        ownProfile.pace ||
+        mine.pace ||
         "";
-
 
       $("buddyNote").value =
-        ownProfile.note ||
+        mine.note ||
         "";
-
 
       $("openBuddyButton").textContent =
         "Mein Run Buddy-Profil bearbeiten";
@@ -3357,10 +3391,9 @@ async function loadBuddyProfiles(){
     }
 
   }
+
 }
 
-
-/* Run Buddy Nachricht */
 
 $("buddyList").addEventListener(
   "click",
@@ -3371,11 +3404,9 @@ $("buddyList").addEventListener(
         "[data-buddy-message]"
       );
 
-
     if(!button){
       return;
     }
-
 
     openMessageModal(
       button.dataset.buddyMessage,
@@ -3386,31 +3417,31 @@ $("buddyList").addEventListener(
 );
 
 
-/* Run Buddy Formular öffnen */
-
 $("openBuddyButton").onclick =
   () => {
 
     if(!currentUser){
-
-      window.location.href =
+      location.href =
         "home.html";
-
       return;
     }
-
 
     $("buddyForm")
       .classList
       .toggle("open");
 
+    if(
+      $("buddyForm")
+        .classList
+        .contains("open")
+    ){
 
-    $("buddyLocation").focus();
+      $("buddyLocation").focus();
+
+    }
 
   };
 
-
-/* Run Buddy Formular abbrechen */
 
 $("cancelBuddyButton").onclick =
   () => {
@@ -3419,17 +3450,12 @@ $("cancelBuddyButton").onclick =
       .classList
       .remove("open");
 
-
-    $("buddyFormMessage").textContent =
+    $("buddyFormMessage")
+      .textContent =
       "";
-
-
-    setBuddyDays("");
 
   };
 
-
-/* ausgewählte Tage */
 
 function getSelectedBuddyDays(){
 
@@ -3441,10 +3467,9 @@ function getSelectedBuddyDays(){
     checkbox =>
       checkbox.value
   );
+
 }
 
-
-/* Tage aus gespeicherten Daten aktivieren */
 
 function setBuddyDays(value){
 
@@ -3452,7 +3477,6 @@ function setBuddyDays(value){
     new Set(
       getBuddyDays(value)
     );
-
 
   document
     .querySelectorAll(
@@ -3468,74 +3492,33 @@ function setBuddyDays(value){
 
       }
     );
+
 }
 
-
-/* Run Buddy speichern */
 
 $("buddyProfileForm").onsubmit =
   async event => {
 
     event.preventDefault();
 
-
     if(!currentUser){
-
-      window.location.href =
+      location.href =
         "home.html";
-
       return;
     }
 
-
-    const selectedDays =
+    const days =
       getSelectedBuddyDays();
 
+    if(!days.length){
 
-    if(!selectedDays.length){
-
-      $("buddyFormMessage").textContent =
+      $("buddyFormMessage")
+        .textContent =
         "Bitte wähle mindestens einen Lauftag aus.";
 
       return;
+
     }
-
-
-    const location =
-      $("buddyLocation")
-        .value
-        .trim();
-
-
-    const time =
-      $("buddyTime")
-        .value;
-
-
-    const pace =
-      $("buddyPace")
-        .value
-        .trim();
-
-
-    const note =
-      $("buddyNote")
-        .value
-        .trim();
-
-
-    if(
-      !location ||
-      !time ||
-      !pace
-    ){
-
-      $("buddyFormMessage").textContent =
-        "Bitte fülle alle Pflichtfelder aus.";
-
-      return;
-    }
-
 
     const payload = {
 
@@ -3543,19 +3526,31 @@ $("buddyProfileForm").onsubmit =
         currentUser.id,
 
       location:
-        location,
+        $("buddyLocation")
+          .value
+          .trim(),
+
+      /*
+       * Mehrere Tage werden gespeichert:
+       * Montag,Dienstag,Freitag
+       */
 
       preferred_day:
-        selectedDays.join(","),
+        days.join(","),
 
       preferred_time:
-        time,
+        $("buddyTime")
+          .value,
 
       pace:
-        pace,
+        $("buddyPace")
+          .value
+          .trim(),
 
       note:
-        note,
+        $("buddyNote")
+          .value
+          .trim(),
 
       updated_at:
         new Date().toISOString()
@@ -3566,19 +3561,23 @@ $("buddyProfileForm").onsubmit =
     const button =
       $("submitBuddyButton");
 
-
     button.disabled =
       true;
 
     button.textContent =
       "Wird gespeichert …";
 
-
-    $("buddyFormMessage").textContent =
+    $("buddyFormMessage")
+      .textContent =
       "";
 
 
     try{
+
+      /*
+       * user_id ist der eindeutige Schlüssel
+       * des Run-Buddy-Profils.
+       */
 
       const {
         error
@@ -3595,18 +3594,15 @@ $("buddyProfileForm").onsubmit =
             }
           );
 
-
       if(error){
         throw error;
       }
 
-
-      $("buddyFormMessage").textContent =
+      $("buddyFormMessage")
+        .textContent =
         "Profil gespeichert ✓";
 
-
       await loadBuddyProfiles();
-
 
       setTimeout(
         () => {
@@ -3619,12 +3615,17 @@ $("buddyProfileForm").onsubmit =
         600
       );
 
-
     }catch(error){
 
-      $("buddyFormMessage").textContent =
+      console.error(
+        "Run Buddy error:",
+        error
+      );
+
+      $("buddyFormMessage")
+        .textContent =
         error.message ||
-        "Das Profil konnte nicht gespeichert werden.";
+        "Das Run Buddy-Profil konnte nicht gespeichert werden.";
 
     }finally{
 
@@ -3639,29 +3640,32 @@ $("buddyProfileForm").onsubmit =
   };
 
 
-/* =========================================================
-   GEMEINSAME LÄUFE
-   ========================================================= */
-
+/* ========================= */
+/* GEMEINSAME LÄUFE */
+/* ========================= */
 
 $("openRunButton").onclick =
   () => {
 
     if(!currentUser){
-
-      window.location.href =
+      location.href =
         "home.html";
-
       return;
     }
-
 
     $("runForm")
       .classList
       .toggle("open");
 
+    if(
+      $("runForm")
+        .classList
+        .contains("open")
+    ){
 
-    $("runTitle").focus();
+      $("runTitle").focus();
+
+    }
 
   };
 
@@ -3672,13 +3676,14 @@ $("cancelRunButton").onclick =
     $("communityRunForm").reset();
 
     $("runMaxParticipants").value =
-      "8";
+      8;
 
     $("runForm")
       .classList
       .remove("open");
 
-    $("runFormMessage").textContent =
+    $("runFormMessage")
+      .textContent =
       "";
 
   };
@@ -3690,32 +3695,27 @@ function runCard(run){
     run.community_run_participants ||
     [];
 
-
   const creator =
     run.profiles ||
     {};
 
-
   const joined =
     currentUser &&
     participants.some(
-      participant =>
-        participant.user_id ===
+      item =>
+        item.user_id ===
         currentUser.id
     );
-
 
   const owner =
     currentUser?.id ===
     run.creator_id;
-
 
   const max =
     Number(
       run.max_participants ||
       0
     );
-
 
   return `
 
@@ -3819,11 +3819,9 @@ function runCard(run){
       <div class="ma-run-participants">
 
         <div class="ma-run-participant-count">
-
           👥 ${participants.length} /
           ${max}
           Teilnehmer
-
         </div>
 
 
@@ -3834,9 +3832,9 @@ function runCard(run){
               ? `
                 <button
                   class="ma-run-delete"
-                  type="button"
                   data-run-action="delete"
                   data-run-id="${run.id}"
+                  type="button"
                 >
                   Löschen
                 </button>
@@ -3848,9 +3846,9 @@ function runCard(run){
                       ? "joined"
                       : ""
                   }"
-                  type="button"
                   data-run-action="join"
                   data-run-id="${run.id}"
+                  type="button"
                   ${
                     !joined &&
                     participants.length >= max
@@ -3858,6 +3856,7 @@ function runCard(run){
                       : ""
                   }
                 >
+
                   ${
                     joined
                       ? "✓ Ich bin dabei"
@@ -3865,6 +3864,7 @@ function runCard(run){
                         ? "Voll"
                         : "Ich bin dabei"
                   }
+
                 </button>
               `
           }
@@ -3876,6 +3876,7 @@ function runCard(run){
     </article>
 
   `;
+
 }
 
 
@@ -3900,13 +3901,13 @@ async function loadCommunityRuns(){
         max_participants,
         created_at,
 
-        profiles:creator_id (
+        profiles:creator_id(
           display_name,
           username,
           avatar_url
         ),
 
-        community_run_participants (
+        community_run_participants(
           user_id
         )
       `)
@@ -3929,23 +3930,14 @@ async function loadCommunityRuns(){
         }
       );
 
-
   if(error){
     throw error;
   }
 
-
-  const runs =
-    data || [];
-
-
   $("runList").innerHTML =
-    runs.length
-      ? runs
-          .map(
-            run =>
-              runCard(run)
-          )
+    (data || []).length
+      ? data
+          .map(runCard)
           .join("")
       : `
         <div class="ma-buddy-empty">
@@ -3955,6 +3947,7 @@ async function loadCommunityRuns(){
 
         </div>
       `;
+
 }
 
 
@@ -3967,29 +3960,26 @@ $("runList").addEventListener(
         "[data-run-action]"
       );
 
-
     if(!button){
       return;
     }
 
-
     const runId =
       button.dataset.runId;
 
+    const action =
+      button.dataset.runAction;
 
-    if(
-      button.dataset.runAction ===
-      "delete"
-    ){
+
+    if(action === "delete"){
 
       if(
-        !window.confirm(
+        !confirm(
           "Diesen gemeinsamen Lauf wirklich löschen?"
         )
       ){
         return;
       }
-
 
       const {
         error
@@ -4008,21 +3998,22 @@ $("runList").addEventListener(
             currentUser.id
           );
 
-
       if(error){
 
-        window.alert(
-          error.message
+        alert(
+          error.message ||
+          "Der Lauf konnte nicht gelöscht werden."
         );
 
         return;
+
       }
 
     }else{
 
       const {
-        data: existing,
-        error: findError
+        data:existing,
+        error:findError
       } =
         await supabaseClient
           .from(
@@ -4041,16 +4032,15 @@ $("runList").addEventListener(
           )
           .maybeSingle();
 
-
       if(findError){
 
-        window.alert(
+        alert(
           findError.message
         );
 
         return;
-      }
 
+      }
 
       if(existing){
 
@@ -4071,13 +4061,8 @@ $("runList").addEventListener(
               currentUser.id
             );
 
-
         if(error){
-
-          window.alert(
-            error.message
-          );
-
+          alert(error.message);
           return;
         }
 
@@ -4091,29 +4076,21 @@ $("runList").addEventListener(
               "community_run_participants"
             )
             .insert({
-
               run_id:
                 runId,
 
               user_id:
                 currentUser.id
-
             });
 
-
         if(error){
-
-          window.alert(
-            error.message
-          );
-
+          alert(error.message);
           return;
         }
 
       }
 
     }
-
 
     await loadCommunityRuns();
 
@@ -4126,24 +4103,25 @@ $("communityRunForm").onsubmit =
 
     event.preventDefault();
 
-
     if(!currentUser){
+      location.href =
+        "home.html";
       return;
     }
-
 
     const button =
       $("submitRunButton");
 
-
     button.disabled =
       true;
 
+    button.textContent =
+      "Wird erstellt …";
 
     try{
 
       const {
-        data: createdRun,
+        data:run,
         error
       } =
         await supabaseClient
@@ -4151,7 +4129,6 @@ $("communityRunForm").onsubmit =
             "community_runs"
           )
           .insert({
-
             creator_id:
               currentUser.id,
 
@@ -4183,13 +4160,11 @@ $("communityRunForm").onsubmit =
                 $("runMaxParticipants")
                   .value
               )
-
           })
           .select(
             "id"
           )
           .single();
-
 
       if(error){
         throw error;
@@ -4197,23 +4172,19 @@ $("communityRunForm").onsubmit =
 
 
       const {
-        error:
-          participantError
+        error:participantError
       } =
         await supabaseClient
           .from(
             "community_run_participants"
           )
           .insert({
-
             run_id:
-              createdRun.id,
+              run.id,
 
             user_id:
               currentUser.id
-
           });
-
 
       if(participantError){
         throw participantError;
@@ -4222,12 +4193,17 @@ $("communityRunForm").onsubmit =
 
       $("cancelRunButton").click();
 
-
       await loadCommunityRuns();
 
     }catch(error){
 
-      $("runFormMessage").textContent =
+      console.error(
+        "Create run error:",
+        error
+      );
+
+      $("runFormMessage")
+        .textContent =
         error.message ||
         "Der Lauf konnte nicht erstellt werden.";
 
@@ -4236,15 +4212,17 @@ $("communityRunForm").onsubmit =
       button.disabled =
         false;
 
+      button.textContent =
+        "Lauf erstellen";
+
     }
 
   };
 
 
-/* =========================================================
-   INITIALISIERUNG
-   ========================================================= */
-
+/* ========================= */
+/* INITIALISIERUNG */
+/* ========================= */
 
 async function initializeCommunity(){
 
@@ -4252,35 +4230,26 @@ async function initializeCommunity(){
 
     await loadCurrentUser();
 
-
     await Promise.all([
-
       loadPosts(),
-
       loadBuddyProfiles(),
-
       loadCommunityRuns()
-
     ]);
-
 
     $("communityLoading")
       .style
       .display =
       "none";
 
-
     $("communityBuddySection")
       .style
       .display =
       "block";
 
-
     $("communityRunsSection")
       .style
       .display =
       "block";
-
 
   }catch(error){
 
@@ -4289,20 +4258,18 @@ async function initializeCommunity(){
       error
     );
 
-
     $("communityLoading")
       .style
       .display =
       "none";
-
 
     $("communityError")
       .style
       .display =
       "block";
 
-
-    $("communityError").textContent =
+    $("communityError")
+      .textContent =
       error.message ||
       "Die Community konnte nicht geladen werden.";
 
