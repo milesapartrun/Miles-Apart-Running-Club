@@ -1885,6 +1885,92 @@ function setBuddyDays(value){
 
 
 /* =========================================================
+   KOMMENTAR-PROFILE SEPARAT LADEN
+   ---------------------------------------------------------
+   Wichtig:
+   community_item_comments.author_id wird nicht mehr
+   als Relation zu profiles abgefragt.
+
+   Stattdessen:
+   1. Kommentare laden
+   2. author_id sammeln
+   3. Profile über profiles.id laden
+   4. Profile an Kommentare hängen
+========================================================= */
+
+async function attachCommentProfiles(comments){
+
+  const list=
+    Array.isArray(comments)
+    ?comments
+    :[];
+
+
+  if(!list.length){
+    return list;
+  }
+
+
+  const authorIds=
+    [
+      ...new Set(
+        list
+          .map(comment=>comment.author_id)
+          .filter(Boolean)
+      )
+    ];
+
+
+  if(!authorIds.length){
+    return list;
+  }
+
+
+  const {
+    data:profiles,
+    error
+  }=
+    await supabaseClient
+      .from("profiles")
+      .select(
+        "id,display_name,username,avatar_url,location"
+      )
+      .in(
+        "id",
+        authorIds
+      );
+
+
+  if(error){
+    throw error;
+  }
+
+
+  const profileMap=
+    new Map(
+      (profiles||[]).map(
+        profile=>[
+          String(profile.id),
+          profile
+        ]
+      )
+    );
+
+
+  return list.map(comment=>({
+
+    ...comment,
+
+    profiles:
+      profileMap.get(
+        String(comment.author_id)
+      )||{}
+
+  }));
+}
+
+
+/* =========================================================
    KOMMENTARE HTML
 ========================================================= */
 
@@ -2315,6 +2401,8 @@ function createPostHtml(post){
 
 /* =========================================================
    RUN BUDDY KOMMENTARE
+   ---------------------------------------------------------
+   KEINE profiles:author_id RELATION MEHR
 ========================================================= */
 
 async function loadBuddyComments(){
@@ -2326,12 +2414,7 @@ async function loadBuddyComments(){
     await supabaseClient
       .from("community_item_comments")
       .select(
-        `id,item_id,author_id,content,created_at,
-        profiles:author_id(
-          display_name,
-          username,
-          avatar_url
-        )`
+        "id,item_id,author_id,content,created_at"
       )
       .eq(
         "item_type",
@@ -2350,10 +2433,16 @@ async function loadBuddyComments(){
   }
 
 
+  const enriched=
+    await attachCommentProfiles(
+      data||[]
+    );
+
+
   buddyComments={};
 
 
-  (data||[]).forEach(comment=>{
+  enriched.forEach(comment=>{
 
     const id=
       String(comment.item_id);
@@ -2369,6 +2458,8 @@ async function loadBuddyComments(){
 
 /* =========================================================
    RUN KOMMENTARE
+   ---------------------------------------------------------
+   KEINE profiles:author_id RELATION MEHR
 ========================================================= */
 
 async function loadRunComments(){
@@ -2380,12 +2471,7 @@ async function loadRunComments(){
     await supabaseClient
       .from("community_item_comments")
       .select(
-        `id,item_id,author_id,content,created_at,
-        profiles:author_id(
-          display_name,
-          username,
-          avatar_url
-        )`
+        "id,item_id,author_id,content,created_at"
       )
       .eq(
         "item_type",
@@ -2404,10 +2490,16 @@ async function loadRunComments(){
   }
 
 
+  const enriched=
+    await attachCommentProfiles(
+      data||[]
+    );
+
+
   runComments={};
 
 
-  (data||[]).forEach(comment=>{
+  enriched.forEach(comment=>{
 
     const id=
       String(comment.item_id);
@@ -3074,6 +3166,11 @@ async function addComment(
 
 async function deleteComment(id){
 
+  if(!currentUser){
+    return;
+  }
+
+
   const {
     error
   }=
@@ -3286,6 +3383,7 @@ document.addEventListener(
 
 
       if(box){
+
         box.classList.add("open");
 
         box.querySelector(
@@ -3469,6 +3567,7 @@ function openMessageModal(
 
 
   messageReceiverId=id;
+
   messageReceiverName=
     name||
     "Miles Apart Member";
