@@ -1,12 +1,27 @@
 <!doctype html>
 <html lang="de">
+
 <head>
+
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
 
-  <title>Events — Miles Apart Running Club</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
 
-  <link rel="stylesheet" href="style.css">
+  <title>
+    Events — Miles Apart Running Club
+  </title>
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
+
+  <script
+    src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+  ></script>
 
   <style>
 
@@ -29,7 +44,7 @@
       align-items: center;
       justify-content: flex-start;
       padding: 0;
-      margin: 0 0 28px;
+      margin: 0;
     }
 
     .brand a {
@@ -120,6 +135,146 @@
       font-size: 15px;
       line-height: 1.55;
     }
+
+
+    /* =========================================================
+       EVENT ACTION
+    ========================================================= */
+
+    .events-hero-action {
+      position: relative;
+      z-index: 2;
+      margin-top: 24px;
+    }
+
+    .events-join-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      min-height: 48px;
+      padding: 12px 18px;
+      border: 0;
+      border-radius: 12px;
+      background: #fff;
+      color: #111;
+      font-size: 14px;
+      font-weight: 900;
+      text-decoration: none;
+      cursor: pointer;
+      transition:
+        transform .18s ease,
+        opacity .18s ease,
+        background .18s ease;
+    }
+
+    .events-join-btn:hover {
+      transform: translateY(-1px);
+      background: #18b8c7;
+      color: #fff;
+    }
+
+    .events-join-btn.is-joined {
+      pointer-events: none;
+      opacity: .75;
+    }
+
+
+    /* =========================================================
+       EVENT LEADERBOARD
+    ========================================================= */
+
+    .event-leaderboard {
+      position: relative;
+      z-index: 1;
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,.12);
+    }
+
+    .event-leaderboard-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
+    }
+
+    .event-leaderboard-title h3 {
+      margin: 0;
+      color: #fff;
+      font-size: 19px;
+      line-height: 1.2;
+      font-weight: 900;
+    }
+
+    .event-leaderboard-title span {
+      color: #aaa;
+      font-size: 11px;
+      white-space: nowrap;
+    }
+
+    .event-leaderboard-row {
+      display: grid;
+      grid-template-columns: 34px minmax(0,1fr) auto;
+      align-items: center;
+      gap: 10px;
+      padding: 11px 0;
+      border-top: 1px solid rgba(255,255,255,.12);
+    }
+
+    .event-leaderboard-position {
+      color: #fff;
+      font-weight: 800;
+      font-size: 18px;
+      text-align: center;
+    }
+
+    .event-leaderboard-medal {
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    .event-leaderboard-profile-link {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: #fff;
+      text-decoration: none;
+      font-weight: 700;
+      transition:
+        color .18s ease,
+        opacity .18s ease;
+    }
+
+    .event-leaderboard-profile-link:hover {
+      color: #18b8c7;
+      text-decoration: underline;
+    }
+
+    .event-leaderboard-time {
+      color: #fff;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .event-leaderboard-empty {
+      padding: 8px 0 2px;
+      color: #aaa;
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .event-leaderboard-loading {
+      color: #aaa;
+      font-size: 13px;
+    }
+
+
+    /* =========================================================
+       EVENT INFO
+    ========================================================= */
 
     .events-hero-bottom {
       position: relative;
@@ -258,13 +413,6 @@
       font-weight: 900;
     }
 
-    .event-description {
-      margin-top: 5px;
-      color: #858585;
-      font-size: 12px;
-      line-height: 1.4;
-    }
-
 
     /* =========================================================
        MOBILE
@@ -318,6 +466,11 @@
         gap: 10px;
       }
 
+      .event-leaderboard-row {
+        grid-template-columns: 30px minmax(0,1fr) auto;
+        gap: 8px;
+      }
+
       .event-item {
         grid-template-columns: 62px minmax(0,1fr);
         gap: 14px;
@@ -326,519 +479,1826 @@
     }
 
   </style>
+
 </head>
+
 
 <body>
 
-  <div class="shell">
+<div class="shell">
 
-    <!-- =======================================================
-         SIDEBAR
-    ======================================================== -->
 
-    <aside class="sidebar">
+  <!-- =======================================================
+       SIDEBAR
+  ======================================================== -->
 
-      <div class="brand">
+  <aside class="sidebar">
 
-        <a href="index.html">
+    <div class="brand">
 
-          <img
-            src="miles-apart-full-logo.png"
-            alt="Miles Apart Running Club"
-          >
+      <a href="index.html">
 
-        </a>
+        <img
+          src="miles-apart-wordmark.png"
+          alt="Miles Apart Running Club"
+        >
+
+      </a>
+
+    </div>
+
+
+    <nav class="nav">
+
+      <a href="index.html">
+        Miles Apart
+      </a>
+
+      <a href="home.html">
+        Home
+      </a>
+
+      <a href="challenges.html">
+        Challenges
+      </a>
+
+      <a href="community.html">
+        Community
+      </a>
+
+      <a
+        class="active"
+        href="events.html"
+      >
+        Events
+      </a>
+
+      <a href="training.html">
+        Training
+      </a>
+
+    </nav>
+
+
+    <div class="side-bottom">
+
+      <small>
+        THIS WEEK
+      </small>
+
+      <strong>
+        23.4 / 30 KM
+      </strong>
+
+      <div class="mini-progress">
+
+        <i></i>
 
       </div>
 
+      <p
+        class="small"
+        style="color:#aaa;margin-bottom:0"
+      >
+        Nur 6.6 km bis zum Wochenziel.
+      </p>
 
-      <nav class="nav">
+    </div>
 
-        <a href="index.html">
-          Miles Apart
-        </a>
-
-        <a href="home.html">
-          Home
-        </a>
-
-        <a href="challenges.html">
-          Challenges
-        </a>
-
-        <a href="community.html">
-          Community
-        </a>
-
-        <a
-          class="active"
-          href="events.html"
-        >
-          Events
-        </a>
-
-        <a href="training.html">
-          Training
-        </a>
-
-      </nav>
+  </aside>
 
 
-      <div class="side-bottom">
+  <!-- =======================================================
+       MAIN
+  ======================================================== -->
 
-        <small>
-          THIS WEEK
-        </small>
+  <main class="main">
 
-        <strong>
-          23.4 / 30 KM
-        </strong>
 
-        <div class="mini-progress">
-          <i></i>
+    <div class="events-page">
+
+
+      <!-- ===================================================
+           TOP
+      ==================================================== -->
+
+      <div class="top">
+
+        <div class="crumb">
+          MILES APART / EVENTS
         </div>
 
-        <p
-          class="small"
-          style="color:#aaa;margin-bottom:0"
-        >
-          Nur 6.6 km bis zum Wochenziel.
-        </p>
-
       </div>
 
-    </aside>
+
+      <!-- ===================================================
+           NÄCHSTES EVENT
+      ==================================================== -->
+
+      <section class="events-hero">
+
+        <div class="events-hero-card">
 
 
-    <!-- =======================================================
-         MAIN
-    ======================================================== -->
+          <div class="events-hero-content">
 
-    <main class="main">
-
-      <div class="events-page">
-
-
-        <!-- ===================================================
-             TOP
-        ==================================================== -->
-
-        <div class="top">
-
-          <div class="crumb">
-            MILES APART / EVENTS
-          </div>
-
-          <div class="top-right">
-
-            <span
-              class="small muted"
-              id="userGreeting"
-            >
-              Wird geladen …
+            <span class="events-hero-label">
+              Nächstes Event
             </span>
 
+
+            <h1 class="events-hero-title">
+              10 Kilometer Run
+            </h1>
+
+
+            <div class="events-hero-date">
+              Samstag · 03. Oktober 2026
+            </div>
+
+
+            <div class="events-hero-subtitle">
+              Schnür deine Schuhe und lauf deine
+              10 Kilometer – egal, wo du gerade bist.
+              Dein schnellster 10-Kilometer-Lauf am
+              03. Oktober zählt für das Event-Leaderboard.
+            </div>
+
+
+            <!-- =============================================
+                 ANMELDEN
+            ============================================== -->
+
+            <div class="events-hero-action">
+
+              <a
+                id="eventJoinButton"
+                class="events-join-btn"
+                href="#"
+              >
+                Beitreten 🏁
+              </a>
+
+            </div>
+
+
+            <!-- =============================================
+                 LEADERBOARD
+            ============================================== -->
+
+            <div class="event-leaderboard">
+
+              <div class="event-leaderboard-title">
+
+                <h3>
+                  Leaderboard 🏆
+                </h3>
+
+                <span>
+                  03.10.2026 · 00:00–24:00 Uhr
+                </span>
+
+              </div>
+
+
+              <div
+                id="eventLeaderboard"
+                class="event-leaderboard-loading"
+              >
+                Wird geladen …
+              </div>
+
+            </div>
+
+
           </div>
+
+
+          <div class="events-hero-bottom">
+
+            <div class="events-hero-info">
+
+              <strong>
+                10 Kilometer Run
+              </strong>
+
+              Miles Apart Community
+
+            </div>
+
+          </div>
+
+
+        </div>
+
+      </section>
+
+
+      <!-- ===================================================
+           EVENT KALENDER
+      ==================================================== -->
+
+      <section class="events-calendar-card">
+
+
+        <div class="events-calendar-head">
+
+          <div>
+
+            <h2>
+              Event-Kalender
+            </h2>
+
+            <p>
+              Die nächsten gemeinsamen Läufe der Miles Apart Community.
+            </p>
+
+          </div>
+
+
+          <span class="events-month-badge">
+            Oktober 2026
+          </span>
 
         </div>
 
 
-        <!-- ===================================================
-             NÄCHSTES EVENT
-        ==================================================== -->
+        <div class="event-list">
 
-        <section class="events-hero">
 
-          <div class="events-hero-card">
+          <!-- ===============================================
+               03. OKTOBER
+          ================================================ -->
 
-            <div class="events-hero-content">
+          <article class="event-item">
 
-              <span class="events-hero-label">
-                Nächstes Event
+            <div class="event-date-box">
+
+              <b>
+                03
+              </b>
+
+              <span>
+                Okt
               </span>
 
+            </div>
 
-              <h1 class="events-hero-title">
+
+            <div class="event-content">
+
+              <h3 class="event-title">
                 10 Kilometer Run
-              </h1>
+              </h3>
+
+            </div>
+
+          </article>
 
 
-              <div class="events-hero-date">
-                Samstag · 03. Oktober 2026
-              </div>
+          <!-- ===============================================
+               10. OKTOBER
+          ================================================ -->
 
+          <article class="event-item">
 
-              <div class="events-hero-subtitle">
-                Schnür deine Schuhe und lauf deine
-                10 Kilometer – egal, wo du gerade bist.
-              </div>
+            <div class="event-date-box">
+
+              <b>
+                10
+              </b>
+
+              <span>
+                Okt
+              </span>
 
             </div>
 
 
-            <div class="events-hero-bottom">
+            <div class="event-content">
 
-              <div class="events-hero-info">
-
-                <strong>
-                  10 Kilometer Run
-                </strong>
-
-                Miles Apart Community
-
-              </div>
+              <h3 class="event-title">
+                Halbmarathon · 21,1 Kilometer
+              </h3>
 
             </div>
 
-          </div>
+          </article>
 
-        </section>
 
+        </div>
 
-        <!-- ===================================================
-             EVENT KALENDER
-        ==================================================== -->
+      </section>
 
-        <section class="events-calendar-card">
 
-          <div class="events-calendar-head">
+    </div>
 
-            <div>
+  </main>
 
-              <h2>
-                Event-Kalender
-              </h2>
+</div>
 
-              <p>
-                Die nächsten gemeinsamen Läufe der Miles Apart Community.
-              </p>
 
-            </div>
+<script>
 
-            <span class="events-month-badge">
-              Oktober 2026
-            </span>
+  /* ==========================================================
+     SUPABASE
+  ========================================================== */
 
-          </div>
+  const SUPABASE_URL =
+    "https://orbrkdrsihsacsnprewf.supabase.co";
 
+  const SUPABASE_KEY =
+    "sb_publishable_wc3w2fSuj8ItwiF6XBoQgw_HeW5_rNW";
 
-          <div class="event-list">
 
+  const supabaseClient =
+    window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_KEY
+    );
 
-            <!-- ===============================================
-                 03. OKTOBER
-            ================================================ -->
 
-            <article class="event-item">
+  /* ==========================================================
+     EVENT
+  ========================================================== */
 
-              <div class="event-date-box">
+  const EVENT_ID =
+    "event-10k-2026-10-03";
 
-                <b>
-                  03
-                </b>
 
-                <span>
-                  Okt
-                </span>
+  const EVENT_DATE_START =
+    new Date(
+      "2026-10-03T00:00:00"
+    );
 
-              </div>
 
+  const EVENT_DATE_END =
+    new Date(
+      "2026-10-04T00:00:00"
+    );
 
-              <div class="event-content">
 
-                <h3 class="event-title">
-                  10 Kilometer Run
-                </h3>
+  const EVENT_DISTANCE_KM =
+    10;
 
-              </div>
 
-            </article>
+  /* ==========================================================
+     ELEMENTE
+  ========================================================== */
 
+  const eventJoinButton =
+    document.getElementById(
+      "eventJoinButton"
+    );
 
-            <!-- ===============================================
-                 10. OKTOBER
-            ================================================ -->
 
-            <article class="event-item">
+  const eventLeaderboard =
+    document.getElementById(
+      "eventLeaderboard"
+    );
 
-              <div class="event-date-box">
 
-                <b>
-                  10
-                </b>
+  /* ==========================================================
+     FORMATIERUNG
+  ========================================================== */
 
-                <span>
-                  Okt
-                </span>
+  function numberValue(
+    value
+  ) {
 
-              </div>
+    if (
+      value === null ||
+      value === undefined ||
+      value === ""
+    ) {
 
-
-              <div class="event-content">
-
-                <h3 class="event-title">
-                  Halbmarathon · 21,1 Kilometer
-                </h3>
-
-              </div>
-
-            </article>
-
-
-          </div>
-
-        </section>
-
-
-      </div>
-
-    </main>
-
-  </div>
-
-
-  <!-- =========================================================
-       SUPABASE
-  ========================================================== -->
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-
-  <script>
-
-    const SUPABASE_URL =
-      "https://dein-projekt.supabase.co";
-
-    const SUPABASE_ANON_KEY =
-      "DEIN_SUPABASE_ANON_KEY";
-
-
-    const supabaseClient =
-      supabase.createClient(
-        SUPABASE_URL,
-        SUPABASE_ANON_KEY
-      );
-
-
-    const userGreeting =
-      document.getElementById(
-        "userGreeting"
-      );
-
-
-    /* =========================================================
-       USER NAME
-    ========================================================== */
-
-    function getUserDisplayName(
-      user,
-      profile
-    ){
-
-      if(
-        profile &&
-        profile.display_name &&
-        String(
-          profile.display_name
-        ).trim()
-      ){
-
-        return String(
-          profile.display_name
-        ).trim();
-
-      }
-
-
-      if(
-        user &&
-        user.user_metadata &&
-        user.user_metadata.display_name &&
-        String(
-          user.user_metadata.display_name
-        ).trim()
-      ){
-
-        return String(
-          user.user_metadata.display_name
-        ).trim();
-
-      }
-
-
-      if(
-        user &&
-        user.user_metadata &&
-        user.user_metadata.name &&
-        String(
-          user.user_metadata.name
-        ).trim()
-      ){
-
-        return String(
-          user.user_metadata.name
-        ).trim();
-
-      }
-
-
-      if(
-        user &&
-        user.email
-      ){
-
-        return user.email
-          .split("@")[0]
-          .trim();
-
-      }
-
-
-      return "Runner";
+      return 0;
 
     }
 
 
-    /* =========================================================
-       FIRST NAME
-    ========================================================== */
-
-    function getFirstName(
-      name
-    ){
-
-      if(
-        !name ||
-        !String(name).trim()
-      ){
-
-        return "Runner";
-
-      }
+    const number =
+      Number(
+        String(value)
+          .replace(",", ".")
+      );
 
 
-      return String(
-        name
+    return Number.isFinite(
+      number
+    )
+      ? number
+      : 0;
+
+  }
+
+
+  function escapeHtml(
+    value
+  ) {
+
+    return String(
+      value ?? ""
+    )
+      .replace(
+        /&/g,
+        "&amp;"
       )
-        .trim()
-        .split(/\s+/)[0];
+      .replace(
+        /</g,
+        "&lt;"
+      )
+      .replace(
+        />/g,
+        "&gt;"
+      )
+      .replace(
+        /"/g,
+        "&quot;"
+      )
+      .replace(
+        /'/g,
+        "&#039;"
+      );
+
+  }
+
+
+  function formatTime(
+    seconds
+  ) {
+
+    const totalSeconds =
+      Math.max(
+        0,
+        Math.round(
+          Number(seconds || 0)
+        )
+      );
+
+
+    const hours =
+      Math.floor(
+        totalSeconds / 3600
+      );
+
+
+    const minutes =
+      Math.floor(
+        (
+          totalSeconds % 3600
+        ) / 60
+      );
+
+
+    const remainingSeconds =
+      totalSeconds % 60;
+
+
+    if (
+      hours > 0
+    ) {
+
+      return (
+        String(hours)
+          .padStart(2, "0") +
+        ":" +
+        String(minutes)
+          .padStart(2, "0") +
+        ":" +
+        String(remainingSeconds)
+          .padStart(2, "0")
+      );
 
     }
 
 
-    /* =========================================================
-       USER LADEN
-    ========================================================== */
+    return (
+      String(minutes)
+        .padStart(2, "0") +
+      ":" +
+      String(remainingSeconds)
+        .padStart(2, "0")
+    );
 
-    async function loadUser(){
+  }
 
-      try{
 
-        const {
+  /* ==========================================================
+     SPALTEN ERKENNEN
+  ========================================================== */
 
-          data: {
-            user
+  function findColumn(
+    row,
+    names
+  ) {
+
+    const keys =
+      Object.keys(
+        row || {}
+      );
+
+
+    for (
+      const name of names
+    ) {
+
+      const exact =
+        keys.find(
+          key =>
+            key === name
+        );
+
+
+      if (exact) {
+
+        return exact;
+
+      }
+
+    }
+
+
+    for (
+      const name of names
+    ) {
+
+      const lower =
+        name.toLowerCase();
+
+
+      const found =
+        keys.find(
+          key =>
+            key.toLowerCase() ===
+            lower
+        );
+
+
+      if (found) {
+
+        return found;
+
+      }
+
+    }
+
+
+    return null;
+
+  }
+
+
+  function findUserColumn(
+    row
+  ) {
+
+    return findColumn(
+      row,
+      [
+        "user_id",
+        "User_id",
+        "userid",
+        "userId"
+      ]
+    );
+
+  }
+
+
+  function findDistanceColumn(
+    row
+  ) {
+
+    return findColumn(
+      row,
+      [
+        "distance_km",
+        "Distance_km",
+        "distance",
+        "Distance",
+        "km",
+        "Km",
+        "kilometers",
+        "kilometres",
+        "total_km"
+      ]
+    );
+
+  }
+
+
+  function findDateColumn(
+    row
+  ) {
+
+    return findColumn(
+      row,
+      [
+        "run_date",
+        "Run_date",
+        "date",
+        "Date",
+        "performed_at",
+        "Performed_at",
+        "created_at",
+        "Created_at",
+        "start_time",
+        "Start_time",
+        "started_at",
+        "Started_at",
+        "start",
+        "Start"
+      ]
+    );
+
+  }
+
+
+  function findDurationColumn(
+    row
+  ) {
+
+    return findColumn(
+      row,
+      [
+        "duration_seconds",
+        "Duration_seconds",
+        "elapsed_seconds",
+        "Elapsed_seconds",
+        "time_seconds",
+        "Time_seconds",
+        "duration_sec",
+        "Duration_sec",
+        "elapsed_sec",
+        "Elapsed_sec",
+        "duration_minutes",
+        "Duration_minutes",
+        "elapsed_minutes",
+        "Elapsed_minutes",
+        "time_minutes",
+        "Time_minutes",
+        "duration",
+        "Duration",
+        "elapsed_time",
+        "Elapsed_time",
+        "elapsed",
+        "Elapsed",
+        "time",
+        "Time"
+      ]
+    );
+
+  }
+
+
+  function findPaceColumn(
+    row
+  ) {
+
+    return findColumn(
+      row,
+      [
+        "pace",
+        "Pace",
+        "pace_min_km",
+        "Pace_min_km",
+        "avg_pace",
+        "Avg_pace",
+        "average_pace",
+        "Average_pace"
+      ]
+    );
+
+  }
+
+
+  /* ==========================================================
+     DATUM DES LAUFS
+  ========================================================== */
+
+  function getRunDate(
+    run,
+    dateColumn
+  ) {
+
+    if (
+      !dateColumn ||
+      !run[dateColumn]
+    ) {
+
+      return null;
+
+    }
+
+
+    const date =
+      new Date(
+        run[dateColumn]
+      );
+
+
+    if (
+      Number.isNaN(
+        date.getTime()
+      )
+    ) {
+
+      return null;
+
+    }
+
+
+    return date;
+
+  }
+
+
+  /* ==========================================================
+     LAUFZEIT IN SEKUNDEN
+  ========================================================== */
+
+  function parseDurationToSeconds(
+    value
+  ) {
+
+    if (
+      value === null ||
+      value === undefined ||
+      value === ""
+    ) {
+
+      return 0;
+
+    }
+
+
+    /*
+     * Bereits numerischer Wert.
+     *
+     * duration_seconds:
+     * Sekunden
+     *
+     * duration_minutes:
+     * Minuten
+     *
+     * Diese Unterscheidung wird weiter unten
+     * über den Spaltennamen vorgenommen.
+     */
+
+    if (
+      typeof value === "number"
+    ) {
+
+      return value;
+
+    }
+
+
+    const text =
+      String(
+        value
+      ).trim();
+
+
+    /*
+     * HH:MM:SS
+     */
+
+    if (
+      /^\d+:\d{2}:\d{2}$/.test(
+        text
+      )
+    ) {
+
+      const parts =
+        text
+          .split(":")
+          .map(
+            Number
+          );
+
+
+      return (
+        parts[0] * 3600 +
+        parts[1] * 60 +
+        parts[2]
+      );
+
+    }
+
+
+    /*
+     * MM:SS
+     */
+
+    if (
+      /^\d+:\d{2}$/.test(
+        text
+      )
+    ) {
+
+      const parts =
+        text
+          .split(":")
+          .map(
+            Number
+          );
+
+
+      return (
+        parts[0] * 60 +
+        parts[1]
+      );
+
+    }
+
+
+    /*
+     * Zahl aus String
+     */
+
+    const number =
+      Number(
+        text.replace(
+          ",",
+          "."
+        )
+      );
+
+
+    if (
+      Number.isFinite(
+        number
+      )
+    ) {
+
+      return number;
+
+    }
+
+
+    return 0;
+
+  }
+
+
+  function getRunDurationSeconds(
+    run,
+    durationColumn,
+    paceColumn,
+    distanceKm
+  ) {
+
+    if (
+      durationColumn
+    ) {
+
+      const value =
+        run[
+          durationColumn
+        ];
+
+
+      const columnName =
+        durationColumn
+          .toLowerCase();
+
+
+      /*
+       * Sekunden
+       */
+
+      if (
+        columnName.includes(
+          "second"
+        ) ||
+        columnName.includes(
+          "_sec"
+        )
+      ) {
+
+        return parseDurationToSeconds(
+          value
+        );
+
+      }
+
+
+      /*
+       * Minuten
+       */
+
+      if (
+        columnName.includes(
+          "minute"
+        )
+      ) {
+
+        return (
+          parseDurationToSeconds(
+            value
+          ) * 60
+        );
+
+      }
+
+
+      /*
+       * Zeit im Format MM:SS
+       * oder HH:MM:SS.
+       */
+
+      return parseDurationToSeconds(
+        value
+      );
+
+    }
+
+
+    /*
+     * Falls keine Dauer gespeichert ist,
+     * versuchen wir aus der Pace und der
+     * Distanz die Laufzeit zu berechnen.
+     */
+
+    if (
+      paceColumn &&
+      distanceKm > 0
+    ) {
+
+      const paceValue =
+        run[
+          paceColumn
+        ];
+
+
+      const paceSeconds =
+        parseDurationToSeconds(
+          paceValue
+        );
+
+
+      if (
+        paceSeconds > 0
+      ) {
+
+        return (
+          paceSeconds *
+          distanceKm
+        );
+
+      }
+
+    }
+
+
+    return 0;
+
+  }
+
+
+  /* ==========================================================
+     PROFILE
+  ========================================================== */
+
+  async function getProfileNames(
+    userIds
+  ) {
+
+    if (
+      !userIds.length
+    ) {
+
+      return {};
+
+    }
+
+
+    const {
+      data,
+      error
+    } =
+      await supabaseClient
+        .from("profiles")
+        .select(
+          "id, display_name, username"
+        )
+        .in(
+          "id",
+          userIds
+        );
+
+
+    if (error) {
+
+      console.error(
+        "Profile konnten nicht geladen werden:",
+        error
+      );
+
+
+      return {};
+
+    }
+
+
+    const profiles = {};
+
+
+    (data || []).forEach(
+      profile => {
+
+        profiles[
+          profile.id
+        ] = {
+
+          displayName:
+            profile.display_name ||
+            profile.username ||
+            "Runner",
+
+          username:
+            profile.username ||
+            null
+
+        };
+
+      }
+    );
+
+
+    return profiles;
+
+  }
+
+
+  function getProfileUrl(
+    username
+  ) {
+
+    if (
+      !username
+    ) {
+
+      return "#";
+
+    }
+
+
+    return (
+      "user.html?username=" +
+      encodeURIComponent(
+        username
+      )
+    );
+
+  }
+
+
+  /* ==========================================================
+     POSITION
+  ========================================================== */
+
+  function renderPosition(
+    index
+  ) {
+
+    if (
+      index === 0
+    ) {
+
+      return `
+        <span class="event-leaderboard-medal">
+          🥇
+        </span>
+      `;
+
+    }
+
+
+    if (
+      index === 1
+    ) {
+
+      return `
+        <span class="event-leaderboard-medal">
+          🥈
+        </span>
+      `;
+
+    }
+
+
+    if (
+      index === 2
+    ) {
+
+      return `
+        <span class="event-leaderboard-medal">
+          🥉
+        </span>
+      `;
+
+    }
+
+
+    return (
+      index + 1
+    );
+
+  }
+
+
+  /* ==========================================================
+     EVENT LEADERBOARD
+  ========================================================== */
+
+  async function loadEventLeaderboard() {
+
+    eventLeaderboard.innerHTML =
+      `
+        <div class="event-leaderboard-loading">
+          Wird geladen …
+        </div>
+      `;
+
+
+    try {
+
+      /*
+       * Alle Läufe laden.
+       */
+
+      const {
+        data: runs,
+        error
+      } =
+        await supabaseClient
+          .from("runs")
+          .select("*");
+
+
+      if (error) {
+
+        throw error;
+
+      }
+
+
+      if (
+        !runs ||
+        !runs.length
+      ) {
+
+        eventLeaderboard.innerHTML =
+          `
+            <div class="event-leaderboard-empty">
+              Noch keine 10-Kilometer-Läufe für dieses Event.
+            </div>
+          `;
+
+
+        return;
+
+      }
+
+
+      const firstRun =
+        runs[0];
+
+
+      const userColumn =
+        findUserColumn(
+          firstRun
+        );
+
+
+      const distanceColumn =
+        findDistanceColumn(
+          firstRun
+        );
+
+
+      const dateColumn =
+        findDateColumn(
+          firstRun
+        );
+
+
+      const durationColumn =
+        findDurationColumn(
+          firstRun
+        );
+
+
+      const paceColumn =
+        findPaceColumn(
+          firstRun
+        );
+
+
+      if (
+        !userColumn ||
+        !distanceColumn ||
+        !dateColumn
+      ) {
+
+        throw new Error(
+          "Die runs-Tabelle enthält nicht alle benötigten Laufdaten."
+        );
+
+      }
+
+
+      /*
+       * Ohne Zeit oder Pace können wir kein
+       * Zeit-Leaderboard erstellen.
+       */
+
+      if (
+        !durationColumn &&
+        !paceColumn
+      ) {
+
+        throw new Error(
+          "In der runs-Tabelle wurde keine Laufzeit oder Pace gefunden."
+        );
+
+      }
+
+
+      const fastestRuns = {};
+
+
+      /*
+       * Jeden Lauf prüfen.
+       */
+
+      runs.forEach(
+        run => {
+
+          const userId =
+            run[
+              userColumn
+            ];
+
+
+          if (
+            !userId
+          ) {
+
+            return;
+
           }
 
-        } =
-          await supabaseClient
-            .auth
-            .getUser();
+
+          const runDate =
+            getRunDate(
+              run,
+              dateColumn
+            );
 
 
-        if(!user){
+          if (
+            !runDate
+          ) {
 
-          userGreeting.textContent =
-            "";
+            return;
 
-          userGreeting.style.display =
-            "none";
+          }
 
-          return;
+
+          /*
+           * GANZ WICHTIG:
+           *
+           * Der Lauf muss am
+           * 03.10.2026 liegen.
+           *
+           * 00:00 inklusive
+           * 24:00 exklusiv.
+           */
+
+          if (
+            runDate <
+              EVENT_DATE_START ||
+            runDate >=
+              EVENT_DATE_END
+          ) {
+
+            return;
+
+          }
+
+
+          /*
+           * Nur ungefähr 10 Kilometer.
+           *
+           * Es wird eine kleine Toleranz verwendet,
+           * damit z.B. 10,01 km oder 9,99 km
+           * ebenfalls als 10-km-Lauf zählen.
+           */
+
+          const distance =
+            numberValue(
+              run[
+                distanceColumn
+              ]
+            );
+
+
+          if (
+            distance < 9.9 ||
+            distance > 10.2
+          ) {
+
+            return;
+
+          }
+
+
+          /*
+           * Laufzeit bestimmen.
+           */
+
+          const durationSeconds =
+            getRunDurationSeconds(
+              run,
+              durationColumn,
+              paceColumn,
+              distance
+            );
+
+
+          if (
+            durationSeconds <= 0
+          ) {
+
+            return;
+
+          }
+
+
+          /*
+           * Pro Runner nur den
+           * schnellsten Lauf übernehmen.
+           */
+
+          if (
+            !fastestRuns[
+              userId
+            ] ||
+            durationSeconds <
+              fastestRuns[
+                userId
+              ].durationSeconds
+          ) {
+
+            fastestRuns[
+              userId
+            ] = {
+
+              userId,
+
+              durationSeconds,
+
+              distance
+
+            };
+
+          }
 
         }
+      );
 
 
-        let profile =
-          null;
-
-
-        const {
-          data
-        } =
-          await supabaseClient
-            .from("profiles")
-            .select(
-              "display_name"
-            )
-            .eq(
-              "id",
-              user.id
-            )
-            .maybeSingle();
-
-
-        profile =
-          data ||
-          null;
-
-
-        const displayName =
-          getUserDisplayName(
-            user,
-            profile
+      const leaderboard =
+        Object.values(
+          fastestRuns
+        )
+          .sort(
+            (
+              a,
+              b
+            ) =>
+              a.durationSeconds -
+              b.durationSeconds
           );
 
 
-        const firstName =
-          getFirstName(
-            displayName
-          );
+      if (
+        !leaderboard.length
+      ) {
+
+        eventLeaderboard.innerHTML =
+          `
+            <div class="event-leaderboard-empty">
+              Noch kein gültiger 10-Kilometer-Lauf
+              am 03. Oktober 2026 hochgeladen.
+            </div>
+          `;
 
 
-        userGreeting.style.display =
-          "inline";
+        return;
+
+      }
 
 
-        userGreeting.textContent =
-          "Hallo " +
-          firstName;
+      /*
+       * Profile laden.
+       */
+
+      const userIds =
+        leaderboard.map(
+          runner =>
+            runner.userId
+        );
 
 
-      }catch(error){
+      const profiles =
+        await getProfileNames(
+          userIds
+        );
+
+
+      /*
+       * Leaderboard ausgeben.
+       */
+
+      eventLeaderboard.innerHTML =
+        leaderboard
+          .map(
+            (
+              runner,
+              index
+            ) => {
+
+              const profile =
+                profiles[
+                  runner.userId
+                ];
+
+
+              const name =
+                profile?.displayName ||
+                "Runner";
+
+
+              const profileHtml =
+                profile?.username
+                  ? `
+                    <a
+                      class="event-leaderboard-profile-link"
+                      href="${escapeHtml(
+                        getProfileUrl(
+                          profile.username
+                        )
+                      )}"
+                    >
+                      ${escapeHtml(
+                        name
+                      )}
+                    </a>
+                  `
+                  : `
+                    <span class="event-leaderboard-profile-link">
+                      ${escapeHtml(
+                        name
+                      )}
+                    </span>
+                  `;
+
+
+              return `
+                <div class="event-leaderboard-row">
+
+                  <div class="event-leaderboard-position">
+                    ${renderPosition(
+                      index
+                    )}
+                  </div>
+
+                  <div>
+                    ${profileHtml}
+                  </div>
+
+                  <div class="event-leaderboard-time">
+                    ${formatTime(
+                      runner.durationSeconds
+                    )}
+                  </div>
+
+                </div>
+              `;
+
+            }
+          )
+          .join("");
+
+
+    } catch (error) {
+
+      console.error(
+        "Event-Leaderboard konnte nicht geladen werden:",
+        error
+      );
+
+
+      eventLeaderboard.innerHTML =
+        `
+          <div class="event-leaderboard-empty">
+            Das Leaderboard konnte gerade nicht geladen werden.
+          </div>
+        `;
+
+    }
+
+  }
+
+
+  /* ==========================================================
+     EVENT BEITRITT
+  ========================================================== */
+
+  async function updateEventJoinButton() {
+
+    try {
+
+      const {
+        data: {
+          user
+        }
+      } =
+        await supabaseClient
+          .auth
+          .getUser();
+
+
+      if (
+        !user
+      ) {
+
+        eventJoinButton.textContent =
+          "Beitreten 🏁";
+
+
+        return;
+
+      }
+
+
+      const {
+        data,
+        error
+      } =
+        await supabaseClient
+          .from("Challenge_members")
+          .select("id")
+          .eq(
+            "User_id",
+            user.id
+          )
+          .eq(
+            "Challenge_id",
+            EVENT_ID
+          )
+          .maybeSingle();
+
+
+      if (error) {
 
         console.error(
-          "Fehler beim Laden des Benutzers:",
+          "Event-Teilnahmestatus konnte nicht geladen werden:",
           error
         );
 
 
-        userGreeting.style.display =
-          "none";
+        return;
 
       }
 
+
+      if (data) {
+
+        eventJoinButton.textContent =
+          "Bereits dabei ✓";
+
+
+        eventJoinButton.classList.add(
+          "is-joined"
+        );
+
+      }
+
+    } catch (error) {
+
+      console.error(
+        "Event-Teilnahmestatus:",
+        error
+      );
+
     }
 
+  }
 
-    /* =========================================================
-       AUTH
-    ========================================================== */
 
-    supabaseClient
-      .auth
-      .onAuthStateChange(
-        () => {
+  async function joinEvent() {
 
-          loadUser();
+    try {
 
+      const {
+        data: {
+          user
         }
+      } =
+        await supabaseClient
+          .auth
+          .getUser();
+
+
+      if (
+        !user
+      ) {
+
+        window.location.href =
+          "home.html";
+
+
+        return;
+
+      }
+
+
+      eventJoinButton.textContent =
+        "Wird gespeichert …";
+
+
+      eventJoinButton.style.pointerEvents =
+        "none";
+
+
+      /*
+       * Prüfen, ob bereits angemeldet.
+       */
+
+      const {
+        data: existing,
+        error: existingError
+      } =
+        await supabaseClient
+          .from("Challenge_members")
+          .select("id")
+          .eq(
+            "User_id",
+            user.id
+          )
+          .eq(
+            "Challenge_id",
+            EVENT_ID
+          )
+          .maybeSingle();
+
+
+      if (existingError) {
+
+        throw existingError;
+
+      }
+
+
+      if (existing) {
+
+        eventJoinButton.textContent =
+          "Bereits dabei ✓";
+
+
+        eventJoinButton.classList.add(
+          "is-joined"
+        );
+
+
+        return;
+
+      }
+
+
+      /*
+       * Event-Teilnahme speichern.
+       *
+       * Wir verwenden dieselbe Tabelle wie
+       * bei den Challenges.
+       */
+
+      const {
+        error
+      } =
+        await supabaseClient
+          .from("Challenge_members")
+          .insert({
+
+            User_id:
+              user.id,
+
+            Challenge_id:
+              EVENT_ID,
+
+            Joined_at:
+              new Date().toISOString()
+
+          });
+
+
+      if (error) {
+
+        throw error;
+
+      }
+
+
+      eventJoinButton.textContent =
+        "Dabei ✓";
+
+
+      eventJoinButton.classList.add(
+        "is-joined"
       );
 
 
-    loadUser();
+      alert(
+        "Du bist jetzt für den 10 Kilometer Run am 03. Oktober 2026 angemeldet."
+      );
 
-  </script>
+
+    } catch (error) {
+
+      console.error(
+        "Event-Anmeldung fehlgeschlagen:",
+        error
+      );
+
+
+      eventJoinButton.style.pointerEvents =
+        "";
+
+
+      eventJoinButton.textContent =
+        "Erneut versuchen 🏁";
+
+
+      alert(
+        "Die Anmeldung konnte gerade nicht gespeichert werden.\n\n" +
+        (
+          error?.message ||
+          "Unbekannter Fehler"
+        )
+      );
+
+    }
+
+  }
+
+
+  /* ==========================================================
+     BUTTON
+  ========================================================== */
+
+  eventJoinButton.addEventListener(
+    "click",
+    event => {
+
+      event.preventDefault();
+
+      joinEvent();
+
+    }
+  );
+
+
+  /* ==========================================================
+     AUTH
+  ========================================================== */
+
+  supabaseClient
+    .auth
+    .onAuthStateChange(
+      () => {
+
+        updateEventJoinButton();
+
+      }
+    );
+
+
+  /* ==========================================================
+     START
+  ========================================================== */
+
+  updateEventJoinButton();
+
+  loadEventLeaderboard();
+
+</script>
 
 </body>
+
 </html>
