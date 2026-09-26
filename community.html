@@ -67,7 +67,7 @@
 
 
 /* =========================================================
-   HARTE AUSRICHTUNG
+   GRUNDLEGENDE AUSRICHTUNG
 ========================================================= */
 
 .ma-community-page,
@@ -97,7 +97,7 @@
 
 
 /* =========================================================
-   POSTS
+   POSTS — ALLES LINKS
 ========================================================= */
 
 .ma-post{
@@ -107,21 +107,29 @@
   margin:0 0 22px;
   padding:28px;
   text-align:left !important;
+  text-indent:0 !important;
   overflow:hidden;
+}
+
+.ma-post *{
+  text-indent:0 !important;
 }
 
 .ma-post-header{
   width:100%;
   display:flex;
   align-items:center;
+  text-align:left !important;
 }
 
 .ma-post-author{
   width:100%;
   display:flex;
   align-items:center;
+  justify-content:flex-start !important;
   text-decoration:none;
   color:inherit;
+  text-align:left !important;
 }
 
 .ma-post-avatar{
@@ -160,6 +168,7 @@
 .ma-post-author-info{
   margin-left:13px;
   min-width:0;
+  text-align:left !important;
 }
 
 .ma-post-author-name{
@@ -167,6 +176,7 @@
   font-size:19px;
   line-height:1.25;
   font-weight:800;
+  text-align:left !important;
 }
 
 .ma-post-author-meta{
@@ -174,13 +184,23 @@
   color:#777;
   font-size:15px;
   line-height:1.35;
+  text-align:left !important;
 }
 
-.ma-post-copy{
+
+/*
+   WICHTIG:
+   Der eigentliche Post-Text beginnt IMMER links.
+   !important verhindert Überschreiben durch style.css.
+*/
+
+.ma-post-copy,
+.ma-community-page .ma-post-copy,
+.ma-community-page .ma-post .ma-post-copy{
   display:block !important;
   width:100% !important;
   box-sizing:border-box !important;
-  margin:25px 0 26px !important;
+  margin:25px 0 26px 0 !important;
   padding:0 !important;
   color:#111;
   font-size:20px;
@@ -189,7 +209,16 @@
   text-indent:0 !important;
   white-space:pre-wrap;
   overflow-wrap:anywhere;
+  direction:ltr !important;
 }
+
+.ma-post-copy *,
+.ma-community-page .ma-post-copy *,
+.ma-community-page .ma-post .ma-post-copy *{
+  text-align:left !important;
+  text-indent:0 !important;
+}
+
 
 .ma-post-image{
   display:block;
@@ -238,8 +267,18 @@
 
 
 /* =========================================================
-   KOMMENTARE
+   KOMMENTARE — ALLES LINKS
 ========================================================= */
+
+.ma-comments,
+.ma-comments-list,
+.ma-comment,
+.ma-comment-content,
+.ma-comment-header,
+.ma-comment-text{
+  text-align:left !important;
+  text-indent:0 !important;
+}
 
 .ma-comments{
   width:100%;
@@ -247,7 +286,6 @@
   padding-top:18px;
   border-top:1px solid #eee;
   box-sizing:border-box;
-  text-align:left !important;
 }
 
 .ma-comments-list{
@@ -256,16 +294,15 @@
   flex-direction:column;
   gap:18px;
   align-items:stretch !important;
-  text-align:left !important;
+  justify-content:flex-start !important;
 }
 
 .ma-comment{
   width:100%;
-  display:flex;
+  display:flex !important;
   gap:11px;
   align-items:flex-start !important;
   justify-content:flex-start !important;
-  text-align:left !important;
 }
 
 .ma-comment-avatar{
@@ -295,7 +332,7 @@
 }
 
 .ma-comment-content{
-  flex:1;
+  flex:1 !important;
   min-width:0;
   width:100%;
   display:block !important;
@@ -309,14 +346,13 @@
 
 .ma-comment-header{
   width:100%;
-  display:flex;
+  display:flex !important;
   align-items:baseline;
   justify-content:flex-start !important;
   gap:8px;
   flex-wrap:wrap;
   margin:0 !important;
   padding:0 !important;
-  text-align:left !important;
 }
 
 .ma-comment-name{
@@ -333,7 +369,16 @@
   text-align:left !important;
 }
 
-.ma-comment-text{
+
+/*
+   WICHTIG:
+   Kommentartext beginnt IMMER am linken Rand
+   des Kommentarbereichs.
+*/
+
+.ma-comment-text,
+.ma-community-page .ma-comment-text,
+.ma-community-page .ma-comment .ma-comment-content .ma-comment-text{
   display:block !important;
   width:100% !important;
   max-width:100% !important;
@@ -347,12 +392,14 @@
   white-space:pre-wrap;
   overflow-wrap:anywhere;
   align-self:flex-start !important;
+  direction:ltr !important;
 }
 
 .ma-comment-text *,
 .ma-comment-content *,
 .ma-comment *,
-.ma-comments-list *{
+.ma-comments-list *,
+.ma-comments *{
   text-align:left !important;
   text-indent:0 !important;
 }
@@ -421,13 +468,16 @@
   border:1px solid #e8e8e8;
   box-sizing:border-box;
   background:#fff;
+  text-align:left !important;
 }
 
 .ma-buddy-top{
   display:flex;
   align-items:center;
+  justify-content:flex-start !important;
   gap:14px;
   margin-bottom:18px;
+  text-align:left !important;
 }
 
 .ma-buddy-avatar{
@@ -464,6 +514,7 @@
   font-weight:800;
   line-height:1.2;
   text-decoration:none;
+  text-align:left !important;
 }
 
 .ma-buddy-name:hover{
@@ -474,6 +525,7 @@
   margin:4px 0 0;
   color:#777;
   font-size:14px;
+  text-align:left !important;
 }
 
 .ma-buddy-details{
@@ -486,6 +538,7 @@
 .ma-buddy-detail{
   padding:12px;
   background:#f7fafa;
+  text-align:left !important;
 }
 
 .ma-buddy-label{
@@ -496,6 +549,7 @@
   text-transform:uppercase;
   letter-spacing:.05em;
   font-weight:700;
+  text-align:left !important;
 }
 
 .ma-buddy-value{
@@ -619,65 +673,6 @@
   white-space:nowrap !important;
 }
 
-.ma-buddy-delete:hover{
-  border-color:#b44 !important;
-  color:#8f2222 !important;
-}
-
-
-/* =========================================================
-   BUDDY TAGE
-========================================================= */
-
-.ma-buddy-days{
-  display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:8px;
-}
-
-.ma-buddy-day{
-  position:relative;
-}
-
-.ma-buddy-day input{
-  position:absolute;
-  opacity:0;
-  pointer-events:none;
-}
-
-.ma-buddy-day label{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  min-height:48px;
-  padding:0 10px;
-  border:1px solid #d8d8d8;
-  background:#fff;
-  color:#111;
-  font-size:14px;
-  font-weight:800;
-  cursor:pointer;
-  box-sizing:border-box;
-  text-align:center;
-}
-
-.ma-buddy-day input:checked + label{
-  border-color:#18b8c7;
-  background:#eefafa;
-  color:#18b8c7;
-}
-
-.ma-buddy-day label:hover{
-  border-color:#18b8c7;
-}
-
-.ma-buddy-empty{
-  padding:28px 0;
-  color:#777;
-  text-align:center;
-  grid-column:1/-1;
-}
-
 
 /* =========================================================
    FORMULARE
@@ -709,6 +704,7 @@
   display:flex;
   flex-direction:column;
   gap:7px;
+  text-align:left !important;
 }
 
 .ma-form-field.full{
@@ -758,6 +754,7 @@ textarea.ma-form-input{
   color:#18b8c7;
   font-size:14px;
   font-weight:700;
+  text-align:left !important;
 }
 
 
@@ -785,6 +782,7 @@ textarea.ma-form-input{
   border:1px solid #e8e8e8;
   background:#fff;
   box-sizing:border-box;
+  text-align:left !important;
 }
 
 .ma-run-card-top{
@@ -792,6 +790,7 @@ textarea.ma-form-input{
   justify-content:space-between;
   gap:15px;
   margin-bottom:16px;
+  text-align:left !important;
 }
 
 .ma-run-card-title{
@@ -816,6 +815,7 @@ textarea.ma-form-input{
 .ma-run-detail{
   padding:12px;
   background:#f7fafa;
+  text-align:left !important;
 }
 
 .ma-run-detail-label{
@@ -851,6 +851,7 @@ textarea.ma-form-input{
   color:#555;
   font-size:14px;
   font-weight:700;
+  text-align:left !important;
 }
 
 .ma-run-actions{
@@ -858,58 +859,6 @@ textarea.ma-form-input{
   gap:8px;
   flex-wrap:wrap;
   justify-content:flex-end;
-}
-
-.ma-run-join,
-.ma-run-message{
-  min-height:42px;
-  border:0;
-  background:#18b8c7;
-  color:#fff;
-  padding:0 16px;
-  font-size:14px;
-  font-weight:800;
-  cursor:pointer;
-}
-
-.ma-run-join.joined{
-  background:#111;
-}
-
-.ma-run-message:hover{
-  background:#109eab;
-}
-
-.ma-run-comment{
-  min-height:42px;
-  border:1px solid #d8d8d8;
-  background:#fff;
-  color:#111;
-  padding:0 16px;
-  font-size:14px;
-  font-weight:800;
-  cursor:pointer;
-}
-
-.ma-run-comment:hover{
-  border-color:#18b8c7;
-  color:#18b8c7;
-}
-
-.ma-run-delete{
-  min-height:42px;
-  border:1px solid #e0bcbc;
-  background:#fff7f7;
-  color:#b44;
-  padding:0 12px;
-  font-size:14px;
-  font-weight:800;
-  cursor:pointer;
-}
-
-.ma-run-delete:hover{
-  border-color:#b44;
-  color:#8f2222;
 }
 
 
@@ -960,6 +909,7 @@ textarea.ma-form-input{
 .ma-message-modal-recipient{
   margin:4px 0;
   color:#777;
+  text-align:left !important;
 }
 
 .ma-message-close{
@@ -1015,10 +965,6 @@ textarea.ma-form-input{
   text-align:left !important;
 }
 
-.ma-message-view-link:hover{
-  color:#109eab !important;
-}
-
 .ma-message-send{
   width:100%;
   min-width:120px;
@@ -1034,10 +980,6 @@ textarea.ma-form-input{
   align-items:center !important;
   justify-content:center !important;
   text-align:center !important;
-}
-
-.ma-message-send:hover{
-  background:#18b8c7 !important;
 }
 
 
@@ -1079,6 +1021,7 @@ textarea.ma-form-input{
   margin:3px 0 0;
   color:#777;
   font-size:13px;
+  text-align:left !important;
 }
 
 .ma-inbox-close{
@@ -1113,6 +1056,7 @@ textarea.ma-form-input{
   font-weight:800;
   text-transform:uppercase;
   letter-spacing:.06em;
+  text-align:left !important;
 }
 
 .ma-conversation{
@@ -1124,42 +1068,9 @@ textarea.ma-form-input{
   display:flex;
   align-items:center;
   gap:12px;
-  text-align:left;
+  text-align:left !important;
   cursor:pointer;
   box-sizing:border-box;
-}
-
-.ma-conversation:hover{
-  background:#f2fafa;
-}
-
-.ma-conversation.active{
-  background:#eefafa;
-}
-
-.ma-conversation-avatar{
-  width:48px;
-  height:48px;
-  min-width:48px;
-  border-radius:50%;
-  overflow:hidden;
-  border:2px solid #63d6e5;
-  background:#eefafa;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.ma-conversation-avatar img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.ma-conversation-initials{
-  color:#18b8c7;
-  font-size:12px;
-  font-weight:800;
 }
 
 .ma-conversation-copy{
@@ -1172,9 +1083,6 @@ textarea.ma-form-input{
   color:#111;
   font-size:15px;
   font-weight:800;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
   text-align:left !important;
 }
 
@@ -1183,16 +1091,7 @@ textarea.ma-form-input{
   color:#777;
   font-size:13px;
   line-height:1.35;
-  white-space:nowrap;
-  overflow:hidden;
-  text-overflow:ellipsis;
   text-align:left !important;
-}
-
-.ma-conversation-time{
-  color:#999;
-  font-size:11px;
-  white-space:nowrap;
 }
 
 .ma-inbox-thread{
@@ -1200,47 +1099,6 @@ textarea.ma-form-input{
   min-height:0;
   display:flex;
   flex-direction:column;
-}
-
-.ma-thread-head{
-  min-height:70px;
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:14px 20px;
-  border-bottom:1px solid #eee;
-  box-sizing:border-box;
-}
-
-.ma-thread-head-avatar{
-  width:42px;
-  height:42px;
-  min-width:42px;
-  border-radius:50%;
-  overflow:hidden;
-  border:2px solid #63d6e5;
-  background:#eefafa;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-}
-
-.ma-thread-head-avatar img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.ma-thread-head-name{
-  color:#111;
-  font-size:17px;
-  font-weight:800;
-}
-
-.ma-thread-head-username{
-  margin-top:2px;
-  color:#777;
-  font-size:13px;
 }
 
 .ma-thread-list{
@@ -1253,26 +1111,6 @@ textarea.ma-form-input{
   gap:10px;
   box-sizing:border-box;
   background:#fff;
-}
-
-.ma-thread-empty{
-  flex:1;
-  min-height:180px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  color:#888;
-  padding:30px;
-}
-
-.ma-message-bubble-row{
-  display:flex;
-  width:100%;
-}
-
-.ma-message-bubble-row.mine{
-  justify-content:flex-end;
 }
 
 .ma-message-bubble{
@@ -1288,72 +1126,16 @@ textarea.ma-form-input{
   text-align:left !important;
 }
 
-.ma-message-bubble-row.mine .ma-message-bubble{
-  background:#18b8c7;
-  color:#fff;
-}
-
-.ma-message-bubble-time{
-  margin-top:4px;
-  color:#999;
-  font-size:10px;
-}
-
-.ma-message-bubble-row.mine .ma-message-bubble-time{
-  text-align:right;
-}
-
-.ma-thread-reply{
-  display:flex;
-  gap:8px;
-  padding:14px 18px;
-  border-top:1px solid #eee;
-  background:#fff;
-  box-sizing:border-box;
-}
-
 .ma-thread-reply textarea{
   flex:1;
   min-width:0;
   height:52px;
-  min-height:52px;
-  max-height:140px;
   padding:13px 14px;
   border:1px solid #d8d8d8;
   font:inherit;
   resize:vertical;
   box-sizing:border-box;
   text-align:left !important;
-}
-
-.ma-thread-reply textarea::placeholder{
-  text-align:left !important;
-}
-
-.ma-thread-reply button{
-  height:52px;
-  border:0 !important;
-  background:#111 !important;
-  color:#fff !important;
-  padding:0 18px;
-  font-size:15px;
-  font-weight:800;
-  cursor:pointer;
-  display:flex !important;
-  align-items:center !important;
-  justify-content:center !important;
-  text-align:center !important;
-}
-
-.ma-thread-reply button:hover{
-  background:#18b8c7 !important;
-}
-
-.ma-inbox-empty{
-  padding:35px 20px;
-  color:#888;
-  text-align:center;
-  line-height:1.5;
 }
 
 
@@ -1401,9 +1183,68 @@ textarea.ma-form-input{
   display:block;
 }
 
-.ma-image-upload-name{
-  color:#777;
-  font-size:14px;
+
+/* =========================================================
+   DER ENTSCHEIDENDE LETZTE OVERRIDE
+   POST- UND KOMMENTARTEXT IMMER LINKS
+========================================================= */
+
+.ma-community-page .ma-post,
+.ma-community-page .ma-post-copy,
+.ma-community-page .ma-post-copy *,
+.ma-community-page .ma-comment,
+.ma-community-page .ma-comment *,
+.ma-community-page .ma-comment-content,
+.ma-community-page .ma-comment-header,
+.ma-community-page .ma-comment-text,
+.ma-community-page .ma-comments,
+.ma-community-page .ma-comments *,
+.ma-community-page .ma-comments-list,
+.ma-community-page .ma-comments-list *{
+  text-align:left !important;
+  text-indent:0 !important;
+}
+
+.ma-community-page .ma-post-copy{
+  display:block !important;
+  width:100% !important;
+  margin-left:0 !important;
+  margin-right:0 !important;
+  padding-left:0 !important;
+  padding-right:0 !important;
+}
+
+.ma-community-page .ma-comment{
+  display:flex !important;
+  align-items:flex-start !important;
+  justify-content:flex-start !important;
+}
+
+.ma-community-page .ma-comment-content{
+  display:block !important;
+  width:100% !important;
+  margin-left:0 !important;
+  margin-right:0 !important;
+  padding-left:0 !important;
+  padding-right:0 !important;
+  align-self:flex-start !important;
+}
+
+.ma-community-page .ma-comment-header{
+  display:flex !important;
+  justify-content:flex-start !important;
+  align-items:baseline !important;
+}
+
+.ma-community-page .ma-comment-text{
+  display:block !important;
+  width:100% !important;
+  max-width:100% !important;
+  margin-left:0 !important;
+  margin-right:0 !important;
+  padding-left:0 !important;
+  padding-right:0 !important;
+  align-self:flex-start !important;
 }
 
 
@@ -1478,7 +1319,6 @@ textarea.ma-form-input{
     text-align:center !important;
   }
 
-
   .ma-buddy-actions{
     width:100% !important;
     display:flex !important;
@@ -1514,7 +1354,6 @@ textarea.ma-form-input{
     white-space:nowrap !important;
   }
 
-
   .ma-run-participants{
     align-items:flex-start;
     flex-direction:column;
@@ -1524,11 +1363,6 @@ textarea.ma-form-input{
     width:100%;
     justify-content:flex-start;
   }
-
-  .ma-run-actions > button{
-    flex:0 0 auto;
-  }
-
 
   .ma-message-overlay,
   .ma-inbox-overlay{
@@ -1559,10 +1393,6 @@ textarea.ma-form-input{
     border-radius:18px 18px 10px 10px;
   }
 
-  .ma-inbox-head{
-    padding:15px 17px;
-  }
-
   .ma-inbox-layout{
     display:flex;
     flex-direction:column;
@@ -1580,64 +1410,26 @@ textarea.ma-form-input{
     min-height:0;
   }
 
-  .ma-thread-list{
-    padding:15px;
-  }
-
   .ma-message-bubble{
     max-width:85%;
-  }
-
-  .ma-thread-reply{
-    padding:10px;
-  }
-
-  .ma-thread-reply textarea{
-    height:48px;
-    min-height:48px;
-  }
-
-  .ma-thread-reply button{
-    height:48px;
-    padding:0 14px;
-    display:flex !important;
-    align-items:center !important;
-    justify-content:center !important;
-    text-align:center !important;
   }
 
 }
 
 
 /* =========================================================
-   LETZTER SICHERHEITS-OVERRIDE
+   EXTRA SICHERHEIT FÜR DEN POST-TEXT
 ========================================================= */
 
-.ma-community-page .ma-comment,
-.ma-community-page .ma-comment-content,
-.ma-community-page .ma-comment-header,
-.ma-community-page .ma-comment-text,
-.ma-community-page .ma-comments,
-.ma-community-page .ma-comments-list{
+.ma-community-page .ma-post > .ma-post-copy{
   text-align:left !important;
-  text-indent:0 !important;
-  justify-content:flex-start !important;
-  align-items:flex-start !important;
-}
-
-.ma-community-page .ma-comment-text{
-  display:block !important;
-  width:100% !important;
+  padding:0 !important;
   margin-left:0 !important;
   margin-right:0 !important;
-  padding-left:0 !important;
-  padding-right:0 !important;
 }
 
-.ma-message-status,
-.ma-message-status *{
+.ma-community-page .ma-post > .ma-post-copy::first-line{
   text-align:left !important;
-  text-indent:0 !important;
 }
 
 </style>
@@ -1660,41 +1452,20 @@ textarea.ma-form-input{
 
   <nav class="nav">
 
-    <a href="index.html">
-      Miles Apart
-    </a>
-
-    <a href="home.html">
-      Home
-    </a>
-
-    <a href="challenges.html">
-      Challenges
-    </a>
-
-    <a class="active" href="community.html">
-      Community
-    </a>
-
-    <a href="events.html">
-      Events
-    </a>
-
-    <a href="training.html">
-      Training
-    </a>
+    <a href="index.html">Miles Apart</a>
+    <a href="home.html">Home</a>
+    <a href="challenges.html">Challenges</a>
+    <a class="active" href="community.html">Community</a>
+    <a href="events.html">Events</a>
+    <a href="training.html">Training</a>
 
   </nav>
 
   <div class="side-bottom">
 
-    <small>
-      THIS WEEK
-    </small>
+    <small>THIS WEEK</small>
 
-    <strong>
-      23.4 / 30 KM
-    </strong>
+    <strong>23.4 / 30 KM</strong>
 
     <div class="mini-progress">
       <i></i>
@@ -1729,9 +1500,7 @@ textarea.ma-form-input{
 
     <div>
 
-      <h1>
-        Community.
-      </h1>
+      <h1>Community.</h1>
 
       <p
         class="lead"
@@ -1781,9 +1550,7 @@ textarea.ma-form-input{
 
     <div class="section-head">
 
-      <h2>
-        Neuer Post
-      </h2>
+      <h2>Neuer Post</h2>
 
       <span
         class="small muted"
@@ -1902,8 +1669,6 @@ textarea.ma-form-input{
   ></div>
 
 
-  <!-- RUN BUDDY -->
-
   <div
     class="card ma-section"
     id="communityBuddySection"
@@ -2012,10 +1777,6 @@ textarea.ma-form-input{
 
             </div>
 
-            <small class="small muted">
-              Du kannst mehrere Tage auswählen.
-            </small>
-
           </div>
 
 
@@ -2120,8 +1881,6 @@ textarea.ma-form-input{
 
   </div>
 
-
-  <!-- GEMEINSAME LÄUFE -->
 
   <div
     class="card ma-section"
@@ -2327,8 +2086,6 @@ textarea.ma-form-input{
   </div>
 
 
-  <!-- POSTS -->
-
   <div
     id="postsContainer"
     style="display:block;width:100%"
@@ -2339,7 +2096,7 @@ textarea.ma-form-input{
 </div>
 
 
-<!-- NACHRICHT SCHREIBEN -->
+<!-- PRIVATE NACHRICHT -->
 
 <div
   id="messageOverlay"
@@ -2421,17 +2178,13 @@ textarea.ma-form-input{
     class="ma-inbox-modal"
     role="dialog"
     aria-modal="true"
-    aria-labelledby="messagesInboxTitle"
   >
 
     <div class="ma-inbox-head">
 
       <div>
 
-        <h2
-          id="messagesInboxTitle"
-          class="ma-inbox-title"
-        >
+        <h2 class="ma-inbox-title">
           Private Nachrichten
         </h2>
 
@@ -2472,7 +2225,6 @@ textarea.ma-form-input{
           class="ma-thread-head"
           style="display:none"
         ></div>
-
 
         <div
           id="messageThreadList"
@@ -2534,10 +2286,8 @@ const supabaseClient=
     SUPABASE_PUBLISHABLE_KEY
   );
 
-
 const $=
   id=>document.getElementById(id);
-
 
 let currentUser=null;
 let currentProfile=null;
@@ -2547,10 +2297,6 @@ let messageProfiles={};
 let buddyComments={};
 let runComments={};
 
-
-/* =========================================================
-   HILFSFUNKTIONEN
-========================================================= */
 
 function escapeHtml(v){
 
@@ -2575,11 +2321,7 @@ function getInitials(name){
       .filter(Boolean);
 
   if(p.length===1){
-
-    return p[0]
-      .slice(0,2)
-      .toUpperCase();
-
+    return p[0].slice(0,2).toUpperCase();
   }
 
   return(
@@ -2766,9 +2508,7 @@ function itemCommentsHtml(
 
         ${
           sorted.length
-            ?sorted
-              .map(createCommentHtml)
-              .join("")
+            ?sorted.map(createCommentHtml).join("")
             :`
               <div
                 class="ma-inbox-empty"
@@ -2843,10 +2583,7 @@ async function loadItemComments(
           avatar_url
         )
       `)
-      .eq(
-        "item_type",
-        itemType
-      )
+      .eq("item_type",itemType)
       .in(
         "item_id",
         itemIds.map(String)
@@ -2862,28 +2599,22 @@ async function loadItemComments(
     throw error;
   }
 
-  (data||[])
-    .forEach(
-      comment=>{
+  (data||[]).forEach(
+    comment=>{
 
-        if(!map[comment.item_id]){
-          map[comment.item_id]=[];
-        }
-
-        map[comment.item_id]
-          .push(comment);
-
+      if(!map[comment.item_id]){
+        map[comment.item_id]=[];
       }
-    );
+
+      map[comment.item_id].push(comment);
+
+    }
+  );
 
   return map;
 
 }
 
-
-/* =========================================================
-   USER
-========================================================= */
 
 async function loadCurrentUser(){
 
@@ -2922,10 +2653,7 @@ async function loadCurrentUser(){
       .select(
         "display_name,username,avatar_url,bio,location"
       )
-      .eq(
-        "id",
-        currentUser.id
-      )
+      .eq("id",currentUser.id)
       .maybeSingle();
 
   if(pe){
@@ -2952,10 +2680,6 @@ async function loadCurrentUser(){
 
 }
 
-
-/* =========================================================
-   POSTS
-========================================================= */
 
 async function loadPosts(){
 
@@ -3017,14 +2741,11 @@ function renderPosts(posts){
     $("postsContainer")
       .innerHTML=`
         <div class="ma-empty">
-
           <strong>
             Sei der Erste in der Community.
           </strong>
-
           Teile deinen ersten Lauf, ein Ziel
           oder einfach ein paar Worte mit Miles Apart.
-
         </div>
       `;
 
@@ -3034,12 +2755,10 @@ function renderPosts(posts){
 
   posts.forEach(
     post=>{
-
       $("postsContainer")
         .appendChild(
           createPostElement(post)
         );
-
     }
   );
 
@@ -3055,14 +2774,11 @@ function createPostElement(post){
   const liked=
     !!currentUser&&
     likes.some(
-      x=>
-        x.user_id===
-        currentUser.id
+      x=>x.user_id===currentUser.id
     );
 
   const owner=
-    currentUser?.id===
-    post.author_id;
+    currentUser?.id===post.author_id;
 
   const n=
     p.display_name||
@@ -3256,6 +2972,7 @@ function createCommentHtml(c){
     "Miles Apart Member";
 
   return`
+
     <div
       class="ma-comment"
       style="
@@ -3321,6 +3038,7 @@ function createCommentHtml(c){
       </div>
 
     </div>
+
   `;
 
 }
@@ -3482,22 +3200,15 @@ async function deletePost(id){
       .eq("author_id",currentUser.id);
 
   if(error){
-
     alert(error.message);
-
   }else{
-
     await loadPosts();
-
   }
 
 }
 
 
-async function submitComment(
-  id,
-  input
-){
+async function submitComment(id,input){
 
   if(!currentUser){
     return location.href="home.html";
@@ -3553,10 +3264,6 @@ function openMessageModal(id,name){
 
   if(!currentUser){
     return location.href="home.html";
-  }
-
-  if(!id){
-    return;
   }
 
   messageReceiverId=id;
@@ -3830,8 +3537,6 @@ async function loadMessageInbox(
 
   if(!rows.length){
 
-    messageProfiles={};
-
     $("messageConversationList")
       .innerHTML=`
         <div class="ma-inbox-empty">
@@ -3847,8 +3552,7 @@ async function loadMessageInbox(
     ...new Set(
       rows.map(
         m=>
-          m.sender_id===
-          currentUser.id
+          m.sender_id===currentUser.id
             ?m.receiver_id
             :m.sender_id
       )
@@ -3875,12 +3579,11 @@ async function loadMessageInbox(
 
   messageProfiles={};
 
-  (profiles||[])
-    .forEach(
-      p=>{
-        messageProfiles[p.id]=p;
-      }
-    );
+  (profiles||[]).forEach(
+    p=>{
+      messageProfiles[p.id]=p;
+    }
+  );
 
   const conversations=[];
 
@@ -3888,26 +3591,20 @@ async function loadMessageInbox(
     message=>{
 
       const otherId=
-        message.sender_id===
-        currentUser.id
+        message.sender_id===currentUser.id
           ?message.receiver_id
           :message.sender_id;
 
-      let conversation=
-        conversations.find(
+      if(
+        !conversations.some(
           x=>x.userId===otherId
-        );
+        )
+      ){
 
-      if(!conversation){
-
-        conversation={
+        conversations.push({
           userId:otherId,
           lastMessage:message
-        };
-
-        conversations.push(
-          conversation
-        );
+        });
 
       }
 
@@ -3982,10 +3679,6 @@ function renderMessageConversations(
       button.dataset.userId=
         conversation.userId;
 
-      const preview=
-        conversation.lastMessage.content||
-        "";
-
       button.innerHTML=`
 
         ${inboxAvatarHtml(p)}
@@ -4000,7 +3693,9 @@ function renderMessageConversations(
           </div>
 
           <div class="ma-conversation-preview">
-            ${escapeHtml(preview)}
+            ${escapeHtml(
+              conversation.lastMessage.content||""
+            )}
           </div>
 
         </div>
@@ -4037,7 +3732,19 @@ async function openConversation(userId){
 
   activeConversationUserId=userId;
 
-  renderMessageConversationsFromCurrent();
+  document
+    .querySelectorAll(
+      ".ma-conversation"
+    )
+    .forEach(
+      button=>{
+        button.classList.toggle(
+          "active",
+          button.dataset.userId===
+          activeConversationUserId
+        );
+      }
+    );
 
   const p=
     messageProfiles[userId]||
@@ -4052,18 +3759,17 @@ async function openConversation(userId){
   $("messageThreadHead")
     .innerHTML=`
 
-      ${
-        p.avatar_url
-          ?`
-            <div class="ma-thread-head-avatar">
+      <div class="ma-thread-head-avatar">
+
+        ${
+          p.avatar_url
+            ?`
               <img
                 src="${escapeHtml(p.avatar_url)}"
                 alt="Profilbild"
               >
-            </div>
-          `
-          :`
-            <div class="ma-thread-head-avatar">
+            `
+            :`
               <div class="ma-conversation-initials">
                 ${escapeHtml(
                   getInitials(
@@ -4071,9 +3777,10 @@ async function openConversation(userId){
                   )
                 )}
               </div>
-            </div>
-          `
-      }
+            `
+        }
+
+      </div>
 
       <div>
 
@@ -4088,9 +3795,7 @@ async function openConversation(userId){
           p.username
             ?`
               <div class="ma-thread-head-username">
-                @${escapeHtml(
-                  p.username
-                )}
+                @${escapeHtml(p.username)}
               </div>
             `
             :""
@@ -4102,13 +3807,6 @@ async function openConversation(userId){
 
   $("messageReplyForm")
     .style.display="flex";
-
-  $("messageThreadList")
-    .innerHTML=`
-      <div class="ma-thread-empty">
-        Nachrichten werden geladen …
-      </div>
-    `;
 
   const {
     data,
@@ -4147,27 +3845,6 @@ async function openConversation(userId){
   }
 
   renderMessageThread(data||[]);
-
-}
-
-
-function renderMessageConversationsFromCurrent(){
-
-  document
-    .querySelectorAll(
-      ".ma-conversation"
-    )
-    .forEach(
-      button=>{
-
-        button.classList.toggle(
-          "active",
-          button.dataset.userId===
-          activeConversationUserId
-        );
-
-      }
-    );
 
 }
 
@@ -4394,10 +4071,6 @@ $("postImage")
   };
 
 
-/* =========================================================
-   BILDER OHNE SUPABASE-STORAGE-BUCKET
-========================================================= */
-
 function compressImageToDataUrl(file){
 
   return new Promise(
@@ -4446,28 +4119,17 @@ function compressImageToDataUrl(file){
                   MAX_HEIGHT/height
                 );
 
-              width=
-                Math.round(
-                  width*ratio
-                );
-
-              height=
-                Math.round(
-                  height*ratio
-                );
+              width=Math.round(width*ratio);
+              height=Math.round(height*ratio);
 
               const canvas=
-                document.createElement(
-                  "canvas"
-                );
+                document.createElement("canvas");
 
               canvas.width=width;
               canvas.height=height;
 
               const ctx=
-                canvas.getContext(
-                  "2d"
-                );
+                canvas.getContext("2d");
 
               if(!ctx){
 
@@ -4489,18 +4151,16 @@ function compressImageToDataUrl(file){
                 height
               );
 
-              const dataUrl=
+              resolve(
                 canvas.toDataURL(
                   "image/jpeg",
-                  0.78
-                );
-
-              resolve(dataUrl);
+                  .78
+                )
+              );
 
             };
 
-          img.src=
-            reader.result;
+          img.src=reader.result;
 
         };
 
@@ -4537,8 +4197,7 @@ $("postForm")
 
     if(
       file&&
-      file.size>
-      15*1024*1024
+      file.size>15*1024*1024
     ){
 
       $("postFormMessage")
@@ -4553,24 +4212,15 @@ $("postForm")
       $("submitPostButton");
 
     b.disabled=true;
-
-    b.textContent=
-      "Wird veröffentlicht …";
-
-    $("postFormMessage")
-      .textContent="";
+    b.textContent="Wird veröffentlicht …";
 
     try{
 
       let imageUrl=null;
 
       if(file){
-
         imageUrl=
-          await compressImageToDataUrl(
-            file
-          );
-
+          await compressImageToDataUrl(file);
       }
 
       const {error}=
@@ -4586,14 +4236,11 @@ $("postForm")
         throw error;
       }
 
-      $("cancelPostButton")
-        .click();
+      $("cancelPostButton").click();
 
       await loadPosts();
 
     }catch(err){
-
-      console.error(err);
 
       $("postFormMessage")
         .textContent=
@@ -4603,9 +4250,7 @@ $("postForm")
     }finally{
 
       b.disabled=false;
-
-      b.textContent=
-        "Post veröffentlichen";
+      b.textContent="Post veröffentlichen";
 
     }
 
@@ -4707,9 +4352,7 @@ function buddyCard(row){
 
           <span class="ma-buddy-value">
             📅 ${escapeHtml(
-              buddyDaysLabel(
-                row.preferred_day
-              )
+              buddyDaysLabel(row.preferred_day)
             )}
           </span>
 
@@ -4725,8 +4368,7 @@ function buddyCard(row){
           <span class="ma-buddy-value">
             🕐 ${escapeHtml(
               String(
-                row.preferred_time||
-                ""
+                row.preferred_time||""
               ).slice(0,5)
             )} Uhr
           </span>
@@ -4818,14 +4460,8 @@ function buddyCard(row){
               </div>
 
             </div>
-          `
-          :""
-      }
 
 
-      ${
-        currentUser
-          ?`
             <div
               class="ma-comments"
               data-buddy-comments="${row.user_id}"
@@ -4908,49 +4544,21 @@ async function loadBuddyProfiles(){
 
     const mine=
       list.find(
-        x=>
-          x.user_id===
-          currentUser.id
+        x=>x.user_id===currentUser.id
       );
 
     if(mine){
 
-      $("buddyLocation")
-        .value=
-        mine.location||"";
-
-      setBuddyDays(
-        mine.preferred_day||""
-      );
-
-      $("buddyTime")
-        .value=
-        String(
-          mine.preferred_time||""
-        ).slice(0,5);
-
-      $("buddyPace")
-        .value=
-        mine.pace||"";
-
-      $("buddyNote")
-        .value=
-        mine.note||"";
+      $("buddyLocation").value=mine.location||"";
+      setBuddyDays(mine.preferred_day||"");
+      $("buddyTime").value=
+        String(mine.preferred_time||"").slice(0,5);
+      $("buddyPace").value=mine.pace||"";
+      $("buddyNote").value=mine.note||"";
 
       $("openBuddyButton")
         .textContent=
         "Mein Run Buddy-Profil bearbeiten";
-
-    }else{
-
-      $("buddyProfileForm")
-        .reset();
-
-      setBuddyDays("");
-
-      $("openBuddyButton")
-        .textContent=
-        "+ Run Buddy eintragen";
 
     }
 
@@ -4990,45 +4598,18 @@ $("buddyList")
           return;
         }
 
-        deleteButton.disabled=true;
-
         const {error}=
           await supabaseClient
             .from("run_buddy_profiles")
             .delete()
-            .eq(
-              "user_id",
-              currentUser.id
-            );
+            .eq("user_id",currentUser.id);
 
         if(error){
-
           alert(error.message);
-
-          deleteButton.disabled=false;
-
           return;
-
         }
 
-        $("buddyForm")
-          .classList
-          .remove("open");
-
-        $("buddyFormMessage")
-          .textContent="";
-
-        $("openBuddyButton")
-          .textContent=
-          "+ Run Buddy eintragen";
-
-        $("buddyProfileForm")
-          .reset();
-
-        setBuddyDays("");
-
         await loadBuddyProfiles();
-
         return;
 
       }
@@ -5050,12 +4631,10 @@ $("buddyList")
           );
 
         if(box){
-
           box.style.display=
             box.style.display==="none"
               ?"block"
               :"none";
-
         }
 
         return;
@@ -5106,18 +4685,10 @@ $("buddyList")
         return;
       }
 
-      const itemId=
-        box.dataset.buddyComments;
-
-      const input=
-        form.querySelector(
-          ".ma-comment-input"
-        );
-
       await submitItemComment(
         "buddy",
-        itemId,
-        input
+        box.dataset.buddyComments,
+        form.querySelector(".ma-comment-input")
       );
 
     }
@@ -5136,9 +4707,6 @@ $("openBuddyButton")
       .classList
       .toggle("open");
 
-    $("buddyLocation")
-      .focus();
-
   };
 
 
@@ -5150,11 +4718,6 @@ $("cancelBuddyButton")
       .classList
       .remove("open");
 
-    $("buddyFormMessage")
-      .textContent="";
-
-    setBuddyDays("");
-
   };
 
 
@@ -5164,9 +4727,7 @@ function getSelectedBuddyDays(){
     document.querySelectorAll(
       '#buddyDays input[type="checkbox"]:checked'
     )
-  ).map(
-    x=>x.value
-  );
+  ).map(x=>x.value);
 
 }
 
@@ -5184,8 +4745,7 @@ function setBuddyDays(value){
     )
     .forEach(
       x=>{
-        x.checked=
-          selected.has(x.value);
+        x.checked=selected.has(x.value);
       }
     );
 
@@ -5241,8 +4801,7 @@ $("buddyProfileForm")
           .trim(),
 
       updated_at:
-        new Date()
-          .toISOString()
+        new Date().toISOString()
 
     };
 
@@ -5250,12 +4809,6 @@ $("buddyProfileForm")
       $("submitBuddyButton");
 
     b.disabled=true;
-
-    b.textContent=
-      "Wird gespeichert …";
-
-    $("buddyFormMessage")
-      .textContent="";
 
     try{
 
@@ -5273,19 +4826,7 @@ $("buddyProfileForm")
         throw error;
       }
 
-      $("buddyFormMessage")
-        .textContent=
-        "Profil gespeichert ✓";
-
       await loadBuddyProfiles();
-
-      setTimeout(
-        ()=>
-          $("buddyForm")
-            .classList
-            .remove("open"),
-        600
-      );
 
     }catch(err){
 
@@ -5296,9 +4837,6 @@ $("buddyProfileForm")
     }finally{
 
       b.disabled=false;
-
-      b.textContent=
-        "Run Buddy-Profil speichern";
 
     }
 
@@ -5321,9 +4859,6 @@ $("openRunButton")
       .classList
       .toggle("open");
 
-    $("runTitle")
-      .focus();
-
   };
 
 
@@ -5331,18 +4866,13 @@ $("cancelRunButton")
   .onclick=
   ()=>{
 
-    $("communityRunForm")
-      .reset();
+    $("communityRunForm").reset();
 
-    $("runMaxParticipants")
-      .value=8;
+    $("runMaxParticipants").value=8;
 
     $("runForm")
       .classList
       .remove("open");
-
-    $("runFormMessage")
-      .textContent="";
 
   };
 
@@ -5350,34 +4880,25 @@ $("cancelRunButton")
 function runCard(run){
 
   const parts=
-    run.community_run_participants||
-    [];
+    run.community_run_participants||[];
 
   const creator=
-    run.profiles||
-    {};
+    run.profiles||{};
 
   const joined=
     currentUser&&
     parts.some(
-      x=>
-        x.user_id===
-        currentUser.id
+      x=>x.user_id===currentUser.id
     );
 
   const owner=
-    currentUser?.id===
-    run.creator_id;
+    currentUser?.id===run.creator_id;
 
   const max=
-    Number(
-      run.max_participants||
-      0
-    );
+    Number(run.max_participants||0);
 
   const comments=
-    runComments[String(run.id)]||
-    [];
+    runComments[String(run.id)]||[];
 
   return`
 
@@ -5450,9 +4971,7 @@ function runCard(run){
 
           <span class="ma-run-detail-value">
             🕐 ${escapeHtml(
-              String(
-                run.run_time||""
-              ).slice(0,5)
+              String(run.run_time||"").slice(0,5)
             )} Uhr
           </span>
 
@@ -5497,12 +5016,12 @@ function runCard(run){
             class="ma-run-message"
             type="button"
             data-run-action="message"
-            data-run-id="${run.id}"
             data-run-creator-id="${run.creator_id}"
             data-run-creator-name="${escapeHtml(
               creator.display_name||
               "Miles Apart Member"
             )}"
+            data-run-id="${run.id}"
           >
             Nachricht senden
           </button>
@@ -5526,19 +5045,11 @@ function runCard(run){
                   }"
                   data-run-action="join"
                   data-run-id="${run.id}"
-                  ${
-                    !joined&&
-                    parts.length>=max
-                      ?"disabled"
-                      :""
-                  }
                 >
                   ${
                     joined
                       ?"✓ Ich bin dabei"
-                      :parts.length>=max
-                        ?"Voll"
-                        :"Ich bin dabei"
+                      :"Ich bin dabei"
                   }
                 </button>
               `
@@ -5600,12 +5111,6 @@ async function loadCommunityRuns(){
         ),
         community_run_participants(user_id)
       `)
-      .gte(
-        "run_date",
-        new Date()
-          .toISOString()
-          .slice(0,10)
-      )
       .order(
         "run_date",
         {
@@ -5628,9 +5133,7 @@ async function loadCommunityRuns(){
   runComments=
     await loadItemComments(
       "run",
-      list.map(
-        x=>String(x.id)
-      )
+      list.map(x=>String(x.id))
     );
 
   $("runList")
@@ -5640,7 +5143,6 @@ async function loadCommunityRuns(){
       :`
         <div class="ma-buddy-empty">
           Noch keine gemeinsamen Läufe geplant.
-          Erstelle den ersten!
         </div>
       `;
 
@@ -5675,12 +5177,10 @@ $("runList")
           );
 
         if(box){
-
           box.style.display=
             box.style.display==="none"
               ?"block"
               :"none";
-
         }
 
         return;
@@ -5722,9 +5222,7 @@ $("runList")
 
         const {data:x}=
           await supabaseClient
-            .from(
-              "community_run_participants"
-            )
+            .from("community_run_participants")
             .select("run_id")
             .eq("run_id",id)
             .eq("user_id",currentUser.id)
@@ -5733,9 +5231,7 @@ $("runList")
         if(x){
 
           await supabaseClient
-            .from(
-              "community_run_participants"
-            )
+            .from("community_run_participants")
             .delete()
             .eq("run_id",id)
             .eq("user_id",currentUser.id);
@@ -5743,9 +5239,7 @@ $("runList")
         }else{
 
           await supabaseClient
-            .from(
-              "community_run_participants"
-            )
+            .from("community_run_participants")
             .insert({
               run_id:id,
               user_id:currentUser.id
@@ -5786,18 +5280,10 @@ $("runList")
         return;
       }
 
-      const itemId=
-        box.dataset.runComments;
-
-      const input=
-        form.querySelector(
-          ".ma-comment-input"
-        );
-
       await submitItemComment(
         "run",
-        itemId,
-        input
+        box.dataset.runComments,
+        form.querySelector(".ma-comment-input")
       );
 
     }
@@ -5895,26 +5381,14 @@ $("communityRunForm")
           .from("community_runs")
           .insert({
             creator_id:currentUser.id,
-            title:
-              $("runTitle")
-                .value
-                .trim(),
-            location:
-              $("runLocation")
-                .value
-                .trim(),
-            run_date:
-              $("runDate").value,
-            run_time:
-              $("runTime").value,
-            pace:
-              $("runPace")
-                .value
-                .trim(),
+            title:$("runTitle").value.trim(),
+            location:$("runLocation").value.trim(),
+            run_date:$("runDate").value,
+            run_time:$("runTime").value,
+            pace:$("runPace").value.trim(),
             max_participants:
               Number(
-                $("runMaxParticipants")
-                  .value
+                $("runMaxParticipants").value
               )
           })
           .select("id")
@@ -5926,9 +5400,7 @@ $("communityRunForm")
 
       const {error:pe}=
         await supabaseClient
-          .from(
-            "community_run_participants"
-          )
+          .from("community_run_participants")
           .insert({
             run_id:r.id,
             user_id:currentUser.id
@@ -5938,8 +5410,7 @@ $("communityRunForm")
         throw pe;
       }
 
-      $("cancelRunButton")
-        .click();
+      $("cancelRunButton").click();
 
       await loadCommunityRuns();
 
@@ -5975,28 +5446,23 @@ async function initializeCommunity(){
     ]);
 
     $("communityLoading")
-      .style
-      .display="none";
+      .style.display="none";
 
     $("communityBuddySection")
-      .style
-      .display="block";
+      .style.display="block";
 
     $("communityRunsSection")
-      .style
-      .display="block";
+      .style.display="block";
 
   }catch(err){
 
     console.error(err);
 
     $("communityLoading")
-      .style
-      .display="none";
+      .style.display="none";
 
     $("communityError")
-      .style
-      .display="block";
+      .style.display="block";
 
     $("communityError")
       .textContent=
