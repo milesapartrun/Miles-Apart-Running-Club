@@ -947,7 +947,7 @@
 
 
         <!-- =====================================================
-             EIN EINZIGES MILES APART POSTER
+             MILES APART POSTER
         ====================================================== -->
 
         <section class="runner-share-section">
@@ -2696,10 +2696,54 @@
 
 
     /* =========================================================
-       EINZIGER POSTER-RENDERER
+       COMMUNITY CTA
+       
+       Der Aufruf sitzt oben rechts auf dem Poster.
+    ========================================================== */
 
-       Größere Typografie und deutlich größere PB-Felder.
-       Das Poster wird jetzt nahezu vollständig genutzt.
+    function posterCommunityCta(
+      ctx
+    ) {
+
+      const text =
+        "Werde Teil der Miles Apart Community →";
+
+
+      const right =
+        1016;
+
+      const y =
+        70;
+
+      const maxWidth =
+        370;
+
+
+      posterFittedText(
+        ctx,
+        text,
+        right,
+        y,
+        maxWidth,
+        23,
+        16,
+        "900",
+        "#18a6b4",
+        "right"
+      );
+    }
+
+
+    /* =========================================================
+       EINZIGER POSTER-RENDERER
+       
+       Die Bestzeiten auf dem Poster entsprechen jetzt exakt
+       den persönlichen Bestzeiten, die unten auf der Seite
+       dargestellt werden.
+
+       Wichtig:
+       - Kilometer / Level / Läufe = 2026
+       - Persönliche Bestzeiten = ALL-TIME
     ========================================================== */
 
     function renderRunnerPoster(
@@ -2799,9 +2843,6 @@
 
       /* =====================================================
          HEADER
-         
-         Bewusst größer und klarer.
-         Kein zusätzliches Branding unten.
       ====================================================== */
 
       posterFittedText(
@@ -2812,11 +2853,16 @@
         ),
         64,
         78,
-        900,
+        590,
         72,
         42,
         "900",
         "#17211f"
+      );
+
+
+      posterCommunityCta(
+        ctx
       );
 
 
@@ -2933,7 +2979,8 @@
          PB GRID
 
          2 Spalten × 3 Reihen.
-         Die frei gewordene Fläche wird vollständig genutzt.
+         Die Bestzeiten stammen aus ALLEN Läufen des Users,
+         genau wie die Bestzeiten unten auf der Seite.
       ====================================================== */
 
       const pbGap =
@@ -3040,26 +3087,27 @@
         data.pbs?.["100plus"],
         "100plus"
       );
-
-
-      /*
-       * Absichtlich kein Footer:
-       * Das Poster endet nach dem PB-Bereich und enthält
-       * keine zusätzlichen Slogans, Linien oder Deko.
-       */
     }
 
 
     /* =========================================================
        POSTER DATEN
 
-       Poster-PBs = ausschließlich 2026.
-       Normale Profil-PBs unten bleiben ALL-TIME.
+       2026-Statistiken:
+       - Kilometer
+       - Läufe
+       - Level
+       - längster Lauf
+
+       Persönliche Bestzeiten:
+       - ALL-TIME
+       - exakt dieselbe Quelle/Logik wie unten auf der Seite
     ========================================================== */
 
     function createPosterData(
       profile,
-      runs2026
+      runs2026,
+      allRuns
     ) {
 
       const statistics =
@@ -3109,41 +3157,46 @@
             ? longestRun.run_date
             : null,
 
+        /*
+         * WICHTIG:
+         * Hier werden jetzt ALL-TIME-Läufe verwendet,
+         * genau wie bei den Bestzeiten unten auf der Seite.
+         */
         pbs: {
 
           "5k":
             findBestRunByCategory(
-              runs2026,
+              allRuns,
               "5k"
             ),
 
           "10k":
             findBestRunByCategory(
-              runs2026,
+              allRuns,
               "10k"
             ),
 
           "half":
             findBestRunByCategory(
-              runs2026,
+              allRuns,
               "half"
             ),
 
           "marathon":
             findBestRunByCategory(
-              runs2026,
+              allRuns,
               "marathon"
             ),
 
           "100k":
             findBestRunByCategory(
-              runs2026,
+              allRuns,
               "100k"
             ),
 
           "100plus":
             findBestRunByCategory(
-              runs2026,
+              allRuns,
               "100plus"
             )
         }
@@ -4723,12 +4776,17 @@
 
         /* =====================================================
            POSTER
+
+           Wichtig:
+           runs2026 wird für die Jahresstatistiken verwendet,
+           allRuns wird für die persönlichen Bestzeiten verwendet.
         ====================================================== */
 
         currentPosterData =
           createPosterData(
             profile,
-            runs2026
+            runs2026,
+            allRuns
           );
 
 
