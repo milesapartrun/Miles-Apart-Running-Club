@@ -2450,10 +2450,10 @@
         ctx,
         label,
         x + 28,
-        y + 32,
+        y + 42,
         {
           font:
-            "900 15px Arial",
+            "900 21px Arial",
           color:
             "#75817e",
           baseline:
@@ -2470,10 +2470,10 @@
           ctx,
           emoji,
           x + 28,
-          y + 88,
+          y + 126,
           {
             font:
-              "37px Arial",
+              "50px Arial",
             color:
               "#17211f",
             baseline:
@@ -2485,11 +2485,11 @@
         posterFittedText(
           ctx,
           value,
-          x + 84,
-          y + 88,
-          width - 112,
-          43,
-          24,
+          x + 96,
+          y + 126,
+          width - 124,
+          61,
+          34,
           "900",
           "#17211f"
         );
@@ -2500,10 +2500,10 @@
           ctx,
           value,
           x + 28,
-          y + 88,
+          y + 126,
           width - 56,
-          43,
-          24,
+          61,
+          34,
           "900",
           "#17211f"
         );
@@ -2562,10 +2562,10 @@
         ctx,
         label,
         x + 29,
-        y + 35,
+        y + 42,
         {
           font:
-            "900 15px Arial",
+            "900 20px Arial",
           color:
             "#6e7b78",
           baseline:
@@ -2580,10 +2580,10 @@
           ctx,
           "Noch keine Zeit",
           x + 29,
-          y + 88,
+          y + 126,
           {
             font:
-              "800 23px Arial",
+              "800 29px Arial",
             color:
               "#a5afac",
             baseline:
@@ -2619,10 +2619,10 @@
             ? `${formatNumber(distance)} km`
             : "100+ km",
           x + 29,
-          y + 79,
+          y + 112,
           width - 58,
-          28,
-          20,
+          38,
+          26,
           "900",
           "#18a6b4"
         );
@@ -2632,10 +2632,10 @@
           ctx,
           duration,
           x + 29,
-          y + 119,
+          y + 167,
           width - 58,
-          38,
-          23,
+          55,
+          34,
           "900",
           "#17211f"
         );
@@ -2648,10 +2648,10 @@
             run.distance_km
           ),
           x + 29,
-          y + height - 20,
+          y + height - 22,
           {
             font:
-              "800 13px Arial",
+              "800 16px Arial",
             color:
               "#87928f",
             baseline:
@@ -2665,10 +2665,10 @@
           ctx,
           duration,
           x + 29,
-          y + 91,
+          y + 135,
           width - 58,
-          43,
-          25,
+          62,
+          37,
           "900",
           "#17211f"
         );
@@ -2681,10 +2681,10 @@
             run.distance_km
           ),
           x + 29,
-          y + height - 20,
+          y + height - 22,
           {
             font:
-              "800 13px Arial",
+              "800 16px Arial",
             color:
               "#87928f",
             baseline:
@@ -2782,7 +2782,7 @@
         0,
         0,
         W,
-        565
+        470
       );
 
 
@@ -2849,6 +2849,9 @@
 
       /* =====================================================
          HAUPTWERTE
+
+         Nur zwei Felder:
+         Gelaufene Kilometer + Aktuelles Level.
       ====================================================== */
 
       const statGap =
@@ -2858,42 +2861,19 @@
         (W - 128 - statGap) / 2;
 
       const statHeight =
-        142;
+        220;
 
       const statX =
         64;
 
       const statY =
-        205;
+        195;
 
 
       const totalKm =
         Number(
           data.totalKm
         ) || 0;
-
-
-      const runCount =
-        Number(
-          data.runCount
-        ) || 0;
-
-
-      const longestDistance =
-        Number(
-          data.longestDistance
-        );
-
-
-      const longestText =
-        Number.isFinite(
-          longestDistance
-        ) &&
-        longestDistance > 0
-          ? `${formatNumber(
-              longestDistance
-            )} km`
-          : "—";
 
 
       const levelText =
@@ -2923,39 +2903,9 @@
         statY,
         statWidth,
         statHeight,
-        "LÄUFE 2026",
-        String(
-          runCount
-        )
-      );
-
-
-      posterStatBox(
-        ctx,
-        statX,
-        statY +
-          statHeight +
-          statGap,
-        statWidth,
-        statHeight,
         "AKTUELLES LEVEL",
         levelText,
         data.level?.emoji || ""
-      );
-
-
-      posterStatBox(
-        ctx,
-        statX +
-          statWidth +
-          statGap,
-        statY +
-          statHeight +
-          statGap,
-        statWidth,
-        statHeight,
-        "LÄNGSTER LAUF",
-        longestText
       );
 
 
@@ -2965,9 +2915,9 @@
 
       posterText(
         ctx,
-        "Persönliche Bestzeiten · 2026",
+        "Persönliche Bestzeiten",
         64,
-        547,
+        450,
         {
           font:
             "900 31px Arial",
@@ -2983,8 +2933,7 @@
          PB GRID
 
          2 Spalten × 3 Reihen.
-         Dadurch sind die Felder auf dem Handy deutlich
-         größer und die Schrift kann wesentlich größer werden.
+         Die frei gewordene Fläche wird vollständig genutzt.
       ====================================================== */
 
       const pbGap =
@@ -2994,10 +2943,10 @@
         (W - 128 - pbGap) / 2;
 
       const pbHeight =
-        185;
+        260;
 
       const pbStartY =
-        580;
+        485;
 
 
       const pbX1 =
