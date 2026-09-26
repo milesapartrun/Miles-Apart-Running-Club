@@ -207,10 +207,9 @@
       position: relative;
       width: min(100%,590px);
       overflow: hidden;
-      border-radius: 28px;
-      background: #fff;
-      border: 1px solid #dfe7e5;
-      padding: 8px;
+      border-radius: 30px;
+      background: #18b8c7;
+      padding: 12px;
       box-shadow:
         0 24px 60px rgba(24,45,41,.12),
         0 5px 18px rgba(24,45,41,.05);
@@ -221,14 +220,14 @@
       overflow: hidden;
       width: 100%;
       border-radius: 21px;
-      background: #eaf4f3;
+      background: #fff;
     }
 
     #runnerPosterCanvas {
       display: block;
       width: 100%;
       height: auto;
-      background: #eaf4f3;
+      background: #fff;
     }
 
     .runner-share-actions {
@@ -642,12 +641,15 @@
     ========================================================= */
 
     @media (max-width:980px) {
+
       .main-stats {
         grid-template-columns: repeat(2,minmax(0,1fr));
       }
+
     }
 
     @media (max-width:720px) {
+
       .user-page {
         width: min(100% - 22px,620px);
         padding-top: 22px;
@@ -697,16 +699,18 @@
       .pb-time {
         font-size: 26px;
       }
+
     }
 
     @media (max-width:600px) {
+
       .runner-poster-shell {
-        border-radius: 21px;
-        padding: 5px;
+        border-radius: 24px;
+        padding: 10px;
       }
 
       .runner-poster-canvas-wrap {
-        border-radius: 16px;
+        border-radius: 17px;
       }
 
       .runner-share-actions {
@@ -720,9 +724,11 @@
       .pb-time {
         font-size: 24px;
       }
+
     }
 
     @media (max-width:500px) {
+
       .run-card {
         grid-template-columns: 1fr;
       }
@@ -730,9 +736,11 @@
       .run-card-right {
         text-align: left;
       }
+
     }
 
     @media (max-width:370px) {
+
       .main-stats,
       .highlights-grid {
         grid-template-columns: 1fr;
@@ -741,13 +749,16 @@
       .main-stat.primary {
         grid-column: auto;
       }
+
     }
+
   </style>
 </head>
 
 <body>
 
 <main class="main">
+
 <div class="user-page">
 
   <a href="community.html" class="back-link">
@@ -811,14 +822,21 @@
             class="runner-share-button save"
             type="button"
           >
-            <span class="runner-share-button-icon" aria-hidden="true">
+
+            <span
+              class="runner-share-button-icon"
+              aria-hidden="true"
+            >
+
               <svg viewBox="0 0 24 24" fill="none">
+
                 <path
                   d="M12 3v11"
                   stroke="currentColor"
                   stroke-width="2"
                   stroke-linecap="round"
                 />
+
                 <path
                   d="m7.5 10.5 4.5 4.5 4.5-4.5"
                   stroke="currentColor"
@@ -826,15 +844,20 @@
                   stroke-linecap="round"
                   stroke-linejoin="round"
                 />
+
                 <path
                   d="M5 20.5h14"
                   stroke="currentColor"
                   stroke-width="2"
                   stroke-linecap="round"
                 />
+
               </svg>
+
             </span>
+
             Poster speichern
+
           </button>
 
           <button
@@ -842,12 +865,22 @@
             class="runner-share-button whatsapp"
             type="button"
           >
-            <span class="runner-share-button-icon" aria-hidden="true">
+
+            <span
+              class="runner-share-button-icon"
+              aria-hidden="true"
+            >
+
               <svg viewBox="0 0 24 24" fill="currentColor">
+
                 <path d="M12.04 2C6.51 2 2 6.51 2 12.04c0 1.77.46 3.5 1.33 5.03L2 22l5.08-1.3a10 10 0 0 0 4.96 1.3h.01c5.53 0 10.03-4.51 10.03-10.04C22.08 6.51 17.57 2 12.04 2Zm0 18.27c-1.55 0-3.07-.42-4.4-1.22l-.32-.19-3.02.77.8-2.94-.21-.32a8.26 8.26 0 1 1 7.15 3.9Zm4.54-6.19c-.25-.13-1.47-.73-1.7-.81-.23-.08-.4-.13-.57.13-.17.25-.65.81-.8.98-.15.17-.3.19-.55.06-.25-.13-1.04-.38-1.98-1.22-.73-.65-1.22-1.45-1.36-1.7-.14-.25-.01-.39.11-.52.11-.11.25-.3.38-.44.13-.15.17-.25.25-.42.08-.17.04-.32-.02-.44-.06-.13-.57-1.37-.78-1.88-.21-.5-.42-.43-.57-.44h-.48c-.17 0-.44.06-.67.32-.23.25-.88.86-.88 2.1s.9 2.44 1.03 2.61c.13.17 1.76 2.69 4.26 3.77.6.26 1.07.42 1.44.54.61.19 1.16.16 1.6.1.49-.07 1.47-.6 1.68-1.18.21-.58.21-1.08.15-1.18-.06-.1-.23-.16-.48-.29Z"/>
+
               </svg>
+
             </span>
+
             WhatsApp teilen
+
           </button>
 
           <button
@@ -855,8 +888,14 @@
             class="runner-share-button instagram"
             type="button"
           >
-            <span class="runner-share-button-icon" aria-hidden="true">
+
+            <span
+              class="runner-share-button-icon"
+              aria-hidden="true"
+            >
+
               <svg viewBox="0 0 24 24" fill="none">
+
                 <rect
                   x="3"
                   y="3"
@@ -866,6 +905,7 @@
                   stroke="currentColor"
                   stroke-width="1.9"
                 />
+
                 <circle
                   cx="12"
                   cy="12"
@@ -873,15 +913,20 @@
                   stroke="currentColor"
                   stroke-width="1.9"
                 />
+
                 <circle
                   cx="17.4"
                   cy="6.7"
                   r="1.15"
                   fill="currentColor"
                 />
+
               </svg>
+
             </span>
+
             Instagram teilen
+
           </button>
 
         </div>
@@ -897,128 +942,341 @@
     </section>
 
     <div class="section-heading">
+
       <div>
+
         <h2>2026 in Zahlen</h2>
-        <p>Alle Werte basieren ausschließlich auf Läufen aus 2026.</p>
+
+        <p>
+          Alle Werte basieren ausschließlich auf Läufen aus 2026.
+        </p>
+
       </div>
+
     </div>
 
     <section class="main-stats">
 
       <div class="main-stat primary">
-        <div class="stat-label">Gelaufene Kilometer</div>
-        <div id="totalKm" class="stat-value">0 km</div>
-        <div class="stat-sub">Gesamtstrecke 2026</div>
-      </div>
 
-      <div class="main-stat">
-        <div class="stat-label">Läufe</div>
-        <div id="runCount" class="stat-value">0</div>
-        <div class="stat-sub">absolvierte Läufe</div>
-      </div>
-
-      <div class="main-stat">
-        <div class="stat-label">Aktuelles Level</div>
-
-        <div id="currentLevel" class="stat-value level-stat-value">
-          <span id="currentLevelEmoji" class="level-stat-emoji">–</span>
-          <span>Level 0</span>
+        <div class="stat-label">
+          Gelaufene Kilometer
         </div>
 
-        <div id="currentLevelSub" class="stat-sub">
+        <div id="totalKm" class="stat-value">
+          0 km
+        </div>
+
+        <div class="stat-sub">
+          Gesamtstrecke 2026
+        </div>
+
+      </div>
+
+      <div class="main-stat">
+
+        <div class="stat-label">
+          Läufe
+        </div>
+
+        <div id="runCount" class="stat-value">
+          0
+        </div>
+
+        <div class="stat-sub">
+          absolvierte Läufe
+        </div>
+
+      </div>
+
+      <div class="main-stat">
+
+        <div class="stat-label">
+          Aktuelles Level
+        </div>
+
+        <div
+          id="currentLevel"
+          class="stat-value level-stat-value"
+        >
+
+          <span
+            id="currentLevelEmoji"
+            class="level-stat-emoji"
+          >
+            –
+          </span>
+
+          <span>
+            Level 0
+          </span>
+
+        </div>
+
+        <div
+          id="currentLevelSub"
+          class="stat-sub"
+        >
           Noch kein Level erreicht
         </div>
+
       </div>
 
       <div class="main-stat">
-        <div class="stat-label">Längster Lauf</div>
-        <div id="longestRun" class="stat-value">–</div>
-        <div id="longestRunSub" class="stat-sub">
+
+        <div class="stat-label">
+          Längster Lauf
+        </div>
+
+        <div
+          id="longestRun"
+          class="stat-value"
+        >
+          –
+        </div>
+
+        <div
+          id="longestRunSub"
+          class="stat-sub"
+        >
           Noch kein Lauf
         </div>
+
       </div>
 
     </section>
 
     <div class="section-heading">
+
       <div>
-        <h2>Persönliche Bestzeiten</h2>
-        <p>Die schnellsten eingetragenen Läufe aus dem Home-Bestzeiten-System.</p>
+
+        <h2>
+          Persönliche Bestzeiten
+        </h2>
+
+        <p>
+          Die schnellsten eingetragenen Läufe aus dem Home-Bestzeiten-System.
+        </p>
+
       </div>
+
     </div>
 
     <section class="highlights-grid">
 
       <div class="highlight-card">
+
         <div class="highlight-top">
-          <div class="highlight-label">5 Kilometer</div>
-          <div class="highlight-icon">5K</div>
+
+          <div class="highlight-label">
+            5 Kilometer
+          </div>
+
+          <div class="highlight-icon">
+            5K
+          </div>
+
         </div>
-        <div id="pb5k" class="highlight-value">–</div>
-        <div id="pb5kSub" class="highlight-sub">Noch kein Lauf</div>
+
+        <div
+          id="pb5k"
+          class="highlight-value"
+        >
+          –
+        </div>
+
+        <div
+          id="pb5kSub"
+          class="highlight-sub"
+        >
+          Noch kein Lauf
+        </div>
+
       </div>
 
       <div class="highlight-card">
+
         <div class="highlight-top">
-          <div class="highlight-label">10 Kilometer</div>
-          <div class="highlight-icon">10K</div>
+
+          <div class="highlight-label">
+            10 Kilometer
+          </div>
+
+          <div class="highlight-icon">
+            10K
+          </div>
+
         </div>
-        <div id="pb10k" class="highlight-value">–</div>
-        <div id="pb10kSub" class="highlight-sub">Noch kein Lauf</div>
+
+        <div
+          id="pb10k"
+          class="highlight-value"
+        >
+          –
+        </div>
+
+        <div
+          id="pb10kSub"
+          class="highlight-sub"
+        >
+          Noch kein Lauf
+        </div>
+
       </div>
 
       <div class="highlight-card">
+
         <div class="highlight-top">
-          <div class="highlight-label">Halb-<br>Marathon</div>
-          <div class="highlight-icon">21K</div>
+
+          <div class="highlight-label">
+            Halb-<br>Marathon
+          </div>
+
+          <div class="highlight-icon">
+            21K
+          </div>
+
         </div>
-        <div id="pbHalf" class="highlight-value">–</div>
-        <div id="pbHalfSub" class="highlight-sub">Noch kein Lauf</div>
+
+        <div
+          id="pbHalf"
+          class="highlight-value"
+        >
+          –
+        </div>
+
+        <div
+          id="pbHalfSub"
+          class="highlight-sub"
+        >
+          Noch kein Lauf
+        </div>
+
       </div>
 
       <div class="highlight-card">
+
         <div class="highlight-top">
-          <div class="highlight-label">Marathon</div>
-          <div class="highlight-icon">42K</div>
+
+          <div class="highlight-label">
+            Marathon
+          </div>
+
+          <div class="highlight-icon">
+            42K
+          </div>
+
         </div>
-        <div id="pbMarathon" class="highlight-value">–</div>
-        <div id="pbMarathonSub" class="highlight-sub">Noch kein Lauf</div>
+
+        <div
+          id="pbMarathon"
+          class="highlight-value"
+        >
+          –
+        </div>
+
+        <div
+          id="pbMarathonSub"
+          class="highlight-sub"
+        >
+          Noch kein Lauf
+        </div>
+
       </div>
 
       <div class="highlight-card">
+
         <div class="highlight-top">
-          <div class="highlight-label">100 Kilometer</div>
-          <div class="highlight-icon">100K</div>
+
+          <div class="highlight-label">
+            100 Kilometer
+          </div>
+
+          <div class="highlight-icon">
+            100K
+          </div>
+
         </div>
-        <div id="pb100k" class="highlight-value">–</div>
-        <div id="pb100kSub" class="highlight-sub">Noch kein Lauf</div>
+
+        <div
+          id="pb100k"
+          class="highlight-value"
+        >
+          –
+        </div>
+
+        <div
+          id="pb100kSub"
+          class="highlight-sub"
+        >
+          Noch kein Lauf
+        </div>
+
       </div>
 
       <div class="highlight-card">
+
         <div class="highlight-top">
-          <div class="highlight-label">Über 100 Kilometer</div>
-          <div class="highlight-icon">100+</div>
+
+          <div class="highlight-label">
+            Über 100 Kilometer
+          </div>
+
+          <div class="highlight-icon">
+            100+
+          </div>
+
         </div>
-        <div id="pb100Plus" class="highlight-value">–</div>
-        <div id="pb100PlusSub" class="highlight-sub">Noch kein Lauf</div>
+
+        <div
+          id="pb100Plus"
+          class="highlight-value"
+        >
+          –
+        </div>
+
+        <div
+          id="pb100PlusSub"
+          class="highlight-sub"
+        >
+          Noch kein Lauf
+        </div>
+
       </div>
 
     </section>
 
     <div class="section-heading">
+
       <div>
-        <h2>Laufhistorie</h2>
-        <p>Alle öffentlichen Läufe aus 2026.</p>
+
+        <h2>
+          Laufhistorie
+        </h2>
+
+        <p>
+          Alle öffentlichen Läufe aus 2026.
+        </p>
+
       </div>
+
     </div>
 
-    <section id="runsList" class="runs-list"></section>
+    <section
+      id="runsList"
+      class="runs-list"
+    ></section>
 
   </div>
 
-  <div id="errorState" class="message-card" style="display:none;"></div>
+  <div
+    id="errorState"
+    class="message-card"
+    style="display:none;"
+  ></div>
 
 </div>
+
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -1037,12 +1295,9 @@ const supabaseClient =
     SUPABASE_PUBLISHABLE_KEY
   );
 
-/* =========================================================
-   EINBETTUNG ERKENNEN
-========================================================= */
-
 const IS_EMBEDDED =
   window.self !== window.top;
+
 
 /* =========================================================
    LEVELSYSTEM
@@ -1080,23 +1335,37 @@ const RUN_LEVELS = [
 ];
 
 function getCurrentRunningLevel(km){
-  km=Math.max(0,Number(km)||0);
+
+  km=Math.max(
+    0,
+    Number(km)||0
+  );
+
   let level=null;
 
   RUN_LEVELS.forEach(item=>{
-    if(km>=item.km) level=item;
+
+    if(km>=item.km)
+      level=item;
+
   });
 
   return level;
 }
 
 function getNextRunningLevel(km){
-  km=Math.max(0,Number(km)||0);
+
+  km=Math.max(
+    0,
+    Number(km)||0
+  );
 
   return RUN_LEVELS.find(
     item=>km<item.km
   )||null;
+
 }
+
 
 /* =========================================================
    BESTZEITEN
@@ -1148,12 +1417,16 @@ const BEST_TIME_CATEGORIES = {
 
 };
 
-function findBestRunByCategory(runs,category){
+function findBestRunByCategory(
+  runs,
+  category
+){
 
   const config=
     BEST_TIME_CATEGORIES[category];
 
-  if(!config) return null;
+  if(!config)
+    return null;
 
   const eligible=
     runs.filter(run=>{
@@ -1173,7 +1446,8 @@ function findBestRunByCategory(runs,category){
 
     });
 
-  if(!eligible.length) return null;
+  if(!eligible.length)
+    return null;
 
   eligible.sort(
     (a,b)=>
@@ -1183,6 +1457,7 @@ function findBestRunByCategory(runs,category){
 
   return eligible[0];
 }
+
 
 /* =========================================================
    FORMAT
@@ -1202,15 +1477,24 @@ function formatNumber(value){
 
 function formatDate(dateString){
 
-  if(!dateString) return "";
+  if(!dateString)
+    return "";
 
   const date=
-    new Date(`${dateString}T00:00:00`);
+    new Date(
+      `${dateString}T00:00:00`
+    );
 
-  if(Number.isNaN(date.getTime()))
+  if(
+    Number.isNaN(
+      date.getTime()
+    )
+  )
     return dateString;
 
-  return date.toLocaleDateString("de-DE");
+  return date.toLocaleDateString(
+    "de-DE"
+  );
 
 }
 
@@ -1220,10 +1504,13 @@ function formatDuration(seconds){
     seconds===null||
     seconds===undefined||
     seconds===""
-  ) return "—";
+  )
+    return "—";
 
   const total=
-    Math.round(Number(seconds));
+    Math.round(
+      Number(seconds)
+    );
 
   if(!Number.isFinite(total))
     return "—";
@@ -1232,7 +1519,9 @@ function formatDuration(seconds){
     Math.floor(total/3600);
 
   const minutes=
-    Math.floor((total%3600)/60);
+    Math.floor(
+      (total%3600)/60
+    );
 
   const secs=
     total%60;
@@ -1257,30 +1546,43 @@ function formatDuration(seconds){
 
 }
 
-function formatPace(seconds,distanceKm){
+function formatPace(
+  seconds,
+  distanceKm
+){
 
-  const duration=Number(seconds);
-  const distance=Number(distanceKm);
+  const duration=
+    Number(seconds);
+
+  const distance=
+    Number(distanceKm);
 
   if(
     !Number.isFinite(duration)||
     !Number.isFinite(distance)||
     duration<=0||
     distance<=0
-  ) return "—";
+  )
+    return "—";
 
   const secondsPerKm=
     duration/distance;
 
   let minutes=
-    Math.floor(secondsPerKm/60);
+    Math.floor(
+      secondsPerKm/60
+    );
 
   let secondsRest=
-    Math.round(secondsPerKm%60);
+    Math.round(
+      secondsPerKm%60
+    );
 
   if(secondsRest===60){
+
     minutes++;
     secondsRest=0;
+
   }
 
   return(
@@ -1306,6 +1608,7 @@ function escapeHtml(value){
 function getRunTypeLabel(type){
 
   const labels={
+
     easy:"Easy Run",
     long:"Long Run",
     interval:"Intervalle",
@@ -1315,11 +1618,17 @@ function getRunTypeLabel(type){
     trail:"Trail",
     recovery:"Recovery Run",
     other:"Lauf"
+
   };
 
-  return labels[type]||type||"Lauf";
+  return(
+    labels[type]||
+    type||
+    "Lauf"
+  );
 
 }
+
 
 /* =========================================================
    SUPABASE
@@ -1327,7 +1636,10 @@ function getRunTypeLabel(type){
 
 async function loadProfile(username){
 
-  const {data,error}=
+  const {
+    data,
+    error
+  }=
     await supabaseClient
       .from("profiles")
       .select(`
@@ -1338,10 +1650,14 @@ async function loadProfile(username){
         bio,
         location
       `)
-      .eq("username",username)
+      .eq(
+        "username",
+        username
+      )
       .maybeSingle();
 
-  if(error) throw error;
+  if(error)
+    throw error;
 
   if(!data)
     throw new Error(
@@ -1355,12 +1671,16 @@ async function loadProfile(username){
 async function loadAllRuns(userId){
 
   const PAGE_SIZE=1000;
+
   let allRuns=[];
   let from=0;
 
   while(true){
 
-    const {data,error}=
+    const {
+      data,
+      error
+    }=
       await supabaseClient
         .from("runs")
         .select(`
@@ -1376,20 +1696,31 @@ async function loadAllRuns(userId){
           end_time,
           created_at
         `)
-        .eq("user_id",userId)
-        .order("run_date",{ascending:false})
+        .eq(
+          "user_id",
+          userId
+        )
+        .order(
+          "run_date",
+          {ascending:false}
+        )
         .range(
           from,
           from+PAGE_SIZE-1
         );
 
-    if(error) throw error;
+    if(error)
+      throw error;
 
-    const page=data||[];
+    const page=
+      data||[];
 
     allRuns.push(...page);
 
-    if(page.length<PAGE_SIZE)
+    if(
+      page.length<
+      PAGE_SIZE
+    )
       break;
 
     from+=PAGE_SIZE;
@@ -1413,35 +1744,49 @@ function getRunsFor2026(runs){
 function calculateStatistics(runs){
 
   const totalKm=
-    runs.reduce((sum,run)=>{
+    runs.reduce(
+      (sum,run)=>{
 
-      const distance=
-        Number(run.distance_km);
+        const distance=
+          Number(
+            run.distance_km
+          );
 
-      return Number.isFinite(distance)
-        ?sum+distance
-        :sum;
+        return Number.isFinite(distance)
+          ?sum+distance
+          :sum;
 
-    },0);
+      },
+      0
+    );
 
   let longestRun=null;
 
-  for(const run of runs){
+  for(
+    const run of runs
+  ){
 
     const distance=
-      Number(run.distance_km);
+      Number(
+        run.distance_km
+      );
 
     if(
       !Number.isFinite(distance)||
       distance<=0
-    ) continue;
+    )
+      continue;
 
     if(
       !longestRun||
       distance>
-        Number(longestRun.distance_km)
+        Number(
+          longestRun.distance_km
+        )
     ){
+
       longestRun=run;
+
     }
 
   }
@@ -1454,8 +1799,9 @@ function calculateStatistics(runs){
 
 }
 
+
 /* =========================================================
-   POSTER ENGINE
+   POSTER HILFSFUNKTIONEN
 ========================================================= */
 
 let currentPosterData=null;
@@ -1478,29 +1824,40 @@ function posterRoundedRect(
 
   ctx.beginPath();
 
-  ctx.moveTo(x+r,y);
+  ctx.moveTo(
+    x+r,
+    y
+  );
 
   ctx.arcTo(
-    x+width,y,
-    x+width,y+height,
+    x+width,
+    y,
+    x+width,
+    y+height,
     r
   );
 
   ctx.arcTo(
-    x+width,y+height,
-    x,y+height,
+    x+width,
+    y+height,
+    x,
+    y+height,
     r
   );
 
   ctx.arcTo(
-    x,y+height,
-    x,y,
+    x,
+    y+height,
+    x,
+    y,
     r
   );
 
   ctx.arcTo(
-    x,y,
-    x+width,y,
+    x,
+    y,
+    x+width,
+    y,
     r
   );
 
@@ -1530,7 +1887,11 @@ function posterText(
   ctx.textAlign=align;
   ctx.textBaseline=baseline;
 
-  ctx.fillText(text,x,y);
+  ctx.fillText(
+    text,
+    x,
+    y
+  );
 
   ctx.restore();
 
@@ -1551,16 +1912,22 @@ function posterFittedText(
 
   let size=startSize;
 
-  const value=String(text??"");
+  const value=
+    String(text??"");
 
-  while(size>minSize){
+  while(
+    size>minSize
+  ){
 
     ctx.font=
       `${weight} ${size}px Arial, Helvetica, sans-serif`;
 
     if(
-      ctx.measureText(value).width<=maxWidth
-    ) break;
+      ctx.measureText(
+        value
+      ).width<=maxWidth
+    )
+      break;
 
     size--;
 
@@ -1582,104 +1949,135 @@ function posterFittedText(
 
 }
 
+
 /* =========================================================
-   POSTER RAHMEN
+   POSTER AUSSENRAHMEN
 ========================================================= */
 
-function drawPosterFrame(ctx,W,H){
+/*
+ * WICHTIG:
+ *
+ * Der türkise Rahmen liegt jetzt KOMPLETT AUSSEN.
+ *
+ * Der weiße Innenbereich beginnt deutlich weiter innen.
+ *
+ * ALLE Inhalte beginnen erst innerhalb dieses weißen
+ * Innenbereichs.
+ *
+ * Dadurch kann keine Schrift mehr auf dem türkisen
+ * Außenrahmen liegen.
+ */
+
+function drawPosterFrame(
+  ctx,
+  W,
+  H
+){
+
+  /* kompletter Hintergrund */
+
+  ctx.fillStyle="#f2f7f6";
+
+  ctx.fillRect(
+    0,
+    0,
+    W,
+    H
+  );
+
 
   /*
-   * Außen:
-   * Ein kräftiger, klarer Miles-Apart-Türkisrahmen.
+   * ÄUSSERER TÜRKISER RAHMEN
    *
-   * Innen:
-   * Eine ruhige, komplett weiße Fläche.
-   *
-   * Wichtig:
-   * Kein zusätzlicher türkiser Innenrahmen,
-   * keine türkise Linie innerhalb der weißen Fläche.
+   * Dieser Bereich gehört ausschließlich dem Rahmen.
    */
 
-  ctx.fillStyle="#eaf4f3";
-  ctx.fillRect(0,0,W,H);
-
-  /*
-   * Dezenter Schatten hinter dem gesamten Poster.
-   */
+  const outerX=24;
+  const outerY=24;
+  const outerW=W-48;
+  const outerH=H-48;
+  const outerRadius=42;
 
   ctx.save();
 
-  ctx.shadowColor="rgba(18,45,42,.22)";
-  ctx.shadowBlur=38;
-  ctx.shadowOffsetY=14;
+  ctx.shadowColor=
+    "rgba(18,45,42,.18)";
+
+  ctx.shadowBlur=34;
+
+  ctx.shadowOffsetY=12;
 
   posterRoundedRect(
     ctx,
-    24,
-    24,
-    W-48,
-    H-48,
-    42
+    outerX,
+    outerY,
+    outerW,
+    outerH,
+    outerRadius
   );
 
   ctx.fillStyle="#18b8c7";
+
   ctx.fill();
 
   ctx.restore();
 
+
   /*
-   * Der dicke äußere türkise Rahmen.
+   * WEISSE INNENFLÄCHE
+   *
+   * Sehr großer Abstand zum Außenrahmen.
+   *
+   * Der Rahmen ist dadurch wirklich außen
+   * und die Inhalte liegen nicht darauf.
    */
+
+  const innerX=76;
+  const innerY=76;
+  const innerW=W-152;
+  const innerH=H-152;
+  const innerRadius=27;
 
   posterRoundedRect(
     ctx,
-    24,
-    24,
-    W-48,
-    H-48,
-    42
-  );
-
-  ctx.fillStyle="#18b8c7";
-  ctx.fill();
-
-  /*
-   * Ruhige weiße Innenfläche.
-   * Kein weiterer türkiser Rahmen.
-   */
-
-  posterRoundedRect(
-    ctx,
-    62,
-    62,
-    W-124,
-    H-124,
-    25
+    innerX,
+    innerY,
+    innerW,
+    innerH,
+    innerRadius
   );
 
   ctx.fillStyle="#ffffff";
+
   ctx.fill();
 
+
   /*
-   * Sehr dezente graue Innenkontur.
-   * Bewusst kein Türkis, damit die Schrift
-   * maximal klar und ruhig bleibt.
+   * Dezente graue Kontur der weißen Fläche.
+   * Kein Türkis.
    */
 
   posterRoundedRect(
     ctx,
-    62,
-    62,
-    W-124,
-    H-124,
-    25
+    innerX,
+    innerY,
+    innerW,
+    innerH,
+    innerRadius
   );
 
   ctx.strokeStyle="#dce7e5";
+
   ctx.lineWidth=2;
+
   ctx.stroke();
 
 }
+
+
+/* =========================================================
+   POSTER STAT BOX
+========================================================= */
 
 function posterStatBox(
   ctx,
@@ -1698,14 +2096,17 @@ function posterStatBox(
     y,
     width,
     height,
-    26
+    24
   );
 
   ctx.fillStyle="#ffffff";
+
   ctx.fill();
 
   ctx.strokeStyle="#dbe7e5";
+
   ctx.lineWidth=2;
+
   ctx.stroke();
 
   posterText(
@@ -1764,6 +2165,11 @@ function posterStatBox(
 
 }
 
+
+/* =========================================================
+   POSTER BESTZEIT BOX
+========================================================= */
+
 function posterPbBox(
   ctx,
   x,
@@ -1785,17 +2191,20 @@ function posterPbBox(
   );
 
   ctx.fillStyle="#ffffff";
+
   ctx.fill();
 
   ctx.strokeStyle="#dbe7e5";
+
   ctx.lineWidth=2;
+
   ctx.stroke();
 
+
   /*
-   * Kleiner türkiser Akzent nur innerhalb
-   * der einzelnen Bestzeiten-Karten.
+   * Kleiner türkiser Akzent an der Karte.
    *
-   * Der große innere Rahmen wurde entfernt.
+   * NICHT am äußeren Rahmen.
    */
 
   ctx.fillStyle="#18b8c7";
@@ -1806,6 +2215,7 @@ function posterPbBox(
     8,
     height-44
   );
+
 
   posterText(
     ctx,
@@ -1818,6 +2228,7 @@ function posterPbBox(
       baseline:"middle"
     }
   );
+
 
   if(!run){
 
@@ -1834,17 +2245,24 @@ function posterPbBox(
     );
 
     return;
+
   }
+
 
   const duration=
     formatDuration(
       run.duration_seconds
     );
 
-  if(category==="100plus"){
+
+  if(
+    category==="100plus"
+  ){
 
     const distance=
-      Number(run.distance_km);
+      Number(
+        run.distance_km
+      );
 
     posterFittedText(
       ctx,
@@ -1888,7 +2306,9 @@ function posterPbBox(
     );
 
     return;
+
   }
+
 
   posterFittedText(
     ctx,
@@ -1919,23 +2339,28 @@ function posterPbBox(
 
 }
 
+
 /* =========================================================
-   POSTER
+   POSTER RENDER
 ========================================================= */
 
-function renderRunnerPoster(data){
+function renderRunnerPoster(
+  data
+){
 
   const canvas=
     document.getElementById(
       "runnerPosterCanvas"
     );
 
-  if(!canvas) return;
+  if(!canvas)
+    return;
 
   const ctx=
     canvas.getContext("2d");
 
-  if(!ctx) return;
+  if(!ctx)
+    return;
 
   const W=1080;
   const H=1350;
@@ -1943,7 +2368,17 @@ function renderRunnerPoster(data){
   canvas.width=W;
   canvas.height=H;
 
-  ctx.clearRect(0,0,W,H);
+  ctx.clearRect(
+    0,
+    0,
+    W,
+    H
+  );
+
+
+  /*
+   * Rahmen zuerst.
+   */
 
   drawPosterFrame(
     ctx,
@@ -1951,11 +2386,35 @@ function renderRunnerPoster(data){
     H
   );
 
+
+  /*
+   * AB HIER LIEGT ALLES INNERHALB
+   * DER WEISSEN FLÄCHE.
+   *
+   * Die weiße Fläche beginnt bei x=76.
+   *
+   * Deshalb beginnt auch der Inhalt erst
+   * deutlich weiter innen bei x=100.
+   */
+
+  const contentX=100;
+
+  const contentRight=
+    W-100;
+
+  const contentWidth=
+    contentRight-contentX;
+
+
+  /*
+   * NAME
+   */
+
   posterFittedText(
     ctx,
     data.name||"Runner",
-    64,
-    82,
+    contentX,
+    116,
     570,
     72,
     42,
@@ -1963,11 +2422,11 @@ function renderRunnerPoster(data){
     "#17211f"
   );
 
+
   /*
-   * WICHTIG:
+   * COMMUNITY HINWEIS
    *
-   * Der Community-Hinweis bleibt weiterhin Bestandteil
-   * des Posters. Inhaltlich wurde nichts verändert.
+   * Ebenfalls innerhalb der weißen Fläche.
    */
 
   if(!IS_EMBEDDED){
@@ -1975,8 +2434,8 @@ function renderRunnerPoster(data){
     posterText(
       ctx,
       "Werde Teil der",
-      1016,
-      66,
+      contentRight,
+      100,
       {
         font:"900 22px Arial",
         color:"#18a6b4",
@@ -1988,8 +2447,8 @@ function renderRunnerPoster(data){
     posterText(
       ctx,
       "Miles Apart Community →",
-      1016,
-      95,
+      contentRight,
+      130,
       {
         font:"900 24px Arial",
         color:"#18a6b4",
@@ -2000,11 +2459,16 @@ function renderRunnerPoster(data){
 
   }
 
+
+  /*
+   * MEMBER ZEILE
+   */
+
   posterText(
     ctx,
     "Miles Apart Member 2026",
-    64,
-    132,
+    contentX,
+    166,
     {
       font:"900 22px Arial",
       color:"#18a6b4",
@@ -2012,60 +2476,74 @@ function renderRunnerPoster(data){
     }
   );
 
-  ctx.fillStyle="#dceceb";
+
+  /*
+   * Dezente graue Trennlinie.
+   *
+   * Auch diese liegt vollständig
+   * innerhalb des weißen Bereichs.
+   */
+
+  ctx.fillStyle="#dce7e5";
 
   ctx.fillRect(
-    64,
-    172,
-    W-128,
+    contentX,
+    198,
+    contentWidth,
     3
   );
+
+
+  /*
+   * STATISTIKKARTEN
+   */
 
   const statGap=20;
 
   const statWidth=
-    (W-128-statGap)/2;
+    (contentWidth-statGap)/2;
 
-  const statHeight=220;
+  const statHeight=210;
 
-  const statX=64;
+  const statY=220;
 
-  const statY=195;
-
-  const totalKm=
-    Number(data.totalKm)||0;
-
-  const levelText=
-    data.level
-      ?`Level ${data.level.km}`
-      :"Level 0";
 
   posterStatBox(
     ctx,
-    statX,
+    contentX,
     statY,
     statWidth,
     statHeight,
     "KILOMETER 2026",
-    `${formatNumber(totalKm)} km`
+    `${formatNumber(
+      Number(data.totalKm)||0
+    )} km`
   );
+
 
   posterStatBox(
     ctx,
-    statX+statWidth+statGap,
+    contentX+statWidth+statGap,
     statY,
     statWidth,
     statHeight,
     "AKTUELLES LEVEL",
-    levelText,
+    data.level
+      ?`Level ${data.level.km}`
+      :"Level 0",
     data.level?.emoji||""
   );
+
+
+  /*
+   * BESTZEITEN ÜBERSCHRIFT
+   */
 
   posterText(
     ctx,
     "Persönliche Bestzeiten",
-    64,
-    450,
+    contentX,
+    470,
     {
       font:"900 31px Arial",
       color:"#17211f",
@@ -2073,19 +2551,28 @@ function renderRunnerPoster(data){
     }
   );
 
+
+  /*
+   * BESTZEITEN
+   */
+
   const pbGap=20;
 
   const pbWidth=
-    (W-128-pbGap)/2;
+    (contentWidth-pbGap)/2;
 
-  const pbHeight=260;
+  const pbHeight=235;
 
-  const pbStartY=485;
+  const pbStartY=505;
 
-  const pbX1=64;
+  const pbX1=
+    contentX;
 
   const pbX2=
-    pbX1+pbWidth+pbGap;
+    contentX+
+    pbWidth+
+    pbGap;
+
 
   posterPbBox(
     ctx,
@@ -2098,6 +2585,7 @@ function renderRunnerPoster(data){
     "5k"
   );
 
+
   posterPbBox(
     ctx,
     pbX2,
@@ -2109,10 +2597,13 @@ function renderRunnerPoster(data){
     "10k"
   );
 
+
   posterPbBox(
     ctx,
     pbX1,
-    pbStartY+pbHeight+pbGap,
+    pbStartY+
+      pbHeight+
+      pbGap,
     pbWidth,
     pbHeight,
     "HALBMARATHON",
@@ -2120,10 +2611,13 @@ function renderRunnerPoster(data){
     "half"
   );
 
+
   posterPbBox(
     ctx,
     pbX2,
-    pbStartY+pbHeight+pbGap,
+    pbStartY+
+      pbHeight+
+      pbGap,
     pbWidth,
     pbHeight,
     "MARATHON",
@@ -2131,10 +2625,12 @@ function renderRunnerPoster(data){
     "marathon"
   );
 
+
   posterPbBox(
     ctx,
     pbX1,
-    pbStartY+(pbHeight+pbGap)*2,
+    pbStartY+
+      (pbHeight+pbGap)*2,
     pbWidth,
     pbHeight,
     "100 KILOMETER",
@@ -2142,10 +2638,12 @@ function renderRunnerPoster(data){
     "100k"
   );
 
+
   posterPbBox(
     ctx,
     pbX2,
-    pbStartY+(pbHeight+pbGap)*2,
+    pbStartY+
+      (pbHeight+pbGap)*2,
     pbWidth,
     pbHeight,
     "100 KILOMETER PLUS",
@@ -2154,6 +2652,7 @@ function renderRunnerPoster(data){
   );
 
 }
+
 
 /* =========================================================
    POSTER DATA
@@ -2198,7 +2697,9 @@ function createPosterData(
 
     longestDistance:
       longestRun
-        ?Number(longestRun.distance_km)
+        ?Number(
+            longestRun.distance_km
+          )
         :null,
 
     longestDate:
@@ -2250,6 +2751,7 @@ function createPosterData(
 
 }
 
+
 /* =========================================================
    POSTER BLOB
 ========================================================= */
@@ -2281,6 +2783,7 @@ async function getPosterBlob(){
             );
 
             return;
+
           }
 
           resolve(blob);
@@ -2304,9 +2807,18 @@ function getPosterFileName(){
   const safeName=
     String(rawName)
       .normalize("NFD")
-      .replace(/[\u0300-\u036f]/g,"")
-      .replace(/[^a-zA-Z0-9]+/g,"-")
-      .replace(/^-+|-+$/g,"")
+      .replace(
+        /[\u0300-\u036f]/g,
+        ""
+      )
+      .replace(
+        /[^a-zA-Z0-9]+/g,
+        "-"
+      )
+      .replace(
+        /^-+|-+$/g,
+        ""
+      )
       .toLowerCase();
 
   return(
@@ -2315,11 +2827,14 @@ function getPosterFileName(){
 
 }
 
+
 /* =========================================================
    STATUS
 ========================================================= */
 
-function setPosterStatus(message){
+function setPosterStatus(
+  message
+){
 
   const status=
     document.getElementById(
@@ -2327,12 +2842,14 @@ function setPosterStatus(message){
     );
 
   if(status)
-    status.textContent=message||"";
+    status.textContent=
+      message||"";
 
 }
 
+
 /* =========================================================
-   POSTER SPEICHERN
+   DOWNLOAD
 ========================================================= */
 
 async function downloadRunnerPoster(){
@@ -2358,7 +2875,9 @@ async function downloadRunnerPoster(){
       new File(
         [blob],
         getPosterFileName(),
-        {type:"image/png"}
+        {
+          type:"image/png"
+        }
       );
 
     if(
@@ -2385,9 +2904,14 @@ async function downloadRunnerPoster(){
 
       }catch(error){
 
-        if(error?.name==="AbortError"){
+        if(
+          error?.name==="AbortError"
+        ){
+
           setPosterStatus("");
+
           return;
+
         }
 
       }
@@ -2395,20 +2919,34 @@ async function downloadRunnerPoster(){
     }
 
     const url=
-      URL.createObjectURL(blob);
+      URL.createObjectURL(
+        blob
+      );
 
     const link=
-      document.createElement("a");
+      document.createElement(
+        "a"
+      );
 
     link.href=url;
-    link.download=getPosterFileName();
 
-    document.body.appendChild(link);
+    link.download=
+      getPosterFileName();
+
+    document.body.appendChild(
+      link
+    );
+
     link.click();
+
     link.remove();
 
     setTimeout(
-      ()=>URL.revokeObjectURL(url),
+      ()=>{
+        URL.revokeObjectURL(
+          url
+        );
+      },
       1000
     );
 
@@ -2436,13 +2974,15 @@ async function downloadRunnerPoster(){
 
 }
 
+
 /* =========================================================
    SHARE TEXT
 ========================================================= */
 
 function getPosterShareText(){
 
-  const data=currentPosterData;
+  const data=
+    currentPosterData;
 
   if(!data)
     return(
@@ -2528,13 +3068,17 @@ function getPosterShareText(){
 
   }
 
-  if(pbParts.length)
+  if(pbParts.length){
+
     text+=
       `\nPBs: ${pbParts.join(" · ")}`;
+
+  }
 
   return text;
 
 }
+
 
 /* =========================================================
    WHATSAPP
@@ -2563,7 +3107,9 @@ async function shareRunnerPosterWhatsApp(){
       new File(
         [blob],
         getPosterFileName(),
-        {type:"image/png"}
+        {
+          type:"image/png"
+        }
       );
 
     const shareText=
@@ -2594,9 +3140,14 @@ async function shareRunnerPosterWhatsApp(){
 
       }catch(error){
 
-        if(error?.name==="AbortError"){
+        if(
+          error?.name==="AbortError"
+        ){
+
           setPosterStatus("");
+
           return;
+
         }
 
       }
@@ -2639,6 +3190,7 @@ async function shareRunnerPosterWhatsApp(){
 
 }
 
+
 /* =========================================================
    INSTAGRAM
 ========================================================= */
@@ -2668,7 +3220,9 @@ async function shareRunnerPosterInstagram(){
       new File(
         [blob],
         getPosterFileName(),
-        {type:"image/png"}
+        {
+          type:"image/png"
+        }
       );
 
     const shareText=
@@ -2699,9 +3253,14 @@ async function shareRunnerPosterInstagram(){
 
       }catch(error){
 
-        if(error?.name==="AbortError"){
+        if(
+          error?.name==="AbortError"
+        ){
+
           setPosterStatus("");
+
           return;
+
         }
 
       }
@@ -2709,20 +3268,34 @@ async function shareRunnerPosterInstagram(){
     }
 
     const url=
-      URL.createObjectURL(blob);
+      URL.createObjectURL(
+        blob
+      );
 
     const link=
-      document.createElement("a");
+      document.createElement(
+        "a"
+      );
 
     link.href=url;
-    link.download=getPosterFileName();
 
-    document.body.appendChild(link);
+    link.download=
+      getPosterFileName();
+
+    document.body.appendChild(
+      link
+    );
+
     link.click();
+
     link.remove();
 
     setTimeout(
-      ()=>URL.revokeObjectURL(url),
+      ()=>{
+        URL.revokeObjectURL(
+          url
+        );
+      },
       1000
     );
 
@@ -2748,7 +3321,9 @@ async function shareRunnerPosterInstagram(){
       popup&&
       !popup.closed
     ){
+
       popup.close();
+
     }
 
     setPosterStatus(
@@ -2763,6 +3338,7 @@ async function shareRunnerPosterInstagram(){
   }
 
 }
+
 
 /* =========================================================
    BUTTONS
@@ -2785,31 +3361,43 @@ function initializePosterButtons(){
       "posterInstagramButton"
     );
 
-  if(downloadButton)
+  if(downloadButton){
+
     downloadButton.addEventListener(
       "click",
       downloadRunnerPoster
     );
 
-  if(whatsappButton)
+  }
+
+  if(whatsappButton){
+
     whatsappButton.addEventListener(
       "click",
       shareRunnerPosterWhatsApp
     );
 
-  if(instagramButton)
+  }
+
+  if(instagramButton){
+
     instagramButton.addEventListener(
       "click",
       shareRunnerPosterInstagram
     );
 
+  }
+
 }
+
 
 /* =========================================================
    PROFIL
 ========================================================= */
 
-function renderProfile(profile){
+function renderProfile(
+  profile
+){
 
   const avatarContainer=
     document.getElementById(
@@ -2821,11 +3409,16 @@ function renderProfile(profile){
   if(profile.avatar_url){
 
     if(
-      profile.avatar_url.startsWith("http://")||
-      profile.avatar_url.startsWith("https://")
+      profile.avatar_url.startsWith(
+        "http://"
+      )||
+      profile.avatar_url.startsWith(
+        "https://"
+      )
     ){
 
-      avatarUrl=profile.avatar_url;
+      avatarUrl=
+        profile.avatar_url;
 
     }else{
 
@@ -2838,7 +3431,8 @@ function renderProfile(profile){
           );
 
       avatarUrl=
-        data?.publicUrl||null;
+        data?.publicUrl||
+        null;
 
     }
 
@@ -2899,7 +3493,9 @@ function renderProfile(profile){
 
     metaItems.push(`
       <span class="profile-meta-item">
-        📍 ${escapeHtml(profile.location)}
+        📍 ${escapeHtml(
+          profile.location
+        )}
       </span>
     `);
 
@@ -2928,15 +3524,18 @@ function renderProfile(profile){
     bio.textContent=
       profile.bio;
 
-    bio.style.display="block";
+    bio.style.display=
+      "block";
 
   }else{
 
-    bio.style.display="none";
+    bio.style.display=
+      "none";
 
   }
 
 }
+
 
 /* =========================================================
    STATISTIKEN
@@ -2947,7 +3546,8 @@ function renderStatistics(
   allRuns
 ){
 
-  const totalKm=stats.totalKm;
+  const totalKm=
+    stats.totalKm;
 
   document.getElementById(
     "totalKm"
@@ -2960,10 +3560,14 @@ function renderStatistics(
     stats.runCount;
 
   const currentLevel=
-    getCurrentRunningLevel(totalKm);
+    getCurrentRunningLevel(
+      totalKm
+    );
 
   const nextLevel=
-    getNextRunningLevel(totalKm);
+    getNextRunningLevel(
+      totalKm
+    );
 
   const emoji=
     document.getElementById(
@@ -3033,7 +3637,8 @@ function renderStatistics(
 
     document.getElementById(
       "longestRun"
-    ).textContent="–";
+    ).textContent=
+      "–";
 
     document.getElementById(
       "longestRunSub"
@@ -3098,6 +3703,7 @@ function renderStatistics(
 
 }
 
+
 /* =========================================================
    BESTZEIT RENDERN
 ========================================================= */
@@ -3120,7 +3726,9 @@ function renderPersonalBest(
 
   if(!run){
 
-    valueElement.classList.add("empty");
+    valueElement.classList.add(
+      "empty"
+    );
 
     valueElement.innerHTML=`
       <span class="pb-time">
@@ -3131,6 +3739,7 @@ function renderPersonalBest(
     subElement.innerHTML="";
 
     return;
+
   }
 
   const duration=
@@ -3154,10 +3763,13 @@ function renderPersonalBest(
       run.distance_km
     );
 
-  valueElement.classList.remove("empty");
+  valueElement.classList.remove(
+    "empty"
+  );
 
   if(
-    run.best_time_category==="100plus"
+    run.best_time_category===
+    "100plus"
   ){
 
     valueElement.innerHTML=`
@@ -3208,11 +3820,14 @@ function renderPersonalBest(
 
 }
 
+
 /* =========================================================
    LAUFHISTORIE
 ========================================================= */
 
-function renderRuns(runs){
+function renderRuns(
+  runs
+){
 
   const container=
     document.getElementById(
@@ -3231,87 +3846,103 @@ function renderRuns(runs){
     `;
 
     return;
+
   }
 
   container.innerHTML=
-    runs.map(run=>{
+    runs.map(
+      run=>{
 
-      const distance=
-        Number(run.distance_km);
+        const distance=
+          Number(
+            run.distance_km
+          );
 
-      const duration=
-        Number(run.duration_seconds);
+        const duration=
+          Number(
+            run.duration_seconds
+          );
 
-      const is100Plus=
-        Number.isFinite(distance)&&
-        distance>100;
+        const is100Plus=
+          Number.isFinite(distance)&&
+          distance>100;
 
-      return`
-        <article class="run-card">
+        return`
+          <article class="run-card">
 
-          <div>
+            <div>
 
-            <div class="run-card-date">
-              ${formatDate(run.run_date)}
-            </div>
+              <div class="run-card-date">
+                ${formatDate(
+                  run.run_date
+                )}
+              </div>
 
-            <div class="run-card-type">
-              ${escapeHtml(
-                getRunTypeLabel(run.run_type)
-              )}
-            </div>
+              <div class="run-card-type">
+                ${escapeHtml(
+                  getRunTypeLabel(
+                    run.run_type
+                  )
+                )}
+              </div>
 
-            ${
-              run.note
-                ?`
-                  <div class="run-card-note">
-                    ${escapeHtml(run.note)}
-                  </div>
-                `
-                :""
-            }
-
-            ${
-              is100Plus
-                ?`
-                  <div class="run-badge">
-                    100 km+ Lauf
-                  </div>
-                `
-                :""
-            }
-
-          </div>
-
-          <div class="run-card-right">
-
-            <div class="run-distance">
               ${
-                Number.isFinite(distance)
-                  ?`${formatNumber(distance)} km`
-                  :"–"
+                run.note
+                  ?`
+                    <div class="run-card-note">
+                      ${escapeHtml(
+                        run.note
+                      )}
+                    </div>
+                  `
+                  :""
               }
+
+              ${
+                is100Plus
+                  ?`
+                    <div class="run-badge">
+                      100 km+ Lauf
+                    </div>
+                  `
+                  :""
+              }
+
             </div>
 
-            <div class="run-duration">
-              ${formatDuration(duration)}
+            <div class="run-card-right">
+
+              <div class="run-distance">
+                ${
+                  Number.isFinite(distance)
+                    ?`${formatNumber(distance)} km`
+                    :"–"
+                }
+              </div>
+
+              <div class="run-duration">
+                ${formatDuration(
+                  duration
+                )}
+              </div>
+
+              <div class="run-pace">
+                ${formatPace(
+                  duration,
+                  distance
+                )}
+              </div>
+
             </div>
 
-            <div class="run-pace">
-              ${formatPace(
-                duration,
-                distance
-              )}
-            </div>
+          </article>
+        `;
 
-          </div>
-
-        </article>
-      `;
-
-    }).join("");
+      }
+    ).join("");
 
 }
+
 
 /* =========================================================
    INITIALISIERUNG
@@ -3342,7 +3973,10 @@ async function initializePage(){
       );
 
     if(backLink){
-      backLink.style.display="none";
+
+      backLink.style.display=
+        "none";
+
     }
 
   }
@@ -3355,7 +3989,9 @@ async function initializePage(){
       );
 
     const username=
-      params.get("username");
+      params.get(
+        "username"
+      );
 
     if(!username){
 
@@ -3409,9 +4045,11 @@ async function initializePage(){
       currentPosterData
     );
 
-    loadingState.style.display="none";
+    loadingState.style.display=
+      "none";
 
-    profileContent.style.display="block";
+    profileContent.style.display=
+      "block";
 
   }catch(error){
 
@@ -3420,9 +4058,11 @@ async function initializePage(){
       error
     );
 
-    loadingState.style.display="none";
+    loadingState.style.display=
+      "none";
 
-    errorState.style.display="block";
+    errorState.style.display=
+      "block";
 
     errorState.innerHTML=`
       <strong>
@@ -3443,6 +4083,7 @@ async function initializePage(){
 
 }
 
+
 /* =========================================================
    START
 ========================================================= */
@@ -3450,8 +4091,11 @@ async function initializePage(){
 document.addEventListener(
   "DOMContentLoaded",
   ()=>{
+
     initializePosterButtons();
+
     initializePage();
+
   }
 );
 
