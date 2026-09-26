@@ -8,9 +8,27 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-.top-right{display:flex;align-items:center;gap:12px;position:relative}
-.ma-community-loading{padding:70px 20px;text-align:center;color:#777}
-.ma-community-error{margin:25px 0;padding:16px 18px;border:1px solid #e2bcbc;background:#fff7f7;color:#b22f2f;font-weight:700}
+.top-right{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  position:relative
+}
+
+.ma-community-loading{
+  padding:70px 20px;
+  text-align:center;
+  color:#777
+}
+
+.ma-community-error{
+  margin:25px 0;
+  padding:16px 18px;
+  border:1px solid #e2bcbc;
+  background:#fff7f7;
+  color:#b22f2f;
+  font-weight:700
+}
 
 .ma-section{
   width:100%;
@@ -192,29 +210,73 @@
   line-height:1.45;
 }
 
+
+/* =========================================================
+   RUN BUDDY AKTIONEN
+========================================================= */
+
 .ma-buddy-actions{
   display:flex;
-  justify-content:flex-end;
+  justify-content:flex-start;
   align-items:center;
-  gap:8px;
+  gap:10px;
   margin-top:16px;
   padding-top:14px;
   border-top:1px solid #eee;
+  width:100%;
+  box-sizing:border-box;
+}
+
+.ma-buddy-action-buttons{
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  gap:10px;
+  flex-wrap:wrap;
+  width:100%;
+}
+
+.ma-buddy-message-button,
+.ma-buddy-delete{
+  min-height:46px;
+  min-width:0;
+  border-radius:999px;
+  box-sizing:border-box;
+  padding:9px 16px;
+  font:inherit;
+  font-size:14px;
+  line-height:1.2;
+  font-weight:800;
+  text-align:center;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  white-space:normal;
+  overflow-wrap:anywhere;
+}
+
+.ma-buddy-message-button{
+  border:0;
+  background:#18b8c7;
+  color:#fff;
+}
+
+.ma-buddy-message-button:hover{
+  background:#111;
+  color:#fff;
 }
 
 .ma-buddy-delete{
-  border:0;
-  background:transparent;
-  color:#b44;
-  padding:7px 8px;
-  font:inherit;
-  font-size:14px;
-  font-weight:800;
-  cursor:pointer;
+  border:2px solid #c75b5b;
+  background:#fff;
+  color:#a33d3d;
+  max-width:210px;
 }
 
 .ma-buddy-delete:hover{
-  color:#8f2222;
+  background:#a33d3d;
+  color:#fff;
 }
 
 
@@ -296,19 +358,16 @@
 
 
 /*
-  DAS IST DIE ENTSCHEIDENDE REGEL FÜR DEN POST-TEXT.
-  Der Text bekommt selbst und für seine Inhalte:
-  - 100% Breite
-  - keinen linken Margin
-  - kein linkes Padding
-  - linksbündige Ausrichtung
-  - keinen Text-Indent
+  POST-TEXT ABSOLUT LINKS:
+  Kein Einzug, kein Margin, kein Padding.
+  Der Text beginnt exakt am linken Rand
+  des Post-Inhalts.
 */
 
 .ma-community-page .ma-post-copy,
 .ma-community-page .ma-post-copy *{
-  display:block !important;
-  width:100% !important;
+  width:auto !important;
+  max-width:none !important;
   box-sizing:border-box !important;
   margin-left:0 !important;
   padding-left:0 !important;
@@ -317,11 +376,28 @@
 }
 
 .ma-community-page .ma-post-copy{
+  display:block !important;
+  width:100% !important;
+  margin-top:25px !important;
   margin-right:0 !important;
+  margin-bottom:26px !important;
+  padding-top:0 !important;
+  padding-right:0 !important;
+  padding-bottom:0 !important;
+  color:#111 !important;
+  font-size:20px !important;
+  line-height:1.45 !important;
+  white-space:pre-wrap !important;
+  overflow-wrap:anywhere !important;
+  word-break:normal !important;
+  text-align:left !important;
 }
 
 .ma-community-page .ma-post,
-.ma-community-page .ma-post *{
+.ma-community-page .ma-post *,
+.ma-community-page .ma-post-copy,
+.ma-community-page .ma-post-copy::before,
+.ma-community-page .ma-post-copy::after{
   text-indent:0 !important;
 }
 
@@ -490,13 +566,6 @@ textarea.ma-form-input{
   font-size:15px;
   line-height:1.35;
 }
-
-
-/*
-  POST-TEXT:
-  Dieser Block beginnt garantiert links am Anfang
-  des Post-Inhalts.
-*/
 
 .ma-post-copy{
   display:block !important;
@@ -948,15 +1017,42 @@ textarea.ma-form-input{
 .ma-message-actions{
   display:flex;
   align-items:center;
-  gap:8px;
-  margin-top:12px;
+  gap:12px;
+  margin-top:14px;
 }
 
 .ma-message-status{
   flex:1;
+  min-width:0;
   color:#18b8c7;
-  font-size:14px;
+  font-size:15px;
+  line-height:1.45;
   font-weight:700;
+  text-align:left;
+}
+
+.ma-message-status-text{
+  display:block;
+  margin-bottom:5px;
+  color:#18b8c7;
+  font-size:15px;
+  font-weight:800;
+}
+
+.ma-message-status-link{
+  display:inline-block;
+  margin-top:2px;
+  color:#18b8c7 !important;
+  font-size:18px !important;
+  line-height:1.3 !important;
+  font-weight:900 !important;
+  text-decoration:underline !important;
+  text-decoration-thickness:2px;
+  text-underline-offset:3px;
+}
+
+.ma-message-status-link:hover{
+  color:#111 !important;
 }
 
 .ma-message-send{
@@ -1019,6 +1115,9 @@ textarea.ma-form-input{
   }
 
   .ma-post-copy{
+    width:100% !important;
+    margin-left:0 !important;
+    padding-left:0 !important;
     font-size:20px;
   }
 
@@ -1040,6 +1139,21 @@ textarea.ma-form-input{
     width:100%;
   }
 
+  .ma-buddy-action-buttons{
+    width:100%;
+    flex-direction:row;
+    align-items:stretch;
+  }
+
+  .ma-buddy-message-button{
+    flex:1 1 145px;
+  }
+
+  .ma-buddy-delete{
+    flex:1 1 145px;
+    max-width:none;
+  }
+
   .ma-message-overlay{
     align-items:flex-end;
     padding:10px;
@@ -1053,6 +1167,14 @@ textarea.ma-form-input{
   .ma-message-actions{
     flex-direction:column;
     align-items:stretch;
+  }
+
+  .ma-message-status{
+    width:100%;
+  }
+
+  .ma-message-status-link{
+    font-size:19px !important;
   }
 
   .ma-message-send{
@@ -2978,8 +3100,18 @@ $("sendPrivateMessageButton")
     }else{
 
       $("privateMessageStatus")
-        .innerHTML=
-        'Nachricht wurde gesendet ✓ — <a href="messages.html" style="color:#18b8c7;font-weight:800">Private Nachrichten ansehen</a>';
+        .innerHTML=`
+          <span class="ma-message-status-text">
+            Nachricht wurde gesendet ✓
+          </span>
+
+          <a
+            href="messages.html"
+            class="ma-message-status-link"
+          >
+            Private Nachrichten ansehen →
+          </a>
+        `;
 
       $("privateMessageContent")
         .value=
@@ -3403,17 +3535,10 @@ function buddyCard(row){
           ?`
             <div class="ma-buddy-actions">
 
-              <div
-                style="
-                  display:flex;
-                  align-items:center;
-                  gap:8px;
-                  flex-wrap:wrap
-                "
-              >
+              <div class="ma-buddy-action-buttons">
 
                 <button
-                  class="btn"
+                  class="ma-buddy-message-button"
                   type="button"
                   data-buddy-message="${row.user_id}"
                   data-buddy-name="${escapeHtml(name)}"
@@ -3431,7 +3556,7 @@ function buddyCard(row){
                         data-buddy-action="delete"
                         data-buddy-id="${row.user_id}"
                       >
-                        Eigenes Run-Buddy-Profil löschen
+                        Run Buddy<br>Profil löschen
                       </button>
                     `
                     :""
@@ -3593,9 +3718,11 @@ $("buddyList")
         }
 
 
-        if(!confirm(
-          "Dein Run Buddy-Profil wirklich löschen?"
-        )){
+        if(
+          !confirm(
+            "Dein Run Buddy-Profil wirklich löschen?"
+          )
+        ){
           return;
         }
 
