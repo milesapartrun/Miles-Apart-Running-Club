@@ -787,10 +787,6 @@
     </section>
 
 
-    <!-- =======================================================
-         POSTER
-    ======================================================== -->
-
     <section class="runner-share-section">
 
       <div class="runner-poster-area">
@@ -905,10 +901,6 @@
     </section>
 
 
-    <!-- =======================================================
-         STATISTIK
-    ======================================================== -->
-
     <div class="section-heading">
       <div>
         <h2>2026 in Zahlen</h2>
@@ -953,10 +945,6 @@
 
     </section>
 
-
-    <!-- =======================================================
-         BESTZEITEN
-    ======================================================== -->
 
     <div class="section-heading">
       <div>
@@ -1024,10 +1012,6 @@
     </section>
 
 
-    <!-- =======================================================
-         LAUFHISTORIE
-    ======================================================== -->
-
     <div class="section-heading">
       <div>
         <h2>Laufhistorie</h2>
@@ -1061,6 +1045,24 @@ const supabaseClient =
     SUPABASE_URL,
     SUPABASE_PUBLISHABLE_KEY
   );
+
+
+/* =========================================================
+   EINBETTUNG ERKENNEN
+========================================================= */
+
+/*
+ * Wenn user.html innerhalb der index.html geladen wird,
+ * ist window.self nicht gleich window.top.
+ *
+ * Dann soll ausschließlich der Link
+ * "← Zur Community" verschwinden.
+ *
+ * Wird user.html direkt geöffnet, bleibt der Link sichtbar.
+ */
+
+const IS_EMBEDDED =
+  window.self !== window.top;
 
 
 /* =========================================================
@@ -1483,11 +1485,6 @@ function calculateStatistics(runs){
 
 let currentPosterData=null;
 
-
-/* ---------------------------------------------------------
-   Rounded Rectangle
---------------------------------------------------------- */
-
 function posterRoundedRect(
   ctx,
   x,
@@ -1535,11 +1532,6 @@ function posterRoundedRect(
   ctx.closePath();
 
 }
-
-
-/* ---------------------------------------------------------
-   Text
---------------------------------------------------------- */
 
 function posterText(
   ctx,
@@ -1615,23 +1607,10 @@ function posterFittedText(
 
 }
 
-
-/* ---------------------------------------------------------
-   Poster Rahmen
---------------------------------------------------------- */
-
 function drawPosterFrame(ctx,W,H){
-
-  /* kompletter Hintergrund */
 
   ctx.fillStyle="#eaf4f3";
   ctx.fillRect(0,0,W,H);
-
-
-  /*
-   * Schatten für die eigentliche Posterfläche.
-   * Dieser Teil ist jetzt Bestandteil des exportierten PNG.
-   */
 
   ctx.save();
 
@@ -1653,9 +1632,6 @@ function drawPosterFrame(ctx,W,H){
 
   ctx.restore();
 
-
-  /* feiner äußerer Rahmen */
-
   posterRoundedRect(
     ctx,
     28,
@@ -1668,11 +1644,6 @@ function drawPosterFrame(ctx,W,H){
   ctx.strokeStyle="#d5e4e2";
   ctx.lineWidth=3;
   ctx.stroke();
-
-
-  /*
-   * Cyan-Kopfstreifen.
-   */
 
   ctx.save();
 
@@ -1690,12 +1661,6 @@ function drawPosterFrame(ctx,W,H){
 
   ctx.restore();
 
-
-  /*
-   * Kleine cyanfarbene Linie unten.
-   * Sehr dezent – kein zusätzlicher Slogan.
-   */
-
   ctx.fillStyle="#18b8c7";
 
   ctx.fillRect(
@@ -1706,11 +1671,6 @@ function drawPosterFrame(ctx,W,H){
   );
 
 }
-
-
-/* ---------------------------------------------------------
-   Stat Box
---------------------------------------------------------- */
 
 function posterStatBox(
   ctx,
@@ -1795,11 +1755,6 @@ function posterStatBox(
 
 }
 
-
-/* ---------------------------------------------------------
-   PB Box
---------------------------------------------------------- */
-
 function posterPbBox(
   ctx,
   x,
@@ -1827,11 +1782,6 @@ function posterPbBox(
   ctx.lineWidth=2;
   ctx.stroke();
 
-
-  /*
-   * Cyan-Leiste links
-   */
-
   ctx.fillStyle="#18b8c7";
 
   ctx.fillRect(
@@ -1840,7 +1790,6 @@ function posterPbBox(
     8,
     height-44
   );
-
 
   posterText(
     ctx,
@@ -1853,7 +1802,6 @@ function posterPbBox(
       baseline:"middle"
     }
   );
-
 
   if(!run){
 
@@ -1872,16 +1820,10 @@ function posterPbBox(
     return;
   }
 
-
   const duration=
     formatDuration(
       run.duration_seconds
     );
-
-
-  /*
-   * 100+ KM
-   */
 
   if(category==="100plus"){
 
@@ -1902,10 +1844,6 @@ function posterPbBox(
       "#18a6b4"
     );
 
-    /*
-     * Zeit größer
-     */
-
     posterFittedText(
       ctx,
       duration,
@@ -1917,10 +1855,6 @@ function posterPbBox(
       "900",
       "#17211f"
     );
-
-    /*
-     * Pace deutlich größer
-     */
 
     posterText(
       ctx,
@@ -1940,11 +1874,6 @@ function posterPbBox(
     return;
   }
 
-
-  /*
-   * Normale Bestzeit
-   */
-
   posterFittedText(
     ctx,
     duration,
@@ -1956,13 +1885,6 @@ function posterPbBox(
     "900",
     "#17211f"
   );
-
-
-  /*
-   * PACE:
-   * vorher 16px
-   * jetzt 22px und kräftiger
-   */
 
   posterText(
     ctx,
@@ -1982,46 +1904,9 @@ function posterPbBox(
 }
 
 
-/* ---------------------------------------------------------
-   Community CTA
---------------------------------------------------------- */
-
-function posterCommunityCta(ctx){
-
-  const right=1016;
-
-  posterText(
-    ctx,
-    "Werde Teil der",
-    right,
-    66,
-    {
-      font:"900 22px Arial",
-      color:"#18a6b4",
-      align:"right",
-      baseline:"middle"
-    }
-  );
-
-  posterText(
-    ctx,
-    "Miles Apart Community →",
-    right,
-    95,
-    {
-      font:"900 24px Arial",
-      color:"#18a6b4",
-      align:"right",
-      baseline:"middle"
-    }
-  );
-
-}
-
-
-/* ---------------------------------------------------------
-   Poster Renderer
---------------------------------------------------------- */
+/* =========================================================
+   POSTER
+========================================================= */
 
 function renderRunnerPoster(data){
 
@@ -2045,26 +1930,11 @@ function renderRunnerPoster(data){
 
   ctx.clearRect(0,0,W,H);
 
-
-  /*
-   * NEUER ECHTER POSTER-RAHMEN
-   */
-
   drawPosterFrame(
     ctx,
     W,
     H
   );
-
-
-  /* =======================================================
-     HEADER
-  ======================================================== */
-
-  /*
-   * Der Name bleibt links.
-   * Rechts daneben befindet sich jetzt der größere CTA.
-   */
 
   posterFittedText(
     ctx,
@@ -2078,9 +1948,43 @@ function renderRunnerPoster(data){
     "#17211f"
   );
 
+  /*
+   * WICHTIG:
+   *
+   * Der Community-Hinweis gehört weiterhin zum Poster,
+   * weil die Änderung hier ausschließlich den Link
+   * "← Zur Community" außerhalb des Posters betrifft.
+   */
 
-  posterCommunityCta(ctx);
+  if(!IS_EMBEDDED){
 
+    posterText(
+      ctx,
+      "Werde Teil der",
+      1016,
+      66,
+      {
+        font:"900 22px Arial",
+        color:"#18a6b4",
+        align:"right",
+        baseline:"middle"
+      }
+    );
+
+    posterText(
+      ctx,
+      "Miles Apart Community →",
+      1016,
+      95,
+      {
+        font:"900 24px Arial",
+        color:"#18a6b4",
+        align:"right",
+        baseline:"middle"
+      }
+    );
+
+  }
 
   posterText(
     ctx,
@@ -2094,7 +1998,6 @@ function renderRunnerPoster(data){
     }
   );
 
-
   ctx.fillStyle="#dceceb";
 
   ctx.fillRect(
@@ -2103,11 +2006,6 @@ function renderRunnerPoster(data){
     W-128,
     3
   );
-
-
-  /* =======================================================
-     HAUPTWERTE
-  ======================================================== */
 
   const statGap=20;
 
@@ -2128,7 +2026,6 @@ function renderRunnerPoster(data){
       ?`Level ${data.level.km}`
       :"Level 0";
 
-
   posterStatBox(
     ctx,
     statX,
@@ -2138,7 +2035,6 @@ function renderRunnerPoster(data){
     "KILOMETER 2026",
     `${formatNumber(totalKm)} km`
   );
-
 
   posterStatBox(
     ctx,
@@ -2151,11 +2047,6 @@ function renderRunnerPoster(data){
     data.level?.emoji||""
   );
 
-
-  /* =======================================================
-     BESTZEITEN
-  ======================================================== */
-
   posterText(
     ctx,
     "Persönliche Bestzeiten",
@@ -2167,7 +2058,6 @@ function renderRunnerPoster(data){
       baseline:"middle"
     }
   );
-
 
   const pbGap=20;
 
@@ -2182,7 +2072,6 @@ function renderRunnerPoster(data){
 
   const pbX2=
     pbX1+pbWidth+pbGap;
-
 
   posterPbBox(
     ctx,
@@ -2206,7 +2095,6 @@ function renderRunnerPoster(data){
     "10k"
   );
 
-
   posterPbBox(
     ctx,
     pbX1,
@@ -2228,7 +2116,6 @@ function renderRunnerPoster(data){
     data.pbs?.["marathon"],
     "marathon"
   );
-
 
   posterPbBox(
     ctx,
@@ -2257,9 +2144,6 @@ function renderRunnerPoster(data){
 
 /* =========================================================
    POSTER DATA
-
-   Jahreswerte = 2026
-   PBs = ALL-TIME
 ========================================================= */
 
 function createPosterData(
@@ -2309,12 +2193,6 @@ function createPosterData(
         ?longestRun.run_date
         :null,
 
-    /*
-     * GANZ WICHTIG:
-     * Die Poster-Bestzeiten stammen aus ALLEN
-     * Läufen – genauso wie die Bestzeiten unten.
-     */
-
     pbs:{
 
       "5k":
@@ -2329,13 +2207,13 @@ function createPosterData(
           "10k"
         ),
 
-      "half":
+      half:
         findBestRunByCategory(
           allRuns,
           "half"
         ),
 
-      "marathon":
+      marathon:
         findBestRunByCategory(
           allRuns,
           "marathon"
@@ -2404,7 +2282,6 @@ async function getPosterBlob(){
   );
 
 }
-
 
 function getPosterFileName(){
 
@@ -2790,12 +2667,6 @@ async function shareRunnerPosterInstagram(){
     const shareText=
       getPosterShareText();
 
-    /*
-     * Auf mobilen Geräten wird das echte Poster
-     * direkt über das native Share Sheet geteilt.
-     * Der neue Rahmen ist Bestandteil des PNG.
-     */
-
     if(
       navigator.share&&
       navigator.canShare&&
@@ -2830,12 +2701,6 @@ async function shareRunnerPosterInstagram(){
 
     }
 
-
-    /*
-     * Fallback:
-     * PNG speichern und Instagram öffnen.
-     */
-
     const url=
       URL.createObjectURL(blob);
 
@@ -2853,7 +2718,6 @@ async function shareRunnerPosterInstagram(){
       ()=>URL.revokeObjectURL(url),
       1000
     );
-
 
     popup=
       window.open(
@@ -3091,7 +2955,6 @@ function renderStatistics(
   ).textContent=
     stats.runCount;
 
-
   const currentLevel=
     getCurrentRunningLevel(totalKm);
 
@@ -3133,14 +2996,12 @@ function renderStatistics(
 
   }
 
-
   document.getElementById(
     "currentLevelSub"
   ).textContent=
     nextLevel
       ?`Nächstes Level bei ${nextLevel.km.toLocaleString("de-DE")} km`
       :"🏁 Alle Lauflevel bis 10.000 km erreicht";
-
 
   const longestRun=
     stats.longestRun;
@@ -3176,7 +3037,6 @@ function renderStatistics(
       "Noch kein Lauf";
 
   }
-
 
   renderPersonalBest(
     "pb5k",
@@ -3270,7 +3130,6 @@ function renderPersonalBest(
     return;
   }
 
-
   const duration=
     formatDuration(
       run.duration_seconds
@@ -3293,7 +3152,6 @@ function renderPersonalBest(
     );
 
   valueElement.classList.remove("empty");
-
 
   if(
     run.best_time_category==="100plus"
@@ -3330,7 +3188,6 @@ function renderPersonalBest(
     `;
 
   }
-
 
   subElement.innerHTML=`
     <span class="pb-date">
@@ -3373,7 +3230,6 @@ function renderRuns(runs){
 
     return;
   }
-
 
   container.innerHTML=
     runs.map(run=>{
@@ -3477,6 +3333,26 @@ async function initializePage(){
       "errorState"
     );
 
+  /*
+   * GENAU HIER wird nur der "← Zur Community"-Link
+   * entfernt, wenn user.html eingebettet ist.
+   *
+   * Direkt auf user.html bleibt er erhalten.
+   */
+
+  if(IS_EMBEDDED){
+
+    const backLink=
+      document.querySelector(
+        ".back-link"
+      );
+
+    if(backLink){
+      backLink.style.display="none";
+    }
+
+  }
+
   try{
 
     const params=
@@ -3495,70 +3371,38 @@ async function initializePage(){
 
     }
 
-
-    /* Profil */
-
     const profile=
       await loadProfile(
         username
       );
-
-
-    /* Alle Läufe */
 
     const allRuns=
       await loadAllRuns(
         profile.id
       );
 
-
-    /* 2026 */
-
     const runs2026=
       getRunsFor2026(
         allRuns
       );
-
-
-    /* Statistik */
 
     const statistics=
       calculateStatistics(
         runs2026
       );
 
-
-    /* Profil */
-
     renderProfile(
       profile
     );
-
-
-    /* Statistik + All-Time PBs */
 
     renderStatistics(
       statistics,
       allRuns
     );
 
-
-    /* Historie */
-
     renderRuns(
       runs2026
     );
-
-
-    /*
-     * Poster:
-     *
-     * 2026:
-     * Kilometer / Läufe / Level
-     *
-     * ALL-TIME:
-     * persönliche Bestzeiten
-     */
 
     currentPosterData=
       createPosterData(
@@ -3567,16 +3411,13 @@ async function initializePage(){
         allRuns
       );
 
-
     renderRunnerPoster(
       currentPosterData
     );
 
-
     loadingState.style.display="none";
 
     profileContent.style.display="block";
-
 
   }catch(error){
 
