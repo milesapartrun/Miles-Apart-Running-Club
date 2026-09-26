@@ -3,472 +3,958 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Nachrichten — Miles Apart Running Club</title>
-
+<title>Community — Miles Apart Running Club</title>
 <link rel="stylesheet" href="style.css">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-.ma-messages-page{
+.top-right{display:flex;align-items:center;gap:12px;position:relative}
+.ma-community-loading{padding:70px 20px;text-align:center;color:#777}
+.ma-community-error{margin:25px 0;padding:16px 18px;border:1px solid #e2bcbc;background:#fff7f7;color:#b22f2f;font-weight:700}
+
+.ma-section{
   width:100%;
   box-sizing:border-box;
+  margin:0 0 28px;
+  padding:28px;
 }
 
-.ma-messages-header{
+.ma-section-head{
   display:flex;
-  align-items:flex-end;
+  align-items:flex-start;
   justify-content:space-between;
   gap:20px;
-  margin-bottom:28px;
+  margin:0 0 22px;
 }
 
-.ma-messages-title{
+.ma-section-title{
   margin:0;
   color:#111;
-  font-size:48px;
-  line-height:1;
-  font-weight:900;
+  font-size:28px;
+  line-height:1.2;
+  font-weight:800;
 }
 
-.ma-messages-subtitle{
-  margin:10px 0 0;
-  color:#18b8c7;
-  font-size:17px;
+.ma-section-subtitle{
+  margin:7px 0 0;
+  color:#777;
+  font-size:15px;
   line-height:1.45;
 }
 
-.ma-messages-layout{
+.ma-buddy-list{
   display:grid;
-  grid-template-columns:330px minmax(0,1fr);
-  min-height:650px;
-  background:#fff;
-  border:1px solid #e5e5e5;
-  box-sizing:border-box;
-  overflow:hidden;
+  grid-template-columns:1fr;
+  gap:18px;
+  width:100%;
 }
 
-.ma-conversation-panel{
-  border-right:1px solid #e5e5e5;
-  background:#fafafa;
+.ma-buddy-card{
   min-width:0;
+  width:100%;
+  padding:22px;
+  border:1px solid #e8e8e8;
+  box-sizing:border-box;
+  background:#fff;
 }
 
-.ma-conversation-heading{
+.ma-buddy-days{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:8px;
+}
+
+.ma-buddy-day{
+  position:relative;
+}
+
+.ma-buddy-day input{
+  position:absolute;
+  opacity:0;
+  pointer-events:none;
+}
+
+.ma-buddy-day label{
   display:flex;
   align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  padding:20px;
-  border-bottom:1px solid #e5e5e5;
+  justify-content:flex-start;
+  min-height:48px;
+  padding:0 10px;
+  border:1px solid #d8d8d8;
+  background:#fff;
+  color:#111;
+  font-size:14px;
+  font-weight:800;
+  cursor:pointer;
+  box-sizing:border-box;
+  text-align:left;
 }
 
-.ma-conversation-heading h2{
+.ma-buddy-day input:checked + label{
+  border-color:#18b8c7;
+  background:#eefafa;
+  color:#18b8c7;
+}
+
+.ma-buddy-day label:hover{
+  border-color:#18b8c7;
+}
+
+.ma-buddy-top{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom:18px;
+}
+
+.ma-buddy-avatar{
+  width:58px;
+  height:58px;
+  min-width:58px;
+  border-radius:50%;
+  overflow:hidden;
+  border:2px solid #63d6e5;
+  background:#eefafa;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-sizing:border-box;
+}
+
+.ma-buddy-avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.ma-buddy-initials{
+  color:#18b8c7;
+  font-size:15px;
+  font-weight:800;
+}
+
+.ma-buddy-name{
+  display:inline-block;
   margin:0;
   color:#111;
   font-size:20px;
   font-weight:800;
+  line-height:1.2;
+  text-decoration:none;
 }
 
-.ma-conversation-count{
-  min-width:26px;
-  height:26px;
-  padding:0 7px;
-  border-radius:20px;
-  background:#18b8c7;
-  color:#fff;
+.ma-buddy-name:hover{
+  color:#18b8c7;
+}
+
+.ma-buddy-location{
+  margin:4px 0 0;
+  color:#777;
+  font-size:14px;
+}
+
+.ma-buddy-details{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:10px;
+  margin-bottom:16px;
+}
+
+.ma-buddy-detail{
+  padding:12px;
+  background:#f7fafa;
+}
+
+.ma-buddy-label{
+  display:block;
+  margin-bottom:4px;
+  color:#888;
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  font-weight:700;
+}
+
+.ma-buddy-value{
+  display:block;
+  color:#111;
+  font-size:15px;
+  line-height:1.3;
+  font-weight:800;
+  overflow-wrap:anywhere;
+}
+
+.ma-buddy-note{
+  padding:13px 0 0;
+  border-top:1px solid #eee;
+  color:#333;
+  font-size:15px;
+  line-height:1.45;
+}
+
+.ma-buddy-actions{
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  gap:8px;
+  margin-top:16px;
+  padding-top:14px;
+  border-top:1px solid #eee;
+}
+
+.ma-buddy-delete{
+  border:0;
+  background:transparent;
+  color:#b44;
+  padding:7px 8px;
+  font:inherit;
+  font-size:14px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.ma-buddy-delete:hover{
+  color:#8f2222;
+}
+
+.ma-buddy-empty{
+  padding:28px 0;
+  color:#777;
+  text-align:center;
+  grid-column:1/-1;
+}
+
+.ma-buddy-form{
+  display:none;
+  width:100%;
+  margin:0 0 22px;
+  padding:22px;
+  border:1px solid #e5e5e5;
+  background:#fafafa;
+  box-sizing:border-box;
+}
+
+.ma-buddy-form.open{
+  display:block;
+}
+
+.ma-form-grid{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:14px;
+}
+
+.ma-form-field{
+  display:flex;
+  flex-direction:column;
+  gap:7px;
+}
+
+.ma-form-field.full{
+  grid-column:1/-1;
+}
+
+.ma-form-label{
+  color:#111;
+  font-size:14px;
+  font-weight:800;
+}
+
+.ma-form-input{
+  width:100%;
+  height:50px;
+  padding:0 13px;
+  border:1px solid #d8d8d8;
+  outline:none;
+  background:#fff;
+  color:#111;
+  font:inherit;
+  font-size:16px;
+  box-sizing:border-box;
+}
+
+textarea.ma-form-input{
+  height:110px;
+  padding:13px;
+  resize:vertical;
+}
+
+.ma-form-input:focus{
+  border-color:#18b8c7;
+}
+
+.ma-form-actions{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  margin-top:16px;
+}
+
+.ma-form-message{
+  color:#18b8c7;
+  font-size:14px;
+  font-weight:700;
+}
+
+.ma-post{
+  width:100%;
+  box-sizing:border-box;
+  display:block;
+  margin:0 0 22px;
+  padding:28px;
+  text-align:left;
+  overflow:hidden;
+}
+
+.ma-post-header{
+  width:100%;
+  display:flex;
+  align-items:center;
+}
+
+.ma-post-author{
+  width:100%;
+  display:flex;
+  align-items:center;
+  text-decoration:none;
+  color:inherit;
+}
+
+.ma-post-avatar{
+  width:56px;
+  height:56px;
+  min-width:56px;
+  border-radius:50%;
+  overflow:hidden;
+  border:2px solid #63d6e5;
+  background:#63d6e5;
   display:flex;
   align-items:center;
   justify-content:center;
   box-sizing:border-box;
+}
+
+.ma-post-avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.ma-post-avatar-initials{
+  width:100%;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:50%;
+  background:#eefafa;
+  color:#18b8c7;
+  font-size:14px;
+  font-weight:800;
+}
+
+.ma-post-author-info{
+  margin-left:13px;
+  min-width:0;
+}
+
+.ma-post-author-name{
+  color:#111;
+  font-size:19px;
+  line-height:1.25;
+  font-weight:800;
+}
+
+.ma-post-author-meta{
+  margin-top:3px;
+  color:#777;
+  font-size:15px;
+  line-height:1.35;
+}
+
+.ma-post-copy{
+  display:block;
+  width:100%;
+  margin:25px 0 26px;
+  padding-left:0 !important;
+  padding-right:0;
+  color:#111;
+  font-size:20px;
+  line-height:1.45;
+  text-align:left !important;
+  text-indent:0 !important;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere;
+}
+
+.ma-post-image{
+  display:block;
+  width:100%;
+  max-height:650px;
+  margin:0 0 25px;
+  border-radius:14px;
+  object-fit:cover;
+}
+
+.ma-post-actions{
+  width:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:15px 0 0;
+  border-top:1px solid #eee;
+  box-sizing:border-box;
+}
+
+.ma-post-action-left{
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+  gap:8px;
+}
+
+.ma-post-action{
+  border:0;
+  background:transparent;
+  padding:7px 8px;
+  color:#555;
+  font:inherit;
+  font-size:18px;
+  font-weight:700;
+  cursor:pointer;
+}
+
+.ma-post-action.liked,
+.ma-message-button{
+  color:#18b8c7;
+}
+
+.ma-delete{
+  color:#b44;
+}
+
+.ma-comments{
+  width:100%;
+  margin-top:18px;
+  padding-top:18px;
+  border-top:1px solid #eee;
+  box-sizing:border-box;
+}
+
+.ma-comments-list{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+.ma-comment{
+  display:flex;
+  gap:11px;
+}
+
+.ma-comment-avatar{
+  width:46px;
+  height:46px;
+  min-width:46px;
+  border-radius:50%;
+  overflow:hidden;
+  border:2px solid #63d6e5;
+  background:#eefafa;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-sizing:border-box;
+}
+
+.ma-comment-avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.ma-comment-avatar-initials{
+  color:#18b8c7;
   font-size:12px;
   font-weight:800;
 }
 
-.ma-conversation-list{
-  width:100%;
-}
-
-.ma-conversation-empty{
-  padding:35px 22px;
-  color:#777;
-  text-align:center;
-  font-size:15px;
-  line-height:1.5;
-}
-
-.ma-conversation{
-  width:100%;
-  display:flex;
-  align-items:center;
-  gap:12px;
-  padding:16px 18px;
-  border:0;
-  border-bottom:1px solid #e8e8e8;
-  background:transparent;
-  color:#111;
-  text-align:left;
-  cursor:pointer;
-  box-sizing:border-box;
-}
-
-.ma-conversation:hover{
-  background:#f1fafa;
-}
-
-.ma-conversation.active{
-  background:#eefafa;
-  box-shadow:inset 4px 0 0 #18b8c7;
-}
-
-.ma-conversation-avatar{
-  width:50px;
-  height:50px;
-  min-width:50px;
-  border-radius:50%;
-  overflow:hidden;
-  background:#eefafa;
-  border:2px solid #63d6e5;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  box-sizing:border-box;
-}
-
-.ma-conversation-avatar img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.ma-conversation-initials{
-  color:#18b8c7;
-  font-size:13px;
-  font-weight:800;
-}
-
-.ma-conversation-content{
-  min-width:0;
+.ma-comment-content{
   flex:1;
+  min-width:0;
 }
 
-.ma-conversation-name{
+.ma-comment-header{
+  display:flex;
+  align-items:baseline;
+  gap:8px;
+  flex-wrap:wrap;
+}
+
+.ma-comment-name{
   color:#111;
   font-size:16px;
   font-weight:800;
-  line-height:1.25;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-}
-
-.ma-conversation-preview{
-  margin-top:4px;
-  color:#777;
-  font-size:13px;
-  line-height:1.35;
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-}
-
-.ma-conversation-time{
-  margin-top:4px;
-  color:#999;
-  font-size:11px;
-}
-
-.ma-thread{
-  min-width:0;
-  display:flex;
-  flex-direction:column;
-  background:#fff;
-}
-
-.ma-thread-empty{
-  height:100%;
-  min-height:600px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:30px;
-  text-align:center;
-  color:#777;
-  box-sizing:border-box;
-}
-
-.ma-thread-empty strong{
-  display:block;
-  margin-bottom:8px;
-  color:#111;
-  font-size:22px;
-}
-
-.ma-thread-header{
-  display:flex;
-  align-items:center;
-  gap:13px;
-  padding:18px 22px;
-  border-bottom:1px solid #e5e5e5;
-  min-height:82px;
-  box-sizing:border-box;
-}
-
-.ma-thread-avatar{
-  width:48px;
-  height:48px;
-  min-width:48px;
-  border-radius:50%;
-  overflow:hidden;
-  border:2px solid #63d6e5;
-  background:#eefafa;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  box-sizing:border-box;
-}
-
-.ma-thread-avatar img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-}
-
-.ma-thread-initials{
-  color:#18b8c7;
-  font-size:13px;
-  font-weight:800;
-}
-
-.ma-thread-person{
-  min-width:0;
-}
-
-.ma-thread-person-name{
-  color:#111;
-  font-size:19px;
-  font-weight:800;
-  line-height:1.25;
   text-decoration:none;
 }
 
-.ma-thread-person-name:hover{
-  color:#18b8c7;
-}
-
-.ma-thread-person-username{
-  margin-top:3px;
+.ma-comment-time{
   color:#888;
   font-size:13px;
 }
 
-.ma-thread-messages{
-  flex:1;
-  min-height:450px;
-  max-height:520px;
-  overflow-y:auto;
-  padding:25px;
-  box-sizing:border-box;
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-  background:#fcfcfc;
-}
-
-.ma-message-row{
-  width:100%;
-  display:flex;
-}
-
-.ma-message-row.mine{
-  justify-content:flex-end;
-}
-
-.ma-message-row.theirs{
-  justify-content:flex-start;
-}
-
-.ma-message-bubble{
-  max-width:min(75%,520px);
-  padding:12px 15px;
-  border-radius:17px;
+.ma-comment-text{
+  margin-top:5px;
+  padding-left:0 !important;
   color:#111;
-  font-size:16px;
+  font-size:18px;
   line-height:1.45;
+  text-align:left !important;
+  text-indent:0 !important;
   white-space:pre-wrap;
   overflow-wrap:anywhere;
-  box-sizing:border-box;
 }
 
-.ma-message-row.mine .ma-message-bubble{
-  background:#18b8c7;
-  color:#fff;
-  border-bottom-right-radius:5px;
-}
-
-.ma-message-row.theirs .ma-message-bubble{
-  background:#fff;
-  border:1px solid #e2e2e2;
-  border-bottom-left-radius:5px;
-}
-
-.ma-message-time{
-  margin-top:5px;
-  font-size:11px;
-  opacity:.65;
-}
-
-.ma-message-row.mine .ma-message-time{
-  text-align:right;
-}
-
-.ma-thread-form{
+.ma-comment-form{
   display:flex;
-  gap:10px;
-  padding:16px 18px;
-  border-top:1px solid #e5e5e5;
-  background:#fff;
-  box-sizing:border-box;
+  gap:8px;
+  margin-top:20px;
 }
 
-.ma-thread-input{
+.ma-comment-input{
   flex:1;
   min-width:0;
-  min-height:52px;
-  max-height:150px;
-  padding:14px 15px;
+  height:52px;
+  padding:0 14px;
   border:1px solid #d8d8d8;
-  outline:none;
-  resize:none;
   font:inherit;
-  font-size:16px;
-  line-height:1.4;
   box-sizing:border-box;
 }
 
-.ma-thread-input:focus{
-  border-color:#18b8c7;
-}
-
-.ma-thread-send{
-  align-self:flex-end;
-  min-width:110px;
+.ma-comment-submit,
+.ma-message-send{
   height:52px;
   border:0;
-  background:#18b8c7;
+  background:#111;
   color:#fff;
+  padding:0 18px;
+  font-size:16px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.ma-comment-submit:hover,
+.ma-message-send:hover{
+  background:#18b8c7;
+}
+
+.ma-image-upload{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  margin-top:14px;
+}
+
+.ma-image-upload-label{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  width:fit-content;
+  min-height:44px;
+  padding:0 16px;
+  border:1px solid #d8d8d8;
+  background:#fff;
+  color:#111;
   font-size:15px;
   font-weight:800;
   cursor:pointer;
 }
 
-.ma-thread-send:hover{
+.ma-image-upload-input{
+  display:none;
+}
+
+.ma-image-preview{
+  display:none;
+  width:100%;
+  max-width:420px;
+  max-height:320px;
+  object-fit:cover;
+  border-radius:14px;
+  border:1px solid #eee;
+}
+
+.ma-image-preview.visible{
+  display:block;
+}
+
+.ma-image-upload-name{
+  color:#777;
+  font-size:14px;
+}
+
+.ma-run-details{
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:12px;
+  margin-bottom:18px;
+}
+
+.ma-run-card{
+  width:100%;
+  padding:22px;
+  border:1px solid #e8e8e8;
+  background:#fff;
+  box-sizing:border-box;
+}
+
+.ma-run-list{
+  width:100%;
+  display:grid;
+  grid-template-columns:repeat(2,minmax(0,1fr));
+  gap:18px;
+}
+
+.ma-run-card-top{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  margin-bottom:16px;
+}
+
+.ma-run-card-title{
+  margin:0;
+  color:#111;
+  font-size:22px;
+  font-weight:800;
+}
+
+.ma-run-card-author{
+  margin-top:5px;
+  color:#777;
+  font-size:14px;
+}
+
+.ma-run-card-icon{
+  font-size:28px;
+}
+
+.ma-run-detail{
+  padding:12px;
+  background:#f7fafa;
+}
+
+.ma-run-detail-label{
+  display:block;
+  margin-bottom:4px;
+  color:#888;
+  font-size:12px;
+  text-transform:uppercase;
+  letter-spacing:.05em;
+  font-weight:700;
+}
+
+.ma-run-detail-value{
+  display:block;
+  color:#111;
+  font-size:15px;
+  line-height:1.3;
+  font-weight:800;
+}
+
+.ma-run-participants{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding-top:15px;
+  border-top:1px solid #eee;
+}
+
+.ma-run-participant-count{
+  color:#555;
+  font-size:14px;
+  font-weight:700;
+}
+
+.ma-run-actions{
+  display:flex;
+  gap:8px;
+}
+
+.ma-run-join{
+  min-height:42px;
+  border:0;
+  background:#18b8c7;
+  color:#fff;
+  padding:0 16px;
+  font-size:14px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.ma-run-join.joined{
   background:#111;
 }
 
-.ma-thread-send:disabled{
-  opacity:.55;
-  cursor:not-allowed;
+.ma-run-delete{
+  min-height:42px;
+  border:0;
+  background:transparent;
+  color:#b44;
+  padding:0 8px;
+  font-size:14px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.ma-run-form{
+  display:none;
+  width:100%;
+  margin-bottom:22px;
+  padding:22px;
+  border:1px solid #e5e5e5;
+  background:#fafafa;
+  box-sizing:border-box;
+}
+
+.ma-run-form.open{
+  display:block;
+}
+
+.ma-empty{
+  width:100%;
+  padding:55px 20px;
+  border:1px dashed #ccc;
+  box-sizing:border-box;
+  text-align:center;
+  color:#777;
+}
+
+.ma-empty strong{
+  display:block;
+  margin-bottom:8px;
+  color:#111;
+  font-size:20px;
+}
+
+.ma-message-overlay{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(0,0,0,.45);
+  box-sizing:border-box;
+}
+
+.ma-message-overlay.open{
+  display:flex;
+}
+
+.ma-message-modal{
+  width:100%;
+  max-width:520px;
+  background:#fff;
+  border-radius:18px;
+  padding:26px;
+  box-sizing:border-box;
+}
+
+.ma-message-modal-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  margin-bottom:18px;
+}
+
+.ma-message-modal-title{
+  margin:0;
+  font-size:24px;
+}
+
+.ma-message-modal-recipient{
+  margin:4px 0;
+  color:#777;
+}
+
+.ma-message-close{
+  width:40px;
+  height:40px;
+  border:0;
+  border-radius:50%;
+  background:#f2f2f2;
+  font-size:24px;
+  cursor:pointer;
+}
+
+.ma-message-textarea{
+  width:100%;
+  min-height:140px;
+  padding:14px;
+  border:1px solid #d8d8d8;
+  font:inherit;
+  box-sizing:border-box;
+  resize:vertical;
+}
+
+.ma-message-actions{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-top:12px;
 }
 
 .ma-message-status{
-  padding:0 18px 12px;
+  flex:1;
   color:#18b8c7;
-  font-size:13px;
-  font-weight:700;
-  background:#fff;
-}
-
-.ma-loading{
-  padding:40px;
-  text-align:center;
-  color:#777;
-}
-
-.ma-error{
-  padding:18px;
-  margin-bottom:20px;
-  border:1px solid #e1bcbc;
-  background:#fff7f7;
-  color:#b22f2f;
+  font-size:14px;
   font-weight:700;
 }
 
-.ma-login-box{
-  padding:50px 25px;
-  background:#fff;
-  border:1px solid #e5e5e5;
-  text-align:center;
+.ma-message-send{
+  min-width:120px;
 }
 
-.ma-login-box h2{
-  margin:0 0 10px;
-  color:#111;
+
+/* =========================================================
+   HARTE COMMUNITY-ÜBERSCHREIBUNG GEGEN TEXT-EINRÜCKUNG
+========================================================= */
+
+.ma-community-page .ma-section,
+.ma-community-page .ma-section *{
+  text-indent:0 !important;
 }
 
-.ma-login-box p{
-  margin:0 0 22px;
-  color:#777;
+.ma-community-page .ma-section p,
+.ma-community-page .ma-section h1,
+.ma-community-page .ma-section h2,
+.ma-community-page .ma-section h3,
+.ma-community-page .ma-section h4,
+.ma-community-page .ma-section label,
+.ma-community-page .ma-section span,
+.ma-community-page .ma-section a,
+.ma-community-page .ma-section button,
+.ma-community-page .ma-section input,
+.ma-community-page .ma-section textarea,
+.ma-community-page .ma-section small,
+.ma-community-page .ma-post-copy,
+.ma-community-page .ma-comment-text,
+.ma-community-page .ma-buddy-note,
+.ma-community-page .ma-buddy-value,
+.ma-community-page .ma-buddy-label,
+.ma-community-page .ma-run-detail-value,
+.ma-community-page .ma-run-detail-label,
+.ma-community-page .ma-run-card-title,
+.ma-community-page .ma-run-card-author,
+.ma-community-page .ma-section-subtitle{
+  padding-left:0 !important;
+  text-align:left !important;
+  text-indent:0 !important;
+  margin-left:0 !important;
 }
 
-@media(max-width:850px){
-  .ma-messages-title{
-    font-size:38px;
-  }
+.ma-community-page .ma-post,
+.ma-community-page .ma-post *{
+  text-indent:0 !important;
+}
 
-  .ma-messages-layout{
-    grid-template-columns:280px minmax(0,1fr);
-  }
+.ma-community-page .ma-post-copy{
+  margin-left:0 !important;
 }
 
 @media(max-width:700px){
-  .ma-messages-header{
+
+  .ma-section{
+    padding:24px;
+    margin-bottom:22px;
+  }
+
+  .ma-section-head{
+    flex-direction:column;
+  }
+
+  .ma-section-head .btn{
+    width:100%;
+  }
+
+  .ma-buddy-list,
+  .ma-run-list{
+    grid-template-columns:1fr;
+  }
+
+  .ma-buddy-days{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+
+  .ma-buddy-details,
+  .ma-run-details{
+    grid-template-columns:1fr;
+  }
+
+  .ma-form-grid{
+    grid-template-columns:1fr;
+  }
+
+  .ma-form-field.full{
+    grid-column:auto;
+  }
+
+  .ma-form-actions{
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  .ma-form-actions .btn{
+    width:100%;
+  }
+
+  .ma-post{
+    padding:24px;
+  }
+
+  .ma-post-copy{
+    font-size:20px;
+  }
+
+  .ma-comment-form{
+    flex-direction:column;
+  }
+
+  .ma-comment-submit{
+    width:100%;
+  }
+
+  .ma-run-participants{
     align-items:flex-start;
     flex-direction:column;
   }
 
-  .ma-messages-title{
-    font-size:36px;
+  .ma-run-actions,
+  .ma-run-join{
+    width:100%;
   }
 
-  .ma-messages-layout{
-    display:flex;
+  .ma-message-overlay{
+    align-items:flex-end;
+    padding:10px;
+  }
+
+  .ma-message-modal{
+    border-radius:18px 18px 12px 12px;
+    padding:22px;
+  }
+
+  .ma-message-actions{
     flex-direction:column;
-    min-height:0;
+    align-items:stretch;
   }
 
-  .ma-conversation-panel{
-    border-right:0;
-    border-bottom:1px solid #e5e5e5;
-  }
-
-  .ma-conversation-list{
-    max-height:280px;
-    overflow-y:auto;
-  }
-
-  .ma-thread{
-    min-height:600px;
-  }
-
-  .ma-thread-empty{
-    min-height:300px;
-  }
-
-  .ma-thread-messages{
-    min-height:380px;
-    max-height:none;
-  }
-
-  .ma-message-bubble{
-    max-width:85%;
-  }
-
-  .ma-thread-form{
-    padding:12px;
-  }
-
-  .ma-thread-send{
-    min-width:85px;
+  .ma-message-send{
+    width:100%;
   }
 }
 </style>
@@ -478,143 +964,811 @@
 
 <div class="shell">
 
-  <aside class="sidebar">
+<aside class="sidebar">
 
-    <div class="brand">
-      <a href="index.html">
-        <img src="miles-apart-wordmark.png" alt="Miles Apart Running Club">
-      </a>
+  <div class="brand">
+    <a href="index.html">
+      <img src="miles-apart-wordmark.png" alt="Miles Apart Running Club">
+    </a>
+  </div>
+
+  <nav class="nav">
+
+    <a href="index.html">
+      Miles Apart
+    </a>
+
+    <a href="home.html">
+      Home
+    </a>
+
+    <a href="challenges.html">
+      Challenges
+    </a>
+
+    <a class="active" href="community.html">
+      Community
+    </a>
+
+    <a href="messages.html">
+      Nachrichten
+    </a>
+
+    <a href="events.html">
+      Events
+    </a>
+
+    <a href="training.html">
+      Training
+    </a>
+
+  </nav>
+
+  <div class="side-bottom">
+
+    <small>
+      THIS WEEK
+    </small>
+
+    <strong>
+      23.4 / 30 KM
+    </strong>
+
+    <div class="mini-progress">
+      <i></i>
     </div>
 
-    <nav class="nav">
-      <a href="index.html">Miles Apart</a>
-      <a href="home.html">Home</a>
-      <a href="challenges.html">Challenges</a>
-      <a href="community.html">Community</a>
-      <a class="active" href="messages.html">Nachrichten</a>
-      <a href="events.html">Events</a>
-      <a href="training.html">Training</a>
-    </nav>
+    <p class="small" style="color:#aaa;margin-bottom:0">
+      Nur 6.6 km bis zum Wochenziel.
+    </p>
 
-    <div class="side-bottom">
-      <small>THIS WEEK</small>
-      <strong>23.4 / 30 KM</strong>
+  </div>
 
-      <div class="mini-progress">
-        <i></i>
-      </div>
+</aside>
 
-      <p class="small" style="color:#aaa;margin-bottom:0">
-        Nur 6.6 km bis zum Wochenziel.
+
+<main class="main ma-community-page">
+
+  <div class="top">
+
+    <div class="crumb">
+      MILES APART / COMMUNITY
+    </div>
+
+    <div class="top-right"></div>
+
+  </div>
+
+
+  <div class="hero">
+
+    <div>
+
+      <h1>
+        Community.
+      </h1>
+
+      <p
+        class="lead"
+        style="color:#18b8c7"
+      >
+        Dein virtueller Run Club — gemeinsam laufen, egal wo du bist.
       </p>
+
     </div>
 
-  </aside>
+    <div
+      style="
+        display:flex;
+        align-items:center;
+        gap:10px;
+        flex-wrap:wrap;
+        justify-content:flex-start
+      "
+    >
+
+      <a
+        href="messages.html"
+        class="btn"
+      >
+        Nachrichten
+      </a>
+
+      <button
+        id="openPostButton"
+        class="btn lime"
+        type="button"
+      >
+        + Post erstellen
+      </button>
+
+    </div>
+
+  </div>
 
 
-  <main class="main">
+  <div
+    id="postFormCard"
+    class="card post-form-card"
+    style="display:none"
+  >
 
-    <div class="top">
-      <div class="crumb">
-        MILES APART / NACHRICHTEN
+    <div class="section-head">
+
+      <h2>
+        Neuer Post
+      </h2>
+
+      <span
+        class="small muted"
+        id="postAuthorName"
+      >
+        —
+      </span>
+
+    </div>
+
+
+    <form id="postForm">
+
+      <textarea
+        id="postContent"
+        maxlength="2000"
+        placeholder="Was möchtest du mit der Community teilen?"
+        required
+        style="
+          width:100%;
+          min-height:130px;
+          padding:16px;
+          border:1px solid #ddd;
+          box-sizing:border-box;
+          font:inherit;
+          resize:vertical
+        "
+      ></textarea>
+
+
+      <div class="ma-image-upload">
+
+        <label
+          class="ma-image-upload-label"
+          for="postImage"
+        >
+          📸 Bild hinzufügen
+        </label>
+
+        <input
+          id="postImage"
+          class="ma-image-upload-input"
+          type="file"
+          accept="image/*"
+        >
+
+        <img
+          id="postImagePreview"
+          class="ma-image-preview"
+          alt="Bildvorschau"
+        >
+
+        <div
+          id="postImageName"
+          class="ma-image-upload-name"
+        ></div>
+
       </div>
 
-      <div class="top-right"></div>
-    </div>
 
+      <div
+        style="
+          display:flex;
+          justify-content:space-between;
+          align-items:center;
+          gap:15px;
+          margin-top:14px
+        "
+      >
 
-    <div class="ma-messages-page">
+        <div
+          id="postFormMessage"
+          class="post-form-message"
+        ></div>
 
-      <div class="ma-messages-header">
+        <div style="display:flex;gap:8px">
 
-        <div>
-          <h1 class="ma-messages-title">
-            Nachrichten.
-          </h1>
+          <button
+            id="cancelPostButton"
+            type="button"
+            class="btn"
+          >
+            Abbrechen
+          </button>
 
-          <p class="ma-messages-subtitle">
-            Private Gespräche mit der Miles Apart Community.
-          </p>
+          <button
+            id="submitPostButton"
+            type="submit"
+            class="btn lime"
+          >
+            Post veröffentlichen
+          </button>
+
         </div>
 
-        <a href="community.html" class="btn">
-          ← Community
-        </a>
-
       </div>
 
+    </form>
 
-      <div id="messagesError" class="ma-error" style="display:none"></div>
+  </div>
 
-      <div id="messagesLogin" class="ma-login-box" style="display:none">
-        <h2>Bitte anmelden</h2>
-        <p>
-          Melde dich an, um deine privaten Nachrichten zu sehen.
+
+  <div
+    id="communityLoading"
+    class="ma-community-loading"
+  >
+    Community wird geladen …
+  </div>
+
+
+  <div
+    id="communityError"
+    class="ma-community-error"
+    style="display:none"
+  ></div>
+
+
+  <!-- =====================================================
+       RUN BUDDY
+  ====================================================== -->
+
+  <div
+    class="card ma-section"
+    id="communityBuddySection"
+    style="display:none"
+  >
+
+    <div class="ma-section-head">
+
+      <div>
+
+        <h2 class="ma-section-title">
+          Run Buddy finden 🏃
+        </h2>
+
+        <p class="ma-section-subtitle">
+          Finde Läufer mit ähnlichem Rhythmus und verabrede dich zum gemeinsamen Laufen.
         </p>
 
-        <a href="home.html" class="btn lime">
-          Anmelden
-        </a>
       </div>
 
-
-      <div id="messagesLoading" class="ma-loading">
-        Nachrichten werden geladen …
-      </div>
-
-
-      <div id="messagesLayout" class="ma-messages-layout" style="display:none">
-
-        <!-- UNTERHALTUNGEN -->
-
-        <section class="ma-conversation-panel">
-
-          <div class="ma-conversation-heading">
-
-            <h2>
-              Unterhaltungen
-            </h2>
-
-            <span
-              id="conversationCount"
-              class="ma-conversation-count"
-            >
-              0
-            </span>
-
-          </div>
-
-          <div
-            id="conversationList"
-            class="ma-conversation-list"
-          ></div>
-
-        </section>
-
-
-        <!-- CHAT -->
-
-        <section id="threadPanel" class="ma-thread">
-
-          <div class="ma-thread-empty">
-
-            <div>
-              <strong>
-                Keine Unterhaltung ausgewählt
-              </strong>
-
-              Wähle links eine Unterhaltung aus, um die Nachrichten zu sehen.
-            </div>
-
-          </div>
-
-        </section>
-
-      </div>
+      <button
+        id="openBuddyButton"
+        class="btn lime"
+        type="button"
+      >
+        + Run Buddy eintragen
+      </button>
 
     </div>
 
-  </main>
+
+    <div
+      id="buddyForm"
+      class="ma-buddy-form"
+    >
+
+      <form id="buddyProfileForm">
+
+        <div class="ma-form-grid">
+
+          <div class="ma-form-field">
+
+            <label
+              class="ma-form-label"
+              for="buddyLocation"
+            >
+              📍 Ort
+            </label>
+
+            <input
+              id="buddyLocation"
+              class="ma-form-input"
+              maxlength="120"
+              placeholder="z. B. Mainz"
+              required
+            >
+
+          </div>
+
+
+          <div class="ma-form-field full">
+
+            <span class="ma-form-label">
+              📅 An welchen Tagen läufst du gerne?
+            </span>
+
+            <div
+              id="buddyDays"
+              class="ma-buddy-days"
+            >
+
+              <div class="ma-buddy-day">
+                <input
+                  id="buddyDayMonday"
+                  type="checkbox"
+                  value="Montag"
+                >
+                <label for="buddyDayMonday">
+                  Montag
+                </label>
+              </div>
+
+              <div class="ma-buddy-day">
+                <input
+                  id="buddyDayTuesday"
+                  type="checkbox"
+                  value="Dienstag"
+                >
+                <label for="buddyDayTuesday">
+                  Dienstag
+                </label>
+              </div>
+
+              <div class="ma-buddy-day">
+                <input
+                  id="buddyDayWednesday"
+                  type="checkbox"
+                  value="Mittwoch"
+                >
+                <label for="buddyDayWednesday">
+                  Mittwoch
+                </label>
+              </div>
+
+              <div class="ma-buddy-day">
+                <input
+                  id="buddyDayThursday"
+                  type="checkbox"
+                  value="Donnerstag"
+                >
+                <label for="buddyDayThursday">
+                  Donnerstag
+                </label>
+              </div>
+
+              <div class="ma-buddy-day">
+                <input
+                  id="buddyDayFriday"
+                  type="checkbox"
+                  value="Freitag"
+                >
+                <label for="buddyDayFriday">
+                  Freitag
+                </label>
+              </div>
+
+              <div class="ma-buddy-day">
+                <input
+                  id="buddyDaySaturday"
+                  type="checkbox"
+                  value="Samstag"
+                >
+                <label for="buddyDaySaturday">
+                  Samstag
+                </label>
+              </div>
+
+              <div class="ma-buddy-day">
+                <input
+                  id="buddyDaySunday"
+                  type="checkbox"
+                  value="Sonntag"
+                >
+                <label for="buddyDaySunday">
+                  Sonntag
+                </label>
+              </div>
+
+            </div>
+
+            <small class="small muted">
+              Du kannst mehrere Tage auswählen.
+            </small>
+
+          </div>
+
+
+          <div class="ma-form-field">
+
+            <label
+              class="ma-form-label"
+              for="buddyTime"
+            >
+              🕐 Uhrzeit
+            </label>
+
+            <input
+              id="buddyTime"
+              class="ma-form-input"
+              type="time"
+              required
+            >
+
+          </div>
+
+
+          <div class="ma-form-field">
+
+            <label
+              class="ma-form-label"
+              for="buddyPace"
+            >
+              ⚡ Pace
+            </label>
+
+            <input
+              id="buddyPace"
+              class="ma-form-input"
+              maxlength="40"
+              placeholder="z. B. 5:30–6:00 min/km"
+              required
+            >
+
+          </div>
+
+
+          <div class="ma-form-field full">
+
+            <label
+              class="ma-form-label"
+              for="buddyNote"
+            >
+              💬 Kurz über deinen Run
+            </label>
+
+            <textarea
+              id="buddyNote"
+              class="ma-form-input"
+              maxlength="500"
+              placeholder="z. B. Ich laufe gerne entspannt 5–10 km und suche jemanden für regelmäßige Feierabendläufe."
+            ></textarea>
+
+          </div>
+
+        </div>
+
+
+        <div class="ma-form-actions">
+
+          <div
+            id="buddyFormMessage"
+            class="ma-form-message"
+          ></div>
+
+          <div style="display:flex;gap:8px">
+
+            <button
+              id="cancelBuddyButton"
+              class="btn"
+              type="button"
+            >
+              Abbrechen
+            </button>
+
+            <button
+              id="submitBuddyButton"
+              class="btn lime"
+              type="submit"
+            >
+              Run Buddy-Profil speichern
+            </button>
+
+          </div>
+
+        </div>
+
+      </form>
+
+    </div>
+
+
+    <div
+      id="buddyList"
+      class="ma-buddy-list"
+    ></div>
+
+  </div>
+
+
+  <!-- =====================================================
+       GEMEINSAME LÄUFE
+  ====================================================== -->
+
+  <div
+    class="card ma-section"
+    id="communityRunsSection"
+    style="display:none"
+  >
+
+    <div class="ma-section-head">
+
+      <div>
+
+        <h2 class="ma-section-title">
+          Gemeinsame Läufe 🏃‍♂️
+        </h2>
+
+        <p class="ma-section-subtitle">
+          Erstelle einen Lauf und finde andere Miles Apart Mitglieder zum Mitlaufen.
+        </p>
+
+      </div>
+
+      <button
+        id="openRunButton"
+        class="btn lime"
+        type="button"
+      >
+        + Lauf erstellen
+      </button>
+
+    </div>
+
+
+    <div
+      id="runForm"
+      class="ma-run-form"
+    >
+
+      <form id="communityRunForm">
+
+        <div class="ma-form-grid">
+
+          <div class="ma-form-field full">
+
+            <label
+              class="ma-form-label"
+              for="runTitle"
+            >
+              Titel
+            </label>
+
+            <input
+              id="runTitle"
+              class="ma-form-input"
+              maxlength="120"
+              placeholder="z. B. 10 km Feierabendlauf"
+              required
+            >
+
+          </div>
+
+
+          <div class="ma-form-field">
+
+            <label
+              class="ma-form-label"
+              for="runLocation"
+            >
+              📍 Ort
+            </label>
+
+            <input
+              id="runLocation"
+              class="ma-form-input"
+              maxlength="120"
+              placeholder="z. B. Mainz"
+              required
+            >
+
+          </div>
+
+
+          <div class="ma-form-field">
+
+            <label
+              class="ma-form-label"
+              for="runDate"
+            >
+              📅 Datum
+            </label>
+
+            <input
+              id="runDate"
+              class="ma-form-input"
+              type="date"
+              required
+            >
+
+          </div>
+
+
+          <div class="ma-form-field">
+
+            <label
+              class="ma-form-label"
+              for="runTime"
+            >
+              🕐 Uhrzeit
+            </label>
+
+            <input
+              id="runTime"
+              class="ma-form-input"
+              type="time"
+              required
+            >
+
+          </div>
+
+
+          <div class="ma-form-field">
+
+            <label
+              class="ma-form-label"
+              for="runPace"
+            >
+              ⚡ Pace
+            </label>
+
+            <input
+              id="runPace"
+              class="ma-form-input"
+              maxlength="30"
+              placeholder="z. B. 5:30–6:00 min/km"
+              required
+            >
+
+          </div>
+
+
+          <div class="ma-form-field">
+
+            <label
+              class="ma-form-label"
+              for="runMaxParticipants"
+            >
+              👥 Teilnehmer
+            </label>
+
+            <input
+              id="runMaxParticipants"
+              class="ma-form-input"
+              type="number"
+              min="2"
+              max="100"
+              value="8"
+              required
+            >
+
+          </div>
+
+        </div>
+
+
+        <div class="ma-form-actions">
+
+          <div
+            id="runFormMessage"
+            class="ma-form-message"
+          ></div>
+
+          <div style="display:flex;gap:8px">
+
+            <button
+              id="cancelRunButton"
+              class="btn"
+              type="button"
+            >
+              Abbrechen
+            </button>
+
+            <button
+              id="submitRunButton"
+              class="btn lime"
+              type="submit"
+            >
+              Lauf erstellen
+            </button>
+
+          </div>
+
+        </div>
+
+      </form>
+
+    </div>
+
+
+    <div
+      id="runList"
+      class="ma-run-list"
+    ></div>
+
+  </div>
+
+
+  <!-- =====================================================
+       COMMUNITY POSTS
+  ====================================================== -->
+
+  <div
+    id="postsContainer"
+    style="display:block;width:100%"
+  ></div>
+
+</main>
+
+</div>
+
+
+<!-- =======================================================
+     PRIVATE MESSAGE MODAL
+======================================================== -->
+
+<div
+  id="messageOverlay"
+  class="ma-message-overlay"
+>
+
+  <div
+    class="ma-message-modal"
+    role="dialog"
+    aria-modal="true"
+  >
+
+    <div class="ma-message-modal-head">
+
+      <div>
+
+        <h2 class="ma-message-modal-title">
+          Private Nachricht
+        </h2>
+
+        <p
+          id="messageRecipient"
+          class="ma-message-modal-recipient"
+        >
+          —
+        </p>
+
+      </div>
+
+      <button
+        id="closeMessageButton"
+        class="ma-message-close"
+        type="button"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <textarea
+      id="privateMessageContent"
+      class="ma-message-textarea"
+      maxlength="2000"
+      placeholder="Schreib eine private Nachricht …"
+    ></textarea>
+
+
+    <div class="ma-message-actions">
+
+      <div
+        id="privateMessageStatus"
+        class="ma-message-status"
+      ></div>
+
+      <button
+        id="sendPrivateMessageButton"
+        class="ma-message-send"
+        type="button"
+      >
+        Senden
+      </button>
+
+    </div>
+
+  </div>
 
 </div>
 
@@ -634,29 +1788,19 @@ const supabaseClient=
   );
 
 
+const $=id=>document.getElementById(id);
+
 let currentUser=null;
 let currentProfile=null;
 
-let allMessages=[];
-let profilesById={};
-
-let conversations=[];
-let activeConversationUserId=null;
-
-let refreshTimer=null;
+let messageReceiverId=null;
+let messageReceiverName="";
 
 
-const $=id=>document.getElementById(id);
-
-
-/* =========================================================
-   HILFSFUNKTIONEN
-========================================================= */
-
-function escapeHtml(value){
-  return value==null
+function escapeHtml(v){
+  return v==null
     ?""
-    :String(value)
+    :String(v)
       .replaceAll("&","&amp;")
       .replaceAll("<","&lt;")
       .replaceAll(">","&gt;")
@@ -667,69 +1811,51 @@ function escapeHtml(value){
 
 function getInitials(name){
 
-  const parts=
+  const p=
     (name||"M")
       .trim()
       .split(/\s+/)
       .filter(Boolean);
 
-  if(parts.length===1){
-    return parts[0]
+  if(p.length===1){
+    return p[0]
       .slice(0,2)
       .toUpperCase();
   }
 
-  return (
-    parts[0][0]+
-    parts[parts.length-1][0]
+  return(
+    p[0][0]+
+    p[p.length-1][0]
   ).toUpperCase();
 }
 
 
-function profileUrl(profile){
+function formatTime(s){
 
-  if(!profile?.username){
-    return "#";
-  }
+  const d=new Date(s);
 
-  return(
-    `user.html?username=${
-      encodeURIComponent(profile.username)
-    }`
-  );
-}
-
-
-function formatMessageTime(timestamp){
-
-  if(!timestamp){
-    return "";
-  }
-
-  const date=new Date(timestamp);
-
-  if(Number.isNaN(date.getTime())){
-    return "";
-  }
-
-  const now=new Date();
-
-  const sameDay=
-    date.toDateString()===
-    now.toDateString();
-
-  if(sameDay){
-
-    return date.toLocaleTimeString(
-      "de-DE",
-      {
-        hour:"2-digit",
-        minute:"2-digit"
-      }
+  const diff=
+    Math.floor(
+      (Date.now()-d)/1000
     );
+
+  if(diff<60){
+    return "gerade eben";
   }
 
-  return date.toLocaleDateString(
+  if(diff<3600){
+    return `vor ${Math.floor(diff/60)} Min`;
+  }
+
+  if(diff<86400){
+    return `vor ${Math.floor(diff/3600)} Std`;
+  }
+
+  if(diff<172800){
+    return "gestern";
+  }
+
+  return d.toLocaleDateString(
     "de-DE",
     {
       day:"2-digit",
@@ -740,57 +1866,49 @@ function formatMessageTime(timestamp){
 }
 
 
-function formatConversationTime(timestamp){
+function formatRunDate(s){
 
-  if(!timestamp){
-    return "";
+  if(!s){
+    return "—";
   }
 
-  const date=new Date(timestamp);
-
-  if(Number.isNaN(date.getTime())){
-    return "";
-  }
-
-  const now=new Date();
-
-  const sameDay=
-    date.toDateString()===
-    now.toDateString();
-
-  if(sameDay){
-
-    return date.toLocaleTimeString(
-      "de-DE",
-      {
-        hour:"2-digit",
-        minute:"2-digit"
-      }
-    );
-  }
-
-  return date.toLocaleDateString(
+  return new Date(
+    `${s}T12:00:00`
+  ).toLocaleDateString(
     "de-DE",
     {
+      weekday:"short",
       day:"2-digit",
-      month:"2-digit"
+      month:"2-digit",
+      year:"numeric"
     }
   );
 }
 
 
-function avatarHtml(profile,cls){
+function profileUrl(p){
 
-  const name=
-    profile?.display_name||
+  return p?.username
+    ?`user.html?username=${encodeURIComponent(p.username)}`
+    :"#";
+}
+
+
+function avatarHtml(
+  p,
+  cls="ma-buddy-avatar"
+){
+
+  const n=
+    p?.display_name||
     "Miles Apart Member";
 
-  if(profile?.avatar_url){
+  if(p?.avatar_url){
 
     return`
       <div class="${cls}">
         <img
-          src="${escapeHtml(profile.avatar_url)}"
+          src="${escapeHtml(p.avatar_url)}"
           alt="Profilbild"
         >
       </div>
@@ -799,11 +1917,12 @@ function avatarHtml(profile,cls){
 
   return`
     <div class="${cls}">
-      <div class="${cls.includes("thread")
-        ?"ma-thread-initials"
-        :"ma-conversation-initials"
+      <div class="${
+        cls.includes("buddy")
+          ?"ma-buddy-initials"
+          :"ma-post-avatar-initials"
       }">
-        ${escapeHtml(getInitials(name))}
+        ${escapeHtml(getInitials(n))}
       </div>
     </div>
   `;
@@ -811,52 +1930,58 @@ function avatarHtml(profile,cls){
 
 
 /* =========================================================
-   USER LADEN
+   USER
 ========================================================= */
 
 async function loadCurrentUser(){
 
-  const {data,error}=
+  const {
+    data,
+    error
+  }=
     await supabaseClient.auth.getUser();
 
-  if(error){
-    throw error;
-  }
-
-  if(!data.user){
+  if(error||!data.user){
 
     currentUser=null;
     currentProfile=null;
 
-    $("messagesLoading").style.display="none";
-    $("messagesLogin").style.display="block";
+    $("openPostButton").textContent=
+      "Anmelden";
 
-    return false;
+    $("postAuthorName").textContent=
+      "Anmelden, um einen Post zu erstellen";
+
+    return;
   }
+
 
   currentUser=data.user;
 
 
   const {
-    data:profile,
-    error:profileError
+    data:p,
+    error:pe
   }=
     await supabaseClient
       .from("profiles")
       .select(
-        "display_name,username,avatar_url,location"
+        "display_name,username,avatar_url,bio,location"
       )
-      .eq("id",currentUser.id)
+      .eq(
+        "id",
+        currentUser.id
+      )
       .maybeSingle();
 
 
-  if(profileError){
-    throw profileError;
+  if(pe){
+    throw pe;
   }
 
 
   currentProfile=
-    profile||
+    p||
     {
       display_name:
         currentUser.user_metadata?.display_name||
@@ -865,32 +1990,56 @@ async function loadCurrentUser(){
     };
 
 
-  return true;
+  $("postAuthorName").textContent=
+    currentProfile.username
+      ?`@${currentProfile.username}`
+      :(currentProfile.display_name||
+        "Miles Apart Member");
 }
 
 
 /* =========================================================
-   NACHRICHTEN LADEN
+   POSTS
 ========================================================= */
 
-async function loadMessages(){
+async function loadPosts(){
 
   const {
     data,
     error
   }=
     await supabaseClient
-      .from("private_messages")
-      .select(
-        "id,sender_id,receiver_id,content,created_at"
-      )
-      .or(
-        `sender_id.eq.${currentUser.id},receiver_id.eq.${currentUser.id}`
-      )
+      .from("community_posts")
+      .select(`
+        id,
+        author_id,
+        content,
+        image_url,
+        created_at,
+        updated_at,
+        profiles:author_id(
+          display_name,
+          username,
+          avatar_url,
+          location
+        ),
+        community_post_likes(user_id),
+        community_post_comments(
+          id,
+          author_id,
+          content,
+          created_at,
+          profiles:author_id(
+            display_name,
+            username,
+            avatar_url
+          )
+        )
+      `)
       .order(
         "created_at",
         {
-          ascending:true
+          ascending:false
         }
       );
 
@@ -900,176 +2049,25 @@ async function loadMessages(){
   }
 
 
-  allMessages=data||[];
-
-
-  const userIds=[
-    ...new Set(
-      allMessages.flatMap(message=>[
-        message.sender_id,
-        message.receiver_id
-      ])
-    )
-  ];
-
-
-  if(userIds.length){
-
-    const {
-      data:profiles,
-      error:profilesError
-    }=
-      await supabaseClient
-        .from("profiles")
-        .select(
-          "id,display_name,username,avatar_url,location"
-        )
-        .in("id",userIds);
-
-
-    if(profilesError){
-      throw profilesError;
-    }
-
-
-    profilesById={};
-
-    (profiles||[]).forEach(profile=>{
-      profilesById[profile.id]=profile;
-    });
-  }
-
-
-  buildConversations();
-
-  renderConversationList();
-
-
-  if(activeConversationUserId){
-
-    const stillExists=
-      conversations.some(
-        conversation=>
-          conversation.userId===
-          activeConversationUserId
-      );
-
-    if(stillExists){
-
-      renderThread(
-        activeConversationUserId
-      );
-
-    }else{
-
-      activeConversationUserId=null;
-
-      renderEmptyThread();
-    }
-
-  }else if(conversations.length){
-
-    selectConversation(
-      conversations[0].userId
-    );
-
-  }else{
-
-    renderEmptyThread();
-  }
+  renderPosts(data||[]);
 }
 
 
-/* =========================================================
-   UNTERHALTUNGEN AUFBAUEN
-========================================================= */
+function renderPosts(posts){
 
-function buildConversations(){
-
-  const map=new Map();
+  $("postsContainer").innerHTML="";
 
 
-  allMessages.forEach(message=>{
+  if(!posts.length){
 
-    const otherUserId=
-      message.sender_id===currentUser.id
-        ?message.receiver_id
-        :message.sender_id;
+    $("postsContainer").innerHTML=`
+      <div class="ma-empty">
+        <strong>
+          Sei der Erste in der Community.
+        </strong>
 
-
-    if(!map.has(otherUserId)){
-
-      map.set(
-        otherUserId,
-        {
-          userId:otherUserId,
-          messages:[]
-        }
-      );
-    }
-
-
-    map
-      .get(otherUserId)
-      .messages
-      .push(message);
-  });
-
-
-  conversations=
-    Array.from(map.values())
-      .map(conversation=>{
-
-        const sorted=
-          conversation.messages
-            .slice()
-            .sort(
-              (a,b)=>
-                new Date(a.created_at)-
-                new Date(b.created_at)
-            );
-
-
-        const lastMessage=
-          sorted[sorted.length-1];
-
-
-        return{
-          ...conversation,
-          lastMessage
-        };
-      })
-      .sort(
-        (a,b)=>
-          new Date(
-            b.lastMessage?.created_at||0
-          )-
-          new Date(
-            a.lastMessage?.created_at||0
-          )
-      );
-
-
-  $("conversationCount").textContent=
-    conversations.length;
-}
-
-
-/* =========================================================
-   UNTERHALTUNGSLISTE
-========================================================= */
-
-function renderConversationList(){
-
-  const container=
-    $("conversationList");
-
-  if(!conversations.length){
-
-    container.innerHTML=`
-      <div class="ma-conversation-empty">
-        Noch keine privaten Nachrichten.<br><br>
-        Gehe in die Community und schreibe jemanden an.
+        Teile deinen ersten Lauf, ein Ziel
+        oder einfach ein paar Worte mit Miles Apart.
       </div>
     `;
 
@@ -1077,343 +2075,269 @@ function renderConversationList(){
   }
 
 
-  container.innerHTML=
-    conversations
-      .map(conversation=>{
+  posts.forEach(post=>{
 
-        const profile=
-          profilesById[conversation.userId]||
-          {
-            display_name:
-              "Miles Apart Member"
-          };
-
-
-        const last=
-          conversation.lastMessage;
-
-
-        const preview=
-          last
-            ?last.content
-            :"";
-
-
-        const isActive=
-          activeConversationUserId===
-          conversation.userId;
-
-
-        return`
-          <button
-            type="button"
-            class="ma-conversation ${
-              isActive?"active":""
-            }"
-            data-conversation-user-id="${
-              escapeHtml(conversation.userId)
-            }"
-          >
-
-            ${avatarHtml(
-              profile,
-              "ma-conversation-avatar"
-            )}
-
-            <div class="ma-conversation-content">
-
-              <div class="ma-conversation-name">
-                ${escapeHtml(
-                  profile.display_name||
-                  "Miles Apart Member"
-                )}
-              </div>
-
-              <div class="ma-conversation-preview">
-                ${escapeHtml(preview)}
-              </div>
-
-              <div class="ma-conversation-time">
-                ${formatConversationTime(
-                  last?.created_at
-                )}
-              </div>
-
-            </div>
-
-          </button>
-        `;
-      })
-      .join("");
-}
-
-
-$("conversationList").addEventListener(
-  "click",
-  event=>{
-
-    const button=
-      event.target.closest(
-        "[data-conversation-user-id]"
+    $("postsContainer")
+      .appendChild(
+        createPostElement(post)
       );
 
-    if(!button)return;
-
-
-    selectConversation(
-      button.dataset.conversationUserId
-    );
-  }
-);
-
-
-/* =========================================================
-   UNTERHALTUNG AUSWÄHLEN
-========================================================= */
-
-function selectConversation(userId){
-
-  activeConversationUserId=userId;
-
-  renderConversationList();
-
-  renderThread(userId);
+  });
 }
 
 
-/* =========================================================
-   LEEREN THREAD ZEIGEN
-========================================================= */
+function createPostElement(post){
 
-function renderEmptyThread(){
+  const p=
+    post.profiles||
+    {};
 
-  $("threadPanel").innerHTML=`
-    <div class="ma-thread-empty">
+  const likes=
+    post.community_post_likes||
+    [];
 
-      <div>
-        <strong>
-          Keine Unterhaltung ausgewählt
-        </strong>
+  const comments=
+    post.community_post_comments||
+    [];
 
-        Wähle links eine Unterhaltung aus,
-        um die Nachrichten zu sehen.
-      </div>
+  const liked=
+    !!currentUser&&
+    likes.some(
+      x=>x.user_id===currentUser.id
+    );
+
+  const owner=
+    currentUser?.id===
+    post.author_id;
+
+  const n=
+    p.display_name||
+    "Miles Apart Member";
+
+
+  const w=
+    document.createElement("div");
+
+  w.className=
+    "card ma-post";
+
+  w.dataset.postId=
+    post.id;
+
+
+  w.innerHTML=`
+
+    <div class="ma-post-header">
+
+      <a
+        class="ma-post-author"
+        href="${profileUrl(p)}"
+      >
+
+        ${avatarHtml(
+          p,
+          "ma-post-avatar"
+        )}
+
+        <div class="ma-post-author-info">
+
+          <div class="ma-post-author-name">
+            ${escapeHtml(n)}
+          </div>
+
+          <div class="ma-post-author-meta">
+            ${
+              p.username
+                ?`@${escapeHtml(p.username)} · `
+                :""
+            }
+
+            ${formatTime(post.created_at)}
+
+            ${
+              p.location
+                ?` · ${escapeHtml(p.location)}`
+                :""
+            }
+          </div>
+
+        </div>
+
+      </a>
 
     </div>
-  `;
-}
 
 
-/* =========================================================
-   THREAD RENDERN
-========================================================= */
-
-function renderThread(userId){
-
-  const profile=
-    profilesById[userId]||
-    {
-      display_name:
-        "Miles Apart Member"
-    };
+    <div class="ma-post-copy">
+      ${escapeHtml(post.content)}
+    </div>
 
 
-  const messages=
-    allMessages
-      .filter(message=>{
-
-        return(
-          (
-            message.sender_id===currentUser.id&&
-            message.receiver_id===userId
-          )||
-          (
-            message.sender_id===userId&&
-            message.receiver_id===currentUser.id
-          )
-        );
-      })
-      .sort(
-        (a,b)=>
-          new Date(a.created_at)-
-          new Date(b.created_at)
-      );
+    ${
+      post.image_url
+        ?`
+          <img
+            class="ma-post-image"
+            src="${escapeHtml(post.image_url)}"
+            alt="Bild zum Community-Post"
+            loading="lazy"
+          >
+        `
+        :""
+    }
 
 
-  $("threadPanel").innerHTML=`
+    <div class="ma-post-actions">
 
-    <div class="ma-thread-header">
+      <div class="ma-post-action-left">
 
-      ${avatarHtml(
-        profile,
-        "ma-thread-avatar"
-      )}
-
-      <div class="ma-thread-person">
-
-        <a
-          class="ma-thread-person-name"
-          href="${profileUrl(profile)}"
+        <button
+          class="ma-post-action ${
+            liked?"liked":""
+          }"
+          data-action="like"
+          data-post-id="${post.id}"
         >
-          ${escapeHtml(
-            profile.display_name||
-            "Miles Apart Member"
-          )}
-        </a>
+          ${liked?"❤️":"♡"} ${likes.length}
+        </button>
+
+
+        <button
+          class="ma-post-action"
+          data-action="comments"
+          data-post-id="${post.id}"
+        >
+          💬 ${comments.length}
+        </button>
+
 
         ${
-          profile.username
-          ?`
-            <div class="ma-thread-person-username">
-              @${escapeHtml(profile.username)}
-            </div>
-          `
-          :""
+          currentUser
+            ?`
+              <button
+                class="ma-post-action ma-message-button"
+                data-action="message"
+                data-author-id="${post.author_id}"
+                data-author-name="${escapeHtml(n)}"
+              >
+                Nachricht
+              </button>
+            `
+            :""
         }
 
       </div>
 
-    </div>
-
-
-    <div
-      id="threadMessages"
-      class="ma-thread-messages"
-    >
 
       ${
-        messages.length
-        ?messages.map(renderMessageBubble).join("")
-        :`
-          <div class="ma-thread-empty">
-            <div>
-              <strong>
-                Noch keine Nachrichten
-              </strong>
-
-              Schreib ${escapeHtml(
-                profile.display_name||
-                "diesem Mitglied"
-              )} deine erste Nachricht.
-            </div>
-          </div>
-        `
+        owner
+          ?`
+            <button
+              class="ma-post-action ma-delete"
+              data-action="delete"
+              data-post-id="${post.id}"
+            >
+              Löschen
+            </button>
+          `
+          :""
       }
 
     </div>
 
 
     <div
-      id="threadStatus"
-      class="ma-message-status"
+      class="ma-comments"
+      data-comments="${post.id}"
       style="display:none"
-    ></div>
-
-
-    <form
-      id="threadForm"
-      class="ma-thread-form"
     >
 
-      <textarea
-        id="threadInput"
-        class="ma-thread-input"
-        maxlength="2000"
-        rows="1"
-        placeholder="Nachricht schreiben …"
-        required
-      ></textarea>
+      <div class="ma-comments-list">
 
-      <button
-        id="threadSend"
-        class="ma-thread-send"
-        type="submit"
+        ${
+          comments
+            .sort(
+              (a,b)=>
+                new Date(a.created_at)-
+                new Date(b.created_at)
+            )
+            .map(createCommentHtml)
+            .join("")
+        }
+
+      </div>
+
+
+      <form
+        class="ma-comment-form"
+        data-comment-form="${post.id}"
       >
-        Senden
-      </button>
 
-    </form>
+        <input
+          class="ma-comment-input"
+          maxlength="1000"
+          placeholder="Antwort schreiben …"
+          required
+        >
+
+        <button
+          class="ma-comment-submit"
+          type="submit"
+        >
+          Senden
+        </button>
+
+      </form>
+
+    </div>
+
   `;
 
 
-  const messageContainer=
-    $("threadMessages");
-
-
-  if(messageContainer){
-
-    requestAnimationFrame(()=>{
-      messageContainer.scrollTop=
-        messageContainer.scrollHeight;
-    });
-  }
-
-
-  const form=
-    $("threadForm");
-
-
-  if(form){
-
-    form.addEventListener(
-      "submit",
-      sendThreadMessage
-    );
-  }
-
-
-  const input=
-    $("threadInput");
-
-
-  if(input){
-
-    input.addEventListener(
-      "keydown",
-      event=>{
-
-        if(
-          event.key==="Enter"&&
-          !event.shiftKey
-        ){
-
-          event.preventDefault();
-
-          form.requestSubmit();
-        }
-      }
-    );
-
-
-    input.focus();
-  }
+  return w;
 }
 
 
-/* =========================================================
-   EINZELNE NACHRICHT
-========================================================= */
+function createCommentHtml(c){
 
-function renderMessageBubble(message){
+  const p=
+    c.profiles||
+    {};
 
-  const mine=
-    message.sender_id===
-    currentUser.id;
+  const n=
+    p.display_name||
+    "Miles Apart Member";
 
 
   return`
-    <div class="ma-message-row ${
-      mine?"mine":"theirs"
-    }">
+    <div class="ma-comment">
 
-      <div class="ma-message-bubble">
+      <a href="${profileUrl(p)}">
+        ${avatarHtml(
+          p,
+          "ma-comment-avatar"
+        )}
+      </a>
 
-        ${escapeHtml(message.content)}
+      <div class="ma-comment-content">
 
-        <div class="ma-message-time">
-          ${formatMessageTime(
-            message.created_at
-          )}
+        <div class="ma-comment-header">
+
+          <a
+            class="ma-comment-name"
+            href="${profileUrl(p)}"
+          >
+            ${escapeHtml(n)}
+          </a>
+
+          <span class="ma-comment-time">
+            ${formatTime(c.created_at)}
+          </span>
+
+        </div>
+
+        <div class="ma-comment-text">
+          ${escapeHtml(c.content)}
         </div>
 
       </div>
@@ -1423,33 +2347,211 @@ function renderMessageBubble(message){
 }
 
 
-/* =========================================================
-   NACHRICHT SENDEN
-========================================================= */
+$("postsContainer").addEventListener(
+  "click",
+  async e=>{
 
-async function sendThreadMessage(event){
+    const b=
+      e.target.closest("[data-action]");
 
-  event.preventDefault();
+    if(!b){
+      return;
+    }
 
+
+    const a=
+      b.dataset.action;
+
+    const id=
+      b.dataset.postId;
+
+
+    if(a==="like"){
+      return toggleLike(id,b);
+    }
+
+
+    if(a==="delete"){
+      return deletePost(id);
+    }
+
+
+    if(a==="message"){
+      return openMessageModal(
+        b.dataset.authorId,
+        b.dataset.authorName
+      );
+    }
+
+
+    if(a==="comments"){
+
+      const x=
+        b.closest(".ma-post")
+          .querySelector(
+            `[data-comments="${id}"]`
+          );
+
+      x.style.display=
+        x.style.display==="none"
+          ?"block"
+          :"none";
+    }
+
+  }
+);
+
+
+$("postsContainer").addEventListener(
+  "submit",
+  async e=>{
+
+    const f=
+      e.target.closest(
+        "[data-comment-form]"
+      );
+
+    if(!f){
+      return;
+    }
+
+    e.preventDefault();
+
+    await submitComment(
+      f.dataset.commentForm,
+      f.querySelector("input")
+    );
+
+  }
+);
+
+
+async function toggleLike(id,b){
 
   if(!currentUser){
+    return location.href="home.html";
+  }
+
+
+  b.disabled=true;
+
+
+  try{
+
+    const {
+      data:x,
+      error:fe
+    }=
+      await supabaseClient
+        .from("community_post_likes")
+        .select(
+          "post_id,user_id"
+        )
+        .eq(
+          "post_id",
+          id
+        )
+        .eq(
+          "user_id",
+          currentUser.id
+        )
+        .maybeSingle();
+
+
+    if(fe){
+      throw fe;
+    }
+
+
+    if(x){
+
+      await supabaseClient
+        .from("community_post_likes")
+        .delete()
+        .eq(
+          "post_id",
+          id
+        )
+        .eq(
+          "user_id",
+          currentUser.id
+        );
+
+    }else{
+
+      const {
+        error
+      }=
+        await supabaseClient
+          .from("community_post_likes")
+          .insert({
+            post_id:id,
+            user_id:currentUser.id
+          });
+
+      if(error){
+        throw error;
+      }
+
+    }
+
+
+    await loadPosts();
+
+  }finally{
+
+    b.disabled=false;
+
+  }
+}
+
+
+async function deletePost(id){
+
+  if(!currentUser){
+    return location.href="home.html";
+  }
+
+
+  if(!confirm(
+    "Diesen Post wirklich löschen?"
+  )){
     return;
   }
 
 
-  if(!activeConversationUserId){
-    return;
+  const {
+    error
+  }=
+    await supabaseClient
+      .from("community_posts")
+      .delete()
+      .eq(
+        "id",
+        id
+      )
+      .eq(
+        "author_id",
+        currentUser.id
+      );
+
+
+  if(error){
+    alert(error.message);
+  }else{
+    await loadPosts();
   }
+}
 
 
-  const input=
-    $("threadInput");
+async function submitComment(
+  id,
+  input
+){
 
-  const sendButton=
-    $("threadSend");
-
-  const status=
-    $("threadStatus");
+  if(!currentUser){
+    return location.href="home.html";
+  }
 
 
   const content=
@@ -1461,243 +2563,1465 @@ async function sendThreadMessage(event){
   }
 
 
-  sendButton.disabled=true;
-  status.style.display="none";
-  status.textContent="";
+  input.disabled=true;
 
 
-  try{
+  const {
+    error
+  }=
+    await supabaseClient
+      .from("community_post_comments")
+      .insert({
+        post_id:id,
+        author_id:currentUser.id,
+        content
+      });
+
+
+  input.disabled=false;
+
+
+  if(error){
+
+    alert(error.message);
+
+  }else{
+
+    await loadPosts();
+
+    const x=
+      document.querySelector(
+        `[data-post-id="${id}"] [data-comments="${id}"]`
+      );
+
+    if(x){
+      x.style.display="block";
+    }
+
+  }
+}
+
+
+/* =========================================================
+   PRIVATE MESSAGES
+========================================================= */
+
+function openMessageModal(
+  id,
+  name
+){
+
+  if(!currentUser){
+    return location.href="home.html";
+  }
+
+  if(!id){
+    return;
+  }
+
+
+  messageReceiverId=id;
+
+  messageReceiverName=
+    name||
+    "Miles Apart Member";
+
+
+  $("messageRecipient").textContent=
+    `An ${messageReceiverName}`;
+
+
+  $("privateMessageContent").value="";
+
+  $("privateMessageStatus").textContent="";
+
+  $("messageOverlay")
+    .classList
+    .add("open");
+}
+
+
+function closeMessageModal(){
+
+  $("messageOverlay")
+    .classList
+    .remove("open");
+
+  messageReceiverId=null;
+}
+
+
+$("closeMessageButton").onclick=
+  closeMessageModal;
+
+
+$("messageOverlay").onclick=
+  e=>{
+
+    if(
+      e.target===
+      $("messageOverlay")
+    ){
+      closeMessageModal();
+    }
+
+  };
+
+
+$("sendPrivateMessageButton").onclick=
+  async()=>{
+
+    const content=
+      $("privateMessageContent")
+        .value
+        .trim();
+
+
+    if(!content){
+
+      $("privateMessageStatus")
+        .textContent=
+        "Bitte schreibe zuerst eine Nachricht.";
+
+      return;
+    }
+
+
+    const b=
+      $("sendPrivateMessageButton");
+
+    b.disabled=true;
+
 
     const {
-      data,
       error
     }=
       await supabaseClient
         .from("private_messages")
         .insert({
           sender_id:currentUser.id,
-          receiver_id:activeConversationUserId,
-          content:content
-        })
-        .select(
-          "id,sender_id,receiver_id,content,created_at"
-        )
-        .single();
+          receiver_id:messageReceiverId,
+          content
+        });
 
 
     if(error){
-      throw error;
+
+      $("privateMessageStatus")
+        .textContent=
+        error.message;
+
+    }else{
+
+      $("privateMessageStatus").innerHTML=
+        'Nachricht wurde gesendet ✓ — <a href="messages.html" style="color:#18b8c7;font-weight:800">Zu meinen Nachrichten</a>';
+
+      $("privateMessageContent").value="";
+
     }
 
 
-    if(data){
+    b.disabled=false;
 
-      allMessages.push(data);
-
-      buildConversations();
-      renderConversationList();
-      renderThread(
-        activeConversationUserId
-      );
-    }
-
-
-  }catch(error){
-
-    console.error(error);
-
-    status.style.display="block";
-    status.textContent=
-      error.message||
-      "Die Nachricht konnte nicht gesendet werden.";
-
-  }finally{
-
-    sendButton.disabled=false;
-  }
-}
+  };
 
 
 /* =========================================================
-   AUTOMATISCHE AKTUALISIERUNG
+   POST ERSTELLEN
 ========================================================= */
 
-async function refreshMessages(){
+$("openPostButton").onclick=
+  ()=>{
 
-  if(!currentUser){
-    return;
-  }
+    if(!currentUser){
+      return location.href="home.html";
+    }
 
+    $("postFormCard").style.display="block";
 
-  try{
+    $("postContent").focus();
 
-    const {
-      data,
-      error
-    }=
-      await supabaseClient
-        .from("private_messages")
-        .select(
-          "id,sender_id,receiver_id,content,created_at"
-        )
-        .or(
-          `sender_id.eq.${currentUser.id},receiver_id.eq.${currentUser.id}`
-        )
-        .order(
-          "created_at",
-          {
-            ascending:true
-          }
-        );
+  };
 
 
-    if(error){
-      console.error(error);
+$("cancelPostButton").onclick=
+  ()=>{
+
+    $("postForm").reset();
+
+    $("postImagePreview")
+      .classList
+      .remove("visible");
+
+    $("postImagePreview").src="";
+
+    $("postImageName").textContent="";
+
+    $("postFormCard").style.display="none";
+
+  };
+
+
+$("postImage").onchange=
+  ()=>{
+
+    const f=
+      $("postImage")
+        .files?.[0];
+
+    if(!f){
       return;
     }
 
 
-    const oldCount=
-      allMessages.length;
+    $("postImageName").textContent=
+      f.name;
 
 
-    allMessages=data||[];
+    const r=
+      new FileReader();
 
 
-    const changed=
-      allMessages.length!==oldCount;
+    r.onload=
+      e=>{
+
+        $("postImagePreview").src=
+          e.target.result;
+
+        $("postImagePreview")
+          .classList
+          .add("visible");
+
+      };
 
 
-    if(changed){
+    r.readAsDataURL(f);
 
-      await reloadProfilesAndRender();
+  };
 
-    }else if(activeConversationUserId){
 
-      const oldLast=
-        allMessages[allMessages.length-1];
+async function uploadPostImage(f){
 
-      const renderedLast=
-        document.querySelector(
-          ".ma-message-row:last-child .ma-message-time"
-        );
+  const ext=
+    f.name
+      .split(".")
+      .pop()
+      .toLowerCase()
+      .replace(
+        /[^a-z0-9]/g,
+        ""
+      );
+
+
+  const path=
+    `${currentUser.id}/${Date.now()}-${crypto.randomUUID()}.${ext}`;
+
+
+  const {
+    error
+  }=
+    await supabaseClient
+      .storage
+      .from("community-images")
+      .upload(
+        path,
+        f,
+        {
+          cacheControl:"3600",
+          upsert:false
+        }
+      );
+
+
+  if(error){
+    throw error;
+  }
+
+
+  return supabaseClient
+    .storage
+    .from("community-images")
+    .getPublicUrl(path)
+    .data
+    .publicUrl;
+}
+
+
+$("postForm").onsubmit=
+  async e=>{
+
+    e.preventDefault();
+
+
+    const content=
+      $("postContent")
+        .value
+        .trim();
+
+    const file=
+      $("postImage")
+        .files?.[0];
+
+
+    if(!content){
+      return;
+    }
+
+
+    if(
+      file&&
+      file.size>
+      8*1024*1024
+    ){
+
+      $("postFormMessage")
+        .textContent=
+        "Das Bild darf maximal 8 MB groß sein.";
+
+      return;
+    }
+
+
+    const b=
+      $("submitPostButton");
+
+    b.disabled=true;
+
+
+    try{
+
+      const url=
+        file
+          ?await uploadPostImage(file)
+          :null;
+
+
+      const {
+        error
+      }=
+        await supabaseClient
+          .from("community_posts")
+          .insert({
+            author_id:currentUser.id,
+            content,
+            image_url:url
+          });
+
+
+      if(error){
+        throw error;
+      }
+
+
+      $("cancelPostButton").click();
+
+      await loadPosts();
+
+    }catch(err){
+
+      $("postFormMessage")
+        .textContent=
+        err.message;
+
+    }finally{
+
+      b.disabled=false;
+
+    }
+
+  };
+
+
+/* =========================================================
+   RUN BUDDY
+========================================================= */
+
+function getBuddyDays(value){
+
+  if(!value){
+    return[];
+  }
+
+  return String(value)
+    .split(",")
+    .map(x=>x.trim())
+    .filter(Boolean);
+}
+
+
+function buddyDaysLabel(value){
+
+  const days=
+    getBuddyDays(value);
+
+  return days.length
+    ?days.join(" · ")
+    :"Flexibel";
+}
+
+
+function buddyCard(row){
+
+  const p=
+    row.profiles||
+    {};
+
+  const name=
+    p.display_name||
+    "Miles Apart Member";
+
+
+  return`
+
+    <article class="ma-buddy-card">
+
+      <div class="ma-buddy-top">
+
+        ${avatarHtml(p)}
+
+        <div>
+
+          <a
+            class="ma-buddy-name"
+            href="${profileUrl(p)}"
+          >
+            ${escapeHtml(name)}
+          </a>
+
+          <div class="ma-buddy-location">
+
+            ${
+              p.username
+                ?`@${escapeHtml(p.username)} · `
+                :""
+            }
+
+            ${escapeHtml(
+              row.location||
+              p.location||
+              ""
+            )}
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="ma-buddy-details">
+
+        <div class="ma-buddy-detail">
+
+          <span class="ma-buddy-label">
+            Lauftage
+          </span>
+
+          <span class="ma-buddy-value">
+            📅 ${escapeHtml(
+              buddyDaysLabel(
+                row.preferred_day
+              )
+            )}
+          </span>
+
+        </div>
+
+
+        <div class="ma-buddy-detail">
+
+          <span class="ma-buddy-label">
+            Uhrzeit
+          </span>
+
+          <span class="ma-buddy-value">
+            🕐 ${escapeHtml(
+              String(
+                row.preferred_time||
+                ""
+              ).slice(0,5)
+            )} Uhr
+          </span>
+
+        </div>
+
+
+        <div class="ma-buddy-detail">
+
+          <span class="ma-buddy-label">
+            Pace
+          </span>
+
+          <span class="ma-buddy-value">
+            ⚡ ${escapeHtml(
+              row.pace
+            )}
+          </span>
+
+        </div>
+
+
+        <div class="ma-buddy-detail">
+
+          <span class="ma-buddy-label">
+            Ort
+          </span>
+
+          <span class="ma-buddy-value">
+            📍 ${escapeHtml(
+              row.location
+            )}
+          </span>
+
+        </div>
+
+      </div>
+
+
+      ${
+        row.note
+          ?`
+            <div class="ma-buddy-note">
+              ${escapeHtml(row.note)}
+            </div>
+          `
+          :""
+      }
+
+
+      ${
+        currentUser
+          ?`
+            <div class="ma-buddy-actions">
+
+              <div
+                style="
+                  display:flex;
+                  align-items:center;
+                  gap:8px;
+                  flex-wrap:wrap
+                "
+              >
+
+                <button
+                  class="btn"
+                  type="button"
+                  data-buddy-message="${row.user_id}"
+                  data-buddy-name="${escapeHtml(name)}"
+                >
+                  Nachricht
+                </button>
+
+
+                ${
+                  currentUser.id===row.user_id
+                    ?`
+                      <button
+                        class="ma-buddy-delete"
+                        type="button"
+                        data-buddy-action="delete"
+                        data-buddy-id="${row.user_id}"
+                      >
+                        Mein Profil löschen
+                      </button>
+                    `
+                    :""
+                }
+
+              </div>
+
+            </div>
+          `
+          :""
+      }
+
+    </article>
+
+  `;
+}
+
+
+async function loadBuddyProfiles(){
+
+  const {
+    data,
+    error
+  }=
+    await supabaseClient
+      .from("run_buddy_profiles")
+      .select(`
+        user_id,
+        location,
+        preferred_day,
+        preferred_time,
+        pace,
+        note,
+        updated_at,
+        profiles:user_id(
+          display_name,
+          username,
+          avatar_url,
+          location
+        )
+      `)
+      .order(
+        "updated_at",
+        {
+          ascending:false
+        }
+      );
+
+
+  if(error){
+    throw error;
+  }
+
+
+  const list=
+    data||
+    [];
+
+
+  $("buddyList").innerHTML=
+    list.length
+      ?list.map(buddyCard).join("")
+      :`
+        <div class="ma-buddy-empty">
+          Noch keine Run Buddy-Profile vorhanden.
+          Sei der Erste! 🏃
+        </div>
+      `;
+
+
+  if(currentUser){
+
+    const mine=
+      list.find(
+        x=>x.user_id===currentUser.id
+      );
+
+
+    if(mine){
+
+      $("buddyLocation").value=
+        mine.location||
+        "";
+
+      setBuddyDays(
+        mine.preferred_day||
+        ""
+      );
+
+      $("buddyTime").value=
+        String(
+          mine.preferred_time||
+          ""
+        ).slice(0,5);
+
+      $("buddyPace").value=
+        mine.pace||
+        "";
+
+      $("buddyNote").value=
+        mine.note||
+        "";
+
+      $("openBuddyButton").textContent=
+        "Mein Run Buddy-Profil bearbeiten";
+
+    }else{
+
+      $("buddyProfileForm").reset();
+
+      setBuddyDays("");
+
+      $("openBuddyButton").textContent=
+        "+ Run Buddy eintragen";
+
+    }
+
+  }
+}
+
+
+$("buddyList").addEventListener(
+  "click",
+  async e=>{
+
+    const deleteButton=
+      e.target.closest(
+        '[data-buddy-action="delete"]'
+      );
+
+
+    if(deleteButton){
+
+      if(!currentUser){
+        return location.href="home.html";
+      }
 
 
       if(
-        oldLast&&
-        renderedLast&&
-        renderedLast.textContent.trim()!==
-        formatMessageTime(oldLast.created_at)
+        deleteButton.dataset.buddyId!==
+        currentUser.id
       ){
-
-        await reloadProfilesAndRender();
+        return;
       }
-    }
-
-  }catch(error){
-
-    console.error(error);
-  }
-}
 
 
-async function reloadProfilesAndRender(){
-
-  const userIds=[
-    ...new Set(
-      allMessages.flatMap(message=>[
-        message.sender_id,
-        message.receiver_id
-      ])
-    )
-  ];
+      if(!confirm(
+        "Dein Run Buddy-Profil wirklich löschen?"
+      )){
+        return;
+      }
 
 
-  if(userIds.length){
-
-    const {
-      data:profiles,
-      error
-    }=
-      await supabaseClient
-        .from("profiles")
-        .select(
-          "id,display_name,username,avatar_url,location"
-        )
-        .in("id",userIds);
+      deleteButton.disabled=true;
 
 
-    if(error){
-      console.error(error);
+      const {
+        error
+      }=
+        await supabaseClient
+          .from("run_buddy_profiles")
+          .delete()
+          .eq(
+            "user_id",
+            currentUser.id
+          );
+
+
+      if(error){
+
+        alert(error.message);
+
+        deleteButton.disabled=false;
+
+        return;
+      }
+
+
+      $("buddyForm")
+        .classList
+        .remove("open");
+
+      $("buddyFormMessage")
+        .textContent="";
+
+      $("openBuddyButton").textContent=
+        "+ Run Buddy eintragen";
+
+      $("buddyProfileForm").reset();
+
+      setBuddyDays("");
+
+
+      await loadBuddyProfiles();
+
       return;
     }
 
 
-    profilesById={};
+    const b=
+      e.target.closest(
+        "[data-buddy-message]"
+      );
 
-    (profiles||[]).forEach(profile=>{
-      profilesById[profile.id]=profile;
-    });
+
+    if(b){
+
+      openMessageModal(
+        b.dataset.buddyMessage,
+        b.dataset.buddyName
+      );
+
+    }
+
   }
+);
 
 
-  buildConversations();
-  renderConversationList();
+$("openBuddyButton").onclick=
+  ()=>{
+
+    if(!currentUser){
+      return location.href="home.html";
+    }
+
+    $("buddyForm")
+      .classList
+      .toggle("open");
+
+    $("buddyLocation").focus();
+
+  };
 
 
-  if(activeConversationUserId){
+$("cancelBuddyButton").onclick=
+  ()=>{
 
-    renderThread(
-      activeConversationUserId
-    );
-  }
+    $("buddyForm")
+      .classList
+      .remove("open");
+
+    $("buddyFormMessage")
+      .textContent="";
+
+    setBuddyDays("");
+
+  };
+
+
+function getSelectedBuddyDays(){
+
+  return Array.from(
+    document.querySelectorAll(
+      '#buddyDays input[type="checkbox"]:checked'
+    )
+  ).map(
+    x=>x.value
+  );
+
 }
+
+
+function setBuddyDays(value){
+
+  const selected=
+    new Set(
+      getBuddyDays(value)
+    );
+
+
+  document
+    .querySelectorAll(
+      '#buddyDays input[type="checkbox"]'
+    )
+    .forEach(
+      x=>{
+        x.checked=
+          selected.has(x.value);
+      }
+    );
+
+}
+
+
+$("buddyProfileForm").onsubmit=
+  async e=>{
+
+    e.preventDefault();
+
+
+    if(!currentUser){
+      return location.href="home.html";
+    }
+
+
+    const days=
+      getSelectedBuddyDays();
+
+
+    if(!days.length){
+
+      $("buddyFormMessage")
+        .textContent=
+        "Bitte wähle mindestens einen Lauftag aus.";
+
+      return;
+    }
+
+
+    const payload={
+
+      user_id:
+        currentUser.id,
+
+      location:
+        $("buddyLocation")
+          .value
+          .trim(),
+
+      preferred_day:
+        days.join(","),
+
+      preferred_time:
+        $("buddyTime").value,
+
+      pace:
+        $("buddyPace")
+          .value
+          .trim(),
+
+      note:
+        $("buddyNote")
+          .value
+          .trim(),
+
+      updated_at:
+        new Date().toISOString()
+
+    };
+
+
+    const b=
+      $("submitBuddyButton");
+
+    b.disabled=true;
+
+    b.textContent=
+      "Wird gespeichert …";
+
+
+    $("buddyFormMessage")
+      .textContent="";
+
+
+    try{
+
+      const {
+        error
+      }=
+        await supabaseClient
+          .from("run_buddy_profiles")
+          .upsert(
+            payload,
+            {
+              onConflict:"user_id"
+            }
+          );
+
+
+      if(error){
+        throw error;
+      }
+
+
+      $("buddyFormMessage")
+        .textContent=
+        "Profil gespeichert ✓";
+
+
+      await loadBuddyProfiles();
+
+
+      setTimeout(
+        ()=>
+          $("buddyForm")
+            .classList
+            .remove("open"),
+        600
+      );
+
+
+    }catch(err){
+
+      $("buddyFormMessage")
+        .textContent=
+        err.message;
+
+    }finally{
+
+      b.disabled=false;
+
+      b.textContent=
+        "Run Buddy-Profil speichern";
+
+    }
+
+  };
+
+
+/* =========================================================
+   GEMEINSAME LÄUFE
+========================================================= */
+
+$("openRunButton").onclick=
+  ()=>{
+
+    if(!currentUser){
+      return location.href="home.html";
+    }
+
+    $("runForm")
+      .classList
+      .toggle("open");
+
+    $("runTitle").focus();
+
+  };
+
+
+$("cancelRunButton").onclick=
+  ()=>{
+
+    $("communityRunForm").reset();
+
+    $("runMaxParticipants").value=8;
+
+    $("runForm")
+      .classList
+      .remove("open");
+
+    $("runFormMessage")
+      .textContent="";
+
+  };
+
+
+function runCard(run){
+
+  const parts=
+    run.community_run_participants||
+    [];
+
+  const creator=
+    run.profiles||
+    {};
+
+  const joined=
+    currentUser&&
+    parts.some(
+      x=>x.user_id===currentUser.id
+    );
+
+  const owner=
+    currentUser?.id===
+    run.creator_id;
+
+  const max=
+    Number(
+      run.max_participants||
+      0
+    );
+
+
+  return`
+
+    <article class="ma-run-card">
+
+      <div class="ma-run-card-top">
+
+        <div>
+
+          <h3 class="ma-run-card-title">
+            ${escapeHtml(run.title)}
+          </h3>
+
+          <div class="ma-run-card-author">
+            von ${
+              escapeHtml(
+                creator.display_name||
+                "Miles Apart Member"
+              )
+            }
+          </div>
+
+        </div>
+
+        <div class="ma-run-card-icon">
+          🏃
+        </div>
+
+      </div>
+
+
+      <div class="ma-run-details">
+
+        <div class="ma-run-detail">
+
+          <span class="ma-run-detail-label">
+            Ort
+          </span>
+
+          <span class="ma-run-detail-value">
+            📍 ${escapeHtml(run.location)}
+          </span>
+
+        </div>
+
+
+        <div class="ma-run-detail">
+
+          <span class="ma-run-detail-label">
+            Datum
+          </span>
+
+          <span class="ma-run-detail-value">
+            📅 ${escapeHtml(
+              formatRunDate(run.run_date)
+            )}
+          </span>
+
+        </div>
+
+
+        <div class="ma-run-detail">
+
+          <span class="ma-run-detail-label">
+            Uhrzeit
+          </span>
+
+          <span class="ma-run-detail-value">
+            🕐 ${escapeHtml(
+              String(
+                run.run_time||
+                ""
+              ).slice(0,5)
+            )} Uhr
+          </span>
+
+        </div>
+
+
+        <div class="ma-run-detail">
+
+          <span class="ma-run-detail-label">
+            Pace
+          </span>
+
+          <span class="ma-run-detail-value">
+            ⚡ ${escapeHtml(run.pace)}
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="ma-run-participants">
+
+        <div class="ma-run-participant-count">
+          👥 ${parts.length} / ${max} Teilnehmer
+        </div>
+
+
+        <div class="ma-run-actions">
+
+          ${
+            owner
+              ?`
+                <button
+                  class="ma-run-delete"
+                  data-run-action="delete"
+                  data-run-id="${run.id}"
+                >
+                  Löschen
+                </button>
+              `
+              :`
+                <button
+                  class="ma-run-join ${
+                    joined?"joined":""
+                  }"
+                  data-run-action="join"
+                  data-run-id="${run.id}"
+                  ${
+                    !joined&&
+                    parts.length>=max
+                      ?"disabled"
+                      :""
+                  }
+                >
+                  ${
+                    joined
+                      ?"✓ Ich bin dabei"
+                      :parts.length>=max
+                        ?"Voll"
+                        :"Ich bin dabei"
+                  }
+                </button>
+              `
+          }
+
+        </div>
+
+      </div>
+
+    </article>
+
+  `;
+}
+
+
+async function loadCommunityRuns(){
+
+  const {
+    data,
+    error
+  }=
+    await supabaseClient
+      .from("community_runs")
+      .select(`
+        id,
+        creator_id,
+        title,
+        location,
+        run_date,
+        run_time,
+        pace,
+        max_participants,
+        created_at,
+        profiles:creator_id(
+          display_name,
+          username,
+          avatar_url
+        ),
+        community_run_participants(user_id)
+      `)
+      .gte(
+        "run_date",
+        new Date()
+          .toISOString()
+          .slice(0,10)
+      )
+      .order(
+        "run_date",
+        {
+          ascending:true
+        }
+      )
+      .order(
+        "run_time",
+        {
+          ascending:true
+        }
+      );
+
+
+  if(error){
+    throw error;
+  }
+
+
+  $("runList").innerHTML=
+    (data||[]).length
+      ?(data||[])
+        .map(runCard)
+        .join("")
+      :`
+        <div class="ma-buddy-empty">
+          Noch keine gemeinsamen Läufe geplant.
+          Erstelle den ersten!
+        </div>
+      `;
+}
+
+
+$("runList").addEventListener(
+  "click",
+  async e=>{
+
+    const b=
+      e.target.closest(
+        "[data-run-action]"
+      );
+
+    if(!b){
+      return;
+    }
+
+
+    const id=
+      b.dataset.runId;
+
+
+    if(
+      b.dataset.runAction===
+      "delete"
+    ){
+
+      if(!confirm(
+        "Diesen gemeinsamen Lauf wirklich löschen?"
+      )){
+        return;
+      }
+
+
+      await supabaseClient
+        .from("community_runs")
+        .delete()
+        .eq("id",id)
+        .eq(
+          "creator_id",
+          currentUser.id
+        );
+
+    }else{
+
+      const {
+        data:x
+      }=
+        await supabaseClient
+          .from("community_run_participants")
+          .select("run_id")
+          .eq("run_id",id)
+          .eq(
+            "user_id",
+            currentUser.id
+          )
+          .maybeSingle();
+
+
+      if(x){
+
+        await supabaseClient
+          .from("community_run_participants")
+          .delete()
+          .eq("run_id",id)
+          .eq(
+            "user_id",
+            currentUser.id
+          );
+
+      }else{
+
+        await supabaseClient
+          .from("community_run_participants")
+          .insert({
+            run_id:id,
+            user_id:currentUser.id
+          });
+
+      }
+
+    }
+
+
+    await loadCommunityRuns();
+
+  }
+);
+
+
+$("communityRunForm").onsubmit=
+  async e=>{
+
+    e.preventDefault();
+
+
+    const b=
+      $("submitRunButton");
+
+    b.disabled=true;
+
+
+    try{
+
+      const {
+        data:r,
+        error
+      }=
+        await supabaseClient
+          .from("community_runs")
+          .insert({
+            creator_id:currentUser.id,
+            title:$("runTitle").value.trim(),
+            location:$("runLocation").value.trim(),
+            run_date:$("runDate").value,
+            run_time:$("runTime").value,
+            pace:$("runPace").value.trim(),
+            max_participants:
+              Number(
+                $("runMaxParticipants").value
+              )
+          })
+          .select("id")
+          .single();
+
+
+      if(error){
+        throw error;
+      }
+
+
+      const {
+        error:pe
+      }=
+        await supabaseClient
+          .from("community_run_participants")
+          .insert({
+            run_id:r.id,
+            user_id:currentUser.id
+          });
+
+
+      if(pe){
+        throw pe;
+      }
+
+
+      $("cancelRunButton").click();
+
+      await loadCommunityRuns();
+
+
+    }catch(err){
+
+      $("runFormMessage")
+        .textContent=
+        err.message;
+
+    }finally{
+
+      b.disabled=false;
+
+    }
+
+  };
 
 
 /* =========================================================
    INITIALISIERUNG
 ========================================================= */
 
-async function initializeMessages(){
+async function initializeCommunity(){
 
   try{
 
-    const loggedIn=
-      await loadCurrentUser();
+    await loadCurrentUser();
 
 
-    if(!loggedIn){
-      return;
-    }
+    await Promise.all([
+      loadPosts(),
+      loadBuddyProfiles(),
+      loadCommunityRuns()
+    ]);
 
 
-    await loadMessages();
+    $("communityLoading")
+      .style
+      .display="none";
+
+    $("communityBuddySection")
+      .style
+      .display="block";
+
+    $("communityRunsSection")
+      .style
+      .display="block";
 
 
-    $("messagesLoading").style.display="none";
-    $("messagesLayout").style.display="grid";
+  }catch(err){
+
+    console.error(err);
 
 
-    refreshTimer=
-      setInterval(
-        refreshMessages,
-        5000
-      );
+    $("communityLoading")
+      .style
+      .display="none";
 
+    $("communityError")
+      .style
+      .display="block";
 
-  }catch(error){
+    $("communityError")
+      .textContent=
+      err.message||
+      "Die Community konnte nicht geladen werden.";
 
-    console.error(error);
-
-
-    $("messagesLoading").style.display="none";
-
-    $("messagesError").style.display="block";
-
-    $("messagesError").textContent=
-      error.message||
-      "Die Nachrichten konnten nicht geladen werden.";
   }
+
 }
 
 
@@ -1707,11 +4031,12 @@ supabaseClient.auth.onAuthStateChange(
     currentUser=
       session?.user||
       null;
+
   }
 );
 
 
-initializeMessages();
+initializeCommunity();
 </script>
 
 </body>
