@@ -9,6 +9,66 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
+
+/* =========================================================
+   COMMUNITY – GLOBALE AUSRICHTUNG
+   Diese Regeln überschreiben auch globale style.css-Regeln.
+========================================================= */
+
+.main,
+.main *{
+  text-indent:0 !important;
+}
+
+.main p,
+.main h1,
+.main h2,
+.main h3,
+.main h4,
+.main h5,
+.main h6,
+.main div,
+.main span,
+.main label,
+.main a,
+.main li{
+  text-align:left !important;
+}
+
+.main p,
+.main h1,
+.main h2,
+.main h3,
+.main h4,
+.main h5,
+.main h6{
+  margin-left:0 !important;
+  margin-right:0 !important;
+}
+
+.main .btn,
+.main button{
+  text-indent:0 !important;
+}
+
+.main input,
+.main textarea,
+.main select{
+  text-align:left !important;
+  text-indent:0 !important;
+  padding-left:13px !important;
+}
+
+/* Ausnahme: Wochentage dürfen mittig in ihren Kästchen stehen */
+.ma-buddy-day label{
+  text-align:center !important;
+}
+
+
+/* =========================================================
+   GRUNDLAYOUT
+========================================================= */
+
 .top-right{
   display:flex;
   align-items:center;
@@ -17,8 +77,8 @@
 
 .ma-community-loading{
   padding:60px 20px;
-  text-align:center;
   color:#777;
+  text-align:left !important;
 }
 
 .ma-community-error{
@@ -28,13 +88,15 @@
   background:#fff7f7;
   color:#b22f2f;
   font-weight:700;
+  text-align:left !important;
 }
 
 .ma-section{
   width:100%;
   box-sizing:border-box;
-  margin:0 0 28px;
+  margin:0 0 28px !important;
   padding:28px;
+  text-align:left !important;
 }
 
 .ma-section-head{
@@ -42,11 +104,11 @@
   align-items:flex-start;
   justify-content:space-between;
   gap:20px;
-  margin:0 0 22px;
+  margin:0 0 22px !important;
 }
 
 .ma-section-title{
-  margin:0;
+  margin:0 !important;
   color:#111;
   font-size:28px;
   line-height:1.2;
@@ -54,11 +116,12 @@
 }
 
 .ma-section-subtitle{
-  margin:7px 0 0;
+  margin:7px 0 0 !important;
   color:#777;
   font-size:15px;
   line-height:1.45;
 }
+
 
 /* =========================================================
    RUN BUDDY
@@ -68,6 +131,7 @@
   display:grid;
   grid-template-columns:1fr;
   gap:18px;
+  width:100%;
 }
 
 .ma-buddy-card{
@@ -83,13 +147,13 @@
   display:flex;
   align-items:center;
   gap:14px;
-  margin-bottom:18px;
-  text-align:left !important;
+  margin:0 0 18px !important;
 }
 
-.ma-buddy-avatar,
-.ma-post-avatar,
-.ma-comment-avatar{
+.ma-buddy-avatar{
+  width:58px;
+  height:58px;
+  min-width:58px;
   border-radius:50%;
   overflow:hidden;
   border:2px solid #63d6e5;
@@ -100,45 +164,25 @@
   box-sizing:border-box;
 }
 
-.ma-buddy-avatar{
-  width:58px;
-  height:58px;
-  min-width:58px;
-}
-
-.ma-post-avatar{
-  width:56px;
-  height:56px;
-  min-width:56px;
-}
-
-.ma-comment-avatar{
-  width:40px;
-  height:40px;
-  min-width:40px;
-}
-
-.ma-buddy-avatar img,
-.ma-post-avatar img,
-.ma-comment-avatar img{
+.ma-buddy-avatar img{
   width:100%;
   height:100%;
   object-fit:cover;
 }
 
-.ma-buddy-initials,
-.ma-post-avatar-initials,
-.ma-comment-avatar-initials{
+.ma-buddy-initials{
   color:#18b8c7;
+  font-size:15px;
   font-weight:800;
 }
 
 .ma-buddy-name{
   display:inline-block;
-  margin:0;
+  margin:0 !important;
   color:#111;
   font-size:20px;
   font-weight:800;
+  line-height:1.2;
   text-decoration:none;
 }
 
@@ -147,18 +191,16 @@
 }
 
 .ma-buddy-location{
-  margin:4px 0 0;
+  margin:4px 0 0 !important;
   color:#777;
   font-size:14px;
-  text-align:left !important;
 }
 
 .ma-buddy-details{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
   gap:10px;
-  margin-bottom:16px;
-  text-align:left !important;
+  margin:0 0 16px !important;
 }
 
 .ma-buddy-detail{
@@ -169,13 +211,12 @@
 
 .ma-buddy-label{
   display:block;
-  margin-bottom:4px;
+  margin:0 0 4px !important;
   color:#888;
   font-size:11px;
   text-transform:uppercase;
   letter-spacing:.05em;
   font-weight:700;
-  text-align:left !important;
 }
 
 .ma-buddy-value{
@@ -185,30 +226,41 @@
   line-height:1.3;
   font-weight:800;
   overflow-wrap:anywhere;
-  text-align:left !important;
 }
 
 .ma-buddy-note{
-  padding:13px 0;
+  width:100%;
+  box-sizing:border-box;
+  margin:0 !important;
+  padding:13px 0 !important;
   border-top:1px solid #eee;
   color:#333;
   font-size:15px;
   line-height:1.45;
+}
+
+.ma-buddy-empty{
+  padding:35px 20px;
+  border:1px dashed #ccc;
+  color:#777;
   text-align:left !important;
 }
 
+
 /* =========================================================
-   AKTIONSBUTTONS
+   AKTIONEN
 ========================================================= */
 
 .ma-action-row{
   display:flex;
   align-items:center;
-  justify-content:flex-end;
+  justify-content:flex-start;
   flex-wrap:wrap;
-  gap:10px;
-  margin-top:16px;
-  padding-top:14px;
+  gap:12px;
+  width:100%;
+  box-sizing:border-box;
+  margin:15px 0 0 !important;
+  padding:14px 0 0 !important;
   border-top:1px solid #eee;
 }
 
@@ -218,9 +270,10 @@
   color:#555;
   padding:7px 4px;
   font:inherit;
-  font-size:16px;
+  font-size:15px;
   font-weight:800;
   cursor:pointer;
+  text-align:left !important;
 }
 
 .ma-action-button:hover{
@@ -240,12 +293,13 @@
 }
 
 .ma-like-button{
-  margin-right:auto;
+  margin-right:0 !important;
 }
 
 .ma-like-button.liked{
   color:#18b8c7;
 }
+
 
 /* =========================================================
    KOMMENTARE
@@ -253,8 +307,10 @@
 
 .ma-comments-box{
   display:none;
-  margin-top:15px;
-  padding-top:15px;
+  width:100%;
+  box-sizing:border-box;
+  margin:15px 0 0 !important;
+  padding:15px 0 0 !important;
   border-top:1px solid #eee;
   text-align:left !important;
 }
@@ -267,19 +323,51 @@
   display:flex;
   flex-direction:column;
   gap:14px;
-  margin-bottom:14px;
+  margin:0 !important;
+  padding:0 !important;
   text-align:left !important;
 }
 
 .ma-comment{
   display:flex;
+  align-items:flex-start;
   gap:10px;
+  width:100%;
+  margin:0 !important;
+  padding:0 !important;
   text-align:left !important;
+}
+
+.ma-comment-avatar{
+  width:40px;
+  height:40px;
+  min-width:40px;
+  border-radius:50%;
+  overflow:hidden;
+  border:2px solid #63d6e5;
+  background:#eefafa;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.ma-comment-avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.ma-comment-avatar-initials{
+  color:#18b8c7;
+  font-size:11px;
+  font-weight:800;
 }
 
 .ma-comment-content{
   min-width:0;
   flex:1;
+  margin:0 !important;
+  padding:0 !important;
   text-align:left !important;
 }
 
@@ -288,6 +376,7 @@
   font-size:14px;
   font-weight:800;
   text-decoration:none;
+  text-align:left !important;
 }
 
 .ma-comment-name:hover{
@@ -295,13 +384,15 @@
 }
 
 .ma-comment-time{
-  margin-left:7px;
+  margin-left:7px !important;
   color:#999;
   font-size:11px;
 }
 
 .ma-comment-text{
-  margin-top:3px;
+  width:100%;
+  margin:3px 0 0 !important;
+  padding:0 !important;
   color:#222;
   font-size:15px;
   line-height:1.4;
@@ -310,17 +401,32 @@
   text-align:left !important;
 }
 
+.ma-comment-delete{
+  border:0;
+  background:transparent;
+  color:#b44;
+  padding:0 !important;
+  margin:5px 0 0 !important;
+  font-size:11px;
+  font-weight:700;
+  cursor:pointer;
+  text-align:left !important;
+}
+
 .ma-comment-form{
   display:flex;
+  align-items:stretch;
   gap:8px;
-  text-align:left !important;
+  width:100%;
+  margin:15px 0 0 !important;
+  padding:0 !important;
 }
 
 .ma-comment-input{
   flex:1;
   min-width:0;
   height:46px;
-  padding:0 12px;
+  padding:0 12px !important;
   border:1px solid #d8d8d8;
   font:inherit;
   box-sizing:border-box;
@@ -346,26 +452,16 @@
   background:#18b8c7;
 }
 
-.ma-comment-delete{
-  border:0;
-  background:transparent;
-  color:#b44;
-  padding:0;
-  margin-top:4px;
-  font-size:11px;
-  font-weight:700;
-  cursor:pointer;
-}
 
 /* =========================================================
-   FORMS
+   FORMULARE
 ========================================================= */
 
 .ma-buddy-form,
 .ma-run-form{
   display:none;
   width:100%;
-  margin:0 0 22px;
+  margin:0 0 22px !important;
   padding:22px;
   border:1px solid #e5e5e5;
   background:#fafafa;
@@ -376,41 +472,6 @@
 .ma-buddy-form.open,
 .ma-run-form.open{
   display:block;
-}
-
-.ma-buddy-days{
-  display:grid;
-  grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:8px;
-}
-
-.ma-buddy-day{
-  position:relative;
-}
-
-.ma-buddy-day input{
-  position:absolute;
-  opacity:0;
-  pointer-events:none;
-}
-
-.ma-buddy-day label{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  min-height:48px;
-  padding:0 10px;
-  border:1px solid #d8d8d8;
-  background:#fff;
-  font-size:14px;
-  font-weight:800;
-  cursor:pointer;
-}
-
-.ma-buddy-day input:checked + label{
-  border-color:#18b8c7;
-  background:#eefafa;
-  color:#18b8c7;
 }
 
 .ma-form-grid{
@@ -440,7 +501,7 @@
 .ma-form-input{
   width:100%;
   height:50px;
-  padding:0 13px;
+  padding:0 13px !important;
   border:1px solid #d8d8d8;
   background:#fff;
   color:#111;
@@ -451,7 +512,7 @@
 
 textarea.ma-form-input{
   height:110px;
-  padding:13px;
+  padding:13px !important;
   resize:vertical;
 }
 
@@ -465,7 +526,7 @@ textarea.ma-form-input{
   align-items:center;
   justify-content:space-between;
   gap:12px;
-  margin-top:16px;
+  margin:16px 0 0 !important;
 }
 
 .ma-form-message{
@@ -474,6 +535,43 @@ textarea.ma-form-input{
   font-weight:700;
   text-align:left !important;
 }
+
+.ma-buddy-days{
+  display:grid;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:8px;
+}
+
+.ma-buddy-day{
+  position:relative;
+}
+
+.ma-buddy-day input{
+  position:absolute;
+  opacity:0;
+  pointer-events:none;
+}
+
+.ma-buddy-day label{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:48px;
+  padding:0 10px;
+  border:1px solid #d8d8d8;
+  background:#fff;
+  font-size:14px;
+  font-weight:800;
+  cursor:pointer;
+  box-sizing:border-box;
+}
+
+.ma-buddy-day input:checked + label{
+  border-color:#18b8c7;
+  background:#eefafa;
+  color:#18b8c7;
+}
+
 
 /* =========================================================
    POSTS
@@ -484,78 +582,131 @@ textarea.ma-form-input{
   max-width:none !important;
   box-sizing:border-box !important;
   display:block !important;
+
   margin:0 0 22px 0 !important;
+
   padding:28px !important;
+
   text-align:left !important;
   text-indent:0 !important;
-  overflow:hidden;
 }
 
 .ma-post-header{
   width:100% !important;
   display:flex !important;
   align-items:center;
+
   margin:0 !important;
   padding:0 !important;
+
   text-align:left !important;
-  text-indent:0 !important;
 }
 
 .ma-post-author{
   width:100% !important;
   display:flex !important;
   align-items:center;
+
   margin:0 !important;
   padding:0 !important;
+
   text-decoration:none;
   color:inherit;
+
   text-align:left !important;
   text-indent:0 !important;
+}
+
+.ma-post-avatar{
+  width:56px;
+  height:56px;
+  min-width:56px;
+
+  border-radius:50%;
+  overflow:hidden;
+
+  border:2px solid #63d6e5;
+  background:#eefafa;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  box-sizing:border-box;
+}
+
+.ma-post-avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+.ma-post-avatar-initials{
+  color:#18b8c7;
+  font-size:14px;
+  font-weight:800;
 }
 
 .ma-post-author-info{
-  margin-left:13px !important;
-  margin-right:0 !important;
   min-width:0;
+
+  margin:0 0 0 13px !important;
+  padding:0 !important;
+
   text-align:left !important;
-  text-indent:0 !important;
 }
 
 .ma-post-author-name{
+  margin:0 !important;
+  padding:0 !important;
+
   color:#111;
   font-size:19px;
   font-weight:800;
+
   text-align:left !important;
 }
 
 .ma-post-author-meta{
-  margin-top:3px !important;
-  margin-left:0 !important;
-  padding-left:0 !important;
+  margin:3px 0 0 !important;
+  padding:0 !important;
+
   color:#777;
   font-size:15px;
+
   text-align:left !important;
-  text-indent:0 !important;
 }
 
+
 /*
-  WICHTIG:
-  Der Post-Text wird hier bewusst gegen globale Regeln
-  aus style.css abgesichert.
+  DER WICHTIGSTE BLOCK FÜR DIE POST-AUSRICHTUNG.
+
+  Damit wird auch eine globale style.css-Regel wie
+  "margin:auto", "max-width", "text-align:center"
+  oder "padding-left" vollständig überschrieben.
 */
 
-.ma-post-copy{
+.ma-post-copy,
+.ma-post-copy p,
+.ma-post-copy div,
+.ma-post-copy span{
   display:block !important;
+
   width:100% !important;
   max-width:none !important;
-  box-sizing:border-box !important;
 
-  margin:25px 0 26px 0 !important;
-  padding:0 !important;
-  padding-left:0 !important;
+  margin-top:25px !important;
+  margin-right:0 !important;
+  margin-bottom:26px !important;
+  margin-left:0 !important;
+
+  padding-top:0 !important;
   padding-right:0 !important;
+  padding-bottom:0 !important;
+  padding-left:0 !important;
 
   color:#111;
+
   font-size:20px;
   line-height:1.45;
 
@@ -566,24 +717,27 @@ textarea.ma-form-input{
   overflow-wrap:anywhere;
 }
 
+.ma-post-copy p:first-child{
+  margin-top:0 !important;
+}
+
+.ma-post-copy p:last-child{
+  margin-bottom:0 !important;
+}
+
 .ma-post-image{
   display:block;
+
   width:100%;
-  max-height:650px;
+  max-width:none;
+
   margin:0 0 25px 0 !important;
+  padding:0 !important;
+
   border-radius:14px;
   object-fit:cover;
 }
 
-.ma-post-actions{
-  display:flex;
-  align-items:center;
-  justify-content:flex-end;
-  flex-wrap:wrap;
-  gap:10px;
-  padding:15px 0 0;
-  border-top:1px solid #eee;
-}
 
 /* =========================================================
    GEMEINSAME LÄUFE
@@ -593,6 +747,7 @@ textarea.ma-form-input{
   display:grid;
   grid-template-columns:1fr;
   gap:18px;
+  width:100%;
 }
 
 .ma-run-card{
@@ -608,23 +763,20 @@ textarea.ma-form-input{
   display:flex;
   justify-content:space-between;
   gap:15px;
-  margin-bottom:16px;
-  text-align:left !important;
+  margin:0 0 16px !important;
 }
 
 .ma-run-card-title{
-  margin:0;
+  margin:0 !important;
   color:#111;
   font-size:22px;
   font-weight:800;
-  text-align:left !important;
 }
 
 .ma-run-card-author{
-  margin-top:5px;
+  margin:5px 0 0 !important;
   color:#777;
   font-size:14px;
-  text-align:left !important;
 }
 
 .ma-run-card-icon{
@@ -635,8 +787,7 @@ textarea.ma-form-input{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
   gap:10px;
-  margin-bottom:18px;
-  text-align:left !important;
+  margin:0 0 18px !important;
 }
 
 .ma-run-detail{
@@ -647,13 +798,12 @@ textarea.ma-form-input{
 
 .ma-run-detail-label{
   display:block;
-  margin-bottom:4px;
+  margin:0 0 4px !important;
   color:#888;
   font-size:11px;
   text-transform:uppercase;
   letter-spacing:.05em;
   font-weight:700;
-  text-align:left !important;
 }
 
 .ma-run-detail-value{
@@ -662,7 +812,6 @@ textarea.ma-form-input{
   font-size:15px;
   line-height:1.3;
   font-weight:800;
-  text-align:left !important;
 }
 
 .ma-run-participants{
@@ -670,7 +819,10 @@ textarea.ma-form-input{
   align-items:center;
   justify-content:space-between;
   gap:12px;
-  padding-top:15px;
+
+  margin:0 !important;
+  padding:15px 0 0 !important;
+
   border-top:1px solid #eee;
 }
 
@@ -678,7 +830,6 @@ textarea.ma-form-input{
   color:#555;
   font-size:14px;
   font-weight:700;
-  text-align:left !important;
 }
 
 .ma-run-actions{
@@ -712,30 +863,16 @@ textarea.ma-form-input{
   cursor:not-allowed;
 }
 
-.ma-empty,
-.ma-buddy-empty{
-  padding:45px 20px;
-  border:1px dashed #ccc;
-  text-align:center;
-  color:#777;
-}
-
-.ma-empty strong{
-  display:block;
-  margin-bottom:8px;
-  color:#111;
-  font-size:20px;
-}
 
 /* =========================================================
-   BILD-UPLOAD
+   POST FORMULAR / BILD
 ========================================================= */
 
 .ma-image-upload{
   display:flex;
   flex-direction:column;
   gap:10px;
-  margin-top:14px;
+  margin:14px 0 0 !important;
   text-align:left !important;
 }
 
@@ -778,17 +915,20 @@ textarea.ma-form-input{
   text-align:left !important;
 }
 
+
 /* =========================================================
-   PRIVATE NACHRICHT
+   PRIVATE NACHRICHT MODAL
 ========================================================= */
 
 .ma-message-overlay{
   position:fixed;
   inset:0;
   z-index:9999;
+
   display:none;
   align-items:center;
   justify-content:center;
+
   padding:20px;
   background:rgba(0,0,0,.45);
   box-sizing:border-box;
@@ -801,10 +941,13 @@ textarea.ma-form-input{
 .ma-message-modal{
   width:100%;
   max-width:520px;
+
   background:#fff;
   border-radius:18px;
+
   padding:26px;
   box-sizing:border-box;
+
   text-align:left !important;
 }
 
@@ -813,17 +956,18 @@ textarea.ma-form-input{
   align-items:center;
   justify-content:space-between;
   gap:15px;
-  margin-bottom:18px;
+
+  margin:0 0 18px !important;
 }
 
 .ma-message-modal-title{
-  margin:0;
+  margin:0 !important;
   font-size:24px;
   text-align:left !important;
 }
 
 .ma-message-modal-recipient{
-  margin:4px 0;
+  margin:4px 0 !important;
   color:#777;
   text-align:left !important;
 }
@@ -841,24 +985,25 @@ textarea.ma-form-input{
 .ma-message-textarea{
   width:100%;
   min-height:140px;
-  padding:14px;
+
+  margin:0 !important;
+  padding:14px !important;
+
   border:1px solid #d8d8d8;
+
   font:inherit;
   box-sizing:border-box;
   resize:vertical;
-  text-align:left !important;
-}
 
-.ma-message-textarea:focus{
-  outline:none;
-  border-color:#18b8c7;
+  text-align:left !important;
 }
 
 .ma-message-actions{
   display:flex;
   align-items:center;
   gap:8px;
-  margin-top:12px;
+
+  margin:12px 0 0 !important;
 }
 
 .ma-message-status{
@@ -872,9 +1017,11 @@ textarea.ma-form-input{
 .ma-message-send{
   min-width:120px;
   height:52px;
+
   border:0;
   background:#18b8c7;
   color:#fff;
+
   font-weight:800;
   cursor:pointer;
 }
@@ -882,6 +1029,7 @@ textarea.ma-form-input{
 .ma-message-send:hover{
   background:#111;
 }
+
 
 /* =========================================================
    MOBILE
@@ -924,18 +1072,21 @@ textarea.ma-form-input{
     padding:24px !important;
   }
 
-  .ma-post-copy{
+  .ma-post-copy,
+  .ma-post-copy p{
     width:100% !important;
     max-width:none !important;
+
     margin-left:0 !important;
     margin-right:0 !important;
+
     padding-left:0 !important;
     padding-right:0 !important;
+
     text-align:left !important;
     text-indent:0 !important;
   }
 
-  .ma-post-actions,
   .ma-action-row{
     justify-content:flex-start;
   }
@@ -949,8 +1100,8 @@ textarea.ma-form-input{
     width:100%;
   }
 
-  .ma-run-actions>*{
-    flex:1;
+  .ma-run-join{
+    width:100%;
   }
 
   .ma-comment-form{
@@ -979,6 +1130,7 @@ textarea.ma-form-input{
     width:100%;
   }
 }
+
 </style>
 </head>
 
@@ -998,17 +1150,41 @@ textarea.ma-form-input{
   </div>
 
   <nav class="nav">
-    <a href="index.html">Miles Apart</a>
-    <a href="home.html">Home</a>
-    <a href="challenges.html">Challenges</a>
-    <a class="active" href="community.html">Community</a>
-    <a href="messages.html">Nachrichten</a>
-    <a href="events.html">Events</a>
-    <a href="training.html">Training</a>
+
+    <a href="index.html">
+      Miles Apart
+    </a>
+
+    <a href="home.html">
+      Home
+    </a>
+
+    <a href="challenges.html">
+      Challenges
+    </a>
+
+    <a class="active" href="community.html">
+      Community
+    </a>
+
+    <a href="messages.html">
+      Nachrichten
+    </a>
+
+    <a href="events.html">
+      Events
+    </a>
+
+    <a href="training.html">
+      Training
+    </a>
+
   </nav>
 
   <div class="side-bottom">
+
     <small>THIS WEEK</small>
+
     <strong>23.4 / 30 KM</strong>
 
     <div class="mini-progress">
@@ -1021,6 +1197,7 @@ textarea.ma-form-input{
     >
       Nur 6.6 km bis zum Wochenziel.
     </p>
+
   </div>
 
 </aside>
@@ -1029,18 +1206,21 @@ textarea.ma-form-input{
 <main class="main">
 
 <div class="top">
+
   <div class="crumb">
     MILES APART / COMMUNITY
   </div>
 
-  <div class="top-right"></div>
 </div>
 
 
 <div class="hero">
 
   <div>
-    <h1>Community.</h1>
+
+    <h1>
+      Community.
+    </h1>
 
     <p
       class="lead"
@@ -1048,6 +1228,7 @@ textarea.ma-form-input{
     >
       Dein virtueller Run Club — gemeinsam laufen, egal wo du bist.
     </p>
+
   </div>
 
   <button
@@ -1072,7 +1253,10 @@ textarea.ma-form-input{
 >
 
   <div class="section-head">
-    <h2>Neuer Post</h2>
+
+    <h2>
+      Neuer Post
+    </h2>
 
     <span
       class="small muted"
@@ -1080,6 +1264,7 @@ textarea.ma-form-input{
     >
       —
     </span>
+
   </div>
 
 
@@ -1248,87 +1433,41 @@ textarea.ma-form-input{
           >
 
             <div class="ma-buddy-day">
-              <input
-                id="buddyDayMonday"
-                type="checkbox"
-                value="Montag"
-              >
-              <label for="buddyDayMonday">
-                Montag
-              </label>
+              <input id="buddyDayMonday" type="checkbox" value="Montag">
+              <label for="buddyDayMonday">Montag</label>
             </div>
 
             <div class="ma-buddy-day">
-              <input
-                id="buddyDayTuesday"
-                type="checkbox"
-                value="Dienstag"
-              >
-              <label for="buddyDayTuesday">
-                Dienstag
-              </label>
+              <input id="buddyDayTuesday" type="checkbox" value="Dienstag">
+              <label for="buddyDayTuesday">Dienstag</label>
             </div>
 
             <div class="ma-buddy-day">
-              <input
-                id="buddyDayWednesday"
-                type="checkbox"
-                value="Mittwoch"
-              >
-              <label for="buddyDayWednesday">
-                Mittwoch
-              </label>
+              <input id="buddyDayWednesday" type="checkbox" value="Mittwoch">
+              <label for="buddyDayWednesday">Mittwoch</label>
             </div>
 
             <div class="ma-buddy-day">
-              <input
-                id="buddyDayThursday"
-                type="checkbox"
-                value="Donnerstag"
-              >
-              <label for="buddyDayThursday">
-                Donnerstag
-              </label>
+              <input id="buddyDayThursday" type="checkbox" value="Donnerstag">
+              <label for="buddyDayThursday">Donnerstag</label>
             </div>
 
             <div class="ma-buddy-day">
-              <input
-                id="buddyDayFriday"
-                type="checkbox"
-                value="Freitag"
-              >
-              <label for="buddyDayFriday">
-                Freitag
-              </label>
+              <input id="buddyDayFriday" type="checkbox" value="Freitag">
+              <label for="buddyDayFriday">Freitag</label>
             </div>
 
             <div class="ma-buddy-day">
-              <input
-                id="buddyDaySaturday"
-                type="checkbox"
-                value="Samstag"
-              >
-              <label for="buddyDaySaturday">
-                Samstag
-              </label>
+              <input id="buddyDaySaturday" type="checkbox" value="Samstag">
+              <label for="buddyDaySaturday">Samstag</label>
             </div>
 
             <div class="ma-buddy-day">
-              <input
-                id="buddyDaySunday"
-                type="checkbox"
-                value="Sonntag"
-              >
-              <label for="buddyDaySunday">
-                Sonntag
-              </label>
+              <input id="buddyDaySunday" type="checkbox" value="Sonntag">
+              <label for="buddyDaySunday">Sonntag</label>
             </div>
 
           </div>
-
-          <small class="small muted">
-            Du kannst mehrere Tage auswählen.
-          </small>
 
         </div>
 
@@ -1385,7 +1524,7 @@ textarea.ma-form-input{
             id="buddyNote"
             class="ma-form-input"
             maxlength="500"
-            placeholder="z. B. Ich laufe gerne entspannt 5–10 km und suche jemanden für regelmäßige Feierabendläufe."
+            placeholder="z. B. Ich laufe gerne entspannt 5–10 km."
           ></textarea>
 
         </div>
@@ -1481,10 +1620,7 @@ textarea.ma-form-input{
 
         <div class="ma-form-field full">
 
-          <label
-            class="ma-form-label"
-            for="runTitle"
-          >
+          <label class="ma-form-label">
             Titel
           </label>
 
@@ -1501,10 +1637,7 @@ textarea.ma-form-input{
 
         <div class="ma-form-field">
 
-          <label
-            class="ma-form-label"
-            for="runLocation"
-          >
+          <label class="ma-form-label">
             📍 Ort
           </label>
 
@@ -1521,10 +1654,7 @@ textarea.ma-form-input{
 
         <div class="ma-form-field">
 
-          <label
-            class="ma-form-label"
-            for="runDate"
-          >
+          <label class="ma-form-label">
             📅 Datum
           </label>
 
@@ -1540,10 +1670,7 @@ textarea.ma-form-input{
 
         <div class="ma-form-field">
 
-          <label
-            class="ma-form-label"
-            for="runTime"
-          >
+          <label class="ma-form-label">
             🕐 Uhrzeit
           </label>
 
@@ -1559,10 +1686,7 @@ textarea.ma-form-input{
 
         <div class="ma-form-field">
 
-          <label
-            class="ma-form-label"
-            for="runPace"
-          >
+          <label class="ma-form-label">
             ⚡ Pace
           </label>
 
@@ -1579,10 +1703,7 @@ textarea.ma-form-input{
 
         <div class="ma-form-field">
 
-          <label
-            class="ma-form-label"
-            for="runMaxParticipants"
-          >
+          <label class="ma-form-label">
             👥 Teilnehmer
           </label>
 
@@ -1657,7 +1778,7 @@ textarea.ma-form-input{
 
 
 <!-- =======================================================
-     PRIVATE NACHRICHT
+     NACHRICHT MODAL
 ======================================================= -->
 
 <div
@@ -1726,13 +1847,15 @@ textarea.ma-form-input{
 
 
 <script>
+
 const SUPABASE_URL=
   "https://orbrkdrsihsacsnprewf.supabase.co";
 
 const SUPABASE_PUBLISHABLE_KEY=
   "sb_publishable_wc3w2fSuj8ItwiF6XBoQgw_HeW5_rNW";
 
-const {createClient}=window.supabase;
+const {createClient}=
+  window.supabase;
 
 const supabaseClient=
   createClient(
@@ -1741,7 +1864,8 @@ const supabaseClient=
   );
 
 
-const $=id=>document.getElementById(id);
+const $=
+  id=>document.getElementById(id);
 
 
 let currentUser=null;
@@ -1780,7 +1904,6 @@ function getInitials(name){
       .filter(Boolean);
 
   if(parts.length===1){
-
     return parts[0]
       .slice(0,2)
       .toUpperCase();
@@ -1809,7 +1932,8 @@ function profileUrl(profile){
 
 function formatTime(timestamp){
 
-  const date=new Date(timestamp);
+  const date=
+    new Date(timestamp);
 
   if(Number.isNaN(date.getTime())){
     return "";
@@ -1894,11 +2018,13 @@ function avatarHtml(
     "ma-post-avatar-initials";
 
   if(className.includes("buddy")){
-    initialsClass="ma-buddy-initials";
+    initialsClass=
+      "ma-buddy-initials";
   }
 
   if(className.includes("comment")){
-    initialsClass="ma-comment-avatar-initials";
+    initialsClass=
+      "ma-comment-avatar-initials";
   }
 
 
@@ -1927,7 +2053,8 @@ function getBuddyDays(value){
 
 function buddyDaysLabel(value){
 
-  const days=getBuddyDays(value);
+  const days=
+    getBuddyDays(value);
 
   return days.length
     ?days.join(" · ")
@@ -1964,98 +2091,6 @@ function setBuddyDays(value){
 
 
 /* =========================================================
-   KOMMENTAR HTML
-   kind:
-   - "post" für community_post_comments
-   - "item" für community_item_comments
-========================================================= */
-
-function commentsHtml(
-  comments,
-  kind="item"
-){
-
-  if(!comments.length){
-
-    return`
-      <div class="small muted">
-        Noch keine Kommentare.
-      </div>
-    `;
-  }
-
-
-  return comments.map(comment=>{
-
-    const profile=
-      comment.profiles||{};
-
-    const name=
-      profile.display_name||
-      "Miles Apart Member";
-
-
-    const canDelete=
-      currentUser?.id===
-      comment.author_id;
-
-
-    return`
-      <div class="ma-comment">
-
-        <a href="${profileUrl(profile)}">
-          ${avatarHtml(
-            profile,
-            "ma-comment-avatar"
-          )}
-        </a>
-
-        <div class="ma-comment-content">
-
-          <div>
-
-            <a
-              class="ma-comment-name"
-              href="${profileUrl(profile)}"
-            >
-              ${escapeHtml(name)}
-            </a>
-
-            <span class="ma-comment-time">
-              ${formatTime(comment.created_at)}
-            </span>
-
-          </div>
-
-          <div class="ma-comment-text">
-            ${escapeHtml(comment.content)}
-          </div>
-
-          ${
-            canDelete
-            ?`
-              <button
-                class="ma-comment-delete"
-                type="button"
-                data-delete-comment="${escapeHtml(comment.id)}"
-                data-delete-comment-kind="${kind}"
-              >
-                Kommentar löschen
-              </button>
-            `
-            :""
-          }
-
-        </div>
-
-      </div>
-    `;
-
-  }).join("");
-}
-
-
-/* =========================================================
    CURRENT USER
 ========================================================= */
 
@@ -2076,21 +2111,14 @@ async function loadCurrentUser(){
 
 
   if(!data.user){
-
     currentUser=null;
     currentProfile=null;
-
-    $("openPostButton").textContent=
-      "Anmelden";
-
-    $("postAuthorName").textContent=
-      "Anmelden, um einen Post zu erstellen";
-
     return;
   }
 
 
-  currentUser=data.user;
+  currentUser=
+    data.user;
 
 
   const {
@@ -2100,9 +2128,12 @@ async function loadCurrentUser(){
     await supabaseClient
       .from("profiles")
       .select(
-        "display_name,username,avatar_url,bio,location"
+        "display_name,username,avatar_url,location"
       )
-      .eq("id",currentUser.id)
+      .eq(
+        "id",
+        currentUser.id
+      )
       .maybeSingle();
 
 
@@ -2115,7 +2146,6 @@ async function loadCurrentUser(){
     profile||
     {
       display_name:
-        currentUser.user_metadata?.display_name||
         currentUser.email?.split("@")[0]||
         "Miles Apart Member"
     };
@@ -2130,7 +2160,7 @@ async function loadCurrentUser(){
 
 
 /* =========================================================
-   POSTS LADEN
+   POSTS
 ========================================================= */
 
 async function loadPosts(){
@@ -2142,14 +2172,21 @@ async function loadPosts(){
     await supabaseClient
       .from("community_posts")
       .select(
-        `id,author_id,content,image_url,created_at,updated_at,
+        `
+        id,
+        author_id,
+        content,
+        image_url,
+        created_at,
         profiles:author_id(
           display_name,
           username,
           avatar_url,
           location
         ),
-        community_post_likes(user_id),
+        community_post_likes(
+          user_id
+        ),
         community_post_comments(
           id,
           author_id,
@@ -2160,7 +2197,8 @@ async function loadPosts(){
             username,
             avatar_url
           )
-        )`
+        )
+        `
       )
       .order(
         "created_at",
@@ -2175,28 +2213,18 @@ async function loadPosts(){
   }
 
 
-  renderPosts(data||[]);
-}
-
-
-function renderPosts(posts){
-
   $("postsContainer").innerHTML=
-    posts.length
-    ?posts.map(
+    (data||[]).length
+    ?(data||[]).map(
       createPostHtml
     ).join("")
     :`
       <div class="ma-empty">
-
         <strong>
           Sei der Erste in der Community.
         </strong>
-
         Teile deinen ersten Lauf,
-        ein Ziel oder einfach ein paar Worte
-        mit Miles Apart.
-
+        ein Ziel oder ein paar Worte.
       </div>
     `;
 }
@@ -2298,7 +2326,7 @@ function createPostHtml(post){
       }
 
 
-      <div class="ma-post-actions">
+      <div class="ma-action-row">
 
         <button
           class="ma-action-button ma-like-button ${
@@ -2365,10 +2393,17 @@ function createPostHtml(post){
 
         <div class="ma-comments-list">
 
-          ${commentsHtml(
-            comments,
-            "post"
-          )}
+          ${
+            comments.length
+            ?comments.map(
+              commentHtml
+            ).join("")
+            :`
+              <div class="small muted">
+                Noch keine Kommentare.
+              </div>
+            `
+          }
 
         </div>
 
@@ -2402,11 +2437,76 @@ function createPostHtml(post){
 }
 
 
+function commentHtml(comment){
+
+  const profile=
+    comment.profiles||{};
+
+  const name=
+    profile.display_name||
+    "Miles Apart Member";
+
+  const canDelete=
+    currentUser?.id===
+    comment.author_id;
+
+
+  return`
+    <div class="ma-comment">
+
+      ${avatarHtml(
+        profile,
+        "ma-comment-avatar"
+      )}
+
+      <div class="ma-comment-content">
+
+        <div>
+
+          <a
+            class="ma-comment-name"
+            href="${profileUrl(profile)}"
+          >
+            ${escapeHtml(name)}
+          </a>
+
+          <span class="ma-comment-time">
+            ${formatTime(comment.created_at)}
+          </span>
+
+        </div>
+
+        <div class="ma-comment-text">
+          ${escapeHtml(comment.content)}
+        </div>
+
+        ${
+          canDelete
+          ?`
+            <button
+              class="ma-comment-delete"
+              type="button"
+              data-delete-comment="${comment.id}"
+              data-delete-kind="post"
+            >
+              Kommentar löschen
+            </button>
+          `
+          :""
+        }
+
+      </div>
+
+    </div>
+  `;
+}
+
+
 /* =========================================================
-   RUN BUDDY KOMMENTARE
+   BUDDY / RUN COMMENTS
 ========================================================= */
 
-async function loadBuddyComments(){
+async function loadItemComments(){
 
   const {
     data,
@@ -2415,11 +2515,7 @@ async function loadBuddyComments(){
     await supabaseClient
       .from("community_item_comments")
       .select(
-        "id,item_id,author_id,content,created_at"
-      )
-      .eq(
-        "item_type",
-        "buddy"
+        "id,item_type,item_id,author_id,content,created_at"
       )
       .order(
         "created_at",
@@ -2471,7 +2567,6 @@ async function loadBuddyComments(){
     if(profileError){
       throw profileError;
     }
-
 
     profiles=
       profileData||[];
@@ -2490,150 +2585,50 @@ async function loadBuddyComments(){
 
 
   buddyComments={};
-
-
-  comments
-    .map(comment=>({
-
-      ...comment,
-
-      profiles:
-        profileMap.get(
-          String(comment.author_id)
-        )||{}
-
-    }))
-    .forEach(comment=>{
-
-      const id=
-        String(comment.item_id);
-
-      if(!buddyComments[id]){
-        buddyComments[id]=[];
-      }
-
-      buddyComments[id].push(comment);
-    });
-}
-
-
-/* =========================================================
-   RUN KOMMENTARE
-========================================================= */
-
-async function loadRunComments(){
-
-  const {
-    data,
-    error
-  }=
-    await supabaseClient
-      .from("community_item_comments")
-      .select(
-        "id,item_id,author_id,content,created_at"
-      )
-      .eq(
-        "item_type",
-        "run"
-      )
-      .order(
-        "created_at",
-        {
-          ascending:true
-        }
-      );
-
-
-  if(error){
-    throw error;
-  }
-
-
-  const comments=
-    data||[];
-
-
-  const authorIds=
-    [
-      ...new Set(
-        comments
-          .map(comment=>comment.author_id)
-          .filter(Boolean)
-      )
-    ];
-
-
-  let profiles=[];
-
-
-  if(authorIds.length){
-
-    const {
-      data:profileData,
-      error:profileError
-    }=
-      await supabaseClient
-        .from("profiles")
-        .select(
-          "id,display_name,username,avatar_url,location"
-        )
-        .in(
-          "id",
-          authorIds
-        );
-
-
-    if(profileError){
-      throw profileError;
-    }
-
-
-    profiles=
-      profileData||[];
-  }
-
-
-  const profileMap=
-    new Map(
-      profiles.map(
-        profile=>[
-          String(profile.id),
-          profile
-        ]
-      )
-    );
-
-
   runComments={};
 
 
-  comments
-    .map(comment=>({
+  comments.forEach(comment=>{
 
+    const itemId=
+      String(comment.item_id);
+
+    const prepared={
       ...comment,
-
       profiles:
         profileMap.get(
           String(comment.author_id)
         )||{}
+    };
 
-    }))
-    .forEach(comment=>{
 
-      const id=
-        String(comment.item_id);
+    if(comment.item_type==="buddy"){
 
-      if(!runComments[id]){
-        runComments[id]=[];
+      if(!buddyComments[itemId]){
+        buddyComments[itemId]=[];
       }
 
-      runComments[id].push(comment);
-    });
+      buddyComments[itemId]
+        .push(prepared);
+    }
+
+
+    if(comment.item_type==="run"){
+
+      if(!runComments[itemId]){
+        runComments[itemId]=[];
+      }
+
+      runComments[itemId]
+        .push(prepared);
+    }
+
+  });
 }
 
 
 /* =========================================================
-   RUN BUDDY CARDS
+   BUDDY
 ========================================================= */
 
 function buddyCard(row){
@@ -2653,10 +2648,7 @@ function buddyCard(row){
 
 
   return`
-    <article
-      class="ma-buddy-card"
-      data-buddy-id="${escapeHtml(id)}"
-    >
+    <article class="ma-buddy-card">
 
       <div class="ma-buddy-top">
 
@@ -2773,7 +2765,7 @@ function buddyCard(row){
           class="ma-action-button"
           data-action="comment"
           data-comment-type="buddy"
-          data-comment-target="${escapeHtml(id)}"
+          data-comment-target="${id}"
           type="button"
         >
           Kommentieren · ${comments.length}
@@ -2786,7 +2778,7 @@ function buddyCard(row){
             <button
               class="ma-action-button ma-message"
               data-action="message"
-              data-author-id="${escapeHtml(id)}"
+              data-author-id="${id}"
               data-author-name="${escapeHtml(name)}"
               type="button"
             >
@@ -2801,21 +2793,30 @@ function buddyCard(row){
 
       <div
         class="ma-comments-box"
-        data-comment-box="buddy-${escapeHtml(id)}"
+        data-comment-box="buddy-${id}"
       >
 
         <div class="ma-comments-list">
-          ${commentsHtml(
-            comments,
-            "item"
-          )}
+
+          ${
+            comments.length
+            ?comments.map(
+              commentHtml
+            ).join("")
+            :`
+              <div class="small muted">
+                Noch keine Kommentare.
+              </div>
+            `
+          }
+
         </div>
 
 
         <form
           class="ma-comment-form"
           data-comment-form-type="buddy"
-          data-comment-target="${escapeHtml(id)}"
+          data-comment-target="${id}"
         >
 
           <input
@@ -2850,14 +2851,21 @@ async function loadBuddyProfiles(){
     await supabaseClient
       .from("run_buddy_profiles")
       .select(
-        `user_id,location,preferred_day,
-        preferred_time,pace,note,updated_at,
+        `
+        user_id,
+        location,
+        preferred_day,
+        preferred_time,
+        pace,
+        note,
+        updated_at,
         profiles:user_id(
           display_name,
           username,
           avatar_url,
           location
-        )`
+        )
+        `
       )
       .order(
         "updated_at",
@@ -2873,7 +2881,7 @@ async function loadBuddyProfiles(){
 
 
   /*
-    Das eigene Profil bleibt weiterhin sichtbar.
+    Das eigene Profil bleibt sichtbar.
   */
   const list=
     data||[];
@@ -2930,7 +2938,7 @@ async function loadBuddyProfiles(){
 
 
 /* =========================================================
-   GEMEINSAME LÄUFE
+   RUNS
 ========================================================= */
 
 function runCard(run){
@@ -2941,6 +2949,10 @@ function runCard(run){
   const creator=
     run.profiles||{};
 
+  const owner=
+    currentUser?.id===
+    run.creator_id;
+
   const joined=
     currentUser&&
     participants.some(
@@ -2948,10 +2960,6 @@ function runCard(run){
         participant.user_id===
         currentUser.id
     );
-
-  const owner=
-    currentUser?.id===
-    run.creator_id;
 
   const max=
     Number(
@@ -2966,10 +2974,7 @@ function runCard(run){
 
 
   return`
-    <article
-      class="ma-run-card"
-      data-run-id="${escapeHtml(id)}"
-    >
+    <article class="ma-run-card">
 
       <div class="ma-run-card-top">
 
@@ -3018,9 +3023,7 @@ function runCard(run){
 
           <span class="ma-run-detail-value">
             📅 ${escapeHtml(
-              formatRunDate(
-                run.run_date
-              )
+              formatRunDate(run.run_date)
             )}
           </span>
 
@@ -3076,7 +3079,7 @@ function runCard(run){
                   joined?"joined":""
                 }"
                 data-run-action="join"
-                data-run-id="${escapeHtml(id)}"
+                data-run-id="${id}"
                 ${
                   !joined&&
                   participants.length>=max
@@ -3102,7 +3105,7 @@ function runCard(run){
               <button
                 class="ma-action-button ma-delete"
                 data-run-action="delete"
-                data-run-id="${escapeHtml(id)}"
+                data-run-id="${id}"
                 type="button"
               >
                 Löschen
@@ -3122,7 +3125,7 @@ function runCard(run){
           class="ma-action-button"
           data-action="comment"
           data-comment-type="run"
-          data-comment-target="${escapeHtml(id)}"
+          data-comment-target="${id}"
           type="button"
         >
           Kommentieren · ${comments.length}
@@ -3135,7 +3138,7 @@ function runCard(run){
             <button
               class="ma-action-button ma-message"
               data-action="message"
-              data-author-id="${escapeHtml(run.creator_id)}"
+              data-author-id="${run.creator_id}"
               data-author-name="${escapeHtml(
                 creator.display_name||
                 "Miles Apart Member"
@@ -3153,21 +3156,30 @@ function runCard(run){
 
       <div
         class="ma-comments-box"
-        data-comment-box="run-${escapeHtml(id)}"
+        data-comment-box="run-${id}"
       >
 
         <div class="ma-comments-list">
-          ${commentsHtml(
-            comments,
-            "item"
-          )}
+
+          ${
+            comments.length
+            ?comments.map(
+              commentHtml
+            ).join("")
+            :`
+              <div class="small muted">
+                Noch keine Kommentare.
+              </div>
+            `
+          }
+
         </div>
 
 
         <form
           class="ma-comment-form"
           data-comment-form-type="run"
-          data-comment-target="${escapeHtml(id)}"
+          data-comment-target="${id}"
         >
 
           <input
@@ -3202,15 +3214,25 @@ async function loadCommunityRuns(){
     await supabaseClient
       .from("community_runs")
       .select(
-        `id,creator_id,title,location,
-        run_date,run_time,pace,max_participants,
+        `
+        id,
+        creator_id,
+        title,
+        location,
+        run_date,
+        run_time,
+        pace,
+        max_participants,
         created_at,
         profiles:creator_id(
           display_name,
           username,
           avatar_url
         ),
-        community_run_participants(user_id)`
+        community_run_participants(
+          user_id
+        )
+        `
       )
       .gte(
         "run_date",
@@ -3252,52 +3274,40 @@ async function loadCommunityRuns(){
 
 
 /* =========================================================
-   POST-KOMMENTAR SPEICHERN
-   ---------------------------------------------------------
-   POSTS verwenden community_post_comments.
-   NICHT community_item_comments.
+   KOMMENTARE SPEICHERN
 ========================================================= */
 
-async function addPostComment(
-  postId,
-  content
-){
-
-  if(!currentUser){
-    return location.href="home.html";
-  }
-
-
-  const {
-    error
-  }=
-    await supabaseClient
-      .from("community_post_comments")
-      .insert({
-        post_id:postId,
-        author_id:currentUser.id,
-        content:content
-      });
-
-
-  if(error){
-    throw error;
-  }
-}
-
-
-/* =========================================================
-   RUN-BUDDY / RUN KOMMENTAR SPEICHERN
-========================================================= */
-
-async function addItemComment(
+async function addComment(
   type,
   target,
   content
 ){
 
   if(!currentUser){
-    return location.href="home.html";
+    location.href="home.html";
+    return;
+  }
+
+
+  if(type==="post"){
+
+    const {
+      error
+    }=
+      await supabaseClient
+        .from("community_post_comments")
+        .insert({
+          post_id:target,
+          author_id:currentUser.id,
+          content:content
+        });
+
+
+    if(error){
+      throw error;
+    }
+
+    return;
   }
 
 
@@ -3321,99 +3331,6 @@ async function addItemComment(
 
 
 /* =========================================================
-   KOMMENTAR SPEICHERN
-========================================================= */
-
-async function addComment(
-  type,
-  target,
-  content
-){
-
-  if(type==="post"){
-
-    return addPostComment(
-      target,
-      content
-    );
-  }
-
-
-  return addItemComment(
-    type,
-    target,
-    content
-  );
-}
-
-
-/* =========================================================
-   POST-KOMMENTAR LÖSCHEN
-========================================================= */
-
-async function deletePostComment(id){
-
-  if(!currentUser){
-    return;
-  }
-
-
-  const {
-    error
-  }=
-    await supabaseClient
-      .from("community_post_comments")
-      .delete()
-      .eq(
-        "id",
-        id
-      )
-      .eq(
-        "author_id",
-        currentUser.id
-      );
-
-
-  if(error){
-    throw error;
-  }
-}
-
-
-/* =========================================================
-   RUN-BUDDY / RUN KOMMENTAR LÖSCHEN
-========================================================= */
-
-async function deleteItemComment(id){
-
-  if(!currentUser){
-    return;
-  }
-
-
-  const {
-    error
-  }=
-    await supabaseClient
-      .from("community_item_comments")
-      .delete()
-      .eq(
-        "id",
-        id
-      )
-      .eq(
-        "author_id",
-        currentUser.id
-      );
-
-
-  if(error){
-    throw error;
-  }
-}
-
-
-/* =========================================================
    KOMMENTAR LÖSCHEN
 ========================================================= */
 
@@ -3424,52 +3341,47 @@ async function deleteComment(
 
   if(kind==="post"){
 
-    return deletePostComment(id);
-  }
+    const {
+      error
+    }=
+      await supabaseClient
+        .from("community_post_comments")
+        .delete()
+        .eq("id",id)
+        .eq(
+          "author_id",
+          currentUser.id
+        );
 
+    if(error){
+      throw error;
+    }
 
-  return deleteItemComment(id);
-}
-
-
-/* =========================================================
-   KOMMENTARFELD ÖFFNEN
-========================================================= */
-
-function toggleCommentBox(
-  type,
-  target
-){
-
-  const selector=
-    `[data-comment-box="${type}-${CSS.escape(String(target))}"]`;
-
-  const box=
-    document.querySelector(selector);
-
-
-  if(!box){
     return;
   }
 
 
-  box.classList.toggle("open");
+  const {
+    error
+  }=
+    await supabaseClient
+      .from("community_item_comments")
+      .delete()
+      .eq("id",id)
+      .eq(
+        "author_id",
+        currentUser.id
+      );
 
 
-  if(box.classList.contains("open")){
-
-    const input=
-      box.querySelector("input");
-
-    if(input){
-      input.focus();
-    }
+  if(error){
+    throw error;
   }
 }
 
 
 /* =========================================================
-   GLOBALER CLICK HANDLER
+   CLICK EVENTS
 ========================================================= */
 
 document.addEventListener(
@@ -3484,64 +3396,84 @@ document.addEventListener(
 
     if(action){
 
-      const type=
-        action.dataset.action;
+      if(action.dataset.action==="like"){
 
-
-      if(type==="like"){
-
-        return toggleLike(
+        await toggleLike(
           action.dataset.postId,
           action
         );
+
+        return;
       }
 
 
-      if(type==="delete"){
+      if(action.dataset.action==="delete"){
 
-        return deletePost(
+        await deletePost(
           action.dataset.postId
         );
+
+        return;
       }
 
 
-      if(type==="message"){
+      if(action.dataset.action==="message"){
 
-        return openMessageModal(
+        openMessageModal(
           action.dataset.authorId,
           action.dataset.authorName
         );
+
+        return;
       }
 
 
-      if(type==="comment"){
+      if(action.dataset.action==="comment"){
 
-        return toggleCommentBox(
-          action.dataset.commentType,
-          action.dataset.commentTarget
-        );
+        const type=
+          action.dataset.commentType;
+
+        const target=
+          action.dataset.commentTarget;
+
+        const box=
+          document.querySelector(
+            `[data-comment-box="${type}-${CSS.escape(String(target))}"]`
+          );
+
+        if(box){
+
+          box.classList.toggle("open");
+
+          if(box.classList.contains("open")){
+
+            box.querySelector(
+              ".ma-comment-input"
+            )?.focus();
+          }
+        }
+
+        return;
       }
     }
 
 
-    const deleteCommentButton=
+    const deleteButton=
       event.target.closest(
         "[data-delete-comment]"
       );
 
 
-    if(deleteCommentButton){
+    if(deleteButton){
 
       try{
 
         await deleteComment(
-          deleteCommentButton.dataset.deleteComment,
-          deleteCommentButton.dataset.deleteCommentKind
+          deleteButton.dataset.deleteComment,
+          deleteButton.dataset.deleteKind
         );
 
-
         await refreshAll();
-
 
       }catch(error){
 
@@ -3551,12 +3483,145 @@ document.addEventListener(
         );
       }
     }
+
+
+    const runAction=
+      event.target.closest(
+        "[data-run-action]"
+      );
+
+
+    if(runAction){
+
+      const runId=
+        runAction.dataset.runId;
+
+      if(runAction.dataset.runAction==="delete"){
+
+        if(
+          !confirm(
+            "Diesen gemeinsamen Lauf wirklich löschen?"
+          )
+        ){
+          return;
+        }
+
+
+        const {
+          error
+        }=
+          await supabaseClient
+            .from("community_runs")
+            .delete()
+            .eq(
+              "id",
+              runId
+            )
+            .eq(
+              "creator_id",
+              currentUser.id
+            );
+
+
+        if(error){
+          alert(error.message);
+          return;
+        }
+
+
+        await loadItemComments();
+        await loadCommunityRuns();
+
+        return;
+      }
+
+
+      if(runAction.dataset.runAction==="join"){
+
+        try{
+
+          const {
+            data:existing,
+            error:checkError
+          }=
+            await supabaseClient
+              .from("community_run_participants")
+              .select("run_id")
+              .eq(
+                "run_id",
+                runId
+              )
+              .eq(
+                "user_id",
+                currentUser.id
+              )
+              .maybeSingle();
+
+
+          if(checkError){
+            throw checkError;
+          }
+
+
+          if(existing){
+
+            const {
+              error
+            }=
+              await supabaseClient
+                .from("community_run_participants")
+                .delete()
+                .eq(
+                  "run_id",
+                  runId
+                )
+                .eq(
+                  "user_id",
+                  currentUser.id
+                );
+
+
+            if(error){
+              throw error;
+            }
+
+          }else{
+
+            const {
+              error
+            }=
+              await supabaseClient
+                .from("community_run_participants")
+                .insert({
+                  run_id:runId,
+                  user_id:currentUser.id
+                });
+
+
+            if(error){
+              throw error;
+            }
+          }
+
+
+          await loadCommunityRuns();
+
+        }catch(error){
+
+          alert(
+            error.message||
+            "Teilnahme konnte nicht geändert werden."
+          );
+        }
+      }
+    }
+
   }
 );
 
 
 /* =========================================================
-   KOMMENTAR FORM SUBMIT
+   KOMMENTAR FORMULARE
 ========================================================= */
 
 document.addEventListener(
@@ -3582,7 +3647,7 @@ document.addEventListener(
         ".ma-comment-input"
       );
 
-    const submit=
+    const button=
       form.querySelector(
         ".ma-comment-submit"
       );
@@ -3596,7 +3661,7 @@ document.addEventListener(
     }
 
 
-    submit.disabled=true;
+    button.disabled=true;
 
 
     try{
@@ -3618,28 +3683,7 @@ document.addEventListener(
       input.value="";
 
 
-      /*
-        Bei Posts nur die Posts neu laden.
-        Bei Buddy/Run werden die jeweiligen
-        Kommentar-Daten neu geladen.
-      */
-
-      if(type==="post"){
-
-        await loadPosts();
-
-      }else if(type==="buddy"){
-
-        await loadBuddyComments();
-
-        await loadBuddyProfiles();
-
-      }else if(type==="run"){
-
-        await loadRunComments();
-
-        await loadCommunityRuns();
-      }
+      await refreshAll();
 
 
       const box=
@@ -3649,14 +3693,8 @@ document.addEventListener(
 
 
       if(box){
-
         box.classList.add("open");
-
-        box.querySelector(
-          "input"
-        )?.focus();
       }
-
 
     }catch(error){
 
@@ -3667,23 +3705,24 @@ document.addEventListener(
 
     }finally{
 
-      submit.disabled=false;
+      button.disabled=false;
     }
   }
 );
 
 
 /* =========================================================
-   LIKE
+   LIKES
 ========================================================= */
 
 async function toggleLike(
-  id,
+  postId,
   button
 ){
 
   if(!currentUser){
-    return location.href="home.html";
+    location.href="home.html";
+    return;
   }
 
 
@@ -3698,12 +3737,10 @@ async function toggleLike(
     }=
       await supabaseClient
         .from("community_post_likes")
-        .select(
-          "post_id,user_id"
-        )
+        .select("post_id,user_id")
         .eq(
           "post_id",
-          id
+          postId
         )
         .eq(
           "user_id",
@@ -3720,37 +3757,40 @@ async function toggleLike(
     if(data){
 
       const {
-        error:deleteError
+        error
       }=
         await supabaseClient
           .from("community_post_likes")
           .delete()
-          .eq("post_id",id)
+          .eq(
+            "post_id",
+            postId
+          )
           .eq(
             "user_id",
             currentUser.id
           );
 
 
-      if(deleteError){
-        throw deleteError;
+      if(error){
+        throw error;
       }
 
     }else{
 
       const {
-        error:insertError
+        error
       }=
         await supabaseClient
           .from("community_post_likes")
           .insert({
-            post_id:id,
+            post_id:postId,
             user_id:currentUser.id
           });
 
 
-      if(insertError){
-        throw insertError;
+      if(error){
+        throw error;
       }
     }
 
@@ -3778,13 +3818,15 @@ async function toggleLike(
 async function deletePost(id){
 
   if(!currentUser){
-    return location.href="home.html";
+    return;
   }
 
 
-  if(!confirm(
-    "Diesen Post wirklich löschen?"
-  )){
+  if(
+    !confirm(
+      "Diesen Post wirklich löschen?"
+    )
+  ){
     return;
   }
 
@@ -3795,7 +3837,10 @@ async function deletePost(id){
     await supabaseClient
       .from("community_posts")
       .delete()
-      .eq("id",id)
+      .eq(
+        "id",
+        id
+      )
       .eq(
         "author_id",
         currentUser.id
@@ -3814,7 +3859,7 @@ async function deletePost(id){
 
 
 /* =========================================================
-   PRIVATE NACHRICHTEN
+   NACHRICHT MODAL
 ========================================================= */
 
 function openMessageModal(
@@ -3823,11 +3868,7 @@ function openMessageModal(
 ){
 
   if(!currentUser){
-    return location.href="home.html";
-  }
-
-
-  if(!id){
+    location.href="home.html";
     return;
   }
 
@@ -3874,7 +3915,6 @@ $("messageOverlay").onclick=
       event.target===
       $("messageOverlay")
     ){
-
       closeMessageModal();
     }
   };
@@ -3954,14 +3994,15 @@ $("sendPrivateMessageButton").onclick=
 
 
 /* =========================================================
-   POST FORMULAR
+   POST ERSTELLEN
 ========================================================= */
 
 $("openPostButton").onclick=
   ()=>{
 
     if(!currentUser){
-      return location.href="home.html";
+      location.href="home.html";
+      return;
     }
 
     $("postFormCard")
@@ -3998,8 +4039,7 @@ $("postImage").onchange=
 
     const file=
       $("postImage")
-        .files
-        ?. [0];
+        .files?.[0];
 
 
     if(!file){
@@ -4085,7 +4125,8 @@ $("postForm").onsubmit=
 
 
     if(!currentUser){
-      return location.href="home.html";
+      location.href="home.html";
+      return;
     }
 
 
@@ -4096,8 +4137,7 @@ $("postForm").onsubmit=
 
     const file=
       $("postImage")
-        .files
-        ?. [0];
+        .files?.[0];
 
 
     if(!content){
@@ -4153,7 +4193,6 @@ $("postForm").onsubmit=
 
       await loadPosts();
 
-
     }catch(error){
 
       $("postFormMessage").textContent=
@@ -4168,21 +4207,20 @@ $("postForm").onsubmit=
 
 
 /* =========================================================
-   RUN BUDDY FORM
+   BUDDY FORM
 ========================================================= */
 
 $("openBuddyButton").onclick=
   ()=>{
 
     if(!currentUser){
-      return location.href="home.html";
+      location.href="home.html";
+      return;
     }
 
     $("buddyForm")
       .classList
       .toggle("open");
-
-    $("buddyLocation").focus();
   };
 
 
@@ -4193,8 +4231,7 @@ $("cancelBuddyButton").onclick=
       .classList
       .remove("open");
 
-    $("buddyFormMessage")
-      .textContent="";
+    $("buddyFormMessage").textContent="";
   };
 
 
@@ -4202,11 +4239,6 @@ $("buddyProfileForm").onsubmit=
   async event=>{
 
     event.preventDefault();
-
-
-    if(!currentUser){
-      return location.href="home.html";
-    }
 
 
     const days=
@@ -4223,36 +4255,6 @@ $("buddyProfileForm").onsubmit=
     }
 
 
-    const payload={
-
-      user_id:currentUser.id,
-
-      location:
-        $("buddyLocation")
-          .value
-          .trim(),
-
-      preferred_day:
-        days.join(","),
-
-      preferred_time:
-        $("buddyTime").value,
-
-      pace:
-        $("buddyPace")
-          .value
-          .trim(),
-
-      note:
-        $("buddyNote")
-          .value
-          .trim(),
-
-      updated_at:
-        new Date().toISOString()
-    };
-
-
     const button=
       $("submitBuddyButton");
 
@@ -4267,7 +4269,27 @@ $("buddyProfileForm").onsubmit=
         await supabaseClient
           .from("run_buddy_profiles")
           .upsert(
-            payload,
+            {
+              user_id:currentUser.id,
+              location:
+                $("buddyLocation")
+                  .value
+                  .trim(),
+              preferred_day:
+                days.join(","),
+              preferred_time:
+                $("buddyTime").value,
+              pace:
+                $("buddyPace")
+                  .value
+                  .trim(),
+              note:
+                $("buddyNote")
+                  .value
+                  .trim(),
+              updated_at:
+                new Date().toISOString()
+            },
             {
               onConflict:"user_id"
             }
@@ -4284,19 +4306,7 @@ $("buddyProfileForm").onsubmit=
         "Profil gespeichert ✓";
 
 
-      await loadBuddyComments();
-
       await loadBuddyProfiles();
-
-
-      setTimeout(
-        ()=>
-          $("buddyForm")
-            .classList
-            .remove("open"),
-        600
-      );
-
 
     }catch(error){
 
@@ -4313,21 +4323,20 @@ $("buddyProfileForm").onsubmit=
 
 
 /* =========================================================
-   GEMEINSAME LÄUFE FORM
+   RUN FORM
 ========================================================= */
 
 $("openRunButton").onclick=
   ()=>{
 
     if(!currentUser){
-      return location.href="home.html";
+      location.href="home.html";
+      return;
     }
 
     $("runForm")
       .classList
       .toggle("open");
-
-    $("runTitle").focus();
   };
 
 
@@ -4342,8 +4351,7 @@ $("cancelRunButton").onclick=
       .classList
       .remove("open");
 
-    $("runFormMessage")
-      .textContent="";
+    $("runFormMessage").textContent="";
   };
 
 
@@ -4351,11 +4359,6 @@ $("communityRunForm").onsubmit=
   async event=>{
 
     event.preventDefault();
-
-
-    if(!currentUser){
-      return location.href="home.html";
-    }
 
 
     const button=
@@ -4373,34 +4376,27 @@ $("communityRunForm").onsubmit=
         await supabaseClient
           .from("community_runs")
           .insert({
-
-            creator_id:
-              currentUser.id,
-
+            creator_id:currentUser.id,
             title:
               $("runTitle")
                 .value
                 .trim(),
-
             location:
               $("runLocation")
                 .value
                 .trim(),
-
             run_date:
               $("runDate").value,
-
             run_time:
               $("runTime").value,
-
             pace:
               $("runPace")
                 .value
                 .trim(),
-
             max_participants:
               Number(
-                $("runMaxParticipants").value
+                $("runMaxParticipants")
+                  .value
               )
           })
           .select("id")
@@ -4430,11 +4426,7 @@ $("communityRunForm").onsubmit=
 
       $("cancelRunButton").click();
 
-
-      await loadRunComments();
-
       await loadCommunityRuns();
-
 
     }catch(error){
 
@@ -4451,190 +4443,15 @@ $("communityRunForm").onsubmit=
 
 
 /* =========================================================
-   LAUF TEILNEHMEN / VERLASSEN / LÖSCHEN
-========================================================= */
-
-document.addEventListener(
-  "click",
-  async event=>{
-
-    const button=
-      event.target.closest(
-        "[data-run-action]"
-      );
-
-
-    if(!button){
-      return;
-    }
-
-
-    const action=
-      button.dataset.runAction;
-
-    const runId=
-      button.dataset.runId;
-
-
-    if(action==="delete"){
-
-      if(!currentUser){
-        return;
-      }
-
-
-      if(!confirm(
-        "Diesen gemeinsamen Lauf wirklich löschen?"
-      )){
-        return;
-      }
-
-
-      try{
-
-        const {
-          error
-        }=
-          await supabaseClient
-            .from("community_runs")
-            .delete()
-            .eq("id",runId)
-            .eq(
-              "creator_id",
-              currentUser.id
-            );
-
-
-        if(error){
-          throw error;
-        }
-
-
-        await loadRunComments();
-
-        await loadCommunityRuns();
-
-
-      }catch(error){
-
-        alert(
-          error.message||
-          "Lauf konnte nicht gelöscht werden."
-        );
-      }
-
-
-      return;
-    }
-
-
-    if(action==="join"){
-
-      if(!currentUser){
-        return location.href="home.html";
-      }
-
-
-      button.disabled=true;
-
-
-      try{
-
-        const {
-          data:existing,
-          error:checkError
-        }=
-          await supabaseClient
-            .from("community_run_participants")
-            .select("run_id")
-            .eq(
-              "run_id",
-              runId
-            )
-            .eq(
-              "user_id",
-              currentUser.id
-            )
-            .maybeSingle();
-
-
-        if(checkError){
-          throw checkError;
-        }
-
-
-        if(existing){
-
-          const {
-            error
-          }=
-            await supabaseClient
-              .from("community_run_participants")
-              .delete()
-              .eq(
-                "run_id",
-                runId
-              )
-              .eq(
-                "user_id",
-                currentUser.id
-              );
-
-
-          if(error){
-            throw error;
-          }
-
-        }else{
-
-          const {
-            error
-          }=
-            await supabaseClient
-              .from("community_run_participants")
-              .insert({
-                run_id:runId,
-                user_id:currentUser.id
-              });
-
-
-          if(error){
-            throw error;
-          }
-        }
-
-
-        await loadCommunityRuns();
-
-
-      }catch(error){
-
-        alert(
-          error.message||
-          "Teilnahme konnte nicht geändert werden."
-        );
-
-      }finally{
-
-        button.disabled=false;
-      }
-    }
-  }
-);
-
-
-/* =========================================================
-   ALLES AKTUALISIEREN
+   REFRESH
 ========================================================= */
 
 async function refreshAll(){
 
   await Promise.all([
     loadPosts(),
-    loadBuddyComments(),
-    loadRunComments()
+    loadItemComments()
   ]);
-
 
   await Promise.all([
     loadBuddyProfiles(),
@@ -4666,7 +4483,7 @@ async function initializeCommunity(){
 
       $("communityError")
         .textContent=
-        "Bitte melde dich an, um die Community vollständig zu nutzen.";
+        "Bitte melde dich an, um die Community zu nutzen.";
 
       return;
     }
@@ -4674,8 +4491,7 @@ async function initializeCommunity(){
 
     await Promise.all([
       loadPosts(),
-      loadBuddyComments(),
-      loadRunComments()
+      loadItemComments()
     ]);
 
 
@@ -4689,11 +4505,9 @@ async function initializeCommunity(){
       .style
       .display="none";
 
-
     $("communityBuddySection")
       .style
       .display="block";
-
 
     $("communityRunsSection")
       .style
@@ -4709,11 +4523,9 @@ async function initializeCommunity(){
       .style
       .display="none";
 
-
     $("communityError")
       .style
       .display="block";
-
 
     $("communityError")
       .textContent=
@@ -4724,6 +4536,7 @@ async function initializeCommunity(){
 
 
 initializeCommunity();
+
 </script>
 
 </body>
