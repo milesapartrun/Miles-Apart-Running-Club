@@ -210,27 +210,45 @@
   line-height:1.45
 }
 
+
+/* =========================================================
+   RUN BUDDY AKTIONEN
+========================================================= */
+
 .ma-buddy-actions{
-  display:flex;
-  justify-content:flex-start;
-  align-items:center;
-  gap:8px;
-  margin-top:16px;
-  padding-top:14px;
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+  width:100%;
+  margin-top:18px;
+  padding-top:18px;
   border-top:1px solid #eee;
-  flex-wrap:wrap
+  box-sizing:border-box
 }
 
-.ma-buddy-message-btn{
-  min-height:42px;
-  border:0;
-  background:#18b8c7;
-  color:#fff;
-  padding:0 16px;
+.ma-buddy-actions > button{
+  width:100%;
+  min-width:0;
+  min-height:48px;
+  margin:0;
+  padding:0 12px;
+  box-sizing:border-box;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  white-space:normal;
+  line-height:1.2;
   font:inherit;
   font-size:14px;
   font-weight:800;
   cursor:pointer
+}
+
+.ma-buddy-message-btn{
+  border:0;
+  background:#18b8c7;
+  color:#fff
 }
 
 .ma-buddy-message-btn:hover{
@@ -238,15 +256,9 @@
 }
 
 .ma-buddy-comment-btn{
-  min-height:42px;
   border:1px solid #d8d8d8;
   background:#fff;
-  color:#111;
-  padding:0 16px;
-  font:inherit;
-  font-size:14px;
-  font-weight:800;
-  cursor:pointer
+  color:#111
 }
 
 .ma-buddy-comment-btn:hover{
@@ -255,15 +267,9 @@
 }
 
 .ma-buddy-delete{
-  min-height:42px;
   border:1px solid #e0bcbc;
   background:#fff7f7;
-  color:#b44;
-  padding:0 12px;
-  font:inherit;
-  font-size:13px;
-  font-weight:800;
-  cursor:pointer
+  color:#b44
 }
 
 .ma-buddy-delete:hover{
@@ -847,9 +853,9 @@ textarea.ma-form-input{
 
 .ma-run-participants{
   display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
+  flex-direction:column;
+  align-items:stretch;
+  gap:14px;
   padding-top:15px;
   border-top:1px solid #eee
 }
@@ -860,22 +866,42 @@ textarea.ma-form-input{
   font-weight:700
 }
 
+
+/* =========================================================
+   GEMEINSAME-LÄUFE-AKTIONEN
+========================================================= */
+
 .ma-run-actions{
-  display:flex;
-  gap:8px;
-  flex-wrap:wrap;
-  justify-content:flex-end
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:10px;
+  width:100%;
+  box-sizing:border-box
 }
 
-.ma-run-join{
-  min-height:42px;
-  border:0;
-  background:#18b8c7;
-  color:#fff;
-  padding:0 16px;
+.ma-run-actions > button{
+  width:100%;
+  min-width:0;
+  min-height:48px;
+  margin:0;
+  padding:0 12px;
+  box-sizing:border-box;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  white-space:normal;
+  line-height:1.2;
+  font:inherit;
   font-size:14px;
   font-weight:800;
   cursor:pointer
+}
+
+.ma-run-join{
+  border:0;
+  background:#18b8c7;
+  color:#fff
 }
 
 .ma-run-join.joined{
@@ -883,14 +909,9 @@ textarea.ma-form-input{
 }
 
 .ma-run-message{
-  min-height:42px;
   border:0;
   background:#18b8c7;
-  color:#fff;
-  padding:0 16px;
-  font-size:14px;
-  font-weight:800;
-  cursor:pointer
+  color:#fff
 }
 
 .ma-run-message:hover{
@@ -898,14 +919,9 @@ textarea.ma-form-input{
 }
 
 .ma-run-comment{
-  min-height:42px;
   border:1px solid #d8d8d8;
   background:#fff;
-  color:#111;
-  padding:0 16px;
-  font-size:14px;
-  font-weight:800;
-  cursor:pointer
+  color:#111
 }
 
 .ma-run-comment:hover{
@@ -914,14 +930,9 @@ textarea.ma-form-input{
 }
 
 .ma-run-delete{
-  min-height:42px;
   border:1px solid #e0bcbc;
   background:#fff7f7;
-  color:#b44;
-  padding:0 12px;
-  font-size:14px;
-  font-weight:800;
-  cursor:pointer
+  color:#b44
 }
 
 .ma-run-delete:hover{
@@ -1031,16 +1042,18 @@ textarea.ma-form-input{
 
 .ma-message-actions{
   display:flex;
-  align-items:center;
+  align-items:flex-start;
   gap:8px;
   margin-top:12px
 }
 
 .ma-message-status{
   flex:1;
+  min-width:0;
   color:#18b8c7;
   font-size:14px;
-  font-weight:700
+  font-weight:700;
+  text-align:left
 }
 
 .ma-message-send{
@@ -1048,19 +1061,20 @@ textarea.ma-form-input{
 }
 
 .ma-message-view-link{
-  display:inline-flex;
+  display:flex;
   align-items:center;
-  justify-content:center;
+  justify-content:flex-start;
   min-height:36px;
-  margin-top:7px;
-  padding:0 12px;
+  margin-top:5px;
+  padding:0;
   border:0;
   background:transparent;
   color:#18b8c7;
   font:inherit;
   font-size:14px;
   font-weight:800;
-  cursor:pointer
+  cursor:pointer;
+  text-align:left
 }
 
 .ma-message-view-link:hover{
@@ -1439,16 +1453,28 @@ textarea.ma-form-input{
   }
 
   .ma-run-participants{
-    align-items:flex-start;
+    align-items:stretch;
     flex-direction:column
   }
 
   .ma-run-actions{
+    grid-template-columns:1fr;
     width:100%
   }
 
   .ma-run-actions > button{
-    flex:1
+    width:100%;
+    min-height:50px
+  }
+
+  .ma-buddy-actions{
+    grid-template-columns:1fr;
+    width:100%
+  }
+
+  .ma-buddy-actions > button{
+    width:100%;
+    min-height:50px
   }
 
   .ma-message-overlay,
@@ -1467,26 +1493,17 @@ textarea.ma-form-input{
     align-items:stretch
   }
 
+  .ma-message-status{
+    width:100%
+  }
+
   .ma-message-send{
     width:100%
   }
 
   .ma-message-view-link{
-    width:100%
-  }
-
-  .ma-buddy-actions{
-    align-items:stretch
-  }
-
-  .ma-buddy-actions > div{
-    width:100%
-  }
-
-  .ma-buddy-message-btn,
-  .ma-buddy-comment-btn,
-  .ma-buddy-delete{
-    flex:1
+    width:100%;
+    justify-content:flex-start
   }
 
   .ma-inbox-modal{
@@ -2677,6 +2694,13 @@ function inboxAvatarHtml(p){
 }
 
 
+/* =========================================================
+   ITEM-KOMMENTARE
+   Profile werden separat geladen.
+   Dadurch wird keine Supabase-Relationship
+   community_item_comments -> profiles benötigt.
+========================================================= */
+
 function itemCommentsHtml(
   comments,
   inputPlaceholder="Kommentar schreiben …"
@@ -2766,12 +2790,7 @@ async function loadItemComments(
         item_id,
         author_id,
         content,
-        created_at,
-        profiles:author_id(
-          display_name,
-          username,
-          avatar_url
-        )
+        created_at
       `)
       .eq(
         "item_type",
@@ -2794,19 +2813,80 @@ async function loadItemComments(
   }
 
 
-  (data||[])
-    .forEach(
-      comment=>{
+  const comments=
+    data||
+    [];
 
-        if(!map[comment.item_id]){
-          map[comment.item_id]=[];
+
+  const authorIds=
+    [
+      ...new Set(
+        comments
+          .map(
+            comment=>comment.author_id
+          )
+          .filter(Boolean)
+      )
+    ];
+
+
+  let profilesById=
+    {};
+
+
+  if(authorIds.length){
+
+    const {
+      data:profiles,
+      error:profileError
+    }=
+      await supabaseClient
+        .from("profiles")
+        .select(
+          "id,display_name,username,avatar_url,location"
+        )
+        .in(
+          "id",
+          authorIds
+        );
+
+
+    if(profileError){
+      throw profileError;
+    }
+
+
+    (profiles||[])
+      .forEach(
+        profile=>{
+          profilesById[profile.id]=
+            profile;
         }
+      );
 
-        map[comment.item_id]
-          .push(comment);
+  }
 
+
+  comments.forEach(
+    comment=>{
+
+      if(!map[comment.item_id]){
+        map[comment.item_id]=[];
       }
-    );
+
+
+      map[comment.item_id]
+        .push({
+          ...comment,
+          profiles:
+            profilesById[
+              comment.author_id
+            ]||
+            {}
+        });
+
+    }
+  );
 
 
   return map;
@@ -3708,7 +3788,10 @@ $("sendPrivateMessageButton")
 
       $("privateMessageStatus")
         .innerHTML=`
-          Nachricht wurde gesendet ✓<br>
+          <div>
+            Nachricht wurde gesendet ✓
+          </div>
+
           <button
             type="button"
             class="ma-message-view-link"
@@ -4012,6 +4095,12 @@ async function loadMessageInbox(
 
     activeConversationUserId=
       preselectUserId;
+
+  }else{
+
+    activeConversationUserId=
+      conversations[0]?.userId||
+      null;
 
   }
 
@@ -4486,10 +4575,11 @@ $("messageReplyForm")
         .value=
         "";
 
-      await loadMessageInbox();
+      const selectedUserId=
+        activeConversationUserId;
 
-      await openConversation(
-        activeConversationUserId
+      await loadMessageInbox(
+        selectedUserId
       );
 
     }
@@ -4925,51 +5015,40 @@ function buddyCard(row){
           ?`
             <div class="ma-buddy-actions">
 
-              <div
-                style="
-                  display:flex;
-                  align-items:center;
-                  gap:8px;
-                  flex-wrap:wrap
-                "
+              <button
+                class="ma-buddy-message-btn"
+                type="button"
+                data-buddy-message="${row.user_id}"
+                data-buddy-name="${escapeHtml(name)}"
               >
-
-                <button
-                  class="ma-buddy-message-btn"
-                  type="button"
-                  data-buddy-message="${row.user_id}"
-                  data-buddy-name="${escapeHtml(name)}"
-                >
-                  Nachricht senden
-                </button>
+                Nachricht senden
+              </button>
 
 
-                <button
-                  class="ma-buddy-comment-btn"
-                  type="button"
-                  data-buddy-action="comments"
-                  data-buddy-id="${row.user_id}"
-                >
-                  Kommentieren${comments.length?` (${comments.length})`:""}
-                </button>
+              <button
+                class="ma-buddy-comment-btn"
+                type="button"
+                data-buddy-action="comments"
+                data-buddy-id="${row.user_id}"
+              >
+                Kommentieren${comments.length?` (${comments.length})`:""}
+              </button>
 
 
-                ${
-                  currentUser.id===row.user_id
-                    ?`
-                      <button
-                        class="ma-buddy-delete"
-                        type="button"
-                        data-buddy-action="delete"
-                        data-buddy-id="${row.user_id}"
-                      >
-                        Run Buddy Profil löschen
-                      </button>
-                    `
-                    :""
-                }
-
-              </div>
+              ${
+                currentUser.id===row.user_id
+                  ?`
+                    <button
+                      class="ma-buddy-delete"
+                      type="button"
+                      data-buddy-action="delete"
+                      data-buddy-id="${row.user_id}"
+                    >
+                      Run Buddy Profil löschen
+                    </button>
+                  `
+                  :""
+              }
 
             </div>
           `
@@ -5746,6 +5825,7 @@ function runCard(run){
               ?`
                 <button
                   class="ma-run-delete"
+                  type="button"
                   data-run-action="delete"
                   data-run-id="${run.id}"
                 >
@@ -5757,6 +5837,7 @@ function runCard(run){
                   class="ma-run-join ${
                     joined?"joined":""
                   }"
+                  type="button"
                   data-run-action="join"
                   data-run-id="${run.id}"
                   ${
@@ -5960,22 +6041,37 @@ $("runList")
         }
 
 
-        await supabaseClient
-          .from("community_runs")
-          .delete()
-          .eq(
-            "id",
-            id
-          )
-          .eq(
-            "creator_id",
-            currentUser.id
+        const {
+          error
+        }=
+          await supabaseClient
+            .from("community_runs")
+            .delete()
+            .eq(
+              "id",
+              id
+            )
+            .eq(
+              "creator_id",
+              currentUser.id
+            );
+
+
+        if(error){
+
+          alert(
+            error.message
           );
+
+          return;
+
+        }
 
       }else{
 
         const {
-          data:x
+          data:x,
+          error:findError
         }=
           await supabaseClient
             .from(
@@ -5993,32 +6089,71 @@ $("runList")
             .maybeSingle();
 
 
+        if(findError){
+
+          alert(
+            findError.message
+          );
+
+          return;
+
+        }
+
+
         if(x){
 
-          await supabaseClient
-            .from(
-              "community_run_participants"
-            )
-            .delete()
-            .eq(
-              "run_id",
-              id
-            )
-            .eq(
-              "user_id",
-              currentUser.id
+          const {
+            error
+          }=
+            await supabaseClient
+              .from(
+                "community_run_participants"
+              )
+              .delete()
+              .eq(
+                "run_id",
+                id
+              )
+              .eq(
+                "user_id",
+                currentUser.id
+              );
+
+
+          if(error){
+
+            alert(
+              error.message
             );
+
+            return;
+
+          }
 
         }else{
 
-          await supabaseClient
-            .from(
-              "community_run_participants"
-            )
-            .insert({
-              run_id:id,
-              user_id:currentUser.id
-            });
+          const {
+            error
+          }=
+            await supabaseClient
+              .from(
+                "community_run_participants"
+              )
+              .insert({
+                run_id:id,
+                user_id:currentUser.id
+              });
+
+
+          if(error){
+
+            alert(
+              error.message
+            );
+
+            return;
+
+          }
 
         }
 
@@ -6177,6 +6312,11 @@ $("communityRunForm")
     e.preventDefault();
 
 
+    if(!currentUser){
+      return location.href="home.html";
+    }
+
+
     const b=
       $("submitRunButton");
 
@@ -6274,6 +6414,44 @@ $("communityRunForm")
     }
 
   };
+
+
+/* =========================================================
+   ESC ZUM SCHLIESSEN DER POPUPS
+========================================================= */
+
+document.addEventListener(
+  "keydown",
+  e=>{
+
+    if(e.key!=="Escape"){
+      return;
+    }
+
+
+    if(
+      $("messageOverlay")
+        .classList
+        .contains("open")
+    ){
+
+      closeMessageModal();
+
+    }
+
+
+    if(
+      $("messagesInboxOverlay")
+        .classList
+        .contains("open")
+    ){
+
+      closeMessagesInbox();
+
+    }
+
+  }
+);
 
 
 /* =========================================================
