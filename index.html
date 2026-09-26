@@ -668,8 +668,9 @@ h1,h2,h3,h4,h5,h6,strong,b,.kpi,.label,.principle-number,
 }
 
 /* =====================================================
-   LOGGED-IN PROFILE
-   Die echte profile.html wird hier eingebettet.
+   EINGELOGGTE USER-SEITE
+   Die öffentliche Runner-Seite user.html
+   wird hier eingebettet.
 ===================================================== */
 
 .logged-profile-page{
@@ -1544,8 +1545,8 @@ h1,h2,h3,h4,h5,h6,strong,b,.kpi,.label,.principle-number,
 
 
     <!-- =====================================================
-         EINGELOGGTES PROFIL
-         Die echte profile.html wird hier angezeigt.
+         EINGELOGGTE USER-SEITE
+         Die echte user.html wird hier angezeigt.
     ====================================================== -->
 
     <section
@@ -1556,7 +1557,7 @@ h1,h2,h3,h4,h5,h6,strong,b,.kpi,.label,.principle-number,
       <iframe
         id="loggedProfileFrame"
         class="logged-profile-frame"
-        title="Mein Miles Apart Profil"
+        title="Miles Apart User Profil"
         allow="web-share"
       ></iframe>
 
@@ -2904,7 +2905,7 @@ function showLoggedProfile(){
 
 
 /* =====================================================
-   PROFILE IFRAME
+   USER.HTML IFRAME
 ===================================================== */
 
 function resizeLoggedProfileFrame(){
@@ -2955,7 +2956,7 @@ function resizeLoggedProfileFrame(){
   }catch(error){
 
     console.error(
-      "Profilhöhe konnte nicht angepasst werden:",
+      "User-Seite konnte nicht angepasst werden:",
       error
     );
   }
@@ -3019,7 +3020,7 @@ function observeLoggedProfileFrame(){
   }catch(error){
 
     console.error(
-      "Profil-Observer:",
+      "User-Seiten-Observer:",
       error
     );
   }
@@ -3064,8 +3065,18 @@ async function loadLoggedProfilePage(){
 
     showLoggedProfile();
 
+    /*
+     * WICHTIG:
+     *
+     * Die eingeloggte Seite ist NICHT
+     * profile.html (Account-Bearbeitung).
+     *
+     * Die eigentliche öffentliche Runner-Seite
+     * befindet sich in user.html.
+     */
+
     const profileUrl =
-      "profile.html?username=" +
+      "user.html?username=" +
       encodeURIComponent(
         currentProfile.username
       );
@@ -3103,7 +3114,7 @@ async function loadLoggedProfilePage(){
   }catch(error){
 
     console.error(
-      "Profil konnte nicht geöffnet werden:",
+      "User-Seite konnte nicht geöffnet werden:",
       error
     );
   }
@@ -3290,6 +3301,17 @@ logoutButton.addEventListener(
 
     currentUser = null;
     currentProfile = null;
+
+    if(profileFrameObserver){
+
+      try{
+        profileFrameObserver.disconnect();
+      }catch(error){
+        console.error(error);
+      }
+
+      profileFrameObserver = null;
+    }
 
     loggedProfileFrame.src =
       "about:blank";
@@ -4218,6 +4240,17 @@ supabaseClient.auth.onAuthStateChange(
 
       currentProfile =
         null;
+
+      if(profileFrameObserver){
+
+        try{
+          profileFrameObserver.disconnect();
+        }catch(error){
+          console.error(error);
+        }
+
+        profileFrameObserver = null;
+      }
 
       loggedProfileFrame.src =
         "about:blank";
