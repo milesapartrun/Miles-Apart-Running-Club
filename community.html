@@ -238,7 +238,7 @@
 
 
 /* =========================================================
-   KOMMENTARE — WIRKLICH LINKS
+   KOMMENTARE
 ========================================================= */
 
 .ma-comments{
@@ -519,8 +519,7 @@
 
 
 /* =========================================================
-   DIE DREI RUN-BUDDY-BUTTONS
-   KOMPAKT + SCHÖN + NEBENEINANDER
+   RUN BUDDY BUTTONS
 ========================================================= */
 
 .ma-buddy-actions{
@@ -915,7 +914,7 @@ textarea.ma-form-input{
 
 
 /* =========================================================
-   NACHRICHTEN SCHREIBEN
+   NACHRICHT SCHREIBEN
 ========================================================= */
 
 .ma-message-overlay,
@@ -986,19 +985,42 @@ textarea.ma-form-input{
 
 .ma-message-actions{
   display:flex;
-  align-items:center;
-  gap:8px;
+  flex-direction:column;
+  align-items:stretch;
+  gap:6px;
   margin-top:12px;
 }
 
 .ma-message-status{
-  flex:1;
+  width:100%;
   color:#18b8c7;
   font-size:14px;
   font-weight:700;
+  text-align:left !important;
+}
+
+.ma-message-view-link{
+  display:block !important;
+  width:max-content !important;
+  max-width:100%;
+  margin:6px 0 0 0 !important;
+  padding:0 !important;
+  border:0 !important;
+  background:transparent !important;
+  color:#18b8c7 !important;
+  font:inherit;
+  font-size:14px;
+  font-weight:800;
+  cursor:pointer;
+  text-align:left !important;
+}
+
+.ma-message-view-link:hover{
+  color:#109eab !important;
 }
 
 .ma-message-send{
+  width:100%;
   min-width:120px;
   height:52px;
   border:0 !important;
@@ -1016,22 +1038,6 @@ textarea.ma-form-input{
 
 .ma-message-send:hover{
   background:#18b8c7 !important;
-}
-
-.ma-message-view-link{
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  min-height:36px;
-  margin-top:7px;
-  padding:0 12px;
-  border:0;
-  background:transparent;
-  color:#18b8c7;
-  font:inherit;
-  font-size:14px;
-  font-weight:800;
-  cursor:pointer;
 }
 
 
@@ -1473,10 +1479,6 @@ textarea.ma-form-input{
   }
 
 
-  /* -------------------------------------------------------
-     RUN-BUDDY-BUTTONS AUCH AUF MOBILE KOMPAKT
-  ------------------------------------------------------- */
-
   .ma-buddy-actions{
     width:100% !important;
     display:flex !important;
@@ -1539,21 +1541,16 @@ textarea.ma-form-input{
     padding:22px;
   }
 
-  .ma-message-actions{
-    flex-direction:column;
-    align-items:stretch;
-  }
-
   .ma-message-send{
     width:100%;
-    display:flex !important;
-    align-items:center !important;
-    justify-content:center !important;
-    text-align:center !important;
   }
 
   .ma-message-view-link{
-    width:100%;
+    display:block !important;
+    width:max-content !important;
+    margin-left:0 !important;
+    margin-right:0 !important;
+    text-align:left !important;
   }
 
   .ma-inbox-modal{
@@ -1614,7 +1611,6 @@ textarea.ma-form-input{
 
 /* =========================================================
    LETZTER SICHERHEITS-OVERRIDE
-   Dieser Block steht absichtlich ganz am Ende.
 ========================================================= */
 
 .ma-community-page .ma-comment,
@@ -1636,6 +1632,12 @@ textarea.ma-form-input{
   margin-right:0 !important;
   padding-left:0 !important;
   padding-right:0 !important;
+}
+
+.ma-message-status,
+.ma-message-status *{
+  text-align:left !important;
+  text-indent:0 !important;
 }
 
 </style>
@@ -2540,7 +2542,6 @@ const $=
 let currentUser=null;
 let currentProfile=null;
 let messageReceiverId=null;
-let messageReceiverName="";
 let activeConversationUserId=null;
 let messageProfiles={};
 let buddyComments={};
@@ -3559,13 +3560,10 @@ function openMessageModal(id,name){
   }
 
   messageReceiverId=id;
-  messageReceiverName=
-    name||
-    "Miles Apart Member";
 
   $("messageRecipient")
     .textContent=
-    `An ${messageReceiverName}`;
+    `An ${name||"Miles Apart Member"}`;
 
   $("privateMessageContent")
     .value="";
@@ -3657,7 +3655,14 @@ $("sendPrivateMessageButton")
 
       $("privateMessageStatus")
         .innerHTML=`
-          Nachricht wurde gesendet ✓<br>
+          <div
+            style="
+              text-align:left !important;
+              width:100%;
+            "
+          >
+            Nachricht wurde gesendet ✓
+          </div>
 
           <button
             type="button"
@@ -4389,44 +4394,120 @@ $("postImage")
   };
 
 
-async function uploadPostImage(f){
+/* =========================================================
+   BILDER OHNE SUPABASE-STORAGE-BUCKET
+========================================================= */
 
-  const ext=
-    f.name
-      .split(".")
-      .pop()
-      .toLowerCase()
-      .replace(
-        /[^a-z0-9]/g,
-        ""
-      );
+function compressImageToDataUrl(file){
 
-  const path=
-    `${currentUser.id}/${Date.now()}-${crypto.randomUUID()}.${ext}`;
+  return new Promise(
+    (resolve,reject)=>{
 
-  const {error}=
-    await supabaseClient
-      .storage
-      .from("community-images")
-      .upload(
-        path,
-        f,
-        {
-          cacheControl:"3600",
-          upsert:false
-        }
-      );
+      const reader=
+        new FileReader();
 
-  if(error){
-    throw error;
-  }
+      reader.onerror=
+        ()=>{
+          reject(
+            new Error(
+              "Das Bild konnte nicht gelesen werden."
+            )
+          );
+        };
 
-  return supabaseClient
-    .storage
-    .from("community-images")
-    .getPublicUrl(path)
-    .data
-    .publicUrl;
+      reader.onload=
+        ()=>{
+
+          const img=
+            new Image();
+
+          img.onerror=
+            ()=>{
+              reject(
+                new Error(
+                  "Das Bild konnte nicht verarbeitet werden."
+                )
+              );
+            };
+
+          img.onload=
+            ()=>{
+
+              const MAX_WIDTH=1400;
+              const MAX_HEIGHT=1400;
+
+              let width=img.naturalWidth;
+              let height=img.naturalHeight;
+
+              const ratio=
+                Math.min(
+                  1,
+                  MAX_WIDTH/width,
+                  MAX_HEIGHT/height
+                );
+
+              width=
+                Math.round(
+                  width*ratio
+                );
+
+              height=
+                Math.round(
+                  height*ratio
+                );
+
+              const canvas=
+                document.createElement(
+                  "canvas"
+                );
+
+              canvas.width=width;
+              canvas.height=height;
+
+              const ctx=
+                canvas.getContext(
+                  "2d"
+                );
+
+              if(!ctx){
+
+                reject(
+                  new Error(
+                    "Das Bild konnte nicht verarbeitet werden."
+                  )
+                );
+
+                return;
+
+              }
+
+              ctx.drawImage(
+                img,
+                0,
+                0,
+                width,
+                height
+              );
+
+              const dataUrl=
+                canvas.toDataURL(
+                  "image/jpeg",
+                  0.78
+                );
+
+              resolve(dataUrl);
+
+            };
+
+          img.src=
+            reader.result;
+
+        };
+
+      reader.readAsDataURL(file);
+
+    }
+  );
 
 }
 
@@ -4436,6 +4517,10 @@ $("postForm")
   async e=>{
 
     e.preventDefault();
+
+    if(!currentUser){
+      return location.href="home.html";
+    }
 
     const content=
       $("postContent")
@@ -4453,12 +4538,12 @@ $("postForm")
     if(
       file&&
       file.size>
-      8*1024*1024
+      15*1024*1024
     ){
 
       $("postFormMessage")
         .textContent=
-        "Das Bild darf maximal 8 MB groß sein.";
+        "Das Bild darf maximal 15 MB groß sein.";
 
       return;
 
@@ -4469,12 +4554,24 @@ $("postForm")
 
     b.disabled=true;
 
+    b.textContent=
+      "Wird veröffentlicht …";
+
+    $("postFormMessage")
+      .textContent="";
+
     try{
 
-      const url=
-        file
-          ?await uploadPostImage(file)
-          :null;
+      let imageUrl=null;
+
+      if(file){
+
+        imageUrl=
+          await compressImageToDataUrl(
+            file
+          );
+
+      }
 
       const {error}=
         await supabaseClient
@@ -4482,7 +4579,7 @@ $("postForm")
           .insert({
             author_id:currentUser.id,
             content,
-            image_url:url
+            image_url:imageUrl
           });
 
       if(error){
@@ -4496,13 +4593,19 @@ $("postForm")
 
     }catch(err){
 
+      console.error(err);
+
       $("postFormMessage")
         .textContent=
-        err.message;
+        err.message||
+        "Der Post konnte nicht veröffentlicht werden.";
 
     }finally{
 
       b.disabled=false;
+
+      b.textContent=
+        "Post veröffentlichen";
 
     }
 
