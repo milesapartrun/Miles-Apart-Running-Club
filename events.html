@@ -3,165 +3,602 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
+
   <title>Events — Miles Apart Running Club</title>
+
   <link rel="stylesheet" href="style.css">
+
+  <style>
+
+    /* =========================================================
+       EVENTS
+    ========================================================= */
+
+    .events-page {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .events-hero {
+      margin-bottom: 24px;
+    }
+
+    .events-hero-card {
+      position: relative;
+      overflow: hidden;
+      background: #111;
+      border-radius: 24px;
+      padding: 38px;
+      min-height: 330px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      color: #fff;
+    }
+
+    .events-hero-card::after {
+      content: "10K";
+      position: absolute;
+      right: 22px;
+      bottom: -34px;
+      font-size: 190px;
+      line-height: 1;
+      font-weight: 900;
+      color: rgba(255,255,255,.045);
+      pointer-events: none;
+    }
+
+    .events-hero-content {
+      position: relative;
+      z-index: 1;
+    }
+
+    .events-hero-label {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: #18b8c7;
+      color: #fff;
+      font-size: 11px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+    }
+
+    .events-hero-title {
+      margin: 22px 0 8px;
+      font-size: clamp(38px,5vw,64px);
+      line-height: .98;
+      font-weight: 900;
+      letter-spacing: -.045em;
+    }
+
+    .events-hero-date {
+      margin-top: 14px;
+      color: #18b8c7;
+      font-size: 19px;
+      font-weight: 850;
+    }
+
+    .events-hero-subtitle {
+      margin-top: 9px;
+      max-width: 650px;
+      color: #bbb;
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    .events-hero-bottom {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid rgba(255,255,255,.12);
+    }
+
+    .events-hero-info {
+      color: #aaa;
+      font-size: 13px;
+    }
+
+    .events-hero-info strong {
+      display: block;
+      margin-bottom: 4px;
+      color: #fff;
+      font-size: 14px;
+    }
+
+    .events-calendar-card {
+      background: #fff;
+      border: 1px solid #e7e8e8;
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 8px 30px rgba(0,0,0,.035);
+    }
+
+    .events-calendar-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 20px;
+      margin-bottom: 22px;
+    }
+
+    .events-calendar-head h2 {
+      margin: 0;
+      font-size: 26px;
+      line-height: 1.1;
+      font-weight: 900;
+      letter-spacing: -.025em;
+    }
+
+    .events-calendar-head p {
+      margin: 6px 0 0;
+      color: #888;
+      font-size: 13px;
+    }
+
+    .events-month-badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: #effbfc;
+      color: #1199a6;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .event-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .event-item {
+      display: grid;
+      grid-template-columns: 72px minmax(0,1fr) auto;
+      align-items: center;
+      gap: 18px;
+      padding: 17px;
+      border: 1px solid #e7e8e8;
+      border-radius: 18px;
+      background: #fff;
+      transition:
+        transform .18s ease,
+        box-shadow .18s ease,
+        border-color .18s ease;
+    }
+
+    .event-item:hover {
+      transform: translateY(-2px);
+      border-color: #d7e4e2;
+      box-shadow: 0 10px 26px rgba(0,0,0,.045);
+    }
+
+    .event-date-box {
+      width: 62px;
+      height: 62px;
+      border-radius: 15px;
+      background: #f0fafa;
+      color: #1199a6;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .event-date-box b {
+      font-size: 24px;
+      line-height: 1;
+      font-weight: 900;
+    }
+
+    .event-date-box span {
+      margin-top: 4px;
+      font-size: 10px;
+      line-height: 1;
+      font-weight: 850;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+    }
+
+    .event-content {
+      min-width: 0;
+    }
+
+    .event-title {
+      margin: 0;
+      font-size: 17px;
+      line-height: 1.2;
+      font-weight: 900;
+    }
+
+    .event-description {
+      margin-top: 5px;
+      color: #858585;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .event-distance {
+      color: #17211f;
+      font-size: 14px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
+
+    .event-distance span {
+      display: block;
+      margin-top: 4px;
+      color: #999;
+      font-size: 10px;
+      font-weight: 700;
+      text-align: right;
+    }
+
+    @media (max-width: 760px) {
+
+      .events-hero-card {
+        padding: 28px 24px;
+        min-height: 310px;
+      }
+
+      .events-calendar-card {
+        padding: 22px;
+      }
+
+      .events-calendar-head {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+    }
+
+    @media (max-width: 560px) {
+
+      .events-hero-card {
+        border-radius: 20px;
+      }
+
+      .events-hero-title {
+        font-size: 42px;
+      }
+
+      .events-hero-bottom {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .event-item {
+        grid-template-columns: 62px minmax(0,1fr);
+        gap: 14px;
+      }
+
+      .event-distance {
+        grid-column: 2;
+        margin-top: -5px;
+      }
+
+      .event-distance span {
+        text-align: left;
+      }
+
+    }
+
+  </style>
 </head>
 
 <body>
+
   <div class="shell">
+
+    <!-- =======================================================
+         SIDEBAR
+    ======================================================== -->
 
     <aside class="sidebar">
 
       <div class="brand">
+
         <a href="index.html">
-          <img src="miles-apart-full-logo.png" alt="Miles Apart Running Club">
+
+          <img
+            src="miles-apart-full-logo.png"
+            alt="Miles Apart Running Club"
+          >
+
         </a>
+
       </div>
 
       <nav class="nav">
-        <a href="index.html">Miles Apart</a>
-        <a href="home.html">Home</a>
-        <a href="challenges.html">Challenges</a>
-        <a href="community.html">Community</a>
-        <a class="active" href="events.html">Events</a>
-        <a href="training.html">Training</a>
+
+        <a href="index.html">
+          Miles Apart
+        </a>
+
+        <a href="home.html">
+          Home
+        </a>
+
+        <a href="challenges.html">
+          Challenges
+        </a>
+
+        <a href="community.html">
+          Community
+        </a>
+
+        <a
+          class="active"
+          href="events.html"
+        >
+          Events
+        </a>
+
+        <a href="training.html">
+          Training
+        </a>
+
       </nav>
 
       <div class="side-bottom">
-        <small>THIS WEEK</small>
-        <strong>23.4 / 30 KM</strong>
+
+        <small>
+          THIS WEEK
+        </small>
+
+        <strong>
+          23.4 / 30 KM
+        </strong>
 
         <div class="mini-progress">
           <i></i>
         </div>
 
-        <p class="small" style="color:#aaa;margin-bottom:0">
+        <p
+          class="small"
+          style="color:#aaa;margin-bottom:0"
+        >
           Nur 6.6 km bis zum Wochenziel.
         </p>
+
       </div>
 
     </aside>
 
+
+    <!-- =======================================================
+         MAIN
+    ======================================================== -->
+
     <main class="main">
 
-      <div class="top">
-        <div class="crumb">MILES APART / EVENTS</div>
+      <div class="events-page">
 
-        <div class="top-right">
-          <span class="small muted" id="userGreeting">Wird geladen …</span>
-          <div class="avatar" id="userAvatar">A</div>
-        </div>
-      </div>
 
-      <div class="hero">
-        <div>
-          <h1>Events.</h1>
-          <p class="lead">
-            Gemeinsame Startlinien. Egal, wo du läufst.
-          </p>
-        </div>
+        <!-- ===================================================
+             TOP
+        ==================================================== -->
 
-        <a class="btn lime" href="#">Event vorschlagen</a>
-      </div>
+        <div class="top">
 
-      <div class="grid g2">
-
-        <div class="card dark">
-
-          <div class="row">
-            <span class="badge lime">19. SEPTEMBER</span>
-            <span>6,740 Runner</span>
+          <div class="crumb">
+            MILES APART / EVENTS
           </div>
 
-          <h2 style="font-size:34px">
-            THE COMMUNITY 10K
-          </h2>
+          <div class="top-right">
 
-          <p style="color:#bbb">
-            Samstag · 09:00 Uhr · deine Stadt · deine Strecke
-          </p>
+            <span
+              class="small muted"
+              id="userGreeting"
+            >
+              Wird geladen …
+            </span>
 
-          <div class="route"></div>
+            <div
+              class="avatar"
+              id="userAvatar"
+            >
+              A
+            </div>
 
-          <div class="row" style="margin-top:16px">
-            <span>🎧 Gemeinsamer Start-Countdown</span>
-            <a class="btn lime" href="#">Anmelden</a>
           </div>
 
         </div>
 
-        <div class="card">
 
-          <div class="section-head">
-            <h2>Event-Kalender</h2>
-            <span class="badge">September</span>
+        <!-- ===================================================
+             NÄCHSTES EVENT
+        ==================================================== -->
+
+        <section class="events-hero">
+
+          <div class="events-hero-card">
+
+            <div class="events-hero-content">
+
+              <span class="events-hero-label">
+                Nächstes Event
+              </span>
+
+              <h1 class="events-hero-title">
+                10-Kilometer-Lauf.
+              </h1>
+
+              <div class="events-hero-date">
+                Samstag · 03. Oktober 2026
+              </div>
+
+              <div class="events-hero-subtitle">
+                Gemeinsame Startlinie für die Miles Apart
+                Community. Egal, wo du läufst – schnür deine
+                Schuhe und lauf deine 10 Kilometer.
+              </div>
+
+            </div>
+
+
+            <div class="events-hero-bottom">
+
+              <div class="events-hero-info">
+
+                <strong>
+                  10 km
+                </strong>
+
+                Virtueller Community-Lauf
+
+              </div>
+
+              <div class="events-hero-info">
+
+                <strong>
+                  03.10.2026
+                </strong>
+
+                Gemeinsamer Lauftag
+
+              </div>
+
+            </div>
+
           </div>
 
-          <div class="event">
-            <div class="date">
-              <b>19</b>
-              <span>Sep</span>
-            </div>
+        </section>
+
+
+        <!-- ===================================================
+             EVENT KALENDER
+        ==================================================== -->
+
+        <section class="events-calendar-card">
+
+          <div class="events-calendar-head">
 
             <div>
-              <b>Community 10K</b>
-              <div class="small muted">
-                Virtuell · 10 km
-              </div>
+
+              <h2>
+                Event-Kalender
+              </h2>
+
+              <p>
+                Die nächsten gemeinsamen Läufe der Miles Apart Community.
+              </p>
+
             </div>
 
-            <b>6.7k</b>
+            <span class="events-month-badge">
+              Oktober 2026
+            </span>
+
           </div>
 
-          <div class="event" style="margin-top:15px">
-            <div class="date">
-              <b>27</b>
-              <span>Sep</span>
-            </div>
 
-            <div>
-              <b>Half Marathon Day</b>
-              <div class="small muted">
-                Virtuell · 21.1 km
+          <div class="event-list">
+
+
+            <!-- ===============================================
+                 03. OKTOBER
+            ================================================ -->
+
+            <article class="event-item">
+
+              <div class="event-date-box">
+
+                <b>
+                  03
+                </b>
+
+                <span>
+                  Okt
+                </span>
+
               </div>
-            </div>
 
-            <b>2.4k</b>
+              <div class="event-content">
+
+                <h3 class="event-title">
+                  10-Kilometer-Lauf
+                </h3>
+
+                <div class="event-description">
+                  Community Run · Samstag · gemeinsame Startlinie
+                </div>
+
+              </div>
+
+              <div class="event-distance">
+
+                10 km
+
+                <span>
+                  Community Run
+                </span>
+
+              </div>
+
+            </article>
+
+
+            <!-- ===============================================
+                 10. OKTOBER
+            ================================================ -->
+
+            <article class="event-item">
+
+              <div class="event-date-box">
+
+                <b>
+                  10
+                </b>
+
+                <span>
+                  Okt
+                </span>
+
+              </div>
+
+              <div class="event-content">
+
+                <h3 class="event-title">
+                  Halbmarathon
+                </h3>
+
+                <div class="event-description">
+                  Community Run · Samstag · 21,1 Kilometer
+                </div>
+
+              </div>
+
+              <div class="event-distance">
+
+                21,1 km
+
+                <span>
+                  Halbmarathon
+                </span>
+
+              </div>
+
+            </article>
+
+
           </div>
 
-          <div class="event" style="margin-top:15px">
-            <div class="date">
-              <b>03</b>
-              <span>Okt</span>
-            </div>
+        </section>
 
-            <div>
-              <b>Run &amp; Coffee</b>
-              <div class="small muted">
-                Local Meetups · 5 km
-              </div>
-            </div>
-
-            <b>318</b>
-          </div>
-
-          <div class="event" style="margin-top:15px">
-            <div class="date">
-              <b>11</b>
-              <span>Okt</span>
-            </div>
-
-            <div>
-              <b>First 10K</b>
-              <div class="small muted">
-                Beginner · 10 km
-              </div>
-            </div>
-
-            <b>1.2k</b>
-          </div>
-
-        </div>
 
       </div>
 
@@ -169,124 +606,316 @@
 
   </div>
 
-  <!-- Supabase -->
+
+  <!-- =========================================================
+       SUPABASE
+  ========================================================== -->
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+
   <script>
-    const SUPABASE_URL = "https://dein-projekt.supabase.co";
-    const SUPABASE_ANON_KEY = "DEIN_SUPABASE_ANON_KEY";
 
-    const supabaseClient = supabase.createClient(
-      SUPABASE_URL,
-      SUPABASE_ANON_KEY
-    );
+    const SUPABASE_URL =
+      "https://dein-projekt.supabase.co";
 
-    const userGreeting = document.getElementById("userGreeting");
-    const userAvatar = document.getElementById("userAvatar");
+    const SUPABASE_ANON_KEY =
+      "DEIN_SUPABASE_ANON_KEY";
 
-    function getUserDisplayName(user, profile) {
-      if (
+
+    const supabaseClient =
+      supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_ANON_KEY
+      );
+
+
+    const userGreeting =
+      document.getElementById(
+        "userGreeting"
+      );
+
+    const userAvatar =
+      document.getElementById(
+        "userAvatar"
+      );
+
+
+    /* =========================================================
+       USER NAME
+    ========================================================== */
+
+    function getUserDisplayName(
+      user,
+      profile
+    ){
+
+      if(
         profile &&
         profile.display_name &&
-        String(profile.display_name).trim()
-      ) {
-        return String(profile.display_name).trim();
+        String(
+          profile.display_name
+        ).trim()
+      ){
+
+        return String(
+          profile.display_name
+        ).trim();
+
       }
 
-      if (
+
+      if(
         user &&
         user.user_metadata &&
         user.user_metadata.display_name &&
-        String(user.user_metadata.display_name).trim()
-      ) {
-        return String(user.user_metadata.display_name).trim();
+        String(
+          user.user_metadata.display_name
+        ).trim()
+      ){
+
+        return String(
+          user.user_metadata.display_name
+        ).trim();
+
       }
 
-      if (
+
+      if(
         user &&
         user.user_metadata &&
         user.user_metadata.name &&
-        String(user.user_metadata.name).trim()
-      ) {
-        return String(user.user_metadata.name).trim();
+        String(
+          user.user_metadata.name
+        ).trim()
+      ){
+
+        return String(
+          user.user_metadata.name
+        ).trim();
+
       }
 
-      if (user && user.email) {
-        return user.email.split("@")[0].trim();
+
+      if(
+        user &&
+        user.email
+      ){
+
+        return user.email
+          .split("@")[0]
+          .trim();
+
       }
+
 
       return "Runner";
+
     }
 
-    function getFirstName(name) {
-      if (!name || !String(name).trim()) {
+
+    /* =========================================================
+       FIRST NAME
+    ========================================================== */
+
+    function getFirstName(
+      name
+    ){
+
+      if(
+        !name ||
+        !String(name).trim()
+      ){
+
         return "Runner";
+
       }
 
-      return String(name).trim().split(/\s+/)[0];
+
+      return String(
+        name
+      )
+        .trim()
+        .split(/\s+/)[0];
+
     }
 
-    function getInitials(name) {
-      if (!name) {
+
+    /* =========================================================
+       INITIALS
+    ========================================================== */
+
+    function getInitials(
+      name
+    ){
+
+      if(!name){
+
         return "M";
+
       }
 
-      const parts = name.trim().split(/\s+/);
 
-      if (parts.length === 1) {
-        return parts[0].substring(0, 1).toUpperCase();
+      const parts =
+        name
+          .trim()
+          .split(/\s+/);
+
+
+      if(
+        parts.length===1
+      ){
+
+        return parts[0]
+          .substring(0,1)
+          .toUpperCase();
+
       }
 
-      return (
-        parts[0].substring(0, 1) +
-        parts[parts.length - 1].substring(0, 1)
+
+      return(
+        parts[0]
+          .substring(0,1) +
+
+        parts[
+          parts.length-1
+        ]
+          .substring(0,1)
+
       ).toUpperCase();
+
     }
 
-    async function loadUser() {
-      try {
-        const {
-          data: { user }
-        } = await supabaseClient.auth.getUser();
 
-        if (!user) {
-          userGreeting.textContent = "";
-          userGreeting.style.display = "none";
-          userAvatar.textContent = "A";
+    /* =========================================================
+       USER LADEN
+    ========================================================== */
+
+    async function loadUser(){
+
+      try{
+
+        const {
+
+          data: {
+            user
+          }
+
+        } =
+          await supabaseClient
+            .auth
+            .getUser();
+
+
+        if(!user){
+
+          userGreeting.textContent =
+            "";
+
+          userGreeting.style.display =
+            "none";
+
+          userAvatar.textContent =
+            "A";
+
           return;
+
         }
 
-        let profile = null;
 
-        const { data } = await supabaseClient
-          .from("profiles")
-          .select("display_name")
-          .eq("id", user.id)
-          .maybeSingle();
+        let profile =
+          null;
 
-        profile = data || null;
 
-        const displayName = getUserDisplayName(user, profile);
-        const firstName = getFirstName(displayName);
-        const initials = getInitials(displayName);
+        const {
+          data
+        } =
+          await supabaseClient
+            .from("profiles")
+            .select(
+              "display_name"
+            )
+            .eq(
+              "id",
+              user.id
+            )
+            .maybeSingle();
 
-        userGreeting.style.display = "inline";
-        userGreeting.textContent = "Hallo " + firstName;
-        userAvatar.textContent = initials;
 
-      } catch (error) {
-        console.error("Fehler beim Laden des Benutzers:", error);
+        profile =
+          data ||
+          null;
 
-        userGreeting.style.display = "none";
-        userAvatar.textContent = "A";
+
+        const displayName =
+          getUserDisplayName(
+            user,
+            profile
+          );
+
+
+        const firstName =
+          getFirstName(
+            displayName
+          );
+
+
+        const initials =
+          getInitials(
+            displayName
+          );
+
+
+        userGreeting.style.display =
+          "inline";
+
+
+        userGreeting.textContent =
+          "Hallo " +
+          firstName;
+
+
+        userAvatar.textContent =
+          initials;
+
+
+      }catch(error){
+
+        console.error(
+          "Fehler beim Laden des Benutzers:",
+          error
+        );
+
+
+        userGreeting.style.display =
+          "none";
+
+
+        userAvatar.textContent =
+          "A";
+
       }
+
     }
 
-    supabaseClient.auth.onAuthStateChange(() => {
-      loadUser();
-    });
+
+    /* =========================================================
+       AUTH
+    ========================================================== */
+
+    supabaseClient
+      .auth
+      .onAuthStateChange(
+        () => {
+
+          loadUser();
+
+        }
+      );
+
 
     loadUser();
+
   </script>
 
 </body>
