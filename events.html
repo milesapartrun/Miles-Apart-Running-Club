@@ -19,6 +19,37 @@
       margin: 0 auto;
     }
 
+
+    /* =========================================================
+       LOGO
+    ========================================================= */
+
+    .brand {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 0;
+      margin: 0 0 28px;
+    }
+
+    .brand a {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+    }
+
+    .brand img {
+      display: block;
+      width: 190px;
+      max-width: 100%;
+      height: auto;
+    }
+
+
+    /* =========================================================
+       HERO
+    ========================================================= */
+
     .events-hero {
       margin-bottom: 24px;
     }
@@ -114,6 +145,11 @@
       font-size: 14px;
     }
 
+
+    /* =========================================================
+       EVENT KALENDER
+    ========================================================= */
+
     .events-calendar-card {
       background: #fff;
       border: 1px solid #e7e8e8;
@@ -165,7 +201,7 @@
 
     .event-item {
       display: grid;
-      grid-template-columns: 72px minmax(0,1fr) auto;
+      grid-template-columns: 72px minmax(0,1fr);
       align-items: center;
       gap: 18px;
       padding: 17px;
@@ -229,23 +265,16 @@
       line-height: 1.4;
     }
 
-    .event-distance {
-      color: #17211f;
-      font-size: 14px;
-      font-weight: 900;
-      white-space: nowrap;
-    }
 
-    .event-distance span {
-      display: block;
-      margin-top: 4px;
-      color: #999;
-      font-size: 10px;
-      font-weight: 700;
-      text-align: right;
-    }
+    /* =========================================================
+       MOBILE
+    ========================================================= */
 
     @media (max-width: 760px) {
+
+      .brand img {
+        width: 170px;
+      }
 
       .events-hero-card {
         padding: 28px 24px;
@@ -264,7 +293,16 @@
 
     }
 
+
     @media (max-width: 560px) {
+
+      .brand {
+        margin-bottom: 22px;
+      }
+
+      .brand img {
+        width: 155px;
+      }
 
       .events-hero-card {
         border-radius: 20px;
@@ -283,15 +321,6 @@
       .event-item {
         grid-template-columns: 62px minmax(0,1fr);
         gap: 14px;
-      }
-
-      .event-distance {
-        grid-column: 2;
-        margin-top: -5px;
-      }
-
-      .event-distance span {
-        text-align: left;
       }
 
     }
@@ -321,6 +350,7 @@
         </a>
 
       </div>
+
 
       <nav class="nav">
 
@@ -352,6 +382,7 @@
         </a>
 
       </nav>
+
 
       <div class="side-bottom">
 
@@ -407,13 +438,6 @@
               Wird geladen …
             </span>
 
-            <div
-              class="avatar"
-              id="userAvatar"
-            >
-              A
-            </div>
-
           </div>
 
         </div>
@@ -433,18 +457,20 @@
                 Nächstes Event
               </span>
 
+
               <h1 class="events-hero-title">
-                10-Kilometer-Lauf.
+                10 Kilometer Run
               </h1>
+
 
               <div class="events-hero-date">
                 Samstag · 03. Oktober 2026
               </div>
 
+
               <div class="events-hero-subtitle">
-                Gemeinsame Startlinie für die Miles Apart
-                Community. Egal, wo du läufst – schnür deine
-                Schuhe und lauf deine 10 Kilometer.
+                Schnür deine Schuhe und lauf deine
+                10 Kilometer – egal, wo du gerade bist.
               </div>
 
             </div>
@@ -455,20 +481,10 @@
               <div class="events-hero-info">
 
                 <strong>
-                  10 km
+                  10 Kilometer Run
                 </strong>
 
-                Virtueller Community-Lauf
-
-              </div>
-
-              <div class="events-hero-info">
-
-                <strong>
-                  03.10.2026
-                </strong>
-
-                Gemeinsamer Lauftag
+                Miles Apart Community
 
               </div>
 
@@ -527,25 +543,12 @@
 
               </div>
 
+
               <div class="event-content">
 
                 <h3 class="event-title">
-                  10-Kilometer-Lauf
+                  10 Kilometer Run
                 </h3>
-
-                <div class="event-description">
-                  Community Run · Samstag · gemeinsame Startlinie
-                </div>
-
-              </div>
-
-              <div class="event-distance">
-
-                10 km
-
-                <span>
-                  Community Run
-                </span>
 
               </div>
 
@@ -570,25 +573,12 @@
 
               </div>
 
+
               <div class="event-content">
 
                 <h3 class="event-title">
-                  Halbmarathon
+                  Halbmarathon · 21,1 Kilometer
                 </h3>
-
-                <div class="event-description">
-                  Community Run · Samstag · 21,1 Kilometer
-                </div>
-
-              </div>
-
-              <div class="event-distance">
-
-                21,1 km
-
-                <span>
-                  Halbmarathon
-                </span>
 
               </div>
 
@@ -633,11 +623,6 @@
     const userGreeting =
       document.getElementById(
         "userGreeting"
-      );
-
-    const userAvatar =
-      document.getElementById(
-        "userAvatar"
       );
 
 
@@ -742,52 +727,6 @@
 
 
     /* =========================================================
-       INITIALS
-    ========================================================== */
-
-    function getInitials(
-      name
-    ){
-
-      if(!name){
-
-        return "M";
-
-      }
-
-
-      const parts =
-        name
-          .trim()
-          .split(/\s+/);
-
-
-      if(
-        parts.length===1
-      ){
-
-        return parts[0]
-          .substring(0,1)
-          .toUpperCase();
-
-      }
-
-
-      return(
-        parts[0]
-          .substring(0,1) +
-
-        parts[
-          parts.length-1
-        ]
-          .substring(0,1)
-
-      ).toUpperCase();
-
-    }
-
-
-    /* =========================================================
        USER LADEN
     ========================================================== */
 
@@ -814,9 +753,6 @@
 
           userGreeting.style.display =
             "none";
-
-          userAvatar.textContent =
-            "A";
 
           return;
 
@@ -860,12 +796,6 @@
           );
 
 
-        const initials =
-          getInitials(
-            displayName
-          );
-
-
         userGreeting.style.display =
           "inline";
 
@@ -873,10 +803,6 @@
         userGreeting.textContent =
           "Hallo " +
           firstName;
-
-
-        userAvatar.textContent =
-          initials;
 
 
       }catch(error){
@@ -889,10 +815,6 @@
 
         userGreeting.style.display =
           "none";
-
-
-        userAvatar.textContent =
-          "A";
 
       }
 
