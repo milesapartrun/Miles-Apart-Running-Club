@@ -102,19 +102,20 @@
     .nav a.active {
       background: #e4f8fb;
       color: #111;
-      padding-left: 48px;
+      padding-left: 80px !important;
     }
 
     .nav a.active::before {
       content: "";
       position: absolute;
-      left: 18px;
+      left: 36px;
       top: 50%;
       width: 10px;
       height: 10px;
       border-radius: 50%;
       background: #18b8c7;
       transform: translateY(-50%);
+      z-index: 2;
     }
 
 
@@ -536,11 +537,11 @@
       }
 
       .nav a.active {
-        padding-left: 40px;
+        padding-left: 64px !important;
       }
 
       .nav a.active::before {
-        left: 14px;
+        left: 28px;
         width: 9px;
         height: 9px;
       }
@@ -593,11 +594,11 @@
       }
 
       .nav a.active {
-        padding-left: 34px;
+        padding-left: 54px !important;
       }
 
       .nav a.active::before {
-        left: 12px;
+        left: 22px;
         width: 8px;
         height: 8px;
       }
