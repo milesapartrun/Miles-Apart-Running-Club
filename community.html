@@ -189,8 +189,6 @@
   text-indent:0 !important;
   white-space:pre-wrap;
   overflow-wrap:anywhere;
-  align-self:flex-start !important;
-  justify-content:flex-start !important;
 }
 
 .ma-post-image{
@@ -319,7 +317,6 @@
   margin:0 !important;
   padding:0 !important;
   text-align:left !important;
-  text-indent:0 !important;
 }
 
 .ma-comment-name{
@@ -1466,8 +1463,6 @@ textarea.ma-form-input{
 
   .ma-post-copy{
     font-size:20px;
-    text-align:left !important;
-    text-indent:0 !important;
   }
 
   .ma-comment-form{
@@ -1618,19 +1613,6 @@ textarea.ma-form-input{
    LETZTER SICHERHEITS-OVERRIDE
 ========================================================= */
 
-.ma-community-page .ma-post-copy{
-  display:block !important;
-  width:100% !important;
-  margin-left:0 !important;
-  margin-right:0 !important;
-  padding-left:0 !important;
-  padding-right:0 !important;
-  text-align:left !important;
-  text-indent:0 !important;
-  align-self:flex-start !important;
-  justify-content:flex-start !important;
-}
-
 .ma-community-page .ma-comment,
 .ma-community-page .ma-comment-content,
 .ma-community-page .ma-comment-header,
@@ -1656,6 +1638,77 @@ textarea.ma-form-input{
 .ma-message-status *{
   text-align:left !important;
   text-indent:0 !important;
+}
+
+
+/* =========================================================
+   POST- UND KOMMENTARTEXT — ENDGÜLTIG LINKS
+========================================================= */
+
+/* Der eigentliche Text des Posts */
+.ma-community-page .ma-post .ma-post-copy,
+.ma-community-page .ma-post .ma-post-copy *{
+  display:block !important;
+  width:100% !important;
+  max-width:100% !important;
+
+  margin-left:0 !important;
+  margin-right:0 !important;
+
+  padding-left:0 !important;
+  padding-right:0 !important;
+
+  text-align:left !important;
+  text-indent:0 !important;
+
+  align-self:stretch !important;
+  justify-self:start !important;
+}
+
+
+/* Der eigentliche Text eines Kommentars */
+.ma-community-page .ma-post .ma-comment,
+.ma-community-page .ma-post .ma-comment-content,
+.ma-community-page .ma-post .ma-comment-text,
+.ma-community-page .ma-post .ma-comment-text *{
+  text-align:left !important;
+  text-indent:0 !important;
+}
+
+
+.ma-community-page .ma-post .ma-comment{
+  display:flex !important;
+  width:100% !important;
+  justify-content:flex-start !important;
+  align-items:flex-start !important;
+}
+
+
+.ma-community-page .ma-post .ma-comment-content{
+  display:block !important;
+  flex:1 1 auto !important;
+  width:auto !important;
+  min-width:0 !important;
+
+  margin:0 !important;
+  padding:0 !important;
+
+  text-align:left !important;
+}
+
+
+.ma-community-page .ma-post .ma-comment-text{
+  display:block !important;
+  width:100% !important;
+  max-width:none !important;
+
+  margin:5px 0 0 0 !important;
+  padding:0 !important;
+
+  text-align:left !important;
+  text-indent:0 !important;
+
+  align-self:flex-start !important;
 }
 
 </style>
