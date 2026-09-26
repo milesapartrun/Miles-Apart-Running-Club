@@ -92,6 +92,7 @@
         background .18s ease,
         color .18s ease,
         transform .18s ease;
+      box-sizing: border-box;
     }
 
     .nav a:hover {
@@ -102,20 +103,22 @@
     .nav a.active {
       background: #e4f8fb;
       color: #111;
-      padding-left: 80px !important;
+      padding: 0 12px !important;
     }
 
-    .nav a.active::before {
-      content: "";
-      position: absolute;
-      left: 36px;
-      top: 50%;
+    .nav a.active .nav-active-dot {
+      flex: 0 0 10px;
       width: 10px;
       height: 10px;
+      margin-left: 24px;
+      margin-right: 24px;
       border-radius: 50%;
       background: #18b8c7;
-      transform: translateY(-50%);
-      z-index: 2;
+    }
+
+    .nav a.active .nav-active-text {
+      display: block;
+      flex: 0 0 auto;
     }
 
 
@@ -537,13 +540,15 @@
       }
 
       .nav a.active {
-        padding-left: 64px !important;
+        padding: 0 8px !important;
       }
 
-      .nav a.active::before {
-        left: 28px;
+      .nav a.active .nav-active-dot {
+        flex-basis: 9px;
         width: 9px;
         height: 9px;
+        margin-left: 14px;
+        margin-right: 18px;
       }
 
       .events-intro {
@@ -594,13 +599,15 @@
       }
 
       .nav a.active {
-        padding-left: 54px !important;
+        padding: 0 4px !important;
       }
 
-      .nav a.active::before {
-        left: 22px;
+      .nav a.active .nav-active-dot {
+        flex-basis: 8px;
         width: 8px;
         height: 8px;
+        margin-left: 12px;
+        margin-right: 14px;
       }
 
       .events-intro {
@@ -700,7 +707,16 @@
         class="active"
         href="events.html"
       >
-        Events
+
+        <span
+          class="nav-active-dot"
+          aria-hidden="true"
+        ></span>
+
+        <span class="nav-active-text">
+          Events
+        </span>
+
       </a>
 
       <a href="training.html">
