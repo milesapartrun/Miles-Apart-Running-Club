@@ -203,13 +203,28 @@
       align-items: center;
     }
 
+    /*
+     * WICHTIG:
+     *
+     * Der türkise Rahmen wird jetzt NUR noch vom Canvas gezeichnet.
+     * Der Shell selbst bekommt KEINE türkise Hintergrundfarbe mehr.
+     *
+     * Dadurch entsteht auf der Seite nicht mehr:
+     *
+     * Türkis → Türkis → Grau → Weiß
+     *
+     * sondern:
+     *
+     * Türkis → Grau → Weiß
+     */
+
     .runner-poster-shell {
       position: relative;
       width: min(100%,590px);
       overflow: hidden;
       border-radius: 30px;
-      background: #18b8c7;
-      padding: 12px;
+      background: transparent;
+      padding: 0;
       box-shadow:
         0 24px 60px rgba(24,45,41,.12),
         0 5px 18px rgba(24,45,41,.05);
@@ -219,15 +234,15 @@
       position: relative;
       overflow: hidden;
       width: 100%;
-      border-radius: 21px;
-      background: #fff;
+      border-radius: 30px;
+      background: transparent;
     }
 
     #runnerPosterCanvas {
       display: block;
       width: 100%;
       height: auto;
-      background: #fff;
+      background: transparent;
     }
 
     .runner-share-actions {
@@ -706,11 +721,11 @@
 
       .runner-poster-shell {
         border-radius: 24px;
-        padding: 10px;
+        padding: 0;
       }
 
       .runner-poster-canvas-wrap {
-        border-radius: 17px;
+        border-radius: 24px;
       }
 
       .runner-share-actions {
@@ -1955,18 +1970,24 @@ function posterFittedText(
 ========================================================= */
 
 /*
- * AUFBAU DES POSTERS:
+ * GENAU DIESER AUFBAU:
  *
- * 1. Ganz außen: türkiser Rahmen
+ * ┌─────────────────────────────────────┐
+ * │                                     │
+ * │        EINZIGER TÜRKISER             │
+ * │             AUSSENRAHMEN             │
+ * │   ┌─────────────────────────────┐   │
+ * │   │       KLEINE GRAUE FLÄCHE   │   │
+ * │   │   ┌─────────────────────┐   │   │
+ * │   │   │                     │   │   │
+ * │   │   │       INHALT        │   │   │
+ * │   │   │                     │   │   │
+ * │   │   └─────────────────────┘   │   │
+ * │   └─────────────────────────────┘   │
+ * │                                     │
+ * └─────────────────────────────────────┘
  *
- * 2. Direkt dahinter: kleine graue Fläche
- *
- * 3. Danach: weiße Innenfläche
- *
- * 4. Erst innerhalb der weißen Fläche:
- *    kompletter Inhalt
- *
- * Es gibt KEINEN inneren türkisen Rahmen mehr.
+ * KEIN innerer türkiser Rahmen.
  */
 
 function drawPosterFrame(
@@ -1975,70 +1996,40 @@ function drawPosterFrame(
   H
 ){
 
-  /* -------------------------------------------------------
-     Grundfläche
-  ------------------------------------------------------- */
-
-  ctx.fillStyle="#f2f7f6";
-
-  ctx.fillRect(
-    0,
-    0,
-    W,
-    H
-  );
-
-
-  /* -------------------------------------------------------
-     1. ÄUSSERER TÜRKISER RAHMEN
-     
-     Dieser ist der EINZIGE türkise Rahmen.
-  ------------------------------------------------------- */
-
-  const outerX=24;
-  const outerY=24;
-  const outerW=W-48;
-  const outerH=H-48;
-  const outerRadius=42;
-
-  ctx.save();
-
-  ctx.shadowColor=
-    "rgba(18,45,42,.18)";
-
-  ctx.shadowBlur=34;
-
-  ctx.shadowOffsetY=12;
+  /*
+   * -------------------------------------------------------
+   * 1. GANZ AUSSEN: TÜRKIS
+   * -------------------------------------------------------
+   */
 
   posterRoundedRect(
     ctx,
-    outerX,
-    outerY,
-    outerW,
-    outerH,
-    outerRadius
+    0,
+    0,
+    W,
+    H,
+    48
   );
 
   ctx.fillStyle="#18b8c7";
 
   ctx.fill();
 
-  ctx.restore();
 
+  /*
+   * -------------------------------------------------------
+   * 2. DAHINTER: KLEINE GRAUE FLÄCHE
+   *
+   * Der Abstand zum türkisen Außenrahmen ist bewusst
+   * relativ klein.
+   * -------------------------------------------------------
+   */
 
-  /* -------------------------------------------------------
-     2. KLEINE GRAUE INNENFLÄCHE
-     
-     Diese ersetzt den bisherigen inneren Türkisbereich.
-     
-     Sie ist bewusst nur schmal.
-  ------------------------------------------------------- */
-
-  const greyX=54;
-  const greyY=54;
-  const greyW=W-108;
-  const greyH=H-108;
-  const greyRadius=31;
+  const greyX=28;
+  const greyY=28;
+  const greyW=W-56;
+  const greyH=H-56;
+  const greyRadius=38;
 
   posterRoundedRect(
     ctx,
@@ -2054,20 +2045,22 @@ function drawPosterFrame(
   ctx.fill();
 
 
-  /* -------------------------------------------------------
-     3. WEISSE INNENFLÄCHE
-     
-     Hier beginnt der eigentliche Posterinhalt.
-     
-     Zwischen Türkis und Weiß bleibt nur die kleine graue
-     Fläche.
-  ------------------------------------------------------- */
+  /*
+   * -------------------------------------------------------
+   * 3. WEISSE INNENFLÄCHE
+   *
+   * Hier beginnt der eigentliche Inhalt.
+   *
+   * WICHTIG:
+   * Kein Türkis zwischen Grau und Weiß.
+   * -------------------------------------------------------
+   */
 
-  const innerX=76;
-  const innerY=76;
-  const innerW=W-152;
-  const innerH=H-152;
-  const innerRadius=27;
+  const innerX=64;
+  const innerY=64;
+  const innerW=W-128;
+  const innerH=H-128;
+  const innerRadius=30;
 
   posterRoundedRect(
     ctx,
@@ -2083,7 +2076,9 @@ function drawPosterFrame(
   ctx.fill();
 
 
-  /* dezente graue Kontur */
+  /*
+   * Dezente graue Kontur um die weiße Fläche.
+   */
 
   posterRoundedRect(
     ctx,
@@ -2231,7 +2226,7 @@ function posterPbBox(
 
   /*
    * Kleiner türkiser Akzent NUR an den Karten.
-   * Dieser ist kein Rahmen.
+   * Das ist ausdrücklich KEIN äußerer Rahmen.
    */
 
   ctx.fillStyle="#18b8c7";
@@ -2418,9 +2413,8 @@ function renderRunnerPoster(
    * -------------------------------------------------------
    * AB HIER: NUR NOCH INHALT
    *
-   * Alles befindet sich innerhalb der weißen Fläche.
-   * Der türkise Außenrahmen und die graue Fläche werden
-   * nicht mehr berührt.
+   * Der Inhalt bleibt vollständig innerhalb der weißen
+   * Innenfläche.
    * -------------------------------------------------------
    */
 
