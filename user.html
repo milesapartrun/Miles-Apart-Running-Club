@@ -201,6 +201,289 @@
     }
 
     /* =========================================================
+       =========================================================
+       MILES APART SOCIAL POSTER
+       NEU
+       =========================================================
+       ========================================================= */
+
+    .runner-share-section {
+      margin: 0 0 34px;
+    }
+
+    .runner-share-heading {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 20px;
+      margin: 34px 2px 14px;
+    }
+
+    .runner-share-heading h2 {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.1;
+      font-weight: 850;
+      letter-spacing: -0.02em;
+    }
+
+    .runner-share-heading p {
+      margin: 4px 0 0;
+      color: #888;
+      font-size: 13px;
+      line-height: 1.5;
+    }
+
+    .runner-share-layout {
+      display: grid;
+      grid-template-columns: minmax(280px, 440px) minmax(0, 1fr);
+      gap: 26px;
+      align-items: stretch;
+    }
+
+    /* ---------------------------------------------------------
+       POSTER PREVIEW
+    --------------------------------------------------------- */
+
+    .runner-poster-shell {
+      position: relative;
+      overflow: hidden;
+      border-radius: 24px;
+      padding: 10px;
+      background:
+        linear-gradient(
+          135deg,
+          #111 0%,
+          #182527 55%,
+          #18b8c7 150%
+        );
+      box-shadow:
+        0 20px 45px rgba(0, 0, 0, 0.13),
+        0 0 0 1px rgba(0, 0, 0, 0.04);
+    }
+
+    .runner-poster-canvas-wrap {
+      position: relative;
+      overflow: hidden;
+      border-radius: 17px;
+      background: #111;
+      aspect-ratio: 4 / 5;
+    }
+
+    #runnerPosterCanvas {
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: #111;
+    }
+
+    .runner-poster-badge {
+      position: absolute;
+      top: 17px;
+      right: 17px;
+      z-index: 2;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.93);
+      color: #111;
+      font-size: 9px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      box-shadow: 0 5px 16px rgba(0, 0, 0, 0.12);
+    }
+
+    /* ---------------------------------------------------------
+       SHARE INFO
+    --------------------------------------------------------- */
+
+    .runner-share-panel {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-width: 0;
+      background: #fff;
+      border: 1px solid var(--ma-border);
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.035);
+    }
+
+    .runner-share-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      width: fit-content;
+      gap: 7px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      background: #effbfc;
+      color: var(--ma-cyan-dark);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .runner-share-panel h3 {
+      margin: 17px 0 0;
+      max-width: 600px;
+      font-size: clamp(28px, 4vw, 44px);
+      line-height: 1.02;
+      font-weight: 900;
+      letter-spacing: -0.045em;
+    }
+
+    .runner-share-panel h3 span {
+      color: var(--ma-cyan);
+    }
+
+    .runner-share-panel-text {
+      margin: 16px 0 0;
+      max-width: 590px;
+      color: #666;
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    .runner-share-actions {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 26px;
+    }
+
+    .runner-share-button {
+      appearance: none;
+      border: 0;
+      border-radius: 13px;
+      min-height: 48px;
+      padding: 12px 15px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 13px;
+      font-weight: 850;
+      transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        opacity 0.18s ease;
+    }
+
+    .runner-share-button:hover {
+      transform: translateY(-2px);
+    }
+
+    .runner-share-button:active {
+      transform: translateY(0);
+    }
+
+    .runner-share-button.primary {
+      background: var(--ma-cyan);
+      color: #fff;
+      box-shadow: 0 7px 18px rgba(24, 184, 199, 0.22);
+    }
+
+    .runner-share-button.dark {
+      background: #111;
+      color: #fff;
+      box-shadow: 0 7px 18px rgba(17, 17, 17, 0.13);
+    }
+
+    .runner-share-button.light {
+      background: #f4f6f6;
+      color: #222;
+      border: 1px solid #e6e8e8;
+    }
+
+    .runner-share-button.whatsapp {
+      background: #20b96b;
+      color: #fff;
+      box-shadow: 0 7px 18px rgba(32, 185, 107, 0.18);
+    }
+
+    .runner-share-button.instagram {
+      background:
+        linear-gradient(
+          135deg,
+          #111 0%,
+          #333 100%
+        );
+      color: #fff;
+      box-shadow: 0 7px 18px rgba(17, 17, 17, 0.13);
+    }
+
+    .runner-share-button:disabled {
+      cursor: wait;
+      opacity: 0.6;
+      transform: none;
+    }
+
+    .runner-share-button-icon {
+      font-size: 17px;
+      line-height: 1;
+    }
+
+    .runner-share-status {
+      min-height: 20px;
+      margin-top: 15px;
+      color: #777;
+      font-size: 12px;
+      line-height: 1.5;
+    }
+
+    .runner-share-note {
+      margin-top: 20px;
+      padding-top: 18px;
+      border-top: 1px solid #ededed;
+      color: #929292;
+      font-size: 11px;
+      line-height: 1.55;
+    }
+
+    .runner-share-note strong {
+      color: #666;
+    }
+
+    /* ---------------------------------------------------------
+       POSTER STATS PREVIEW
+    --------------------------------------------------------- */
+
+    .runner-poster-live-stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+      margin-top: 24px;
+    }
+
+    .runner-poster-live-stat {
+      padding: 12px 10px;
+      border-radius: 13px;
+      background: #f7f8f8;
+      border: 1px solid #eceeee;
+      text-align: center;
+    }
+
+    .runner-poster-live-stat-label {
+      color: #999;
+      font-size: 8px;
+      font-weight: 900;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .runner-poster-live-stat-value {
+      margin-top: 6px;
+      color: #222;
+      font-size: 15px;
+      line-height: 1;
+      font-weight: 900;
+    }
+
+    /* =========================================================
        SECTION HEADER
     ========================================================= */
 
@@ -496,6 +779,25 @@
       .main-stats {
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
+
+      .runner-share-layout {
+        grid-template-columns: minmax(280px, 390px) minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 820px) {
+      .runner-share-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .runner-poster-shell {
+        width: min(100%, 500px);
+        margin: 0 auto;
+      }
+
+      .runner-share-panel {
+        padding: 26px;
+      }
     }
 
     @media (max-width: 720px) {
@@ -560,6 +862,19 @@
         border-radius: 9px;
         font-size: 12px;
       }
+
+      .runner-share-heading {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .runner-share-panel h3 {
+        font-size: 34px;
+      }
+
+      .runner-poster-live-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
 
     @media (max-width: 500px) {
@@ -586,6 +901,23 @@
       .run-card-right {
         text-align: left;
       }
+
+      .runner-share-panel {
+        padding: 22px;
+        border-radius: 20px;
+      }
+
+      .runner-share-actions {
+        grid-template-columns: 1fr;
+      }
+
+      .runner-share-heading {
+        margin-top: 28px;
+      }
+
+      .runner-share-heading h2 {
+        font-size: 20px;
+      }
     }
 
     @media (max-width: 370px) {
@@ -599,6 +931,10 @@
 
       .highlights-grid {
         grid-template-columns: 1fr;
+      }
+
+      .runner-poster-live-stats {
+        grid-template-columns: 1fr 1fr;
       }
     }
   </style>
@@ -677,6 +1013,226 @@
           </div>
 
         </section>
+
+
+        <!-- =====================================================
+             MILES APART SOCIAL POSTER
+             
+             NEU:
+             Direkt unter dem Profilkasten.
+        ====================================================== -->
+
+        <section class="runner-share-section">
+
+          <div class="runner-share-heading">
+
+            <div>
+              <h2>
+                Dein Miles Apart Poster
+              </h2>
+
+              <p>
+                Zeig deine Kilometer. Zeig dein Level. Zeig, dass du Teil der Community bist.
+              </p>
+            </div>
+
+          </div>
+
+
+          <div class="runner-share-layout">
+
+            <!-- =================================================
+                 POSTER
+            ================================================== -->
+
+            <div class="runner-poster-shell">
+
+              <div class="runner-poster-canvas-wrap">
+
+                <canvas
+                  id="runnerPosterCanvas"
+                  width="1080"
+                  height="1350"
+                ></canvas>
+
+                <div class="runner-poster-badge">
+                  2026 · RUNNER
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <!-- =================================================
+                 TEILEN
+            ================================================== -->
+
+            <div class="runner-share-panel">
+
+              <div class="runner-share-eyebrow">
+                ✦ Miles Apart Community
+              </div>
+
+              <h3>
+                Deine Story.
+                <span>Dein Run.</span>
+                Unsere Community.
+              </h3>
+
+              <p class="runner-share-panel-text">
+                Dein persönliches Miles Apart Poster ist aus deinen aktuellen
+                Laufdaten erstellt. Teile es mit deinen Freunden, poste es auf
+                Instagram oder schick es direkt über WhatsApp weiter.
+              </p>
+
+
+              <!-- LIVE PREVIEW DER WERTE -->
+
+              <div class="runner-poster-live-stats">
+
+                <div class="runner-poster-live-stat">
+
+                  <div class="runner-poster-live-stat-label">
+                    Kilometer
+                  </div>
+
+                  <div
+                    id="posterLiveKm"
+                    class="runner-poster-live-stat-value"
+                  >
+                    0 km
+                  </div>
+
+                </div>
+
+                <div class="runner-poster-live-stat">
+
+                  <div class="runner-poster-live-stat-label">
+                    Läufe
+                  </div>
+
+                  <div
+                    id="posterLiveRuns"
+                    class="runner-poster-live-stat-value"
+                  >
+                    0
+                  </div>
+
+                </div>
+
+                <div class="runner-poster-live-stat">
+
+                  <div class="runner-poster-live-stat-label">
+                    Level
+                  </div>
+
+                  <div
+                    id="posterLiveLevel"
+                    class="runner-poster-live-stat-value"
+                  >
+                    –
+                  </div>
+
+                </div>
+
+                <div class="runner-poster-live-stat">
+
+                  <div class="runner-poster-live-stat-label">
+                    Longest
+                  </div>
+
+                  <div
+                    id="posterLiveLongest"
+                    class="runner-poster-live-stat-value"
+                  >
+                    –
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <!-- BUTTONS -->
+
+              <div class="runner-share-actions">
+
+                <button
+                  id="posterDownloadButton"
+                  class="runner-share-button primary"
+                  type="button"
+                >
+                  <span class="runner-share-button-icon">
+                    ↓
+                  </span>
+
+                  Poster speichern
+                </button>
+
+
+                <button
+                  id="posterWhatsappButton"
+                  class="runner-share-button whatsapp"
+                  type="button"
+                >
+                  <span class="runner-share-button-icon">
+                    ☎
+                  </span>
+
+                  WhatsApp teilen
+                </button>
+
+
+                <button
+                  id="posterInstagramButton"
+                  class="runner-share-button instagram"
+                  type="button"
+                >
+                  <span class="runner-share-button-icon">
+                    ◎
+                  </span>
+
+                  Instagram teilen
+                </button>
+
+
+                <button
+                  id="posterNativeShareButton"
+                  class="runner-share-button dark"
+                  type="button"
+                >
+                  <span class="runner-share-button-icon">
+                    ↗
+                  </span>
+
+                  Poster teilen
+                </button>
+
+              </div>
+
+
+              <div
+                id="posterShareStatus"
+                class="runner-share-status"
+                aria-live="polite"
+              ></div>
+
+
+              <div class="runner-share-note">
+                <strong>Tipp:</strong>
+                Auf dem Smartphone kannst du über „Poster teilen“ oder
+                „Instagram teilen“ den nativen Teilen-Dialog verwenden.
+                Wenn das Gerät Instagram nicht direkt unterstützt, wird das
+                Poster zuerst als Bild gespeichert.
+              </div>
+
+            </div>
+
+          </div>
+
+        </section>
+
 
         <!-- =====================================================
              STATISTIK
@@ -784,6 +1340,7 @@
 
         </section>
 
+
         <!-- =====================================================
              PERSÖNLICHE BESTZEITEN
         ====================================================== -->
@@ -830,6 +1387,7 @@
 
           </div>
 
+
           <!-- 10 KM -->
           <div class="highlight-card">
 
@@ -860,6 +1418,7 @@
             </div>
 
           </div>
+
 
           <!-- HALBMARATHON -->
           <div class="highlight-card">
@@ -892,6 +1451,7 @@
 
           </div>
 
+
           <!-- MARATHON -->
           <div class="highlight-card">
 
@@ -923,6 +1483,7 @@
 
           </div>
 
+
           <!-- 100 KM -->
           <div class="highlight-card">
 
@@ -953,6 +1514,7 @@
             </div>
 
           </div>
+
 
           <!-- 100 KM+ -->
           <div class="highlight-card">
@@ -987,6 +1549,7 @@
 
         </section>
 
+
         <!-- =====================================================
              LAUFHISTORIE
         ====================================================== -->
@@ -1007,6 +1570,7 @@
 
       </div>
 
+
       <!-- =====================================================
            ERROR
       ====================================================== -->
@@ -1020,6 +1584,7 @@
     </div>
 
   </main>
+
 
   <!-- =========================================================
        SUPABASE
@@ -1045,7 +1610,7 @@
 
     /* =========================================================
        HOME-LEVELSYSTEM
-       
+
        EXAKT AUS DER HOME-SEITE
     ========================================================== */
 
@@ -1102,6 +1667,7 @@
           if (
             totalKm >= level.km
           ) {
+
             currentLevel =
               level;
           }
@@ -1135,7 +1701,7 @@
 
     /* =========================================================
        HOME-BESTZEITEN
-       
+
        EXAKT AUS DER HOME-SEITE
     ========================================================== */
 
@@ -1212,6 +1778,7 @@
       if (
         !eligible.length
       ) {
+
         return null;
       }
 
@@ -1232,8 +1799,75 @@
 
 
     /* =========================================================
+       NEU:
+       BESTZEITEN FÜR DAS POSTER
+
+       Diese Funktion verwendet bewusst nur die Läufe aus 2026.
+       Die normale Profilseite bleibt davon unberührt.
+    ========================================================== */
+
+    function findYearBestRun(
+      runs,
+      category
+    ) {
+
+      const eligible =
+        runs.filter(
+          run => {
+
+            const duration =
+              Number(
+                run.duration_seconds
+              );
+
+
+            return (
+              run.best_time_category ===
+                category &&
+              duration > 0
+            );
+          }
+        );
+
+
+      if (
+        !eligible.length
+      ) {
+
+        return null;
+      }
+
+
+      return eligible.reduce(
+        (
+          best,
+          current
+        ) => {
+
+          if (!best) {
+            return current;
+          }
+
+
+          return (
+            Number(
+              current.duration_seconds
+            ) <
+            Number(
+              best.duration_seconds
+            )
+              ? current
+              : best
+          );
+        },
+        null
+      );
+    }
+
+
+    /* =========================================================
        HOME FORMATIERUNG
-       
+
        EXAKT WIE HOME
     ========================================================== */
 
@@ -1273,6 +1907,7 @@
           date.getTime()
         )
       ) {
+
         return dateString;
       }
 
@@ -1292,6 +1927,7 @@
         seconds === undefined ||
         seconds === ""
       ) {
+
         return "—";
       }
 
@@ -1307,6 +1943,7 @@
           total
         )
       ) {
+
         return "—";
       }
 
@@ -1372,6 +2009,7 @@
       const duration =
         Number(seconds);
 
+
       const distance =
         Number(distanceKm);
 
@@ -1386,6 +2024,7 @@
         duration <= 0 ||
         distance <= 0
       ) {
+
         return "—";
       }
 
@@ -1560,7 +2199,7 @@
 
     /* =========================================================
        ALLE LÄUFE DES USERS
-       
+
        WICHTIG:
        Wie auf HOME werden für die PBs ALLE Läufe geladen.
     ========================================================== */
@@ -1637,6 +2276,7 @@
           page.length <
           PAGE_SIZE
         ) {
+
           break;
         }
 
@@ -1651,7 +2291,7 @@
 
     /* =========================================================
        2026 FILTER
-       
+
        Nur Jahresstatistik + Historie
     ========================================================== */
 
@@ -1665,6 +2305,7 @@
           if (
             !run.run_date
           ) {
+
             return false;
           }
 
@@ -1706,6 +2347,7 @@
                 distance
               )
             ) {
+
               return sum;
             }
 
@@ -1738,6 +2380,7 @@
           ) ||
           distance <= 0
         ) {
+
           continue;
         }
 
@@ -1765,6 +2408,2361 @@
 
         longestRun
       };
+    }
+
+
+    /* =========================================================
+       =========================================================
+       POSTER ENGINE
+       =========================================================
+       ========================================================= */
+
+    let currentPosterData = null;
+
+
+    function posterSafeText(
+      value,
+      fallback
+    ) {
+
+      const text =
+        String(
+          value ??
+          ""
+        )
+          .trim();
+
+
+      return (
+        text ||
+        fallback
+      );
+    }
+
+
+    function drawPosterRoundedRect(
+      ctx,
+      x,
+      y,
+      width,
+      height,
+      radius
+    ) {
+
+      const r =
+        Math.min(
+          radius,
+          width / 2,
+          height / 2
+        );
+
+
+      ctx.beginPath();
+
+
+      ctx.moveTo(
+        x + r,
+        y
+      );
+
+
+      ctx.arcTo(
+        x + width,
+        y,
+        x + width,
+        y + height,
+        r
+      );
+
+
+      ctx.arcTo(
+        x + width,
+        y + height,
+        x,
+        y + height,
+        r
+      );
+
+
+      ctx.arcTo(
+        x,
+        y + height,
+        x,
+        y,
+        r
+      );
+
+
+      ctx.arcTo(
+        x,
+        y,
+        x + width,
+        y,
+        r
+      );
+
+
+      ctx.closePath();
+    }
+
+
+    function drawPosterText(
+      ctx,
+      text,
+      x,
+      y,
+      options = {}
+    ) {
+
+      const {
+
+        font =
+          "700 30px Arial",
+
+        color =
+          "#111",
+
+        align =
+          "left",
+
+        baseline =
+          "alphabetic",
+
+        maxWidth = null,
+
+        lineHeight =
+          1.2
+
+      } = options;
+
+
+      ctx.save();
+
+
+      ctx.font =
+        font;
+
+      ctx.fillStyle =
+        color;
+
+      ctx.textAlign =
+        align;
+
+      ctx.textBaseline =
+        baseline;
+
+
+      if (
+        maxWidth
+      ) {
+
+        const words =
+          String(
+            text
+          ).split(
+            " "
+          );
+
+
+        const lines =
+          [];
+
+        let current =
+          "";
+
+
+        words.forEach(
+          word => {
+
+            const test =
+              current
+                ? `${current} ${word}`
+                : word;
+
+
+            if (
+              ctx.measureText(
+                test
+              ).width >
+              maxWidth &&
+              current
+            ) {
+
+              lines.push(
+                current
+              );
+
+              current =
+                word;
+
+            } else {
+
+              current =
+                test;
+            }
+          }
+        );
+
+
+        if (
+          current
+        ) {
+
+          lines.push(
+            current
+          );
+        }
+
+
+        lines.forEach(
+          (
+            line,
+            index
+          ) => {
+
+            ctx.fillText(
+              line,
+              x,
+              y +
+                index *
+                  fontSizeFromFont(
+                    font
+                  ) *
+                  lineHeight
+            );
+          }
+        );
+
+      } else {
+
+        ctx.fillText(
+          text,
+          x,
+          y
+        );
+      }
+
+
+      ctx.restore();
+    }
+
+
+    function fontSizeFromFont(
+      font
+    ) {
+
+      const match =
+        String(
+          font
+        ).match(
+          /(\d+(?:\.\d+)?)px/
+        );
+
+
+      return match
+        ? Number(
+            match[1]
+          )
+        : 30;
+    }
+
+
+    function drawPosterStatBox(
+      ctx,
+      x,
+      y,
+      width,
+      height,
+      label,
+      value,
+      sub
+    ) {
+
+      ctx.save();
+
+
+      drawPosterRoundedRect(
+        ctx,
+        x,
+        y,
+        width,
+        height,
+        20
+      );
+
+
+      ctx.fillStyle =
+        "rgba(255,255,255,0.10)";
+
+
+      ctx.fill();
+
+
+      ctx.strokeStyle =
+        "rgba(255,255,255,0.16)";
+
+
+      ctx.lineWidth =
+        2;
+
+
+      ctx.stroke();
+
+
+      drawPosterText(
+        ctx,
+        label,
+        x + 24,
+        y + 31,
+        {
+          font:
+            "800 16px Arial",
+          color:
+            "rgba(255,255,255,0.68)",
+          baseline:
+            "middle"
+        }
+      );
+
+
+      drawPosterText(
+        ctx,
+        value,
+        x + 24,
+        y + 70,
+        {
+          font:
+            "900 32px Arial",
+          color:
+            "#ffffff",
+          baseline:
+            "middle"
+        }
+      );
+
+
+      if (
+        sub
+      ) {
+
+        drawPosterText(
+          ctx,
+          sub,
+          x + 24,
+          y + height - 22,
+          {
+            font:
+              "600 13px Arial",
+            color:
+              "rgba(255,255,255,0.56)",
+            baseline:
+              "bottom"
+          }
+        );
+      }
+
+
+      ctx.restore();
+    }
+
+
+    function drawPosterPb(
+      ctx,
+      x,
+      y,
+      width,
+      label,
+      value
+    ) {
+
+      ctx.save();
+
+
+      drawPosterRoundedRect(
+        ctx,
+        x,
+        y,
+        width,
+        76,
+        18
+      );
+
+
+      ctx.fillStyle =
+        "#ffffff";
+
+
+      ctx.fill();
+
+
+      drawPosterText(
+        ctx,
+        label,
+        x + 20,
+        y + 26,
+        {
+          font:
+            "900 15px Arial",
+          color:
+            "#1199a6",
+          baseline:
+            "middle"
+        }
+      );
+
+
+      drawPosterText(
+        ctx,
+        value,
+        x + width - 20,
+        y + 26,
+        {
+          font:
+            "900 18px Arial",
+          color:
+            "#111",
+          align:
+            "right",
+          baseline:
+            "middle"
+        }
+      );
+
+
+      drawPosterText(
+        ctx,
+        "PERSONAL BEST · 2026",
+        x + 20,
+        y + 55,
+        {
+          font:
+            "700 10px Arial",
+          color:
+            "#999",
+          baseline:
+            "middle"
+        }
+      );
+
+
+      ctx.restore();
+    }
+
+
+    function renderRunnerPoster(
+      data
+    ) {
+
+      const canvas =
+        document.getElementById(
+          "runnerPosterCanvas"
+        );
+
+
+      if (!canvas) {
+        return;
+      }
+
+
+      const ctx =
+        canvas.getContext(
+          "2d"
+        );
+
+
+      const width =
+        canvas.width;
+
+
+      const height =
+        canvas.height;
+
+
+      ctx.clearRect(
+        0,
+        0,
+        width,
+        height
+      );
+
+
+      /* =====================================================
+         BACKGROUND
+      ====================================================== */
+
+      const background =
+        ctx.createLinearGradient(
+          0,
+          0,
+          width,
+          height
+        );
+
+
+      background.addColorStop(
+        0,
+        "#0e1516"
+      );
+
+
+      background.addColorStop(
+        0.5,
+        "#122527"
+      );
+
+
+      background.addColorStop(
+        1,
+        "#18b8c7"
+      );
+
+
+      ctx.fillStyle =
+        background;
+
+
+      ctx.fillRect(
+        0,
+        0,
+        width,
+        height
+      );
+
+
+      /* =====================================================
+         ABSTRACT GRAPHICS
+      ====================================================== */
+
+      ctx.save();
+
+
+      ctx.globalAlpha =
+        0.14;
+
+
+      ctx.strokeStyle =
+        "#ffffff";
+
+
+      ctx.lineWidth =
+        3;
+
+
+      for (
+        let i = 0;
+        i < 7;
+        i++
+      ) {
+
+        ctx.beginPath();
+
+
+        ctx.arc(
+          width * 0.93,
+          height * 0.14,
+          120 + i * 52,
+          Math.PI * 0.2,
+          Math.PI * 1.55
+        );
+
+
+        ctx.stroke();
+      }
+
+
+      ctx.globalAlpha =
+        0.10;
+
+
+      ctx.fillStyle =
+        "#ffffff";
+
+
+      ctx.beginPath();
+
+
+      ctx.arc(
+        width * 0.08,
+        height * 0.90,
+        210,
+        0,
+        Math.PI * 2
+      );
+
+
+      ctx.fill();
+
+
+      ctx.restore();
+
+
+      /* =====================================================
+         TOP BRAND
+      ====================================================== */
+
+      drawPosterText(
+        ctx,
+        "MILES APART",
+        70,
+        76,
+        {
+          font:
+            "900 30px Arial",
+          color:
+            "#ffffff",
+          baseline:
+            "middle"
+        }
+      );
+
+
+      drawPosterText(
+        ctx,
+        "RUNNING CLUB",
+        72,
+        112,
+        {
+          font:
+            "800 15px Arial",
+          color:
+            "rgba(255,255,255,0.58)",
+          baseline:
+            "middle"
+        }
+      );
+
+
+      /* =====================================================
+         YEAR
+      ====================================================== */
+
+      drawPosterRoundedRect(
+        ctx,
+        width - 190,
+        55,
+        120,
+        50,
+        25
+      );
+
+
+      ctx.fillStyle =
+        "#ffffff";
+
+
+      ctx.fill();
+
+
+      drawPosterText(
+        ctx,
+        "2026",
+        width - 130,
+        80,
+        {
+          font:
+            "900 18px Arial",
+          color:
+            "#111",
+          align:
+            "center",
+          baseline:
+            "middle"
+        }
+      );
+
+
+      /* =====================================================
+         RUNNER NAME
+      ====================================================== */
+
+      const runnerName =
+        posterSafeText(
+          data.name,
+          "RUNNER"
+        );
+
+
+      let nameFontSize =
+        92;
+
+
+      if (
+        runnerName.length > 16
+      ) {
+
+        nameFontSize =
+          74;
+      }
+
+
+      if (
+        runnerName.length > 23
+      ) {
+
+        nameFontSize =
+          62;
+      }
+
+
+      drawPosterText(
+        ctx,
+        runnerName.toUpperCase(),
+        70,
+        205,
+        {
+          font:
+            `900 ${nameFontSize}px Arial`,
+          color:
+            "#ffffff",
+          baseline:
+            "alphabetic",
+          maxWidth:
+            width - 140
+        }
+      );
+
+
+      drawPosterText(
+        ctx,
+        "MILES APART MEMBER",
+        74,
+        250,
+        {
+          font:
+            "900 17px Arial",
+          color:
+            "#18b8c7",
+          baseline:
+            "middle"
+        }
+      );
+
+
+      drawPosterText(
+        ctx,
+        "RUNNING CLUB",
+        74,
+        280,
+        {
+          font:
+            "700 15px Arial",
+          color:
+            "rgba(255,255,255,0.64)",
+          baseline:
+            "middle"
+        }
+      );
+
+
+      /* =====================================================
+         LEVEL
+      ====================================================== */
+
+      const levelText =
+        data.level
+          ? `LEVEL ${data.level.km}`
+          : "LEVEL 0";
+
+
+      const levelEmoji =
+        data.level?.emoji ||
+        "🏃";
+
+
+      drawPosterRoundedRect(
+        ctx,
+        width - 270,
+        190,
+        200,
+        92,
+        22
+      );
+
+
+      ctx.fillStyle =
+        "rgba(24,184,199,0.95)";
+
+
+      ctx.fill();
+
+
+      drawPosterText(
+        ctx,
+        levelEmoji,
+        width - 245,
+        236,
+        {
+          font:
+            "42px Arial",
+          baseline:
+            "middle"
+        }
+      );
+
+
+      drawPosterText(
+        ctx,
+        levelText,
+        width - 175,
+        228,
+        {
+          font:
+            "900 21px Arial",
+          color:
+            "#ffffff",
+          baseline:
+            "middle"
+        }
+      );
+
+
+      drawPosterText(
+        ctx,
+        "CURRENT LEVEL",
+        width - 175,
+        254,
+        {
+          font:
+            "700 10px Arial",
+          color:
+            "rgba(255,255,255,0.65)",
+          baseline:
+            "middle"
+        }
+      );
+
+
+      /* =====================================================
+         MAIN STATS
+      ====================================================== */
+
+      const statsTop =
+        330;
+
+
+      const boxGap =
+        14;
+
+
+      const boxWidth =
+        (
+          width -
+          140 -
+          boxGap
+        ) / 2;
+
+
+      drawPosterStatBox(
+        ctx,
+        70,
+        statsTop,
+        boxWidth,
+        128,
+        "KILOMETER 2026",
+        `${formatNumber(data.totalKm)} km`,
+        "YEAR TO DATE"
+      );
+
+
+      drawPosterStatBox(
+        ctx,
+        70 +
+          boxWidth +
+          boxGap,
+        statsTop,
+        boxWidth,
+        128,
+        "LAUFZAHL",
+        String(data.runCount),
+        "RUNS IN 2026"
+      );
+
+
+      drawPosterStatBox(
+        ctx,
+        70,
+        statsTop + 142,
+        boxWidth,
+        128,
+        "LÄNGSTER LAUF",
+        data.longestDistance
+          ? `${formatNumber(
+              data.longestDistance
+            )} km`
+          : "—",
+        data.longestDate
+          ? formatDate(
+              data.longestDate
+            )
+          : "NOCH KEIN LAUF"
+      );
+
+
+      drawPosterStatBox(
+        ctx,
+        70 +
+          boxWidth +
+          boxGap,
+        statsTop + 142,
+        boxWidth,
+        128,
+        "LEVEL",
+        levelText,
+        data.level
+          ? `${levelEmoji} ${data.level.km} km`
+          : "START YOUR RUN"
+      );
+
+
+      /* =====================================================
+         PERSONAL BESTS
+      ====================================================== */
+
+      drawPosterText(
+        ctx,
+        "PERSONAL BESTS · 2026",
+        70,
+        650,
+        {
+          font:
+            "900 19px Arial",
+          color:
+            "#ffffff",
+          baseline:
+            "middle"
+        }
+      );
+
+
+      const pbWidth =
+        (
+          width -
+          140 -
+          14
+        ) / 2;
+
+
+      drawPosterPb(
+        ctx,
+        70,
+        680,
+        pbWidth,
+        "5K",
+        data.pbs["5k"]
+          ? formatDuration(
+              data.pbs["5k"].duration_seconds
+            )
+          : "—"
+      );
+
+
+      drawPosterPb(
+        ctx,
+        70 +
+          pbWidth +
+          14,
+        680,
+        pbWidth,
+        "10K",
+        data.pbs["10k"]
+          ? formatDuration(
+              data.pbs["10k"].duration_seconds
+            )
+          : "—"
+      );
+
+
+      drawPosterPb(
+        ctx,
+        70,
+        766,
+        pbWidth,
+        "HALF",
+        data.pbs["half"]
+          ? formatDuration(
+              data.pbs["half"].duration_seconds
+            )
+          : "—"
+      );
+
+
+      drawPosterPb(
+        ctx,
+        70 +
+          pbWidth +
+          14,
+        766,
+        pbWidth,
+        "MARATHON",
+        data.pbs["marathon"]
+          ? formatDuration(
+              data.pbs["marathon"].duration_seconds
+            )
+          : "—"
+      );
+
+
+      /* =====================================================
+         COMMUNITY MESSAGE
+      ====================================================== */
+
+      drawPosterRoundedRect(
+        ctx,
+        70,
+        875,
+        width - 140,
+        220,
+        28
+      );
+
+
+      ctx.fillStyle =
+        "#ffffff";
+
+
+      ctx.fill();
+
+
+      drawPosterText(
+        ctx,
+        "RUN TOGETHER.",
+        width / 2,
+        930,
+        {
+          font:
+            "900 39px Arial",
+          color:
+            "#111",
+          align:
+            "center",
+          baseline:
+            "middle"
+        }
+      );
+
+
+      drawPosterText(
+        ctx,
+        "FROM ANYWHERE.",
+        width / 2,
+        974,
+        {
+          font:
+            "900 39px Arial",
+          color:
+            "#18b8c7",
+          align:
+            "center",
+          baseline:
+            "middle"
+        }
+      );
+
+
+      drawPosterText(
+        ctx,
+        "Miles Apart wächst mit jedem Menschen,",
+        width / 2,
+        1020,
+        {
+          font:
+            "600 16px Arial",
+          color:
+            "#666",
+          align:
+            "center",
+          baseline:
+            "middle"
+        }
+      );
+
+
+      drawPosterText(
+        ctx,
+        "der mit uns läuft. Teile deine Story.",
+        width / 2,
+        1048,
+        {
+          font:
+            "600 16px Arial",
+          color:
+            "#666",
+          align:
+            "center",
+          baseline:
+            "middle"
+        }
+      );
+
+
+      /* =====================================================
+         FOOTER
+      ====================================================== */
+
+      drawPosterText(
+        ctx,
+        "MILES APART RUNNING CLUB",
+        70,
+        1190,
+        {
+          font:
+            "900 17px Arial",
+          color:
+            "#ffffff",
+          baseline:
+            "middle"
+        }
+      );
+
+
+      drawPosterText(
+        ctx,
+        "RUN · CONNECT · REPEAT",
+        70,
+        1222,
+        {
+          font:
+            "800 12px Arial",
+          color:
+            "rgba(255,255,255,0.58)",
+          baseline:
+            "middle"
+        }
+      );
+
+
+      drawPosterText(
+        ctx,
+        "milesapart",
+        width - 70,
+        1190,
+        {
+          font:
+            "800 15px Arial",
+          color:
+            "#ffffff",
+          align:
+            "right",
+          baseline:
+            "middle"
+        }
+      );
+
+
+      drawPosterText(
+        ctx,
+        "2026",
+        width - 70,
+        1222,
+        {
+          font:
+            "700 12px Arial",
+          color:
+            "rgba(255,255,255,0.58)",
+          align:
+            "right",
+          baseline:
+            "middle"
+        }
+      );
+
+
+      /* =====================================================
+         DECORATIVE BOTTOM LINE
+      ====================================================== */
+
+      ctx.save();
+
+
+      ctx.strokeStyle =
+        "#18b8c7";
+
+
+      ctx.lineWidth =
+        7;
+
+
+      ctx.lineCap =
+        "round";
+
+
+      ctx.beginPath();
+
+
+      ctx.moveTo(
+        70,
+        1275
+      );
+
+
+      ctx.lineTo(
+        width - 70,
+        1275
+      );
+
+
+      ctx.stroke();
+
+
+      ctx.restore();
+
+
+      /* =====================================================
+         LIVE UI
+      ====================================================== */
+
+      const liveKm =
+        document.getElementById(
+          "posterLiveKm"
+        );
+
+
+      const liveRuns =
+        document.getElementById(
+          "posterLiveRuns"
+        );
+
+
+      const liveLevel =
+        document.getElementById(
+          "posterLiveLevel"
+        );
+
+
+      const liveLongest =
+        document.getElementById(
+          "posterLiveLongest"
+        );
+
+
+      if (
+        liveKm
+      ) {
+
+        liveKm.textContent =
+          `${formatNumber(
+            data.totalKm
+          )} km`;
+      }
+
+
+      if (
+        liveRuns
+      ) {
+
+        liveRuns.textContent =
+          String(
+            data.runCount
+          );
+      }
+
+
+      if (
+        liveLevel
+      ) {
+
+        liveLevel.textContent =
+          data.level
+            ? `${data.level.emoji} ${data.level.km}`
+            : "–";
+      }
+
+
+      if (
+        liveLongest
+      ) {
+
+        liveLongest.textContent =
+          data.longestDistance
+            ? `${formatNumber(
+                data.longestDistance
+              )} km`
+            : "–";
+      }
+    }
+
+
+    /* =========================================================
+       POSTER-DATEN ERSTELLEN
+    ========================================================== */
+
+    function createPosterData(
+      profile,
+      runs2026
+    ) {
+
+      const statistics =
+        calculateStatistics(
+          runs2026
+        );
+
+
+      const level =
+        getCurrentRunningLevel(
+          statistics.totalKm
+        );
+
+
+      const longestRun =
+        statistics.longestRun;
+
+
+      const pbs = {
+
+        "5k":
+          findYearBestRun(
+            runs2026,
+            "5k"
+          ),
+
+        "10k":
+          findYearBestRun(
+            runs2026,
+            "10k"
+          ),
+
+        "half":
+          findYearBestRun(
+            runs2026,
+            "half"
+          ),
+
+        "marathon":
+          findYearBestRun(
+            runs2026,
+            "marathon"
+          )
+      };
+
+
+      return {
+
+        name:
+          profile.display_name ||
+          profile.username ||
+          "Runner",
+
+        username:
+          profile.username ||
+          "",
+
+        totalKm:
+          statistics.totalKm,
+
+        runCount:
+          statistics.runCount,
+
+        level,
+
+        longestDistance:
+          longestRun
+            ? Number(
+                longestRun.distance_km
+              )
+            : null,
+
+        longestDate:
+          longestRun
+            ? longestRun.run_date
+            : null,
+
+        pbs
+      };
+    }
+
+
+    /* =========================================================
+       POSTER ALS PNG
+    ========================================================== */
+
+    async function getPosterBlob() {
+
+      const canvas =
+        document.getElementById(
+          "runnerPosterCanvas"
+        );
+
+
+      if (!canvas) {
+        throw new Error(
+          "Poster konnte nicht gefunden werden."
+        );
+      }
+
+
+      return new Promise(
+        (
+          resolve,
+          reject
+        ) => {
+
+          canvas.toBlob(
+            blob => {
+
+              if (!blob) {
+
+                reject(
+                  new Error(
+                    "Das Poster konnte nicht als Bild erstellt werden."
+                  )
+                );
+
+                return;
+              }
+
+
+              resolve(
+                blob
+              );
+            },
+            "image/png",
+            1
+          );
+        }
+      );
+    }
+
+
+    function getPosterFileName() {
+
+      const rawName =
+        currentPosterData?.name ||
+        "runner";
+
+
+      const safeName =
+        String(
+          rawName
+        )
+          .normalize(
+            "NFD"
+          )
+          .replace(
+            /[\u0300-\u036f]/g,
+            ""
+          )
+          .replace(
+            /[^a-zA-Z0-9]+/g,
+            "-"
+          )
+          .replace(
+            /^-+|-+$/g,
+            ""
+          )
+          .toLowerCase();
+
+
+      return (
+        `miles-apart-${safeName || "runner"}-2026.png`
+      );
+    }
+
+
+    /* =========================================================
+       STATUS
+    ========================================================== */
+
+    function setPosterStatus(
+      message
+    ) {
+
+      const status =
+        document.getElementById(
+          "posterShareStatus"
+        );
+
+
+      if (
+        status
+      ) {
+
+        status.textContent =
+          message || "";
+      }
+    }
+
+
+    /* =========================================================
+       POSTER DOWNLOAD
+    ========================================================== */
+
+    async function downloadRunnerPoster() {
+
+      const button =
+        document.getElementById(
+          "posterDownloadButton"
+        );
+
+
+      try {
+
+        if (
+          button
+        ) {
+
+          button.disabled =
+            true;
+        }
+
+
+        setPosterStatus(
+          "Poster wird vorbereitet …"
+        );
+
+
+        const blob =
+          await getPosterBlob();
+
+
+        const url =
+          URL.createObjectURL(
+            blob
+          );
+
+
+        const link =
+          document.createElement(
+            "a"
+          );
+
+
+        link.href =
+          url;
+
+
+        link.download =
+          getPosterFileName();
+
+
+        document.body.appendChild(
+          link
+        );
+
+
+        link.click();
+
+
+        link.remove();
+
+
+        setTimeout(
+          () => {
+
+            URL.revokeObjectURL(
+              url
+            );
+          },
+          1000
+        );
+
+
+        setPosterStatus(
+          "✓ Poster wurde als PNG gespeichert."
+        );
+
+      }
+
+      catch (error) {
+
+        console.error(
+          "Poster Download Fehler:",
+          error
+        );
+
+
+        setPosterStatus(
+          "Das Poster konnte nicht gespeichert werden."
+        );
+
+      }
+
+      finally {
+
+        if (
+          button
+        ) {
+
+          button.disabled =
+            false;
+        }
+      }
+    }
+
+
+    /* =========================================================
+       SHARE TEXT
+    ========================================================== */
+
+    function getPosterShareText() {
+
+      const data =
+        currentPosterData;
+
+
+      if (!data) {
+
+        return (
+          "Ich bin Teil des Miles Apart Running Club."
+        );
+      }
+
+
+      const year =
+        new Date()
+          .getFullYear();
+
+
+      const pbLines =
+        [];
+
+
+      if (
+        data.pbs["5k"]
+      ) {
+
+        pbLines.push(
+          `5K ${formatDuration(
+            data.pbs["5k"]
+              .duration_seconds
+          )}`
+        );
+      }
+
+
+      if (
+        data.pbs["10k"]
+      ) {
+
+        pbLines.push(
+          `10K ${formatDuration(
+            data.pbs["10k"]
+              .duration_seconds
+          )}`
+        );
+      }
+
+
+      if (
+        data.pbs["half"]
+      ) {
+
+        pbLines.push(
+          `HM ${formatDuration(
+            data.pbs["half"]
+              .duration_seconds
+          )}`
+        );
+      }
+
+
+      if (
+        data.pbs["marathon"]
+      ) {
+
+        pbLines.push(
+          `Marathon ${formatDuration(
+            data.pbs["marathon"]
+              .duration_seconds
+          )}`
+        );
+      }
+
+
+      let text =
+        `🏃 ${data.name} ist Miles Apart Member.\n\n` +
+        `Miles Apart Running Club\n` +
+        `${formatNumber(
+          data.totalKm
+        )} km in ${year} · ${data.runCount} Läufe`;
+
+
+      if (
+        data.level
+      ) {
+
+        text +=
+          ` · ${data.level.emoji} Level ${data.level.km}`;
+      }
+
+
+      if (
+        data.longestDistance
+      ) {
+
+        text +=
+          `\nLängster Lauf: ${formatNumber(
+            data.longestDistance
+          )} km`;
+      }
+
+
+      if (
+        pbLines.length
+      ) {
+
+        text +=
+          `\nPBs: ${pbLines.join(
+            " · "
+          )}`;
+      }
+
+
+      text +=
+        "\n\nRun together. From anywhere. 🌍";
+
+
+      return text;
+    }
+
+
+    /* =========================================================
+       WHATSAPP
+    ========================================================== */
+
+    async function shareRunnerPosterWhatsApp() {
+
+      const button =
+        document.getElementById(
+          "posterWhatsappButton"
+        );
+
+
+      try {
+
+        if (
+          button
+        ) {
+
+          button.disabled =
+            true;
+        }
+
+
+        setPosterStatus(
+          "WhatsApp-Poster wird vorbereitet …"
+        );
+
+
+        const blob =
+          await getPosterBlob();
+
+
+        const file =
+          new File(
+            [
+              blob
+            ],
+            getPosterFileName(),
+            {
+              type:
+                "image/png"
+            }
+          );
+
+
+        const shareText =
+          getPosterShareText();
+
+
+        /*
+         * Wenn das Gerät Dateien über den nativen
+         * Share-Dialog unterstützt, wird das echte Poster
+         * inklusive Bild geteilt.
+         */
+
+        if (
+          navigator.share &&
+          navigator.canShare &&
+          navigator.canShare({
+            files: [file]
+          })
+        ) {
+
+          try {
+
+            await navigator.share({
+              files: [file],
+              title:
+                "Miles Apart Running Club",
+              text:
+                shareText
+            });
+
+
+            setPosterStatus(
+              "✓ Poster wurde zum Teilen übergeben."
+            );
+
+
+            return;
+
+          }
+
+          catch (shareError) {
+
+            /*
+             * Abbruch durch den Benutzer:
+             * nichts weiter tun.
+             */
+
+            if (
+              shareError?.name ===
+              "AbortError"
+            ) {
+
+              setPosterStatus(
+                ""
+              );
+
+
+              return;
+            }
+          }
+        }
+
+
+        /*
+         * Fallback:
+         * Bild speichern + WhatsApp mit Text öffnen.
+         */
+
+        const url =
+          URL.createObjectURL(
+            blob
+          );
+
+
+        const link =
+          document.createElement(
+            "a"
+          );
+
+
+        link.href =
+          url;
+
+
+        link.download =
+          getPosterFileName();
+
+
+        document.body.appendChild(
+          link
+        );
+
+
+        link.click();
+
+
+        link.remove();
+
+
+        setTimeout(
+          () => {
+
+            URL.revokeObjectURL(
+              url
+            );
+          },
+          1000
+        );
+
+
+        const whatsappUrl =
+          "https://wa.me/?text=" +
+          encodeURIComponent(
+            shareText
+          );
+
+
+        window.open(
+          whatsappUrl,
+          "_blank",
+          "noopener,noreferrer"
+        );
+
+
+        setPosterStatus(
+          "✓ Poster gespeichert. WhatsApp wurde geöffnet."
+        );
+
+      }
+
+      catch (error) {
+
+        console.error(
+          "WhatsApp Share Fehler:",
+          error
+        );
+
+
+        setPosterStatus(
+          "WhatsApp konnte nicht geöffnet werden."
+        );
+
+      }
+
+      finally {
+
+        if (
+          button
+        ) {
+
+          button.disabled =
+            false;
+        }
+      }
+    }
+
+
+    /* =========================================================
+       INSTAGRAM
+    ========================================================== */
+
+    async function shareRunnerPosterInstagram() {
+
+      const button =
+        document.getElementById(
+          "posterInstagramButton"
+        );
+
+
+      let instagramWindow =
+        null;
+
+
+      try {
+
+        if (
+          button
+        ) {
+
+          button.disabled =
+            true;
+        }
+
+
+        /*
+         * Popup früh öffnen, damit Browser den späteren
+         * Instagram-Aufruf nicht als unerlaubtes Popup blockieren.
+         */
+
+        instagramWindow =
+          window.open(
+            "about:blank",
+            "_blank"
+          );
+
+
+        setPosterStatus(
+          "Instagram-Poster wird vorbereitet …"
+        );
+
+
+        const blob =
+          await getPosterBlob();
+
+
+        const file =
+          new File(
+            [
+              blob
+            ],
+            getPosterFileName(),
+            {
+              type:
+                "image/png"
+            }
+          );
+
+
+        const shareText =
+          getPosterShareText();
+
+
+        /*
+         * Auf mobilen Geräten kann der native Share-Dialog
+         * Instagram als Ziel anbieten.
+         */
+
+        if (
+          navigator.share &&
+          navigator.canShare &&
+          navigator.canShare({
+            files: [file]
+          })
+        ) {
+
+          if (
+            instagramWindow &&
+            !instagramWindow.closed
+          ) {
+
+            instagramWindow.close();
+
+            instagramWindow =
+              null;
+          }
+
+
+          try {
+
+            await navigator.share({
+              files: [file],
+              title:
+                "Miles Apart Running Club",
+              text:
+                shareText
+            });
+
+
+            setPosterStatus(
+              "✓ Poster wurde zum Teilen übergeben. Wähle Instagram aus."
+            );
+
+
+            return;
+
+          }
+
+          catch (shareError) {
+
+            if (
+              shareError?.name ===
+              "AbortError"
+            ) {
+
+              setPosterStatus(
+                ""
+              );
+
+
+              return;
+            }
+          }
+        }
+
+
+        /*
+         * Fallback für Desktop / Browser ohne
+         * Datei-Sharing:
+         *
+         * Poster wird gespeichert und Instagram geöffnet.
+         */
+
+        const url =
+          URL.createObjectURL(
+            blob
+          );
+
+
+        const link =
+          document.createElement(
+            "a"
+          );
+
+
+        link.href =
+          url;
+
+
+        link.download =
+          getPosterFileName();
+
+
+        document.body.appendChild(
+          link
+        );
+
+
+        link.click();
+
+
+        link.remove();
+
+
+        setTimeout(
+          () => {
+
+            URL.revokeObjectURL(
+              url
+            );
+          },
+          1000
+        );
+
+
+        const instagramUrl =
+          "https://www.instagram.com/";
+
+
+        if (
+          instagramWindow &&
+          !instagramWindow.closed
+        ) {
+
+          instagramWindow.location.href =
+            instagramUrl;
+
+        } else {
+
+          window.open(
+            instagramUrl,
+            "_blank",
+            "noopener,noreferrer"
+          );
+        }
+
+
+        setPosterStatus(
+          "✓ Poster gespeichert. Instagram wurde geöffnet."
+        );
+
+      }
+
+      catch (error) {
+
+        console.error(
+          "Instagram Share Fehler:",
+          error
+        );
+
+
+        if (
+          instagramWindow &&
+          !instagramWindow.closed
+        ) {
+
+          instagramWindow.close();
+        }
+
+
+        setPosterStatus(
+          "Instagram konnte nicht geöffnet werden."
+        );
+
+      }
+
+      finally {
+
+        if (
+          button
+        ) {
+
+          button.disabled =
+            false;
+        }
+      }
+    }
+
+
+    /* =========================================================
+       NATIVER SHARE-DIALOG
+    ========================================================== */
+
+    async function shareRunnerPosterNative() {
+
+      const button =
+        document.getElementById(
+          "posterNativeShareButton"
+        );
+
+
+      try {
+
+        if (
+          !navigator.share
+        ) {
+
+          setPosterStatus(
+            "Dein Browser unterstützt den nativen Teilen-Dialog nicht. Nutze stattdessen WhatsApp oder Instagram."
+          );
+
+
+          return;
+        }
+
+
+        if (
+          button
+        ) {
+
+          button.disabled =
+            true;
+        }
+
+
+        setPosterStatus(
+          "Poster wird zum Teilen vorbereitet …"
+        );
+
+
+        const blob =
+          await getPosterBlob();
+
+
+        const file =
+          new File(
+            [
+              blob
+            ],
+            getPosterFileName(),
+            {
+              type:
+                "image/png"
+            }
+          );
+
+
+        const shareText =
+          getPosterShareText();
+
+
+        if (
+          navigator.canShare &&
+          navigator.canShare({
+            files: [file]
+          })
+        ) {
+
+          await navigator.share({
+            files: [file],
+            title:
+              "Miles Apart Running Club",
+            text:
+              shareText
+          });
+
+        } else {
+
+          await navigator.share({
+            title:
+              "Miles Apart Running Club",
+            text:
+              shareText,
+            url:
+              window.location.href
+          });
+        }
+
+
+        setPosterStatus(
+          "✓ Poster wurde geteilt."
+        );
+
+      }
+
+      catch (error) {
+
+        console.error(
+          "Native Share Fehler:",
+          error
+        );
+
+
+        if (
+          error?.name ===
+          "AbortError"
+        ) {
+
+          setPosterStatus(
+            ""
+          );
+
+        } else {
+
+          setPosterStatus(
+            "Teilen wurde vom Browser nicht unterstützt."
+          );
+        }
+
+      }
+
+      finally {
+
+        if (
+          button
+        ) {
+
+          button.disabled =
+            false;
+        }
+      }
+    }
+
+
+    /* =========================================================
+       EVENT LISTENER POSTER
+    ========================================================== */
+
+    function initializePosterButtons() {
+
+      const downloadButton =
+        document.getElementById(
+          "posterDownloadButton"
+        );
+
+
+      const whatsappButton =
+        document.getElementById(
+          "posterWhatsappButton"
+        );
+
+
+      const instagramButton =
+        document.getElementById(
+          "posterInstagramButton"
+        );
+
+
+      const nativeShareButton =
+        document.getElementById(
+          "posterNativeShareButton"
+        );
+
+
+      if (
+        downloadButton
+      ) {
+
+        downloadButton.addEventListener(
+          "click",
+          downloadRunnerPoster
+        );
+      }
+
+
+      if (
+        whatsappButton
+      ) {
+
+        whatsappButton.addEventListener(
+          "click",
+          shareRunnerPosterWhatsApp
+        );
+      }
+
+
+      if (
+        instagramButton
+      ) {
+
+        instagramButton.addEventListener(
+          "click",
+          shareRunnerPosterInstagram
+        );
+      }
+
+
+      if (
+        nativeShareButton
+      ) {
+
+        nativeShareButton.addEventListener(
+          "click",
+          shareRunnerPosterNative
+        );
+      }
     }
 
 
@@ -1972,7 +4970,7 @@
 
       /* =====================================================
          AKTUELLES LAUFLEVEL
-         
+
          EXAKT DIE RUN_LEVELS DER HOME
       ====================================================== */
 
@@ -2052,7 +5050,7 @@
 
       /* =====================================================
          LÄNGSTER LAUF
-         
+
          Weiterhin nur 2026, wie die Jahresstatistik.
       ====================================================== */
 
@@ -2102,10 +5100,10 @@
 
       /* =====================================================
          PBs
-         
+
          EXAKT WIE HOME:
          best_time_category + kürzeste Zeit.
-         
+
          WICHTIG:
          allRuns statt nur 2026.
       ====================================================== */
@@ -2173,7 +5171,7 @@
 
     /* =========================================================
        BESTZEIT RENDERN
-       
+
        Darstellung an die Home-Logik angelehnt.
     ========================================================== */
 
@@ -2273,7 +5271,7 @@
 
     /* =========================================================
        LAUFHISTORIE
-       
+
        Nur 2026.
     ========================================================== */
 
@@ -2468,7 +5466,7 @@
 
         /* =====================================================
            ALLE LÄUFE
-           
+
            Wichtig für die PBs wie auf Home.
         ====================================================== */
 
@@ -2480,7 +5478,7 @@
 
         /* =====================================================
            NUR 2026
-           
+
            Wichtig für Jahresstatistik + Historie.
         ====================================================== */
 
@@ -2517,6 +5515,26 @@
 
         renderRuns(
           runs2026
+        );
+
+
+        /* =====================================================
+           POSTER ERSTELLEN
+           
+           NEU:
+           Die Poster-Daten basieren ausschließlich auf
+           diesem Profil + seinen Läufen 2026.
+        ====================================================== */
+
+        currentPosterData =
+          createPosterData(
+            profile,
+            runs2026
+          );
+
+
+        renderRunnerPoster(
+          currentPosterData
         );
 
 
@@ -2571,7 +5589,16 @@
        START
     ========================================================== */
 
-    initializePage();
+    document.addEventListener(
+      "DOMContentLoaded",
+      () => {
+
+        initializePosterButtons();
+
+        initializePage();
+
+      }
+    );
 
   </script>
 
