@@ -43,19 +43,20 @@
       display: flex;
       align-items: center;
       justify-content: flex-start;
+      width: 100%;
       padding: 0;
       margin: 0;
     }
 
     .brand a {
-      display: inline-flex;
-      align-items: center;
+      display: block;
+      width: 100%;
       text-decoration: none;
     }
 
     .brand img {
       display: block;
-      width: 190px;
+      width: 100%;
       max-width: 100%;
       height: auto;
     }
@@ -231,6 +232,10 @@
     }
 
     .event-leaderboard-medal {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
       font-size: 22px;
       line-height: 1;
     }
@@ -421,7 +426,7 @@
     @media (max-width: 760px) {
 
       .brand img {
-        width: 170px;
+        width: 100%;
       }
 
       .events-hero-card {
@@ -449,7 +454,7 @@
       }
 
       .brand img {
-        width: 155px;
+        width: 100%;
       }
 
       .events-hero-card {
@@ -520,10 +525,6 @@
 
       <a href="challenges.html">
         Challenges
-      </a>
-
-      <a href="community.html">
-        Community
       </a>
 
       <a
@@ -1233,19 +1234,6 @@
     }
 
 
-    /*
-     * Bereits numerischer Wert.
-     *
-     * duration_seconds:
-     * Sekunden
-     *
-     * duration_minutes:
-     * Minuten
-     *
-     * Diese Unterscheidung wird weiter unten
-     * über den Spaltennamen vorgenommen.
-     */
-
     if (
       typeof value === "number"
     ) {
@@ -1260,10 +1248,6 @@
         value
       ).trim();
 
-
-    /*
-     * HH:MM:SS
-     */
 
     if (
       /^\d+:\d{2}:\d{2}$/.test(
@@ -1288,10 +1272,6 @@
     }
 
 
-    /*
-     * MM:SS
-     */
-
     if (
       /^\d+:\d{2}$/.test(
         text
@@ -1313,10 +1293,6 @@
 
     }
 
-
-    /*
-     * Zahl aus String
-     */
 
     const number =
       Number(
@@ -1365,10 +1341,6 @@
           .toLowerCase();
 
 
-      /*
-       * Sekunden
-       */
-
       if (
         columnName.includes(
           "second"
@@ -1385,10 +1357,6 @@
       }
 
 
-      /*
-       * Minuten
-       */
-
       if (
         columnName.includes(
           "minute"
@@ -1404,23 +1372,12 @@
       }
 
 
-      /*
-       * Zeit im Format MM:SS
-       * oder HH:MM:SS.
-       */
-
       return parseDurationToSeconds(
         value
       );
 
     }
 
-
-    /*
-     * Falls keine Dauer gespeichert ist,
-     * versuchen wir aus der Pace und der
-     * Distanz die Laufzeit zu berechnen.
-     */
 
     if (
       paceColumn &&
@@ -1557,7 +1514,7 @@
 
 
   /* ==========================================================
-     POSITION
+     POSITION + MEDAILLEN
   ========================================================== */
 
   function renderPosition(
@@ -1569,7 +1526,11 @@
     ) {
 
       return `
-        <span class="event-leaderboard-medal">
+        <span
+          class="event-leaderboard-medal"
+          aria-label="Platz 1"
+          title="Platz 1"
+        >
           🥇
         </span>
       `;
@@ -1582,7 +1543,11 @@
     ) {
 
       return `
-        <span class="event-leaderboard-medal">
+        <span
+          class="event-leaderboard-medal"
+          aria-label="Platz 2"
+          title="Platz 2"
+        >
           🥈
         </span>
       `;
@@ -1595,7 +1560,11 @@
     ) {
 
       return `
-        <span class="event-leaderboard-medal">
+        <span
+          class="event-leaderboard-medal"
+          aria-label="Platz 3"
+          title="Platz 3"
+        >
           🥉
         </span>
       `;
@@ -1603,9 +1572,11 @@
     }
 
 
-    return (
-      index + 1
-    );
+    return `
+      <span>
+        ${index + 1}
+      </span>
+    `;
 
   }
 
@@ -1625,10 +1596,6 @@
 
 
     try {
-
-      /*
-       * Alle Läufe laden.
-       */
 
       const {
         data: runs,
@@ -1711,11 +1678,6 @@
       }
 
 
-      /*
-       * Ohne Zeit oder Pace können wir kein
-       * Zeit-Leaderboard erstellen.
-       */
-
       if (
         !durationColumn &&
         !paceColumn
@@ -1730,10 +1692,6 @@
 
       const fastestRuns = {};
 
-
-      /*
-       * Jeden Lauf prüfen.
-       */
 
       runs.forEach(
         run => {
@@ -1769,16 +1727,6 @@
           }
 
 
-          /*
-           * GANZ WICHTIG:
-           *
-           * Der Lauf muss am
-           * 03.10.2026 liegen.
-           *
-           * 00:00 inklusive
-           * 24:00 exklusiv.
-           */
-
           if (
             runDate <
               EVENT_DATE_START ||
@@ -1790,14 +1738,6 @@
 
           }
 
-
-          /*
-           * Nur ungefähr 10 Kilometer.
-           *
-           * Es wird eine kleine Toleranz verwendet,
-           * damit z.B. 10,01 km oder 9,99 km
-           * ebenfalls als 10-km-Lauf zählen.
-           */
 
           const distance =
             numberValue(
@@ -1817,10 +1757,6 @@
           }
 
 
-          /*
-           * Laufzeit bestimmen.
-           */
-
           const durationSeconds =
             getRunDurationSeconds(
               run,
@@ -1838,11 +1774,6 @@
 
           }
 
-
-          /*
-           * Pro Runner nur den
-           * schnellsten Lauf übernehmen.
-           */
 
           if (
             !fastestRuns[
@@ -1904,10 +1835,6 @@
       }
 
 
-      /*
-       * Profile laden.
-       */
-
       const userIds =
         leaderboard.map(
           runner =>
@@ -1920,10 +1847,6 @@
           userIds
         );
 
-
-      /*
-       * Leaderboard ausgeben.
-       */
 
       eventLeaderboard.innerHTML =
         leaderboard
@@ -2137,10 +2060,6 @@
         "none";
 
 
-      /*
-       * Prüfen, ob bereits angemeldet.
-       */
-
       const {
         data: existing,
         error: existingError
@@ -2181,13 +2100,6 @@
 
       }
 
-
-      /*
-       * Event-Teilnahme speichern.
-       *
-       * Wir verwenden dieselbe Tabelle wie
-       * bei den Challenges.
-       */
 
       const {
         error
