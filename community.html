@@ -212,26 +212,62 @@
 
 .ma-buddy-actions{
   display:flex;
-  justify-content:flex-end;
+  justify-content:flex-start;
   align-items:center;
   gap:8px;
   margin-top:16px;
   padding-top:14px;
-  border-top:1px solid #eee
+  border-top:1px solid #eee;
+  flex-wrap:wrap
 }
 
-.ma-buddy-delete{
+.ma-buddy-message-btn{
+  min-height:42px;
   border:0;
-  background:transparent;
-  color:#b44;
-  padding:7px 8px;
+  background:#18b8c7;
+  color:#fff;
+  padding:0 16px;
   font:inherit;
   font-size:14px;
   font-weight:800;
   cursor:pointer
 }
 
+.ma-buddy-message-btn:hover{
+  background:#109eab
+}
+
+.ma-buddy-comment-btn{
+  min-height:42px;
+  border:1px solid #d8d8d8;
+  background:#fff;
+  color:#111;
+  padding:0 16px;
+  font:inherit;
+  font-size:14px;
+  font-weight:800;
+  cursor:pointer
+}
+
+.ma-buddy-comment-btn:hover{
+  border-color:#18b8c7;
+  color:#18b8c7
+}
+
+.ma-buddy-delete{
+  min-height:42px;
+  border:1px solid #e0bcbc;
+  background:#fff7f7;
+  color:#b44;
+  padding:0 12px;
+  font:inherit;
+  font-size:13px;
+  font-weight:800;
+  cursor:pointer
+}
+
 .ma-buddy-delete:hover{
+  border-color:#b44;
   color:#8f2222
 }
 
@@ -677,6 +713,14 @@ textarea.ma-form-input{
   background:#18b8c7
 }
 
+.ma-item-comments{
+  width:100%;
+  margin-top:18px;
+  padding-top:18px;
+  border-top:1px solid #eee;
+  box-sizing:border-box
+}
+
 
 /* =========================================================
    BILDER
@@ -818,7 +862,9 @@ textarea.ma-form-input{
 
 .ma-run-actions{
   display:flex;
-  gap:8px
+  gap:8px;
+  flex-wrap:wrap;
+  justify-content:flex-end
 }
 
 .ma-run-join{
@@ -836,15 +882,51 @@ textarea.ma-form-input{
   background:#111
 }
 
-.ma-run-delete{
+.ma-run-message{
   min-height:42px;
   border:0;
-  background:transparent;
-  color:#b44;
-  padding:0 8px;
+  background:#18b8c7;
+  color:#fff;
+  padding:0 16px;
   font-size:14px;
   font-weight:800;
   cursor:pointer
+}
+
+.ma-run-message:hover{
+  background:#109eab
+}
+
+.ma-run-comment{
+  min-height:42px;
+  border:1px solid #d8d8d8;
+  background:#fff;
+  color:#111;
+  padding:0 16px;
+  font-size:14px;
+  font-weight:800;
+  cursor:pointer
+}
+
+.ma-run-comment:hover{
+  border-color:#18b8c7;
+  color:#18b8c7
+}
+
+.ma-run-delete{
+  min-height:42px;
+  border:1px solid #e0bcbc;
+  background:#fff7f7;
+  color:#b44;
+  padding:0 12px;
+  font-size:14px;
+  font-weight:800;
+  cursor:pointer
+}
+
+.ma-run-delete:hover{
+  border-color:#b44;
+  color:#8f2222
 }
 
 .ma-run-form{
@@ -963,6 +1045,27 @@ textarea.ma-form-input{
 
 .ma-message-send{
   min-width:120px
+}
+
+.ma-message-view-link{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:36px;
+  margin-top:7px;
+  padding:0 12px;
+  border:0;
+  background:transparent;
+  color:#18b8c7;
+  font:inherit;
+  font-size:14px;
+  font-weight:800;
+  cursor:pointer
+}
+
+.ma-message-view-link:hover{
+  color:#109eab;
+  text-decoration:underline
 }
 
 
@@ -1340,9 +1443,12 @@ textarea.ma-form-input{
     flex-direction:column
   }
 
-  .ma-run-actions,
-  .ma-run-join{
+  .ma-run-actions{
     width:100%
+  }
+
+  .ma-run-actions > button{
+    flex:1
   }
 
   .ma-message-overlay,
@@ -1363,6 +1469,24 @@ textarea.ma-form-input{
 
   .ma-message-send{
     width:100%
+  }
+
+  .ma-message-view-link{
+    width:100%
+  }
+
+  .ma-buddy-actions{
+    align-items:stretch
+  }
+
+  .ma-buddy-actions > div{
+    width:100%
+  }
+
+  .ma-buddy-message-btn,
+  .ma-buddy-comment-btn,
+  .ma-buddy-delete{
+    flex:1
   }
 
   .ma-inbox-modal{
@@ -2339,6 +2463,12 @@ let activeConversationUserId=
 let messageProfiles=
   {};
 
+let buddyComments=
+  {};
+
+let runComments=
+  {};
+
 
 /* =========================================================
    HILFSFUNKTIONEN
@@ -2543,6 +2673,143 @@ function inboxAvatarHtml(p){
       </div>
     </div>
   `;
+
+}
+
+
+function itemCommentsHtml(
+  comments,
+  inputPlaceholder="Kommentar schreiben …"
+){
+
+  const sorted=
+    [...(comments||[])]
+      .sort(
+        (a,b)=>
+          new Date(a.created_at)-
+          new Date(b.created_at)
+      );
+
+
+  return`
+
+    <div class="ma-item-comments">
+
+      <div class="ma-comments-list">
+
+        ${
+          sorted.length
+            ?sorted
+              .map(createCommentHtml)
+              .join("")
+            :`
+              <div class="ma-inbox-empty" style="padding:15px 0">
+                Noch keine Kommentare.
+              </div>
+            `
+        }
+
+      </div>
+
+
+      <form
+        class="ma-comment-form"
+        data-item-comment-form="true"
+      >
+
+        <input
+          class="ma-comment-input"
+          maxlength="1000"
+          placeholder="${escapeHtml(inputPlaceholder)}"
+          required
+        >
+
+        <button
+          class="ma-comment-submit"
+          type="submit"
+        >
+          Senden
+        </button>
+
+      </form>
+
+    </div>
+
+  `;
+
+}
+
+
+async function loadItemComments(
+  itemType,
+  itemIds
+){
+
+  const map=
+    {};
+
+
+  if(!itemIds.length){
+    return map;
+  }
+
+
+  const {
+    data,
+    error
+  }=
+    await supabaseClient
+      .from("community_item_comments")
+      .select(`
+        id,
+        item_type,
+        item_id,
+        author_id,
+        content,
+        created_at,
+        profiles:author_id(
+          display_name,
+          username,
+          avatar_url
+        )
+      `)
+      .eq(
+        "item_type",
+        itemType
+      )
+      .in(
+        "item_id",
+        itemIds.map(String)
+      )
+      .order(
+        "created_at",
+        {
+          ascending:true
+        }
+      );
+
+
+  if(error){
+    throw error;
+  }
+
+
+  (data||[])
+    .forEach(
+      comment=>{
+
+        if(!map[comment.item_id]){
+          map[comment.item_id]=[];
+        }
+
+        map[comment.item_id]
+          .push(comment);
+
+      }
+    );
+
+
+  return map;
 
 }
 
@@ -3329,7 +3596,7 @@ function openMessageModal(
     "";
 
   $("privateMessageStatus")
-    .textContent=
+    .innerHTML=
     "";
 
 
@@ -3399,6 +3666,14 @@ $("sendPrivateMessageButton")
     }
 
 
+    const receiverId=
+      messageReceiverId;
+
+
+    const receiverName=
+      messageReceiverName;
+
+
     const b=
       $("sendPrivateMessageButton");
 
@@ -3417,7 +3692,7 @@ $("sendPrivateMessageButton")
             currentUser.id,
 
           receiver_id:
-            messageReceiverId,
+            receiverId,
 
           content
         });
@@ -3432,21 +3707,34 @@ $("sendPrivateMessageButton")
     }else{
 
       $("privateMessageStatus")
-        .textContent=
-        "Nachricht wurde gesendet ✓";
+        .innerHTML=`
+          Nachricht wurde gesendet ✓<br>
+          <button
+            type="button"
+            class="ma-message-view-link"
+            id="openInboxAfterSend"
+          >
+            Nachrichten ansehen
+          </button>
+        `;
 
 
       $("privateMessageContent")
         .value=
         "";
 
-      setTimeout(
-        ()=>{
+
+      $("openInboxAfterSend")
+        .onclick=
+        async()=>{
+
           closeMessageModal();
-          openMessagesInbox();
-        },
-        450
-      );
+
+          await openMessagesInbox(
+            receiverId
+          );
+
+        };
 
     }
 
@@ -3461,7 +3749,9 @@ $("sendPrivateMessageButton")
    NACHRICHTEN-POSTFACH
 ========================================================= */
 
-async function openMessagesInbox(){
+async function openMessagesInbox(
+  preselectUserId=null
+){
 
   if(!currentUser){
     return location.href="home.html";
@@ -3507,7 +3797,9 @@ async function openMessagesInbox(){
 
   try{
 
-    await loadMessageInbox();
+    await loadMessageInbox(
+      preselectUserId
+    );
 
   }catch(err){
 
@@ -3540,7 +3832,7 @@ function closeMessagesInbox(){
 
 $("openMessagesButton")
   .onclick=
-  openMessagesInbox;
+  ()=>openMessagesInbox();
 
 
 $("closeMessagesInboxButton")
@@ -3564,7 +3856,9 @@ $("messagesInboxOverlay")
   };
 
 
-async function loadMessageInbox(){
+async function loadMessageInbox(
+  preselectUserId=null
+){
 
   if(!currentUser){
     return;
@@ -3705,6 +3999,21 @@ async function loadMessageInbox(){
 
     }
   );
+
+
+  if(
+    preselectUserId&&
+    conversations.some(
+      x=>
+        x.userId===
+        preselectUserId
+    )
+  ){
+
+    activeConversationUserId=
+      preselectUserId;
+
+  }
 
 
   renderMessageConversations(
@@ -4485,10 +4794,17 @@ function buddyCard(row){
     p.display_name||
     "Miles Apart Member";
 
+  const comments=
+    buddyComments[String(row.user_id)]||
+    [];
+
 
   return`
 
-    <article class="ma-buddy-card">
+    <article
+      class="ma-buddy-card"
+      data-buddy-card="${row.user_id}"
+    >
 
       <div class="ma-buddy-top">
 
@@ -4619,12 +4935,22 @@ function buddyCard(row){
               >
 
                 <button
-                  class="btn"
+                  class="ma-buddy-message-btn"
                   type="button"
                   data-buddy-message="${row.user_id}"
                   data-buddy-name="${escapeHtml(name)}"
                 >
                   Nachricht senden
+                </button>
+
+
+                <button
+                  class="ma-buddy-comment-btn"
+                  type="button"
+                  data-buddy-action="comments"
+                  data-buddy-id="${row.user_id}"
+                >
+                  Kommentieren${comments.length?` (${comments.length})`:""}
                 </button>
 
 
@@ -4637,13 +4963,33 @@ function buddyCard(row){
                         data-buddy-action="delete"
                         data-buddy-id="${row.user_id}"
                       >
-                        Eigenes Run-Buddy-Profil löschen
+                        Run Buddy Profil löschen
                       </button>
                     `
                     :""
                 }
 
               </div>
+
+            </div>
+          `
+          :""
+      }
+
+
+      ${
+        currentUser
+          ?`
+            <div
+              class="ma-comments"
+              data-buddy-comments="${row.user_id}"
+              style="display:none"
+            >
+
+              ${itemCommentsHtml(
+                comments,
+                "Kommentar zum Run Buddy schreiben …"
+              )}
 
             </div>
           `
@@ -4696,6 +5042,15 @@ async function loadBuddyProfiles(){
   const list=
     data||
     [];
+
+
+  buddyComments=
+    await loadItemComments(
+      "buddy",
+      list.map(
+        x=>String(x.user_id)
+      )
+    );
 
 
   $("buddyList")
@@ -4867,6 +5222,38 @@ $("buddyList")
       }
 
 
+      const commentButton=
+        e.target.closest(
+          '[data-buddy-action="comments"]'
+        );
+
+
+      if(commentButton){
+
+        const id=
+          commentButton.dataset.buddyId;
+
+
+        const box=
+          document.querySelector(
+            `[data-buddy-comments="${id}"]`
+          );
+
+
+        if(box){
+
+          box.style.display=
+            box.style.display==="none"
+              ?"block"
+              :"none";
+
+        }
+
+        return;
+
+      }
+
+
       const b=
         e.target.closest(
           "[data-buddy-message]"
@@ -4881,6 +5268,56 @@ $("buddyList")
         );
 
       }
+
+    }
+  );
+
+
+$("buddyList")
+  .addEventListener(
+    "submit",
+    async e=>{
+
+      const form=
+        e.target.closest(
+          "[data-item-comment-form]"
+        );
+
+
+      if(!form){
+        return;
+      }
+
+
+      e.preventDefault();
+
+
+      const box=
+        form.closest(
+          "[data-buddy-comments]"
+        );
+
+
+      if(!box){
+        return;
+      }
+
+
+      const itemId=
+        box.dataset.buddyComments;
+
+
+      const input=
+        form.querySelector(
+          ".ma-comment-input"
+        );
+
+
+      await submitItemComment(
+        "buddy",
+        itemId,
+        input
+      );
 
     }
   );
@@ -5169,10 +5606,17 @@ function runCard(run){
       0
     );
 
+  const comments=
+    runComments[String(run.id)]||
+    [];
+
 
   return`
 
-    <article class="ma-run-card">
+    <article
+      class="ma-run-card"
+      data-run-card="${run.id}"
+    >
 
       <div class="ma-run-card-top">
 
@@ -5272,6 +5716,31 @@ function runCard(run){
 
         <div class="ma-run-actions">
 
+          <button
+            class="ma-run-comment"
+            type="button"
+            data-run-action="comments"
+            data-run-id="${run.id}"
+          >
+            Kommentieren${comments.length?` (${comments.length})`:""}
+          </button>
+
+
+          <button
+            class="ma-run-message"
+            type="button"
+            data-run-action="message"
+            data-run-id="${run.id}"
+            data-run-creator-id="${run.creator_id}"
+            data-run-creator-name="${escapeHtml(
+              creator.display_name||
+              "Miles Apart Member"
+            )}"
+          >
+            Nachricht senden
+          </button>
+
+
           ${
             owner
               ?`
@@ -5311,6 +5780,26 @@ function runCard(run){
         </div>
 
       </div>
+
+
+      ${
+        currentUser
+          ?`
+            <div
+              class="ma-comments"
+              data-run-comments="${run.id}"
+              style="display:none"
+            >
+
+              ${itemCommentsHtml(
+                comments,
+                "Kommentar zum gemeinsamen Lauf schreiben …"
+              )}
+
+            </div>
+          `
+          :""
+      }
 
     </article>
 
@@ -5369,10 +5858,24 @@ async function loadCommunityRuns(){
   }
 
 
+  const list=
+    data||
+    [];
+
+
+  runComments=
+    await loadItemComments(
+      "run",
+      list.map(
+        x=>String(x.id)
+      )
+    );
+
+
   $("runList")
     .innerHTML=
-    (data||[]).length
-      ?(data||[])
+    list.length
+      ?list
         .map(runCard)
         .join("")
       :`
@@ -5403,6 +5906,46 @@ $("runList")
 
       const id=
         b.dataset.runId;
+
+
+      if(
+        b.dataset.runAction===
+        "comments"
+      ){
+
+        const box=
+          document.querySelector(
+            `[data-run-comments="${id}"]`
+          );
+
+
+        if(box){
+
+          box.style.display=
+            box.style.display==="none"
+              ?"block"
+              :"none";
+
+        }
+
+        return;
+
+      }
+
+
+      if(
+        b.dataset.runAction===
+        "message"
+      ){
+
+        openMessageModal(
+          b.dataset.runCreatorId,
+          b.dataset.runCreatorName
+        );
+
+        return;
+
+      }
 
 
       if(
@@ -5486,6 +6029,145 @@ $("runList")
 
     }
   );
+
+
+$("runList")
+  .addEventListener(
+    "submit",
+    async e=>{
+
+      const form=
+        e.target.closest(
+          "[data-item-comment-form]"
+        );
+
+
+      if(!form){
+        return;
+      }
+
+
+      e.preventDefault();
+
+
+      const box=
+        form.closest(
+          "[data-run-comments]"
+        );
+
+
+      if(!box){
+        return;
+      }
+
+
+      const itemId=
+        box.dataset.runComments;
+
+
+      const input=
+        form.querySelector(
+          ".ma-comment-input"
+        );
+
+
+      await submitItemComment(
+        "run",
+        itemId,
+        input
+      );
+
+    }
+  );
+
+
+async function submitItemComment(
+  itemType,
+  itemId,
+  input
+){
+
+  if(!currentUser){
+    return location.href="home.html";
+  }
+
+
+  const content=
+    input.value.trim();
+
+
+  if(!content){
+    return;
+  }
+
+
+  input.disabled=
+    true;
+
+
+  const {
+    error
+  }=
+    await supabaseClient
+      .from("community_item_comments")
+      .insert({
+        item_type:itemType,
+        item_id:String(itemId),
+        author_id:currentUser.id,
+        content
+      });
+
+
+  input.disabled=
+    false;
+
+
+  if(error){
+
+    alert(
+      error.message
+    );
+
+    return;
+
+  }
+
+
+  if(itemType==="buddy"){
+
+    await loadBuddyProfiles();
+
+
+    const box=
+      document.querySelector(
+        `[data-buddy-comments="${itemId}"]`
+      );
+
+
+    if(box){
+      box.style.display=
+        "block";
+    }
+
+  }else{
+
+    await loadCommunityRuns();
+
+
+    const box=
+      document.querySelector(
+        `[data-run-comments="${itemId}"]`
+      );
+
+
+    if(box){
+      box.style.display=
+        "block";
+    }
+
+  }
+
+}
 
 
 $("communityRunForm")
