@@ -1310,7 +1310,7 @@
             <div class="highlight-top">
 
               <div class="highlight-label">
-                Halbmarathon
+                Halb-<br />Marathon
               </div>
 
               <div class="highlight-icon">
@@ -2427,7 +2427,7 @@
         y,
         width,
         height,
-        24
+        26
       );
 
 
@@ -2450,10 +2450,10 @@
         ctx,
         label,
         x + 28,
-        y + 29,
+        y + 32,
         {
           font:
-            "900 14px Arial",
+            "900 15px Arial",
           color:
             "#75817e",
           baseline:
@@ -2470,10 +2470,10 @@
           ctx,
           emoji,
           x + 28,
-          y + 79,
+          y + 88,
           {
             font:
-              "31px Arial",
+              "37px Arial",
             color:
               "#17211f",
             baseline:
@@ -2485,11 +2485,11 @@
         posterFittedText(
           ctx,
           value,
-          x + 76,
-          y + 79,
-          width - 104,
-          37,
-          21,
+          x + 84,
+          y + 88,
+          width - 112,
+          43,
+          24,
           "900",
           "#17211f"
         );
@@ -2500,10 +2500,10 @@
           ctx,
           value,
           x + 28,
-          y + 80,
+          y + 88,
           width - 56,
-          38,
-          22,
+          43,
+          24,
           "900",
           "#17211f"
         );
@@ -2528,7 +2528,7 @@
         y,
         width,
         height,
-        21
+        24
       );
 
 
@@ -2552,20 +2552,20 @@
 
       ctx.fillRect(
         x,
-        y + 18,
-        6,
-        height - 36
+        y + 22,
+        7,
+        height - 44
       );
 
 
       posterText(
         ctx,
         label,
-        x + 24,
-        y + 27,
+        x + 29,
+        y + 35,
         {
           font:
-            "900 13px Arial",
+            "900 15px Arial",
           color:
             "#6e7b78",
           baseline:
@@ -2579,11 +2579,11 @@
         posterText(
           ctx,
           "Noch keine Zeit",
-          x + 24,
-          y + 67,
+          x + 29,
+          y + 88,
           {
             font:
-              "800 20px Arial",
+              "800 23px Arial",
             color:
               "#a5afac",
             baseline:
@@ -2618,11 +2618,11 @@
           Number.isFinite(distance)
             ? `${formatNumber(distance)} km`
             : "100+ km",
-          x + 24,
-          y + 61,
-          width - 48,
-          25,
-          17,
+          x + 29,
+          y + 79,
+          width - 58,
+          28,
+          20,
           "900",
           "#18a6b4"
         );
@@ -2631,11 +2631,11 @@
         posterFittedText(
           ctx,
           duration,
-          x + 24,
-          y + 92,
-          width - 48,
-          30,
-          20,
+          x + 29,
+          y + 119,
+          width - 58,
+          38,
+          23,
           "900",
           "#17211f"
         );
@@ -2647,11 +2647,11 @@
             run.duration_seconds,
             run.distance_km
           ),
-          x + 24,
-          y + height - 17,
+          x + 29,
+          y + height - 20,
           {
             font:
-              "700 11px Arial",
+              "800 13px Arial",
             color:
               "#87928f",
             baseline:
@@ -2664,11 +2664,11 @@
         posterFittedText(
           ctx,
           duration,
-          x + 24,
-          y + 69,
-          width - 48,
-          32,
-          20,
+          x + 29,
+          y + 91,
+          width - 58,
+          43,
+          25,
           "900",
           "#17211f"
         );
@@ -2680,11 +2680,11 @@
             run.duration_seconds,
             run.distance_km
           ),
-          x + 24,
-          y + height - 17,
+          x + 29,
+          y + height - 20,
           {
             font:
-              "700 11px Arial",
+              "800 13px Arial",
             color:
               "#87928f",
             baseline:
@@ -2697,6 +2697,9 @@
 
     /* =========================================================
        EINZIGER POSTER-RENDERER
+
+       Größere Typografie und deutlich größere PB-Felder.
+       Das Poster wird jetzt nahezu vollständig genutzt.
     ========================================================== */
 
     function renderRunnerPoster(
@@ -2779,11 +2782,9 @@
         0,
         0,
         W,
-        330
+        565
       );
 
-
-      /* dezenter cyanfarbener Kopfbereich */
 
       ctx.fillStyle =
         "#18b8c7";
@@ -2798,41 +2799,10 @@
 
       /* =====================================================
          HEADER
+         
+         Bewusst größer und klarer.
+         Kein zusätzliches Branding unten.
       ====================================================== */
-
-      posterText(
-        ctx,
-        "Miles Apart Running Club",
-        64,
-        61,
-        {
-          font:
-            "900 26px Arial",
-          color:
-            "#17211f",
-          baseline:
-            "middle"
-        }
-      );
-
-
-      posterText(
-        ctx,
-        "MEMBER 2026",
-        W - 64,
-        61,
-        {
-          font:
-            "900 15px Arial",
-          color:
-            "#1199a6",
-          align:
-            "right",
-          baseline:
-            "middle"
-        }
-      );
-
 
       posterFittedText(
         ctx,
@@ -2841,10 +2811,10 @@
           "Runner"
         ),
         64,
-        133,
-        680,
-        61,
-        35,
+        78,
+        900,
+        72,
+        42,
         "900",
         "#17211f"
       );
@@ -2854,10 +2824,10 @@
         ctx,
         "Miles Apart Member 2026",
         64,
-        177,
+        132,
         {
           font:
-            "800 17px Arial",
+            "900 22px Arial",
           color:
             "#18a6b4",
           baseline:
@@ -2866,16 +2836,14 @@
       );
 
 
-      /* dezente Trennfläche */
-
       ctx.fillStyle =
-        "#e4f1f0";
+        "#dceceb";
 
       ctx.fillRect(
         64,
-        214,
+        172,
         W - 128,
-        2
+        3
       );
 
 
@@ -2884,19 +2852,19 @@
       ====================================================== */
 
       const statGap =
-        18;
+        20;
 
       const statWidth =
         (W - 128 - statGap) / 2;
 
       const statHeight =
-        120;
+        142;
 
       const statX =
         64;
 
       const statY =
-        245;
+        205;
 
 
       const totalKm =
@@ -2999,10 +2967,10 @@
         ctx,
         "Persönliche Bestzeiten · 2026",
         64,
-        548,
+        547,
         {
           font:
-            "900 28px Arial",
+            "900 31px Arial",
           color:
             "#17211f",
           baseline:
@@ -3011,39 +2979,26 @@
       );
 
 
-      posterText(
-        ctx,
-        "Home-Bestzeiten · 2026",
-        W - 64,
-        548,
-        {
-          font:
-            "800 13px Arial",
-          color:
-            "#899490",
-          align:
-            "right",
-          baseline:
-            "middle"
-        }
-      );
-
-
       /* =====================================================
-         PB GRID — 3 SPALTEN / 2 REIHEN
+         PB GRID
+
+         2 Spalten × 3 Reihen.
+         Dadurch sind die Felder auf dem Handy deutlich
+         größer und die Schrift kann wesentlich größer werden.
       ====================================================== */
 
       const pbGap =
-        16;
+        20;
 
       const pbWidth =
-        (W - 128 - pbGap * 2) / 3;
+        (W - 128 - pbGap) / 2;
 
       const pbHeight =
-        125;
+        185;
 
       const pbStartY =
-        579;
+        580;
+
 
       const pbX1 =
         64;
@@ -3053,11 +3008,8 @@
         pbWidth +
         pbGap;
 
-      const pbX3 =
-        pbX2 +
-        pbWidth +
-        pbGap;
 
+      /* REIHE 1 */
 
       posterPbBox(
         ctx,
@@ -3083,17 +3035,7 @@
       );
 
 
-      posterPbBox(
-        ctx,
-        pbX3,
-        pbStartY,
-        pbWidth,
-        pbHeight,
-        "HALBMARATHON",
-        data.pbs?.["half"],
-        "half"
-      );
-
+      /* REIHE 2 */
 
       posterPbBox(
         ctx,
@@ -3103,9 +3045,9 @@
           pbGap,
         pbWidth,
         pbHeight,
-        "MARATHON",
-        data.pbs?.["marathon"],
-        "marathon"
+        "HALBMARATHON",
+        data.pbs?.["half"],
+        "half"
       );
 
 
@@ -3117,6 +3059,21 @@
           pbGap,
         pbWidth,
         pbHeight,
+        "MARATHON",
+        data.pbs?.["marathon"],
+        "marathon"
+      );
+
+
+      /* REIHE 3 */
+
+      posterPbBox(
+        ctx,
+        pbX1,
+        pbStartY +
+          (pbHeight + pbGap) * 2,
+        pbWidth,
+        pbHeight,
         "100 KILOMETER",
         data.pbs?.["100k"],
         "100k"
@@ -3125,10 +3082,9 @@
 
       posterPbBox(
         ctx,
-        pbX3,
+        pbX2,
         pbStartY +
-          pbHeight +
-          pbGap,
+          (pbHeight + pbGap) * 2,
         pbWidth,
         pbHeight,
         "100 KILOMETER PLUS",
@@ -3137,70 +3093,11 @@
       );
 
 
-      /* =====================================================
-         CLEAN FOOTER
-         Keine Route, keine Punkte, keine Community-Botschaft.
-      ====================================================== */
-
-      ctx.fillStyle =
-        "#dcebea";
-
-      ctx.fillRect(
-        64,
-        1025,
-        W - 128,
-        2
-      );
-
-
-      posterText(
-        ctx,
-        "Miles Apart Running Club",
-        64,
-        1070,
-        {
-          font:
-            "900 20px Arial",
-          color:
-            "#17211f",
-          baseline:
-            "middle"
-        }
-      );
-
-
-      posterText(
-        ctx,
-        "2026",
-        W - 64,
-        1070,
-        {
-          font:
-            "900 24px Arial",
-          color:
-            "#18a6b4",
-          align:
-            "right",
-          baseline:
-            "middle"
-        }
-      );
-
-
-      posterText(
-        ctx,
-        "MILES APART MEMBER",
-        64,
-        1102,
-        {
-          font:
-            "800 11px Arial",
-          color:
-            "#899490",
-          baseline:
-            "middle"
-        }
-      );
+      /*
+       * Absichtlich kein Footer:
+       * Das Poster endet nach dem PB-Bereich und enthält
+       * keine zusätzlichen Slogans, Linien oder Deko.
+       */
     }
 
 
@@ -3208,7 +3105,7 @@
        POSTER DATEN
 
        Poster-PBs = ausschließlich 2026.
-       Profil-PBs unten = weiterhin ALL-TIME.
+       Normale Profil-PBs unten bleiben ALL-TIME.
     ========================================================== */
 
     function createPosterData(
@@ -3420,14 +3317,6 @@
 
     /* =========================================================
        POSTER SPEICHERN
-
-       Auf iPhone/Android wird zuerst der native Bild-Share
-       geöffnet. Dort kann der Nutzer "In Fotos sichern",
-       "Bild sichern" bzw. die entsprechende Speicheroption
-       auswählen.
-
-       Ein normaler Browser darf eine Website nicht direkt
-       ohne Nutzeraktion in die Fotos-App schreiben.
     ========================================================== */
 
     async function downloadRunnerPoster() {
@@ -3468,12 +3357,6 @@
             }
           );
 
-
-        /*
-         * Native Share zuerst:
-         * Auf iPhone/Android erscheint damit das native
-         * Teilen-/Speichern-Menü für die Bilddatei.
-         */
 
         if (
           navigator.share &&
@@ -3517,10 +3400,6 @@
           }
         }
 
-
-        /*
-         * Fallback für Browser ohne Datei-Share.
-         */
 
         const url =
           URL.createObjectURL(
@@ -3843,11 +3722,6 @@
         }
 
 
-        /*
-         * Fallback:
-         * WhatsApp mit vorbereiteten Text öffnen.
-         */
-
         const whatsappUrl =
           "https://wa.me/?text=" +
           encodeURIComponent(
@@ -3946,11 +3820,6 @@
           getPosterShareText();
 
 
-        /*
-         * Auf mobilen Geräten bevorzugt der native Share Sheet.
-         * Dort kann Instagram direkt ausgewählt werden.
-         */
-
         if (
           navigator.share &&
           navigator.canShare &&
@@ -3995,11 +3864,6 @@
           }
         }
 
-
-        /*
-         * Desktop-/Fallback-Verhalten:
-         * Poster als PNG bereitstellen und Instagram öffnen.
-         */
 
         const url =
           URL.createObjectURL(
@@ -4471,12 +4335,6 @@
       }
 
 
-      /*
-       * WICHTIG:
-       * Diese sechs PBs bleiben ALL-TIME.
-       * Es wird weiterhin allRuns verwendet.
-       */
-
       renderPersonalBest(
         "pb5k",
         "pb5kSub",
@@ -4540,10 +4398,6 @@
 
     /* =========================================================
        BESTZEIT RENDERN
-
-       Zeit = Hauptwert
-       Pace = kleiner separater Wert
-       Datum / Distanz = Zusatzinformationen
     ========================================================== */
 
     function renderPersonalBest(
