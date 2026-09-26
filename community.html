@@ -430,6 +430,13 @@
   margin-bottom:18px;
 }
 
+/* PROFILBILD IST JETZT EIN LINK */
+.ma-buddy-avatar-link{
+  display:block;
+  flex:0 0 auto;
+  text-decoration:none;
+}
+
 .ma-buddy-avatar{
   width:58px;
   height:58px;
@@ -1645,7 +1652,6 @@ textarea.ma-form-input{
    POST- UND KOMMENTARTEXT — ENDGÜLTIG LINKS
 ========================================================= */
 
-/* Der eigentliche Text des Posts */
 .ma-community-page .ma-post .ma-post-copy,
 .ma-community-page .ma-post .ma-post-copy *{
   display:block !important;
@@ -1665,8 +1671,6 @@ textarea.ma-form-input{
   justify-self:start !important;
 }
 
-
-/* Der eigentliche Text eines Kommentars */
 .ma-community-page .ma-post .ma-comment,
 .ma-community-page .ma-post .ma-comment-content,
 .ma-community-page .ma-post .ma-comment-text,
@@ -1675,14 +1679,12 @@ textarea.ma-form-input{
   text-indent:0 !important;
 }
 
-
 .ma-community-page .ma-post .ma-comment{
   display:flex !important;
   width:100% !important;
   justify-content:flex-start !important;
   align-items:flex-start !important;
 }
-
 
 .ma-community-page .ma-post .ma-comment-content{
   display:block !important;
@@ -1695,7 +1697,6 @@ textarea.ma-form-input{
 
   text-align:left !important;
 }
-
 
 .ma-community-page .ma-post .ma-comment-text{
   display:block !important;
@@ -4736,7 +4737,15 @@ function buddyCard(row){
 
       <div class="ma-buddy-top">
 
-        ${avatarHtml(p)}
+        <a
+          class="ma-buddy-avatar-link"
+          href="${profileUrl(p)}"
+          aria-label="Profil von ${escapeHtml(name)}"
+        >
+
+          ${avatarHtml(p)}
+
+        </a>
 
         <div>
 
@@ -6071,8 +6080,8 @@ async function initializeCommunity(){
 
     $("communityError")
       .textContent=
-      err.message||
-      "Die Community konnte nicht geladen werden.";
+        err.message||
+        "Die Community konnte nicht geladen werden.";
 
   }
 
