@@ -207,20 +207,20 @@
       position: relative;
       width: min(100%,590px);
       overflow: hidden;
-      border-radius: 31px;
-      background: #18b8c7;
-      border: 1px solid #0fa6b4;
-      padding: 9px;
+      border-radius: 28px;
+      background: #fff;
+      border: 1px solid #dfe7e5;
+      padding: 8px;
       box-shadow:
-        0 28px 70px rgba(24,184,199,.20),
-        0 12px 28px rgba(24,45,41,.10);
+        0 24px 60px rgba(24,45,41,.12),
+        0 5px 18px rgba(24,45,41,.05);
     }
 
     .runner-poster-canvas-wrap {
       position: relative;
       overflow: hidden;
       width: 100%;
-      border-radius: 23px;
+      border-radius: 21px;
       background: #eaf4f3;
     }
 
@@ -701,12 +701,12 @@
 
     @media (max-width:600px) {
       .runner-poster-shell {
-        border-radius: 24px;
-        padding: 6px;
+        border-radius: 21px;
+        padding: 5px;
       }
 
       .runner-poster-canvas-wrap {
-        border-radius: 18px;
+        border-radius: 16px;
       }
 
       .runner-share-actions {
@@ -786,7 +786,6 @@
 
     </section>
 
-
     <section class="runner-share-section">
 
       <div class="runner-poster-area">
@@ -804,7 +803,6 @@
           </div>
 
         </div>
-
 
         <div class="runner-share-actions">
 
@@ -839,7 +837,6 @@
             Poster speichern
           </button>
 
-
           <button
             id="posterWhatsappButton"
             class="runner-share-button whatsapp"
@@ -852,7 +849,6 @@
             </span>
             WhatsApp teilen
           </button>
-
 
           <button
             id="posterInstagramButton"
@@ -900,7 +896,6 @@
 
     </section>
 
-
     <div class="section-heading">
       <div>
         <h2>2026 in Zahlen</h2>
@@ -944,7 +939,6 @@
       </div>
 
     </section>
-
 
     <div class="section-heading">
       <div>
@@ -1011,7 +1005,6 @@
 
     </section>
 
-
     <div class="section-heading">
       <div>
         <h2>Laufhistorie</h2>
@@ -1023,12 +1016,10 @@
 
   </div>
 
-
   <div id="errorState" class="message-card" style="display:none;"></div>
 
 </div>
 </main>
-
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -1046,14 +1037,12 @@ const supabaseClient =
     SUPABASE_PUBLISHABLE_KEY
   );
 
-
 /* =========================================================
    EINBETTUNG ERKENNEN
 ========================================================= */
 
 const IS_EMBEDDED =
   window.self !== window.top;
-
 
 /* =========================================================
    LEVELSYSTEM
@@ -1108,7 +1097,6 @@ function getNextRunningLevel(km){
     item=>km<item.km
   )||null;
 }
-
 
 /* =========================================================
    BESTZEITEN
@@ -1195,7 +1183,6 @@ function findBestRunByCategory(runs,category){
 
   return eligible[0];
 }
-
 
 /* =========================================================
    FORMAT
@@ -1334,7 +1321,6 @@ function getRunTypeLabel(type){
 
 }
 
-
 /* =========================================================
    SUPABASE
 ========================================================= */
@@ -1468,7 +1454,6 @@ function calculateStatistics(runs){
 
 }
 
-
 /* =========================================================
    POSTER ENGINE
 ========================================================= */
@@ -1597,71 +1582,44 @@ function posterFittedText(
 
 }
 
-
 /* =========================================================
-   POSTER FRAME
-   Neuer grafischer Look:
-   - kräftiger türkisener Außenrahmen
-   - dunkler Türkis-Akzent
-   - weißer Innenbereich
-   - dezente geometrische Dekoration
-   - mehr Tiefe / Schatten
+   POSTER RAHMEN
 ========================================================= */
 
 function drawPosterFrame(ctx,W,H){
 
   /*
-   * Hintergrund außerhalb des eigentlichen Posters.
+   * Außen:
+   * Ein kräftiger, klarer Miles-Apart-Türkisrahmen.
+   *
+   * Innen:
+   * Eine ruhige, komplett weiße Fläche.
+   *
+   * Wichtig:
+   * Kein zusätzlicher türkiser Innenrahmen,
+   * keine türkise Linie innerhalb der weißen Fläche.
    */
-  ctx.fillStyle="#dff7f5";
+
+  ctx.fillStyle="#eaf4f3";
   ctx.fillRect(0,0,W,H);
 
-
   /*
-   * Weicher türkisener Glow.
+   * Dezenter Schatten hinter dem gesamten Poster.
    */
-  const glow=
-    ctx.createRadialGradient(
-      W/2,
-      H/2,
-      220,
-      W/2,
-      H/2,
-      760
-    );
 
-  glow.addColorStop(
-    0,
-    "rgba(24,184,199,.08)"
-  );
-
-  glow.addColorStop(
-    1,
-    "rgba(24,184,199,0)"
-  );
-
-  ctx.fillStyle=glow;
-  ctx.fillRect(0,0,W,H);
-
-
-  /*
-   * Äußerer Schatten.
-   */
   ctx.save();
 
-  ctx.shadowColor=
-    "rgba(13,82,88,.28)";
-
-  ctx.shadowBlur=42;
-  ctx.shadowOffsetY=16;
+  ctx.shadowColor="rgba(18,45,42,.22)";
+  ctx.shadowBlur=38;
+  ctx.shadowOffsetY=14;
 
   posterRoundedRect(
     ctx,
-    20,
-    20,
-    W-40,
-    H-40,
-    44
+    24,
+    24,
+    W-48,
+    H-48,
+    42
   );
 
   ctx.fillStyle="#18b8c7";
@@ -1669,241 +1627,59 @@ function drawPosterFrame(ctx,W,H){
 
   ctx.restore();
 
-
   /*
-   * Kräftiger türkisener Außenrahmen.
+   * Der dicke äußere türkise Rahmen.
    */
+
   posterRoundedRect(
     ctx,
-    20,
-    20,
-    W-40,
-    H-40,
-    44
+    24,
+    24,
+    W-48,
+    H-48,
+    42
   );
 
   ctx.fillStyle="#18b8c7";
   ctx.fill();
 
-
   /*
-   * Dunkler innerer Rahmen.
+   * Ruhige weiße Innenfläche.
+   * Kein weiterer türkiser Rahmen.
    */
-  posterRoundedRect(
-    ctx,
-    32,
-    32,
-    W-64,
-    H-64,
-    37
-  );
-
-  ctx.strokeStyle="#0f98a5";
-  ctx.lineWidth=5;
-  ctx.stroke();
-
-
-  /*
-   * Weißer Innenbereich.
-   */
-  ctx.save();
-
-  ctx.shadowColor=
-    "rgba(17,33,31,.13)";
-
-  ctx.shadowBlur=22;
-  ctx.shadowOffsetY=7;
 
   posterRoundedRect(
     ctx,
-    48,
-    48,
-    W-96,
-    H-96,
-    30
+    62,
+    62,
+    W-124,
+    H-124,
+    25
   );
 
   ctx.fillStyle="#ffffff";
   ctx.fill();
 
-  ctx.restore();
-
-
   /*
-   * Feine innere Kontur.
+   * Sehr dezente graue Innenkontur.
+   * Bewusst kein Türkis, damit die Schrift
+   * maximal klar und ruhig bleibt.
    */
+
   posterRoundedRect(
     ctx,
-    48,
-    48,
-    W-96,
-    H-96,
-    30
+    62,
+    62,
+    W-124,
+    H-124,
+    25
   );
 
-  ctx.strokeStyle="#d5e4e2";
+  ctx.strokeStyle="#dce7e5";
   ctx.lineWidth=2;
   ctx.stroke();
 
-
-  /*
-   * Dekorative obere linke Ecke.
-   */
-  ctx.save();
-
-  ctx.globalAlpha=.16;
-
-  ctx.fillStyle="#18b8c7";
-
-  ctx.beginPath();
-  ctx.arc(70,70,17,0,Math.PI*2);
-  ctx.fill();
-
-  ctx.beginPath();
-  ctx.arc(100,70,7,0,Math.PI*2);
-  ctx.fill();
-
-  ctx.fillRect(
-    64,
-    96,
-    54,
-    4
-  );
-
-  ctx.restore();
-
-
-  /*
-   * Dekorative obere rechte Ecke.
-   */
-  ctx.save();
-
-  ctx.globalAlpha=.13;
-
-  ctx.strokeStyle="#18b8c7";
-  ctx.lineWidth=8;
-
-  ctx.beginPath();
-
-  ctx.arc(
-    W-78,
-    82,
-    28,
-    Math.PI*.1,
-    Math.PI*1.15
-  );
-
-  ctx.stroke();
-
-  ctx.restore();
-
-
-  /*
-   * Kräftiger oberer Brand-Balken.
-   */
-  ctx.save();
-
-  posterRoundedRect(
-    ctx,
-    48,
-    48,
-    W-96,
-    16,
-    8
-  );
-
-  ctx.fillStyle="#18b8c7";
-  ctx.fill();
-
-  ctx.restore();
-
-
-  /*
-   * Dezente geometrische Elemente
-   * an den seitlichen Rändern.
-   */
-  ctx.save();
-
-  ctx.globalAlpha=.055;
-  ctx.fillStyle="#18b8c7";
-
-  for(let i=0;i<7;i++){
-
-    ctx.beginPath();
-
-    ctx.arc(
-      66,
-      300+i*135,
-      11,
-      0,
-      Math.PI*2
-    );
-
-    ctx.fill();
-
-    ctx.beginPath();
-
-    ctx.arc(
-      W-66,
-      360+i*135,
-      7,
-      0,
-      Math.PI*2
-    );
-
-    ctx.fill();
-
-  }
-
-  ctx.restore();
-
-
-  /*
-   * Kleine türkisene Akzentlinien unten.
-   */
-  ctx.save();
-
-  ctx.globalAlpha=.16;
-  ctx.fillStyle="#18b8c7";
-
-  ctx.fillRect(
-    70,
-    H-93,
-    170,
-    4
-  );
-
-  ctx.fillRect(
-    W-240,
-    H-93,
-    170,
-    4
-  );
-
-  ctx.restore();
-
-
-  /*
-   * Starker türkisener Abschlussbalken.
-   */
-  posterRoundedRect(
-    ctx,
-    48,
-    H-64,
-    W-96,
-    16,
-    8
-  );
-
-  ctx.fillStyle="#18b8c7";
-  ctx.fill();
-
 }
-
-
-/* =========================================================
-   POSTER STAT BOX
-========================================================= */
 
 function posterStatBox(
   ctx,
@@ -1988,11 +1764,6 @@ function posterStatBox(
 
 }
 
-
-/* =========================================================
-   POSTER PB BOX
-========================================================= */
-
 function posterPbBox(
   ctx,
   x,
@@ -2019,6 +1790,13 @@ function posterPbBox(
   ctx.strokeStyle="#dbe7e5";
   ctx.lineWidth=2;
   ctx.stroke();
+
+  /*
+   * Kleiner türkiser Akzent nur innerhalb
+   * der einzelnen Bestzeiten-Karten.
+   *
+   * Der große innere Rahmen wurde entfernt.
+   */
 
   ctx.fillStyle="#18b8c7";
 
@@ -2141,7 +1919,6 @@ function posterPbBox(
 
 }
 
-
 /* =========================================================
    POSTER
 ========================================================= */
@@ -2189,7 +1966,8 @@ function renderRunnerPoster(data){
   /*
    * WICHTIG:
    *
-   * Der Community-Hinweis gehört weiterhin zum Poster.
+   * Der Community-Hinweis bleibt weiterhin Bestandteil
+   * des Posters. Inhaltlich wurde nichts verändert.
    */
 
   if(!IS_EMBEDDED){
@@ -2377,7 +2155,6 @@ function renderRunnerPoster(data){
 
 }
 
-
 /* =========================================================
    POSTER DATA
 ========================================================= */
@@ -2473,7 +2250,6 @@ function createPosterData(
 
 }
 
-
 /* =========================================================
    POSTER BLOB
 ========================================================= */
@@ -2539,7 +2315,6 @@ function getPosterFileName(){
 
 }
 
-
 /* =========================================================
    STATUS
 ========================================================= */
@@ -2555,7 +2330,6 @@ function setPosterStatus(message){
     status.textContent=message||"";
 
 }
-
 
 /* =========================================================
    POSTER SPEICHERN
@@ -2662,7 +2436,6 @@ async function downloadRunnerPoster(){
 
 }
 
-
 /* =========================================================
    SHARE TEXT
 ========================================================= */
@@ -2762,7 +2535,6 @@ function getPosterShareText(){
   return text;
 
 }
-
 
 /* =========================================================
    WHATSAPP
@@ -2866,7 +2638,6 @@ async function shareRunnerPosterWhatsApp(){
   }
 
 }
-
 
 /* =========================================================
    INSTAGRAM
@@ -2993,7 +2764,6 @@ async function shareRunnerPosterInstagram(){
 
 }
 
-
 /* =========================================================
    BUTTONS
 ========================================================= */
@@ -3034,7 +2804,6 @@ function initializePosterButtons(){
     );
 
 }
-
 
 /* =========================================================
    PROFIL
@@ -3168,7 +2937,6 @@ function renderProfile(profile){
   }
 
 }
-
 
 /* =========================================================
    STATISTIKEN
@@ -3330,7 +3098,6 @@ function renderStatistics(
 
 }
 
-
 /* =========================================================
    BESTZEIT RENDERN
 ========================================================= */
@@ -3441,7 +3208,6 @@ function renderPersonalBest(
 
 }
 
-
 /* =========================================================
    LAUFHISTORIE
 ========================================================= */
@@ -3546,7 +3312,6 @@ function renderRuns(runs){
     }).join("");
 
 }
-
 
 /* =========================================================
    INITIALISIERUNG
@@ -3677,7 +3442,6 @@ async function initializePage(){
   }
 
 }
-
 
 /* =========================================================
    START
