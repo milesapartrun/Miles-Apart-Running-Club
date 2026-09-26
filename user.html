@@ -465,60 +465,146 @@
     .highlights-grid {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 14px;
+      gap: 16px;
     }
 
     .highlight-card {
       position: relative;
+      overflow: hidden;
       background: #fff;
-      border: 1px solid var(--ma-border);
-      border-radius: 18px;
-      padding: 22px;
-      min-height: 155px;
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.025);
+      border: 1px solid #dfe6e4;
+      border-radius: 20px;
+      padding: 20px;
+      min-height: 176px;
+      box-shadow:
+        0 5px 20px rgba(22, 39, 35, 0.035),
+        0 1px 2px rgba(22, 39, 35, 0.025);
+      transition:
+        transform 0.18s ease,
+        box-shadow 0.18s ease,
+        border-color 0.18s ease;
+    }
+
+    .highlight-card::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 5px;
+      height: 100%;
+      background: var(--ma-cyan);
+    }
+
+    .highlight-card:hover {
+      transform: translateY(-2px);
+      border-color: #cfe2e1;
+      box-shadow:
+        0 10px 28px rgba(22, 39, 35, 0.07),
+        0 2px 4px rgba(22, 39, 35, 0.025);
     }
 
     .highlight-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 15px;
-      margin-bottom: 17px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: start;
+      gap: 10px;
+      margin-bottom: 18px;
     }
 
     .highlight-label {
-      color: #777;
+      min-width: 0;
+      padding-right: 2px;
+      color: #687471;
       font-size: 11px;
-      font-weight: 800;
+      line-height: 1.25;
+      font-weight: 850;
       text-transform: uppercase;
-      letter-spacing: 0.07em;
+      letter-spacing: 0.055em;
     }
 
     .highlight-icon {
-      width: 34px;
-      height: 34px;
-      border-radius: 10px;
+      width: 39px;
+      height: 32px;
+      border-radius: 9px;
       background: #effbfc;
       color: var(--ma-cyan-dark);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 13px;
-      font-weight: 800;
+      padding: 0 6px;
+      font-size: 11px;
+      line-height: 1;
+      font-weight: 900;
       flex-shrink: 0;
+      white-space: nowrap;
     }
 
     .highlight-value {
-      font-size: 28px;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
       line-height: 1;
-      font-weight: 850;
-      letter-spacing: -0.025em;
+    }
+
+    .pb-time {
+      display: block;
+      color: #17211f;
+      font-size: clamp(26px, 2.5vw, 34px);
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: -0.035em;
+      white-space: nowrap;
+    }
+
+    .pb-distance {
+      display: block;
+      color: var(--ma-cyan-dark);
+      font-size: 12px;
+      line-height: 1;
+      font-weight: 900;
+      letter-spacing: 0.01em;
+    }
+
+    .pb-pace {
+      display: block;
+      color: #697774;
+      font-size: 12px;
+      line-height: 1.2;
+      font-weight: 800;
     }
 
     .highlight-sub {
-      margin-top: 9px;
-      color: #858585;
-      font-size: 13px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-top: 12px;
+      color: #929b98;
+      font-size: 11px;
+      line-height: 1.3;
+    }
+
+    .pb-date,
+    .pb-distance-sub {
+      min-width: 0;
+    }
+
+    .pb-distance-sub {
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .highlight-value.empty {
+      min-height: 34px;
+      justify-content: center;
+    }
+
+    .highlight-value.empty .pb-time {
+      color: #a4adaa;
+      font-size: 18px;
+      letter-spacing: -0.01em;
+      white-space: normal;
     }
 
     /* =========================================================
@@ -694,18 +780,17 @@
 
       .highlight-card {
         padding: 18px;
-        min-height: 145px;
+        min-height: 160px;
       }
 
-      .highlight-value {
-        font-size: 24px;
+      .pb-time {
+        font-size: 26px;
       }
 
       .highlight-icon {
-        width: 30px;
+        width: 36px;
         height: 30px;
-        border-radius: 9px;
-        font-size: 12px;
+        font-size: 10px;
       }
     }
 
@@ -725,6 +810,22 @@
 
       .runner-share-button {
         min-height: 55px;
+      }
+
+      .highlight-card {
+        min-height: 154px;
+      }
+
+      .pb-time {
+        font-size: 24px;
+      }
+
+      .highlight-label {
+        font-size: 10px;
+      }
+
+      .highlight-sub {
+        font-size: 10px;
       }
     }
 
@@ -2316,7 +2417,8 @@
       width,
       height,
       label,
-      value
+      value,
+      emoji = ""
     ) {
 
       posterRoundedRect(
@@ -2325,7 +2427,7 @@
         y,
         width,
         height,
-        22
+        24
       );
 
 
@@ -2334,8 +2436,9 @@
 
       ctx.fill();
 
+
       ctx.strokeStyle =
-        "#dfe8e7";
+        "#dbe7e5";
 
       ctx.lineWidth =
         2;
@@ -2346,30 +2449,65 @@
       posterText(
         ctx,
         label,
-        x + 24,
-        y + 28,
+        x + 28,
+        y + 29,
         {
           font:
-            "800 14px Arial",
+            "900 14px Arial",
           color:
-            "#7b8784",
+            "#75817e",
           baseline:
             "middle"
         }
       );
 
 
-      posterFittedText(
-        ctx,
-        value,
-        x + 24,
-        y + 76,
-        width - 48,
-        34,
-        20,
-        "900",
-        "#17211f"
-      );
+      if (
+        emoji
+      ) {
+
+        posterText(
+          ctx,
+          emoji,
+          x + 28,
+          y + 79,
+          {
+            font:
+              "31px Arial",
+            color:
+              "#17211f",
+            baseline:
+              "middle"
+          }
+        );
+
+
+        posterFittedText(
+          ctx,
+          value,
+          x + 76,
+          y + 79,
+          width - 104,
+          37,
+          21,
+          "900",
+          "#17211f"
+        );
+
+      } else {
+
+        posterFittedText(
+          ctx,
+          value,
+          x + 28,
+          y + 80,
+          width - 56,
+          38,
+          22,
+          "900",
+          "#17211f"
+        );
+      }
     }
 
 
@@ -2380,7 +2518,8 @@
       width,
       height,
       label,
-      value
+      run,
+      category
     ) {
 
       posterRoundedRect(
@@ -2389,7 +2528,7 @@
         y,
         width,
         height,
-        19
+        21
       );
 
 
@@ -2398,8 +2537,9 @@
 
       ctx.fill();
 
+
       ctx.strokeStyle =
-        "#dfe8e7";
+        "#dbe7e5";
 
       ctx.lineWidth =
         2;
@@ -2412,50 +2552,151 @@
 
       ctx.fillRect(
         x,
-        y,
+        y + 18,
         6,
-        height
+        height - 36
       );
 
 
       posterText(
         ctx,
         label,
-        x + 23,
-        y + 25,
+        x + 24,
+        y + 27,
         {
           font:
-            "800 13px Arial",
+            "900 13px Arial",
           color:
-            "#687471",
+            "#6e7b78",
           baseline:
             "middle"
         }
       );
 
 
-      posterFittedText(
-        ctx,
-        value,
-        x + 23,
-        y + 62,
-        width - 46,
-        28,
-        17,
-        "900",
-        value === "—"
-          ? "#b2bbb8"
-          : "#17211f"
-      );
+      if (!run) {
+
+        posterText(
+          ctx,
+          "Noch keine Zeit",
+          x + 24,
+          y + 67,
+          {
+            font:
+              "800 20px Arial",
+            color:
+              "#a5afac",
+            baseline:
+              "middle"
+          }
+        );
+
+
+        return;
+      }
+
+
+      const duration =
+        formatDuration(
+          run.duration_seconds
+        );
+
+
+      if (
+        category ===
+        "100plus"
+      ) {
+
+        const distance =
+          Number(
+            run.distance_km
+          );
+
+
+        posterFittedText(
+          ctx,
+          Number.isFinite(distance)
+            ? `${formatNumber(distance)} km`
+            : "100+ km",
+          x + 24,
+          y + 61,
+          width - 48,
+          25,
+          17,
+          "900",
+          "#18a6b4"
+        );
+
+
+        posterFittedText(
+          ctx,
+          duration,
+          x + 24,
+          y + 92,
+          width - 48,
+          30,
+          20,
+          "900",
+          "#17211f"
+        );
+
+
+        posterText(
+          ctx,
+          formatPace(
+            run.duration_seconds,
+            run.distance_km
+          ),
+          x + 24,
+          y + height - 17,
+          {
+            font:
+              "700 11px Arial",
+            color:
+              "#87928f",
+            baseline:
+              "bottom"
+          }
+        );
+
+      } else {
+
+        posterFittedText(
+          ctx,
+          duration,
+          x + 24,
+          y + 69,
+          width - 48,
+          32,
+          20,
+          "900",
+          "#17211f"
+        );
+
+
+        posterText(
+          ctx,
+          formatPace(
+            run.duration_seconds,
+            run.distance_km
+          ),
+          x + 24,
+          y + height - 17,
+          {
+            font:
+              "700 11px Arial",
+            color:
+              "#87928f",
+            baseline:
+              "bottom"
+          }
+        );
+      }
     }
 
 
     /* =========================================================
        EINZIGER POSTER-RENDERER
-
-       WICHTIG:
-       Der Funktionsname ist exakt renderRunnerPoster(),
-       weil initializePage() diese Funktion aufruft.
     ========================================================== */
 
     function renderRunnerPoster(
@@ -2517,11 +2758,11 @@
 
 
       /* =====================================================
-         HELLER PREMIUM-HINTERGRUND
+         CLEAN PREMIUM BACKGROUND
       ====================================================== */
 
       ctx.fillStyle =
-        "#f7fbfb";
+        "#f5faf9";
 
       ctx.fillRect(
         0,
@@ -2531,20 +2772,18 @@
       );
 
 
-      /* dezente obere Fläche */
-
       ctx.fillStyle =
         "#ffffff";
 
       ctx.fillRect(
         0,
-        9,
+        0,
         W,
-        250
+        330
       );
 
 
-      /* cyanfarbene Linie oben */
+      /* dezenter cyanfarbener Kopfbereich */
 
       ctx.fillStyle =
         "#18b8c7";
@@ -2553,100 +2792,22 @@
         0,
         0,
         W,
-        9
+        10
       );
 
 
       /* =====================================================
-         DEZENTE ROUTE-DEKORATION
-      ====================================================== */
-
-      ctx.save();
-
-      ctx.strokeStyle =
-        "#dceff0";
-
-      ctx.lineWidth =
-        5;
-
-      ctx.lineCap =
-        "round";
-
-      ctx.lineJoin =
-        "round";
-
-
-      ctx.beginPath();
-
-      ctx.moveTo(
-        800,
-        42
-      );
-
-      ctx.lineTo(
-        982,
-        42
-      );
-
-      ctx.lineTo(
-        982,
-        128
-      );
-
-      ctx.lineTo(
-        890,
-        220
-      );
-
-      ctx.lineTo(
-        1015,
-        345
-      );
-
-      ctx.stroke();
-
-
-      [
-        [800, 42],
-        [982, 128],
-        [890, 220],
-        [1015, 345]
-      ].forEach(
-        point => {
-
-          ctx.beginPath();
-
-          ctx.fillStyle =
-            "#bfe9ed";
-
-          ctx.arc(
-            point[0],
-            point[1],
-            8,
-            0,
-            Math.PI * 2
-          );
-
-          ctx.fill();
-        }
-      );
-
-
-      ctx.restore();
-
-
-      /* =====================================================
-         HEADER LINKS
+         HEADER
       ====================================================== */
 
       posterText(
         ctx,
         "Miles Apart Running Club",
         64,
-        63,
+        61,
         {
           font:
-            "800 25px Arial",
+            "900 26px Arial",
           color:
             "#17211f",
           baseline:
@@ -2655,14 +2816,21 @@
       );
 
 
-      ctx.fillStyle =
-        "#18b8c7";
-
-      ctx.fillRect(
-        64,
-        91,
-        54,
-        4
+      posterText(
+        ctx,
+        "MEMBER 2026",
+        W - 64,
+        61,
+        {
+          font:
+            "900 15px Arial",
+          color:
+            "#1199a6",
+          align:
+            "right",
+          baseline:
+            "middle"
+        }
       );
 
 
@@ -2673,90 +2841,39 @@
           "Runner"
         ),
         64,
-        139,
-        590,
-        54,
-        31,
+        133,
+        680,
+        61,
+        35,
         "900",
         "#17211f"
       );
 
 
-      /* =====================================================
-         HEADER RECHTS
-      ====================================================== */
-
-      posterRoundedRect(
-        ctx,
-        W - 290,
-        46,
-        226,
-        76,
-        20
-      );
-
-
-      ctx.fillStyle =
-        "#e9f8fa";
-
-      ctx.fill();
-
-
-      ctx.strokeStyle =
-        "#cfecef";
-
-      ctx.lineWidth =
-        2;
-
-      ctx.stroke();
-
-
       posterText(
         ctx,
-        "Miles Apart Member",
-        W - 177,
-        69,
+        "Miles Apart Member 2026",
+        64,
+        177,
         {
           font:
-            "800 15px Arial",
+            "800 17px Arial",
           color:
-            "#1199a6",
-          align:
-            "center",
+            "#18a6b4",
           baseline:
             "middle"
         }
       );
 
 
-      posterText(
-        ctx,
-        "2026",
-        W - 177,
-        98,
-        {
-          font:
-            "900 22px Arial",
-          color:
-            "#17211f",
-          align:
-            "center",
-          baseline:
-            "middle"
-        }
-      );
-
-
-      /* =====================================================
-         KLEINE TRENNLINIE
-      ====================================================== */
+      /* dezente Trennfläche */
 
       ctx.fillStyle =
-        "#e3eeee";
+        "#e4f1f0";
 
       ctx.fillRect(
         64,
-        184,
+        214,
         W - 128,
         2
       );
@@ -2767,19 +2884,19 @@
       ====================================================== */
 
       const statGap =
-        16;
+        18;
 
       const statWidth =
         (W - 128 - statGap) / 2;
 
       const statHeight =
-        126;
+        120;
 
       const statX =
         64;
 
       const statY =
-        218;
+        245;
 
 
       const totalKm =
@@ -2823,7 +2940,7 @@
         statY,
         statWidth,
         statHeight,
-        "2026 KM",
+        "KILOMETER 2026",
         `${formatNumber(
           totalKm
         )} km`
@@ -2838,7 +2955,7 @@
         statY,
         statWidth,
         statHeight,
-        "RUNS 2026",
+        "LÄUFE 2026",
         String(
           runCount
         )
@@ -2853,8 +2970,9 @@
           statGap,
         statWidth,
         statHeight,
-        "LEVEL",
-        levelText
+        "AKTUELLES LEVEL",
+        levelText,
+        data.level?.emoji || ""
       );
 
 
@@ -2868,23 +2986,23 @@
           statGap,
         statWidth,
         statHeight,
-        "LONGEST RUN",
+        "LÄNGSTER LAUF",
         longestText
       );
 
 
       /* =====================================================
-         PERSONAL BESTS
+         PB HEADER
       ====================================================== */
 
       posterText(
         ctx,
-        "Personal Bests · 2026",
+        "Persönliche Bestzeiten · 2026",
         64,
-        534,
+        548,
         {
           font:
-            "900 27px Arial",
+            "900 28px Arial",
           color:
             "#17211f",
           baseline:
@@ -2897,10 +3015,10 @@
         ctx,
         "Home-Bestzeiten · 2026",
         W - 64,
-        534,
+        548,
         {
           font:
-            "700 13px Arial",
+            "800 13px Arial",
           color:
             "#899490",
           align:
@@ -2911,173 +3029,127 @@
       );
 
 
+      /* =====================================================
+         PB GRID — 3 SPALTEN / 2 REIHEN
+      ====================================================== */
+
       const pbGap =
         16;
 
       const pbWidth =
-        (W - 128 - pbGap) / 2;
+        (W - 128 - pbGap * 2) / 3;
 
       const pbHeight =
-        103;
+        125;
 
       const pbStartY =
-        565;
+        579;
 
+      const pbX1 =
+        64;
 
-      function posterPbValue(
-        category
-      ) {
+      const pbX2 =
+        pbX1 +
+        pbWidth +
+        pbGap;
 
-        const run =
-          data.pbs?.[category];
-
-
-        if (!run) {
-          return "—";
-        }
-
-
-        const duration =
-          formatDuration(
-            run.duration_seconds
-          );
-
-
-        if (
-          category ===
-          "100plus"
-        ) {
-
-          const distance =
-            Number(
-              run.distance_km
-            );
-
-
-          if (
-            Number.isFinite(
-              distance
-            ) &&
-            distance > 0
-          ) {
-
-            return (
-              `${formatNumber(
-                distance
-              )} km · ${duration}`
-            );
-          }
-        }
-
-
-        return duration;
-      }
+      const pbX3 =
+        pbX2 +
+        pbWidth +
+        pbGap;
 
 
       posterPbBox(
         ctx,
-        64,
+        pbX1,
         pbStartY,
         pbWidth,
         pbHeight,
         "5 KILOMETER",
-        posterPbValue(
-          "5k"
-        )
+        data.pbs?.["5k"],
+        "5k"
       );
 
 
       posterPbBox(
         ctx,
-        64 +
-          pbWidth +
-          pbGap,
+        pbX2,
         pbStartY,
         pbWidth,
         pbHeight,
         "10 KILOMETER",
-        posterPbValue(
-          "10k"
-        )
+        data.pbs?.["10k"],
+        "10k"
       );
 
 
       posterPbBox(
         ctx,
-        64,
-        pbStartY +
-          pbHeight +
-          14,
+        pbX3,
+        pbStartY,
         pbWidth,
         pbHeight,
         "HALBMARATHON",
-        posterPbValue(
-          "half"
-        )
+        data.pbs?.["half"],
+        "half"
       );
 
 
       posterPbBox(
         ctx,
-        64 +
-          pbWidth +
-          pbGap,
+        pbX1,
         pbStartY +
           pbHeight +
-          14,
+          pbGap,
         pbWidth,
         pbHeight,
         "MARATHON",
-        posterPbValue(
-          "marathon"
-        )
+        data.pbs?.["marathon"],
+        "marathon"
       );
 
 
       posterPbBox(
         ctx,
-        64,
+        pbX2,
         pbStartY +
-          (pbHeight + 14) * 2,
+          pbHeight +
+          pbGap,
         pbWidth,
         pbHeight,
         "100 KILOMETER",
-        posterPbValue(
-          "100k"
-        )
+        data.pbs?.["100k"],
+        "100k"
       );
 
 
       posterPbBox(
         ctx,
-        64 +
-          pbWidth +
-          pbGap,
+        pbX3,
         pbStartY +
-          (pbHeight + 14) * 2,
+          pbHeight +
+          pbGap,
         pbWidth,
         pbHeight,
         "100 KILOMETER PLUS",
-        posterPbValue(
-          "100plus"
-        )
+        data.pbs?.["100plus"],
+        "100plus"
       );
 
 
       /* =====================================================
-         FOOTER / BRANDING
-         
-         KEINE COMMUNITY-BOTSCHAFT
+         CLEAN FOOTER
+         Keine Route, keine Punkte, keine Community-Botschaft.
       ====================================================== */
 
       ctx.fillStyle =
-        "#18b8c7";
+        "#dcebea";
 
       ctx.fillRect(
         64,
-        1032,
+        1025,
         W - 128,
-        3
+        2
       );
 
 
@@ -3085,10 +3157,10 @@
         ctx,
         "Miles Apart Running Club",
         64,
-        1080,
+        1070,
         {
           font:
-            "800 22px Arial",
+            "900 20px Arial",
           color:
             "#17211f",
           baseline:
@@ -3101,12 +3173,12 @@
         ctx,
         "2026",
         W - 64,
-        1080,
+        1070,
         {
           font:
             "900 24px Arial",
           color:
-            "#18aebb",
+            "#18a6b4",
           align:
             "right",
           baseline:
@@ -3117,141 +3189,14 @@
 
       posterText(
         ctx,
-        "RUN · CONNECT · REPEAT",
+        "MILES APART MEMBER",
         64,
-        1112,
+        1102,
         {
           font:
-            "700 12px Arial",
+            "800 11px Arial",
           color:
-            "#8b9591",
-          baseline:
-            "middle"
-        }
-      );
-
-
-      /* =====================================================
-         DEZENTES ROUTEN-ELEMENT UNTEN
-      ====================================================== */
-
-      ctx.save();
-
-      ctx.strokeStyle =
-        "#d5edef";
-
-      ctx.lineWidth =
-        4;
-
-      ctx.lineCap =
-        "round";
-
-      ctx.lineJoin =
-        "round";
-
-
-      ctx.beginPath();
-
-      ctx.moveTo(
-        770,
-        1190
-      );
-
-      ctx.lineTo(
-        835,
-        1125
-      );
-
-      ctx.lineTo(
-        900,
-        1190
-      );
-
-      ctx.lineTo(
-        1005,
-        1090
-      );
-
-      ctx.stroke();
-
-
-      [
-        [770, 1190],
-        [835, 1125],
-        [900, 1190],
-        [1005, 1090]
-      ].forEach(
-        point => {
-
-          ctx.beginPath();
-
-          ctx.fillStyle =
-            "#18b8c7";
-
-          ctx.arc(
-            point[0],
-            point[1],
-            7,
-            0,
-            Math.PI * 2
-          );
-
-          ctx.fill();
-        }
-      );
-
-
-      ctx.restore();
-
-
-      /* =====================================================
-         ABSCHLUSS
-      ====================================================== */
-
-      posterText(
-        ctx,
-        "Miles Apart · 2026",
-        64,
-        1260,
-        {
-          font:
-            "700 13px Arial",
-          color:
-            "#a0aaa7",
-          baseline:
-            "middle"
-        }
-      );
-
-
-      ctx.fillStyle =
-        "#18b8c7";
-
-      ctx.beginPath();
-
-      ctx.arc(
-        W - 76,
-        1258,
-        18,
-        0,
-        Math.PI * 2
-      );
-
-      ctx.fill();
-
-
-      posterText(
-        ctx,
-        "M",
-        W - 76,
-        1259,
-        {
-          font:
-            "900 16px Arial",
-          color:
-            "#ffffff",
-          align:
-            "center",
+            "#899490",
           baseline:
             "middle"
         }
@@ -3261,10 +3206,9 @@
 
     /* =========================================================
        POSTER DATEN
-       
-       WICHTIG:
+
        Poster-PBs = ausschließlich 2026.
-       Normale Profil-PBs unten bleiben ALL-TIME.
+       Profil-PBs unten = weiterhin ALL-TIME.
     ========================================================== */
 
     function createPosterData(
@@ -3476,6 +3420,14 @@
 
     /* =========================================================
        POSTER SPEICHERN
+
+       Auf iPhone/Android wird zuerst der native Bild-Share
+       geöffnet. Dort kann der Nutzer "In Fotos sichern",
+       "Bild sichern" bzw. die entsprechende Speicheroption
+       auswählen.
+
+       Ein normaler Browser darf eine Website nicht direkt
+       ohne Nutzeraktion in die Fotos-App schreiben.
     ========================================================== */
 
     async function downloadRunnerPoster() {
@@ -3505,6 +3457,70 @@
         const blob =
           await getPosterBlob();
 
+
+        const file =
+          new File(
+            [blob],
+            getPosterFileName(),
+            {
+              type:
+                "image/png"
+            }
+          );
+
+
+        /*
+         * Native Share zuerst:
+         * Auf iPhone/Android erscheint damit das native
+         * Teilen-/Speichern-Menü für die Bilddatei.
+         */
+
+        if (
+          navigator.share &&
+          navigator.canShare &&
+          navigator.canShare({
+            files: [file]
+          })
+        ) {
+
+          try {
+
+            await navigator.share({
+              files: [file],
+              title:
+                "Miles Apart Running Club"
+            });
+
+
+            setPosterStatus(
+              "✓ Im Teilen-Menü kannst du das Poster direkt in Fotos/Bilder sichern."
+            );
+
+
+            return;
+
+          }
+
+          catch (shareError) {
+
+            if (
+              shareError?.name ===
+              "AbortError"
+            ) {
+
+              setPosterStatus(
+                ""
+              );
+
+              return;
+            }
+          }
+        }
+
+
+        /*
+         * Fallback für Browser ohne Datei-Share.
+         */
 
         const url =
           URL.createObjectURL(
@@ -3557,7 +3573,7 @@
       catch (error) {
 
         console.error(
-          "Poster Download Fehler:",
+          "Poster Speicher Fehler:",
           error
         );
 
@@ -3700,8 +3716,19 @@
         data.pbs["100plus"]
       ) {
 
+        const distance =
+          Number(
+            data.pbs["100plus"]
+              .distance_km
+          );
+
+
         pbParts.push(
-          `100K+ ${formatDuration(
+          `100K+ ${
+            Number.isFinite(distance)
+              ? `${formatNumber(distance)} km `
+              : ""
+          }${formatDuration(
             data.pbs["100plus"]
               .duration_seconds
           )}`
@@ -3718,10 +3745,6 @@
             " · "
           )}`;
       }
-
-
-      text +=
-        "\n\nRun together. Grow together. 🌍";
 
 
       return text;
@@ -3820,47 +3843,10 @@
         }
 
 
-        const url =
-          URL.createObjectURL(
-            blob
-          );
-
-
-        const link =
-          document.createElement(
-            "a"
-          );
-
-
-        link.href =
-          url;
-
-        link.download =
-          getPosterFileName();
-
-
-        document.body.appendChild(
-          link
-        );
-
-
-        link.click();
-
-
-        link.remove();
-
-
-        setTimeout(
-          () => {
-
-            URL.revokeObjectURL(
-              url
-            );
-
-          },
-          1000
-        );
-
+        /*
+         * Fallback:
+         * WhatsApp mit vorbereiteten Text öffnen.
+         */
 
         const whatsappUrl =
           "https://wa.me/?text=" +
@@ -3877,7 +3863,7 @@
 
 
         setPosterStatus(
-          "✓ Poster gespeichert und WhatsApp geöffnet."
+          "✓ WhatsApp wurde geöffnet."
         );
 
       }
@@ -3936,13 +3922,6 @@
         }
 
 
-        popup =
-          window.open(
-            "about:blank",
-            "_blank"
-          );
-
-
         setPosterStatus(
           "Poster wird für Instagram vorbereitet …"
         );
@@ -3967,6 +3946,11 @@
           getPosterShareText();
 
 
+        /*
+         * Auf mobilen Geräten bevorzugt der native Share Sheet.
+         * Dort kann Instagram direkt ausgewählt werden.
+         */
+
         if (
           navigator.share &&
           navigator.canShare &&
@@ -3974,18 +3958,6 @@
             files: [file]
           })
         ) {
-
-          if (
-            popup &&
-            !popup.closed
-          ) {
-
-            popup.close();
-
-            popup =
-              null;
-          }
-
 
           try {
 
@@ -4023,6 +3995,11 @@
           }
         }
 
+
+        /*
+         * Desktop-/Fallback-Verhalten:
+         * Poster als PNG bereitstellen und Instagram öffnen.
+         */
 
         const url =
           URL.createObjectURL(
@@ -4066,22 +4043,12 @@
         );
 
 
-        if (
-          popup &&
-          !popup.closed
-        ) {
-
-          popup.location.href =
-            "https://www.instagram.com/";
-
-        } else {
-
+        popup =
           window.open(
             "https://www.instagram.com/",
             "_blank",
             "noopener,noreferrer"
           );
-        }
 
 
         setPosterStatus(
@@ -4504,6 +4471,12 @@
       }
 
 
+      /*
+       * WICHTIG:
+       * Diese sechs PBs bleiben ALL-TIME.
+       * Es wird weiterhin allRuns verwendet.
+       */
+
       renderPersonalBest(
         "pb5k",
         "pb5kSub",
@@ -4567,6 +4540,10 @@
 
     /* =========================================================
        BESTZEIT RENDERN
+
+       Zeit = Hauptwert
+       Pace = kleiner separater Wert
+       Datum / Distanz = Zusatzinformationen
     ========================================================== */
 
     function renderPersonalBest(
@@ -4589,16 +4566,19 @@
 
       if (!run) {
 
-        valueElement.textContent =
-          "Noch kein Lauf";
-
-
         valueElement.classList.add(
           "empty"
         );
 
 
-        subElement.textContent =
+        valueElement.innerHTML = `
+          <span class="pb-time">
+            Noch kein Lauf
+          </span>
+        `;
+
+
+        subElement.innerHTML =
           "";
 
 
@@ -4619,34 +4599,16 @@
         );
 
 
-      if (
-        run.best_time_category ===
-        "100plus"
-      ) {
-
-        valueElement.textContent =
-          `${formatNumber(
-            run.distance_km
-          )} km · ${duration}`;
-
-
-        valueElement.classList.remove(
-          "empty"
+      const date =
+        formatDate(
+          run.run_date
         );
 
 
-        subElement.textContent =
-          `${formatDate(
-            run.run_date
-          )} · ${pace}`;
-
-
-        return;
-      }
-
-
-      valueElement.textContent =
-        `${duration} · ${pace}`;
+      const distance =
+        Number(
+          run.distance_km
+        );
 
 
       valueElement.classList.remove(
@@ -4654,12 +4616,62 @@
       );
 
 
-      subElement.textContent =
-        `${formatDate(
-          run.run_date
-        )} · ${formatNumber(
-          run.distance_km
-        )} km`;
+      if (
+        run.best_time_category ===
+        "100plus"
+      ) {
+
+        valueElement.innerHTML = `
+          <span class="pb-distance">
+            ${
+              Number.isFinite(
+                distance
+              )
+                ? `${formatNumber(
+                    distance
+                  )} km`
+                : "100+ km"
+            }
+          </span>
+
+          <span class="pb-time">
+            ${duration}
+          </span>
+
+          <span class="pb-pace">
+            ${pace}
+          </span>
+        `;
+
+      } else {
+
+        valueElement.innerHTML = `
+          <span class="pb-time">
+            ${duration}
+          </span>
+
+          <span class="pb-pace">
+            ${pace}
+          </span>
+        `;
+      }
+
+
+      subElement.innerHTML = `
+        <span class="pb-date">
+          ${escapeHtml(
+            date
+          )}
+        </span>
+
+        <span class="pb-distance-sub">
+          ${Number.isFinite(distance)
+            ? `${formatNumber(
+                distance
+              )} km`
+            : ""}
+        </span>
+      `;
     }
 
 
