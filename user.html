@@ -207,20 +207,20 @@
       position: relative;
       width: min(100%,590px);
       overflow: hidden;
-      border-radius: 28px;
-      background: #fff;
-      border: 1px solid #dfe7e5;
-      padding: 8px;
+      border-radius: 31px;
+      background: #18b8c7;
+      border: 1px solid #0fa6b4;
+      padding: 9px;
       box-shadow:
-        0 24px 60px rgba(24,45,41,.12),
-        0 5px 18px rgba(24,45,41,.05);
+        0 28px 70px rgba(24,184,199,.20),
+        0 12px 28px rgba(24,45,41,.10);
     }
 
     .runner-poster-canvas-wrap {
       position: relative;
       overflow: hidden;
       width: 100%;
-      border-radius: 21px;
+      border-radius: 23px;
       background: #eaf4f3;
     }
 
@@ -701,12 +701,12 @@
 
     @media (max-width:600px) {
       .runner-poster-shell {
-        border-radius: 21px;
-        padding: 5px;
+        border-radius: 24px;
+        padding: 6px;
       }
 
       .runner-poster-canvas-wrap {
-        border-radius: 16px;
+        border-radius: 18px;
       }
 
       .runner-share-actions {
@@ -1050,16 +1050,6 @@ const supabaseClient =
 /* =========================================================
    EINBETTUNG ERKENNEN
 ========================================================= */
-
-/*
- * Wenn user.html innerhalb der index.html geladen wird,
- * ist window.self nicht gleich window.top.
- *
- * Dann soll ausschließlich der Link
- * "← Zur Community" verschwinden.
- *
- * Wird user.html direkt geöffnet, bleibt der Link sichtbar.
- */
 
 const IS_EMBEDDED =
   window.self !== window.top;
@@ -1607,24 +1597,130 @@ function posterFittedText(
 
 }
 
+
+/* =========================================================
+   POSTER FRAME
+   Neuer grafischer Look:
+   - kräftiger türkisener Außenrahmen
+   - dunkler Türkis-Akzent
+   - weißer Innenbereich
+   - dezente geometrische Dekoration
+   - mehr Tiefe / Schatten
+========================================================= */
+
 function drawPosterFrame(ctx,W,H){
 
-  ctx.fillStyle="#eaf4f3";
+  /*
+   * Hintergrund außerhalb des eigentlichen Posters.
+   */
+  ctx.fillStyle="#dff7f5";
   ctx.fillRect(0,0,W,H);
 
+
+  /*
+   * Weicher türkisener Glow.
+   */
+  const glow=
+    ctx.createRadialGradient(
+      W/2,
+      H/2,
+      220,
+      W/2,
+      H/2,
+      760
+    );
+
+  glow.addColorStop(
+    0,
+    "rgba(24,184,199,.08)"
+  );
+
+  glow.addColorStop(
+    1,
+    "rgba(24,184,199,0)"
+  );
+
+  ctx.fillStyle=glow;
+  ctx.fillRect(0,0,W,H);
+
+
+  /*
+   * Äußerer Schatten.
+   */
   ctx.save();
 
-  ctx.shadowColor="rgba(18,45,42,.18)";
-  ctx.shadowBlur=34;
-  ctx.shadowOffsetY=12;
+  ctx.shadowColor=
+    "rgba(13,82,88,.28)";
+
+  ctx.shadowBlur=42;
+  ctx.shadowOffsetY=16;
 
   posterRoundedRect(
     ctx,
-    28,
-    28,
-    W-56,
-    H-56,
-    34
+    20,
+    20,
+    W-40,
+    H-40,
+    44
+  );
+
+  ctx.fillStyle="#18b8c7";
+  ctx.fill();
+
+  ctx.restore();
+
+
+  /*
+   * Kräftiger türkisener Außenrahmen.
+   */
+  posterRoundedRect(
+    ctx,
+    20,
+    20,
+    W-40,
+    H-40,
+    44
+  );
+
+  ctx.fillStyle="#18b8c7";
+  ctx.fill();
+
+
+  /*
+   * Dunkler innerer Rahmen.
+   */
+  posterRoundedRect(
+    ctx,
+    32,
+    32,
+    W-64,
+    H-64,
+    37
+  );
+
+  ctx.strokeStyle="#0f98a5";
+  ctx.lineWidth=5;
+  ctx.stroke();
+
+
+  /*
+   * Weißer Innenbereich.
+   */
+  ctx.save();
+
+  ctx.shadowColor=
+    "rgba(17,33,31,.13)";
+
+  ctx.shadowBlur=22;
+  ctx.shadowOffsetY=7;
+
+  posterRoundedRect(
+    ctx,
+    48,
+    48,
+    W-96,
+    H-96,
+    30
   );
 
   ctx.fillStyle="#ffffff";
@@ -1632,28 +1728,88 @@ function drawPosterFrame(ctx,W,H){
 
   ctx.restore();
 
+
+  /*
+   * Feine innere Kontur.
+   */
   posterRoundedRect(
     ctx,
-    28,
-    28,
-    W-56,
-    H-56,
-    34
+    48,
+    48,
+    W-96,
+    H-96,
+    30
   );
 
   ctx.strokeStyle="#d5e4e2";
-  ctx.lineWidth=3;
+  ctx.lineWidth=2;
   ctx.stroke();
 
+
+  /*
+   * Dekorative obere linke Ecke.
+   */
+  ctx.save();
+
+  ctx.globalAlpha=.16;
+
+  ctx.fillStyle="#18b8c7";
+
+  ctx.beginPath();
+  ctx.arc(70,70,17,0,Math.PI*2);
+  ctx.fill();
+
+  ctx.beginPath();
+  ctx.arc(100,70,7,0,Math.PI*2);
+  ctx.fill();
+
+  ctx.fillRect(
+    64,
+    96,
+    54,
+    4
+  );
+
+  ctx.restore();
+
+
+  /*
+   * Dekorative obere rechte Ecke.
+   */
+  ctx.save();
+
+  ctx.globalAlpha=.13;
+
+  ctx.strokeStyle="#18b8c7";
+  ctx.lineWidth=8;
+
+  ctx.beginPath();
+
+  ctx.arc(
+    W-78,
+    82,
+    28,
+    Math.PI*.1,
+    Math.PI*1.15
+  );
+
+  ctx.stroke();
+
+  ctx.restore();
+
+
+  /*
+   * Kräftiger oberer Brand-Balken.
+   */
   ctx.save();
 
   posterRoundedRect(
     ctx,
-    28,
-    28,
-    W-56,
-    10,
-    5
+    48,
+    48,
+    W-96,
+    16,
+    8
   );
 
   ctx.fillStyle="#18b8c7";
@@ -1661,16 +1817,93 @@ function drawPosterFrame(ctx,W,H){
 
   ctx.restore();
 
+
+  /*
+   * Dezente geometrische Elemente
+   * an den seitlichen Rändern.
+   */
+  ctx.save();
+
+  ctx.globalAlpha=.055;
+  ctx.fillStyle="#18b8c7";
+
+  for(let i=0;i<7;i++){
+
+    ctx.beginPath();
+
+    ctx.arc(
+      66,
+      300+i*135,
+      11,
+      0,
+      Math.PI*2
+    );
+
+    ctx.fill();
+
+    ctx.beginPath();
+
+    ctx.arc(
+      W-66,
+      360+i*135,
+      7,
+      0,
+      Math.PI*2
+    );
+
+    ctx.fill();
+
+  }
+
+  ctx.restore();
+
+
+  /*
+   * Kleine türkisene Akzentlinien unten.
+   */
+  ctx.save();
+
+  ctx.globalAlpha=.16;
   ctx.fillStyle="#18b8c7";
 
   ctx.fillRect(
-    64,
-    H-72,
-    W-128,
+    70,
+    H-93,
+    170,
     4
   );
 
+  ctx.fillRect(
+    W-240,
+    H-93,
+    170,
+    4
+  );
+
+  ctx.restore();
+
+
+  /*
+   * Starker türkisener Abschlussbalken.
+   */
+  posterRoundedRect(
+    ctx,
+    48,
+    H-64,
+    W-96,
+    16,
+    8
+  );
+
+  ctx.fillStyle="#18b8c7";
+  ctx.fill();
+
 }
+
+
+/* =========================================================
+   POSTER STAT BOX
+========================================================= */
 
 function posterStatBox(
   ctx,
@@ -1754,6 +1987,11 @@ function posterStatBox(
   }
 
 }
+
+
+/* =========================================================
+   POSTER PB BOX
+========================================================= */
 
 function posterPbBox(
   ctx,
@@ -1951,9 +2189,7 @@ function renderRunnerPoster(data){
   /*
    * WICHTIG:
    *
-   * Der Community-Hinweis gehört weiterhin zum Poster,
-   * weil die Änderung hier ausschließlich den Link
-   * "← Zur Community" außerhalb des Posters betrifft.
+   * Der Community-Hinweis gehört weiterhin zum Poster.
    */
 
   if(!IS_EMBEDDED){
@@ -3332,13 +3568,6 @@ async function initializePage(){
     document.getElementById(
       "errorState"
     );
-
-  /*
-   * GENAU HIER wird nur der "← Zur Community"-Link
-   * entfernt, wenn user.html eingebettet ist.
-   *
-   * Direkt auf user.html bleibt er erhalten.
-   */
 
   if(IS_EMBEDDED){
 
