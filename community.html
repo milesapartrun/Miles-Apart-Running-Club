@@ -76,6 +76,7 @@
   border:1px solid #e8e8e8;
   background:#fff;
   box-sizing:border-box;
+  text-align:left !important;
 }
 
 .ma-buddy-top{
@@ -83,6 +84,7 @@
   align-items:center;
   gap:14px;
   margin-bottom:18px;
+  text-align:left !important;
 }
 
 .ma-buddy-avatar,
@@ -148,6 +150,7 @@
   margin:4px 0 0;
   color:#777;
   font-size:14px;
+  text-align:left !important;
 }
 
 .ma-buddy-details{
@@ -155,11 +158,13 @@
   grid-template-columns:repeat(2,minmax(0,1fr));
   gap:10px;
   margin-bottom:16px;
+  text-align:left !important;
 }
 
 .ma-buddy-detail{
   padding:12px;
   background:#f7fafa;
+  text-align:left !important;
 }
 
 .ma-buddy-label{
@@ -170,6 +175,7 @@
   text-transform:uppercase;
   letter-spacing:.05em;
   font-weight:700;
+  text-align:left !important;
 }
 
 .ma-buddy-value{
@@ -179,6 +185,7 @@
   line-height:1.3;
   font-weight:800;
   overflow-wrap:anywhere;
+  text-align:left !important;
 }
 
 .ma-buddy-note{
@@ -187,6 +194,7 @@
   color:#333;
   font-size:15px;
   line-height:1.45;
+  text-align:left !important;
 }
 
 /* =========================================================
@@ -248,6 +256,7 @@
   margin-top:15px;
   padding-top:15px;
   border-top:1px solid #eee;
+  text-align:left !important;
 }
 
 .ma-comments-box.open{
@@ -259,16 +268,19 @@
   flex-direction:column;
   gap:14px;
   margin-bottom:14px;
+  text-align:left !important;
 }
 
 .ma-comment{
   display:flex;
   gap:10px;
+  text-align:left !important;
 }
 
 .ma-comment-content{
   min-width:0;
   flex:1;
+  text-align:left !important;
 }
 
 .ma-comment-name{
@@ -295,11 +307,13 @@
   line-height:1.4;
   white-space:pre-wrap;
   overflow-wrap:anywhere;
+  text-align:left !important;
 }
 
 .ma-comment-form{
   display:flex;
   gap:8px;
+  text-align:left !important;
 }
 
 .ma-comment-input{
@@ -310,6 +324,7 @@
   border:1px solid #d8d8d8;
   font:inherit;
   box-sizing:border-box;
+  text-align:left !important;
 }
 
 .ma-comment-input:focus{
@@ -355,6 +370,7 @@
   border:1px solid #e5e5e5;
   background:#fafafa;
   box-sizing:border-box;
+  text-align:left !important;
 }
 
 .ma-buddy-form.open,
@@ -407,6 +423,7 @@
   display:flex;
   flex-direction:column;
   gap:7px;
+  text-align:left !important;
 }
 
 .ma-form-field.full{
@@ -417,6 +434,7 @@
   color:#111;
   font-size:14px;
   font-weight:800;
+  text-align:left !important;
 }
 
 .ma-form-input{
@@ -428,6 +446,7 @@
   color:#111;
   font:inherit;
   box-sizing:border-box;
+  text-align:left !important;
 }
 
 textarea.ma-form-input{
@@ -453,6 +472,7 @@ textarea.ma-form-input{
   color:#18b8c7;
   font-size:14px;
   font-weight:700;
+  text-align:left !important;
 }
 
 /* =========================================================
@@ -460,56 +480,88 @@ textarea.ma-form-input{
 ========================================================= */
 
 .ma-post{
-  width:100%;
-  box-sizing:border-box;
-  display:block;
-  margin:0 0 22px;
-  padding:28px;
-  text-align:left;
+  width:100% !important;
+  max-width:none !important;
+  box-sizing:border-box !important;
+  display:block !important;
+  margin:0 0 22px 0 !important;
+  padding:28px !important;
+  text-align:left !important;
+  text-indent:0 !important;
   overflow:hidden;
 }
 
 .ma-post-header{
-  width:100%;
-  display:flex;
+  width:100% !important;
+  display:flex !important;
   align-items:center;
+  margin:0 !important;
+  padding:0 !important;
+  text-align:left !important;
+  text-indent:0 !important;
 }
 
 .ma-post-author{
-  width:100%;
-  display:flex;
+  width:100% !important;
+  display:flex !important;
   align-items:center;
+  margin:0 !important;
+  padding:0 !important;
   text-decoration:none;
   color:inherit;
+  text-align:left !important;
+  text-indent:0 !important;
 }
 
 .ma-post-author-info{
-  margin-left:13px;
+  margin-left:13px !important;
+  margin-right:0 !important;
   min-width:0;
+  text-align:left !important;
+  text-indent:0 !important;
 }
 
 .ma-post-author-name{
   color:#111;
   font-size:19px;
   font-weight:800;
+  text-align:left !important;
 }
 
 .ma-post-author-meta{
-  margin-top:3px;
+  margin-top:3px !important;
+  margin-left:0 !important;
+  padding-left:0 !important;
   color:#777;
   font-size:15px;
+  text-align:left !important;
+  text-indent:0 !important;
 }
 
+/*
+  WICHTIG:
+  Der Post-Text wird hier bewusst gegen globale Regeln
+  aus style.css abgesichert.
+*/
+
 .ma-post-copy{
-  display:block;
-  width:100%;
-  margin:25px 0 26px;
-  padding-left:0;
+  display:block !important;
+  width:100% !important;
+  max-width:none !important;
+  box-sizing:border-box !important;
+
+  margin:25px 0 26px 0 !important;
+  padding:0 !important;
+  padding-left:0 !important;
+  padding-right:0 !important;
+
   color:#111;
   font-size:20px;
   line-height:1.45;
-  text-align:left;
-  text-indent:0;
+
+  text-align:left !important;
+  text-indent:0 !important;
+
   white-space:pre-wrap;
   overflow-wrap:anywhere;
 }
@@ -518,7 +570,7 @@ textarea.ma-form-input{
   display:block;
   width:100%;
   max-height:650px;
-  margin:0 0 25px;
+  margin:0 0 25px 0 !important;
   border-radius:14px;
   object-fit:cover;
 }
@@ -549,6 +601,7 @@ textarea.ma-form-input{
   border:1px solid #e8e8e8;
   background:#fff;
   box-sizing:border-box;
+  text-align:left !important;
 }
 
 .ma-run-card-top{
@@ -556,6 +609,7 @@ textarea.ma-form-input{
   justify-content:space-between;
   gap:15px;
   margin-bottom:16px;
+  text-align:left !important;
 }
 
 .ma-run-card-title{
@@ -563,12 +617,14 @@ textarea.ma-form-input{
   color:#111;
   font-size:22px;
   font-weight:800;
+  text-align:left !important;
 }
 
 .ma-run-card-author{
   margin-top:5px;
   color:#777;
   font-size:14px;
+  text-align:left !important;
 }
 
 .ma-run-card-icon{
@@ -580,11 +636,13 @@ textarea.ma-form-input{
   grid-template-columns:repeat(2,minmax(0,1fr));
   gap:10px;
   margin-bottom:18px;
+  text-align:left !important;
 }
 
 .ma-run-detail{
   padding:12px;
   background:#f7fafa;
+  text-align:left !important;
 }
 
 .ma-run-detail-label{
@@ -595,6 +653,7 @@ textarea.ma-form-input{
   text-transform:uppercase;
   letter-spacing:.05em;
   font-weight:700;
+  text-align:left !important;
 }
 
 .ma-run-detail-value{
@@ -603,6 +662,7 @@ textarea.ma-form-input{
   font-size:15px;
   line-height:1.3;
   font-weight:800;
+  text-align:left !important;
 }
 
 .ma-run-participants{
@@ -618,6 +678,7 @@ textarea.ma-form-input{
   color:#555;
   font-size:14px;
   font-weight:700;
+  text-align:left !important;
 }
 
 .ma-run-actions{
@@ -675,6 +736,7 @@ textarea.ma-form-input{
   flex-direction:column;
   gap:10px;
   margin-top:14px;
+  text-align:left !important;
 }
 
 .ma-image-upload-label{
@@ -713,6 +775,7 @@ textarea.ma-form-input{
 .ma-image-upload-name{
   color:#777;
   font-size:14px;
+  text-align:left !important;
 }
 
 /* =========================================================
@@ -742,6 +805,7 @@ textarea.ma-form-input{
   border-radius:18px;
   padding:26px;
   box-sizing:border-box;
+  text-align:left !important;
 }
 
 .ma-message-modal-head{
@@ -755,11 +819,13 @@ textarea.ma-form-input{
 .ma-message-modal-title{
   margin:0;
   font-size:24px;
+  text-align:left !important;
 }
 
 .ma-message-modal-recipient{
   margin:4px 0;
   color:#777;
+  text-align:left !important;
 }
 
 .ma-message-close{
@@ -780,6 +846,7 @@ textarea.ma-form-input{
   font:inherit;
   box-sizing:border-box;
   resize:vertical;
+  text-align:left !important;
 }
 
 .ma-message-textarea:focus{
@@ -799,6 +866,7 @@ textarea.ma-form-input{
   color:#18b8c7;
   font-size:14px;
   font-weight:700;
+  text-align:left !important;
 }
 
 .ma-message-send{
@@ -853,7 +921,18 @@ textarea.ma-form-input{
   }
 
   .ma-post{
-    padding:24px;
+    padding:24px !important;
+  }
+
+  .ma-post-copy{
+    width:100% !important;
+    max-width:none !important;
+    margin-left:0 !important;
+    margin-right:0 !important;
+    padding-left:0 !important;
+    padding-right:0 !important;
+    text-align:left !important;
+    text-indent:0 !important;
   }
 
   .ma-post-actions,
@@ -1885,96 +1964,16 @@ function setBuddyDays(value){
 
 
 /* =========================================================
-   KOMMENTAR-PROFILE SEPARAT LADEN
-   ---------------------------------------------------------
-   Wichtig:
-   community_item_comments.author_id wird nicht mehr
-   als Relation zu profiles abgefragt.
-
-   Stattdessen:
-   1. Kommentare laden
-   2. author_id sammeln
-   3. Profile über profiles.id laden
-   4. Profile an Kommentare hängen
+   KOMMENTAR HTML
+   kind:
+   - "post" für community_post_comments
+   - "item" für community_item_comments
 ========================================================= */
 
-async function attachCommentProfiles(comments){
-
-  const list=
-    Array.isArray(comments)
-    ?comments
-    :[];
-
-
-  if(!list.length){
-    return list;
-  }
-
-
-  const authorIds=
-    [
-      ...new Set(
-        list
-          .map(comment=>comment.author_id)
-          .filter(Boolean)
-      )
-    ];
-
-
-  if(!authorIds.length){
-    return list;
-  }
-
-
-  const {
-    data:profiles,
-    error
-  }=
-    await supabaseClient
-      .from("profiles")
-      .select(
-        "id,display_name,username,avatar_url,location"
-      )
-      .in(
-        "id",
-        authorIds
-      );
-
-
-  if(error){
-    throw error;
-  }
-
-
-  const profileMap=
-    new Map(
-      (profiles||[]).map(
-        profile=>[
-          String(profile.id),
-          profile
-        ]
-      )
-    );
-
-
-  return list.map(comment=>({
-
-    ...comment,
-
-    profiles:
-      profileMap.get(
-        String(comment.author_id)
-      )||{}
-
-  }));
-}
-
-
-/* =========================================================
-   KOMMENTARE HTML
-========================================================= */
-
-function commentsHtml(comments){
+function commentsHtml(
+  comments,
+  kind="item"
+){
 
   if(!comments.length){
 
@@ -2038,7 +2037,8 @@ function commentsHtml(comments){
               <button
                 class="ma-comment-delete"
                 type="button"
-                data-delete-comment="${comment.id}"
+                data-delete-comment="${escapeHtml(comment.id)}"
+                data-delete-comment-kind="${kind}"
               >
                 Kommentar löschen
               </button>
@@ -2365,7 +2365,10 @@ function createPostHtml(post){
 
         <div class="ma-comments-list">
 
-          ${commentsHtml(comments)}
+          ${commentsHtml(
+            comments,
+            "post"
+          )}
 
         </div>
 
@@ -2401,8 +2404,6 @@ function createPostHtml(post){
 
 /* =========================================================
    RUN BUDDY KOMMENTARE
-   ---------------------------------------------------------
-   KEINE profiles:author_id RELATION MEHR
 ========================================================= */
 
 async function loadBuddyComments(){
@@ -2433,33 +2434,91 @@ async function loadBuddyComments(){
   }
 
 
-  const enriched=
-    await attachCommentProfiles(
-      data||[]
+  const comments=
+    data||[];
+
+
+  const authorIds=
+    [
+      ...new Set(
+        comments
+          .map(comment=>comment.author_id)
+          .filter(Boolean)
+      )
+    ];
+
+
+  let profiles=[];
+
+
+  if(authorIds.length){
+
+    const {
+      data:profileData,
+      error:profileError
+    }=
+      await supabaseClient
+        .from("profiles")
+        .select(
+          "id,display_name,username,avatar_url,location"
+        )
+        .in(
+          "id",
+          authorIds
+        );
+
+
+    if(profileError){
+      throw profileError;
+    }
+
+
+    profiles=
+      profileData||[];
+  }
+
+
+  const profileMap=
+    new Map(
+      profiles.map(
+        profile=>[
+          String(profile.id),
+          profile
+        ]
+      )
     );
 
 
   buddyComments={};
 
 
-  enriched.forEach(comment=>{
+  comments
+    .map(comment=>({
 
-    const id=
-      String(comment.item_id);
+      ...comment,
 
-    if(!buddyComments[id]){
-      buddyComments[id]=[];
-    }
+      profiles:
+        profileMap.get(
+          String(comment.author_id)
+        )||{}
 
-    buddyComments[id].push(comment);
-  });
+    }))
+    .forEach(comment=>{
+
+      const id=
+        String(comment.item_id);
+
+      if(!buddyComments[id]){
+        buddyComments[id]=[];
+      }
+
+      buddyComments[id].push(comment);
+    });
 }
 
 
 /* =========================================================
    RUN KOMMENTARE
-   ---------------------------------------------------------
-   KEINE profiles:author_id RELATION MEHR
 ========================================================= */
 
 async function loadRunComments(){
@@ -2490,26 +2549,86 @@ async function loadRunComments(){
   }
 
 
-  const enriched=
-    await attachCommentProfiles(
-      data||[]
+  const comments=
+    data||[];
+
+
+  const authorIds=
+    [
+      ...new Set(
+        comments
+          .map(comment=>comment.author_id)
+          .filter(Boolean)
+      )
+    ];
+
+
+  let profiles=[];
+
+
+  if(authorIds.length){
+
+    const {
+      data:profileData,
+      error:profileError
+    }=
+      await supabaseClient
+        .from("profiles")
+        .select(
+          "id,display_name,username,avatar_url,location"
+        )
+        .in(
+          "id",
+          authorIds
+        );
+
+
+    if(profileError){
+      throw profileError;
+    }
+
+
+    profiles=
+      profileData||[];
+  }
+
+
+  const profileMap=
+    new Map(
+      profiles.map(
+        profile=>[
+          String(profile.id),
+          profile
+        ]
+      )
     );
 
 
   runComments={};
 
 
-  enriched.forEach(comment=>{
+  comments
+    .map(comment=>({
 
-    const id=
-      String(comment.item_id);
+      ...comment,
 
-    if(!runComments[id]){
-      runComments[id]=[];
-    }
+      profiles:
+        profileMap.get(
+          String(comment.author_id)
+        )||{}
 
-    runComments[id].push(comment);
-  });
+    }))
+    .forEach(comment=>{
+
+      const id=
+        String(comment.item_id);
+
+      if(!runComments[id]){
+        runComments[id]=[];
+      }
+
+      runComments[id].push(comment);
+    });
 }
 
 
@@ -2686,7 +2805,10 @@ function buddyCard(row){
       >
 
         <div class="ma-comments-list">
-          ${commentsHtml(comments)}
+          ${commentsHtml(
+            comments,
+            "item"
+          )}
         </div>
 
 
@@ -3035,7 +3157,10 @@ function runCard(run){
       >
 
         <div class="ma-comments-list">
-          ${commentsHtml(comments)}
+          ${commentsHtml(
+            comments,
+            "item"
+          )}
         </div>
 
 
@@ -3127,10 +3252,45 @@ async function loadCommunityRuns(){
 
 
 /* =========================================================
-   KOMMENTAR SPEICHERN
+   POST-KOMMENTAR SPEICHERN
+   ---------------------------------------------------------
+   POSTS verwenden community_post_comments.
+   NICHT community_item_comments.
 ========================================================= */
 
-async function addComment(
+async function addPostComment(
+  postId,
+  content
+){
+
+  if(!currentUser){
+    return location.href="home.html";
+  }
+
+
+  const {
+    error
+  }=
+    await supabaseClient
+      .from("community_post_comments")
+      .insert({
+        post_id:postId,
+        author_id:currentUser.id,
+        content:content
+      });
+
+
+  if(error){
+    throw error;
+  }
+}
+
+
+/* =========================================================
+   RUN-BUDDY / RUN KOMMENTAR SPEICHERN
+========================================================= */
+
+async function addItemComment(
   type,
   target,
   content
@@ -3161,10 +3321,70 @@ async function addComment(
 
 
 /* =========================================================
-   KOMMENTAR LÖSCHEN
+   KOMMENTAR SPEICHERN
 ========================================================= */
 
-async function deleteComment(id){
+async function addComment(
+  type,
+  target,
+  content
+){
+
+  if(type==="post"){
+
+    return addPostComment(
+      target,
+      content
+    );
+  }
+
+
+  return addItemComment(
+    type,
+    target,
+    content
+  );
+}
+
+
+/* =========================================================
+   POST-KOMMENTAR LÖSCHEN
+========================================================= */
+
+async function deletePostComment(id){
+
+  if(!currentUser){
+    return;
+  }
+
+
+  const {
+    error
+  }=
+    await supabaseClient
+      .from("community_post_comments")
+      .delete()
+      .eq(
+        "id",
+        id
+      )
+      .eq(
+        "author_id",
+        currentUser.id
+      );
+
+
+  if(error){
+    throw error;
+  }
+}
+
+
+/* =========================================================
+   RUN-BUDDY / RUN KOMMENTAR LÖSCHEN
+========================================================= */
+
+async function deleteItemComment(id){
 
   if(!currentUser){
     return;
@@ -3177,7 +3397,10 @@ async function deleteComment(id){
     await supabaseClient
       .from("community_item_comments")
       .delete()
-      .eq("id",id)
+      .eq(
+        "id",
+        id
+      )
       .eq(
         "author_id",
         currentUser.id
@@ -3187,6 +3410,25 @@ async function deleteComment(id){
   if(error){
     throw error;
   }
+}
+
+
+/* =========================================================
+   KOMMENTAR LÖSCHEN
+========================================================= */
+
+async function deleteComment(
+  id,
+  kind
+){
+
+  if(kind==="post"){
+
+    return deletePostComment(id);
+  }
+
+
+  return deleteItemComment(id);
 }
 
 
@@ -3293,10 +3535,13 @@ document.addEventListener(
       try{
 
         await deleteComment(
-          deleteCommentButton.dataset.deleteComment
+          deleteCommentButton.dataset.deleteComment,
+          deleteCommentButton.dataset.deleteCommentKind
         );
 
+
         await refreshAll();
+
 
       }catch(error){
 
@@ -3356,16 +3601,6 @@ document.addEventListener(
 
     try{
 
-      await addComment(
-        form.dataset.commentFormType,
-        form.dataset.commentTarget,
-        content
-      );
-
-
-      input.value="";
-
-
       const type=
         form.dataset.commentFormType;
 
@@ -3373,7 +3608,38 @@ document.addEventListener(
         form.dataset.commentTarget;
 
 
-      await refreshAll();
+      await addComment(
+        type,
+        target,
+        content
+      );
+
+
+      input.value="";
+
+
+      /*
+        Bei Posts nur die Posts neu laden.
+        Bei Buddy/Run werden die jeweiligen
+        Kommentar-Daten neu geladen.
+      */
+
+      if(type==="post"){
+
+        await loadPosts();
+
+      }else if(type==="buddy"){
+
+        await loadBuddyComments();
+
+        await loadBuddyProfiles();
+
+      }else if(type==="run"){
+
+        await loadRunComments();
+
+        await loadCommunityRuns();
+      }
 
 
       const box=
