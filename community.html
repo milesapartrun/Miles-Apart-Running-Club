@@ -210,45 +210,27 @@
   line-height:1.45
 }
 
-
-/* =========================================================
-   RUN BUDDY AKTIONEN
-========================================================= */
-
 .ma-buddy-actions{
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:10px;
-  width:100%;
-  margin-top:18px;
-  padding-top:18px;
+  display:flex;
+  justify-content:flex-start;
+  align-items:center;
+  gap:8px;
+  margin-top:16px;
+  padding-top:14px;
   border-top:1px solid #eee;
-  box-sizing:border-box
+  flex-wrap:wrap
 }
 
-.ma-buddy-actions > button{
-  width:100%;
-  min-width:0;
-  min-height:48px;
-  margin:0;
-  padding:0 12px;
-  box-sizing:border-box;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  white-space:normal;
-  line-height:1.2;
+.ma-buddy-message-btn{
+  min-height:42px;
+  border:0;
+  background:#18b8c7;
+  color:#fff;
+  padding:0 16px;
   font:inherit;
   font-size:14px;
   font-weight:800;
   cursor:pointer
-}
-
-.ma-buddy-message-btn{
-  border:0;
-  background:#18b8c7;
-  color:#fff
 }
 
 .ma-buddy-message-btn:hover{
@@ -256,9 +238,15 @@
 }
 
 .ma-buddy-comment-btn{
+  min-height:42px;
   border:1px solid #d8d8d8;
   background:#fff;
-  color:#111
+  color:#111;
+  padding:0 16px;
+  font:inherit;
+  font-size:14px;
+  font-weight:800;
+  cursor:pointer
 }
 
 .ma-buddy-comment-btn:hover{
@@ -267,9 +255,15 @@
 }
 
 .ma-buddy-delete{
+  min-height:42px;
   border:1px solid #e0bcbc;
   background:#fff7f7;
-  color:#b44
+  color:#b44;
+  padding:0 12px;
+  font:inherit;
+  font-size:13px;
+  font-weight:800;
+  cursor:pointer
 }
 
 .ma-buddy-delete:hover{
@@ -323,6 +317,7 @@
 .ma-community-page .ma-section small,
 .ma-community-page .ma-post-copy,
 .ma-community-page .ma-comment-text,
+.ma-community-page .ma-comment-input,
 .ma-community-page .ma-buddy-note,
 .ma-community-page .ma-buddy-value,
 .ma-community-page .ma-buddy-label,
@@ -372,6 +367,56 @@
 .ma-community-page .ma-post,
 .ma-community-page .ma-post *{
   text-indent:0 !important
+}
+
+
+/* =========================================================
+   NEU: ALLE KOMMENTARE LINKS
+========================================================= */
+
+.ma-community-page .ma-comment-text,
+.ma-community-page .ma-comment-text *{
+  width:100% !important;
+  margin-left:0 !important;
+  padding-left:0 !important;
+  text-align:left !important;
+  text-indent:0 !important;
+}
+
+.ma-community-page .ma-comment-input{
+  text-align:left !important;
+  text-indent:0 !important;
+  padding-left:14px !important;
+}
+
+.ma-community-page .ma-comment-input::placeholder{
+  text-align:left !important;
+}
+
+
+/* =========================================================
+   NEU: ALLE SENDEN-BUTTONS EINHEITLICH
+========================================================= */
+
+.ma-community-page .ma-comment-submit,
+.ma-community-page .ma-message-send,
+.ma-community-page .ma-thread-reply button{
+  display:flex !important;
+  align-items:center !important;
+  justify-content:center !important;
+  text-align:center !important;
+  text-indent:0 !important;
+  background:#111 !important;
+  color:#fff !important;
+  border:0 !important;
+  font-weight:800 !important;
+}
+
+.ma-community-page .ma-comment-submit:hover,
+.ma-community-page .ma-message-send:hover,
+.ma-community-page .ma-thread-reply button:hover{
+  background:#18b8c7 !important;
+  color:#fff !important;
 }
 
 
@@ -652,14 +697,16 @@ textarea.ma-form-input{
 
 .ma-comment-content{
   flex:1;
-  min-width:0
+  min-width:0;
+  text-align:left !important
 }
 
 .ma-comment-header{
   display:flex;
   align-items:baseline;
   gap:8px;
-  flex-wrap:wrap
+  flex-wrap:wrap;
+  text-align:left !important
 }
 
 .ma-comment-name{
@@ -699,7 +746,12 @@ textarea.ma-form-input{
   padding:0 14px;
   border:1px solid #d8d8d8;
   font:inherit;
-  box-sizing:border-box
+  box-sizing:border-box;
+  text-align:left !important
+}
+
+.ma-comment-input::placeholder{
+  text-align:left !important
 }
 
 .ma-comment-submit,
@@ -711,7 +763,8 @@ textarea.ma-form-input{
   padding:0 18px;
   font-size:16px;
   font-weight:800;
-  cursor:pointer
+  cursor:pointer;
+  text-align:center !important
 }
 
 .ma-comment-submit:hover,
@@ -853,9 +906,9 @@ textarea.ma-form-input{
 
 .ma-run-participants{
   display:flex;
-  flex-direction:column;
-  align-items:stretch;
-  gap:14px;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
   padding-top:15px;
   border-top:1px solid #eee
 }
@@ -866,42 +919,22 @@ textarea.ma-form-input{
   font-weight:700
 }
 
-
-/* =========================================================
-   GEMEINSAME-LÄUFE-AKTIONEN
-========================================================= */
-
 .ma-run-actions{
-  display:grid;
-  grid-template-columns:repeat(3,minmax(0,1fr));
-  gap:10px;
-  width:100%;
-  box-sizing:border-box
-}
-
-.ma-run-actions > button{
-  width:100%;
-  min-width:0;
-  min-height:48px;
-  margin:0;
-  padding:0 12px;
-  box-sizing:border-box;
   display:flex;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-  white-space:normal;
-  line-height:1.2;
-  font:inherit;
-  font-size:14px;
-  font-weight:800;
-  cursor:pointer
+  gap:8px;
+  flex-wrap:wrap;
+  justify-content:flex-end
 }
 
 .ma-run-join{
+  min-height:42px;
   border:0;
   background:#18b8c7;
-  color:#fff
+  color:#fff;
+  padding:0 16px;
+  font-size:14px;
+  font-weight:800;
+  cursor:pointer
 }
 
 .ma-run-join.joined{
@@ -909,9 +942,14 @@ textarea.ma-form-input{
 }
 
 .ma-run-message{
+  min-height:42px;
   border:0;
   background:#18b8c7;
-  color:#fff
+  color:#fff;
+  padding:0 16px;
+  font-size:14px;
+  font-weight:800;
+  cursor:pointer
 }
 
 .ma-run-message:hover{
@@ -919,9 +957,14 @@ textarea.ma-form-input{
 }
 
 .ma-run-comment{
+  min-height:42px;
   border:1px solid #d8d8d8;
   background:#fff;
-  color:#111
+  color:#111;
+  padding:0 16px;
+  font-size:14px;
+  font-weight:800;
+  cursor:pointer
 }
 
 .ma-run-comment:hover{
@@ -930,9 +973,14 @@ textarea.ma-form-input{
 }
 
 .ma-run-delete{
+  min-height:42px;
   border:1px solid #e0bcbc;
   background:#fff7f7;
-  color:#b44
+  color:#b44;
+  padding:0 12px;
+  font-size:14px;
+  font-weight:800;
+  cursor:pointer
 }
 
 .ma-run-delete:hover{
@@ -1042,18 +1090,16 @@ textarea.ma-form-input{
 
 .ma-message-actions{
   display:flex;
-  align-items:flex-start;
+  align-items:center;
   gap:8px;
   margin-top:12px
 }
 
 .ma-message-status{
   flex:1;
-  min-width:0;
   color:#18b8c7;
   font-size:14px;
-  font-weight:700;
-  text-align:left
+  font-weight:700
 }
 
 .ma-message-send{
@@ -1061,20 +1107,19 @@ textarea.ma-form-input{
 }
 
 .ma-message-view-link{
-  display:flex;
+  display:inline-flex;
   align-items:center;
-  justify-content:flex-start;
+  justify-content:center;
   min-height:36px;
-  margin-top:5px;
-  padding:0;
+  margin-top:7px;
+  padding:0 12px;
   border:0;
   background:transparent;
   color:#18b8c7;
   font:inherit;
   font-size:14px;
   font-weight:800;
-  cursor:pointer;
-  text-align:left
+  cursor:pointer
 }
 
 .ma-message-view-link:hover{
@@ -1360,7 +1405,12 @@ textarea.ma-form-input{
   border:1px solid #d8d8d8;
   font:inherit;
   resize:vertical;
-  box-sizing:border-box
+  box-sizing:border-box;
+  text-align:left !important
+}
+
+.ma-thread-reply textarea::placeholder{
+  text-align:left !important
 }
 
 .ma-thread-reply button{
@@ -1371,7 +1421,8 @@ textarea.ma-form-input{
   padding:0 18px;
   font-size:15px;
   font-weight:800;
-  cursor:pointer
+  cursor:pointer;
+  text-align:center !important
 }
 
 .ma-thread-reply button:hover{
@@ -1449,32 +1500,24 @@ textarea.ma-form-input{
   }
 
   .ma-comment-submit{
-    width:100%
+    width:100%;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    text-align:center !important
   }
 
   .ma-run-participants{
-    align-items:stretch;
+    align-items:flex-start;
     flex-direction:column
   }
 
   .ma-run-actions{
-    grid-template-columns:1fr;
     width:100%
   }
 
   .ma-run-actions > button{
-    width:100%;
-    min-height:50px
-  }
-
-  .ma-buddy-actions{
-    grid-template-columns:1fr;
-    width:100%
-  }
-
-  .ma-buddy-actions > button{
-    width:100%;
-    min-height:50px
+    flex:1
   }
 
   .ma-message-overlay,
@@ -1493,17 +1536,30 @@ textarea.ma-form-input{
     align-items:stretch
   }
 
-  .ma-message-status{
-    width:100%
-  }
-
   .ma-message-send{
-    width:100%
+    width:100%;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    text-align:center !important
   }
 
   .ma-message-view-link{
-    width:100%;
-    justify-content:flex-start
+    width:100%
+  }
+
+  .ma-buddy-actions{
+    align-items:stretch
+  }
+
+  .ma-buddy-actions > div{
+    width:100%
+  }
+
+  .ma-buddy-message-btn,
+  .ma-buddy-comment-btn,
+  .ma-buddy-delete{
+    flex:1
   }
 
   .ma-inbox-modal{
@@ -1552,7 +1608,11 @@ textarea.ma-form-input{
 
   .ma-thread-reply button{
     height:48px;
-    padding:0 14px
+    padding:0 14px;
+    display:flex !important;
+    align-items:center !important;
+    justify-content:center !important;
+    text-align:center !important
   }
 }
 </style>
@@ -2694,13 +2754,6 @@ function inboxAvatarHtml(p){
 }
 
 
-/* =========================================================
-   ITEM-KOMMENTARE
-   Profile werden separat geladen.
-   Dadurch wird keine Supabase-Relationship
-   community_item_comments -> profiles benötigt.
-========================================================= */
-
 function itemCommentsHtml(
   comments,
   inputPlaceholder="Kommentar schreiben …"
@@ -2790,7 +2843,12 @@ async function loadItemComments(
         item_id,
         author_id,
         content,
-        created_at
+        created_at,
+        profiles:author_id(
+          display_name,
+          username,
+          avatar_url
+        )
       `)
       .eq(
         "item_type",
@@ -2813,80 +2871,19 @@ async function loadItemComments(
   }
 
 
-  const comments=
-    data||
-    [];
+  (data||[])
+    .forEach(
+      comment=>{
 
-
-  const authorIds=
-    [
-      ...new Set(
-        comments
-          .map(
-            comment=>comment.author_id
-          )
-          .filter(Boolean)
-      )
-    ];
-
-
-  let profilesById=
-    {};
-
-
-  if(authorIds.length){
-
-    const {
-      data:profiles,
-      error:profileError
-    }=
-      await supabaseClient
-        .from("profiles")
-        .select(
-          "id,display_name,username,avatar_url,location"
-        )
-        .in(
-          "id",
-          authorIds
-        );
-
-
-    if(profileError){
-      throw profileError;
-    }
-
-
-    (profiles||[])
-      .forEach(
-        profile=>{
-          profilesById[profile.id]=
-            profile;
+        if(!map[comment.item_id]){
+          map[comment.item_id]=[];
         }
-      );
 
-  }
+        map[comment.item_id]
+          .push(comment);
 
-
-  comments.forEach(
-    comment=>{
-
-      if(!map[comment.item_id]){
-        map[comment.item_id]=[];
       }
-
-
-      map[comment.item_id]
-        .push({
-          ...comment,
-          profiles:
-            profilesById[
-              comment.author_id
-            ]||
-            {}
-        });
-
-    }
-  );
+    );
 
 
   return map;
@@ -3788,10 +3785,7 @@ $("sendPrivateMessageButton")
 
       $("privateMessageStatus")
         .innerHTML=`
-          <div>
-            Nachricht wurde gesendet ✓
-          </div>
-
+          Nachricht wurde gesendet ✓<br>
           <button
             type="button"
             class="ma-message-view-link"
@@ -4095,12 +4089,6 @@ async function loadMessageInbox(
 
     activeConversationUserId=
       preselectUserId;
-
-  }else{
-
-    activeConversationUserId=
-      conversations[0]?.userId||
-      null;
 
   }
 
@@ -4575,11 +4563,10 @@ $("messageReplyForm")
         .value=
         "";
 
-      const selectedUserId=
-        activeConversationUserId;
+      await loadMessageInbox();
 
-      await loadMessageInbox(
-        selectedUserId
+      await openConversation(
+        activeConversationUserId
       );
 
     }
@@ -5015,40 +5002,51 @@ function buddyCard(row){
           ?`
             <div class="ma-buddy-actions">
 
-              <button
-                class="ma-buddy-message-btn"
-                type="button"
-                data-buddy-message="${row.user_id}"
-                data-buddy-name="${escapeHtml(name)}"
+              <div
+                style="
+                  display:flex;
+                  align-items:center;
+                  gap:8px;
+                  flex-wrap:wrap
+                "
               >
-                Nachricht senden
-              </button>
+
+                <button
+                  class="ma-buddy-message-btn"
+                  type="button"
+                  data-buddy-message="${row.user_id}"
+                  data-buddy-name="${escapeHtml(name)}"
+                >
+                  Nachricht senden
+                </button>
 
 
-              <button
-                class="ma-buddy-comment-btn"
-                type="button"
-                data-buddy-action="comments"
-                data-buddy-id="${row.user_id}"
-              >
-                Kommentieren${comments.length?` (${comments.length})`:""}
-              </button>
+                <button
+                  class="ma-buddy-comment-btn"
+                  type="button"
+                  data-buddy-action="comments"
+                  data-buddy-id="${row.user_id}"
+                >
+                  Kommentieren${comments.length?` (${comments.length})`:""}
+                </button>
 
 
-              ${
-                currentUser.id===row.user_id
-                  ?`
-                    <button
-                      class="ma-buddy-delete"
-                      type="button"
-                      data-buddy-action="delete"
-                      data-buddy-id="${row.user_id}"
-                    >
-                      Run Buddy Profil löschen
-                    </button>
-                  `
-                  :""
-              }
+                ${
+                  currentUser.id===row.user_id
+                    ?`
+                      <button
+                        class="ma-buddy-delete"
+                        type="button"
+                        data-buddy-action="delete"
+                        data-buddy-id="${row.user_id}"
+                      >
+                        Run Buddy Profil löschen
+                      </button>
+                    `
+                    :""
+                }
+
+              </div>
 
             </div>
           `
@@ -5825,7 +5823,6 @@ function runCard(run){
               ?`
                 <button
                   class="ma-run-delete"
-                  type="button"
                   data-run-action="delete"
                   data-run-id="${run.id}"
                 >
@@ -5837,7 +5834,6 @@ function runCard(run){
                   class="ma-run-join ${
                     joined?"joined":""
                   }"
-                  type="button"
                   data-run-action="join"
                   data-run-id="${run.id}"
                   ${
@@ -6041,37 +6037,22 @@ $("runList")
         }
 
 
-        const {
-          error
-        }=
-          await supabaseClient
-            .from("community_runs")
-            .delete()
-            .eq(
-              "id",
-              id
-            )
-            .eq(
-              "creator_id",
-              currentUser.id
-            );
-
-
-        if(error){
-
-          alert(
-            error.message
+        await supabaseClient
+          .from("community_runs")
+          .delete()
+          .eq(
+            "id",
+            id
+          )
+          .eq(
+            "creator_id",
+            currentUser.id
           );
-
-          return;
-
-        }
 
       }else{
 
         const {
-          data:x,
-          error:findError
+          data:x
         }=
           await supabaseClient
             .from(
@@ -6089,71 +6070,32 @@ $("runList")
             .maybeSingle();
 
 
-        if(findError){
-
-          alert(
-            findError.message
-          );
-
-          return;
-
-        }
-
-
         if(x){
 
-          const {
-            error
-          }=
-            await supabaseClient
-              .from(
-                "community_run_participants"
-              )
-              .delete()
-              .eq(
-                "run_id",
-                id
-              )
-              .eq(
-                "user_id",
-                currentUser.id
-              );
-
-
-          if(error){
-
-            alert(
-              error.message
+          await supabaseClient
+            .from(
+              "community_run_participants"
+            )
+            .delete()
+            .eq(
+              "run_id",
+              id
+            )
+            .eq(
+              "user_id",
+              currentUser.id
             );
-
-            return;
-
-          }
 
         }else{
 
-          const {
-            error
-          }=
-            await supabaseClient
-              .from(
-                "community_run_participants"
-              )
-              .insert({
-                run_id:id,
-                user_id:currentUser.id
-              });
-
-
-          if(error){
-
-            alert(
-              error.message
-            );
-
-            return;
-
-          }
+          await supabaseClient
+            .from(
+              "community_run_participants"
+            )
+            .insert({
+              run_id:id,
+              user_id:currentUser.id
+            });
 
         }
 
@@ -6312,11 +6254,6 @@ $("communityRunForm")
     e.preventDefault();
 
 
-    if(!currentUser){
-      return location.href="home.html";
-    }
-
-
     const b=
       $("submitRunButton");
 
@@ -6414,44 +6351,6 @@ $("communityRunForm")
     }
 
   };
-
-
-/* =========================================================
-   ESC ZUM SCHLIESSEN DER POPUPS
-========================================================= */
-
-document.addEventListener(
-  "keydown",
-  e=>{
-
-    if(e.key!=="Escape"){
-      return;
-    }
-
-
-    if(
-      $("messageOverlay")
-        .classList
-        .contains("open")
-    ){
-
-      closeMessageModal();
-
-    }
-
-
-    if(
-      $("messagesInboxOverlay")
-        .classList
-        .contains("open")
-    ){
-
-      closeMessagesInbox();
-
-    }
-
-  }
-);
 
 
 /* =========================================================
