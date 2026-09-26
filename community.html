@@ -2494,19 +2494,19 @@ async function toggleLike(
       const {
         error:deleteError
       } =
-        await supabaseClient
-          .from(
-            "community_post_likes"
-          )
-          .delete()
-          .eq(
-            "post_id",
-            postId
-          )
-          .eq(
-            "user_id",
-            currentUser.id
-          );
+      await supabaseClient
+        .from(
+          "community_post_likes"
+        )
+        .delete()
+        .eq(
+          "post_id",
+          postId
+        )
+        .eq(
+          "user_id",
+          currentUser.id
+        );
 
       if(deleteError){
         throw deleteError;
@@ -2517,17 +2517,17 @@ async function toggleLike(
       const {
         error:insertError
       } =
-        await supabaseClient
-          .from(
-            "community_post_likes"
-          )
-          .insert({
-            post_id:
-              postId,
+      await supabaseClient
+        .from(
+          "community_post_likes"
+        )
+        .insert({
+          post_id:
+            postId,
 
-            user_id:
-              currentUser.id
-          });
+          user_id:
+            currentUser.id
+        });
 
       if(insertError){
         throw insertError;
@@ -3033,20 +3033,20 @@ $("postForm").onsubmit =
       const {
         error
       } =
-        await supabaseClient
-          .from(
-            "community_posts"
-          )
-          .insert({
-            author_id:
-              currentUser.id,
+      await supabaseClient
+        .from(
+          "community_posts"
+        )
+        .insert({
+          author_id:
+            currentUser.id,
 
-            content:
-              content,
+          content:
+            content,
 
-            image_url:
-              imageUrl
-          });
+          image_url:
+            imageUrl
+        });
 
       if(error){
         throw error;
@@ -3277,15 +3277,6 @@ function buddyCard(row){
 
 async function loadBuddyProfiles(){
 
-  /*
-   * WICHTIG:
-   * Hier wird NICHT mehr "id" aus
-   * run_buddy_profiles abgefragt.
-   *
-   * Die Tabelle wird über user_id
-   * mit profiles verbunden.
-   */
-
   const {
     data,
     error
@@ -3321,13 +3312,22 @@ async function loadBuddyProfiles(){
     throw error;
   }
 
+  /*
+   * WICHTIG:
+   * ALLE Run-Buddy-Profile anzeigen,
+   * auch das eigene Profil.
+   *
+   * Vorher wurde das eigene Profil
+   * hier herausgefiltert. Dadurch erschien
+   * bei nur einem vorhandenen Profil:
+   *
+   * "Noch keine Run Buddy-Profile vorhanden."
+   *
+   * Das ist jetzt behoben.
+   */
+
   const list =
-    (data || [])
-      .filter(
-        item =>
-          item.user_id !==
-          currentUser?.id
-      );
+    data || [];
 
 
   $("buddyList").innerHTML =
@@ -3582,17 +3582,17 @@ $("buddyProfileForm").onsubmit =
       const {
         error
       } =
-        await supabaseClient
-          .from(
-            "run_buddy_profiles"
-          )
-          .upsert(
-            payload,
-            {
-              onConflict:
-                "user_id"
-            }
-          );
+      await supabaseClient
+        .from(
+          "run_buddy_profiles"
+        )
+        .upsert(
+          payload,
+          {
+            onConflict:
+              "user_id"
+          }
+        );
 
       if(error){
         throw error;
@@ -3984,19 +3984,19 @@ $("runList").addEventListener(
       const {
         error
       } =
-        await supabaseClient
-          .from(
-            "community_runs"
-          )
-          .delete()
-          .eq(
-            "id",
-            runId
-          )
-          .eq(
-            "creator_id",
-            currentUser.id
-          );
+      await supabaseClient
+        .from(
+          "community_runs"
+        )
+        .delete()
+        .eq(
+          "id",
+          runId
+        )
+        .eq(
+          "creator_id",
+          currentUser.id
+        );
 
       if(error){
 
@@ -4015,22 +4015,22 @@ $("runList").addEventListener(
         data:existing,
         error:findError
       } =
-        await supabaseClient
-          .from(
-            "community_run_participants"
-          )
-          .select(
-            "run_id"
-          )
-          .eq(
-            "run_id",
-            runId
-          )
-          .eq(
-            "user_id",
-            currentUser.id
-          )
-          .maybeSingle();
+      await supabaseClient
+        .from(
+          "community_run_participants"
+        )
+        .select(
+          "run_id"
+        )
+        .eq(
+          "run_id",
+          runId
+        )
+        .eq(
+          "user_id",
+          currentUser.id
+        )
+        .maybeSingle();
 
       if(findError){
 
@@ -4047,19 +4047,19 @@ $("runList").addEventListener(
         const {
           error
         } =
-          await supabaseClient
-            .from(
-              "community_run_participants"
-            )
-            .delete()
-            .eq(
-              "run_id",
-              runId
-            )
-            .eq(
-              "user_id",
-              currentUser.id
-            );
+        await supabaseClient
+          .from(
+            "community_run_participants"
+          )
+          .delete()
+          .eq(
+            "run_id",
+            runId
+          )
+          .eq(
+            "user_id",
+            currentUser.id
+          );
 
         if(error){
           alert(error.message);
@@ -4071,17 +4071,17 @@ $("runList").addEventListener(
         const {
           error
         } =
-          await supabaseClient
-            .from(
-              "community_run_participants"
-            )
-            .insert({
-              run_id:
-                runId,
+        await supabaseClient
+          .from(
+            "community_run_participants"
+          )
+          .insert({
+            run_id:
+              runId,
 
-              user_id:
-                currentUser.id
-            });
+            user_id:
+              currentUser.id
+          });
 
         if(error){
           alert(error.message);
@@ -4124,47 +4124,47 @@ $("communityRunForm").onsubmit =
         data:run,
         error
       } =
-        await supabaseClient
-          .from(
-            "community_runs"
-          )
-          .insert({
-            creator_id:
-              currentUser.id,
+      await supabaseClient
+        .from(
+          "community_runs"
+        )
+        .insert({
+          creator_id:
+            currentUser.id,
 
-            title:
-              $("runTitle")
+          title:
+            $("runTitle")
+              .value
+              .trim(),
+
+          location:
+            $("runLocation")
+              .value
+              .trim(),
+
+          run_date:
+            $("runDate")
+              .value,
+
+          run_time:
+            $("runTime")
+              .value,
+
+          pace:
+            $("runPace")
+              .value
+              .trim(),
+
+          max_participants:
+            Number(
+              $("runMaxParticipants")
                 .value
-                .trim(),
-
-            location:
-              $("runLocation")
-                .value
-                .trim(),
-
-            run_date:
-              $("runDate")
-                .value,
-
-            run_time:
-              $("runTime")
-                .value,
-
-            pace:
-              $("runPace")
-                .value
-                .trim(),
-
-            max_participants:
-              Number(
-                $("runMaxParticipants")
-                  .value
-              )
-          })
-          .select(
-            "id"
-          )
-          .single();
+            )
+        })
+        .select(
+          "id"
+        )
+        .single();
 
       if(error){
         throw error;
@@ -4174,17 +4174,17 @@ $("communityRunForm").onsubmit =
       const {
         error:participantError
       } =
-        await supabaseClient
-          .from(
-            "community_run_participants"
-          )
-          .insert({
-            run_id:
-              run.id,
+      await supabaseClient
+        .from(
+          "community_run_participants"
+        )
+        .insert({
+          run_id:
+            run.id,
 
-            user_id:
-              currentUser.id
-          });
+          user_id:
+            currentUser.id
+        });
 
       if(participantError){
         throw participantError;
