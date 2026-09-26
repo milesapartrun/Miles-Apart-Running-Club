@@ -34,7 +34,7 @@
   width:100%;
   box-sizing:border-box;
   margin:0 0 28px;
-  padding:28px;
+  padding:28px
 }
 
 .ma-section-head{
@@ -42,7 +42,7 @@
   align-items:flex-start;
   justify-content:space-between;
   gap:20px;
-  margin:0 0 22px;
+  margin:0 0 22px
 }
 
 .ma-section-title{
@@ -50,21 +50,21 @@
   color:#111;
   font-size:28px;
   line-height:1.2;
-  font-weight:800;
+  font-weight:800
 }
 
 .ma-section-subtitle{
   margin:7px 0 0;
   color:#777;
   font-size:15px;
-  line-height:1.45;
+  line-height:1.45
 }
 
 .ma-buddy-list{
   display:grid;
   grid-template-columns:1fr;
   gap:18px;
-  width:100%;
+  width:100%
 }
 
 .ma-buddy-card{
@@ -73,23 +73,23 @@
   padding:22px;
   border:1px solid #e8e8e8;
   box-sizing:border-box;
-  background:#fff;
+  background:#fff
 }
 
 .ma-buddy-days{
   display:grid;
   grid-template-columns:repeat(4,minmax(0,1fr));
-  gap:8px;
+  gap:8px
 }
 
 .ma-buddy-day{
-  position:relative;
+  position:relative
 }
 
 .ma-buddy-day input{
   position:absolute;
   opacity:0;
-  pointer-events:none;
+  pointer-events:none
 }
 
 .ma-buddy-day label{
@@ -105,24 +105,24 @@
   font-weight:800;
   cursor:pointer;
   box-sizing:border-box;
-  text-align:center;
+  text-align:center
 }
 
 .ma-buddy-day input:checked + label{
   border-color:#18b8c7;
   background:#eefafa;
-  color:#18b8c7;
+  color:#18b8c7
 }
 
 .ma-buddy-day label:hover{
-  border-color:#18b8c7;
+  border-color:#18b8c7
 }
 
 .ma-buddy-top{
   display:flex;
   align-items:center;
   gap:14px;
-  margin-bottom:18px;
+  margin-bottom:18px
 }
 
 .ma-buddy-avatar{
@@ -136,19 +136,19 @@
   display:flex;
   align-items:center;
   justify-content:center;
-  box-sizing:border-box;
+  box-sizing:border-box
 }
 
 .ma-buddy-avatar img{
   width:100%;
   height:100%;
-  object-fit:cover;
+  object-fit:cover
 }
 
 .ma-buddy-initials{
   color:#18b8c7;
   font-size:15px;
-  font-weight:800;
+  font-weight:800
 }
 
 .ma-buddy-name{
@@ -158,29 +158,29 @@
   font-size:20px;
   font-weight:800;
   line-height:1.2;
-  text-decoration:none;
+  text-decoration:none
 }
 
 .ma-buddy-name:hover{
-  color:#18b8c7;
+  color:#18b8c7
 }
 
 .ma-buddy-location{
   margin:4px 0 0;
   color:#777;
-  font-size:14px;
+  font-size:14px
 }
 
 .ma-buddy-details{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
   gap:10px;
-  margin-bottom:16px;
+  margin-bottom:16px
 }
 
 .ma-buddy-detail{
   padding:12px;
-  background:#f7fafa;
+  background:#f7fafa
 }
 
 .ma-buddy-label{
@@ -190,7 +190,7 @@
   font-size:11px;
   text-transform:uppercase;
   letter-spacing:.05em;
-  font-weight:700;
+  font-weight:700
 }
 
 .ma-buddy-value{
@@ -199,7 +199,7 @@
   font-size:15px;
   line-height:1.3;
   font-weight:800;
-  overflow-wrap:anywhere;
+  overflow-wrap:anywhere
 }
 
 .ma-buddy-note{
@@ -207,76 +207,32 @@
   border-top:1px solid #eee;
   color:#333;
   font-size:15px;
-  line-height:1.45;
+  line-height:1.45
 }
-
-
-/* =========================================================
-   RUN BUDDY AKTIONEN
-========================================================= */
 
 .ma-buddy-actions{
   display:flex;
-  justify-content:flex-start;
+  justify-content:flex-end;
   align-items:center;
-  gap:10px;
+  gap:8px;
   margin-top:16px;
   padding-top:14px;
-  border-top:1px solid #eee;
-  width:100%;
-  box-sizing:border-box;
+  border-top:1px solid #eee
 }
 
-.ma-buddy-action-buttons{
-  display:flex;
-  align-items:center;
-  justify-content:flex-start;
-  gap:10px;
-  flex-wrap:wrap;
-  width:100%;
-}
-
-.ma-buddy-message-button,
 .ma-buddy-delete{
-  min-height:46px;
-  min-width:0;
-  border-radius:999px;
-  box-sizing:border-box;
-  padding:9px 16px;
+  border:0;
+  background:transparent;
+  color:#b44;
+  padding:7px 8px;
   font:inherit;
   font-size:14px;
-  line-height:1.2;
   font-weight:800;
-  text-align:center;
-  cursor:pointer;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  white-space:normal;
-  overflow-wrap:anywhere;
-}
-
-.ma-buddy-message-button{
-  border:0;
-  background:#18b8c7;
-  color:#fff;
-}
-
-.ma-buddy-message-button:hover{
-  background:#111;
-  color:#fff;
-}
-
-.ma-buddy-delete{
-  border:2px solid #c75b5b;
-  background:#fff;
-  color:#a33d3d;
-  max-width:210px;
+  cursor:pointer
 }
 
 .ma-buddy-delete:hover{
-  background:#a33d3d;
-  color:#fff;
+  color:#8f2222
 }
 
 
@@ -286,7 +242,7 @@
 
 .ma-community-page,
 .ma-community-page *{
-  text-indent:0 !important;
+  text-indent:0 !important
 }
 
 .ma-community-page p,
@@ -306,7 +262,7 @@
 .ma-community-page strong,
 .ma-community-page li,
 .ma-community-page div{
-  text-indent:0 !important;
+  text-indent:0 !important
 }
 
 .ma-community-page .hero p,
@@ -336,69 +292,44 @@
   padding-left:0 !important;
   text-align:left !important;
   text-indent:0 !important;
-  margin-left:0 !important;
+  margin-left:0 !important
 }
 
 .ma-community-page .ma-buddy-day label{
   text-align:left !important;
-  justify-content:flex-start !important;
+  justify-content:flex-start !important
 }
 
 .ma-community-page .ma-post-action-left{
-  justify-content:flex-start !important;
+  justify-content:flex-start !important
 }
 
 .ma-community-page .ma-section-head{
-  justify-content:flex-start !important;
+  justify-content:flex-start !important
 }
 
 .ma-community-page .ma-section-head > div{
-  min-width:0;
+  min-width:0
 }
-
-
-/*
-  POST-TEXT ABSOLUT LINKS:
-  Kein Einzug, kein Margin, kein Padding.
-  Der Text beginnt exakt am linken Rand
-  des Post-Inhalts.
-*/
 
 .ma-community-page .ma-post-copy,
 .ma-community-page .ma-post-copy *{
-  width:auto !important;
-  max-width:none !important;
+  display:block !important;
+  width:100% !important;
   box-sizing:border-box !important;
   margin-left:0 !important;
   padding-left:0 !important;
   text-align:left !important;
-  text-indent:0 !important;
+  text-indent:0 !important
 }
 
 .ma-community-page .ma-post-copy{
-  display:block !important;
-  width:100% !important;
-  margin-top:25px !important;
-  margin-right:0 !important;
-  margin-bottom:26px !important;
-  padding-top:0 !important;
-  padding-right:0 !important;
-  padding-bottom:0 !important;
-  color:#111 !important;
-  font-size:20px !important;
-  line-height:1.45 !important;
-  white-space:pre-wrap !important;
-  overflow-wrap:anywhere !important;
-  word-break:normal !important;
-  text-align:left !important;
+  margin-right:0 !important
 }
 
 .ma-community-page .ma-post,
-.ma-community-page .ma-post *,
-.ma-community-page .ma-post-copy,
-.ma-community-page .ma-post-copy::before,
-.ma-community-page .ma-post-copy::after{
-  text-indent:0 !important;
+.ma-community-page .ma-post *{
+  text-indent:0 !important
 }
 
 
@@ -410,7 +341,7 @@
   padding:28px 0;
   color:#777;
   text-align:center;
-  grid-column:1/-1;
+  grid-column:1/-1
 }
 
 .ma-buddy-form{
@@ -420,33 +351,33 @@
   padding:22px;
   border:1px solid #e5e5e5;
   background:#fafafa;
-  box-sizing:border-box;
+  box-sizing:border-box
 }
 
 .ma-buddy-form.open{
-  display:block;
+  display:block
 }
 
 .ma-form-grid{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:14px;
+  gap:14px
 }
 
 .ma-form-field{
   display:flex;
   flex-direction:column;
-  gap:7px;
+  gap:7px
 }
 
 .ma-form-field.full{
-  grid-column:1/-1;
+  grid-column:1/-1
 }
 
 .ma-form-label{
   color:#111;
   font-size:14px;
-  font-weight:800;
+  font-weight:800
 }
 
 .ma-form-input{
@@ -459,17 +390,17 @@
   color:#111;
   font:inherit;
   font-size:16px;
-  box-sizing:border-box;
+  box-sizing:border-box
 }
 
 textarea.ma-form-input{
   height:110px;
   padding:13px;
-  resize:vertical;
+  resize:vertical
 }
 
 .ma-form-input:focus{
-  border-color:#18b8c7;
+  border-color:#18b8c7
 }
 
 .ma-form-actions{
@@ -477,13 +408,13 @@ textarea.ma-form-input{
   align-items:center;
   justify-content:space-between;
   gap:12px;
-  margin-top:16px;
+  margin-top:16px
 }
 
 .ma-form-message{
   color:#18b8c7;
   font-size:14px;
-  font-weight:700;
+  font-weight:700
 }
 
 
@@ -498,13 +429,13 @@ textarea.ma-form-input{
   margin:0 0 22px;
   padding:28px;
   text-align:left;
-  overflow:hidden;
+  overflow:hidden
 }
 
 .ma-post-header{
   width:100%;
   display:flex;
-  align-items:center;
+  align-items:center
 }
 
 .ma-post-author{
@@ -512,7 +443,7 @@ textarea.ma-form-input{
   display:flex;
   align-items:center;
   text-decoration:none;
-  color:inherit;
+  color:inherit
 }
 
 .ma-post-avatar{
@@ -526,13 +457,13 @@ textarea.ma-form-input{
   display:flex;
   align-items:center;
   justify-content:center;
-  box-sizing:border-box;
+  box-sizing:border-box
 }
 
 .ma-post-avatar img{
   width:100%;
   height:100%;
-  object-fit:cover;
+  object-fit:cover
 }
 
 .ma-post-avatar-initials{
@@ -545,26 +476,26 @@ textarea.ma-form-input{
   background:#eefafa;
   color:#18b8c7;
   font-size:14px;
-  font-weight:800;
+  font-weight:800
 }
 
 .ma-post-author-info{
   margin-left:13px;
-  min-width:0;
+  min-width:0
 }
 
 .ma-post-author-name{
   color:#111;
   font-size:19px;
   line-height:1.25;
-  font-weight:800;
+  font-weight:800
 }
 
 .ma-post-author-meta{
   margin-top:3px;
   color:#777;
   font-size:15px;
-  line-height:1.35;
+  line-height:1.35
 }
 
 .ma-post-copy{
@@ -579,7 +510,7 @@ textarea.ma-form-input{
   text-align:left !important;
   text-indent:0 !important;
   white-space:pre-wrap;
-  overflow-wrap:anywhere;
+  overflow-wrap:anywhere
 }
 
 .ma-post-image{
@@ -588,7 +519,7 @@ textarea.ma-form-input{
   max-height:650px;
   margin:0 0 25px;
   border-radius:14px;
-  object-fit:cover;
+  object-fit:cover
 }
 
 .ma-post-actions{
@@ -598,13 +529,13 @@ textarea.ma-form-input{
   justify-content:space-between;
   padding:15px 0 0;
   border-top:1px solid #eee;
-  box-sizing:border-box;
+  box-sizing:border-box
 }
 
 .ma-post-action-left{
   display:flex;
   align-items:center;
-  gap:8px;
+  gap:8px
 }
 
 .ma-post-action{
@@ -615,16 +546,16 @@ textarea.ma-form-input{
   font:inherit;
   font-size:18px;
   font-weight:700;
-  cursor:pointer;
+  cursor:pointer
 }
 
 .ma-post-action.liked,
 .ma-message-button{
-  color:#18b8c7;
+  color:#18b8c7
 }
 
 .ma-delete{
-  color:#b44;
+  color:#b44
 }
 
 
@@ -637,18 +568,18 @@ textarea.ma-form-input{
   margin-top:18px;
   padding-top:18px;
   border-top:1px solid #eee;
-  box-sizing:border-box;
+  box-sizing:border-box
 }
 
 .ma-comments-list{
   display:flex;
   flex-direction:column;
-  gap:18px;
+  gap:18px
 }
 
 .ma-comment{
   display:flex;
-  gap:11px;
+  gap:11px
 }
 
 .ma-comment-avatar{
@@ -662,43 +593,43 @@ textarea.ma-form-input{
   display:flex;
   align-items:center;
   justify-content:center;
-  box-sizing:border-box;
+  box-sizing:border-box
 }
 
 .ma-comment-avatar img{
   width:100%;
   height:100%;
-  object-fit:cover;
+  object-fit:cover
 }
 
 .ma-comment-avatar-initials{
   color:#18b8c7;
   font-size:12px;
-  font-weight:800;
+  font-weight:800
 }
 
 .ma-comment-content{
   flex:1;
-  min-width:0;
+  min-width:0
 }
 
 .ma-comment-header{
   display:flex;
   align-items:baseline;
   gap:8px;
-  flex-wrap:wrap;
+  flex-wrap:wrap
 }
 
 .ma-comment-name{
   color:#111;
   font-size:16px;
   font-weight:800;
-  text-decoration:none;
+  text-decoration:none
 }
 
 .ma-comment-time{
   color:#888;
-  font-size:13px;
+  font-size:13px
 }
 
 .ma-comment-text{
@@ -710,13 +641,13 @@ textarea.ma-form-input{
   text-align:left !important;
   text-indent:0 !important;
   white-space:pre-wrap;
-  overflow-wrap:anywhere;
+  overflow-wrap:anywhere
 }
 
 .ma-comment-form{
   display:flex;
   gap:8px;
-  margin-top:20px;
+  margin-top:20px
 }
 
 .ma-comment-input{
@@ -726,7 +657,7 @@ textarea.ma-form-input{
   padding:0 14px;
   border:1px solid #d8d8d8;
   font:inherit;
-  box-sizing:border-box;
+  box-sizing:border-box
 }
 
 .ma-comment-submit,
@@ -738,12 +669,12 @@ textarea.ma-form-input{
   padding:0 18px;
   font-size:16px;
   font-weight:800;
-  cursor:pointer;
+  cursor:pointer
 }
 
 .ma-comment-submit:hover,
 .ma-message-send:hover{
-  background:#18b8c7;
+  background:#18b8c7
 }
 
 
@@ -755,7 +686,7 @@ textarea.ma-form-input{
   display:flex;
   flex-direction:column;
   gap:10px;
-  margin-top:14px;
+  margin-top:14px
 }
 
 .ma-image-upload-label{
@@ -770,11 +701,11 @@ textarea.ma-form-input{
   color:#111;
   font-size:15px;
   font-weight:800;
-  cursor:pointer;
+  cursor:pointer
 }
 
 .ma-image-upload-input{
-  display:none;
+  display:none
 }
 
 .ma-image-preview{
@@ -784,16 +715,16 @@ textarea.ma-form-input{
   max-height:320px;
   object-fit:cover;
   border-radius:14px;
-  border:1px solid #eee;
+  border:1px solid #eee
 }
 
 .ma-image-preview.visible{
-  display:block;
+  display:block
 }
 
 .ma-image-upload-name{
   color:#777;
-  font-size:14px;
+  font-size:14px
 }
 
 
@@ -805,7 +736,7 @@ textarea.ma-form-input{
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
   gap:12px;
-  margin-bottom:18px;
+  margin-bottom:18px
 }
 
 .ma-run-card{
@@ -813,43 +744,43 @@ textarea.ma-form-input{
   padding:22px;
   border:1px solid #e8e8e8;
   background:#fff;
-  box-sizing:border-box;
+  box-sizing:border-box
 }
 
 .ma-run-list{
   width:100%;
   display:grid;
   grid-template-columns:repeat(2,minmax(0,1fr));
-  gap:18px;
+  gap:18px
 }
 
 .ma-run-card-top{
   display:flex;
   justify-content:space-between;
   gap:15px;
-  margin-bottom:16px;
+  margin-bottom:16px
 }
 
 .ma-run-card-title{
   margin:0;
   color:#111;
   font-size:22px;
-  font-weight:800;
+  font-weight:800
 }
 
 .ma-run-card-author{
   margin-top:5px;
   color:#777;
-  font-size:14px;
+  font-size:14px
 }
 
 .ma-run-card-icon{
-  font-size:28px;
+  font-size:28px
 }
 
 .ma-run-detail{
   padding:12px;
-  background:#f7fafa;
+  background:#f7fafa
 }
 
 .ma-run-detail-label{
@@ -859,7 +790,7 @@ textarea.ma-form-input{
   font-size:12px;
   text-transform:uppercase;
   letter-spacing:.05em;
-  font-weight:700;
+  font-weight:700
 }
 
 .ma-run-detail-value{
@@ -867,7 +798,7 @@ textarea.ma-form-input{
   color:#111;
   font-size:15px;
   line-height:1.3;
-  font-weight:800;
+  font-weight:800
 }
 
 .ma-run-participants{
@@ -876,18 +807,18 @@ textarea.ma-form-input{
   justify-content:space-between;
   gap:12px;
   padding-top:15px;
-  border-top:1px solid #eee;
+  border-top:1px solid #eee
 }
 
 .ma-run-participant-count{
   color:#555;
   font-size:14px;
-  font-weight:700;
+  font-weight:700
 }
 
 .ma-run-actions{
   display:flex;
-  gap:8px;
+  gap:8px
 }
 
 .ma-run-join{
@@ -898,11 +829,11 @@ textarea.ma-form-input{
   padding:0 16px;
   font-size:14px;
   font-weight:800;
-  cursor:pointer;
+  cursor:pointer
 }
 
 .ma-run-join.joined{
-  background:#111;
+  background:#111
 }
 
 .ma-run-delete{
@@ -913,7 +844,7 @@ textarea.ma-form-input{
   padding:0 8px;
   font-size:14px;
   font-weight:800;
-  cursor:pointer;
+  cursor:pointer
 }
 
 .ma-run-form{
@@ -923,11 +854,11 @@ textarea.ma-form-input{
   padding:22px;
   border:1px solid #e5e5e5;
   background:#fafafa;
-  box-sizing:border-box;
+  box-sizing:border-box
 }
 
 .ma-run-form.open{
-  display:block;
+  display:block
 }
 
 .ma-empty{
@@ -936,14 +867,14 @@ textarea.ma-form-input{
   border:1px dashed #ccc;
   box-sizing:border-box;
   text-align:center;
-  color:#777;
+  color:#777
 }
 
 .ma-empty strong{
   display:block;
   margin-bottom:8px;
   color:#111;
-  font-size:20px;
+  font-size:20px
 }
 
 
@@ -951,7 +882,8 @@ textarea.ma-form-input{
    PRIVATE MESSAGE MODAL
 ========================================================= */
 
-.ma-message-overlay{
+.ma-message-overlay,
+.ma-inbox-overlay{
   position:fixed;
   inset:0;
   z-index:9999;
@@ -960,11 +892,12 @@ textarea.ma-form-input{
   justify-content:center;
   padding:20px;
   background:rgba(0,0,0,.45);
-  box-sizing:border-box;
+  box-sizing:border-box
 }
 
-.ma-message-overlay.open{
-  display:flex;
+.ma-message-overlay.open,
+.ma-inbox-overlay.open{
+  display:flex
 }
 
 .ma-message-modal{
@@ -973,7 +906,7 @@ textarea.ma-form-input{
   background:#fff;
   border-radius:18px;
   padding:26px;
-  box-sizing:border-box;
+  box-sizing:border-box
 }
 
 .ma-message-modal-head{
@@ -981,17 +914,17 @@ textarea.ma-form-input{
   align-items:center;
   justify-content:space-between;
   gap:15px;
-  margin-bottom:18px;
+  margin-bottom:18px
 }
 
 .ma-message-modal-title{
   margin:0;
-  font-size:24px;
+  font-size:24px
 }
 
 .ma-message-modal-recipient{
   margin:4px 0;
-  color:#777;
+  color:#777
 }
 
 .ma-message-close{
@@ -1001,7 +934,7 @@ textarea.ma-form-input{
   border-radius:50%;
   background:#f2f2f2;
   font-size:24px;
-  cursor:pointer;
+  cursor:pointer
 }
 
 .ma-message-textarea{
@@ -1011,52 +944,328 @@ textarea.ma-form-input{
   border:1px solid #d8d8d8;
   font:inherit;
   box-sizing:border-box;
-  resize:vertical;
+  resize:vertical
 }
 
 .ma-message-actions{
   display:flex;
   align-items:center;
-  gap:12px;
-  margin-top:14px;
+  gap:8px;
+  margin-top:12px
 }
 
 .ma-message-status{
   flex:1;
-  min-width:0;
   color:#18b8c7;
-  font-size:15px;
-  line-height:1.45;
-  font-weight:700;
-  text-align:left;
-}
-
-.ma-message-status-text{
-  display:block;
-  margin-bottom:5px;
-  color:#18b8c7;
-  font-size:15px;
-  font-weight:800;
-}
-
-.ma-message-status-link{
-  display:inline-block;
-  margin-top:2px;
-  color:#18b8c7 !important;
-  font-size:18px !important;
-  line-height:1.3 !important;
-  font-weight:900 !important;
-  text-decoration:underline !important;
-  text-decoration-thickness:2px;
-  text-underline-offset:3px;
-}
-
-.ma-message-status-link:hover{
-  color:#111 !important;
+  font-size:14px;
+  font-weight:700
 }
 
 .ma-message-send{
-  min-width:120px;
+  min-width:120px
+}
+
+
+/* =========================================================
+   NACHRICHTEN-POSTFACH IM POPUP
+========================================================= */
+
+.ma-inbox-modal{
+  width:100%;
+  max-width:1050px;
+  height:min(760px,calc(100vh - 40px));
+  background:#fff;
+  border-radius:20px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+  box-sizing:border-box
+}
+
+.ma-inbox-head{
+  min-height:76px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  padding:18px 24px;
+  border-bottom:1px solid #eee;
+  box-sizing:border-box
+}
+
+.ma-inbox-title{
+  margin:0;
+  color:#111;
+  font-size:25px;
+  font-weight:800
+}
+
+.ma-inbox-subtitle{
+  margin:3px 0 0;
+  color:#777;
+  font-size:13px
+}
+
+.ma-inbox-close{
+  width:42px;
+  height:42px;
+  border:0;
+  border-radius:50%;
+  background:#f2f2f2;
+  color:#111;
+  font-size:25px;
+  cursor:pointer
+}
+
+.ma-inbox-layout{
+  flex:1;
+  min-height:0;
+  display:grid;
+  grid-template-columns:330px minmax(0,1fr)
+}
+
+.ma-inbox-conversations{
+  min-width:0;
+  overflow-y:auto;
+  border-right:1px solid #eee;
+  background:#fafafa
+}
+
+.ma-inbox-list-title{
+  padding:16px 18px 10px;
+  color:#777;
+  font-size:12px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.06em
+}
+
+.ma-conversation{
+  width:100%;
+  border:0;
+  border-bottom:1px solid #eee;
+  background:transparent;
+  padding:15px 18px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  text-align:left;
+  cursor:pointer;
+  box-sizing:border-box
+}
+
+.ma-conversation:hover{
+  background:#f2fafa
+}
+
+.ma-conversation.active{
+  background:#eefafa
+}
+
+.ma-conversation-avatar{
+  width:48px;
+  height:48px;
+  min-width:48px;
+  border-radius:50%;
+  overflow:hidden;
+  border:2px solid #63d6e5;
+  background:#eefafa;
+  display:flex;
+  align-items:center;
+  justify-content:center
+}
+
+.ma-conversation-avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover
+}
+
+.ma-conversation-initials{
+  color:#18b8c7;
+  font-size:12px;
+  font-weight:800
+}
+
+.ma-conversation-copy{
+  min-width:0;
+  flex:1
+}
+
+.ma-conversation-name{
+  color:#111;
+  font-size:15px;
+  font-weight:800;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis
+}
+
+.ma-conversation-preview{
+  margin-top:4px;
+  color:#777;
+  font-size:13px;
+  line-height:1.35;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis
+}
+
+.ma-conversation-time{
+  color:#999;
+  font-size:11px;
+  white-space:nowrap
+}
+
+.ma-inbox-thread{
+  min-width:0;
+  min-height:0;
+  display:flex;
+  flex-direction:column
+}
+
+.ma-thread-head{
+  min-height:70px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  padding:14px 20px;
+  border-bottom:1px solid #eee;
+  box-sizing:border-box
+}
+
+.ma-thread-head-avatar{
+  width:42px;
+  height:42px;
+  min-width:42px;
+  border-radius:50%;
+  overflow:hidden;
+  border:2px solid #63d6e5;
+  background:#eefafa;
+  display:flex;
+  align-items:center;
+  justify-content:center
+}
+
+.ma-thread-head-avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover
+}
+
+.ma-thread-head-name{
+  color:#111;
+  font-size:17px;
+  font-weight:800
+}
+
+.ma-thread-head-username{
+  margin-top:2px;
+  color:#777;
+  font-size:13px
+}
+
+.ma-thread-list{
+  flex:1;
+  min-height:0;
+  overflow-y:auto;
+  padding:20px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  box-sizing:border-box;
+  background:#fff
+}
+
+.ma-thread-empty{
+  flex:1;
+  min-height:180px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:#888;
+  padding:30px
+}
+
+.ma-message-bubble-row{
+  display:flex;
+  width:100%
+}
+
+.ma-message-bubble-row.mine{
+  justify-content:flex-end
+}
+
+.ma-message-bubble{
+  max-width:75%;
+  padding:11px 14px;
+  border-radius:16px;
+  background:#f1f3f3;
+  color:#111;
+  font-size:15px;
+  line-height:1.45;
+  white-space:pre-wrap;
+  overflow-wrap:anywhere
+}
+
+.ma-message-bubble-row.mine .ma-message-bubble{
+  background:#18b8c7;
+  color:#fff
+}
+
+.ma-message-bubble-time{
+  margin-top:4px;
+  color:#999;
+  font-size:10px
+}
+
+.ma-message-bubble-row.mine .ma-message-bubble-time{
+  text-align:right
+}
+
+.ma-thread-reply{
+  display:flex;
+  gap:8px;
+  padding:14px 18px;
+  border-top:1px solid #eee;
+  background:#fff;
+  box-sizing:border-box
+}
+
+.ma-thread-reply textarea{
+  flex:1;
+  min-width:0;
+  height:52px;
+  min-height:52px;
+  max-height:140px;
+  padding:13px 14px;
+  border:1px solid #d8d8d8;
+  font:inherit;
+  resize:vertical;
+  box-sizing:border-box
+}
+
+.ma-thread-reply button{
+  height:52px;
+  border:0;
+  background:#111;
+  color:#fff;
+  padding:0 18px;
+  font-size:15px;
+  font-weight:800;
+  cursor:pointer
+}
+
+.ma-thread-reply button:hover{
+  background:#18b8c7
+}
+
+.ma-inbox-empty{
+  padding:35px 20px;
+  color:#888;
+  text-align:center;
+  line-height:1.5
 }
 
 
@@ -1068,117 +1277,141 @@ textarea.ma-form-input{
 
   .ma-section{
     padding:24px;
-    margin-bottom:22px;
+    margin-bottom:22px
   }
 
   .ma-section-head{
-    flex-direction:column;
+    flex-direction:column
   }
 
   .ma-section-head .btn{
-    width:100%;
+    width:100%
   }
 
   .ma-buddy-list,
   .ma-run-list{
-    grid-template-columns:1fr;
+    grid-template-columns:1fr
   }
 
   .ma-buddy-days{
-    grid-template-columns:repeat(2,minmax(0,1fr));
+    grid-template-columns:repeat(2,minmax(0,1fr))
   }
 
   .ma-buddy-details,
   .ma-run-details{
-    grid-template-columns:1fr;
+    grid-template-columns:1fr
   }
 
   .ma-form-grid{
-    grid-template-columns:1fr;
+    grid-template-columns:1fr
   }
 
   .ma-form-field.full{
-    grid-column:auto;
+    grid-column:auto
   }
 
   .ma-form-actions{
     flex-direction:column;
-    align-items:stretch;
+    align-items:stretch
   }
 
   .ma-form-actions .btn{
-    width:100%;
+    width:100%
   }
 
   .ma-post{
-    padding:24px;
+    padding:24px
   }
 
   .ma-post-copy{
-    width:100% !important;
-    margin-left:0 !important;
-    padding-left:0 !important;
-    font-size:20px;
+    font-size:20px
   }
 
   .ma-comment-form{
-    flex-direction:column;
+    flex-direction:column
   }
 
   .ma-comment-submit{
-    width:100%;
+    width:100%
   }
 
   .ma-run-participants{
     align-items:flex-start;
-    flex-direction:column;
+    flex-direction:column
   }
 
   .ma-run-actions,
   .ma-run-join{
-    width:100%;
+    width:100%
   }
 
-  .ma-buddy-action-buttons{
-    width:100%;
-    flex-direction:row;
-    align-items:stretch;
-  }
-
-  .ma-buddy-message-button{
-    flex:1 1 145px;
-  }
-
-  .ma-buddy-delete{
-    flex:1 1 145px;
-    max-width:none;
-  }
-
-  .ma-message-overlay{
+  .ma-message-overlay,
+  .ma-inbox-overlay{
     align-items:flex-end;
-    padding:10px;
+    padding:10px
   }
 
   .ma-message-modal{
     border-radius:18px 18px 12px 12px;
-    padding:22px;
+    padding:22px
   }
 
   .ma-message-actions{
     flex-direction:column;
-    align-items:stretch;
-  }
-
-  .ma-message-status{
-    width:100%;
-  }
-
-  .ma-message-status-link{
-    font-size:19px !important;
+    align-items:stretch
   }
 
   .ma-message-send{
-    width:100%;
+    width:100%
+  }
+
+  .ma-inbox-modal{
+    height:calc(100vh - 20px);
+    max-height:none;
+    border-radius:18px 18px 10px 10px
+  }
+
+  .ma-inbox-head{
+    padding:15px 17px
+  }
+
+  .ma-inbox-layout{
+    display:flex;
+    flex-direction:column
+  }
+
+  .ma-inbox-conversations{
+    flex:0 0 210px;
+    max-height:210px;
+    border-right:0;
+    border-bottom:1px solid #eee
+  }
+
+  .ma-inbox-thread{
+    flex:1;
+    min-height:0
+  }
+
+  .ma-thread-list{
+    padding:15px
+  }
+
+  .ma-message-bubble{
+    max-width:85%
+  }
+
+  .ma-thread-reply{
+    padding:10px
+  }
+
+  .ma-thread-reply textarea{
+    height:48px;
+    min-height:48px
+  }
+
+  .ma-thread-reply button{
+    height:48px;
+    padding:0 14px
   }
 }
 </style>
@@ -1215,10 +1448,6 @@ textarea.ma-form-input{
 
     <a class="active" href="community.html">
       Community
-    </a>
-
-    <a href="messages.html">
-      Nachrichten
     </a>
 
     <a href="events.html">
@@ -1297,12 +1526,13 @@ textarea.ma-form-input{
       "
     >
 
-      <a
-        href="messages.html"
+      <button
+        id="openMessagesButton"
         class="btn"
+        type="button"
       >
         Private Nachrichten ansehen
-      </a>
+      </button>
 
       <button
         id="openPostButton"
@@ -1521,107 +1751,38 @@ textarea.ma-form-input{
             >
 
               <div class="ma-buddy-day">
-
-                <input
-                  id="buddyDayMonday"
-                  type="checkbox"
-                  value="Montag"
-                >
-
-                <label for="buddyDayMonday">
-                  Montag
-                </label>
-
+                <input id="buddyDayMonday" type="checkbox" value="Montag">
+                <label for="buddyDayMonday">Montag</label>
               </div>
 
-
               <div class="ma-buddy-day">
-
-                <input
-                  id="buddyDayTuesday"
-                  type="checkbox"
-                  value="Dienstag"
-                >
-
-                <label for="buddyDayTuesday">
-                  Dienstag
-                </label>
-
+                <input id="buddyDayTuesday" type="checkbox" value="Dienstag">
+                <label for="buddyDayTuesday">Dienstag</label>
               </div>
 
-
               <div class="ma-buddy-day">
-
-                <input
-                  id="buddyDayWednesday"
-                  type="checkbox"
-                  value="Mittwoch"
-                >
-
-                <label for="buddyDayWednesday">
-                  Mittwoch
-                </label>
-
+                <input id="buddyDayWednesday" type="checkbox" value="Mittwoch">
+                <label for="buddyDayWednesday">Mittwoch</label>
               </div>
 
-
               <div class="ma-buddy-day">
-
-                <input
-                  id="buddyDayThursday"
-                  type="checkbox"
-                  value="Donnerstag"
-                >
-
-                <label for="buddyDayThursday">
-                  Donnerstag
-                </label>
-
+                <input id="buddyDayThursday" type="checkbox" value="Donnerstag">
+                <label for="buddyDayThursday">Donnerstag</label>
               </div>
 
-
               <div class="ma-buddy-day">
-
-                <input
-                  id="buddyDayFriday"
-                  type="checkbox"
-                  value="Freitag"
-                >
-
-                <label for="buddyDayFriday">
-                  Freitag
-                </label>
-
+                <input id="buddyDayFriday" type="checkbox" value="Freitag">
+                <label for="buddyDayFriday">Freitag</label>
               </div>
 
-
               <div class="ma-buddy-day">
-
-                <input
-                  id="buddyDaySaturday"
-                  type="checkbox"
-                  value="Samstag"
-                >
-
-                <label for="buddyDaySaturday">
-                  Samstag
-                </label>
-
+                <input id="buddyDaySaturday" type="checkbox" value="Samstag">
+                <label for="buddyDaySaturday">Samstag</label>
               </div>
 
-
               <div class="ma-buddy-day">
-
-                <input
-                  id="buddyDaySunday"
-                  type="checkbox"
-                  value="Sonntag"
-                >
-
-                <label for="buddyDaySunday">
-                  Sonntag
-                </label>
-
+                <input id="buddyDaySunday" type="checkbox" value="Sonntag">
+                <label for="buddyDaySunday">Sonntag</label>
               </div>
 
             </div>
@@ -1958,7 +2119,7 @@ textarea.ma-form-input{
 
 
 <!-- =======================================================
-     PRIVATE MESSAGE MODAL
+     NACHRICHTEN SCHREIBEN
 ======================================================== -->
 
 <div
@@ -2030,6 +2191,115 @@ textarea.ma-form-input{
 </div>
 
 
+<!-- =======================================================
+     NACHRICHTEN-POSTFACH
+======================================================== -->
+
+<div
+  id="messagesInboxOverlay"
+  class="ma-inbox-overlay"
+>
+
+  <div
+    class="ma-inbox-modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="messagesInboxTitle"
+  >
+
+    <div class="ma-inbox-head">
+
+      <div>
+
+        <h2
+          id="messagesInboxTitle"
+          class="ma-inbox-title"
+        >
+          Private Nachrichten
+        </h2>
+
+        <p class="ma-inbox-subtitle">
+          Deine Unterhaltungen mit anderen Miles Apart Mitgliedern
+        </p>
+
+      </div>
+
+      <button
+        id="closeMessagesInboxButton"
+        class="ma-inbox-close"
+        type="button"
+      >
+        ×
+      </button>
+
+    </div>
+
+
+    <div class="ma-inbox-layout">
+
+      <div class="ma-inbox-conversations">
+
+        <div class="ma-inbox-list-title">
+          Unterhaltungen
+        </div>
+
+        <div id="messageConversationList"></div>
+
+      </div>
+
+
+      <div class="ma-inbox-thread">
+
+        <div
+          id="messageThreadHead"
+          class="ma-thread-head"
+          style="display:none"
+        ></div>
+
+
+        <div
+          id="messageThreadList"
+          class="ma-thread-list"
+        >
+
+          <div class="ma-thread-empty">
+            Wähle links eine Unterhaltung aus.
+          </div>
+
+        </div>
+
+
+        <form
+          id="messageReplyForm"
+          class="ma-thread-reply"
+          style="display:none"
+        >
+
+          <textarea
+            id="messageReplyInput"
+            maxlength="2000"
+            placeholder="Antwort schreiben …"
+            required
+          ></textarea>
+
+          <button
+            id="messageReplyButton"
+            type="submit"
+          >
+            Senden
+          </button>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
 <script>
 const SUPABASE_URL=
   "https://orbrkdrsihsacsnprewf.supabase.co";
@@ -2062,6 +2332,12 @@ let messageReceiverId=
 
 let messageReceiverName=
   "";
+
+let activeConversationUserId=
+  null;
+
+let messageProfiles=
+  {};
 
 
 /* =========================================================
@@ -2148,6 +2424,23 @@ function formatTime(s){
 }
 
 
+function formatMessageDateTime(s){
+
+  return new Date(s)
+    .toLocaleString(
+      "de-DE",
+      {
+        day:"2-digit",
+        month:"2-digit",
+        year:"numeric",
+        hour:"2-digit",
+        minute:"2-digit"
+      }
+    );
+
+}
+
+
 function formatRunDate(s){
 
   if(!s){
@@ -2210,6 +2503,40 @@ function avatarHtml(
           ?"ma-buddy-initials"
           :"ma-post-avatar-initials"
       }">
+        ${escapeHtml(
+          getInitials(n)
+        )}
+      </div>
+    </div>
+  `;
+
+}
+
+
+function inboxAvatarHtml(p){
+
+  const n=
+    p?.display_name||
+    "Miles Apart Member";
+
+
+  if(p?.avatar_url){
+
+    return`
+      <div class="ma-conversation-avatar">
+        <img
+          src="${escapeHtml(p.avatar_url)}"
+          alt="Profilbild"
+        >
+      </div>
+    `;
+
+  }
+
+
+  return`
+    <div class="ma-conversation-avatar">
+      <div class="ma-conversation-initials">
         ${escapeHtml(
           getInitials(n)
         )}
@@ -2966,7 +3293,7 @@ async function submitComment(
 
 
 /* =========================================================
-   PRIVATE NACHRICHTEN
+   PRIVATE NACHRICHTEN - SCHREIBEN
 ========================================================= */
 
 function openMessageModal(
@@ -3050,6 +3377,11 @@ $("sendPrivateMessageButton")
   .onclick=
   async()=>{
 
+    if(!currentUser){
+      return;
+    }
+
+
     const content=
       $("privateMessageContent")
         .value
@@ -3100,28 +3432,765 @@ $("sendPrivateMessageButton")
     }else{
 
       $("privateMessageStatus")
-        .innerHTML=`
-          <span class="ma-message-status-text">
-            Nachricht wurde gesendet ✓
-          </span>
+        .textContent=
+        "Nachricht wurde gesendet ✓";
 
-          <a
-            href="messages.html"
-            class="ma-message-status-link"
-          >
-            Private Nachrichten ansehen →
-          </a>
-        `;
 
       $("privateMessageContent")
         .value=
         "";
+
+      setTimeout(
+        ()=>{
+          closeMessageModal();
+          openMessagesInbox();
+        },
+        450
+      );
 
     }
 
 
     b.disabled=
       false;
+
+  };
+
+
+/* =========================================================
+   NACHRICHTEN-POSTFACH
+========================================================= */
+
+async function openMessagesInbox(){
+
+  if(!currentUser){
+    return location.href="home.html";
+  }
+
+
+  $("messagesInboxOverlay")
+    .classList
+    .add("open");
+
+
+  $("messageConversationList")
+    .innerHTML=`
+      <div class="ma-inbox-empty">
+        Nachrichten werden geladen …
+      </div>
+    `;
+
+
+  $("messageThreadHead")
+    .style
+    .display=
+    "none";
+
+
+  $("messageReplyForm")
+    .style
+    .display=
+    "none";
+
+
+  $("messageThreadList")
+    .innerHTML=`
+      <div class="ma-thread-empty">
+        Wähle links eine Unterhaltung aus.
+      </div>
+    `;
+
+
+  activeConversationUserId=
+    null;
+
+
+  try{
+
+    await loadMessageInbox();
+
+  }catch(err){
+
+    $("messageConversationList")
+      .innerHTML=`
+        <div class="ma-inbox-empty">
+          ${escapeHtml(
+            err.message||
+            "Nachrichten konnten nicht geladen werden."
+          )}
+        </div>
+      `;
+
+  }
+
+}
+
+
+function closeMessagesInbox(){
+
+  $("messagesInboxOverlay")
+    .classList
+    .remove("open");
+
+  activeConversationUserId=
+    null;
+
+}
+
+
+$("openMessagesButton")
+  .onclick=
+  openMessagesInbox;
+
+
+$("closeMessagesInboxButton")
+  .onclick=
+  closeMessagesInbox;
+
+
+$("messagesInboxOverlay")
+  .onclick=
+  e=>{
+
+    if(
+      e.target===
+      $("messagesInboxOverlay")
+    ){
+
+      closeMessagesInbox();
+
+    }
+
+  };
+
+
+async function loadMessageInbox(){
+
+  if(!currentUser){
+    return;
+  }
+
+
+  const {
+    data:messages,
+    error
+  }=
+    await supabaseClient
+      .from("private_messages")
+      .select(`
+        id,
+        sender_id,
+        receiver_id,
+        content,
+        created_at
+      `)
+      .or(
+        `sender_id.eq.${currentUser.id},receiver_id.eq.${currentUser.id}`
+      )
+      .order(
+        "created_at",
+        {
+          ascending:false
+        }
+      );
+
+
+  if(error){
+    throw error;
+  }
+
+
+  const rows=
+    messages||
+    [];
+
+
+  if(!rows.length){
+
+    messageProfiles=
+      {};
+
+    $("messageConversationList")
+      .innerHTML=`
+        <div class="ma-inbox-empty">
+          Du hast noch keine privaten Nachrichten.
+        </div>
+      `;
+
+    return;
+
+  }
+
+
+  const counterpartIds=
+    [
+      ...new Set(
+        rows.map(
+          m=>
+            m.sender_id===
+            currentUser.id
+              ?m.receiver_id
+              :m.sender_id
+        )
+      )
+    ];
+
+
+  const {
+    data:profiles,
+    error:profileError
+  }=
+    await supabaseClient
+      .from("profiles")
+      .select(
+        "id,display_name,username,avatar_url,location"
+      )
+      .in(
+        "id",
+        counterpartIds
+      );
+
+
+  if(profileError){
+    throw profileError;
+  }
+
+
+  messageProfiles=
+    {};
+
+
+  (profiles||[])
+    .forEach(
+      p=>{
+        messageProfiles[p.id]=p;
+      }
+    );
+
+
+  const conversations=
+    [];
+
+
+  rows.forEach(
+    message=>{
+
+      const otherId=
+        message.sender_id===
+        currentUser.id
+          ?message.receiver_id
+          :message.sender_id;
+
+
+      let conversation=
+        conversations.find(
+          x=>
+            x.userId===
+            otherId
+        );
+
+
+      if(!conversation){
+
+        conversation={
+          userId:otherId,
+          lastMessage:message
+        };
+
+        conversations.push(
+          conversation
+        );
+
+      }
+
+    }
+  );
+
+
+  renderMessageConversations(
+    conversations
+  );
+
+
+  if(
+    activeConversationUserId&&
+    conversations.some(
+      x=>
+        x.userId===
+        activeConversationUserId
+    )
+  ){
+
+    await openConversation(
+      activeConversationUserId
+    );
+
+  }
+
+}
+
+
+function renderMessageConversations(
+  conversations
+){
+
+  $("messageConversationList")
+    .innerHTML=
+    "";
+
+
+  conversations.forEach(
+    conversation=>{
+
+      const p=
+        messageProfiles[
+          conversation.userId
+        ]||
+        {
+          display_name:
+            "Miles Apart Member"
+        };
+
+
+      const button=
+        document.createElement(
+          "button"
+        );
+
+
+      button.type=
+        "button";
+
+      button.className=
+        "ma-conversation";
+
+
+      if(
+        activeConversationUserId===
+        conversation.userId
+      ){
+
+        button.classList.add(
+          "active"
+        );
+
+      }
+
+
+      button.dataset.userId=
+        conversation.userId;
+
+
+      const preview=
+        conversation.lastMessage
+          .content||
+        "";
+
+
+      button.innerHTML=`
+
+        ${inboxAvatarHtml(p)}
+
+        <div class="ma-conversation-copy">
+
+          <div class="ma-conversation-name">
+            ${escapeHtml(
+              p.display_name||
+              "Miles Apart Member"
+            )}
+          </div>
+
+          <div class="ma-conversation-preview">
+            ${escapeHtml(preview)}
+          </div>
+
+        </div>
+
+        <div class="ma-conversation-time">
+          ${formatTime(
+            conversation.lastMessage.created_at
+          )}
+        </div>
+
+      `;
+
+
+      button.onclick=
+        ()=>{
+          openConversation(
+            conversation.userId
+          );
+        };
+
+
+      $("messageConversationList")
+        .appendChild(
+          button
+        );
+
+    }
+  );
+
+}
+
+
+async function openConversation(
+  userId
+){
+
+  if(!currentUser){
+    return;
+  }
+
+
+  activeConversationUserId=
+    userId;
+
+
+  renderMessageConversationsFromCurrent();
+
+
+  const p=
+    messageProfiles[userId]||
+    {
+      display_name:
+        "Miles Apart Member"
+    };
+
+
+  $("messageThreadHead")
+    .style
+    .display=
+    "flex";
+
+
+  $("messageThreadHead")
+    .innerHTML=`
+
+      ${
+        p.avatar_url
+          ?`
+            <div class="ma-thread-head-avatar">
+              <img
+                src="${escapeHtml(p.avatar_url)}"
+                alt="Profilbild"
+              >
+            </div>
+          `
+          :`
+            <div class="ma-thread-head-avatar">
+              <div class="ma-conversation-initials">
+                ${escapeHtml(
+                  getInitials(
+                    p.display_name
+                  )
+                )}
+              </div>
+            </div>
+          `
+      }
+
+      <div>
+
+        <div class="ma-thread-head-name">
+          ${escapeHtml(
+            p.display_name||
+            "Miles Apart Member"
+          )}
+        </div>
+
+        ${
+          p.username
+            ?`
+              <div class="ma-thread-head-username">
+                @${escapeHtml(
+                  p.username
+                )}
+              </div>
+            `
+            :""
+        }
+
+      </div>
+
+    `;
+
+
+  $("messageReplyForm")
+    .style
+    .display=
+    "flex";
+
+
+  $("messageThreadList")
+    .innerHTML=`
+      <div class="ma-thread-empty">
+        Nachrichten werden geladen …
+      </div>
+    `;
+
+
+  const {
+    data,
+    error
+  }=
+    await supabaseClient
+      .from("private_messages")
+      .select(`
+        id,
+        sender_id,
+        receiver_id,
+        content,
+        created_at
+      `)
+      .or(
+        `and(sender_id.eq.${currentUser.id},receiver_id.eq.${userId}),and(sender_id.eq.${userId},receiver_id.eq.${currentUser.id})`
+      )
+      .order(
+        "created_at",
+        {
+          ascending:true
+        }
+      );
+
+
+  if(error){
+
+    $("messageThreadList")
+      .innerHTML=`
+        <div class="ma-thread-empty">
+          ${escapeHtml(
+            error.message
+          )}
+        </div>
+      `;
+
+    return;
+
+  }
+
+
+  renderMessageThread(
+    data||[]
+  );
+
+}
+
+
+function renderMessageConversationsFromCurrent(){
+
+  document
+    .querySelectorAll(
+      ".ma-conversation"
+    )
+    .forEach(
+      button=>{
+
+        button.classList.toggle(
+          "active",
+          button.dataset.userId===
+          activeConversationUserId
+        );
+
+      }
+    );
+
+}
+
+
+function renderMessageThread(
+  messages
+){
+
+  $("messageThreadList")
+    .innerHTML=
+    "";
+
+
+  if(!messages.length){
+
+    $("messageThreadList")
+      .innerHTML=`
+        <div class="ma-thread-empty">
+          Noch keine Nachrichten in dieser Unterhaltung.
+        </div>
+      `;
+
+    return;
+
+  }
+
+
+  messages.forEach(
+    message=>{
+
+      const mine=
+        message.sender_id===
+        currentUser.id;
+
+
+      const row=
+        document.createElement(
+          "div"
+        );
+
+
+      row.className=
+        "ma-message-bubble-row";
+
+
+      if(mine){
+        row.classList.add("mine");
+      }
+
+
+      const wrapper=
+        document.createElement(
+          "div"
+        );
+
+
+      const bubble=
+        document.createElement(
+          "div"
+        );
+
+
+      bubble.className=
+        "ma-message-bubble";
+
+
+      bubble.textContent=
+        message.content;
+
+
+      const time=
+        document.createElement(
+          "div"
+        );
+
+
+      time.className=
+        "ma-message-bubble-time";
+
+
+      time.textContent=
+        formatMessageDateTime(
+          message.created_at
+        );
+
+
+      wrapper.appendChild(
+        bubble
+      );
+
+      wrapper.appendChild(
+        time
+      );
+
+      row.appendChild(
+        wrapper
+      );
+
+
+      $("messageThreadList")
+        .appendChild(
+          row
+        );
+
+    }
+  );
+
+
+  $("messageThreadList")
+    .scrollTop=
+    $("messageThreadList")
+      .scrollHeight;
+
+}
+
+
+$("messageReplyForm")
+  .onsubmit=
+  async e=>{
+
+    e.preventDefault();
+
+
+    if(
+      !currentUser||
+      !activeConversationUserId
+    ){
+
+      return;
+
+    }
+
+
+    const content=
+      $("messageReplyInput")
+        .value
+        .trim();
+
+
+    if(!content){
+      return;
+    }
+
+
+    const b=
+      $("messageReplyButton");
+
+
+    b.disabled=
+      true;
+
+    b.textContent=
+      "…";
+
+
+    const {
+      error
+    }=
+      await supabaseClient
+        .from("private_messages")
+        .insert({
+          sender_id:
+            currentUser.id,
+
+          receiver_id:
+            activeConversationUserId,
+
+          content
+        });
+
+
+    if(error){
+
+      alert(
+        error.message
+      );
+
+    }else{
+
+      $("messageReplyInput")
+        .value=
+        "";
+
+      await loadMessageInbox();
+
+      await openConversation(
+        activeConversationUserId
+      );
+
+    }
+
+
+    b.disabled=
+      false;
+
+    b.textContent=
+      "Senden";
 
   };
 
@@ -3170,6 +4239,11 @@ $("cancelPostButton")
 
 
     $("postImageName")
+      .textContent=
+      "";
+
+
+    $("postFormMessage")
       .textContent=
       "";
 
@@ -3535,10 +4609,17 @@ function buddyCard(row){
           ?`
             <div class="ma-buddy-actions">
 
-              <div class="ma-buddy-action-buttons">
+              <div
+                style="
+                  display:flex;
+                  align-items:center;
+                  gap:8px;
+                  flex-wrap:wrap
+                "
+              >
 
                 <button
-                  class="ma-buddy-message-button"
+                  class="btn"
                   type="button"
                   data-buddy-message="${row.user_id}"
                   data-buddy-name="${escapeHtml(name)}"
@@ -3556,7 +4637,7 @@ function buddyCard(row){
                         data-buddy-action="delete"
                         data-buddy-id="${row.user_id}"
                       >
-                        Run Buddy<br>Profil löschen
+                        Eigenes Run-Buddy-Profil löschen
                       </button>
                     `
                     :""
