@@ -100,13 +100,26 @@
       transform: translateY(-1px);
     }
 
+    /*
+       Wichtig:
+       Alten ::before-Punkt aus style.css vollständig entfernen,
+       damit nicht zwei Punkte erscheinen.
+    */
+
+    .nav a.active::before {
+      content: none !important;
+      display: none !important;
+    }
+
     .nav a.active {
       background: #e4f8fb;
       color: #111;
       padding: 0 12px !important;
+      font-weight: 800 !important;
     }
 
     .nav a.active .nav-active-dot {
+      display: block !important;
       flex: 0 0 10px;
       width: 10px;
       height: 10px;
@@ -119,6 +132,11 @@
     .nav a.active .nav-active-text {
       display: block;
       flex: 0 0 auto;
+      color: #111;
+      font-size: inherit;
+      line-height: inherit;
+      font-weight: 800 !important;
+      letter-spacing: inherit;
     }
 
 
@@ -847,10 +865,6 @@
             </div>
 
 
-            <!-- =============================================
-                 ANMELDEN
-            ============================================== -->
-
             <div class="events-hero-action">
 
               <a
@@ -863,10 +877,6 @@
 
             </div>
 
-
-            <!-- =============================================
-                 LEADERBOARD
-            ============================================== -->
 
             <div class="event-leaderboard">
 
@@ -948,10 +958,6 @@
         <div class="event-list">
 
 
-          <!-- ===============================================
-               03. OKTOBER
-          ================================================ -->
-
           <article class="event-item">
 
             <div class="event-date-box">
@@ -977,10 +983,6 @@
 
           </article>
 
-
-          <!-- ===============================================
-               10. OKTOBER
-          ================================================ -->
 
           <article class="event-item">
 
@@ -1047,18 +1049,15 @@
   const EVENT_ID =
     "event-10k-2026-10-03";
 
-
   const EVENT_DATE_START =
     new Date(
       "2026-10-03T00:00:00"
     );
 
-
   const EVENT_DATE_END =
     new Date(
       "2026-10-04T00:00:00"
     );
-
 
   const EVENT_DISTANCE_KM =
     10;
@@ -1072,7 +1071,6 @@
     document.getElementById(
       "eventJoinButton"
     );
-
 
   const eventLeaderboard =
     document.getElementById(
@@ -1098,13 +1096,11 @@
 
     }
 
-
     const number =
       Number(
         String(value)
           .replace(",", ".")
       );
-
 
     return Number.isFinite(
       number
@@ -1122,26 +1118,11 @@
     return String(
       value ?? ""
     )
-      .replace(
-        /&/g,
-        "&amp;"
-      )
-      .replace(
-        /</g,
-        "&lt;"
-      )
-      .replace(
-        />/g,
-        "&gt;"
-      )
-      .replace(
-        /"/g,
-        "&quot;"
-      )
-      .replace(
-        /'/g,
-        "&#039;"
-      );
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
 
   }
 
@@ -1158,12 +1139,10 @@
         )
       );
 
-
     const hours =
       Math.floor(
         totalSeconds / 3600
       );
-
 
     const minutes =
       Math.floor(
@@ -1172,35 +1151,27 @@
         ) / 60
       );
 
-
     const remainingSeconds =
       totalSeconds % 60;
-
 
     if (
       hours > 0
     ) {
 
       return (
-        String(hours)
-          .padStart(2, "0") +
+        String(hours).padStart(2, "0") +
         ":" +
-        String(minutes)
-          .padStart(2, "0") +
+        String(minutes).padStart(2, "0") +
         ":" +
-        String(remainingSeconds)
-          .padStart(2, "0")
+        String(remainingSeconds).padStart(2, "0")
       );
 
     }
 
-
     return (
-      String(minutes)
-        .padStart(2, "0") +
+      String(minutes).padStart(2, "0") +
       ":" +
-      String(remainingSeconds)
-        .padStart(2, "0")
+      String(remainingSeconds).padStart(2, "0")
     );
 
   }
@@ -1220,7 +1191,6 @@
         row || {}
       );
 
-
     for (
       const name of names
     ) {
@@ -1231,7 +1201,6 @@
             key === name
         );
 
-
       if (exact) {
 
         return exact;
@@ -1240,14 +1209,12 @@
 
     }
 
-
     for (
       const name of names
     ) {
 
       const lower =
         name.toLowerCase();
-
 
       const found =
         keys.find(
@@ -1256,7 +1223,6 @@
             lower
         );
 
-
       if (found) {
 
         return found;
@@ -1264,7 +1230,6 @@
       }
 
     }
-
 
     return null;
 
@@ -1413,12 +1378,10 @@
 
     }
 
-
     const date =
       new Date(
         run[dateColumn]
       );
-
 
     if (
       Number.isNaN(
@@ -1430,14 +1393,13 @@
 
     }
 
-
     return date;
 
   }
 
 
   /* ==========================================================
-     LAUFZEIT IN SEKUNDEN
+     LAUFZEIT
   ========================================================== */
 
   function parseDurationToSeconds(
@@ -1454,7 +1416,6 @@
 
     }
 
-
     if (
       typeof value === "number"
     ) {
@@ -1463,12 +1424,10 @@
 
     }
 
-
     const text =
       String(
         value
       ).trim();
-
 
     if (
       /^\d+:\d{2}:\d{2}$/.test(
@@ -1479,10 +1438,7 @@
       const parts =
         text
           .split(":")
-          .map(
-            Number
-          );
-
+          .map(Number);
 
       return (
         parts[0] * 3600 +
@@ -1491,7 +1447,6 @@
       );
 
     }
-
 
     if (
       /^\d+:\d{2}$/.test(
@@ -1502,10 +1457,7 @@
       const parts =
         text
           .split(":")
-          .map(
-            Number
-          );
-
+          .map(Number);
 
       return (
         parts[0] * 60 +
@@ -1514,7 +1466,6 @@
 
     }
 
-
     const number =
       Number(
         text.replace(
@@ -1522,7 +1473,6 @@
           "."
         )
       );
-
 
     if (
       Number.isFinite(
@@ -1533,7 +1483,6 @@
       return number;
 
     }
-
 
     return 0;
 
@@ -1556,19 +1505,13 @@
           durationColumn
         ];
 
-
       const columnName =
         durationColumn
           .toLowerCase();
 
-
       if (
-        columnName.includes(
-          "second"
-        ) ||
-        columnName.includes(
-          "_sec"
-        )
+        columnName.includes("second") ||
+        columnName.includes("_sec")
       ) {
 
         return parseDurationToSeconds(
@@ -1577,11 +1520,8 @@
 
       }
 
-
       if (
-        columnName.includes(
-          "minute"
-        )
+        columnName.includes("minute")
       ) {
 
         return (
@@ -1592,13 +1532,11 @@
 
       }
 
-
       return parseDurationToSeconds(
         value
       );
 
     }
-
 
     if (
       paceColumn &&
@@ -1610,12 +1548,10 @@
           paceColumn
         ];
 
-
       const paceSeconds =
         parseDurationToSeconds(
           paceValue
         );
-
 
       if (
         paceSeconds > 0
@@ -1629,7 +1565,6 @@
       }
 
     }
-
 
     return 0;
 
@@ -1652,7 +1587,6 @@
 
     }
 
-
     const {
       data,
       error
@@ -1667,7 +1601,6 @@
           userIds
         );
 
-
     if (error) {
 
       console.error(
@@ -1675,14 +1608,11 @@
         error
       );
 
-
       return {};
 
     }
 
-
     const profiles = {};
-
 
     (data || []).forEach(
       profile => {
@@ -1705,7 +1635,6 @@
       }
     );
 
-
     return profiles;
 
   }
@@ -1722,7 +1651,6 @@
       return "#";
 
     }
-
 
     return (
       "user.html?username=" +
@@ -1758,7 +1686,6 @@
 
     }
 
-
     if (
       index === 1
     ) {
@@ -1775,7 +1702,6 @@
 
     }
 
-
     if (
       index === 2
     ) {
@@ -1791,7 +1717,6 @@
       `;
 
     }
-
 
     return `
       <span>
@@ -1815,7 +1740,6 @@
         </div>
       `;
 
-
     try {
 
       const {
@@ -1826,13 +1750,11 @@
           .from("runs")
           .select("*");
 
-
       if (error) {
 
         throw error;
 
       }
-
 
       if (
         !runs ||
@@ -1846,45 +1768,37 @@
             </div>
           `;
 
-
         return;
 
       }
 
-
       const firstRun =
         runs[0];
-
 
       const userColumn =
         findUserColumn(
           firstRun
         );
 
-
       const distanceColumn =
         findDistanceColumn(
           firstRun
         );
-
 
       const dateColumn =
         findDateColumn(
           firstRun
         );
 
-
       const durationColumn =
         findDurationColumn(
           firstRun
         );
 
-
       const paceColumn =
         findPaceColumn(
           firstRun
         );
-
 
       if (
         !userColumn ||
@@ -1898,7 +1812,6 @@
 
       }
 
-
       if (
         !durationColumn &&
         !paceColumn
@@ -1910,9 +1823,7 @@
 
       }
 
-
       const fastestRuns = {};
-
 
       runs.forEach(
         run => {
@@ -1922,7 +1833,6 @@
               userColumn
             ];
 
-
           if (
             !userId
           ) {
@@ -1931,13 +1841,11 @@
 
           }
 
-
           const runDate =
             getRunDate(
               run,
               dateColumn
             );
-
 
           if (
             !runDate
@@ -1946,7 +1854,6 @@
             return;
 
           }
-
 
           if (
             runDate <
@@ -1959,14 +1866,12 @@
 
           }
 
-
           const distance =
             numberValue(
               run[
                 distanceColumn
               ]
             );
-
 
           if (
             distance < 9.9 ||
@@ -1977,7 +1882,6 @@
 
           }
 
-
           const durationSeconds =
             getRunDurationSeconds(
               run,
@@ -1986,7 +1890,6 @@
               distance
             );
 
-
           if (
             durationSeconds <= 0
           ) {
@@ -1994,7 +1897,6 @@
             return;
 
           }
-
 
           if (
             !fastestRuns[
@@ -2050,7 +1952,6 @@
             </div>
           `;
 
-
         return;
 
       }
@@ -2082,11 +1983,9 @@
                   runner.userId
                 ];
 
-
               const name =
                 profile?.displayName ||
                 "Runner";
-
 
               const profileHtml =
                 profile?.username
@@ -2147,7 +2046,6 @@
         error
       );
 
-
       eventLeaderboard.innerHTML =
         `
           <div class="event-leaderboard-empty">
@@ -2185,7 +2083,6 @@
         eventJoinButton.textContent =
           "Beitreten 🏁";
 
-
         return;
 
       }
@@ -2216,7 +2113,6 @@
           error
         );
 
-
         return;
 
       }
@@ -2226,7 +2122,6 @@
 
         eventJoinButton.textContent =
           "Bereits dabei ✓";
-
 
         eventJoinButton.classList.add(
           "is-joined"
@@ -2267,7 +2162,6 @@
         window.location.href =
           "home.html";
 
-
         return;
 
       }
@@ -2275,7 +2169,6 @@
 
       eventJoinButton.textContent =
         "Wird gespeichert …";
-
 
       eventJoinButton.style.pointerEvents =
         "none";
@@ -2311,11 +2204,9 @@
         eventJoinButton.textContent =
           "Bereits dabei ✓";
 
-
         eventJoinButton.classList.add(
           "is-joined"
         );
-
 
         return;
 
@@ -2350,7 +2241,6 @@
 
       eventJoinButton.textContent =
         "Dabei ✓";
-
 
       eventJoinButton.classList.add(
         "is-joined"
